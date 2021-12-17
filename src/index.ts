@@ -1,1 +1,1 @@
-export * from './MusicXMLDocument';
+export * from './MusicXML';
