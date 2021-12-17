@@ -9,11 +9,12 @@
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": 13
+        "ecmaVersion": "latest"
     },
     "plugins": [
         "@typescript-eslint"
     ],
     "rules": {
+        "semi": "error"
     }
 }
