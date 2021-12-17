@@ -25,7 +25,8 @@
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.1",
     "prettier-plugin-organize-imports": "^2.3.4",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "xml.js": "^0.0.8"
   },
   "scripts": {
     "prepare": "husky install",
