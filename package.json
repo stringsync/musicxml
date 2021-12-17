@@ -1,0 +1,9 @@
+{
+  "name": "musicxml",
+  "version": "0.0.0",
+  "description": "a simple musicXML library",
+  "main": "src/index.ts",
+  "repository": "git@github.com:stringsync/musicxml.git",
+  "author": "Jared Johnson <jared@jaredjohnson.dev>",
+  "license": "MIT"
+}
