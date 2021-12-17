@@ -7,6 +7,7 @@
   "author": "Jared Johnson <jared@jaredjohnson.dev>",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^8.4.1",
     "typescript": "^4.5.4"
   }
 }
