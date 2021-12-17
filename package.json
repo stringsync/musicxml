@@ -5,5 +5,8 @@
   "main": "src/index.ts",
   "repository": "git@github.com:stringsync/musicxml.git",
   "author": "Jared Johnson <jared@jaredjohnson.dev>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
 }
