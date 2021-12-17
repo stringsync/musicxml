@@ -12,5 +12,11 @@
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.1",
     "typescript": "^4.5.4"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
