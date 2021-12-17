@@ -1,5 +1,5 @@
 {
-  "name": "musicxml",
+  "name": "@stringsync/musicxml",
   "version": "0.0.0",
   "description": "a simple musicXML library",
   "main": "src/index.ts",
