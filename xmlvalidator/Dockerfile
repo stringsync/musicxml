@@ -10,7 +10,7 @@ RUN curl -L ftp://xmlsoft.org/libxml2/LATEST_LIBXML2 -o ./LIBXML2_LATEST.tar.gz 
   make install
 
 # build app
-WORKDIR /app
+WORKDIR /server
 COPY schema schema
 COPY go.mod .
 COPY go.sum .
@@ -18,4 +18,4 @@ COPY main.go .
 RUN go build
 
 # run app
-CMD [ "/app/musicxmlvalidator" ]
+CMD [ "/server/musicxmlvalidator" ]
