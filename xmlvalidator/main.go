@@ -60,13 +60,13 @@ func newValidateResponse(code string, err error) validateResponse {
 
 func validate(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	encoder := json.NewEncoder(w)
 
 	if req.Method != "POST" {
 		http.NotFound(w, req)
 		return
 	}
 	
-	encoder := json.NewEncoder(w)
 	body, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		encoder.Encode(newValidateResponse(badRequest, err))
