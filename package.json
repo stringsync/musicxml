@@ -29,7 +29,8 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "test": "jest"
+    "pretest": "docker-compose build",
+    "test": "docker-compose run --rm test yarn jest"
   },
   "lint-staged": {
     "src/**/*": [

@@ -11,7 +11,7 @@ services:
       - 8080:8080
 
   test:
-    container_name: musicxml
+    container_name: test
     image: musicxml:latest
     build: .
     links:
