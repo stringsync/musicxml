@@ -15,7 +15,7 @@ import (
 const (
 	// config
 	defaultPort = "8080"
-	schemaUrl = "file://app/schema/musicxml.xsd"
+	schemaUrl = "file://server/schema/musicxml.xsd"
 
 	// codes
 	ok = "OK"
