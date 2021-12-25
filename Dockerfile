@@ -7,8 +7,9 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn
 
-# copy the src files (which include the tests)
-COPY babel.config.js .
+# copy the rest of the files for tests
+COPY babel.config.json .
+COPY tsconfig.json .
 COPY src src
 
 CMD [ "yarn", "jest" ]

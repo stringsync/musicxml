@@ -4,6 +4,8 @@
     "module": "commonjs",
     "strict": true,
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "allowJs": true,
+    "types": ["node", "jest", "jest-extended"]
   }
 }

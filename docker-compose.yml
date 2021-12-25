@@ -14,5 +14,7 @@ services:
     container_name: test
     image: musicxml:latest
     build: .
+    volumes:
+      - './src:/musicxml/src'
     links:
       - xmlvalidator

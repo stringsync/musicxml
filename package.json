@@ -11,6 +11,7 @@
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
     "@types/jest": "^27.0.3",
+    "@types/node-fetch": "2.5.12",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "babel-jest": "^27.4.5",
     "eslint": "^8.4.1",
@@ -22,7 +23,9 @@
     "eslint-plugin-promise": "^5.2.0",
     "husky": "^7.0.4",
     "jest": "^27.4.5",
+    "jest-extended": "^1.2.0",
     "lint-staged": "^12.1.2",
+    "node-fetch": "2.6.6",
     "prettier": "^2.5.1",
     "prettier-plugin-organize-imports": "^2.3.4",
     "typescript": "^4.5.4"
@@ -30,12 +33,20 @@
   "scripts": {
     "prepare": "husky install",
     "pretest": "docker-compose build",
-    "test": "docker-compose run --rm test yarn jest"
+    "test": "docker-compose run --rm test yarn jest",
+    "posttest": "docker-compose down"
   },
   "lint-staged": {
     "src/**/*": [
       "eslint",
       "prettier --write --ignore-unknown"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "jest-extended/all",
+      "<rootDir>/src/testing/jest.setup.ts"
     ]
   }
 }
