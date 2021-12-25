@@ -11,4 +11,4 @@ RUN yarn
 COPY babel.config.js .
 COPY src src
 
-CMD [ "yarn", "test" ]
+CMD [ "yarn", "jest" ]
