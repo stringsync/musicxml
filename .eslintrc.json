@@ -11,5 +11,6 @@
     "ecmaVersion": "latest"
   },
   "plugins": ["@typescript-eslint", "jest"],
+  "ignorePatterns": ["*.xml"],
   "rules": {}
 }
