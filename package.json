@@ -8,6 +8,8 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.16.5",
+    "@babel/plugin-proposal-class-properties": "^7.16.5",
+    "@babel/plugin-proposal-decorators": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
     "@types/jest": "^27.0.3",
@@ -50,6 +52,7 @@
     ]
   },
   "dependencies": {
-    "class-validator": "^0.13.2"
+    "class-validator": "^0.13.2",
+    "xml-js": "^1.6.11"
   }
 }

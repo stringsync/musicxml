@@ -17,5 +17,8 @@
   },
   "plugins": ["@typescript-eslint", "jest"],
   "ignorePatterns": ["*.xml"],
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
+  }
 }
