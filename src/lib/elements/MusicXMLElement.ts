@@ -1,6 +1,6 @@
 import * as classValidator from 'class-validator';
 import * as xmlJs from 'xml-js';
-import { ValidationError } from './errors';
+import { ValidationError } from '../errors/ValidationError';
 
 export type MusicXMLNode =
   | {

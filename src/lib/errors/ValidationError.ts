@@ -1,4 +1,4 @@
-export class MusicXMLError extends Error {}
+import { MusicXMLError } from './MusicXMLError';
 
 export class ValidationError extends MusicXMLError {
   messages: string[];

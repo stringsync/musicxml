@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
-import { ValidationError } from './errors';
+import { ValidationError } from '../errors/ValidationError';
 import { MusicXMLElement, MusicXMLNode } from './MusicXMLElement';
 
 type DummyProps = {
@@ -21,20 +21,14 @@ class Dummy extends MusicXMLElement {
   }
 
   toPOJO(): MusicXMLNode {
-    const text = this.text || '';
-    const dummy = this.dummy;
-
-    const node: MusicXMLNode = {
-      type: 'element',
-      name: 'dummy',
-      elements: [{ type: 'text', text }],
-    };
-
-    if (dummy) {
-      node.elements!.push(dummy.toPOJO());
+    const elements = new Array<MusicXMLNode>();
+    if (this.text) {
+      elements.push({ type: 'text', text: this.text });
     }
-
-    return node;
+    if (this.dummy) {
+      elements.push(this.dummy.toPOJO());
+    }
+    return { type: 'element', name: 'dummy', elements };
   }
 }
 
