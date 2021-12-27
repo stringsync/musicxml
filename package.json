@@ -48,5 +48,8 @@
       "jest-extended/all",
       "<rootDir>/src/testing/jest.setup.ts"
     ]
+  },
+  "dependencies": {
+    "class-validator": "^0.13.2"
   }
 }
