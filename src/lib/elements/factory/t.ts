@@ -49,3 +49,5 @@ export const t = {
   oneOrMore: <T>(value: T) => ({ type: 'oneOrMore' as const, value }),
   none: () => ({ type: 'none' as const }),
 };
+
+export const DESCRIPTOR_NAMES = new Set(Object.keys(t));

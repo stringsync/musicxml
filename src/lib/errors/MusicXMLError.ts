@@ -1,7 +1,7 @@
 export type ErrorDetails = {
   symptom: string;
   remedy: string;
-  values: Record<string, string>;
+  values: Record<string, any>;
 };
 
 export class MusicXMLError extends Error {
@@ -13,8 +13,8 @@ export class MusicXMLError extends Error {
     const values =
       Object.entries(details.values)
         .map(([k, v]) => `${k}=${v}`)
-        .join(' ') || '(None)';
-    super(`symptom: ${symptom}\nvalues: ${values}\nremedy: ${remedy}`);
+        .join('\n\t') || '(None)';
+    super(`symptom:\n\t${symptom}\n\nvalues:\n\t${values}\n\nremedy:\n\t${remedy}\n`);
     this.details = details;
   }
 }

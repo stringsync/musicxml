@@ -1,11 +1,22 @@
-import { Descriptor, Resolve } from './t';
+import { MusicXMLError } from '../../errors';
+import { Descriptor, DESCRIPTOR_NAMES, Resolve } from './t';
 
+const get = (value: any, key: string): any => value[key];
 const isString = (value: unknown): value is string => typeof value === 'string';
 const isNumber = (value: unknown): value is number => typeof value === 'number';
-const isDescriptor = (value: unknown): value is Descriptor => !!value && typeof value === 'object' && 'type' in value;
 const isFunction = (value: unknown): value is (...args: any) => any => typeof value === 'function';
 const isArray = (value: unknown): value is any[] => Array.isArray(value);
 const isObject = (value: unknown): value is Record<string, any> => !!value && typeof value === 'object';
+const isElement = (
+  value: unknown
+): value is { type: 'element'; attributes: Record<string, any>; content: Descriptor } =>
+  !!value &&
+  typeof value === 'object' &&
+  get(value, 'type') === 'element' &&
+  'attributes' in value &&
+  'content' in value;
+const isDescriptor = (value: unknown): value is Descriptor =>
+  !!value && typeof value === 'object' && DESCRIPTOR_NAMES.has(get(value, 'type'));
 
 /**
  * Recursively computes the zero value for a a t.* schema.
@@ -49,8 +60,17 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
       case 'oneOrMore':
         return getZeroValue(descriptor.value) as Resolve<T>;
       default:
-        throw new Error('asdf');
+        throw new MusicXMLError({
+          symptom: 'cannot compute a zero value for descriptor',
+          values: { descriptor: JSON.stringify(descriptor) },
+          remedy: 'use a different descriptor or update getZeroValue to handle it',
+        });
     }
+  }
+  if (isElement(value)) {
+    const attributes = get(value, 'attributes');
+    const content = get(value, 'content');
+    return { ...value, attributes: getZeroValue(attributes), content: getZeroValue(content) } as unknown as Resolve<T>;
   }
   if (isObject(value)) {
     return Object.entries(value).reduce((next, [k, v]) => {
@@ -58,5 +78,9 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
       return next;
     }, {} as any);
   }
-  throw new TypeError(`cannot get zero value: value=${value}`);
+  throw new MusicXMLError({
+    symptom: 'cannot compute zero value for value',
+    values: { value: JSON.stringify(value) },
+    remedy: 'update getZeroValue to handle this type',
+  });
 };
