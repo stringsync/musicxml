@@ -1,5 +1,7 @@
 import { element, t } from './factory';
 
+export type MovementNumber = ReturnType<typeof MovementNumber>;
+
 /**
  * Parent elements: <score-partwise>, <score-timewise>
  *

@@ -1,5 +1,7 @@
 import { element, t } from './factory';
 
+export type PartList = ReturnType<typeof PartList>;
+
 /**
  * Parent elements: <score-partwise>, <score-timewise>
  *

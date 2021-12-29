@@ -1,5 +1,7 @@
 import { element, t } from './factory';
 
+export type Defaults = ReturnType<typeof Defaults>;
+
 /**
  * Parent elements: <score-partwise>, <score-timewise>
  *

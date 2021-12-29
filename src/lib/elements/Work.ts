@@ -1,5 +1,7 @@
 import { element, t } from './factory';
 
+export type Work = ReturnType<typeof Work>;
+
 /**
  * Parent elements: <score-partwise>, <score-timewise>
  *
