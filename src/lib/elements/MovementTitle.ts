@@ -1,6 +1,4 @@
-import { MusicXMLElement, MusicXMLNode } from './MusicXMLElement';
-
-export type MovementTitleProps = Record<string, any>;
+import { element, t } from './factory';
 
 /**
  * Parent elements: <score-partwise>, <score-timewise>
@@ -9,12 +7,7 @@ export type MovementTitleProps = Record<string, any>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/movement-title/}
  */
-export class MovementTitle extends MusicXMLElement {
-  constructor(props: MovementTitleProps = {}) {
-    super();
-  }
-
-  toPOJO(): MusicXMLNode {
-    return { type: 'element', name: 'movement-title' };
-  }
-}
+export const MovementTitle = element('movement-title', {
+  attributes: {},
+  content: t.none(),
+});

@@ -1,6 +1,4 @@
-import { MusicXMLElement, MusicXMLNode } from './MusicXMLElement';
-
-export type PartListProps = Record<string, any>;
+import { element, t } from './factory';
 
 /**
  * Parent elements: <score-partwise>, <score-timewise>
@@ -14,12 +12,7 @@ export type PartListProps = Record<string, any>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-list/}
  */
-export class PartList extends MusicXMLElement {
-  constructor(props: PartListProps = {}) {
-    super();
-  }
-
-  toPOJO(): MusicXMLNode {
-    return { type: 'element', name: 'part-list' };
-  }
-}
+export const PartList = element('part-list', {
+  attributes: {},
+  content: t.none(),
+});

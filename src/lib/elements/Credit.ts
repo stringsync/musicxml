@@ -1,6 +1,4 @@
-import { MusicXMLElement, MusicXMLNode } from './MusicXMLElement';
-
-export type CreditProps = Record<string, any>;
+import { element, t } from './factory';
 
 /**
  * Parent elements: <score-partwise>, <score-timewise>
@@ -18,12 +16,7 @@ export type CreditProps = Record<string, any>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit/}
  */
-export class Credit extends MusicXMLElement {
-  constructor(props: CreditProps = {}) {
-    super();
-  }
-
-  toPOJO(): MusicXMLNode {
-    return { type: 'element', name: 'credit' };
-  }
-}
+export const Credit = element('credit', {
+  attributes: {},
+  content: t.none(),
+});

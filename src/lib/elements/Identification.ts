@@ -1,6 +1,4 @@
-import { MusicXMLElement, MusicXMLNode } from './MusicXMLElement';
-
-export type IdentificationProps = Record<string, any>;
+import { element, t } from './factory';
 
 /**
  * Parent elements: <score-part>, <score-partwise>, <score-timewise>
@@ -11,12 +9,7 @@ export type IdentificationProps = Record<string, any>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/identification/}
  */
-export class Identification extends MusicXMLElement {
-  constructor(props: IdentificationProps = {}) {
-    super();
-  }
-
-  toPOJO(): MusicXMLNode {
-    return { type: 'element', name: 'identification' };
-  }
-}
+export const Identification = element('identification', {
+  attributes: {},
+  content: t.none(),
+});

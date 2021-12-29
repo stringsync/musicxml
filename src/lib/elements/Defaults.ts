@@ -1,6 +1,4 @@
-import { MusicXMLElement, MusicXMLNode } from './MusicXMLElement';
-
-export type DefaultsProps = Record<string, any>;
+import { element, t } from './factory';
 
 /**
  * Parent elements: <score-partwise>, <score-timewise>
@@ -11,12 +9,7 @@ export type DefaultsProps = Record<string, any>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/}
  */
-export class Defaults extends MusicXMLElement {
-  constructor(props: DefaultsProps = {}) {
-    super();
-  }
-
-  toPOJO(): MusicXMLNode {
-    return { type: 'element', name: 'defaults' };
-  }
-}
+export const Defaults = element('defaults', {
+  attributes: {},
+  content: t.none(),
+});

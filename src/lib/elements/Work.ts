@@ -1,6 +1,4 @@
-import { MusicXMLElement, MusicXMLNode } from './MusicXMLElement';
-
-export type WorkProps = Record<string, any>;
+import { element, t } from './factory';
 
 /**
  * Parent elements: <score-partwise>, <score-timewise>
@@ -10,12 +8,7 @@ export type WorkProps = Record<string, any>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work/}
  */
-export class Work extends MusicXMLElement {
-  constructor(props: WorkProps = {}) {
-    super();
-  }
-
-  toPOJO(): MusicXMLNode {
-    return { type: 'element', name: 'work' };
-  }
-}
+export const Work = element('work', {
+  attributes: {},
+  content: t.none(),
+});
