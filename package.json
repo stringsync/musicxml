@@ -40,7 +40,7 @@
   },
   "lint-staged": {
     "src/**/*": [
-      "tsc --noEmit --project tsconfig.json",
+      "tsc --noEmit --types jest-extended",
       "eslint",
       "prettier --write --ignore-unknown"
     ]
