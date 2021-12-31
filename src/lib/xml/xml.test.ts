@@ -76,5 +76,28 @@ describe('xml', () => {
       expect(foo.content[0]).toStrictEqual([Bar()]);
       expect(foo.content[0][0].content[0]).toStrictEqual(Baz());
     });
+
+    it('returns zero values for custom types', () => {
+      const zero = () => new Date(1970, 0, 1, 0, 0, 0, 0);
+
+      const Foo = xml.element(
+        'foo',
+        {
+          attributes: {},
+          content: [
+            t.custom({
+              zero,
+              encode: (date: Date) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+              decode: (str: string) => new Date(str),
+            }),
+          ],
+        },
+        {}
+      );
+
+      const foo = Foo();
+
+      expect(foo.content[0]).toStrictEqual(zero());
+    });
   });
 });

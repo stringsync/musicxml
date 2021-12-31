@@ -64,6 +64,8 @@ const getZeroValue = <T>(value: T): Resolve<T> => {
         return [] as unknown as Resolve<T>;
       case 'oneOrMore':
         return [getZeroValue(descriptor.value)] as unknown as Resolve<T>;
+      case 'custom':
+        return descriptor.value.zero();
       default:
         throw new MusicXMLError({
           symptom: 'cannot compute a zero value for descriptor',
