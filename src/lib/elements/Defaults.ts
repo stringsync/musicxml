@@ -1,4 +1,5 @@
-import { xml } from '../xml';
+import { t, xml } from '../xml';
+import { Scaling } from './Scaling';
 
 /**
  * Parent elements: `<score-partwise>`, `<score-timewise>`
@@ -15,7 +16,7 @@ export const Defaults = xml.element(
   'defaults',
   {
     attributes: {},
-    content: [],
+    content: [t.optional(Scaling)],
   },
   {}
 );
