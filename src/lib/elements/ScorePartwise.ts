@@ -13,8 +13,8 @@ export type ScorePartwise = ReturnType<typeof ScorePartwise>;
 /**
  * Parent elements: None
  *
- * The `<score-partwise>` element is the root element for a partwise MusicXML score. It includes score header information
- * followed by a series of `<part>` elements with `<measure>` elements inside.
+ * The `<score-partwise>` element is the root element for a partwise MusicXML score. It includes score header
+ * information followed by a series of `<part>` elements with `<measure>` elements inside.
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/}
  */
