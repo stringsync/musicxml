@@ -8,20 +8,20 @@
       " * ",
       " * {@link }",
       " */",
-      "export type ${1:ElementName} = ReturnType<typeof ${1:ElementName}>;",
+      "export type $TM_FILENAME_BASE = ReturnType<typeof $TM_FILENAME_BASE>;",
       "",
-      "export const ${1:ElementName} = xml.element('$0', { attributes: {}, content: [] }, {});",
+      "export const $TM_FILENAME_BASE = xml.element('$0', { attributes: {}, content: [] }, {});",
       ""
     ]
   },
   "Test": {
     "prefix": "elet",
     "body": [
-      "import { ${1:ElementName} } from './${1:ElementName}';",
+      "import { ${1:$TM_FILENAME_BASE} } from './${1:$TM_FILENAME_BASE}';",
       "",
-      "describe('${1:ElementName}', () => {",
+      "describe('${1:$TM_FILENAME_BASE}', () => {",
       "  it('runs without crashing', () => {",
-      "    expect(${1:ElementName}).not.toThrow();",
+      "    expect(${1:$TM_FILENAME_BASE}).not.toThrow();",
       "  });${0}",
       "});",
       ""
