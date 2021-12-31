@@ -1,6 +1,7 @@
 import { t, xml } from '../xml';
 import { Creator } from './Creator';
 import { Encoding } from './Encoding';
+import { Miscellaneous } from './Miscellaneous';
 import { Relation } from './Relation';
 import { Rights } from './Rights';
 import { Source } from './Source';
@@ -26,6 +27,7 @@ export const Identification = xml.element(
       t.optional(Encoding),
       t.optional(Source),
       t.zeroOrMore(Relation),
+      t.optional(Miscellaneous),
     ],
   },
   {}

@@ -5,7 +5,7 @@
       "import { xml } from '../xml';",
       "",
       "/**",
-      " *",
+      " * ",
       " * {@link }",
       " */",
       "export type ${1:ElementName} = ReturnType<typeof ${1:ElementName}>;",
