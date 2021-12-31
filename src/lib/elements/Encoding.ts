@@ -1,6 +1,7 @@
 import { t, xml } from '../xml';
 import { Encoder } from './Encoder';
 import { EncodingDate } from './EncodingDate';
+import { EncodingDescription } from './EncodingDescription';
 import { Software } from './Software';
 
 /**
@@ -15,6 +16,9 @@ export type Encoding = ReturnType<typeof Encoding>;
 
 export const Encoding = xml.element(
   'encoding',
-  { attributes: {}, content: [t.optional(EncodingDate), t.optional(Encoder), t.optional(Software)] },
+  {
+    attributes: {},
+    content: [t.optional(EncodingDate), t.optional(Encoder), t.optional(Software), t.optional(EncodingDescription)],
+  },
   {}
 );
