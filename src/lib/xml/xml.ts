@@ -1,4 +1,4 @@
-import { MusicXMLError } from '../../errors/MusicXMLError';
+import { MusicXMLError } from '../errors/MusicXMLError';
 import * as helpers from './helpers';
 import { Descriptor, Resolve } from './t';
 
@@ -53,14 +53,14 @@ export const element =
       schema,
       attributes: helpers.getZeroValue(schema.attributes) as Resolve<S['attributes']>,
       content: helpers.getZeroValue(schema.content) as Resolve<S['content']>,
-      ...methods,
+      methods,
     };
 
     for (const prop of Object.values(element)) {
       if (typeof prop === 'function') {
-        prop.bind(element);
+        (prop as any).bind(element);
       }
     }
 
-    return element;
+    return element as any;
   };

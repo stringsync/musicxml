@@ -1,4 +1,4 @@
-import { MusicXMLError } from '../../errors';
+import { MusicXMLError } from '../errors';
 import { Descriptor, DESCRIPTOR_NAMES, Resolve } from './t';
 
 const get = (value: any, key: string): any => value[key];

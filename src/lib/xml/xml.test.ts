@@ -1,15 +1,15 @@
-import { t } from '.';
-import * as factory from './factory';
+import { t } from './t';
+import * as xml from './xml';
 
-describe('factory', () => {
+describe('xml', () => {
   describe('element', () => {
-    it('creates an element factory', () => {
-      const Foo = factory.element('foo', { attributes: {}, content: t.none() });
+    it('creates an element xml', () => {
+      const Foo = xml.element('foo', { attributes: {}, content: t.none() });
       expect(Foo).toBeFunction();
     });
 
     it('creates elements with attributes', () => {
-      const Foo = factory.element('foo', {
+      const Foo = xml.element('foo', {
         attributes: {
           bar: t.string(),
         },
@@ -22,7 +22,7 @@ describe('factory', () => {
     });
 
     it('creates elements with content', () => {
-      const Foo = factory.element('foo', {
+      const Foo = xml.element('foo', {
         attributes: {},
         content: t.string(),
       });
@@ -33,11 +33,11 @@ describe('factory', () => {
     });
 
     it('creates elements with nested content', () => {
-      const Foo = factory.element('foo', {
+      const Foo = xml.element('foo', {
         attributes: {},
         content: t.string(),
       });
-      const Bar = factory.element('bar', {
+      const Bar = xml.element('bar', {
         attributes: {},
         content: Foo,
       });
@@ -49,7 +49,7 @@ describe('factory', () => {
     });
 
     it('creates elements with methods', () => {
-      const Foo = factory.element(
+      const Foo = xml.element(
         'foo',
         { attributes: {}, content: t.none() },
         {

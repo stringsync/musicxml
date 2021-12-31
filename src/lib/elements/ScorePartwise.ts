@@ -1,6 +1,6 @@
+import { element, t } from '../xml';
 import { Credit } from './Credit';
 import { Defaults } from './Defaults';
-import { element, t } from './factory';
 import { Identification } from './Identification';
 import { MovementNumber } from './MovementNumber';
 import { MovementTitle } from './MovementTitle';
