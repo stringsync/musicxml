@@ -1,4 +1,5 @@
-import { xml } from '../xml';
+import { t, xml } from '../xml';
+import { Creator } from './Creator';
 
 export type Identification = ReturnType<typeof Identification>;
 
@@ -15,7 +16,7 @@ export const Identification = xml.element(
   'identification',
   {
     attributes: {},
-    content: [],
+    content: [t.zeroOrMore(Creator)],
   },
   {}
 );
