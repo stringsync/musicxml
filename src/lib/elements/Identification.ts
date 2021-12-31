@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 import { Creator } from './Creator';
+import { Encoding } from './Encoding';
 import { Rights } from './Rights';
+import { Source } from './Source';
 
 /**
  * Parent elements: `<score-part>`, `<score-partwise>`, `<score-timewise>`
@@ -17,7 +19,7 @@ export const Identification = xml.element(
   'identification',
   {
     attributes: {},
-    content: [t.zeroOrMore(Creator), t.zeroOrMore(Rights)],
+    content: [t.zeroOrMore(Creator), t.zeroOrMore(Rights), t.optional(Encoding), t.optional(Source)],
   },
   {}
 );
