@@ -10,7 +10,11 @@ export type Work = ReturnType<typeof Work>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work/}
  */
-export const Work = element('work', {
-  attributes: {},
-  content: [],
-});
+export const Work = element(
+  'work',
+  {
+    attributes: {},
+    content: [],
+  },
+  {}
+);

@@ -9,7 +9,11 @@ export type MovementTitle = ReturnType<typeof MovementTitle>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/movement-title/}
  */
-export const MovementTitle = element('movement-title', {
-  attributes: {},
-  content: [],
-});
+export const MovementTitle = element(
+  'movement-title',
+  {
+    attributes: {},
+    content: [],
+  },
+  {}
+);

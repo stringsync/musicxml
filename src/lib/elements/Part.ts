@@ -10,7 +10,11 @@ export type Part = ReturnType<typeof Part>;
  *
  *  {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-partwise/}
  */
-export const Part = element('part', {
-  attributes: {},
-  content: [],
-});
+export const Part = element(
+  'part',
+  {
+    attributes: {},
+    content: [],
+  },
+  {}
+);

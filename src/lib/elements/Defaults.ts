@@ -11,7 +11,11 @@ export type Defaults = ReturnType<typeof Defaults>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/}
  */
-export const Defaults = element('defaults', {
-  attributes: {},
-  content: [],
-});
+export const Defaults = element(
+  'defaults',
+  {
+    attributes: {},
+    content: [],
+  },
+  {}
+);

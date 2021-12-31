@@ -18,7 +18,11 @@ export type Credit = ReturnType<typeof Credit>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit/}
  */
-export const Credit = element('credit', {
-  attributes: {},
-  content: [],
-});
+export const Credit = element(
+  'credit',
+  {
+    attributes: {},
+    content: [],
+  },
+  {}
+);

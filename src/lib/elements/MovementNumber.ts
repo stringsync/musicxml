@@ -9,7 +9,11 @@ export type MovementNumber = ReturnType<typeof MovementNumber>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/movement-number/}
  */
-export const MovementNumber = element('movement-number', {
-  attributes: {},
-  content: [],
-});
+export const MovementNumber = element(
+  'movement-number',
+  {
+    attributes: {},
+    content: [],
+  },
+  {}
+);
