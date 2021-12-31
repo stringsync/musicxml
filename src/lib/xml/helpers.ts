@@ -2,12 +2,13 @@ import { MusicXMLError } from '../errors';
 import { Descriptor, DESCRIPTOR_NAMES, Resolve } from './t';
 
 const get = (value: any, key: string): any => value[key];
-const isString = (value: unknown): value is string => typeof value === 'string';
-const isNumber = (value: unknown): value is number => typeof value === 'number';
-const isFunction = (value: unknown): value is (...args: any) => any => typeof value === 'function';
-const isArray = (value: unknown): value is any[] => Array.isArray(value);
-const isObject = (value: unknown): value is Record<string, any> => !!value && typeof value === 'object';
-const isElement = (
+export const isString = (value: unknown): value is string => typeof value === 'string';
+export const isNumber = (value: unknown): value is number => typeof value === 'number';
+export const isFunction = (value: unknown): value is (...args: any) => any => typeof value === 'function';
+export const isArray = (value: unknown): value is any[] => Array.isArray(value);
+export const isObject = (value: unknown): value is Record<string, any> => !!value && typeof value === 'object';
+export const isNull = (value: unknown): value is null => value === null;
+export const isElement = (
   value: unknown
 ): value is { type: 'element'; attributes: Record<string, any>; content: Descriptor } =>
   !!value &&
@@ -15,7 +16,7 @@ const isElement = (
   get(value, 'type') === 'element' &&
   'attributes' in value &&
   'content' in value;
-const isDescriptor = (value: unknown): value is Descriptor =>
+export const isDescriptor = (value: unknown): value is Descriptor =>
   !!value && typeof value === 'object' && DESCRIPTOR_NAMES.has(get(value, 'type'));
 
 /**
@@ -27,6 +28,9 @@ const isDescriptor = (value: unknown): value is Descriptor =>
  * @returns the zero value for the t.* schema.
  */
 export const getZeroValue = <T>(value: T): Resolve<T> => {
+  if (isNull(value)) {
+    return null as Resolve<T>;
+  }
   if (isString(value)) {
     return '' as Resolve<T>;
   }
@@ -57,8 +61,9 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
       case 'list':
         return getZeroValue(descriptor.values) as Resolve<T>;
       case 'zeroOrMore':
+        return [] as unknown as Resolve<T>;
       case 'oneOrMore':
-        return getZeroValue(descriptor.value) as Resolve<T>;
+        return [getZeroValue(descriptor.value)] as unknown as Resolve<T>;
       default:
         throw new MusicXMLError({
           symptom: 'cannot compute a zero value for descriptor',
