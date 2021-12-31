@@ -1,4 +1,5 @@
 import { t, xml } from '../xml';
+import { Encoder } from './Encoder';
 import { EncodingDate } from './EncodingDate';
 
 /**
@@ -11,4 +12,8 @@ import { EncodingDate } from './EncodingDate';
  */
 export type Encoding = ReturnType<typeof Encoding>;
 
-export const Encoding = xml.element('encoding', { attributes: {}, content: [t.optional(EncodingDate)] }, {});
+export const Encoding = xml.element(
+  'encoding',
+  { attributes: {}, content: [t.optional(EncodingDate), t.optional(Encoder)] },
+  {}
+);
