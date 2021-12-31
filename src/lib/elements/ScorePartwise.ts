@@ -42,17 +42,11 @@ export const ScorePartwise = element(
     setWork(work: Work) {
       this.content[0] = work;
     },
-    removeWork() {
-      this.content[0] = null;
-    },
     getMovementNumber() {
       return this.content[1];
     },
     setMovementNumber(movementNumber: MovementNumber) {
       this.content[1] = movementNumber;
-    },
-    removeMovementNumber() {
-      this.content[1] = null;
     },
     getMovementTitle() {
       return this.content[2];
@@ -60,17 +54,11 @@ export const ScorePartwise = element(
     setMovementTitle(movementTitle: MovementTitle) {
       this.content[2] = movementTitle;
     },
-    removeMovementTitle() {
-      this.content[2] = null;
-    },
     getIdentification() {
       return this.content[3];
     },
     setIdentification(identification: Identification) {
       this.content[3] = identification;
-    },
-    removeIdentification() {
-      this.content[3] = null;
     },
     getDefaults() {
       this.content[4];
@@ -78,17 +66,11 @@ export const ScorePartwise = element(
     setDefaults(defaults: Defaults) {
       this.content[4] = defaults;
     },
-    removeDefaults() {
-      this.content[4] = null;
-    },
     getCredits() {
       return this.content[5];
     },
-    addCredit(credit: Credit) {
-      this.content[5].push(credit);
-    },
-    removeCredit(credit: Credit) {
-      this.content[5] = this.content[5].filter((c) => c !== credit);
+    setCredits(credits: Credit[]) {
+      this.content[5] = credits;
     },
     getPartLists() {
       return this.content[6];
