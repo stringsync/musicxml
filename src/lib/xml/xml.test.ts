@@ -17,8 +17,6 @@ describe('xml', () => {
       expect(Foo).toBeFunction();
       expect(Foo).not.toThrow();
 
-      // test husky config
-
       expect(Bar).toBeFunction();
       expect(Bar).not.toThrow();
     });
