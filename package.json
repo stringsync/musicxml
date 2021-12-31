@@ -52,7 +52,6 @@
     ]
   },
   "dependencies": {
-    "class-validator": "^0.13.2",
     "xml-js": "^1.6.11"
   }
 }
