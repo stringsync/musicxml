@@ -1,4 +1,4 @@
-import { element } from '../xml';
+import { xml } from '../xml';
 
 export type PartList = ReturnType<typeof PartList>;
 
@@ -15,7 +15,7 @@ export type PartList = ReturnType<typeof PartList>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-list/}
  */
-export const PartList = element(
+export const PartList = xml.element(
   'part-list',
   {
     attributes: {},

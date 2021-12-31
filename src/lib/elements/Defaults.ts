@@ -1,4 +1,4 @@
-import { element } from '../xml';
+import { xml } from '../xml';
 
 export type Defaults = ReturnType<typeof Defaults>;
 
@@ -11,7 +11,7 @@ export type Defaults = ReturnType<typeof Defaults>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/}
  */
-export const Defaults = element(
+export const Defaults = xml.element(
   'defaults',
   {
     attributes: {},

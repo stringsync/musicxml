@@ -1,4 +1,4 @@
-import { element } from '../xml';
+import { xml } from '../xml';
 
 export type Identification = ReturnType<typeof Identification>;
 
@@ -11,7 +11,7 @@ export type Identification = ReturnType<typeof Identification>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/identification/}
  */
-export const Identification = element(
+export const Identification = xml.element(
   'identification',
   {
     attributes: {},

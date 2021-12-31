@@ -1,2 +1,2 @@
 export * from './t';
-export * from './xml';
+export * as xml from './xml';

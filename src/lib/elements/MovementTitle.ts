@@ -1,4 +1,4 @@
-import { element } from '../xml';
+import { xml } from '../xml';
 
 export type MovementTitle = ReturnType<typeof MovementTitle>;
 
@@ -9,7 +9,7 @@ export type MovementTitle = ReturnType<typeof MovementTitle>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/movement-title/}
  */
-export const MovementTitle = element(
+export const MovementTitle = xml.element(
   'movement-title',
   {
     attributes: {},

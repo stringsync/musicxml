@@ -1,4 +1,4 @@
-import { element } from '../xml';
+import { xml } from '../xml';
 
 export type Credit = ReturnType<typeof Credit>;
 
@@ -18,7 +18,7 @@ export type Credit = ReturnType<typeof Credit>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit/}
  */
-export const Credit = element(
+export const Credit = xml.element(
   'credit',
   {
     attributes: {},

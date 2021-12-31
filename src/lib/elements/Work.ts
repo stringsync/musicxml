@@ -1,4 +1,4 @@
-import { element } from '../xml';
+import { xml } from '../xml';
 
 export type Work = ReturnType<typeof Work>;
 
@@ -10,7 +10,7 @@ export type Work = ReturnType<typeof Work>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work/}
  */
-export const Work = element(
+export const Work = xml.element(
   'work',
   {
     attributes: {},

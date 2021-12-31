@@ -1,4 +1,4 @@
-import { element, t } from '../xml';
+import { t, xml } from '../xml';
 import { Credit } from './Credit';
 import { Defaults } from './Defaults';
 import { Identification } from './Identification';
@@ -18,7 +18,7 @@ export type ScorePartwise = ReturnType<typeof ScorePartwise>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/}
  */
-export const ScorePartwise = element(
+export const ScorePartwise = xml.element(
   'score-partwise',
   {
     attributes: {

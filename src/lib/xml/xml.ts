@@ -1,7 +1,7 @@
 import { MusicXMLError } from '../errors/MusicXMLError';
 import { Descriptor, DESCRIPTOR_NAMES, Resolve } from './t';
 
-export type XMLElementSchema<
+type XMLElementSchema<
   A extends Record<string, Descriptor> = Record<string, Descriptor>,
   C extends Descriptor[] = Descriptor[]
 > = {
@@ -9,7 +9,7 @@ export type XMLElementSchema<
   content: Readonly<C>;
 };
 
-export type XMLElement<N extends string, S extends XMLElementSchema, M extends Record<string, Method>> = {
+type XMLElement<N extends string, S extends XMLElementSchema, M extends Record<string, Method>> = {
   type: 'element';
   name: N;
   schema: S;
@@ -17,7 +17,7 @@ export type XMLElement<N extends string, S extends XMLElementSchema, M extends R
   content: Resolve<S['content']>;
 } & M;
 
-export type Method<T = any> = (this: T, ...args: any[]) => any;
+type Method<T = any> = (this: T, ...args: any[]) => any;
 
 const DISALLOWED_METHOD_NAMES = new Set(['type', 'name', 'schema', 'attributes', 'content']);
 
@@ -43,7 +43,7 @@ const isDescriptor = (value: unknown): value is Descriptor =>
  * @param value any value
  * @returns the zero value for the t.* schema.
  */
-export const getZeroValue = <T>(value: T): Resolve<T> => {
+const getZeroValue = <T>(value: T): Resolve<T> => {
   if (isDescriptor(value)) {
     const descriptor = value;
     switch (descriptor.type) {

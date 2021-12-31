@@ -1,4 +1,4 @@
-import { element } from '../xml';
+import { xml } from '../xml';
 
 export type Part = ReturnType<typeof Part>;
 
@@ -10,7 +10,7 @@ export type Part = ReturnType<typeof Part>;
  *
  *  {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-partwise/}
  */
-export const Part = element(
+export const Part = xml.element(
   'part',
   {
     attributes: {},
