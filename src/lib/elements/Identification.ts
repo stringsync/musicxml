@@ -1,5 +1,6 @@
 import { t, xml } from '../xml';
 import { Creator } from './Creator';
+import { Rights } from './Rights';
 
 export type Identification = ReturnType<typeof Identification>;
 
@@ -16,7 +17,7 @@ export const Identification = xml.element(
   'identification',
   {
     attributes: {},
-    content: [t.zeroOrMore(Creator)],
+    content: [t.zeroOrMore(Creator), t.zeroOrMore(Rights)],
   },
   {}
 );
