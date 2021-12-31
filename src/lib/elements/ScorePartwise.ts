@@ -8,8 +8,6 @@ import { Part } from './Part';
 import { PartList } from './PartList';
 import { Work } from './Work';
 
-export type ScorePartwise = ReturnType<typeof ScorePartwise>;
-
 /**
  * Parent elements: None
  *
@@ -18,6 +16,8 @@ export type ScorePartwise = ReturnType<typeof ScorePartwise>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/}
  */
+export type ScorePartwise = ReturnType<typeof ScorePartwise>;
+
 export const ScorePartwise = xml.element(
   'score-partwise',
   {

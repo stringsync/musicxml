@@ -1,7 +1,5 @@
 import { xml } from '../xml';
 
-export type Defaults = ReturnType<typeof Defaults>;
-
 /**
  * Parent elements: `<score-partwise>`, `<score-timewise>`
  *
@@ -11,6 +9,8 @@ export type Defaults = ReturnType<typeof Defaults>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/}
  */
+export type Defaults = ReturnType<typeof Defaults>;
+
 export const Defaults = xml.element(
   'defaults',
   {

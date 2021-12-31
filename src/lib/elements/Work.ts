@@ -1,7 +1,5 @@
 import { xml } from '../xml';
 
-export type Work = ReturnType<typeof Work>;
-
 /**
  * Parent elements: `<score-partwise>`, `<score-timewise>`
  *
@@ -10,6 +8,8 @@ export type Work = ReturnType<typeof Work>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work/}
  */
+export type Work = ReturnType<typeof Work>;
+
 export const Work = xml.element(
   'work',
   {

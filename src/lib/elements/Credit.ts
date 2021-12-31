@@ -1,7 +1,5 @@
 import { xml } from '../xml';
 
-export type Credit = ReturnType<typeof Credit>;
-
 /**
  * Parent elements: `<score-partwise>`, `<score-timewise>`
  *
@@ -18,6 +16,8 @@ export type Credit = ReturnType<typeof Credit>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit/}
  */
+export type Credit = ReturnType<typeof Credit>;
+
 export const Credit = xml.element(
   'credit',
   {

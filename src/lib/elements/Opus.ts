@@ -6,6 +6,8 @@ import { t, xml } from '../xml';
  * The `<opus>` element represents a link to a MusicXML opus document that composes multiple MusicXML scores into a
  * collection.
  */
+export type Opus = ReturnType<typeof Opus>;
+
 export const Opus = xml.element(
   'opus',
   {

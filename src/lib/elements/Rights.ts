@@ -9,4 +9,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rights/}
  */
+export type Rights = ReturnType<typeof Rights>;
+
 export const Rights = xml.element('rights', { attributes: { type: t.string() }, content: [t.string()] }, {});

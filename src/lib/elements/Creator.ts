@@ -9,6 +9,8 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/identification/}
  */
+export type Creator = ReturnType<typeof Creator>;
+
 export const Creator = xml.element(
   'creator',
   {

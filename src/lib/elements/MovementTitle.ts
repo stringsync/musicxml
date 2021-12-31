@@ -1,7 +1,5 @@
 import { t, xml } from '../xml';
 
-export type MovementTitle = ReturnType<typeof MovementTitle>;
-
 /**
  * Parent elements: `<score-partwise>`, `<score-timewise>`
  *
@@ -9,6 +7,8 @@ export type MovementTitle = ReturnType<typeof MovementTitle>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/movement-title/}
  */
+export type MovementTitle = ReturnType<typeof MovementTitle>;
+
 export const MovementTitle = xml.element(
   'movement-title',
   {

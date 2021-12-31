@@ -1,7 +1,5 @@
 import { xml } from '../xml';
 
-export type PartList = ReturnType<typeof PartList>;
-
 /**
  * Parent elements: `<score-partwise>`, `<score-timewise>`
  *
@@ -15,6 +13,8 @@ export type PartList = ReturnType<typeof PartList>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-list/}
  */
+export type PartList = ReturnType<typeof PartList>;
+
 export const PartList = xml.element(
   'part-list',
   {

@@ -7,4 +7,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work-number/}
  */
+export type WorkNumber = ReturnType<typeof WorkNumber>;
+
 export const WorkNumber = xml.element('work-number', { attributes: {}, content: [t.string()] }, {});

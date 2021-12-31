@@ -2,8 +2,6 @@ import { t, xml } from '../xml';
 import { Creator } from './Creator';
 import { Rights } from './Rights';
 
-export type Identification = ReturnType<typeof Identification>;
-
 /**
  * Parent elements: `<score-part>`, `<score-partwise>`, `<score-timewise>`
  *
@@ -13,6 +11,8 @@ export type Identification = ReturnType<typeof Identification>;
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/identification/}
  */
+export type Identification = ReturnType<typeof Identification>;
+
 export const Identification = xml.element(
   'identification',
   {
