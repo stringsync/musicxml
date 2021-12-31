@@ -1,4 +1,4 @@
-import { element, t } from './factory';
+import { element } from '../xml';
 
 export type MovementTitle = ReturnType<typeof MovementTitle>;
 
@@ -11,5 +11,5 @@ export type MovementTitle = ReturnType<typeof MovementTitle>;
  */
 export const MovementTitle = element('movement-title', {
   attributes: {},
-  content: t.none(),
+  content: [],
 });

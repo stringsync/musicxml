@@ -1,4 +1,4 @@
-import { element, t } from './factory';
+import { element } from '../xml';
 
 export type MovementNumber = ReturnType<typeof MovementNumber>;
 
@@ -11,5 +11,5 @@ export type MovementNumber = ReturnType<typeof MovementNumber>;
  */
 export const MovementNumber = element('movement-number', {
   attributes: {},
-  content: t.none(),
+  content: [],
 });

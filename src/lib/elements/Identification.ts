@@ -1,4 +1,4 @@
-import { element, t } from './factory';
+import { element } from '../xml';
 
 export type Identification = ReturnType<typeof Identification>;
 
@@ -13,5 +13,5 @@ export type Identification = ReturnType<typeof Identification>;
  */
 export const Identification = element('identification', {
   attributes: {},
-  content: t.none(),
+  content: [],
 });

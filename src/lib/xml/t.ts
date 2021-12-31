@@ -18,9 +18,7 @@ export type Resolve<T> = T extends string | number | null
   ? number
   : T extends { type: 'constant'; value: infer V }
   ? Resolve<V>
-  : T extends { type: 'oneOf' }
-  ? TODO
-  : T extends { type: 'list'; values: infer V }
+  : T extends { type: 'oneOf'; value: infer V }
   ? Resolve<V>
   : T extends { type: 'optional'; value: infer V }
   ? Resolve<V> | null
@@ -30,24 +28,20 @@ export type Resolve<T> = T extends string | number | null
   ? Resolve<V>[]
   : T extends { type: 'oneOrMore'; value: infer V }
   ? [Resolve<V>, ...Resolve<V>[]]
-  : T extends { type: 'none' }
-  ? null
   : T extends { [key: string]: any }
-  ? { [K in keyof T]: Resolve<T[K]> }
+  ? { -readonly [K in keyof T]: Resolve<T[K]> }
   : never;
 
 export const t = {
   string: () => ({ type: 'string' as const }),
   int: () => ({ type: 'int' as const }),
   float: () => ({ type: 'float' as const }),
-  constant: <T>(value: T) => ({ type: 'constant' as const, value }),
+  constant: <T extends string | number>(value: T) => ({ type: 'constant' as const, value }),
   oneOf: <T extends any[]>(...values: T) => ({ type: 'oneOf' as const, values }),
-  list: <T extends any[]>(...values: T) => ({ type: 'list' as const, values }),
   optional: <T>(value: T) => ({ type: 'optional' as const, value }),
   required: <T extends NonNullable<any>>(value: T) => ({ type: 'required' as const, value }),
   zeroOrMore: <T>(value: T) => ({ type: 'zeroOrMore' as const, value }),
   oneOrMore: <T>(value: T) => ({ type: 'oneOrMore' as const, value }),
-  none: () => ({ type: 'none' as const }),
 };
 
 export const DESCRIPTOR_NAMES = new Set(Object.keys(t));

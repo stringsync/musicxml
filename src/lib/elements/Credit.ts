@@ -1,4 +1,4 @@
-import { element, t } from './factory';
+import { element } from '../xml';
 
 export type Credit = ReturnType<typeof Credit>;
 
@@ -20,5 +20,5 @@ export type Credit = ReturnType<typeof Credit>;
  */
 export const Credit = element('credit', {
   attributes: {},
-  content: t.none(),
+  content: [],
 });

@@ -1,4 +1,4 @@
-import { element, t } from './factory';
+import { element } from '../xml';
 
 export type Defaults = ReturnType<typeof Defaults>;
 
@@ -13,5 +13,5 @@ export type Defaults = ReturnType<typeof Defaults>;
  */
 export const Defaults = element('defaults', {
   attributes: {},
-  content: t.none(),
+  content: [],
 });

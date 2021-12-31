@@ -4,10 +4,10 @@ import { Descriptor, Resolve } from './t';
 
 export type XMLElementSchema<
   A extends Record<string, Descriptor> = Record<string, Descriptor>,
-  C extends Descriptor | (() => XMLElement<any, any, any>) = Descriptor | (() => XMLElement<any, any, any>)
+  C extends Descriptor[] = Descriptor[]
 > = {
   attributes: A;
-  content: C;
+  content: Readonly<C>;
 };
 
 export type XMLElement<N extends string, S extends XMLElementSchema, M extends Record<string, Method>> = {
@@ -18,7 +18,7 @@ export type XMLElement<N extends string, S extends XMLElementSchema, M extends R
   content: Resolve<S['content']>;
 } & M;
 
-export type Method<T = any, A extends any[] = any[], R = any> = (this: T, ...args: A) => R;
+export type Method<T = any> = (this: T, ...args: any[]) => any;
 
 const DISALLOWED_METHOD_NAMES = new Set(['type', 'name', 'schema', 'attributes', 'content']);
 
@@ -31,7 +31,7 @@ const DISALLOWED_METHOD_NAMES = new Set(['type', 'name', 'schema', 'attributes',
  * @returns an element factory
  */
 export const element =
-  <N extends string, S extends XMLElementSchema, M extends Record<string, Method<XMLElement<N, S, M>, any, any>>>(
+  <N extends string, S extends XMLElementSchema, M extends Record<string, Method<XMLElement<N, S, M>>>>(
     name: N,
     schema: S,
     methods: M = {} as M

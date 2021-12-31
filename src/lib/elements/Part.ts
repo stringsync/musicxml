@@ -1,4 +1,4 @@
-import { element, t } from './factory';
+import { element } from '../xml';
 
 export type Part = ReturnType<typeof Part>;
 
@@ -12,5 +12,5 @@ export type Part = ReturnType<typeof Part>;
  */
 export const Part = element('part', {
   attributes: {},
-  content: t.none(),
+  content: [],
 });
