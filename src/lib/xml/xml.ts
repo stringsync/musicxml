@@ -30,13 +30,16 @@ const DISALLOWED_METHOD_NAMES = new Set(['type', 'name', 'schema', 'attributes',
  * @param methods a dictionary of methods for the element
  * @returns an element factory
  */
-export const element =
-  <N extends string, S extends XMLElementSchema, M extends Record<string, Method<XMLElement<N, S, M>>>>(
-    name: N,
-    schema: S,
-    methods: M = {} as M
-  ) =>
-  (): XMLElement<N, S, M> => {
+export const element = <
+  N extends string,
+  S extends XMLElementSchema,
+  M extends Record<string, Method<XMLElement<N, S, M>>>
+>(
+  name: N,
+  schema: S,
+  methods: M
+) => {
+  return (): XMLElement<N, S, M> => {
     for (const methodName in Object.keys(methods)) {
       if (DISALLOWED_METHOD_NAMES.has(methodName)) {
         throw new MusicXMLError({
@@ -64,3 +67,4 @@ export const element =
 
     return element as any;
   };
+};
