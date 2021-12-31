@@ -3,6 +3,7 @@ import { Encoder } from './Encoder';
 import { EncodingDate } from './EncodingDate';
 import { EncodingDescription } from './EncodingDescription';
 import { Software } from './Software';
+import { Supports } from './Supports';
 
 /**
  * Parent element: `<identification>`
@@ -18,7 +19,13 @@ export const Encoding = xml.element(
   'encoding',
   {
     attributes: {},
-    content: [t.optional(EncodingDate), t.optional(Encoder), t.optional(Software), t.optional(EncodingDescription)],
+    content: [
+      t.optional(EncodingDate),
+      t.optional(Encoder),
+      t.optional(Software),
+      t.optional(EncodingDescription),
+      t.optional(Supports),
+    ],
   },
   {}
 );
