@@ -53,13 +53,10 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
         return 0 as Resolve<T>;
       case 'constant':
         return getZeroValue(descriptor.value) as Resolve<T>;
-      case 'none':
       case 'optional':
         return null as Resolve<T>;
       case 'required':
         return getZeroValue(descriptor.value) as Resolve<T>;
-      case 'list':
-        return getZeroValue(descriptor.values) as Resolve<T>;
       case 'zeroOrMore':
         return [] as unknown as Resolve<T>;
       case 'oneOrMore':
