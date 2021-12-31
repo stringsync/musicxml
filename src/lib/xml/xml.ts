@@ -43,28 +43,26 @@ export const element = <
     for (const methodName in Object.keys(methods)) {
       if (DISALLOWED_METHOD_NAMES.has(methodName)) {
         throw new MusicXMLError({
-          symptom: 'cannot use method because it will override a needed property',
+          symptom: 'cannot use method because it will override an existing property',
           context: { methodName },
           remedy: `do not use methods in: ${Array.from(DISALLOWED_METHOD_NAMES).join(', ')}`,
         });
       }
     }
 
-    const element = {
+    const element: any = {
       type: 'element' as const,
       name,
       schema,
-      attributes: helpers.getZeroValue(schema.attributes) as Resolve<S['attributes']>,
-      content: helpers.getZeroValue(schema.content) as Resolve<S['content']>,
+      attributes: helpers.getZeroValue(schema.attributes),
+      content: helpers.getZeroValue(schema.content),
       methods,
     };
 
-    for (const prop of Object.values(element)) {
-      if (typeof prop === 'function') {
-        (prop as any).bind(element);
-      }
+    for (const method of Object.values(methods)) {
+      method.bind(element);
     }
 
-    return element as any;
+    return element;
   };
 };
