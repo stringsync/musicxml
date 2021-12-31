@@ -13,5 +13,18 @@
       "export const ${1:ElementName} = xml.element('$0', { attributes: {}, content: [] }, {});",
       ""
     ]
+  },
+  "Test": {
+    "prefix": "elet",
+    "body": [
+      "import { ${1:ElementName} } from './${1:ElementName}';",
+      "",
+      "describe('${1:ElementName}', () => {",
+      "  it('runs without crashing', () => {",
+      "    expect(${1:ElementName}).not.toThrow();",
+      "  });${0}",
+      "});",
+      ""
+    ]
   }
 }
