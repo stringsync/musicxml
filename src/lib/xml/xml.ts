@@ -90,7 +90,6 @@ const getZeroValue = <T>(value: T): Resolve<T> => {
     return value.map(getZeroValue) as Resolve<T>;
   }
   if (isElement(value)) {
-    // test ignore args to lint-staged
     const schema = get(value, 'schema');
     return {
       ...value,
