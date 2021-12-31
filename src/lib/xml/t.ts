@@ -1,5 +1,3 @@
-type TODO = never;
-
 export type Descriptor = ReturnType<typeof t[keyof typeof t]>;
 
 export type Resolve<T> = T extends string | number | null
@@ -37,7 +35,7 @@ export const t = {
   int: () => ({ type: 'int' as const }),
   float: () => ({ type: 'float' as const }),
   constant: <T extends string | number>(value: T) => ({ type: 'constant' as const, value }),
-  oneOf: <T extends any[]>(...values: T) => ({ type: 'oneOf' as const, values }),
+  oneOf: <T extends [any, ...any[]]>(...values: T) => ({ type: 'oneOf' as const, values }),
   optional: <T>(value: T) => ({ type: 'optional' as const, value }),
   required: <T extends NonNullable<any>>(value: T) => ({ type: 'required' as const, value }),
   zeroOrMore: <T>(value: T) => ({ type: 'zeroOrMore' as const, value }),
