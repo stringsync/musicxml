@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { t, xml } from '../xml';
 
 export type MovementTitle = ReturnType<typeof MovementTitle>;
 
@@ -13,7 +13,7 @@ export const MovementTitle = xml.element(
   'movement-title',
   {
     attributes: {},
-    content: [],
+    content: [t.string()],
   },
   {}
 );
