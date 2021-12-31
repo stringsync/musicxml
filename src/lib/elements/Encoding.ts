@@ -1,4 +1,5 @@
-import { xml } from '../xml';
+import { t, xml } from '../xml';
+import { EncodingDate } from './EncodingDate';
 
 /**
  * Parent element: `<identification>`
@@ -10,4 +11,4 @@ import { xml } from '../xml';
  */
 export type Encoding = ReturnType<typeof Encoding>;
 
-export const Encoding = xml.element('encoding', { attributes: {}, content: [] }, {});
+export const Encoding = xml.element('encoding', { attributes: {}, content: [t.optional(EncodingDate)] }, {});

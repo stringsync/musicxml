@@ -22,7 +22,7 @@ export type Resolve<T> = T extends string | number | null
   ? number
   : T extends { type: 'constant'; value: infer V }
   ? Resolve<V>
-  : T extends { type: 'oneOf'; value: infer V }
+  : T extends { type: 'choices'; value: infer V }
   ? Resolve<V>
   : T extends { type: 'optional'; value: infer V }
   ? Resolve<V> | null
@@ -44,7 +44,7 @@ export const t = {
   float: () => ({ type: 'float' as const }),
   date: () => ({ type: 'date' as const }),
   constant: <T extends string | number>(value: T) => ({ type: 'constant' as const, value }),
-  oneOf: <T extends [any, ...any[]]>(...values: T) => ({ type: 'oneOf' as const, values }),
+  choices: <T extends [any, ...any[]]>(...values: T) => ({ type: 'choices' as const, values }),
   optional: <T>(value: T) => ({ type: 'optional' as const, value }),
   required: <T extends NonNullable<any>>(value: T) => ({ type: 'required' as const, value }),
   zeroOrMore: <T>(value: T) => ({ type: 'zeroOrMore' as const, value }),

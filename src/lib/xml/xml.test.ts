@@ -39,9 +39,9 @@ describe('xml', () => {
       { name: 'floats', content: () => [t.float()], expectation: 0 },
       { name: 'string constants', content: () => [t.constant('hello')], expectation: 'hello' },
       { name: 'number constants', content: () => [t.constant(3.14)], expectation: 3.14 },
-      { name: 'enumerable string choices', content: () => [t.oneOf('zero', 'one')], expectation: 'zero' },
-      { name: 'enumerable number choices', content: () => [t.oneOf(0, 1)], expectation: 0 },
-      { name: 'enumerable heterogenous choices', content: () => [t.oneOf(0, 'one')], expectation: 0 },
+      { name: 'string choices', content: () => [t.choices('zero', 'one')], expectation: 'zero' },
+      { name: 'number choices', content: () => [t.choices(0, 1)], expectation: 0 },
+      { name: 'heterogenous choices', content: () => [t.choices(0, 'one')], expectation: 0 },
       { name: 'optional string values', content: () => [t.optional(t.string())], expectation: null },
       { name: 'optional number values', content: () => [t.optional(t.int())], expectation: null },
       { name: 'required string values', content: () => [t.required(t.string())], expectation: '' },
@@ -67,7 +67,7 @@ describe('xml', () => {
     });
 
     it('returns zero values for complex deeply nested types', () => {
-      const Baz = xml.element('baz', { attributes: {}, content: [t.oneOf('zero', 'one')] as const }, {});
+      const Baz = xml.element('baz', { attributes: {}, content: [t.choices('zero', 'one')] as const }, {});
       const Bar = xml.element('bar', { attributes: {}, content: [t.required(Baz)] as const }, {});
       const Foo = xml.element('foo', { attributes: {}, content: [t.oneOrMore(Bar)] as const }, {});
 

@@ -54,7 +54,7 @@ const getZeroValue = <T>(value: T): Resolve<T> => {
         return 0 as Resolve<T>;
       case 'constant':
         return descriptor.value as Resolve<T>;
-      case 'oneOf':
+      case 'choices':
         return descriptor.values[0];
       case 'optional':
         return null as Resolve<T>;
