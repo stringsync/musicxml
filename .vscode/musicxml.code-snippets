@@ -1,0 +1,17 @@
+{
+  "Element": {
+    "prefix": ["ele"],
+    "body": [
+      "import { xml } from '../xml';",
+      "",
+      "/**",
+      " *",
+      " * {@link }",
+      " */",
+      "export type ${1:ElementName} = ReturnType<typeof ${1:ElementName}>;",
+      "",
+      "export const ${1:ElementName} = xml.element('$0', { attributes: {}, content: [] }, {});",
+      ""
+    ]
+  }
+}
