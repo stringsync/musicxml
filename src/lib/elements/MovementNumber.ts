@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { t, xml } from '../xml';
 
 export type MovementNumber = ReturnType<typeof MovementNumber>;
 
@@ -13,7 +13,7 @@ export const MovementNumber = xml.element(
   'movement-number',
   {
     attributes: {},
-    content: [],
+    content: [t.int()],
   },
   {}
 );
