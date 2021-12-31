@@ -62,7 +62,7 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
       default:
         throw new MusicXMLError({
           symptom: 'cannot compute a zero value for descriptor',
-          values: { descriptor: JSON.stringify(descriptor) },
+          context: { descriptor: JSON.stringify(descriptor) },
           remedy: 'use a different descriptor or update getZeroValue to handle it',
         });
     }
@@ -80,7 +80,7 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
   }
   throw new MusicXMLError({
     symptom: 'cannot compute zero value for value',
-    values: { value: JSON.stringify(value) },
+    context: { value: JSON.stringify(value) },
     remedy: 'update getZeroValue to handle this type',
   });
 };

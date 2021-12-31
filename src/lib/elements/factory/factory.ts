@@ -41,7 +41,7 @@ export const element =
       if (DISALLOWED_METHOD_NAMES.has(methodName)) {
         throw new MusicXMLError({
           symptom: 'cannot use method because it will override a needed property',
-          values: { methodName },
+          context: { methodName },
           remedy: `do not use methods in: ${Array.from(DISALLOWED_METHOD_NAMES).join(', ')}`,
         });
       }
