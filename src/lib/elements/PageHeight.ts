@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<page-height>` element
+ *
  * Parent element: `<page-layout>`
  *
  * The `<page-height>` element specifies the page height in tenths.

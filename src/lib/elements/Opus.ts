@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<opus>` element
+ *
  * Parent element: `<work>`
  *
  * The `<opus>` element represents a link to a MusicXML opus document that composes multiple MusicXML scores into a

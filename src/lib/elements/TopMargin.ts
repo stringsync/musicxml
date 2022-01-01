@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<top-margin>` element
+ *
  * Parent element: `<page-margins>`
  *
  * The `<top-margin>` element specifies the top page margin in tenths.

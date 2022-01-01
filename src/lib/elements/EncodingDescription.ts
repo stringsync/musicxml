@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<encoding-description>` element
+ *
  * Parent element: `<encoding>`
  *
  * The `<encoding-description>` element contains descriptive information about the digital encoding that is not

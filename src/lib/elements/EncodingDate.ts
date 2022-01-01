@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<encoding-date>` element
+ *
  * Parent element: `<encoding>`
  *
  * The `<encoding-date>` element specifies the date of the digital encoding.

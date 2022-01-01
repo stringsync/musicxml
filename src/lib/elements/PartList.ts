@@ -1,6 +1,8 @@
 import { xml } from '../xml';
 
 /**
+ * The `<part-list>` element
+ *
  * Parent elements: `<score-partwise>`, `<score-timewise>`
  *
  * The `<part-list>` element identifies the different musical parts in this document. Each part has an ID that is used

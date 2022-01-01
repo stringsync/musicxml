@@ -7,6 +7,8 @@ import { Rights } from './Rights';
 import { Source } from './Source';
 
 /**
+ * The `<identification>` element
+ *
  * Parent elements: `<score-part>`, `<score-partwise>`, `<score-timewise>`
  *
  * The `<identification>` element contains basic metadata about the score. It includes information that may apply at a

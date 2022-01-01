@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<movement-number>` element
+ *
  * Parent elements: `<score-partwise>`, `<score-timewise>`
  *
  * The `<movement-number>` element specifies the number of a movement.

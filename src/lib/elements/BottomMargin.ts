@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<bottom-margin>` element
+ *
  * Parent element: `<page-margins>`
  *
  * The `<bottom-margin>` element specifies the bottom page margin in tenths.

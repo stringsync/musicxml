@@ -3,6 +3,8 @@ import { Millimeters } from './Millimeters';
 import { Tenths } from './Tenths';
 
 /**
+ * The `<scaling>` element
+ *
  * Parent element: `<defaults>`
  *
  * Margins, page sizes, and distances are all measured in tenths to keep MusicXML data in a consistent coordinate system

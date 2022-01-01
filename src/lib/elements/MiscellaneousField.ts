@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<miscellaneous-field>` element
+ *
  * Parent element: `<miscellaneous>`
  *
  * If a program has other metadata not yet supported in the MusicXML format, each type of metadata can go in a'

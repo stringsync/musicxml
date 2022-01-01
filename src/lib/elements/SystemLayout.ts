@@ -4,6 +4,8 @@ import { SystemMargins } from './SystemMargins';
 import { TopSystemDistance } from './TopSystemDistance';
 
 /**
+ * The `<system-layout>` element
+ *
  * Parent elements: `<defaults>`, `<print>`
  *
  * A system is a group of staves that are read and played simultaneously. The `<system-layout>` element includes left

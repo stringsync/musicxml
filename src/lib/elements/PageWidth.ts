@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<page-width>` element
+ *
  * Parent element: `<page-layout>`
  *
  * The `<page-width>` element specifies the page width in tenths.

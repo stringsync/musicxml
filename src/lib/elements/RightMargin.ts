@@ -1,6 +1,8 @@
 import { xml } from '../xml';
 
 /**
+ * The `<right-margin>` element
+ *
  * Parent elements: `<page-margins>`, `<system-margins>`
  *
  * The `<right-margin>` element specifies the right margin for the parent element in tenths.

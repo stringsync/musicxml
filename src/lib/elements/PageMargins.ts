@@ -5,6 +5,8 @@ import { RightMargin } from './RightMargin';
 import { TopMargin } from './TopMargin';
 
 /**
+ * The `<page-margins>` element
+ *
  * Parent element: `<page-layout>`
  *
  * The `<page-margins>` element specifies page margins in tenths either for both even and odd pages, or via separate odd

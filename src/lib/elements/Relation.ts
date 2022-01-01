@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<relation>` element
+ *
  * Parent element: `<identification>`
  *
  * The `<relation>` element describes a related resource for the music that is encoded. This is similar to the [Dublin

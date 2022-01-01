@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<creator>` element
+ *
  * Parent elements: `<score-part>`, `<score-partwise>`, `<score-timewise>`
  *
  * The `<identification>` element contains basic metadata about the score. It includes information that may apply at a

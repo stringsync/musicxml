@@ -6,6 +6,8 @@ import { Software } from './Software';
 import { Supports } from './Supports';
 
 /**
+ * The `<encoding>` element
+ *
  * Parent element: `<identification>`
  *
  * The `<encoding>` element contains information about who did the digital encoding, when, with what software, and in

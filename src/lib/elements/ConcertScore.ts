@@ -1,6 +1,8 @@
 import { xml } from '../xml';
 
 /**
+ * The `<concert-score>` element
+ *
  * Parent element: `<defaults>`
  *
  * The presence of a `<concert-score>` element indicates that a score is displayed in concert pitch. It is used for

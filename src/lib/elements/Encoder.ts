@@ -1,5 +1,7 @@
 import { t, xml } from '../xml';
 /**
+ * The `<encoder>` element
+ *
  * Parent element: `<encoding>`
  *
  * The `<encoder>` element contains information about who did the digital encoding.

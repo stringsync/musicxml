@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<source>` element
+ *
  * Parent element: `<identification>`
  *
  * The `<source>` element describes the source for the music that is encoded. This is similar to the [Dublin Core source

@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<movement-title>` element
+ *
  * Parent elements: `<score-partwise>`, `<score-timewise>`
  *
  * The `<movement-title>` element specifies the title of a movement, not including its number.

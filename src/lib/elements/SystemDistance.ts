@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<system-distance>` element
+ *
  * Parent element: `<system-layout>`
  *
  * The `<system-distance>` is measured from the bottom line of the previous system to the top line of the current

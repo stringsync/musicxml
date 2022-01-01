@@ -2,6 +2,8 @@ import { t, xml } from '../xml';
 import { LeftDivider } from './LeftDivider';
 
 /**
+ * The `<system-dividers>` element
+ *
  * Parent element: `<system-layout>`
  *
  * The `<system-dividers>` element indicates the presence or absence of system dividers (also known as system separation

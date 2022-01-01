@@ -5,6 +5,8 @@ import { Scaling } from './Scaling';
 import { SystemLayout } from './SystemLayout';
 
 /**
+ * The `<defautls>` element
+ *
  * Parent elements: `<score-partwise>`, `<score-timewise>`
  *
  * The `<defaults>` element specifies score-wide defaults for scaling; whether or not the file is a concert score;

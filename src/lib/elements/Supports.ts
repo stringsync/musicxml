@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<supports>` element
+ *
  * Parent element: `<encoding>`
  *
  * The `<supports>` element indicates if a MusicXML encoding supports a particular MusicXML element. This is recommended

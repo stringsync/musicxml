@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<tenths>` element
+ *
  * Parent element: `<scaling>`
  *
  * The `<tenths>` element contains the number of tenths that correspond to the given number of millimeters within the

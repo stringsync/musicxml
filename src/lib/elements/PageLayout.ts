@@ -4,6 +4,8 @@ import { PageMargins } from './PageMargins';
 import { PageWidth } from './PageWidth';
 
 /**
+ * The `<page-layout>` element
+ *
  * Parent elements: `<defaults>`, `<print>`
  *
  * Page layout can be defined both in score-wide `<defaults>` and in the `<print>` element. If no `<page-layout>`

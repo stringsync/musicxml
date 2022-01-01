@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<software>` element
+ *
  * Parent element: `<encoding>`
  *
  * The `<software>` element specifies what software created the digital encoding.

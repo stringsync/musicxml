@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<top-system-distance>` element
+ *
  * Parent element: `<system-layout>`
  *
  * The `<top-system-distance>` is measured from the page's top margin to the top line of the first system. It is ignored

@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<work-number>` element
+ *
  * Parent element: `<work>`
  *
  * The `<work-number>` element specifies the number of a work, such as its opus number.

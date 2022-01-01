@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<left-margin>` element
+ *
  * Parent elements: `<page-margins>`, `<system-margins>`
  *
  * The `<left-margin>` element specifies the left margin for the parent element in tenths.

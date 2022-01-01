@@ -1,6 +1,8 @@
 import { xml } from '../xml';
 
 /**
+ * The `<credit>` element
+ *
  * Parent elements: `<score-partwise>`, `<score-timewise>`
  *
  * The `<credit>` element represents the appearance of the title, composer, arranger, lyricist, copyright, dedication,

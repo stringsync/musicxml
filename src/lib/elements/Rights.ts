@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<rights>` element
+ *
  * Parent element: `<identification>`
  *
  * The `<rights>` element contains copyright and other intellectual property notices. This is similar to the Dublin

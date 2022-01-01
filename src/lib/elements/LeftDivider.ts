@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
 
 /**
+ * The `<left-divider>` element
+ *
  * Parent element: `<system-dividers>`
  *
  * The `<left-divider>` element indicates the presence or absence of a system divider (also known as a system separation

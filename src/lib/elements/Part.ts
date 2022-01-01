@@ -1,6 +1,8 @@
 import { xml } from '../xml';
 
 /**
+ * The `<part>` element
+ *
  * Parent element: `<score-partwise>`
  *
  * The `<part>` element is the top level of musical organization below the `<score-partwise>` document element. It
