@@ -22,7 +22,7 @@ export type Resolve<T> = T extends string | number | null
   ? number
   : T extends { type: 'constant'; value: infer V }
   ? Resolve<V>
-  : T extends { type: 'choices'; value: infer V }
+  : T extends { type: 'choices'; values: Array<infer V> }
   ? Resolve<V>
   : T extends { type: 'optional'; value: infer V }
   ? Resolve<V> | null

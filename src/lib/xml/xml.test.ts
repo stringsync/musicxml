@@ -42,6 +42,7 @@ describe('xml', () => {
       { name: 'string choices', content: () => [t.choices('zero', 'one')], expectation: 'zero' },
       { name: 'number choices', content: () => [t.choices(0, 1)], expectation: 0 },
       { name: 'heterogenous choices', content: () => [t.choices(0, 'one')], expectation: 0 },
+      { name: 'complex choices', content: () => [t.choices([t.string(), t.int()], [t.int()])], expectation: ['', 0] },
       { name: 'optional string values', content: () => [t.optional(t.string())], expectation: null },
       { name: 'optional number values', content: () => [t.optional(t.int())], expectation: null },
       { name: 'required string values', content: () => [t.required(t.string())], expectation: '' },

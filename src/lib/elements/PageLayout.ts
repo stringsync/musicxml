@@ -19,6 +19,9 @@ export type PageLayout = ReturnType<typeof PageLayout>;
 
 export const PageLayout = xml.element(
   'page-layout',
-  { attributes: {}, content: [t.optional(PageHeight), t.optional(PageWidth)] as const },
+  {
+    attributes: {},
+    content: [t.optional(PageHeight), t.optional(PageWidth)] as const,
+  },
   {}
 );
