@@ -8,4 +8,17 @@ import { t, xml } from '../xml';
  */
 export type Encoder = ReturnType<typeof Encoder>;
 
-export const Encoder = xml.element('encoder', { attributes: { type: t.string() }, content: [t.string()] as const }, {});
+export const Encoder = xml.element(
+  'encoder',
+  {
+    attributes: {
+      /**
+       * Standard values are music, words, and arrangement, but other types may be used. This attribute is only needed
+       * when there are multiple `<encoder>` elements.
+       */
+      type: t.string(),
+    },
+    content: [t.string()] as const,
+  },
+  {}
+);

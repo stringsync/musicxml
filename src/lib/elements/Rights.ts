@@ -11,4 +11,17 @@ import { t, xml } from '../xml';
  */
 export type Rights = ReturnType<typeof Rights>;
 
-export const Rights = xml.element('rights', { attributes: { type: t.string() }, content: [t.string()] as const }, {});
+export const Rights = xml.element(
+  'rights',
+  {
+    attributes: {
+      /**
+       * Standard type values are music, words, and arrangement, but other types may be used. This attribute is only
+       * needed when there are multiple `<rights>` elements.
+       */
+      type: t.string(),
+    },
+    content: [t.string()] as const,
+  },
+  {}
+);

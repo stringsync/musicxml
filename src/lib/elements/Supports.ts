@@ -17,9 +17,27 @@ export const Supports = xml.element(
   'supports',
   {
     attributes: {
+      /**
+       * Indicates the element that is supported or not by the encoding.
+       */
       element: t.required(t.string()),
-      type: t.required(t.choices('yes', 'no')),
+
+      /**
+       * If yes, the absence of a particular element with a specified attribute or value is meaningful. It indicates
+       * that this information is not present in the score. If no, the absence is not meaningful because the encoding
+       * does not include this type of information.
+       */
+      type: t.required(t.choices('yes' as const, 'no' as const)),
+
+      /**
+       * Indicates a specific element attribute that is supported or not by the encoding.
+       */
       attribute: t.optional(t.string()),
+
+      /**
+       * Indicates a specific attribute value that is supported or not by the encoding. Only used together with the
+       * attribute attribute.
+       */
       value: t.optional(t.string()),
     },
     content: [] as const,

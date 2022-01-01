@@ -14,6 +14,9 @@ export const Relation = xml.element(
   'relation',
   {
     attributes: {
+      /**
+       * Standard type values are music, words, and arrangement, but other types may be used.
+       */
       type: t.optional(t.string()),
     },
     content: [] as const,

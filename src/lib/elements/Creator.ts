@@ -15,6 +15,12 @@ export const Creator = xml.element(
   'creator',
   {
     attributes: {
+      /**
+       * Distinguishes different creative contributions. Thus there can be multiple `<creator>` elements within an
+       * `<identification>` element. Standard values are composer, lyricist, and arranger. Other values may be used for
+       * different types of creative roles. This attribute should usually be used even if there is just a single
+       * `<creator>` element.
+       */
       type: t.optional(t.string()),
     },
     content: [t.string()] as const,

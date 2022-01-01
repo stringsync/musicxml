@@ -22,6 +22,12 @@ export const ScorePartwise = xml.element(
   'score-partwise',
   {
     attributes: {
+      /**
+       * The version attribute was added in Version 1.1 for the score-partwise and score-timewise documents. It provides
+       * an easier way to get version information than through the MusicXML public ID. The default value is 1.0 to make
+       * it possible for programs that handle later versions to distinguish earlier version files reliably. Programs
+       * that write MusicXML 1.1 or later files should set this attribute.
+       */
       version: t.constant('4.0' as const),
     },
     content: [

@@ -17,7 +17,13 @@ export type PageMargins = ReturnType<typeof PageMargins>;
 export const PageMargins = xml.element(
   'page-margins',
   {
-    attributes: { type: t.optional(t.choices('both' as const, 'even' as const, 'odd' as const)) },
+    attributes: {
+      /**
+       * 	Specifies whether the margins apply to even pages, odd pages, or both. This attribute is not needed when used
+       * as part of a `<print>` element. The value is both if omitted when used in the `<defaults>` element.
+       */
+      type: t.optional(t.choices('both' as const, 'even' as const, 'odd' as const)),
+    },
     content: [
       t.required(LeftMargin),
       t.required(RightMargin),
