@@ -27,3 +27,4 @@ export * from './effectValue';
 export * from './enclosureShape';
 export * from './endingNumber';
 export * from './fan';
+export * from './fermataShape';
