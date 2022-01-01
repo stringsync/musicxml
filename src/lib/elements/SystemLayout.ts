@@ -1,6 +1,7 @@
 import { t, xml } from '../xml';
 import { SystemDistance } from './SystemDistance';
 import { SystemMargins } from './SystemMargins';
+import { TopSystemDistance } from './TopSystemDistance';
 
 /**
  * Parent elements: `<defaults>`, `<print>`
@@ -29,6 +30,9 @@ export type SystemLayout = ReturnType<typeof SystemLayout>;
 
 export const SystemLayout = xml.element(
   'system-layout',
-  { attributes: {}, content: [t.optional(SystemMargins), t.optional(SystemDistance)] as const },
+  {
+    attributes: {},
+    content: [t.optional(SystemMargins), t.optional(SystemDistance), t.optional(TopSystemDistance)] as const,
+  },
   {}
 );
