@@ -38,6 +38,7 @@ describe('xml', () => {
       { name: 'colors', content: () => [t.color()], expectation: '#000000' },
       { name: 'ints', content: () => [t.int()], expectation: 0 },
       { name: 'floats', content: () => [t.float()], expectation: 0 },
+      { name: 'ranges', content: () => [t.range(200, 300)], expectation: 200 },
       { name: 'string constants', content: () => [t.constant('hello')], expectation: 'hello' },
       { name: 'number constants', content: () => [t.constant(3.14)], expectation: 3.14 },
       { name: 'string choices', content: () => [t.choices('zero', 'one')], expectation: 'zero' },
