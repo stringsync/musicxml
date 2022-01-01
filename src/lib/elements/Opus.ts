@@ -19,7 +19,7 @@ export const Opus = xml.element(
       ['xlink:title']: t.optional(t.string()),
       ['xlink:type']: t.optional(t.choices('simple')),
     },
-    content: [],
+    content: [] as const,
   },
   {}
 );

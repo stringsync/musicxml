@@ -9,4 +9,4 @@ import { t, xml } from '../xml';
  */
 export type Software = ReturnType<typeof Software>;
 
-export const Software = xml.element('software', { attributes: {}, content: [t.string()] }, {});
+export const Software = xml.element('software', { attributes: {}, content: [t.string()] as const }, {});

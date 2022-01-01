@@ -11,4 +11,4 @@ import { t, xml } from '../xml';
  */
 export type Rights = ReturnType<typeof Rights>;
 
-export const Rights = xml.element('rights', { attributes: { type: t.string() }, content: [t.string()] }, {});
+export const Rights = xml.element('rights', { attributes: { type: t.string() }, content: [t.string()] as const }, {});

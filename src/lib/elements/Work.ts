@@ -14,7 +14,7 @@ export const Work = xml.element(
   'work',
   {
     attributes: {},
-    content: [],
+    content: [] as const,
   },
   {}
 );

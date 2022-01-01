@@ -28,7 +28,7 @@ export const Identification = xml.element(
       t.optional(Source),
       t.zeroOrMore(Relation),
       t.optional(Miscellaneous),
-    ],
+    ] as const,
   },
   {}
 );

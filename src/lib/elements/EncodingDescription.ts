@@ -8,4 +8,8 @@ import { t, xml } from '../xml';
  */
 export type EncodingDescription = ReturnType<typeof EncodingDescription>;
 
-export const EncodingDescription = xml.element('encoding-description', { attributes: {}, content: [t.string()] }, {});
+export const EncodingDescription = xml.element(
+  'encoding-description',
+  { attributes: {}, content: [t.string()] as const },
+  {}
+);

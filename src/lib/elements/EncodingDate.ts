@@ -17,7 +17,7 @@ export const EncodingDate = xml.element(
         encode: (date: Date) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
         decode: (str: string) => new Date(str),
       }),
-    ],
+    ] as const,
   },
   {}
 );

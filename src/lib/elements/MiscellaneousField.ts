@@ -12,6 +12,6 @@ export type MiscellaneousField = ReturnType<typeof MiscellaneousField>;
 
 export const MiscellaneousField = xml.element(
   'miscellaneous-field',
-  { attributes: { name: t.string() }, content: [t.string()] },
+  { attributes: { name: t.string() }, content: [t.string()] as const },
   {}
 );

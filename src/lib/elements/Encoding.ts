@@ -25,7 +25,7 @@ export const Encoding = xml.element(
       t.optional(Software),
       t.optional(EncodingDescription),
       t.optional(Supports),
-    ],
+    ] as const,
   },
   {}
 );

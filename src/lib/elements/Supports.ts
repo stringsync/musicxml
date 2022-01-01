@@ -22,7 +22,7 @@ export const Supports = xml.element(
       attribute: t.optional(t.string()),
       value: t.optional(t.string()),
     },
-    content: [],
+    content: [] as const,
   },
   {}
 );

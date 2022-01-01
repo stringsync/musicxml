@@ -10,4 +10,4 @@ import { t, xml } from '../xml';
  */
 export type Source = ReturnType<typeof Source>;
 
-export const Source = xml.element('source', { attributes: {}, content: [t.string()] }, {});
+export const Source = xml.element('source', { attributes: {}, content: [t.string()] as const }, {});

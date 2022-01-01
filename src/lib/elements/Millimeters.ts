@@ -10,4 +10,8 @@ import { t, xml } from '../xml';
  */
 export type Millimeters = ReturnType<typeof Millimeters>;
 
-export const Millimeters = xml.element('millimeters', { attributes: {}, content: [t.required(t.float())] }, {});
+export const Millimeters = xml.element(
+  'millimeters',
+  { attributes: {}, content: [t.required(t.float())] as const },
+  {}
+);

@@ -13,7 +13,7 @@ export const MovementNumber = xml.element(
   'movement-number',
   {
     attributes: {},
-    content: [t.int()],
+    content: [t.int()] as const,
   },
   {}
 );

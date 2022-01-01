@@ -9,4 +9,4 @@ import { t, xml } from '../xml';
  */
 export type WorkNumber = ReturnType<typeof WorkNumber>;
 
-export const WorkNumber = xml.element('work-number', { attributes: {}, content: [t.string()] }, {});
+export const WorkNumber = xml.element('work-number', { attributes: {}, content: [t.string()] as const }, {});

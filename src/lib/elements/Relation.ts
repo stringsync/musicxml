@@ -16,7 +16,7 @@ export const Relation = xml.element(
     attributes: {
       type: t.optional(t.string()),
     },
-    content: [],
+    content: [] as const,
   },
   {}
 );

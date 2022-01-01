@@ -13,7 +13,7 @@ export const MovementTitle = xml.element(
   'movement-title',
   {
     attributes: {},
-    content: [t.string()],
+    content: [t.string()] as const,
   },
   {}
 );

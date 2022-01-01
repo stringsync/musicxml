@@ -14,7 +14,7 @@ export const Part = xml.element(
   'part',
   {
     attributes: {},
-    content: [],
+    content: [] as const,
   },
   {}
 );

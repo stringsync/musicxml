@@ -16,6 +16,6 @@ export type Scaling = ReturnType<typeof Scaling>;
 
 export const Scaling = xml.element(
   'scaling',
-  { attributes: {}, content: [t.required(Millimeters), t.required(Tenths)] },
+  { attributes: {}, content: [t.required(Millimeters), t.required(Tenths)] as const },
   {}
 );
