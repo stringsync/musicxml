@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -14,6 +15,6 @@ export type TopSystemDistance = ReturnType<typeof TopSystemDistance>;
 
 export const TopSystemDistance = xml.element(
   'top-system-distance',
-  { attributes: {}, content: [t.required(t.float())] as const },
+  { attributes: {}, content: [t.required(dataTypes.tenths())] as const },
   {}
 );

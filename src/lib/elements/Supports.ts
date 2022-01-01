@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -22,19 +23,19 @@ export const Supports = xml.element(
       /**
        * Indicates the element that is supported or not by the encoding.
        */
-      element: t.required(t.string()),
+      element: t.required(dataTypes.nmtoken()),
 
       /**
        * If yes, the absence of a particular element with a specified attribute or value is meaningful. It indicates
        * that this information is not present in the score. If no, the absence is not meaningful because the encoding
        * does not include this type of information.
        */
-      type: t.required(t.choices('yes' as const, 'no' as const)),
+      type: t.required(dataTypes.yesNo()),
 
       /**
        * Indicates a specific element attribute that is supported or not by the encoding.
        */
-      attribute: t.optional(t.string()),
+      attribute: t.optional(dataTypes.nmtoken()),
 
       /**
        * Indicates a specific attribute value that is supported or not by the encoding. Only used together with the

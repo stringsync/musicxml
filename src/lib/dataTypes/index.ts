@@ -31,6 +31,7 @@ export * from './fermataShape';
 export * from './fifths';
 export * from './fontFamily';
 export * from './fontSize';
+export * from './fontStyle';
 export * from './fontWeight';
 export * from './glassValue';
 export * from './glyphType';

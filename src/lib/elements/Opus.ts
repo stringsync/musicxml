@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -21,14 +22,14 @@ export const Opus = xml.element(
        * fragment. See the
        * [definition in the XML Linking Language recommendation.](https://www.w3.org/TR/xlink11/#link-locators)
        */
-      ['xlink:href']: t.required(t.string()),
+      ['xlink:href']: t.required(dataTypes.anyURI()),
 
       /**
        * The actuate attribute is used to communicate the desired timing of traversal from the starting resource to the
        * ending resource. The default value is onRequest. See the
        * [definition in the XML Linking Language recommendation.](https://www.w3.org/TR/xlink11/#link-behaviors)
        */
-      ['xlink:actuate']: t.optional(t.string()),
+      ['xlink:actuate']: t.optional(dataTypes.xlink.actuate()),
 
       /**
        * The role attribute indicates a property of the link. See the
@@ -41,7 +42,7 @@ export const Opus = xml.element(
        * starting resource. The default value is replace. See the
        * [definition in the XML Linking Language recommendation.](https://www.w3.org/TR/xlink11/#link-behaviors)
        */
-      ['xlink:show']: t.optional(t.choices('new', 'replace', 'embed', 'other', 'none')),
+      ['xlink:show']: t.optional(dataTypes.xlink.show()),
 
       /**
        * The title attribute describes the meaning of a link or resource in a human-readable fashion. See the
@@ -53,7 +54,7 @@ export const Opus = xml.element(
        * The type attribute identifies XLink element types. In MusicXML, the value is always simple. See the
        * [definition in the XML Linking Language recommendation.](https://www.w3.org/TR/xlink11/#link-types)
        */
-      ['xlink:type']: t.optional(t.choices('simple')),
+      ['xlink:type']: t.optional(dataTypes.xlink.type()),
     },
     content: [] as const,
   },

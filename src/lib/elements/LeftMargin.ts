@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -11,4 +12,8 @@ import { t, xml } from '../xml';
  */
 export type LeftMargin = ReturnType<typeof LeftMargin>;
 
-export const LeftMargin = xml.element('left-margin', { attributes: {}, content: [t.required(t.float())] as const }, {});
+export const LeftMargin = xml.element(
+  'left-margin',
+  { attributes: {}, content: [t.required(dataTypes.tenths())] as const },
+  {}
+);

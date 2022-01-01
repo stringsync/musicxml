@@ -33,7 +33,7 @@ export const LeftDivider = xml.element(
        * MusicXML file that can understand both features should generally rely on this attribute for its greater
        * accuracy.
        */
-      ['default-x']: t.optional(t.float()),
+      ['default-x']: t.optional(dataTypes.tenths()),
 
       /**
        * Changes the computation of the default vertical position. The origin is changed relative to the top line of the
@@ -43,27 +43,27 @@ export const LeftDivider = xml.element(
        * MusicXML file that can understand both attributes should generally rely on this attribute for its greater
        * accuracy.
        */
-      ['default-y']: t.optional(t.float()),
+      ['default-y']: t.optional(dataTypes.tenths()),
 
       /**
        * A comma-separated list of font names.
        */
-      ['font-family']: t.optional(t.string()),
+      ['font-family']: t.optional(dataTypes.fontFamily()),
 
       /**
        * One of the CSS sizes or a numeric point size.
        */
-      ['font-size']: t.optional(t.float()),
+      ['font-size']: t.optional(dataTypes.fontSize()),
 
       /**
        * Normal or italic style.
        */
-      ['font-style']: t.optional(t.choices('normal' as const, 'italic' as const)),
+      ['font-style']: t.optional(dataTypes.fontStyle()),
 
       /**
        * Normal or bold weight.
        */
-      ['font-weight']: t.optional(t.choices('normal' as const, 'bold' as const)),
+      ['font-weight']: t.optional(dataTypes.fontWeight()),
 
       /**
        * In cases where text extends over more than one line, horizontal alignment and justify values can be different.
@@ -79,32 +79,32 @@ export const LeftDivider = xml.element(
        * justify attribute. For elements where a justify attribute is not allowed, the default is
        * implementation-dependent.
        */
-      halign: t.optional(t.choices('left' as const, 'center' as const, 'right' as const)),
+      halign: t.optional(dataTypes.leftCenterRight()),
 
       /**
        * Specifies whether or not to print an object. It is yes if not specified.
        */
-      ['print-object']: t.optional(t.choices('yes' as const, 'no' as const)),
+      ['print-object']: t.optional(dataTypes.yesNo()),
 
       /**
        * Changes the horizontal position relative to the default position, either as computed by the individual
        * program, or as overridden by the default-x attribute. Positive x is right and negative x is left. It should be
        * interpreted in the context of the <offset> element or directive attribute if those are present.
        */
-      ['relative-x']: t.optional(t.float()),
+      ['relative-x']: t.optional(dataTypes.tenths()),
 
       /**
        * Changes the horizontal position relative to the default position, either as computed by the individual
        * program, or as overridden by the default-x attribute. Positive x is right and negative x is left. It should be
        * interpreted in the context of the <offset> element or directive attribute if those are present.
        */
-      ['relative-y']: t.optional(t.float()),
+      ['relative-y']: t.optional(dataTypes.tenths()),
 
       /**
        * Indicates vertical alignment to the top, middle, bottom, or baseline of the text. The default is
        * implementation-dependent.
        */
-      valign: t.optional(t.choices('top' as const, 'middle' as const, 'bottom' as const, 'baseline' as const)),
+      valign: t.optional(dataTypes.valign()),
     },
     content: [] as const,
   },

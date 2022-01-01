@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -14,6 +15,6 @@ export type Millimeters = ReturnType<typeof Millimeters>;
 
 export const Millimeters = xml.element(
   'millimeters',
-  { attributes: {}, content: [t.required(t.float())] as const },
+  { attributes: {}, content: [t.required(dataTypes.millimeters())] as const },
   {}
 );
