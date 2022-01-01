@@ -64,6 +64,8 @@ export type Resolve<T> = T extends string | number | null
   ? [Resolve<V>, ...Resolve<V>[]]
   : T extends { type: 'custom'; value: { zero: () => infer V } }
   ? V
+  : T extends { type: 'not'; exclude: infer E; include: infer I }
+  ? Exclude<Resolve<I>, Resolve<E>>
   : T extends { [key: string]: any }
   ? { -readonly [K in keyof T]: Resolve<T[K]> }
   : never;
@@ -82,6 +84,7 @@ export const t = {
   zeroOrMore: <T>(value: T) => ({ type: 'zeroOrMore' as const, value }),
   oneOrMore: <T>(value: T) => ({ type: 'oneOrMore' as const, value }),
   custom: <T extends CustomDescriptorOpts<any>>(value: T) => ({ type: 'custom' as const, value }),
+  not: <N, T>(exclude: N, include: T) => ({ type: 'not' as const, exclude, include }),
 };
 
 export const DESCRIPTOR_NAMES = new Set(Object.keys(t));
@@ -124,6 +127,8 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
         return [getZeroValue(descriptor.value)] as unknown as Resolve<T>;
       case 'custom':
         return descriptor.value.zero();
+      case 'not':
+        return getZeroValue(descriptor.include);
       default:
         throw new MusicXMLError({
           symptom: 'cannot compute a zero value for descriptor',
