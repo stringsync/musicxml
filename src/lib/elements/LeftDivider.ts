@@ -107,6 +107,3 @@ export const LeftDivider = xml.element(
   },
   {}
 );
-
-const l = LeftDivider();
-l.attributes.color;
