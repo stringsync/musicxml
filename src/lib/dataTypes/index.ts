@@ -16,3 +16,4 @@ export * from './cancelLocation';
 export * from './circularArrow';
 export * from './clefSign';
 export * from './color';
+export * from './commaSeparatedText';
