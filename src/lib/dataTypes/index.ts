@@ -24,3 +24,4 @@ export * from './degreeTypeValue';
 export * from './distanceType';
 export * from './divisions';
 export * from './effectValue';
+export * from './enclosureShape';
