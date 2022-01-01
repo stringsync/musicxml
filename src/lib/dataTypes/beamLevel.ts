@@ -7,4 +7,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/beam-level/}
  */
-export const beamLevel = () => t.range(1, 8);
+export const beamLevel = () => t.range({ min: 1, max: 8 });

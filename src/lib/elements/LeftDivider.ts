@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -22,7 +23,7 @@ export const LeftDivider = xml.element(
       /**
        * Indicates the color of an element.
        */
-      color: t.optional(t.color()),
+      color: t.optional(dataTypes.color()),
 
       /**
        * 	Changes the computation of the default horizontal position. The origin is changed relative to the left-hand

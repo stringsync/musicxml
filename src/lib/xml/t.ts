@@ -16,10 +16,20 @@ const isDescriptor = (value: unknown): value is Descriptor =>
 
 export type Descriptor = ReturnType<typeof t[keyof typeof t]>;
 
-export type CustomDescriptor<T> = {
+export type CustomDescriptorOpts<T> = {
   zero: () => T;
   encode: (value: T) => string;
   decode: (str: string) => T;
+};
+
+type RegexDescriptorOpts = {
+  pattern: RegExp;
+  zero: () => string;
+};
+
+type RangeDescriptorOpts = {
+  min: number;
+  max: number;
 };
 
 export type Resolve<T> = T extends string | number | null
@@ -32,7 +42,7 @@ export type Resolve<T> = T extends string | number | null
   ? Resolve<V>
   : T extends { type: 'string' }
   ? string
-  : T extends { type: 'color' }
+  : T extends { type: 'regex' }
   ? string
   : T extends { type: 'int' }
   ? number
@@ -60,10 +70,10 @@ export type Resolve<T> = T extends string | number | null
 
 export const t = {
   string: () => ({ type: 'string' as const }),
-  color: () => ({ type: 'color' as const }),
+  regex: (value: RegexDescriptorOpts) => ({ type: 'regex' as const, value }),
   int: () => ({ type: 'int' as const }),
   float: () => ({ type: 'float' as const }),
-  range: (min: number, max: number) => ({ type: 'range' as const, min, max }),
+  range: (value: RangeDescriptorOpts) => ({ type: 'range' as const, value }),
   date: () => ({ type: 'date' as const }),
   constant: <T extends string | number>(value: T) => ({ type: 'constant' as const, value }),
   choices: <T extends [any, ...any[]]>(...values: T) => ({ type: 'choices' as const, values }),
@@ -71,7 +81,7 @@ export const t = {
   required: <T extends NonNullable<any>>(value: T) => ({ type: 'required' as const, value }),
   zeroOrMore: <T>(value: T) => ({ type: 'zeroOrMore' as const, value }),
   oneOrMore: <T>(value: T) => ({ type: 'oneOrMore' as const, value }),
-  custom: <T extends CustomDescriptor<any>>(value: T) => ({ type: 'custom' as const, value }),
+  custom: <T extends CustomDescriptorOpts<any>>(value: T) => ({ type: 'custom' as const, value }),
 };
 
 export const DESCRIPTOR_NAMES = new Set(Object.keys(t));
@@ -90,13 +100,13 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
     switch (descriptor.type) {
       case 'string':
         return '' as Resolve<T>;
-      case 'color':
-        return '#000000' as Resolve<T>;
+      case 'regex':
+        return descriptor.value.zero() as Resolve<T>;
       case 'int':
       case 'float':
         return 0 as Resolve<T>;
       case 'range':
-        return descriptor.min as Resolve<T>;
+        return descriptor.value.min as Resolve<T>;
       case 'constant':
         return descriptor.value as Resolve<T>;
       case 'choices':
