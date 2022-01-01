@@ -1,5 +1,6 @@
 import { t, xml } from '../xml';
 import { PageHeight } from './PageHeight';
+import { PageMargins } from './PageMargins';
 import { PageWidth } from './PageWidth';
 
 /**
@@ -21,7 +22,11 @@ export const PageLayout = xml.element(
   'page-layout',
   {
     attributes: {},
-    content: [t.optional(PageHeight), t.optional(PageWidth)] as const,
+    content: [
+      t.optional(PageHeight),
+      t.optional(PageWidth),
+      t.choices([] as const, [PageMargins] as const, [PageMargins, PageMargins] as const),
+    ] as const,
   },
   {}
 );
