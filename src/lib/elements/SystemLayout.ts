@@ -1,8 +1,4 @@
-import { t, xml } from '../xml';
-import { ConcertScore } from './ConcertScore';
-import { PageLayout } from './PageLayout';
-import { Scaling } from './Scaling';
-import { SystemLayout } from './SystemLayout';
+import { xml } from '../xml';
 
 /**
  * Parent elements: `<score-partwise>`, `<score-timewise>`
@@ -13,13 +9,6 @@ import { SystemLayout } from './SystemLayout';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/}
  */
-export type Defaults = ReturnType<typeof Defaults>;
+export type SystemLayout = ReturnType<typeof SystemLayout>;
 
-export const Defaults = xml.element(
-  'defaults',
-  {
-    attributes: {},
-    content: [t.optional(Scaling), t.optional(ConcertScore), t.optional(PageLayout), t.optional(SystemLayout)] as const,
-  },
-  {}
-);
+export const SystemLayout = xml.element('system-layout', { attributes: {}, content: [] as const }, {});
