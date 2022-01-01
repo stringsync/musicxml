@@ -22,7 +22,7 @@ export const Credit = xml.element(
   'credit',
   {
     attributes: {},
-    content: [],
+    content: [] as const,
   },
   {}
 );

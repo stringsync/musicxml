@@ -1,4 +1,5 @@
 import { t, xml } from '../xml';
+import { ConcertScore } from './ConcertScore';
 import { Scaling } from './Scaling';
 
 /**
@@ -16,7 +17,7 @@ export const Defaults = xml.element(
   'defaults',
   {
     attributes: {},
-    content: [t.optional(Scaling)],
+    content: [t.optional(Scaling), t.optional(ConcertScore)] as const,
   },
   {}
 );

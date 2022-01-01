@@ -17,7 +17,7 @@ export const Creator = xml.element(
     attributes: {
       type: t.optional(t.string()),
     },
-    content: [t.string()],
+    content: [t.string()] as const,
   },
   {}
 );

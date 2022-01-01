@@ -10,7 +10,7 @@
       " */",
       "export type $TM_FILENAME_BASE = ReturnType<typeof $TM_FILENAME_BASE>;",
       "",
-      "export const $TM_FILENAME_BASE = xml.element('$0', { attributes: {}, content: [] }, {});",
+      "export const $TM_FILENAME_BASE = xml.element('$0', { attributes: {}, content: [] as const }, {});",
       ""
     ]
   },
