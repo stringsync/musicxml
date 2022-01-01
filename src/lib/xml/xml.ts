@@ -49,6 +49,8 @@ const getZeroValue = <T>(value: T): Resolve<T> => {
     switch (descriptor.type) {
       case 'string':
         return '' as Resolve<T>;
+      case 'color':
+        return '#000000' as Resolve<T>;
       case 'int':
       case 'float':
         return 0 as Resolve<T>;

@@ -16,6 +16,8 @@ export type Resolve<T> = T extends string | number | null
   ? Resolve<V>
   : T extends { type: 'string' }
   ? string
+  : T extends { type: 'color' }
+  ? string
   : T extends { type: 'int' }
   ? number
   : T extends { type: 'float' }
@@ -40,6 +42,7 @@ export type Resolve<T> = T extends string | number | null
 
 export const t = {
   string: () => ({ type: 'string' as const }),
+  color: () => ({ type: 'color' as const }),
   int: () => ({ type: 'int' as const }),
   float: () => ({ type: 'float' as const }),
   date: () => ({ type: 'date' as const }),

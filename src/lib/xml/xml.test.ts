@@ -35,6 +35,7 @@ describe('xml', () => {
     it.each<{ name: string; content: () => any[]; expectation: any }>([
       { name: 'empty arrays', content: () => [], expectation: undefined },
       { name: 'strings', content: () => [t.string()], expectation: '' },
+      { name: 'colors', content: () => [t.color()], expectation: '#000000' },
       { name: 'ints', content: () => [t.int()], expectation: 0 },
       { name: 'floats', content: () => [t.float()], expectation: 0 },
       { name: 'string constants', content: () => [t.constant('hello')], expectation: 'hello' },
