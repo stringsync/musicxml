@@ -20,3 +20,4 @@ export * from './commaSeparatedText';
 export * from './date';
 export * from './decimal';
 export * from './degreeSymbolValue';
+export * from './degreeTypeValue';
