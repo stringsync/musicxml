@@ -1,6 +1,8 @@
 import { t, xml } from '../xml';
+import { BottomMargin } from './BottomMargin';
 import { LeftMargin } from './LeftMargin';
 import { RightMargin } from './RightMargin';
+import { TopMargin } from './TopMargin';
 
 /**
  * Parent element: `<page-layout>`
@@ -16,7 +18,12 @@ export const PageMargins = xml.element(
   'page-margins',
   {
     attributes: { type: t.optional(t.choices('both' as const, 'even' as const, 'odd' as const)) },
-    content: [t.required(LeftMargin), t.required(RightMargin)] as const,
+    content: [
+      t.required(LeftMargin),
+      t.required(RightMargin),
+      t.required(TopMargin),
+      t.required(BottomMargin),
+    ] as const,
   },
   {}
 );
