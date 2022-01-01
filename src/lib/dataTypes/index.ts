@@ -22,3 +22,4 @@ export * from './decimal';
 export * from './degreeSymbolValue';
 export * from './degreeTypeValue';
 export * from './distanceType';
+export * from './divisions';
