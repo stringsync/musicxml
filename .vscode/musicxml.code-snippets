@@ -6,11 +6,11 @@
       "",
       "/**",
       " * ",
-      " * {@link }",
+      " * {@link $0}",
       " */",
       "export type $TM_FILENAME_BASE = ReturnType<typeof $TM_FILENAME_BASE>;",
       "",
-      "export const $TM_FILENAME_BASE = xml.element('$0', { attributes: {}, content: [] as const }, {});",
+      "export const $TM_FILENAME_BASE = xml.element('$1', { attributes: {}, content: [] as const }, {});",
       ""
     ]
   },
