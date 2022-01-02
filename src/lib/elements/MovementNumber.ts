@@ -1,4 +1,5 @@
-import { t, xml } from '../xml';
+import * as dataTypes from '../dataTypes';
+import { xml } from '../xml';
 
 /**
  * The `<movement-number>` element
@@ -15,7 +16,7 @@ export const MovementNumber = xml.element(
   'movement-number',
   {
     attributes: {},
-    content: [t.int()] as const,
+    content: [dataTypes.string()] as const,
   },
   {}
 );

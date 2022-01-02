@@ -1,4 +1,5 @@
-import { t, xml } from '../xml';
+import * as dataTypes from '../dataTypes';
+import { xml } from '../xml';
 
 /**
  * The `<work-title>` element
@@ -11,4 +12,4 @@ import { t, xml } from '../xml';
  */
 export type WorkTitle = ReturnType<typeof WorkTitle>;
 
-export const WorkTitle = xml.element('work-title', { attributes: {}, content: [t.string()] as const }, {});
+export const WorkTitle = xml.element('work-title', { attributes: {}, content: [dataTypes.string()] as const }, {});

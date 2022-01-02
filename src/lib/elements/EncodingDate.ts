@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { xml } from '../xml';
+import { t, xml } from '../xml';
 
 /**
  * The `<encoding-date>` element
@@ -14,7 +14,7 @@ export const EncodingDate = xml.element(
   'encoding-date',
   {
     attributes: {},
-    content: [dataTypes.yyyyMmDdd()] as const,
+    content: [t.required(dataTypes.yyyyMmDdd())] as const,
   },
   {}
 );

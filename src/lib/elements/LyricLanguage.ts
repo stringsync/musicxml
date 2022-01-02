@@ -24,7 +24,7 @@ export const LyricLanguage = xml.element(
       /**
        * The lyric name for which this is the default, corresponding to the name attribute in the `<lyric>` element.
        */
-      name: t.optional(t.string()),
+      name: t.optional(dataTypes.token()),
 
       /**
        * The lyric number for which this is the default, corresponding to the number attribute in the `<lyric>` element.

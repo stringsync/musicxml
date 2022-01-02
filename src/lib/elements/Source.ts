@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -12,4 +13,4 @@ import { t, xml } from '../xml';
  */
 export type Source = ReturnType<typeof Source>;
 
-export const Source = xml.element('source', { attributes: {}, content: [t.string()] as const }, {});
+export const Source = xml.element('source', { attributes: {}, content: [t.optional(dataTypes.string())] as const }, {});

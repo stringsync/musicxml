@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -21,9 +22,9 @@ export const Rights = xml.element(
        * Standard type values are music, words, and arrangement, but other types may be used. This attribute is only
        * needed when there are multiple `<rights>` elements.
        */
-      type: t.string(),
+      type: t.optional(dataTypes.token()),
     },
-    content: [t.string()] as const,
+    content: [t.required(dataTypes.string())] as const,
   },
   {}
 );

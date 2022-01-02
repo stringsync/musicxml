@@ -22,11 +22,13 @@ export const Encoding = xml.element(
   {
     attributes: {},
     content: [
-      t.optional(EncodingDate),
-      t.optional(Encoder),
-      t.optional(Software),
-      t.optional(EncodingDescription),
-      t.optional(Supports),
+      t.zeroOrMore([
+        t.optional(EncodingDate),
+        t.optional(Encoder),
+        t.optional(Software),
+        t.optional(EncodingDescription),
+        t.optional(Supports),
+      ]),
     ] as const,
   },
   {}

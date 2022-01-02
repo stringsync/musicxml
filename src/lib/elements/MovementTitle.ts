@@ -1,4 +1,5 @@
-import { t, xml } from '../xml';
+import * as dataTypes from '../dataTypes';
+import { xml } from '../xml';
 
 /**
  * The `<movement-title>` element
@@ -15,7 +16,7 @@ export const MovementTitle = xml.element(
   'movement-title',
   {
     attributes: {},
-    content: [t.string()] as const,
+    content: [dataTypes.string()] as const,
   },
   {}
 );

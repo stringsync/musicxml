@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -19,9 +20,9 @@ export const Relation = xml.element(
       /**
        * Standard type values are music, words, and arrangement, but other types may be used.
        */
-      type: t.optional(t.string()),
+      type: t.optional(dataTypes.token()),
     },
-    content: [] as const,
+    content: [t.required(dataTypes.string())] as const,
   },
   {}
 );

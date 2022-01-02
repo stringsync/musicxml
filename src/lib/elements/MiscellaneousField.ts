@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -19,9 +20,9 @@ export const MiscellaneousField = xml.element(
       /**
        * Indicates the type of metadata the element content represents.
        */
-      name: t.required(t.string()),
+      name: t.required(dataTypes.token()),
     },
-    content: [t.string()] as const,
+    content: [t.required(dataTypes.string())] as const,
   },
   {}
 );

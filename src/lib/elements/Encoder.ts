@@ -1,4 +1,6 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
+
 /**
  * The `<encoder>` element
  *
@@ -18,9 +20,9 @@ export const Encoder = xml.element(
        * Standard values are music, words, and arrangement, but other types may be used. This attribute is only needed
        * when there are multiple `<encoder>` elements.
        */
-      type: t.string(),
+      type: t.optional(dataTypes.string()),
     },
-    content: [t.string()] as const,
+    content: [t.required(dataTypes.string())] as const,
   },
   {}
 );

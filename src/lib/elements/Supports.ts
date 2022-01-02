@@ -41,7 +41,7 @@ export const Supports = xml.element(
        * Indicates a specific attribute value that is supported or not by the encoding. Only used together with the
        * attribute attribute.
        */
-      value: t.optional(t.string()),
+      value: t.optional(dataTypes.token()),
     },
     content: [] as const,
   },

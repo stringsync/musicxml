@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -23,9 +24,9 @@ export const Creator = xml.element(
        * different types of creative roles. This attribute should usually be used even if there is just a single
        * `<creator>` element.
        */
-      type: t.optional(t.string()),
+      type: t.optional(dataTypes.string()),
     },
-    content: [t.string()] as const,
+    content: [t.required(dataTypes.token())] as const,
   },
   {}
 );

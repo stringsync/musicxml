@@ -1,4 +1,11 @@
-import { xml } from '../xml';
+import * as dataTypes from '../dataTypes';
+import { t, xml } from '../xml';
+import { Bookmark } from './Bookmark';
+import { CreditImage } from './CreditImage';
+import { CreditSymbol } from './CreditSymbol';
+import { CreditType } from './CreditType';
+import { CreditWords } from './CreditWords';
+import { Link } from './Link';
 
 /**
  * The `<credit>` element
@@ -23,8 +30,28 @@ export type Credit = ReturnType<typeof Credit>;
 export const Credit = xml.element(
   'credit',
   {
-    attributes: {},
-    content: [] as const,
+    attributes: {
+      /**
+       * Specifies an ID that is unique to the entire document.
+       */
+      id: t.optional(dataTypes.id()),
+
+      /**
+       * Specifies the page number where the `<credit>` should appear. This is an integer value that starts with 1 for
+       * the first page. Its value is 1 if not specified. Since credits occur before the music, these page numbers do
+       * not refer to the page numbering specified by the `<print>` element's page-number attribute.
+       */
+      page: t.optional(dataTypes.positiveInteger()),
+    },
+    content: [
+      t.zeroOrMore(CreditType),
+      t.zeroOrMore(Link),
+      t.zeroOrMore(Bookmark),
+      t.choices(CreditImage, [
+        t.choices(CreditWords, CreditSymbol),
+        t.zeroOrMore([t.zeroOrMore(Link), t.zeroOrMore(Bookmark), t.choices(CreditWords, CreditSymbol)] as const),
+      ] as const),
+    ] as const,
   },
   {}
 );

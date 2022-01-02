@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
 
 /**
@@ -19,9 +20,9 @@ export const OtherAppearance = xml.element(
       /**
        * The appearance type being specified.
        */
-      type: t.required(t.string()),
+      type: t.required(dataTypes.string()),
     },
-    content: [t.required(t.string())] as const,
+    content: [t.required(dataTypes.token())] as const,
   },
   {}
 );
