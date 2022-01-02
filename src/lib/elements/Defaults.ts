@@ -1,8 +1,13 @@
 import { t, xml } from '../xml';
+import { Appearance } from './Appearance';
 import { ConcertScore } from './ConcertScore';
+import { LyricFont } from './LyricFont';
+import { LyricLanguage } from './LyricLanguage';
+import { MusicFont } from './MusicFont';
 import { PageLayout } from './PageLayout';
 import { Scaling } from './Scaling';
 import { SystemLayout } from './SystemLayout';
+import { WordFont } from './WordFont';
 
 /**
  * The `<defautls>` element
@@ -21,7 +26,17 @@ export const Defaults = xml.element(
   'defaults',
   {
     attributes: {},
-    content: [t.optional(Scaling), t.optional(ConcertScore), t.optional(PageLayout), t.optional(SystemLayout)] as const,
+    content: [
+      t.optional(Scaling),
+      t.optional(ConcertScore),
+      t.optional(PageLayout),
+      t.optional(SystemLayout),
+      t.optional(Appearance),
+      t.optional(MusicFont),
+      t.optional(WordFont),
+      t.zeroOrMore(LyricFont),
+      t.zeroOrMore(LyricLanguage),
+    ] as const,
   },
   {}
 );
