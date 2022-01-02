@@ -1,4 +1,5 @@
-import { xml } from '../xml';
+import { t, xml } from '../xml';
+import { PartGroup } from './PartGroup';
 
 /**
  * The `<part-list>` element
@@ -21,7 +22,7 @@ export const PartList = xml.element(
   'part-list',
   {
     attributes: {},
-    content: [] as const,
+    content: [t.zeroOrMore(PartGroup)] as const,
   },
   {}
 );

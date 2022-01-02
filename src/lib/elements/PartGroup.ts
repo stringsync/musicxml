@@ -1,4 +1,5 @@
-import { xml } from '../xml';
+import { t, xml } from '../xml';
+import { GroupName } from './GroupName';
 
 /**
  * The `<part-list>` element
@@ -17,4 +18,4 @@ import { xml } from '../xml';
  */
 export type PartGroup = ReturnType<typeof PartGroup>;
 
-export const PartGroup = xml.element('part-group', { attributes: {}, content: [] as const }, {});
+export const PartGroup = xml.element('part-group', { attributes: {}, content: [t.optional(GroupName)] as const }, {});
