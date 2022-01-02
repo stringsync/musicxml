@@ -10,6 +10,41 @@ describe('xml', () => {
       expect(Foo).not.toThrow();
     });
 
+    it('assigns the function name as the camelcase element name', () => {
+      const Foo = xml.element('foo-bar', { attributes: {}, content: [] as const }, {});
+
+      expect(Foo.name).toBe('FooBar');
+    });
+
+    it('assigns the element name to the function', () => {
+      const Foo = xml.element('foo', { attributes: {}, content: [] as const }, {});
+
+      expect(Foo.elementName).toBe('foo');
+    });
+
+    it('assigns the schema to the function', () => {
+      const schema = { attributes: {}, content: [] as const };
+      const Foo = xml.element('foo', schema, {});
+
+      expect(Foo.schema).toBe(schema);
+    });
+
+    it('creates a factory that can initialize attributes', () => {
+      const Foo = xml.element('foo', { attributes: { bar: t.string() }, content: [] as const }, {});
+
+      const foo = Foo({ attributes: { bar: 'hello' } });
+
+      expect(foo.attributes.bar).toBe('hello');
+    });
+
+    it('creates a factory that can initialize content', () => {
+      const Foo = xml.element('foo', { attributes: {}, content: [t.string()] as const }, {});
+
+      const foo = Foo({ content: ['hello'] });
+
+      expect(foo.content[0]).toBe('hello');
+    });
+
     it('creates a nested element factory', () => {
       const Bar = xml.element('bar', { attributes: {}, content: [] }, {});
       const Foo = xml.element('foo', { attributes: {}, content: [t.optional(Bar)] as const }, {});
