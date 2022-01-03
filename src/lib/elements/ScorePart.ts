@@ -1,11 +1,14 @@
 import { t, xml } from '../xml';
 import { Group } from './Group';
 import { Identification } from './Identification';
+import { MidiDevice } from './MidiDevice';
+import { MidiInstrument } from './MidiInstrument';
 import { PartAbbreviation } from './PartAbbreviation';
 import { PartAbbreviationDisplay } from './PartAbbreviationDisplay';
 import { PartLink } from './PartLink';
 import { PartName } from './PartName';
 import { PartNameDisplay } from './PartNameDisplay';
+import { Player } from './Player';
 import { ScoreInstrument } from './ScoreInstrument';
 
 /**
@@ -35,6 +38,8 @@ export const ScorePart = xml.element(
       t.optional(PartAbbreviationDisplay),
       t.zeroOrMore(Group),
       t.zeroOrMore(ScoreInstrument),
+      t.zeroOrMore(Player),
+      t.zeroOrMore(t.choices(MidiDevice, MidiInstrument)),
     ] as const,
   },
   {}

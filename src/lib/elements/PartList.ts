@@ -1,5 +1,6 @@
 import { t, xml } from '../xml';
 import { PartGroup } from './PartGroup';
+import { ScorePart } from './ScorePart';
 
 /**
  * The `<part-list>` element
@@ -22,7 +23,7 @@ export const PartList = xml.element(
   'part-list',
   {
     attributes: {},
-    content: [t.zeroOrMore(PartGroup)] as const,
+    content: [t.zeroOrMore(PartGroup), t.required(ScorePart), t.zeroOrMore(t.choices(PartGroup, ScorePart))] as const,
   },
   {}
 );
