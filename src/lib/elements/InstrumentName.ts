@@ -1,0 +1,20 @@
+import * as dataTypes from '../dataTypes';
+import { t, xml } from '../xml';
+
+/**
+ * The `<instrument-name>` element
+ *
+ * Parent element: `<score-instrument>`
+ *
+ * The `<instrument-name>` element is typically used within a software application, rather than appearing on the printed
+ * page of a score.
+ *
+ * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instrument-name/}
+ */
+export type InstrumentName = ReturnType<typeof InstrumentName>;
+
+export const InstrumentName = xml.element(
+  'instrument-name',
+  { attributes: {}, content: [t.required(dataTypes.string())] as const },
+  {}
+);
