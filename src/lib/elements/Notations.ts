@@ -1,0 +1,35 @@
+import * as dataTypes from '../dataTypes';
+import { t, xml } from '../xml';
+
+/**
+ * The `<notations>` element
+ *
+ * Parent element: `<note>`
+ *
+ * The `<notations>` element collects musical notations that apply to a specific note or chord. Multiple `<notations>`
+ * elements are allowed in order to represent multiple editorial levels. The print-object attribute allows `<notations>`
+ * to represent details of performance technique, such as fingerings, without having them appear in the score. This
+ * element is not related to the concept of XML notations.
+ *
+ * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/notations/}
+ */
+export type Notations = ReturnType<typeof Notations>;
+
+export const Notations = xml.element(
+  'notations',
+  {
+    attributes: {
+      /**
+       * Specifies an ID that is unique to the entire document.
+       */
+      id: t.optional(dataTypes.id()),
+
+      /**
+       * Specifies whether or not to print an object. It is yes if not specified.
+       */
+      ['print-object']: t.optional(dataTypes.yesNo()),
+    },
+    content: [] as const,
+  },
+  {}
+);
