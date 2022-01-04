@@ -135,6 +135,7 @@ export * from './topBottom';
 export * from './tremoloMarks';
 export * from './tremoloType';
 export * from './trillBeats';
+export * from './trillStep';
 export * from './twoNoteTurn';
 export * from './upDown';
 export * from './upDownStopContinue';

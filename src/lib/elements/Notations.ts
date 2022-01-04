@@ -1,5 +1,12 @@
 import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
+import { Footnote } from './Footnote';
+import { Glissando } from './Glissando';
+import { Level } from './Level';
+import { Slide } from './Slide';
+import { Slur } from './Slur';
+import { Tied } from './Tied';
+import { Tuplet } from './Tuplet';
 
 /**
  * The `<notations>` element
@@ -29,7 +36,11 @@ export const Notations = xml.element(
        */
       ['print-object']: t.optional(dataTypes.yesNo()),
     },
-    content: [] as const,
+    content: [
+      t.optional(Footnote),
+      t.optional(Level),
+      t.zeroOrMore(t.choices(Tied, Slur, Tuplet, Glissando, Slide)),
+    ] as const,
   },
   {}
 );
