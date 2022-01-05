@@ -3,6 +3,7 @@ import { t, xml } from '../xml';
 import { Footnote } from './Footnote';
 import { Glissando } from './Glissando';
 import { Level } from './Level';
+import { Ornaments } from './Ornaments';
 import { Slide } from './Slide';
 import { Slur } from './Slur';
 import { Tied } from './Tied';
@@ -39,7 +40,7 @@ export const Notations = xml.element(
     content: [
       t.optional(Footnote),
       t.optional(Level),
-      t.zeroOrMore(t.choices(Tied, Slur, Tuplet, Glissando, Slide)),
+      t.zeroOrMore(t.choices(Tied, Slur, Tuplet, Glissando, Slide, Ornaments)),
     ] as const,
   },
   {}
