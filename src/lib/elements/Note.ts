@@ -10,6 +10,7 @@ import { Footnote } from './Footnote';
 import { Grace } from './Grace';
 import { Instrument } from './Instrument';
 import { Level } from './Level';
+import { Listen } from './Listen';
 import { Lyric } from './Lyric';
 import { Notations } from './Notations';
 import { Notehead } from './Notehead';
@@ -214,6 +215,7 @@ export const Note = xml.element(
       t.zeroOrMore(Notations),
       t.zeroOrMore(Lyric),
       t.optional(Play),
+      t.optional(Listen),
     ] as const,
   },
   {}
