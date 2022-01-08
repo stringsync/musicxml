@@ -65,6 +65,7 @@ export * from './midi16384';
 export * from './millimeters';
 export * from './milliseconds';
 export * from './mode';
+export * from './mute';
 export * from './nmtoken';
 export * from './nonNegativeDecimal';
 export * from './nonNegativeInteger';

@@ -10,9 +10,12 @@ import { Footnote } from './Footnote';
 import { Grace } from './Grace';
 import { Instrument } from './Instrument';
 import { Level } from './Level';
+import { Lyric } from './Lyric';
+import { Notations } from './Notations';
 import { Notehead } from './Notehead';
 import { NoteheadText } from './NoteheadText';
 import { Pitch } from './Pitch';
+import { Play } from './Play';
 import { Rest } from './Rest';
 import { Staff } from './Staff';
 import { Stem } from './Stem';
@@ -208,6 +211,9 @@ export const Note = xml.element(
         [Beam, Beam, Beam, Beam, Beam, Beam, Beam] as const,
         [Beam, Beam, Beam, Beam, Beam, Beam, Beam, Beam] as const
       ),
+      t.zeroOrMore(Notations),
+      t.zeroOrMore(Lyric),
+      t.optional(Play),
     ] as const,
   },
   {}
