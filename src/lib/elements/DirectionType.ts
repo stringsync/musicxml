@@ -1,4 +1,6 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
+import { AccordionRegistration } from './AccordionRegistration';
 import { Bracket } from './Bracket';
 import { Coda } from './Coda';
 import { Damp } from './Damp';
@@ -10,11 +12,14 @@ import { HarpPedals } from './HarpPedals';
 import { Image } from './Image';
 import { Metronome } from './Metronome';
 import { OctaveShift } from './OctaveShift';
+import { OtherDirection } from './OtherDirection';
 import { Pedal } from './Pedal';
+import { Percussion } from './Percussion';
 import { PrincipalVoice } from './PrincipalVoice';
 import { Rehearsal } from './Rehearsal';
 import { Scordatura } from './Scordatura';
 import { Segno } from './Segno';
+import { StaffDivide } from './StaffDivide';
 import { StringMute } from './StringMute';
 import { Symbol } from './Symbol';
 import { Wedge } from './Wedge';
@@ -36,7 +41,12 @@ export type DirectionType = ReturnType<typeof DirectionType>;
 export const DirectionType = xml.element(
   'direction-type',
   {
-    attributes: {},
+    attributes: {
+      /**
+       * Specifies an ID that is unique to the entire document.
+       */
+      id: t.optional(dataTypes.id()),
+    },
     content: [
       t.choices(
         t.oneOrMore(Rehearsal),
@@ -57,7 +67,11 @@ export const DirectionType = xml.element(
         StringMute,
         Scordatura,
         Image,
-        PrincipalVoice
+        PrincipalVoice,
+        t.oneOrMore(Percussion),
+        AccordionRegistration,
+        StaffDivide,
+        OtherDirection
       ),
     ] as const,
   },

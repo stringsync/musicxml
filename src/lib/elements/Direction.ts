@@ -1,4 +1,12 @@
-import { xml } from '../xml';
+import { t, xml } from '../xml';
+import { DirectionType } from './DirectionType';
+import { Footnote } from './Footnote';
+import { Level } from './Level';
+import { Listening } from './Listening';
+import { Offset } from './Offset';
+import { Sound } from './Sound';
+import { Staff } from './Staff';
+import { Voice } from './Voice';
 
 /**
  * The `<direction>` element
@@ -18,4 +26,20 @@ import { xml } from '../xml';
  */
 export type Direction = ReturnType<typeof Direction>;
 
-export const Direction = xml.element('direction', { attributes: {}, content: [] as const }, {});
+export const Direction = xml.element(
+  'direction',
+  {
+    attributes: {},
+    content: [
+      t.oneOrMore(DirectionType),
+      t.optional(Offset),
+      t.optional(Footnote),
+      t.optional(Level),
+      t.optional(Voice),
+      t.optional(Staff),
+      t.optional(Sound),
+      t.optional(Listening),
+    ] as const,
+  },
+  {}
+);

@@ -9,6 +9,7 @@ import { Humming } from './Humming';
 import { Laughing } from './Laughing';
 import { Level } from './Level';
 import { Syllabic } from './Syllabic';
+import { Text } from './Text';
 
 /**
  * The `<lyric>` element
