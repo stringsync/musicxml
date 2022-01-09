@@ -1,12 +1,21 @@
 import { t, xml } from '../xml';
 import { Bracket } from './Bracket';
 import { Coda } from './Coda';
+import { Damp } from './Damp';
+import { DampAll } from './DampAll';
 import { Dashes } from './Dashes';
 import { Dynamics } from './Dynamics';
+import { Eyeglasses } from './Eyeglasses';
+import { HarpPedals } from './HarpPedals';
+import { Image } from './Image';
 import { Metronome } from './Metronome';
+import { OctaveShift } from './OctaveShift';
 import { Pedal } from './Pedal';
+import { PrincipalVoice } from './PrincipalVoice';
 import { Rehearsal } from './Rehearsal';
+import { Scordatura } from './Scordatura';
 import { Segno } from './Segno';
+import { StringMute } from './StringMute';
 import { Symbol } from './Symbol';
 import { Wedge } from './Wedge';
 import { Words } from './Words';
@@ -39,7 +48,16 @@ export const DirectionType = xml.element(
         Dashes,
         Bracket,
         Pedal,
-        Metronome
+        Metronome,
+        OctaveShift,
+        HarpPedals,
+        Damp,
+        DampAll,
+        Eyeglasses,
+        StringMute,
+        Scordatura,
+        Image,
+        PrincipalVoice
       ),
     ] as const,
   },
