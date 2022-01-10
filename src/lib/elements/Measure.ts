@@ -1,4 +1,5 @@
 import { t, xml } from '../xml';
+import { Attributes } from './Attributes';
 import { Backup } from './Backup';
 import { Direction } from './Direction';
 import { Forward } from './Forward';
@@ -17,6 +18,6 @@ export type Measure = ReturnType<typeof Measure>;
 
 export const Measure = xml.element(
   'measure',
-  { attributes: {}, content: [t.zeroOrMore(t.choices(Note, Backup, Forward, Direction))] as const },
+  { attributes: {}, content: [t.zeroOrMore(t.choices(Note, Backup, Forward, Direction, Attributes))] as const },
   {}
 );
