@@ -2,6 +2,7 @@ import { t, xml } from '../xml';
 import { Credit } from './Credit';
 import { Defaults } from './Defaults';
 import { Identification } from './Identification';
+import { Measure } from './Measure';
 import { MovementNumber } from './MovementNumber';
 import { MovementTitle } from './MovementTitle';
 import { Part } from './Part';
@@ -41,6 +42,7 @@ export const ScorePartwise = xml.element(
       t.zeroOrMore(Credit),
       t.required(PartList),
       t.oneOrMore(Part),
+      t.oneOrMore(Measure),
     ] as const,
   },
   {

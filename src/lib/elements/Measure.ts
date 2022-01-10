@@ -2,10 +2,13 @@ import { t, xml } from '../xml';
 import { Attributes } from './Attributes';
 import { Backup } from './Backup';
 import { Barline } from './Barline';
+import { Bookmark } from './Bookmark';
 import { Direction } from './Direction';
 import { FiguredBass } from './FiguredBass';
 import { Forward } from './Forward';
+import { Grouping } from './Grouping';
 import { Harmony } from './Harmony';
+import { Link } from './Link';
 import { Listening } from './Listening';
 import { Note } from './Note';
 import { Print } from './Print';
@@ -28,7 +31,22 @@ export const Measure = xml.element(
     attributes: {},
     content: [
       t.zeroOrMore(
-        t.choices(Note, Backup, Forward, Direction, Attributes, Harmony, FiguredBass, Print, Sound, Listening, Barline)
+        t.choices(
+          Note,
+          Backup,
+          Forward,
+          Direction,
+          Attributes,
+          Harmony,
+          FiguredBass,
+          Print,
+          Sound,
+          Listening,
+          Barline,
+          Grouping,
+          Link,
+          Bookmark
+        )
       ),
     ] as const,
   },

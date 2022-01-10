@@ -1,5 +1,14 @@
+import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
+import { Footnote } from './Footnote';
+import { GroupAbbreviation } from './GroupAbbreviation';
+import { GroupAbbreviationDisplay } from './GroupAbbreviationDisplay';
+import { GroupBarline } from './GroupBarline';
 import { GroupName } from './GroupName';
+import { GroupNameDisplay } from './GroupNameDisplay';
+import { GroupSymbol } from './GroupSymbol';
+import { GroupTime } from './GroupTime';
+import { Level } from './Level';
 
 /**
  * The `<part-list>` element
@@ -18,4 +27,32 @@ import { GroupName } from './GroupName';
  */
 export type PartGroup = ReturnType<typeof PartGroup>;
 
-export const PartGroup = xml.element('part-group', { attributes: {}, content: [t.optional(GroupName)] as const }, {});
+export const PartGroup = xml.element(
+  'part-group',
+  {
+    attributes: {
+      /**
+       * Indicates the start or stop of the `<part-group>`.
+       */
+      type: t.required(dataTypes.startStop()),
+
+      /**
+       * Distinguishes overlapping and nested `<part-group>` elements, not a sequence of `<part-group>` elements. The
+       * default value is 1.
+       */
+      number: t.optional(dataTypes.token()),
+    },
+    content: [
+      t.optional(GroupName),
+      t.optional(GroupNameDisplay),
+      t.optional(GroupAbbreviation),
+      t.optional(GroupAbbreviationDisplay),
+      t.optional(GroupSymbol),
+      t.optional(GroupBarline),
+      t.optional(GroupTime),
+      t.optional(Footnote),
+      t.optional(Level),
+    ] as const,
+  },
+  {}
+);
