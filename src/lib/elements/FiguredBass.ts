@@ -1,55 +1,27 @@
 import * as dataTypes from '../dataTypes';
 import { t, xml } from '../xml';
-import { Bass } from './Bass';
-import { Degree } from './Degree';
+import { Duration } from './Duration';
+import { Figure } from './Figure';
 import { Footnote } from './Footnote';
-import { Frame } from './Frame';
-import { Function } from './Function';
-import { Inversion } from './Inversion';
-import { Kind } from './Kind';
 import { Level } from './Level';
-import { Numeral } from './Numeral';
-import { Offset } from './Offset';
-import { Root } from './Root';
-import { Staff } from './Staff';
 
 /**
- * The `<harmony>` element
+ * The `<figured-bass>` element
  *
  * Parent elements: `<measure>` (partwise), `<part>` (timewise)
  *
- * The `<harmony>` element represents harmony analysis, including chord symbols in popular music as well as functional
- * harmony analysis in classical music.
+ * The `<figured-bass>` element represents figured bass notation. A `<figured-bass>` element takes its position from the
+ * first regular note (not a grace note or chord note) that follows in score order. The optional `<duration>` element is
+ * used to indicate changes of figures under a note. Figures are ordered from top to bottom.
  *
- * The print-object attribute controls whether or not anything is printed due to the `<harmony>` element. The print
- * suggestion attributes set the defaults for the harmony, but individual elements can override this with their own
- * values.
- *
- * A `<harmony>` element can contain many stacked chords (e.g. V of II). Each individual chord including a required
- * `<kind>` element is referred to as a harmony-chord. Stacked chords or secondary functions are represented using a
- * sequence of harmony-chords. For example, V of II would be represented by a harmony-chord with a 5 numeral followed by
- * a harmony-chord with a 2 numeral.
- *
- * A `<root>` is a pitch name like C, D, E, while a `<numeral>` is a scale degree like 1, 2, 3. The `<root>` element is
- * generally used with pop chord symbols, while the `<numeral>` element is generally used with classical functional
- * harmony and Nashville numbers. It is an either/or choice to avoid data inconsistency. The `<function>` element, which
- * represents Roman numerals with roman numeral text, has been deprecated as of MusicXML 4.0.
- *
- * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harmony/}
+ * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/figured-bass/}
  */
-export type Harmony = ReturnType<typeof Harmony>;
+export type FiguredBass = ReturnType<typeof FiguredBass>;
 
-export const Harmony = xml.element(
-  'harmony',
+export const FiguredBass = xml.element(
+  'figured-bass',
   {
     attributes: {
-      /**
-       * Specifies how multiple harmony-chords are arranged relative to each other. Harmony-chords with vertical
-       * arrangement are separated by horizontal lines. Harmony-chords with diagonal or horizontal arrangement are
-       * separated by diagonal lines or slashes.
-       */
-      arrangement: t.optional(dataTypes.harmonyArrangement()),
-
       /**
        * Indicates the color of an element.
        */
@@ -96,9 +68,30 @@ export const Harmony = xml.element(
       ['font-weight']: t.optional(dataTypes.fontWeight()),
 
       /**
+       * In cases where text extends over more than one line, horizontal alignment and justify values can be different.
+       * The most typical case is for credits, such as:
+       *
+       * Words and music by
+       *   Pat Songwriter
+       *
+       * Typically this type of credit is aligned to the right, so that the position information refers to the
+       * right-most part of the text. But in this example, the text is center-justified, not right-justified.
+       *
+       * The halign attribute is used in these situations. If it is not present, its value is the same as for the
+       * justify attribute. For elements where a justify attribute is not allowed, the default is
+       * implementation-dependent.
+       */
+      halign: t.optional(dataTypes.leftCenterRight()),
+
+      /**
        * Specifies an ID that is unique to the entire document.
        */
       id: t.optional(dataTypes.id()),
+
+      /**
+       * Indicates if the entire figured bass is parenthesized. It is no if not present.
+       */
+      parentheses: t.optional(dataTypes.yesNo()),
 
       /**
        * Indicates whether something is above or below another element, such as a note or a notation.
@@ -106,14 +99,29 @@ export const Harmony = xml.element(
       placement: t.optional(dataTypes.aboveBelow()),
 
       /**
-       * Specifies the printing of a frame or fretboard diagram.
+       * Controls the printing of an augmentation dot separately from the rest of the note or rest. This is especially
+       * useful for notes that overlap in different voices, or for chord sheets that contain lyrics and chords but no
+       * melody. If print-object is set to no, this attribute is also interpreted as being set to no if not present.
        */
-      ['print-frame']: t.optional(dataTypes.yesNo()),
+      ['print-dot']: t.optional(dataTypes.yesNo()),
+
+      /**
+       * Controls the printing of a lyric separately from the rest of the note or rest. This is especially useful for
+       * notes that overlap in different voices, or for chord sheets that contain lyrics and chords but no melody. If
+       * print-object is set to no, this attribute is also interpreted as being set to no if not present.
+       */
+      ['print-lyric']: t.optional(dataTypes.yesNo()),
 
       /**
        * Specifies whether or not to print an object. It is yes if not specified.
        */
       ['print-object']: t.optional(dataTypes.yesNo()),
+
+      /**
+       * Controls whether or not spacing is left for an invisible note or object. It is used only if no note, dot, or
+       * lyric is being printed. The value is yes (leave spacing) if not specified.
+       */
+      ['print-spacing']: t.optional(dataTypes.yesNo()),
 
       /**
        * Changes the horizontal position relative to the default position, either as computed by the individual
@@ -130,32 +138,12 @@ export const Harmony = xml.element(
       ['relative-y']: t.optional(dataTypes.tenths()),
 
       /**
-       * Distinguishes elements that are associated with a system rather than the particular part where the element
-       * appears.
+       * Indicates vertical alignment to the top, middle, bottom, or baseline of the text. The default is
+       * implementation-dependent.
        */
-      system: t.optional(dataTypes.systemRelation()),
-
-      /**
-       * If there are alternate harmonies possible, this can be specified using multiple `<harmony>` elements
-       * differentiated by type. Explicit harmonies have all note present in the music; implied have some notes missing
-       * but implied; alternate represents alternate analyses.
-       */
-      type: t.optional(dataTypes.harmonyType()),
+      valign: t.optional(dataTypes.valign()),
     },
-    content: [
-      t.oneOrMore([
-        t.choices(Root, Numeral, Function),
-        t.required(Kind),
-        t.optional(Inversion),
-        t.optional(Bass),
-        t.zeroOrMore(Degree),
-      ]),
-      t.optional(Frame),
-      t.optional(Offset),
-      t.optional(Footnote),
-      t.optional(Level),
-      t.optional(Staff),
-    ] as const,
+    content: [t.oneOrMore(Figure), t.optional(Duration), t.optional(Footnote), t.optional(Level)] as const,
   },
   {}
 );
