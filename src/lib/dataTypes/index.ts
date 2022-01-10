@@ -17,6 +17,7 @@ export * from './circularArrow';
 export * from './clefSign';
 export * from './color';
 export * from './commaSeparatedText';
+export * from './cssFontSize';
 export * from './date';
 export * from './decimal';
 export * from './degreeSymbolValue';

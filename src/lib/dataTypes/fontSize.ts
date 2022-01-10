@@ -1,5 +1,5 @@
-import { cssFontSize } from '../elements/cssFontSize';
 import { t } from '../xml';
+import { cssFontSize } from './cssFontSize';
 
 /**
  * The font-size can be one of the
