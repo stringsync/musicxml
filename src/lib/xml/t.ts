@@ -291,6 +291,11 @@ export const getDecoder = (schema: any, decode = identity): any => {
           const value = v.map(decode);
           return isValid(value, descriptor) ? value : getZeroValue(descriptor);
         };
+      case 'custom':
+        return (v: any) => {
+          const value = descriptor.value.decode(decode(v));
+          return isValid(value, descriptor) ? value : getZeroValue(descriptor);
+        };
       default:
         return decode;
     }

@@ -463,6 +463,15 @@ describe('t', () => {
         value: [],
         expectation: [['', 0]],
       },
+      {
+        name: 'complex descriptors',
+        createDescriptor: () => {
+          const identity = <T>(x: T) => x;
+          return t.oneOrMore(t.custom({ zero: () => 'foo', decode: identity, encode: identity, isValid: () => true }));
+        },
+        value: [],
+        expectation: ['foo'],
+      },
     ])('decodes $name', ({ createDescriptor, value: input, expectation }) => {
       const descriptor = createDescriptor();
       const decode = getDecoder(descriptor);
