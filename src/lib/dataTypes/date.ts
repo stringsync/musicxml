@@ -5,10 +5,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/xsd-date/}
  */
-export const date = () => {
-  return t.custom({
-    zero: () => new Date(1970, 0, 1, 0, 0, 0, 0),
-    encode: (date: Date) => date.toISOString(),
-    decode: (str: string) => new Date(str),
-  });
-};
+export const date = t.date;

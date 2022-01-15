@@ -11,5 +11,6 @@ export const yyyyMmDdd = () => {
     zero: () => new Date(1970, 0, 1, 0, 0, 0, 0),
     encode: (date: Date) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
     decode: (str: string) => new Date(str),
+    isValid: (date: Date) => date instanceof Date,
   });
 };

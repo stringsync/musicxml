@@ -1,25 +1,27 @@
 import { MusicXMLError } from '../errors';
 
-const get = (value: any, key: string): any => value[key];
-const isString = (value: unknown): value is string => typeof value === 'string';
-const isNumber = (value: unknown): value is number => typeof value === 'number';
-const isFunction = (value: unknown): value is (...args: any) => any => typeof value === 'function';
-const isArray = (value: unknown): value is any[] => Array.isArray(value);
-const isObject = (value: unknown): value is Record<string, any> => !!value && typeof value === 'object';
-const isNull = (value: unknown): value is null => value === null;
+const isString = (value: any): value is string => typeof value === 'string';
+const isNumber = (value: any): value is number => typeof value === 'number' && !isNaN(value);
+const isFunction = (value: any): value is (...args: any) => any => typeof value === 'function';
+const isArray = (value: any): value is any[] => Array.isArray(value);
+const isObject = (value: any): value is Record<string, any> => !!value && typeof value === 'object';
+const isNull = (value: any): value is null => value === null;
 const isElement = (
-  value: unknown
+  value: any
 ): value is { type: 'element'; schema: { attributes: Record<string, any>; content: Descriptor[] } } =>
-  !!value && typeof value === 'object' && 'schema' in value && get(value, 'type') === 'element';
-const isDescriptor = (value: unknown): value is Descriptor =>
-  !!value && typeof value === 'object' && DESCRIPTOR_NAMES.has(get(value, 'type'));
+  !!value && typeof value === 'object' && 'schema' in value && value.type === 'element';
+const isDescriptor = (value: any): value is Descriptor =>
+  !!value && typeof value === 'object' && DESCRIPTOR_NAMES.has(value.type);
+
+const identity = <T>(x: T) => x;
 
 export type Descriptor = ReturnType<typeof t[keyof typeof t]>;
 
-export type CustomDescriptorOpts<T> = {
+type CustomDescriptorOpts<T> = {
   zero: () => T;
   encode: (value: T) => string;
   decode: (str: string) => T;
+  isValid: (value: T) => boolean;
 };
 
 type RegexDescriptorOpts = {
@@ -87,7 +89,7 @@ export const t = {
   not: <N, T>(exclude: N, include: T) => ({ type: 'not' as const, exclude, include }),
 };
 
-export const DESCRIPTOR_NAMES = new Set(Object.keys(t));
+const DESCRIPTOR_NAMES = new Set(Object.keys(t));
 
 /**
  * Recursively computes the zero value for a a t.* schema.
@@ -129,6 +131,8 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
         return descriptor.value.zero();
       case 'not':
         return getZeroValue(descriptor.include);
+      case 'date':
+        return new Date(1970, 0, 1, 0, 0, 0, 0) as Resolve<T>;
       default:
         throw new MusicXMLError({
           symptom: 'cannot compute a zero value for descriptor',
@@ -153,7 +157,7 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
     return value.map(getZeroValue) as Resolve<T>;
   }
   if (isElement(value)) {
-    const schema = get(value, 'schema');
+    const schema = value.schema;
     return {
       ...value,
       attributes: getZeroValue(schema.attributes),
@@ -170,5 +174,140 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
     symptom: 'cannot compute zero value for value',
     context: { value: JSON.stringify(value) },
     remedy: 'update getZeroValue to handle this type',
+  });
+};
+
+/**
+ * Determines if the value is valid based on the schema.
+ *
+ * @param value any value
+ * @param schema the partial schema to check against
+ * @returns whether the value is valid based on the schema
+ */
+export const isValid = (value: any, schema: any): boolean => {
+  if (isDescriptor(schema)) {
+    const descriptor = schema;
+    switch (descriptor.type) {
+      case 'string':
+        return isString(value);
+      case 'regex':
+        return isString(value) && !!value.match(descriptor.value.pattern);
+      case 'int':
+        return isNumber(value) && Number.isInteger(value);
+      case 'float':
+        return isNumber(value);
+      case 'range':
+        return isNumber(value) && descriptor.value.min <= value && value <= descriptor.value.max;
+      case 'constant':
+        return value === getZeroValue(descriptor);
+      case 'date':
+        return value instanceof Date;
+      case 'optional':
+        return value === null || isValid(value, descriptor.value);
+      case 'required':
+        return isValid(value, descriptor.value);
+      case 'zeroOrMore':
+        return isArray(value) && value.every((v) => isValid(v, descriptor.value));
+      case 'oneOrMore':
+        return isArray(value) && value.length >= 1 && value.every((v) => isValid(v, descriptor.value));
+      case 'choices':
+        return descriptor.values.some((v) => isValid(value, v));
+      case 'not':
+        return !isValid(value, descriptor.exclude) && isValid(value, descriptor.include);
+      case 'custom':
+        return descriptor.value.isValid(value);
+      default:
+        return false;
+    }
+  }
+  if (isString(schema)) {
+    return value === schema;
+  }
+  if (isNumber(schema)) {
+    return value === schema;
+  }
+  if (isNull(schema)) {
+    return value === schema;
+  }
+  if (isArray(schema)) {
+    return Array.isArray(value) && value.length === schema.length && schema.every((s, ndx) => isValid(value[ndx], s));
+  }
+  if (isObject(schema)) {
+    return Object.entries(schema).every(([k, s]) => k in value && isValid(value[k], s));
+  }
+  throw new MusicXMLError({
+    symptom: 'cannot compute validity for value',
+    context: { value: JSON.stringify(value), schema: JSON.stringify(schema) },
+    remedy: 'update isValid to handle this type',
+  });
+};
+
+/**
+ * Composes a decoder function from the schema.
+ *
+ * @param schema the schema to create the decoder from
+ * @param decode the composed decoding function
+ * @returns a decoder function that's composed from the schema
+ */
+export const getDecoder = (schema: any, decode = identity): any => {
+  if (isDescriptor(schema)) {
+    const descriptor = schema;
+    switch (descriptor.type) {
+      case 'string':
+        return (v: any) => String(decode(v));
+      case 'int':
+        return (v: any) => parseInt(decode(v), 10);
+      case 'float':
+      case 'range':
+        return (v: any) => parseFloat(decode(v));
+      case 'constant':
+        return () => descriptor.value;
+      case 'date':
+        return (v: any) => new Date(decode(v));
+      case 'optional':
+        decode = getDecoder(descriptor.value, decode);
+        return (v: any) => decode(v) || null;
+      case 'required':
+        return getDecoder(descriptor.value, decode);
+      case 'choices':
+        return (v: any) => {
+          const value = decode(v);
+          return isValid(value, descriptor) ? value : getZeroValue(descriptor);
+        };
+      case 'not':
+        return (v: any) => {
+          const value = decode(v);
+          return isValid(value, descriptor) ? value : getZeroValue(descriptor.include);
+        };
+      case 'zeroOrMore':
+        decode = getDecoder(descriptor.value, decode);
+        return (v: any) => {
+          const value = v.map(decode);
+          return isValid(value, descriptor) ? value : getZeroValue(descriptor);
+        };
+      case 'oneOrMore':
+        decode = getDecoder(descriptor.value, decode);
+        return (v: any) => {
+          const value = v.map(decode);
+          return isValid(value, descriptor) ? value : getZeroValue(descriptor);
+        };
+      default:
+        return decode;
+    }
+  }
+  if (isArray(schema)) {
+    const decodes = schema.map((s) => getDecoder(s, decode));
+    return (vs: any) =>
+      vs.map((v: string, ndx: number) => {
+        const d = decodes[ndx];
+        const s = schema[ndx];
+        const value = d(v);
+        return isValid(value, s) ? value : getZeroValue(s);
+      });
+  }
+  throw new MusicXMLError({
+    symptom: 'cannot compute decoder for value',
+    context: { value: JSON.stringify(schema) },
+    remedy: 'update getDecoder to handle this type',
   });
 };

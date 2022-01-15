@@ -131,6 +131,7 @@ describe('xml', () => {
               zero,
               encode: (date: Date) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
               decode: (str: string) => new Date(str),
+              isValid: () => true,
             }),
           ],
         },
