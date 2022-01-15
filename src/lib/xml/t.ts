@@ -34,6 +34,8 @@ type RangeDescriptorOpts = {
   max: number;
 };
 
+type Decoder = (value: any) => any;
+
 export type Resolve<T> = T extends string | number | null
   ? T
   : T extends any[]
@@ -249,7 +251,7 @@ export const isValid = (value: any, schema: any): boolean => {
  * @param decode the composed decoding function
  * @returns a decoder function that's composed from the schema
  */
-export const getDecoder = (schema: any, decode = identity): any => {
+export const getDecoder = (schema: any, decode = identity): Decoder => {
   if (isDescriptor(schema)) {
     const descriptor = schema;
     switch (descriptor.type) {
