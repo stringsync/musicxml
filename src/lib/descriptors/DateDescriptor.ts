@@ -14,9 +14,6 @@ export class DateDescriptor implements Descriptor<Date, string> {
   }
 
   errors(value: Date): string[] {
-    if (!(value instanceof Date)) {
-      return [`must be a Date instance: ${value}`];
-    }
     return [];
   }
 }
