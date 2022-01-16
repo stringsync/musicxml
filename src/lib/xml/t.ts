@@ -34,8 +34,6 @@ type RangeDescriptorOpts = {
   max: number;
 };
 
-type Decoder = (value: any) => any;
-
 export type Resolve<T> = T extends string | number | null
   ? T
   : T extends any[]
@@ -251,7 +249,7 @@ export const isValid = (value: any, schema: any): boolean => {
  * @param decode the composed decoding function
  * @returns a decoder function that's composed from the schema
  */
-export const getDecoder = (schema: any, decode = identity): Decoder => {
+export const getDecoder = (schema: any, decode = identity): any => {
   if (isDescriptor(schema)) {
     const descriptor = schema;
     switch (descriptor.type) {
@@ -279,7 +277,7 @@ export const getDecoder = (schema: any, decode = identity): Decoder => {
       case 'not':
         return (v: any) => {
           const value = decode(v);
-          return isValid(value, descriptor) ? value : getZeroValue(descriptor.include);
+          return isValid(value, descriptor) ? value : getZeroValue(descriptor);
         };
       case 'zeroOrMore':
         decode = getDecoder(descriptor.value, decode);
@@ -314,7 +312,101 @@ export const getDecoder = (schema: any, decode = identity): Decoder => {
   }
   throw new MusicXMLError({
     symptom: 'cannot compute decoder for value',
-    context: { value: JSON.stringify(schema) },
+    context: { schema: JSON.stringify(schema) },
     remedy: 'update getDecoder to handle this type',
+  });
+};
+
+/**
+ * Composes a encoder function from the schema.
+ *
+ * @param schema the schema to create the encoder from
+ * @param encode the composed encode function
+ * @returns a encoder function that's composed from the schema
+ */
+export const getEncoder = (schema: any, encode = identity): any => {
+  if (isDescriptor(schema)) {
+    const descriptor = schema;
+    switch (descriptor.type) {
+      case 'string':
+        return (v: string) => String(v);
+      case 'int':
+        return (v: number) => Math.round(encode(v)).toString();
+      case 'float':
+        return (v: number) => encode(v).toString();
+      case 'range':
+        return (v: number) => (isValid(v, descriptor) ? String(encode(v)) : String(encode(getZeroValue(schema))));
+      case 'constant':
+        return () => String(descriptor.value);
+      case 'date':
+        return (v: Date) => v.toISOString();
+      case 'optional':
+        encode = getEncoder(descriptor.value, encode);
+        return (v: any) => {
+          if (v === null) {
+            return '';
+          } else {
+            return isValid(v, descriptor) ? encode(v) : '';
+          }
+        };
+      case 'required':
+        encode = getEncoder(descriptor.value, encode);
+        return (v: any) => {
+          return isValid(v, descriptor) ? encode(v) : encode(getZeroValue(descriptor));
+        };
+      case 'choices':
+        return (v: any) => {
+          for (const choice of descriptor.values) {
+            if (isValid(v, choice)) {
+              encode = getEncoder(choice, encode);
+              return encode(v);
+            }
+          }
+          return encode(getZeroValue(descriptor));
+        };
+      case 'not':
+        encode = getEncoder(descriptor.include, encode);
+        return (v: any) => {
+          return isValid(v, descriptor) ? encode(v) : encode(getZeroValue(descriptor));
+        };
+      case 'zeroOrMore':
+        encode = getEncoder(descriptor.value, encode);
+        return (v: any) => {
+          return isValid(v, descriptor) ? v.map(encode) : getZeroValue(descriptor).map(encode);
+        };
+      case 'oneOrMore':
+        encode = getEncoder(descriptor.value, encode);
+        return (v: any) => {
+          return isValid(v, descriptor) ? v.map(encode) : getZeroValue(descriptor).map(encode);
+        };
+      case 'custom':
+        return (v: any) => {
+          return isValid(v, descriptor)
+            ? descriptor.value.encode(encode(v))
+            : descriptor.value.encode(getZeroValue(descriptor));
+        };
+      default:
+        return encode;
+    }
+  }
+  if (isString(schema)) {
+    return (v: any) => schema;
+  }
+  if (isNumber(schema)) {
+    return (v: any) => String(schema);
+  }
+  if (isArray(schema)) {
+    const encodes = schema.map((s) => getEncoder(s, encode));
+    return (vs: any) =>
+      vs.map((v: any, ndx: number) => {
+        const e = encodes[ndx];
+        const s = schema[ndx];
+        return isValid(v, s) ? e(v) : e(getZeroValue(s));
+      });
+  }
+  throw new MusicXMLError({
+    symptom: 'cannot compute encoder for value',
+    context: { schema: JSON.stringify(schema) },
+    remedy: 'update getEncoder to handle this type',
   });
 };

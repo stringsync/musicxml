@@ -1,5 +1,4 @@
-import { getZeroValue } from '.';
-import { Descriptor, getDecoder, isValid, t } from './t';
+import { Descriptor, getDecoder, getEncoder, getZeroValue, isValid, t } from './t';
 
 describe('t', () => {
   describe('getZeroValue', () => {
@@ -91,13 +90,13 @@ describe('t', () => {
   describe('isValid', () => {
     it.each<{ name: string; createDescriptor: () => Descriptor; value: any; expectation: boolean }>([
       {
-        name: 'valid strings',
+        name: 'valid string',
         createDescriptor: () => t.string(),
         value: 'foo',
         expectation: true,
       },
       {
-        name: 'invalid strings',
+        name: 'invalid string',
         createDescriptor: () => t.string(),
         value: Symbol('foo'),
         expectation: false,
@@ -300,31 +299,31 @@ describe('t', () => {
   describe('getDecoder', () => {
     it.each<{ name: string; createDescriptor: () => Descriptor; value: any; expectation: any }>([
       {
-        name: 'strings',
+        name: 'string',
         createDescriptor: () => t.string(),
         value: 'foo',
         expectation: 'foo',
       },
       {
-        name: 'ints',
+        name: 'int',
         createDescriptor: () => t.int(),
         value: '42',
         expectation: 42,
       },
       {
-        name: 'floats',
+        name: 'float',
         createDescriptor: () => t.float(),
         value: '4.2',
         expectation: 4.2,
       },
       {
-        name: 'constants',
+        name: 'constant',
         createDescriptor: () => t.constant('foo'),
         value: 'bar',
         expectation: 'foo',
       },
       {
-        name: 'dates',
+        name: 'date',
         createDescriptor: () => t.date(),
         value: '2022-01-15T13:47:12.000Z',
         expectation: new Date('2022-01-15T13:47:12.000Z'),
@@ -336,7 +335,7 @@ describe('t', () => {
         expectation: null,
       },
       {
-        name: 'optional strings',
+        name: 'optional string',
         createDescriptor: () => t.optional(t.string()),
         value: 'foo',
         expectation: 'foo',
@@ -366,7 +365,7 @@ describe('t', () => {
         expectation: 'foo',
       },
       {
-        name: 'required strings',
+        name: 'required string',
         createDescriptor: () => t.required(t.string()),
         value: 'foo',
         expectation: 'foo',
@@ -472,10 +471,165 @@ describe('t', () => {
         value: [],
         expectation: ['foo'],
       },
-    ])('decodes $name', ({ createDescriptor, value: input, expectation }) => {
+    ])('decodes $name', ({ createDescriptor, value, expectation }) => {
       const descriptor = createDescriptor();
       const decode = getDecoder(descriptor);
-      expect(decode(input)).toStrictEqual(expectation);
+      expect(decode(value)).toStrictEqual(expectation);
+    });
+  });
+
+  describe('getEncoder', () => {
+    it.each<{ name: string; createDescriptor: () => Descriptor; value: any; expectation: any }>([
+      {
+        name: 'string',
+        createDescriptor: () => t.string(),
+        value: 'foo',
+        expectation: 'foo',
+      },
+      {
+        name: 'string with invalid value',
+        createDescriptor: () => t.string(),
+        value: 42,
+        expectation: '42',
+      },
+      {
+        name: 'int',
+        createDescriptor: () => t.int(),
+        value: 42,
+        expectation: '42',
+      },
+      {
+        name: 'int when lower float rounds down',
+        createDescriptor: () => t.int(),
+        value: 4.49999,
+        expectation: '4',
+      },
+      {
+        name: 'int when higher float rounds up',
+        createDescriptor: () => t.int(),
+        value: 4.5,
+        expectation: '5',
+      },
+      {
+        name: 'float',
+        createDescriptor: () => t.float(),
+        value: 4.2,
+        expectation: '4.2',
+      },
+      {
+        name: 'float when int stays intact',
+        createDescriptor: () => t.float(),
+        value: 4,
+        expectation: '4',
+      },
+      {
+        name: 'ranges when within range',
+        createDescriptor: () => t.range({ min: 0, max: 42 }),
+        value: 30.5,
+        expectation: '30.5',
+      },
+      {
+        name: 'ranges when outside range uses min',
+        createDescriptor: () => t.range({ min: 4, max: 42 }),
+        value: 100,
+        expectation: '4',
+      },
+      {
+        name: 'date',
+        createDescriptor: () => t.date(),
+        value: new Date('2022-01-15T13:47:12.000Z'),
+        expectation: '2022-01-15T13:47:12.000Z',
+      },
+      {
+        name: 'constant',
+        createDescriptor: () => t.constant('foo'),
+        value: 'foo',
+        expectation: 'foo',
+      },
+      {
+        name: 'simple choices',
+        createDescriptor: () => t.choices('foo', 'bar', 'baz'),
+        value: 'baz',
+        expectation: 'baz',
+      },
+      {
+        name: 'complex choices',
+        createDescriptor: () => t.choices([t.int(), t.string()], [t.int()], [56, 'foo', 'bar']),
+        value: [56, 'foo', 'bar'],
+        expectation: ['56', 'foo', 'bar'],
+      },
+      {
+        name: 'non-null optional',
+        createDescriptor: () => t.optional(t.choices('foo')),
+        value: 'foo',
+        expectation: 'foo',
+      },
+      {
+        name: 'null optional',
+        createDescriptor: () => t.optional(t.choices('foo')),
+        value: null,
+        expectation: '',
+      },
+      {
+        name: 'required',
+        createDescriptor: () => t.required(t.choices('foo')),
+        value: 'foo',
+        expectation: 'foo',
+      },
+      {
+        name: 'invalid required',
+        createDescriptor: () => t.required(t.choices('foo')),
+        value: 'bar',
+        expectation: 'foo',
+      },
+      {
+        name: 'zeroOrMore',
+        createDescriptor: () => t.zeroOrMore(t.int()),
+        value: [42],
+        expectation: ['42'],
+      },
+      {
+        name: 'empty zeroOrMore',
+        createDescriptor: () => t.zeroOrMore(t.int()),
+        value: [],
+        expectation: [],
+      },
+      {
+        name: 'oneOrMore',
+        createDescriptor: () => t.oneOrMore(t.int()),
+        value: [42],
+        expectation: ['42'],
+      },
+      {
+        name: 'invalid oneOrMore',
+        createDescriptor: () => t.oneOrMore(t.int()),
+        value: [],
+        expectation: ['0'],
+      },
+      {
+        name: 'custom',
+        createDescriptor: () => {
+          const identity = <T>(x: T) => x;
+          return t.custom({
+            zero: () => 'foo',
+            encode: identity,
+            decode: identity,
+            isValid: () => true,
+          });
+        },
+        value: 'bar',
+        expectation: 'bar',
+      },
+      {
+        name: 'not',
+        createDescriptor: () => t.not(t.constant('foo'), t.string()),
+        value: 'bar',
+        expectation: 'bar',
+      },
+    ])('encodes $name', ({ createDescriptor, value, expectation }) => {
+      const descriptor = createDescriptor();
+      const encode = getEncoder(descriptor);
+      expect(encode(value)).toStrictEqual(expectation);
     });
   });
 });
