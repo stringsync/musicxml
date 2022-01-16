@@ -390,10 +390,10 @@ export const getEncoder = (schema: any, encode = identity): any => {
     }
   }
   if (isString(schema)) {
-    return (v: any) => schema;
+    return () => schema;
   }
   if (isNumber(schema)) {
-    return (v: any) => String(schema);
+    return () => String(schema);
   }
   if (isArray(schema)) {
     const encodes = schema.map((s) => getEncoder(s, encode));
