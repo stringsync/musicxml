@@ -7,15 +7,15 @@ export class ConstantDescriptor<C extends string> implements Descriptor<C, strin
     return this.value;
   }
 
-  decode(): C {
+  decode(value: string): C {
     return this.value;
   }
 
-  encode(): string {
+  encode(value: string): string {
     return this.value;
   }
 
-  errors(): string[] {
+  errors(value: string): string[] {
     return [];
   }
 }
