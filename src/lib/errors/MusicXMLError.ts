@@ -12,7 +12,7 @@ export class MusicXMLError extends Error {
     const remedy = details.remedy;
     const context =
       Object.entries(details.context)
-        .map(([k, v]) => `${k}=${v}`)
+        .map(([k, v]) => `${k}=${JSON.stringify(v)}`)
         .join('\n\t') || '(None)';
     super(`symptom:\n\t${symptom}\n\fcontext:\n\t${context}\n\nremedy:\n\t${remedy}\n`);
     this.details = details;

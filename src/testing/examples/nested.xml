@@ -1,0 +1,5 @@
+<foo foo="foo">
+  <bar bar="bar">
+    hello world!
+  </bar>
+</foo>

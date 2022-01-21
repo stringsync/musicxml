@@ -1,18 +1,13 @@
 import { MusicXMLError } from '../errors/MusicXMLError';
 import { Descriptor, getZeroValue, Resolve } from './t';
 
-type XMLElementSchema<
-  A extends Record<string, Descriptor> = Record<string, Descriptor>,
-  C extends Descriptor[] = Descriptor[]
-> = {
+type XMLElementSchema<A extends Record<string, Descriptor>, C extends Descriptor[]> = {
   attributes: A;
-  content: Readonly<C>;
+  content: C;
 };
 
-type XMLElement<N extends string, S extends XMLElementSchema, M extends Record<string, Method>> = {
-  type: 'element';
+export type XMLElement<N extends string, S extends XMLElementSchema<any, any>, M extends Record<string, Method>> = {
   name: N;
-  schema: S;
   attributes: Resolve<S['attributes']>;
   content: Resolve<S['content']>;
 } & M;
@@ -21,12 +16,18 @@ type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[] ? DeepPartial<U>[] : T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
-type XMLElementArgs<S extends XMLElementSchema> = {
+type XMLElementArgs<S extends XMLElementSchema<any, any>> = {
   attributes: DeepPartial<Resolve<S['attributes']>>;
   content?: Resolve<S['content']>;
 };
 
 type Method<T = any> = (this: T, ...args: any[]) => any;
+
+export type XMLElementFactory<
+  N extends string,
+  S extends XMLElementSchema<any, any>,
+  M extends Record<string, Method>
+> = ((args?: DeepPartial<XMLElementArgs<S>>) => XMLElement<N, S, M>) & { elementName: N; schema: S };
 
 const DISALLOWED_METHOD_NAMES = new Set(['type', 'name', 'schema', 'attributes', 'content']);
 
@@ -47,13 +48,13 @@ const toCamelCase = (str: string) => {
  */
 export const element = <
   N extends string,
-  S extends XMLElementSchema,
+  S extends XMLElementSchema<any, any>,
   M extends Record<string, Method<XMLElement<N, S, M>>>
 >(
   name: N,
   schema: S,
   methods: M
-) => {
+): XMLElementFactory<N, S, M> => {
   for (const methodName in Object.keys(methods)) {
     if (DISALLOWED_METHOD_NAMES.has(methodName)) {
       throw new MusicXMLError({
@@ -72,9 +73,7 @@ export const element = <
       const elementMethods = { ...methods };
 
       const element: any = {
-        type: 'element',
         name,
-        schema,
         attributes: Object.assign(getZeroValue(schema.attributes), args.attributes),
         content: args.content || getZeroValue(schema.content),
         ...elementMethods,

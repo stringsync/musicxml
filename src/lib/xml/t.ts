@@ -10,7 +10,7 @@ const isElement = (
   value: any
 ): value is { type: 'element'; schema: { attributes: Record<string, any>; content: Descriptor[] } } =>
   !!value && typeof value === 'object' && 'schema' in value && value.type === 'element';
-const isDescriptor = (value: any): value is Descriptor =>
+export const isDescriptor = (value: any): value is Descriptor =>
   !!value && typeof value === 'object' && DESCRIPTOR_NAMES.has(value.type);
 
 const identity = <T>(x: T) => x;
@@ -89,7 +89,7 @@ export const t = {
   not: <N, T>(exclude: N, include: T) => ({ type: 'not' as const, exclude, include }),
 };
 
-const DESCRIPTOR_NAMES = new Set(Object.keys(t));
+export const DESCRIPTOR_NAMES = new Set(Object.keys(t));
 
 /**
  * Recursively computes the zero value for a a t.* schema.
@@ -136,7 +136,7 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
       default:
         throw new MusicXMLError({
           symptom: 'cannot compute a zero value for descriptor',
-          context: { descriptor: JSON.stringify(descriptor) },
+          context: { descriptor },
           remedy: 'use a different descriptor or update getZeroValue to handle it',
         });
     }
@@ -172,7 +172,7 @@ export const getZeroValue = <T>(value: T): Resolve<T> => {
   }
   throw new MusicXMLError({
     symptom: 'cannot compute zero value for value',
-    context: { value: JSON.stringify(value) },
+    context: { value },
     remedy: 'update getZeroValue to handle this type',
   });
 };
@@ -237,7 +237,7 @@ export const isValid = (value: any, schema: any): boolean => {
   }
   throw new MusicXMLError({
     symptom: 'cannot compute validity for value',
-    context: { value: JSON.stringify(value), schema: JSON.stringify(schema) },
+    context: { value, schema },
     remedy: 'update isValid to handle this type',
   });
 };
@@ -249,7 +249,7 @@ export const isValid = (value: any, schema: any): boolean => {
  * @param decode the composed decoding function
  * @returns a decoder function that's composed from the schema
  */
-export const getDecoder = (schema: any, decode = identity): any => {
+export const getDecoder = (schema: any, decode = identity): ((v: any) => any) => {
   if (isDescriptor(schema)) {
     const descriptor = schema;
     switch (descriptor.type) {
@@ -312,7 +312,7 @@ export const getDecoder = (schema: any, decode = identity): any => {
   }
   throw new MusicXMLError({
     symptom: 'cannot compute decoder for value',
-    context: { schema: JSON.stringify(schema) },
+    context: { schema },
     remedy: 'update getDecoder to handle this type',
   });
 };
@@ -406,7 +406,7 @@ export const getEncoder = (schema: any, encode = identity): any => {
   }
   throw new MusicXMLError({
     symptom: 'cannot compute encoder for value',
-    context: { schema: JSON.stringify(schema) },
+    context: { schema },
     remedy: 'update getEncoder to handle this type',
   });
 };
