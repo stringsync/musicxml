@@ -42,6 +42,11 @@ describe('parse', () => {
     expect(element).toStrictEqual(Baz());
   });
 
+  it('parses with complex root descriptors', () => {
+    const element = parse([], t.required(Foo));
+    expect(element).toStrictEqual(Foo());
+  });
+
   it('parses with array descriptors', () => {
     const elements = parse([], [t.optional(Foo)]);
     expect(elements).toStrictEqual([null]);
