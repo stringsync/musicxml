@@ -37,7 +37,8 @@ export class Cursor<T> {
     return this.index;
   }
 
-  goto(index: number) {
+  sync(cursor: Cursor<any>) {
+    const index = cursor.getIndex();
     if (!Number.isInteger(index)) {
       throw new Error('index must be an integer');
     }

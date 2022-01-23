@@ -1,72 +1,107 @@
 import { t } from '.';
-import { Cursor } from '../util';
-import { RawXMLElement, resolve } from './parse';
+import { parse } from './parse';
 import * as xml from './xml';
 
 describe('parse', () => {
-  it('sandbox', async () => {
-    const Baz = xml.element('baz', { attributes: { baz: t.int() }, content: [] }, {});
-    const Bar = xml.element(
-      'bar',
-      {
-        attributes: {
-          bar: t.string(),
-        },
-        content: [t.string()],
+  const Baz = xml.element(
+    'baz',
+    {
+      attributes: { baz: t.int() },
+      content: [t.optional(t.string())] as const,
+    },
+    {}
+  );
+  const Bar = xml.element(
+    'bar',
+    {
+      attributes: {
+        bar: t.string(),
       },
-      {}
+      content: [t.string(), t.optional(Baz)] as const,
+    },
+    {}
+  );
+  const Foo = xml.element(
+    'foo',
+    {
+      attributes: {
+        foo: t.string(),
+      },
+      content: [
+        t.oneOrMore(t.choices(Bar, Baz)),
+        t.required(Baz),
+        t.optional(Bar),
+        t.choices([t.constant('bar'), Bar], [t.constant('baz'), Baz]),
+      ] as const,
+    },
+    {}
+  );
+
+  it('parses with root descriptors', () => {
+    const element = parse([], t.required(Baz));
+    expect(element).toStrictEqual(Baz());
+  });
+
+  it('parses with array descriptors', () => {
+    const elements = parse([], [t.optional(Foo)]);
+    expect(elements).toStrictEqual([null]);
+  });
+
+  it('parses using the raw elements', () => {
+    const element = parse(
+      [
+        {
+          type: 'element',
+          name: Baz.elementName,
+          attributes: { baz: '42' },
+          children: [{ type: 'text', text: 'baz' }],
+        },
+      ],
+      t.required(Baz)
     );
 
-    const Foo = xml.element(
-      'foo',
-      {
+    expect(element).toStrictEqual(
+      Baz({
         attributes: {
-          foo: t.string(),
+          baz: 42,
         },
-        content: [
-          t.oneOrMore(t.choices(Bar, Baz)),
-          t.required(Baz),
-          t.optional(Bar),
-          t.choices([t.constant('bar'), Bar], [t.constant('baz'), Baz]),
-        ],
-      },
-      {}
+        content: ['baz'],
+      })
+    );
+  });
+
+  it('parses multiple raw elements', () => {
+    const element = parse(
+      [
+        {
+          type: 'element',
+          name: Baz.elementName,
+          attributes: { baz: '42' },
+          children: [{ type: 'text', text: 'baz' }],
+        },
+        {
+          type: 'element',
+          name: Baz.elementName,
+          attributes: { baz: '84' },
+          children: [{ type: 'text', text: 'bazbaz' }],
+        },
+      ],
+      t.zeroOrMore(Baz)
     );
 
-    const elements: RawXMLElement[] = [
-      {
-        type: 'element',
-        name: 'foo',
-        attributes: { foo: 'foo' },
-        children: [
-          {
-            type: 'element',
-            name: 'bar',
-            attributes: { bar: 'bar' },
-            children: [{ type: 'text', text: 'hey now' }],
-          },
-          {
-            type: 'element',
-            name: 'baz',
-            attributes: { baz: '111111' },
-            children: [],
-          },
-          {
-            type: 'element',
-            name: 'bar',
-            attributes: { bar: 'bar' },
-            children: [{ type: 'text', text: 'you are an allstar' }],
-          },
-        ],
-      },
-    ];
-
-    const foo = resolve(Cursor.from(elements), t.choices(Bar, Foo));
-
-    expect(
-      foo.content.map((c: any) =>
-        Array.isArray(c) ? c.map((b) => (typeof b === 'object' ? b.name : b)) : c ? c.name : c
-      )
-    ).toStrictEqual({});
+    expect(element).toStrictEqual([
+      Baz({
+        attributes: {
+          baz: 42,
+        },
+        content: ['baz'],
+      }),
+      Baz({
+        attributes: {
+          baz: 84,
+        },
+        content: ['bazbaz'],
+      }),
+    ]);
   });
 });
