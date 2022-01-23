@@ -3,188 +3,153 @@ import { parse } from './parse';
 import * as xml from './xml';
 
 describe('parse', () => {
-  const Baz = xml.element(
-    'baz',
-    {
-      attributes: { baz: t.int() },
-      content: [t.optional(t.string())] as const,
-    },
-    {}
-  );
-  const Bar = xml.element(
-    'bar',
-    {
-      attributes: {
-        bar: t.constant('bar'),
-      },
-      content: [t.string(), t.required(Baz)] as const,
-    },
-    {}
-  );
-  const Foo = xml.element(
-    'foo',
-    {
-      attributes: {
-        foo: t.string(),
-      },
-      content: [
-        t.oneOrMore(t.choices(Bar, Baz)),
-        t.required(Baz),
-        t.optional(Bar),
-        t.choices([t.constant('bar'), Bar], [t.constant('baz'), Baz]),
-      ] as const,
-    },
-    {}
-  );
+  it('returns the zero value of a simple descriptor when no raw elements are given', () => {
+    const Foo = xml.element('foo', { attributes: {}, content: [] as const }, {});
 
-  it('parses with root descriptors', () => {
-    const element = parse([], t.required(Baz));
-    expect(element).toStrictEqual(Baz());
-  });
-
-  it('parses with complex root descriptors', () => {
     const element = parse([], t.required(Foo));
+
     expect(element).toStrictEqual(Foo());
   });
 
-  it('parses with array descriptors', () => {
-    const elements = parse([], [t.optional(Foo)]);
-    expect(elements).toStrictEqual([null]);
+  it('returns the zero value of a complex descriptor when no raw elements are given', () => {
+    const Foo = xml.element(
+      'foo',
+      {
+        attributes: {},
+        content: [t.required(() => Bar), t.choices([() => Baz, () => Baz], [() => Bar, () => Bar, () => Bar])] as const,
+      },
+      {}
+    );
+    const Bar = xml.element('bar', { attributes: {}, content: [t.choices(() => Baz)] as const }, {});
+    const Baz = xml.element('baz', { attributes: { baz: t.int() }, content: [] as const }, {});
+
+    const element = parse([], t.choices(Foo, Bar));
+
+    expect(element).toStrictEqual(Foo());
   });
 
-  it('parses using the raw elements', () => {
+  it('returns the zero value of a descriptor array when no raw elements are given', () => {
+    const Foo = xml.element('foo', { attributes: {}, content: [] }, {});
+
+    const elements = parse([], [t.optional(Foo), t.required(Foo), t.choices(Foo)]);
+
+    expect(elements).toStrictEqual([null, Foo(), Foo()]);
+  });
+
+  it('parses raw elements against a simple descriptor', () => {
+    const Foo = xml.element('foo', { attributes: { foo: t.int() }, content: [] as const }, {});
+
     const element = parse(
       [
         {
           type: 'element',
-          name: 'baz',
-          attributes: { baz: '42' },
+          name: 'foo',
+          attributes: { foo: '42' },
           children: [{ type: 'text', text: 'baz' }],
         },
       ],
-      t.required(Baz)
+      t.required(Foo)
     );
 
-    expect(element).toStrictEqual(
-      Baz({
-        attributes: {
-          baz: 42,
-        },
-        content: ['baz'],
-      })
-    );
+    expect(element).toStrictEqual(Foo({ attributes: { foo: 42 }, content: [] }));
   });
 
-  it('parses multiple raw elements', () => {
+  it('ignores superfluous raw elements', () => {
+    const Foo = xml.element('foo', { attributes: {}, content: [t.required(t.string())] as const }, {});
+
+    const element = parse(
+      [
+        { type: 'element', name: 'foo', attributes: {}, children: [{ type: 'text', text: 'first' }] },
+        { type: 'element', name: 'foo', attributes: {}, children: [{ type: 'text', text: 'second' }] },
+      ],
+      t.required(Foo)
+    );
+
+    expect(element).toStrictEqual(Foo({ content: ['first'] }));
+  });
+
+  it('parses raw elements against a zeroOrMore descriptor', () => {
+    const Foo = xml.element('foo', { attributes: {}, content: [t.required(t.string())] as const }, {});
+
     const elements = parse(
       [
-        {
-          type: 'element',
-          name: 'baz',
-          attributes: { baz: '42' },
-          children: [{ type: 'text', text: 'baz' }],
-        },
-        {
-          type: 'element',
-          name: 'baz',
-          attributes: { baz: '84' },
-          children: [{ type: 'text', text: 'bazbaz' }],
-        },
+        { type: 'element', name: 'foo', attributes: {}, children: [{ type: 'text', text: 'first' }] },
+        { type: 'element', name: 'foo', attributes: {}, children: [{ type: 'text', text: 'second' }] },
       ],
-      t.zeroOrMore(Baz)
+      t.zeroOrMore(Foo)
     );
 
-    expect(elements).toStrictEqual([
-      Baz({
-        attributes: {
-          baz: 42,
-        },
-        content: ['baz'],
-      }),
-      Baz({
-        attributes: {
-          baz: 84,
-        },
-        content: ['bazbaz'],
-      }),
-    ]);
+    expect(elements).toStrictEqual([Foo({ content: ['first'] }), Foo({ content: ['second'] })]);
   });
 
-  it('parses with choice root descriptors', () => {
-    const element = parse(
+  it('parses raw elements against a oneOrMore descriptor with enough elements', () => {
+    const Foo = xml.element('foo', { attributes: {}, content: [t.required(t.string())] as const }, {});
+
+    const elements = parse(
       [
-        {
-          type: 'element',
-          name: 'baz',
-          attributes: { baz: '42' },
-          children: [{ type: 'text', text: 'baz' }],
-        },
+        { type: 'element', name: 'foo', attributes: {}, children: [{ type: 'text', text: 'first' }] },
+        { type: 'element', name: 'foo', attributes: {}, children: [{ type: 'text', text: 'second' }] },
       ],
-      t.choices(Bar, Baz)
+      t.oneOrMore(Foo)
     );
 
-    expect(element).toStrictEqual(Baz({ attributes: { baz: 42 }, content: ['baz'] }));
+    expect(elements).toStrictEqual([Foo({ content: ['first'] }), Foo({ content: ['second'] })]);
   });
 
-  it('parses ignoring irrelevant elements', () => {
-    const element = parse(
-      [
-        {
-          type: 'element',
-          name: 'baz',
-          attributes: { baz: '42' },
-          children: [{ type: 'text', text: 'baz' }],
-        },
-      ],
-      t.optional(Bar)
-    );
+  it('parses raw elements against a choice descriptor', () => {
+    const Foo = xml.element('foo', { attributes: {}, content: [t.required(t.string())] as const }, {});
+    const Bar = xml.element('bar', { attributes: {}, content: [t.required(t.int())] as const }, {});
 
-    expect(element).toStrictEqual(null);
-  });
-
-  it('parses nested elements', () => {
-    const element = parse(
-      [
-        {
-          type: 'element',
-          name: 'bar',
-          attributes: { bar: 'bar' },
-          children: [
-            { type: 'text', text: 'bar' },
-            { type: 'element', name: 'baz', attributes: { baz: '42' }, children: [] },
-          ],
-        },
-      ],
-      t.required(Bar)
-    );
-
-    expect(element).toStrictEqual(
-      Bar({
-        attributes: { bar: 'bar' },
-        content: ['bar', Baz({ attributes: { baz: 42 } })],
-      })
-    );
-  });
-
-  it('parses nested elements missing data', () => {
-    // In Bar's schema, Baz is a required content, but it's omitted from the raw data.
     const element = parse(
       [
         {
           type: 'element',
           name: 'bar',
           attributes: {},
+          children: [{ type: 'text', text: '42' }],
+        },
+      ],
+      t.choices(Foo, Bar)
+    );
+
+    expect(element).toStrictEqual(Bar({ content: [42] }));
+  });
+
+  it('ignores irrelevant elements', () => {
+    const Foo = xml.element('foo', { attributes: {}, content: [] as const }, {});
+
+    const element = parse(
+      [
+        {
+          type: 'element',
+          name: 'baz',
+          attributes: { baz: '42' },
+          children: [{ type: 'text', text: 'baz' }],
+        },
+      ],
+      t.required(Foo)
+    );
+
+    expect(element).toStrictEqual(Foo());
+  });
+
+  it('parses nested elements missing data', () => {
+    const Foo = xml.element('foo', { attributes: {}, content: [t.required(() => Bar)] }, {});
+    const Bar = xml.element('bar', { attributes: { bar: t.date() }, content: [] }, {});
+
+    const element = parse(
+      [
+        {
+          type: 'element',
+          name: 'foo',
+          attributes: {},
           children: [],
         },
       ],
-      t.required(Bar)
+      t.required(Foo)
     );
 
-    expect(element).toStrictEqual(
-      Bar({
-        attributes: { bar: 'bar' },
-        content: ['', Baz()],
-      })
-    );
+    expect(element).toStrictEqual(Foo());
+    expect(element.content[0]).toStrictEqual(Bar());
   });
 });

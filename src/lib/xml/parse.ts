@@ -41,6 +41,8 @@ const isDescriptor = (value: any): value is Descriptor => {
   return typeof value === 'object' && DESCRIPTOR_NAMES.has(value.type);
 };
 
+const isFunction = (value: any): value is (...args: any[]) => any => typeof value === 'function';
+
 const resolve = (cursor: Cursor<RawXMLElement>, schema: any): Resolution => {
   if (cursor.done()) {
     return { type: 'zero', value: getZeroValue(schema) };
@@ -68,6 +70,10 @@ const resolve = (cursor: Cursor<RawXMLElement>, schema: any): Resolution => {
 
   if (isXMLElementFactory(schema)) {
     return resolveElement(cursor, schema);
+  }
+
+  if (isFunction(schema)) {
+    return resolve(cursor, schema());
   }
 
   if (Array.isArray(schema)) {
