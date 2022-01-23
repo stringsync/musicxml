@@ -77,7 +77,7 @@ const resolve = (cursor: Cursor<RawXMLElement>, schema: any): Resolution => {
   }
 
   if (Array.isArray(schema)) {
-    return { type: 'resolved', value: schema.map((s) => resolve(cursor, s)) };
+    return resolveArray(cursor, schema);
   }
 
   throw new MusicXMLError({
@@ -194,4 +194,19 @@ const resolveContent = (cursor: Cursor<RawXMLElement>, descriptors: Descriptor[]
     }
   }
   return content;
+};
+
+const resolveArray = (cursor: Cursor<RawXMLElement>, schema: any[]): Resolution => {
+  const value = new Array<any>();
+  const probeCursor = cursor.dup();
+  for (const s of schema) {
+    const resolution = resolve(probeCursor, s);
+    if (resolution.type !== 'resolved') {
+      return { type: 'none', value: undefined };
+    } else {
+      value.push(resolution.value);
+    }
+  }
+  cursor.sync(probeCursor);
+  return { type: 'resolved', value };
 };

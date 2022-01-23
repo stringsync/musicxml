@@ -152,4 +152,19 @@ describe('parse', () => {
     expect(element).toStrictEqual(Foo());
     expect(element.content[0]).toStrictEqual(Bar());
   });
+
+  it('parses complex choice descriptors with nested arrays', () => {
+    const Foo = xml.element('foo', { attributes: {}, content: [] }, {});
+    const Bar = xml.element('bar', { attributes: {}, content: [] }, {});
+
+    const element = parse(
+      [
+        { type: 'element', name: 'bar', attributes: {}, children: [] },
+        { type: 'element', name: 'foo', attributes: {}, children: [] },
+      ],
+      t.choices([Bar, Bar], [t.choices(Foo, Bar), Foo])
+    );
+
+    expect(element).toStrictEqual([Bar(), Foo()]);
+  });
 });
