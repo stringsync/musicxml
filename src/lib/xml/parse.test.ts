@@ -1,10 +1,11 @@
 import { t } from '.';
-import { loadExample } from '../../testing/helpers';
-import { parse } from './parse';
+import { Cursor } from '../util';
+import { RawXMLElement, resolve } from './parse';
 import * as xml from './xml';
 
 describe('parse', () => {
   it('sandbox', async () => {
+    const Baz = xml.element('baz', { attributes: { baz: t.int() }, content: [] }, {});
     const Bar = xml.element(
       'bar',
       {
@@ -22,13 +23,50 @@ describe('parse', () => {
         attributes: {
           foo: t.string(),
         },
-        content: [t.required(Bar)],
+        content: [
+          t.oneOrMore(t.choices(Bar, Baz)),
+          t.required(Baz),
+          t.optional(Bar),
+          t.choices([t.constant('bar'), Bar], [t.constant('baz'), Baz]),
+        ],
       },
       {}
     );
 
-    const xmlStr = await loadExample('nested.xml');
+    const elements: RawXMLElement[] = [
+      {
+        type: 'element',
+        name: 'foo',
+        attributes: { foo: 'foo' },
+        children: [
+          {
+            type: 'element',
+            name: 'bar',
+            attributes: { bar: 'bar' },
+            children: [{ type: 'text', text: 'hey now' }],
+          },
+          {
+            type: 'element',
+            name: 'baz',
+            attributes: { baz: '111111' },
+            children: [],
+          },
+          {
+            type: 'element',
+            name: 'bar',
+            attributes: { bar: 'bar' },
+            children: [{ type: 'text', text: 'you are an allstar' }],
+          },
+        ],
+      },
+    ];
 
-    expect(parse(xmlStr, [Foo])).toBe({});
+    const foo = resolve(Cursor.from(elements), t.choices(Bar, Foo));
+
+    expect(
+      foo.content.map((c: any) =>
+        Array.isArray(c) ? c.map((b) => (typeof b === 'object' ? b.name : b)) : c ? c.name : c
+      )
+    ).toStrictEqual({});
   });
 });

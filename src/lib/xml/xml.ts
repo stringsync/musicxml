@@ -1,13 +1,15 @@
 import { MusicXMLError } from '../errors/MusicXMLError';
 import { Descriptor, getZeroValue, Resolve } from './t';
 
-type XMLElementSchema<A extends Record<string, Descriptor>, C extends Descriptor[]> = {
+export type XMLElementSchema<A extends Record<string, Descriptor>, C extends Descriptor[]> = {
   attributes: A;
   content: C;
 };
 
 export type XMLElement<N extends string, S extends XMLElementSchema<any, any>, M extends Record<string, Method>> = {
+  type: 'element';
   name: N;
+  schema: S;
   attributes: Resolve<S['attributes']>;
   content: Resolve<S['content']>;
 } & M;
@@ -73,7 +75,9 @@ export const element = <
       const elementMethods = { ...methods };
 
       const element: any = {
+        type: 'element',
         name,
+        schema,
         attributes: Object.assign(getZeroValue(schema.attributes), args.attributes),
         content: args.content || getZeroValue(schema.content),
         ...elementMethods,

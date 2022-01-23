@@ -9,7 +9,7 @@ const isNull = (value: any): value is null => value === null;
 const isElement = (
   value: any
 ): value is { type: 'element'; schema: { attributes: Record<string, any>; content: Descriptor[] } } =>
-  !!value && typeof value === 'object' && 'schema' in value && value.type === 'element';
+  !!value && typeof value === 'object' && value.type === 'element';
 export const isDescriptor = (value: any): value is Descriptor =>
   !!value && typeof value === 'object' && DESCRIPTOR_NAMES.has(value.type);
 
