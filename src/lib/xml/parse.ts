@@ -164,18 +164,28 @@ const resolveElement = (cursor: Cursor<RawXMLElement>, factory: XMLElementFactor
       }
     }
 
-    const resolution = resolve(Cursor.from(element.children), factory.schema.content);
-    switch (resolution.type) {
-      case 'none':
-        return { type: 'zero', value: factory() };
-      case 'zero':
-      case 'resolved':
-        return {
-          type: 'resolved',
-          value: factory({ attributes, content: resolution.value.map((r: Resolution) => r.value) }),
-        };
-    }
+    const content = resolveContent(Cursor.from(element.children), factory.schema.content);
+    return {
+      type: 'resolved',
+      value: factory({ attributes, content }),
+    };
   }
 
   return { type: 'none', value: undefined };
+};
+
+const resolveContent = (cursor: Cursor<RawXMLElement>, descriptors: Descriptor[]) => {
+  const content = new Array<any>();
+  for (const descriptor of descriptors) {
+    const resolution = resolve(cursor, descriptor);
+    switch (resolution.type) {
+      case 'none':
+        content.push(getZeroValue(descriptor));
+        break;
+      case 'resolved':
+      case 'zero':
+        content.push(resolution.value);
+    }
+  }
+  return content;
 };

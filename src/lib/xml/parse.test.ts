@@ -15,9 +15,9 @@ describe('parse', () => {
     'bar',
     {
       attributes: {
-        bar: t.string(),
+        bar: t.constant('bar'),
       },
-      content: [t.string(), t.optional(Baz)] as const,
+      content: [t.string(), t.required(Baz)] as const,
     },
     {}
   );
@@ -52,7 +52,7 @@ describe('parse', () => {
       [
         {
           type: 'element',
-          name: Baz.elementName,
+          name: 'baz',
           attributes: { baz: '42' },
           children: [{ type: 'text', text: 'baz' }],
         },
@@ -71,17 +71,17 @@ describe('parse', () => {
   });
 
   it('parses multiple raw elements', () => {
-    const element = parse(
+    const elements = parse(
       [
         {
           type: 'element',
-          name: Baz.elementName,
+          name: 'baz',
           attributes: { baz: '42' },
           children: [{ type: 'text', text: 'baz' }],
         },
         {
           type: 'element',
-          name: Baz.elementName,
+          name: 'baz',
           attributes: { baz: '84' },
           children: [{ type: 'text', text: 'bazbaz' }],
         },
@@ -89,7 +89,7 @@ describe('parse', () => {
       t.zeroOrMore(Baz)
     );
 
-    expect(element).toStrictEqual([
+    expect(elements).toStrictEqual([
       Baz({
         attributes: {
           baz: 42,
@@ -103,5 +103,83 @@ describe('parse', () => {
         content: ['bazbaz'],
       }),
     ]);
+  });
+
+  it('parses with choice root descriptors', () => {
+    const element = parse(
+      [
+        {
+          type: 'element',
+          name: 'baz',
+          attributes: { baz: '42' },
+          children: [{ type: 'text', text: 'baz' }],
+        },
+      ],
+      t.choices(Bar, Baz)
+    );
+
+    expect(element).toStrictEqual(Baz({ attributes: { baz: 42 }, content: ['baz'] }));
+  });
+
+  it('parses ignoring irrelevant elements', () => {
+    const element = parse(
+      [
+        {
+          type: 'element',
+          name: 'baz',
+          attributes: { baz: '42' },
+          children: [{ type: 'text', text: 'baz' }],
+        },
+      ],
+      t.optional(Bar)
+    );
+
+    expect(element).toStrictEqual(null);
+  });
+
+  it('parses nested elements', () => {
+    const element = parse(
+      [
+        {
+          type: 'element',
+          name: 'bar',
+          attributes: { bar: 'bar' },
+          children: [
+            { type: 'text', text: 'bar' },
+            { type: 'element', name: 'baz', attributes: { baz: '42' }, children: [] },
+          ],
+        },
+      ],
+      t.required(Bar)
+    );
+
+    expect(element).toStrictEqual(
+      Bar({
+        attributes: { bar: 'bar' },
+        content: ['bar', Baz({ attributes: { baz: 42 } })],
+      })
+    );
+  });
+
+  it('parses nested elements missing data', () => {
+    // In Bar's schema, Baz is a required content, but it's omitted from the raw data.
+    const element = parse(
+      [
+        {
+          type: 'element',
+          name: 'bar',
+          attributes: {},
+          children: [],
+        },
+      ],
+      t.required(Bar)
+    );
+
+    expect(element).toStrictEqual(
+      Bar({
+        attributes: { bar: 'bar' },
+        content: ['', Baz()],
+      })
+    );
   });
 });
