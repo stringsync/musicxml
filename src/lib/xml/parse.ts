@@ -102,14 +102,28 @@ const resolveRequirement = (
 };
 
 const resolveChoices = (cursor: Cursor<RawXMLElement>, descriptor: ReturnType<typeof t['choices']>): Resolution => {
+  const results = new Array<{ resolution: Resolution; cursor: Cursor<RawXMLElement> }>();
   for (const choice of descriptor.values) {
     const probeCursor = cursor.dup();
     const resolution = resolve(probeCursor, choice);
-    if (resolution.type === 'resolved') {
-      cursor.sync(probeCursor);
-      return resolution;
+    results.push({ resolution, cursor: probeCursor });
+  }
+
+  const resolvedResults = results.filter((result) => result.resolution.type === 'resolved');
+  const maxResolvedIndex = Math.max(cursor.getIndex(), ...resolvedResults.map((result) => result.cursor.getIndex()));
+
+  const cursorDidNotMove = cursor.getIndex() === maxResolvedIndex;
+  if (cursorDidNotMove) {
+    return { type: 'zero', value: getZeroValue(descriptor) };
+  }
+
+  for (const result of resolvedResults) {
+    if (maxResolvedIndex === result.cursor.getIndex()) {
+      cursor.sync(result.cursor);
+      return { type: 'resolved', value: result.resolution.value };
     }
   }
+
   return { type: 'zero', value: getZeroValue(descriptor) };
 };
 
@@ -201,10 +215,12 @@ const resolveArray = (cursor: Cursor<RawXMLElement>, schema: any[]): Resolution 
   const probeCursor = cursor.dup();
   for (const s of schema) {
     const resolution = resolve(probeCursor, s);
-    if (resolution.type !== 'resolved') {
-      return { type: 'none', value: undefined };
-    } else {
-      value.push(resolution.value);
+    switch (resolution.type) {
+      case 'none':
+        return { type: 'none', value: undefined };
+      case 'zero':
+      case 'resolved':
+        value.push(resolution.value);
     }
   }
   cursor.sync(probeCursor);
