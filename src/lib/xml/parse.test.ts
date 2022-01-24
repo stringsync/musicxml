@@ -153,7 +153,7 @@ describe('parse', () => {
     expect(element.content[0]).toStrictEqual(Bar());
   });
 
-  it('parses complex choice descriptors with nested arrays', () => {
+  it('parses choice descriptors with nested arrays', () => {
     const Foo = xml.element('foo', { attributes: {}, content: [] }, {});
     const Bar = xml.element('bar', { attributes: {}, content: [] }, {});
 
@@ -166,5 +166,22 @@ describe('parse', () => {
     );
 
     expect(element).toStrictEqual([Bar(), Foo()]);
+  });
+
+  it('parses choice descriptors with nested arrays of optionals', () => {
+    const Foo = xml.element('foo', { attributes: {}, content: [] }, {});
+    const Bar = xml.element('bar', { attributes: {}, content: [] }, {});
+
+    const elements = parse(
+      [
+        { type: 'element', name: 'bar', attributes: {}, children: [] },
+        { type: 'element', name: 'foo', attributes: {}, children: [] },
+      ],
+      t.choices([t.optional(Bar), Bar], [t.optional(Foo), Foo])
+    );
+
+    // Even though there's a foo element, the bar element ends up validly matching with the  first choice, so we expect
+    // the first choice to be spawned.
+    expect(elements).toStrictEqual([null, Bar()]);
   });
 });
