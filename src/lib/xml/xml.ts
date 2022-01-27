@@ -89,10 +89,10 @@ export const element = <
 
       return element;
     },
-  }[camelCaseName];
+  }[camelCaseName] as XMLElementFactory<N, S, M>;
 
-  (elementFactory as any).elementName = name;
-  (elementFactory as any).schema = schema;
+  elementFactory.elementName = name;
+  elementFactory.schema = schema;
 
   return elementFactory as typeof elementFactory & { elementName: N; schema: S };
 };
