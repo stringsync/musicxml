@@ -1,4 +1,5 @@
 import { MusicXMLError } from '../errors/MusicXMLError';
+import { DeepPartial } from '../util';
 import { Descriptor, getZeroValue, Resolve } from './t';
 
 export type XMLElementSchema<A extends Record<string, Descriptor>, C extends Descriptor[]> = {
@@ -13,10 +14,6 @@ export type XMLElement<N extends string, S extends XMLElementSchema<any, any>, M
   attributes: Resolve<S['attributes']>;
   content: Resolve<S['content']>;
 } & M;
-
-type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends (infer U)[] ? DeepPartial<U>[] : T[P] extends object ? DeepPartial<T[P]> : T[P];
-};
 
 type XMLElementArgs<S extends XMLElementSchema<any, any>> = {
   attributes: DeepPartial<Resolve<S['attributes']>>;
