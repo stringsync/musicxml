@@ -256,10 +256,16 @@ export const getDecoder = (schema: any, decode = identity): ((v: any) => any) =>
       case 'string':
         return (v: any) => String(decode(v));
       case 'int':
-        return (v: any) => parseInt(decode(v), 10);
+        return (v: any) => {
+          const value = parseInt(decode(v), 10);
+          return isValid(value, descriptor) ? value : getZeroValue(descriptor);
+        };
       case 'float':
       case 'range':
-        return (v: any) => parseFloat(decode(v));
+        return (v: any) => {
+          const value = parseFloat(decode(v));
+          return isValid(value, descriptor) ? value : getZeroValue(descriptor);
+        };
       case 'constant':
         return () => descriptor.value;
       case 'date':
