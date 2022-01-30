@@ -71,7 +71,7 @@ export const ScorePartwise = xml.element(
       this.content[3] = identification;
     },
     getDefaults() {
-      this.content[4];
+      return this.content[4];
     },
     setDefaults(defaults: Defaults) {
       this.content[4] = defaults;
@@ -82,11 +82,23 @@ export const ScorePartwise = xml.element(
     setCredits(credits: Credit[]) {
       this.content[5] = credits;
     },
-    getPartLists() {
+    getPartList() {
       return this.content[6];
     },
     setPartList(partList: PartList) {
       this.content[6] = partList;
+    },
+    getParts() {
+      return this.content[7];
+    },
+    setParts(parts: [Part, ...Part[]]) {
+      this.content[7] = parts;
+    },
+    getMeasures() {
+      return this.content[8];
+    },
+    setMeasures(measures: [Measure, ...Measure[]]) {
+      this.content[8] = measures;
     },
   }
 );
