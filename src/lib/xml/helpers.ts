@@ -34,7 +34,7 @@ export const isXMLElementFactory = (value: any): value is XMLElementFactory<any,
   return isFunction(value) && 'elementName' in value;
 };
 
-export const isXMLElement = (value: any): value is XMLElement<any, any, any> => {
+export const isXMLElement = (value: any): value is XMLElement<any, any, Record<string, any>> => {
   return isObject(value) && value.type === 'element';
 };
 

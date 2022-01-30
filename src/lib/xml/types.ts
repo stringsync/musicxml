@@ -6,7 +6,7 @@ export type Child =
   | Descriptor
   | XMLElementFactory<string, any, Record<string, any>>
   | (() => XMLElementFactory<string, any, Record<string, any>>)
-  | Child[]
+  | Array<Child>
   | ReadonlyArray<Child>;
 
 export type Descriptor =
@@ -164,3 +164,17 @@ export type RawXMLElement =
     };
 
 export type Parser = (xml: string) => RawXMLElement[];
+
+export type Resolution =
+  | {
+      type: 'resolved';
+      value: any;
+    }
+  | {
+      type: 'zero';
+      value: any;
+    }
+  | {
+      type: 'none';
+      value: undefined;
+    };

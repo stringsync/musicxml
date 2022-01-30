@@ -1,22 +1,8 @@
 import { MusicXMLError } from '../errors';
 import * as helpers from './helpers';
 import { isValid } from './isValid';
-import { Child, Descriptor } from './types';
+import { Child, Descriptor, Resolution } from './types';
 import { zero } from './zero';
-
-type Resolution =
-  | {
-      type: 'resolved';
-      value: any;
-    }
-  | {
-      type: 'zero';
-      value: any;
-    }
-  | {
-      type: 'none';
-      value: undefined;
-    };
 
 export const fromString = (value: string, child: Extract<Child, string | number | Descriptor>): any => {
   const resolve = (v: any): Resolution => {

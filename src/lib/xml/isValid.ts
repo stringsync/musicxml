@@ -29,6 +29,10 @@ export const isValid = (value: any, child: Child): boolean => {
         return helpers.isNull(value) || isValid(value, child.value);
       case 'required':
         return isValid(value, child.value);
+      case 'zeroOrMore':
+        return helpers.isArray(value) && value.every((v) => isValid(v, child.value));
+      case 'oneOrMore':
+        return helpers.isArray(value) && value.length >= 1 && value.every((v) => isValid(v, child.value));
       case 'not':
         return isValid(value, child.include) && !isValid(value, child.exclude);
     }
@@ -52,8 +56,8 @@ export const isValid = (value: any, child: Child): boolean => {
     return Array.isArray(value) && value.length === child.length && child.every((c, ndx) => isValid(value[ndx], c));
   }
   throw new MusicXMLError({
-    symptom: 'cannot compute zero value',
+    symptom: 'cannot compute validity',
     context: { child },
-    remedy: 'use a different child or update zero',
+    remedy: 'use a different child or update isValid',
   });
 };

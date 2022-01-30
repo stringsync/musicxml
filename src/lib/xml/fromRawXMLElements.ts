@@ -13,25 +13,12 @@ import {
   OptionalDescriptor,
   RawXMLElement,
   RequiredDescriptor,
+  Resolution,
   StringDescriptor,
   XMLElementFactory,
   ZeroOrMoreDescriptor,
 } from './types';
 import { zero } from './zero';
-
-type Resolution =
-  | {
-      type: 'resolved';
-      value: any;
-    }
-  | {
-      type: 'zero';
-      value: any;
-    }
-  | {
-      type: 'none';
-      value: undefined;
-    };
 
 export const fromRawXMLElements = <T extends Descriptor | Descriptor[]>(
   elements: RawXMLElement[],
