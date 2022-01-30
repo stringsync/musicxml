@@ -163,8 +163,6 @@ export type RawXMLElement =
       text: string;
     };
 
-export type Parser = (xml: string) => RawXMLElement[];
-
 export type Resolution =
   | {
       type: 'resolved';
