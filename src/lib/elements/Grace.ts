@@ -37,7 +37,7 @@ export const Grace = xml.element(
        * The steal-time-previous attribute indicates the percentage of time to steal from the previous note for the
        * grace note playback.
        */
-      ['steal-time-previous']: t.optional(dataTypes.percent),
+      ['steal-time-previous']: t.optional(dataTypes.percent()),
     },
     content: [] as const,
   },

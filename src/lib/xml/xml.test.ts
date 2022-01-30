@@ -72,12 +72,12 @@ describe('xml', () => {
       { name: 'strings', content: () => [t.string()], expectation: '' },
       {
         name: 'regexes',
-        content: () => [t.regex({ pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: () => '#000000' })],
+        content: () => [t.regex({ pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' })],
         expectation: '#000000',
       },
       { name: 'ints', content: () => [t.int()], expectation: 0 },
       { name: 'floats', content: () => [t.float()], expectation: 0 },
-      { name: 'ranges', content: () => [t.range({ min: 200, max: 300 })], expectation: 200 },
+      { name: 'ranges', content: () => [t.int({ min: 200, max: 300 })], expectation: 200 },
       { name: 'string constants', content: () => [t.constant('hello')], expectation: 'hello' },
       { name: 'number constants', content: () => [t.constant(3.14)], expectation: 3.14 },
       { name: 'string choices', content: () => [t.choices('zero', 'one')], expectation: 'zero' },
@@ -117,30 +117,6 @@ describe('xml', () => {
 
       expect(foo.content[0]).toStrictEqual([Bar()]);
       expect(foo.content[0][0].content[0]).toStrictEqual(Baz());
-    });
-
-    it('returns zero values for custom types', () => {
-      const zero = () => new Date(1970, 0, 1, 0, 0, 0, 0);
-
-      const Foo = xml.element(
-        'foo',
-        {
-          attributes: {},
-          content: [
-            t.custom({
-              zero,
-              encode: (date: Date) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
-              decode: (str: string) => new Date(str),
-              isValid: () => true,
-            }),
-          ],
-        },
-        {}
-      );
-
-      const foo = Foo();
-
-      expect(foo.content[0]).toStrictEqual(zero());
     });
   });
 });

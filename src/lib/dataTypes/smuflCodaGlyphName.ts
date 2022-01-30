@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/smufl-coda-glyph-name/}
  */
-export const smuflCodaGlyphName = () => t.regex({ pattern: /coda\c*/, zero: () => 'coda' });
+export const smuflCodaGlyphName = () => t.regex({ pattern: /coda\c*/, zero: 'coda' });

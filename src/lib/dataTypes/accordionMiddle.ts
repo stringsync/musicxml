@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/accordion-middle/}
  */
-export const accordionMiddle = () => t.range({ min: 1, max: 3 });
+export const accordionMiddle = () => t.int({ min: 1, max: 3 });

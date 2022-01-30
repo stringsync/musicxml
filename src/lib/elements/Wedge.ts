@@ -21,7 +21,7 @@ export const Wedge = xml.element(
        * The value is crescendo for the start of a wedge that is closed at the left side, diminuendo for the start of a
        * wedge that is closed on the right side, and stop for the end of a wedge.
        */
-      type: t.required(dataTypes.wedgeType),
+      type: t.required(dataTypes.wedgeType()),
 
       /**
        * Indicates the color of an element.

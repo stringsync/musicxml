@@ -5,4 +5,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/positive-integer-or-empty/}
  */
-export const positiveIntegerOrEmpty = () => t.choices('' as const, t.range({ min: 1, max: Number.POSITIVE_INFINITY }));
+export const positiveIntegerOrEmpty = () => t.choices('' as const, t.int({ min: 1 }));

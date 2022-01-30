@@ -5,4 +5,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/numeral-value/}
  */
-export const numeralValue = () => t.range({ min: 1, max: 7 });
+export const numeralValue = () => t.int({ min: 1, max: 7 });

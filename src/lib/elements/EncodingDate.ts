@@ -14,7 +14,7 @@ export const EncodingDate = xml.element(
   'encoding-date',
   {
     attributes: {},
-    content: [t.required(dataTypes.yyyyMmDdd())] as const,
+    content: [t.required(dataTypes.yyyyMmDd())] as const,
   },
   {}
 );

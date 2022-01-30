@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/smufl-lyrics-glyph-name/}
  */
-export const smuflLyricsGlyphName = () => t.regex({ pattern: /lyrics\c+/, zero: () => 'lyrics' });
+export const smuflLyricsGlyphName = () => t.regex({ pattern: /lyrics\c+/, zero: 'lyrics' });

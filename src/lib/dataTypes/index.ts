@@ -153,4 +153,4 @@ export * as xlink from './xlink';
 export * as xml from './xml';
 export * from './yesNo';
 export * from './yesNoNumber';
-export * from './yyyyMmDdd';
+export * from './yyyyMmDd';

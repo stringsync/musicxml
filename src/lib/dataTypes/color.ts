@@ -11,4 +11,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/color/}
  */
-export const color = () => t.regex({ pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: () => '#000000' });
+export const color = () => t.regex({ pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' });

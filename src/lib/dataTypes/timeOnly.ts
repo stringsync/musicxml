@@ -7,4 +7,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/time-only/}
  */
-export const timeOnly = () => t.regex({ pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: () => '1' });
+export const timeOnly = () => t.regex({ pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' });

@@ -5,4 +5,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/non-negative-decimal/}
  */
-export const nonNegativeDecimal = () => t.range({ min: 0, max: Number.POSITIVE_INFINITY });
+export const nonNegativeDecimal = () => t.int({ min: 0 });

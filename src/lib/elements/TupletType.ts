@@ -19,7 +19,7 @@ export const TupletType = xml.element(
       /**
        * Indicates the color of an element.
        */
-      color: t.optional(dataTypes.color),
+      color: t.optional(dataTypes.color()),
 
       /**
        * A comma-separated list of font names.

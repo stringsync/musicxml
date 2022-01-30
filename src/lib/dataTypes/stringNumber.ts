@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/string-number/}
  */
-export const stringNumber = () => t.range({ min: 1, max: Number.POSITIVE_INFINITY });
+export const stringNumber = () => t.int({ min: 1 });

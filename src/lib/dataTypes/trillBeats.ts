@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/trill-beats/}
  */
-export const trillBeats = () => t.range({ min: 2, max: Number.POSITIVE_INFINITY });
+export const trillBeats = () => t.float({ min: 2 });

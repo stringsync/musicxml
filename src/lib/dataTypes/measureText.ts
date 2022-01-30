@@ -6,4 +6,6 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/measure-text/}
  */
-export const measureText = () => t.not(t.constant('' as const), t.choices('yes' as const, t.string()));
+export const measureText = () => {
+  return t.not({ include: t.choices('yes' as const, t.string()), exclude: t.constant('' as const) });
+};

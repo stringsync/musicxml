@@ -5,4 +5,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/midi-16/}
  */
-export const midi16 = () => t.range({ min: 1, max: 16 });
+export const midi16 = () => t.int({ min: 1, max: 16 });

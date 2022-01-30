@@ -1,41 +1,10 @@
 import { MusicXMLError } from '../errors/MusicXMLError';
 import { DeepPartial } from '../util';
-import { Descriptor, getZeroValue, Resolve } from './t';
-
-export type XMLElementSchema<A extends Record<string, Descriptor>, C extends Descriptor[]> = {
-  attributes: A;
-  content: C;
-};
-
-export type XMLElement<N extends string, S extends XMLElementSchema<any, any>, M extends Record<string, Method>> = {
-  type: 'element';
-  name: N;
-  schema: S;
-  attributes: Resolve<S['attributes']>;
-  content: Resolve<S['content']>;
-} & M;
-
-type XMLElementArgs<S extends XMLElementSchema<any, any>> = {
-  attributes: DeepPartial<Resolve<S['attributes']>>;
-  content?: Resolve<S['content']>;
-};
-
-type Method<T = any> = (this: T, ...args: any[]) => any;
-
-export type XMLElementFactory<
-  N extends string,
-  S extends XMLElementSchema<any, any>,
-  M extends Record<string, Method>
-> = ((args?: DeepPartial<XMLElementArgs<S>>) => XMLElement<N, S, M>) & { elementName: N; schema: S };
+import * as helpers from './helpers';
+import { XMLElement, XMLElementArgs, XMLElementFactory, XMLElementMethod, XMLElementSchema } from './types';
+import { zero } from './zero';
 
 const DISALLOWED_METHOD_NAMES = new Set(['type', 'name', 'schema', 'attributes', 'content']);
-
-const toCamelCase = (str: string) => {
-  return str
-    .split('-')
-    .map((part) => part[0].toUpperCase() + part.substring(1))
-    .join('');
-};
 
 /**
  * Creates an element factory.
@@ -48,7 +17,7 @@ const toCamelCase = (str: string) => {
 export const element = <
   N extends string,
   S extends XMLElementSchema<any, any>,
-  M extends Record<string, Method<XMLElement<N, S, M>>>
+  M extends Record<string, XMLElementMethod<XMLElement<N, S, M>>>
 >(
   name: N,
   schema: S,
@@ -64,19 +33,25 @@ export const element = <
     }
   }
 
-  const camelCaseName = toCamelCase(name);
+  const camelCaseName = helpers.toCamelCase(name);
 
   // Dynamically assigns the camelCaseName as the function.name.
   const elementFactory = {
     [camelCaseName]: (args: DeepPartial<XMLElementArgs<S>> = {}): XMLElement<N, S, M> => {
       const elementMethods = { ...methods };
 
+      const attributes: any = {};
+      const argAttributes: any = args.attributes || {};
+      for (const name of Object.keys(schema.attributes)) {
+        attributes[name] = zero(argAttributes[name] ?? schema.attributes[name]);
+      }
+
       const element: any = {
         type: 'element',
         name,
         schema,
-        attributes: Object.assign(getZeroValue(schema.attributes), args.attributes),
-        content: args.content || getZeroValue(schema.content),
+        attributes,
+        content: args.content || zero(schema.content),
         ...elementMethods,
       };
 
@@ -91,5 +66,5 @@ export const element = <
   elementFactory.elementName = name;
   elementFactory.schema = schema;
 
-  return elementFactory as typeof elementFactory & { elementName: N; schema: S };
+  return elementFactory;
 };

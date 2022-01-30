@@ -29,4 +29,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/number-level/}
  */
-export const numberLevel = () => t.range({ min: 1, max: 16 });
+export const numberLevel = () => t.int({ min: 1, max: 16 });
