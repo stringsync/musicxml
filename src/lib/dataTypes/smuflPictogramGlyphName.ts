@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/smufl-pictogram-glyph-name/}
  */
-export const smuflPictogramGlyphName = () => t.regex({ pattern: /pict\c+/, zero: 'pict' });
+export const smuflPictogramGlyphName = () => t.regex({ pattern: /pict/, zero: 'pict' });

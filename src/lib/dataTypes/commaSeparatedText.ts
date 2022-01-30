@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/comma-separated-text/}
  */
-export const commaSeparatedText = () => t.regex({ pattern: /[^,]+(, ?[^,]+)*/, zero: '' });
+export const commaSeparatedText = () => t.regex({ pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' });
