@@ -1,4 +1,7 @@
-import { xml } from '../xml';
+import { t, xml } from '../xml';
+import { Opus } from './Opus';
+import { WorkNumber } from './WorkNumber';
+import { WorkTitle } from './WorkTitle';
 
 /**
  * The `<work>` element
@@ -16,7 +19,7 @@ export const Work = xml.element(
   'work',
   {
     attributes: {},
-    content: [] as const,
+    content: [t.optional(WorkNumber), t.optional(WorkTitle), t.optional(Opus)] as const,
   },
   {}
 );

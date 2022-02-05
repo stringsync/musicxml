@@ -1,3 +1,4 @@
+import { LabelDescriptor } from '.';
 import { MusicXMLError } from '../errors';
 import {
   Child,
@@ -28,6 +29,11 @@ export type NumberDescriptorOpts = {
 export type NotDescriptorOpts<I, E> = {
   include: I;
   exclude: E;
+};
+
+export type LabelDescriptorOpts<T> = {
+  label: string;
+  value: T;
 };
 
 export class t {
@@ -156,6 +162,14 @@ export class t {
     return {
       type: 'required',
       value,
+    };
+  }
+
+  static label<T>(opts: LabelDescriptorOpts<T>): LabelDescriptor<T> {
+    return {
+      type: 'label',
+      label: opts.label,
+      value: opts.value,
     };
   }
 

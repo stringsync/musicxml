@@ -19,6 +19,7 @@ export type Descriptor =
   | ChoicesDescriptor<[any, ...any[]]>
   | OptionalDescriptor<any>
   | RequiredDescriptor<any>
+  | LabelDescriptor<any>
   | ZeroOrMoreDescriptor<any>
   | OneOrMoreDescriptor<any>
   | NotDescriptor<any, any>;
@@ -85,6 +86,12 @@ export type NotDescriptor<I extends Child, E extends Child> = {
   exclude: E;
 };
 
+export type LabelDescriptor<T> = {
+  type: 'label';
+  label: string;
+  value: T;
+};
+
 export type DescriptorValue<T> = T extends string | number | null
   ? T
   : T extends any[]
@@ -103,6 +110,8 @@ export type DescriptorValue<T> = T extends string | number | null
   ? number
   : T extends { type: 'range' }
   ? number
+  : T extends { type: 'label'; value: infer V }
+  ? DescriptorValue<V>
   : T extends { type: 'constant'; value: infer V }
   ? DescriptorValue<V>
   : T extends { type: 'choices'; choices: Array<infer V> }

@@ -34,7 +34,7 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
-    "generate": "ts-node scripts/generate.ts",
+    "generate": "ts-node src/scripts/generate.ts",
     "prepare": "husky install",
     "pretest": "docker-compose build",
     "test": "docker-compose run --rm test yarn jest",
