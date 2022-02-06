@@ -1,3 +1,6 @@
+import * as fs from 'fs';
+import * as path from 'path';
+import * as elements from '../lib/elements';
 import { MusicXMLError } from '../lib/errors';
 import { Child, XMLElementFactory, XMLElementSchema } from '../lib/xml';
 import * as helpers from '../lib/xml/helpers';
@@ -124,7 +127,7 @@ const getZeroValueLiteral = (child: Child): string => {
 const getAttributesTypeLiteral = (factory: AnyFactory): string => {
   const attributes = new Array<string>();
   for (const [key, value] of Object.entries(factory.schema.attributes)) {
-    attributes.push(`${key}: ${getTypeLiteral(value as Child)}`);
+    attributes.push(`'${key}': ${getTypeLiteral(value as Child)}`);
   }
   return attributes.length > 0 ? `{ ${attributes.join(', ')} }` : '{}';
 };
@@ -132,7 +135,7 @@ const getAttributesTypeLiteral = (factory: AnyFactory): string => {
 const getAttributesZeroValueLiteral = (factory: AnyFactory): string => {
   const attributes = new Array<string>();
   for (const [key, value] of Object.entries(factory.schema.attributes)) {
-    attributes.push(`${key}: ${getZeroValueLiteral(value as Child)}`);
+    attributes.push(`['${key.replace(/:/g, '-')}']: ${getZeroValueLiteral(value as Child)}`);
   }
   return attributes.length > 0 ? `{ ${attributes.join(', ')} }` : '{}';
 };
@@ -190,7 +193,7 @@ const getSchemaLiteral = (factory: AnyFactory): string => {
     if (helpers.isObject(value)) {
       return Object.keys(value).length > 0
         ? `{ ${Object.entries(value)
-            .map(([k, v]) => `${k}: ${dfs(v)}`)
+            .map(([k, v]) => `'${k}': ${dfs(v)}`)
             .join(', ')} }`
         : '{}';
     }
@@ -296,12 +299,12 @@ export type ${contentsTypeName} = ${contentsTypeLiteral};
 export class ${className} {
   static readonly schema = ${schemaLiteral};
 
-  protected attributes: ${attributesTypeName};
-  protected contents: ${contentsTypeName};
+  private attributes: ${attributesTypeName};
+  private contents: ${contentsTypeName};
 
-  constructor(opts: { attributes?: Partial<${attributesTypeName}>; content?: ${contentsTypeName} }) {
-    this.attributes = Object.assign(${attributesZeroValueLiteral}, opts.attributes);
-    this.contents = opts.content || ${contentsZeroValueLiteral};
+  constructor(opts?: { attributes?: Partial<${attributesTypeName}>; content?: ${contentsTypeName} }) {
+    this.attributes = Object.assign(${attributesZeroValueLiteral}, opts?.attributes);
+    this.contents = opts?.content ?? ${contentsZeroValueLiteral};
   }
 
   getAttributes(): ${attributesTypeName} { return this.attributes; }
@@ -312,3 +315,11 @@ ${attributesAccessorMethodLiterals}
 ${contentsAccessorMethodLiterals}
 }`;
 };
+
+const classLiterals = new Array<string>();
+for (const element of Object.values(elements)) {
+  classLiterals.push(toClassLiteral(element));
+}
+const generatedFilePath = path.join(__dirname, '..', 'generated.ts');
+console.log(`writing to ${generatedFilePath}`);
+fs.writeFileSync(generatedFilePath, classLiterals.join('\n\n'));
