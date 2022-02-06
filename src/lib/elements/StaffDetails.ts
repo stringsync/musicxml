@@ -46,8 +46,8 @@ export const StaffDetails = xml.element(
     },
     content: [
       t.optional(StaffType),
-      t.optional([t.required(StaffLines), t.zeroOrMore(LineDetail)]),
-      t.zeroOrMore(StaffTuning),
+      t.label({ label: 'lines', value: t.optional([t.required(StaffLines), t.zeroOrMore(LineDetail)]) }),
+      t.label({ label: 'staff-tunings', value: t.zeroOrMore(StaffTuning) }),
       t.optional(Capo),
       t.optional(StaffSize),
     ] as const,

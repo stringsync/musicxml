@@ -24,11 +24,11 @@ export const Identification = xml.element(
   {
     attributes: {},
     content: [
-      t.zeroOrMore(Creator),
-      t.zeroOrMore(Rights),
+      t.label({ label: 'creators', value: t.zeroOrMore(Creator) }),
+      t.label({ label: 'rights', value: t.zeroOrMore(Rights) }),
       t.optional(Encoding),
       t.optional(Source),
-      t.zeroOrMore(Relation),
+      t.label({ label: 'relations', value: t.zeroOrMore(Relation) }),
       t.optional(Miscellaneous),
     ] as const,
   },

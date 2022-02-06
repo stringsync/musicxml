@@ -38,7 +38,7 @@ export const ScoreInstrument = xml.element(
       t.required(InstrumentName),
       t.optional(InstrumentAbbreviation),
       t.optional(InstrumentSound),
-      t.zeroOrMore(t.choices(Solo, Ensemble)),
+      t.label({ label: 'instrument-type', value: t.zeroOrMore(t.choices(Solo, Ensemble)) }),
       t.optional(VirtualInstrument),
     ] as const,
   },

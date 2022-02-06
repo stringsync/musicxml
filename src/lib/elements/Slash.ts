@@ -40,7 +40,10 @@ export const Slash = xml.element(
       ['use-stems']: t.optional(dataTypes.yesNo()),
     },
     content: [
-      t.optional([t.optional([t.required(SlashType), t.zeroOrMore(SlashDot)]), t.zeroOrMore(ExceptVoice)]),
+      t.label({
+        label: 'slash',
+        value: t.optional([t.optional([t.required(SlashType), t.zeroOrMore(SlashDot)]), t.zeroOrMore(ExceptVoice)]),
+      }),
     ] as const,
   },
   {}

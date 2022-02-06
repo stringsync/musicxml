@@ -107,16 +107,19 @@ export const Lyric = xml.element(
       ['time-only']: t.optional(dataTypes.timeOnly()),
     },
     content: [
-      t.choices(
-        [
-          t.optional(Syllabic),
-          t.required(Text),
-          t.zeroOrMore([t.optional([t.required(Elision), t.optional(Syllabic)]), t.required(Text)]),
-        ],
-        Extend,
-        Laughing,
-        Humming
-      ),
+      t.label({
+        label: 'lyric',
+        value: t.choices(
+          [
+            t.optional(Syllabic),
+            t.required(Text),
+            t.zeroOrMore([t.optional([t.required(Elision), t.optional(Syllabic)]), t.required(Text)]),
+          ],
+          Extend,
+          Laughing,
+          Humming
+        ),
+      }),
       t.optional(EndLine),
       t.optional(EndParagraph),
       t.optional(Footnote),

@@ -10,7 +10,7 @@ import { t, xml } from '../xml';
  * overrides the font specified for the overall `<metronome>` element. This allows separate specification of a music
  * font for the `<beat-unit>` and a text font for the numeric value, in cases where a single metronome font is not used.
  *
- * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome/}
+ * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/per-minute/}
  */
 export type PerMinute = ReturnType<typeof PerMinute>;
 

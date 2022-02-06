@@ -18,6 +18,9 @@ export type NoteheadText = ReturnType<typeof NoteheadText>;
 
 export const NoteheadText = xml.element(
   'notehead-text',
-  { attributes: {}, content: [t.oneOrMore([DisplayText, AccidentalText])] as const },
+  {
+    attributes: {},
+    content: [t.label({ label: 'texts', value: t.oneOrMore([DisplayText, AccidentalText]) })] as const,
+  },
   {}
 );

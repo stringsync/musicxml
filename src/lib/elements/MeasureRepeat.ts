@@ -34,7 +34,7 @@ export const MeasureRepeat = xml.element(
        */
       slashes: t.optional(dataTypes.positiveInteger()),
     },
-    content: [t.required(dataTypes.positiveIntegerOrEmpty())] as const,
+    content: [t.label({ label: 'measure-repeat', value: t.required(dataTypes.positiveIntegerOrEmpty()) })] as const,
   },
   {}
 );

@@ -15,6 +15,9 @@ export type Miscellaneous = ReturnType<typeof Miscellaneous>;
 
 export const Miscellaneous = xml.element(
   'miscellaneous',
-  { attributes: {}, content: [t.zeroOrMore(MiscellaneousField)] as const },
+  {
+    attributes: {},
+    content: [t.label({ label: 'miscellaneous-fields', value: t.zeroOrMore(MiscellaneousField) })] as const,
+  },
   {}
 );

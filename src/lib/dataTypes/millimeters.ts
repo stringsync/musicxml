@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/millimeters/}
  */
-export const millimeters = () => t.float();
+export const millimeters = () => t.label({ label: 'millimeters', value: t.float() });

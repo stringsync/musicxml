@@ -39,27 +39,30 @@ export const Articulations = xml.element(
       id: t.optional(dataTypes.id()),
     },
     content: [
-      t.zeroOrMore(
-        t.choices(
-          Accent,
-          StrongAccent,
-          Staccato,
-          Tenuto,
-          DetachedLegato,
-          Staccatissimo,
-          Spiccato,
-          Scoop,
-          Plop,
-          Doit,
-          Falloff,
-          BreathMark,
-          Caesura,
-          Stress,
-          Unstress,
-          SoftAccent,
-          OtherArticulation
-        )
-      ),
+      t.label({
+        label: 'articulations',
+        value: t.zeroOrMore(
+          t.choices(
+            Accent,
+            StrongAccent,
+            Staccato,
+            Tenuto,
+            DetachedLegato,
+            Staccatissimo,
+            Spiccato,
+            Scoop,
+            Plop,
+            Doit,
+            Falloff,
+            BreathMark,
+            Caesura,
+            Stress,
+            Unstress,
+            SoftAccent,
+            OtherArticulation
+          )
+        ),
+      }),
     ] as const,
   },
   {}

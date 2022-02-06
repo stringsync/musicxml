@@ -70,7 +70,7 @@ export const Barline = xml.element(
       t.optional(WavyLine),
       t.optional(Segno),
       t.optional(Coda),
-      t.choices([], [Fermata], [Fermata, Fermata]),
+      t.label({ label: 'fermatas', value: t.choices([], [Fermata], [Fermata, Fermata]) }),
       t.optional(Ending),
       t.optional(Repeat),
     ] as const,

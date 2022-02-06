@@ -9,5 +9,8 @@ import { t } from '../xml';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/numeral-mode/}
  */
 export const numeralMode = () => {
-  return t.choices(...(['major', 'harmonic minor', 'melodic minor', 'minor', 'natural minor'] as const));
+  return t.label({
+    label: 'numeral-mode',
+    value: t.choices(...(['major', 'harmonic minor', 'melodic minor', 'minor', 'natural minor'] as const)),
+  });
 };

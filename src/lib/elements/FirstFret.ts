@@ -27,7 +27,7 @@ export const FirstFret = xml.element(
        */
       text: t.optional(dataTypes.token()),
     },
-    content: [t.required(dataTypes.positiveInteger())] as const,
+    content: [t.label({ label: 'fret', value: t.required(dataTypes.positiveInteger()) })] as const,
   },
   {}
 );

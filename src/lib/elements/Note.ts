@@ -179,41 +179,47 @@ export const Note = xml.element(
       ['time-only']: t.optional(dataTypes.timeOnly()),
     },
     content: [
-      t.choices(
-        [
-          t.required(Grace),
-          t.choices(
-            [t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.choices([], [Tie], [Tie, Tie])],
-            [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)]
-          ),
-        ],
-        [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)]
-      ),
-      t.zeroOrMore(Instrument),
+      t.label({
+        label: 'note',
+        value: t.choices(
+          [
+            t.required(Grace),
+            t.choices(
+              [t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.choices([], [Tie], [Tie, Tie])],
+              [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)]
+            ),
+          ],
+          [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)]
+        ),
+      }),
+      t.label({ label: 'instruments', value: t.zeroOrMore(Instrument) }),
       t.optional(Footnote),
       t.optional(Level),
       t.optional(Voice),
       t.optional(Type),
-      t.zeroOrMore(Dot),
+      t.label({ label: 'dots', value: t.zeroOrMore(Dot) }),
       t.optional(Accidental),
       t.optional(TimeModification),
       t.optional(Stem),
       t.optional(Notehead),
       t.optional(NoteheadText),
       t.optional(Staff),
-      t.choices(
-        [] as const,
-        [Beam] as const,
-        [Beam, Beam] as const,
-        [Beam, Beam, Beam] as const,
-        [Beam, Beam, Beam, Beam] as const,
-        [Beam, Beam, Beam, Beam, Beam] as const,
-        [Beam, Beam, Beam, Beam, Beam, Beam] as const,
-        [Beam, Beam, Beam, Beam, Beam, Beam, Beam] as const,
-        [Beam, Beam, Beam, Beam, Beam, Beam, Beam, Beam] as const
-      ),
-      t.zeroOrMore(Notations),
-      t.zeroOrMore(Lyric),
+      t.label({
+        label: 'beams',
+        value: t.choices(
+          [] as const,
+          [Beam] as const,
+          [Beam, Beam] as const,
+          [Beam, Beam, Beam] as const,
+          [Beam, Beam, Beam, Beam] as const,
+          [Beam, Beam, Beam, Beam, Beam] as const,
+          [Beam, Beam, Beam, Beam, Beam, Beam] as const,
+          [Beam, Beam, Beam, Beam, Beam, Beam, Beam] as const,
+          [Beam, Beam, Beam, Beam, Beam, Beam, Beam, Beam] as const
+        ),
+      }),
+      t.label({ label: 'notations', value: t.zeroOrMore(Notations) }),
+      t.label({ label: 'lyrics', value: t.zeroOrMore(Lyric) }),
       t.optional(Play),
       t.optional(Listen),
     ] as const,

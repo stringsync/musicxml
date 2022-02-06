@@ -14,6 +14,6 @@ export type Second = ReturnType<typeof Second>;
 
 export const Second = xml.element(
   'second',
-  { attributes: {}, content: [t.required(dataTypes.positiveInteger())] as const },
+  { attributes: {}, content: [t.label({ label: 'second', value: t.required(dataTypes.positiveInteger()) })] as const },
   {}
 );

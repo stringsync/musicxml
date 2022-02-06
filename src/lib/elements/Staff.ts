@@ -15,6 +15,6 @@ export type Staff = ReturnType<typeof Staff>;
 
 export const Staff = xml.element(
   'staff',
-  { attributes: {}, content: [t.required(dataTypes.positiveInteger())] as const },
+  { attributes: {}, content: [t.label({ label: 'staff', value: t.required(dataTypes.positiveInteger()) })] as const },
   {}
 );

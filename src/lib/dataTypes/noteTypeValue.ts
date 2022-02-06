@@ -7,23 +7,26 @@ import { t } from '../xml';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/note-type-value/}
  */
 export const noteTypeValue = () => {
-  return t.choices(
-    ...([
-      'whole',
-      '1024th',
-      '512th',
-      '256th',
-      '128th',
-      '64th',
-      '32nd',
-      '16th',
-      'eigth',
-      'half',
-      'quarter',
-      'whole',
-      'breve',
-      'long',
-      'maxima',
-    ] as const)
-  );
+  return t.label({
+    label: 'note-type-value',
+    value: t.choices(
+      ...([
+        'whole',
+        '1024th',
+        '512th',
+        '256th',
+        '128th',
+        '64th',
+        '32nd',
+        '16th',
+        'eigth',
+        'half',
+        'quarter',
+        'whole',
+        'breve',
+        'long',
+        'maxima',
+      ] as const)
+    ),
+  });
 };

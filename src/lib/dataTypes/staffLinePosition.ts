@@ -7,4 +7,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/staff-line-position/}
  */
-export const staffLinePosition = () => t.int();
+export const staffLinePosition = () => t.label({ label: 'staff-line-position', value: t.int() });

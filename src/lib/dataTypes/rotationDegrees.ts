@@ -5,4 +5,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/rotation-degrees/}
  */
-export const rotationDegrees = () => t.float({ min: -180, max: 180 });
+export const rotationDegrees = () => t.label({ label: 'rotation-degrees', value: t.float({ min: -180, max: 180 }) });

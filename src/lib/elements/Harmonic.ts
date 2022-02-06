@@ -87,8 +87,8 @@ export const Harmonic = xml.element(
       ['relative-y']: t.optional(dataTypes.tenths()),
     },
     content: [
-      t.zeroOrMore(t.choices(Natural, Artificial)),
-      t.zeroOrMore(t.choices(BasePitch, TouchingPitch, SoundingPitch)),
+      t.label({ label: 'types', value: t.zeroOrMore(t.choices(Natural, Artificial)) }),
+      t.label({ label: 'pitches', value: t.zeroOrMore(t.choices(BasePitch, TouchingPitch, SoundingPitch)) }),
     ] as const,
   },
   {}

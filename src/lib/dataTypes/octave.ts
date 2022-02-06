@@ -5,4 +5,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/octave/}
  */
-export const octave = () => t.int({ min: 0, max: 9 });
+export const octave = () => t.label({ label: 'octave', value: t.int({ min: 0, max: 9 }) });

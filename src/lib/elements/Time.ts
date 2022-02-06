@@ -25,10 +25,13 @@ export const Time = xml.element(
   {
     attributes: {},
     content: [
-      t.choices(
-        [t.oneOrMore([t.required(Beats), t.required(BeatType)]), t.optional(Interchangeable)] as const,
-        SenzaMisura
-      ),
+      t.label({
+        label: 'time',
+        value: t.choices(
+          [t.oneOrMore([t.required(Beats), t.required(BeatType)]), t.optional(Interchangeable)] as const,
+          SenzaMisura
+        ),
+      }),
     ] as const,
   },
   {}

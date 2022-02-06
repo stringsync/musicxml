@@ -27,7 +27,10 @@ export const PageLayout = xml.element(
     content: [
       t.optional(PageHeight),
       t.optional(PageWidth),
-      t.choices([] as const, [PageMargins] as const, [PageMargins, PageMargins] as const),
+      t.label({
+        label: 'page-margins',
+        value: t.choices([] as const, [PageMargins] as const, [PageMargins, PageMargins] as const),
+      }),
     ] as const,
   },
   {}

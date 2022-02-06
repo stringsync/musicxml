@@ -30,7 +30,7 @@ export const StaffSize = xml.element(
        */
       scaling: t.optional(dataTypes.nonNegativeDecimal()),
     },
-    content: [t.required(dataTypes.nonNegativeDecimal())] as const,
+    content: [t.label({ label: 'staff-size', value: t.required(dataTypes.nonNegativeDecimal()) })] as const,
   },
   {}
 );

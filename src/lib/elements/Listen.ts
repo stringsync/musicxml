@@ -19,6 +19,9 @@ export type Listen = ReturnType<typeof Listen>;
 
 export const Listen = xml.element(
   'listen',
-  { attributes: {}, content: [t.oneOrMore(t.choices(Assess, Wait, OtherListen))] as const },
+  {
+    attributes: {},
+    content: [t.label({ label: 'listens', value: t.oneOrMore(t.choices(Assess, Wait, OtherListen)) })] as const,
+  },
   {}
 );

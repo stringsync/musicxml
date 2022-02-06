@@ -14,6 +14,9 @@ export type ClefOctaveChange = ReturnType<typeof ClefOctaveChange>;
 
 export const ClefOctaveChange = xml.element(
   'clef-octave-change',
-  { attributes: {}, content: [t.required(dataTypes.integer())] as const },
+  {
+    attributes: {},
+    content: [t.label({ label: 'clef-octave-change', value: t.required(dataTypes.integer()) })] as const,
+  },
   {}
 );

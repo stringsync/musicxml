@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/swing-type-value/}
  */
-export const swingTypeValue = () => t.choices('eighth' as const, '16th' as const);
+export const swingTypeValue = () => t.label({ label: 'eighth', value: t.choices('eighth' as const, '16th' as const) });

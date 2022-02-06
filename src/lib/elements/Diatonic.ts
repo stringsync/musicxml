@@ -16,6 +16,6 @@ export type Diatonic = ReturnType<typeof Diatonic>;
 
 export const Diatonic = xml.element(
   'diatonic',
-  { attributes: {}, content: [t.required(dataTypes.integer())] as const },
+  { attributes: {}, content: [t.label({ label: 'diatonic', value: t.required(dataTypes.integer()) })] as const },
   {}
 );

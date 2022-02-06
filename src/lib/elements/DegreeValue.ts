@@ -87,7 +87,7 @@ export const DegreeValue = xml.element(
        */
       text: t.optional(dataTypes.token()),
     },
-    content: [t.required(dataTypes.positiveInteger())] as const,
+    content: [t.label({ label: 'degree-value', value: t.required(dataTypes.positiveInteger()) })] as const,
   },
   {}
 );

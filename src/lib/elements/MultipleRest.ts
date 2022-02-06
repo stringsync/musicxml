@@ -22,7 +22,7 @@ export const MultipleRest = xml.element(
        */
       ['use-symbols']: t.optional(dataTypes.yesNo()),
     },
-    content: [t.required(dataTypes.positiveInteger())] as const,
+    content: [t.label({ label: 'multiple-rest', value: t.required(dataTypes.positiveInteger()) })] as const,
   },
   {}
 );

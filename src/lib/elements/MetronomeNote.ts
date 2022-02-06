@@ -22,8 +22,8 @@ export const MetronomeNote = xml.element(
     attributes: {},
     content: [
       t.required(MetronomeType),
-      t.zeroOrMore(MetronomeDot),
-      t.zeroOrMore(MetronomeBeam),
+      t.label({ label: 'metronome-dots', value: t.zeroOrMore(MetronomeDot) }),
+      t.label({ label: 'metronome-beams', value: t.zeroOrMore(MetronomeBeam) }),
       t.optional(MetronomeTied),
       t.optional(MetronomeTuplet),
     ] as const,

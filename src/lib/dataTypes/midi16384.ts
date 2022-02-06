@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/midi-16384/}
  */
-export const midi16384 = () => t.int({ min: 1, max: 16384 });
+export const midi16384 = () => t.label({ label: 'midi16384', value: t.int({ min: 1, max: 16384 }) });

@@ -5,4 +5,9 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/glass-value/}
  */
-export const glassValue = () => t.choices(...(['glass harmonica', 'glass harp', 'wind chimes'] as const));
+export const glassValue = () => {
+  return t.label({
+    label: 'glass-value',
+    value: t.choices(...(['glass harmonica', 'glass harp', 'wind chimes'] as const)),
+  });
+};

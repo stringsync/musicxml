@@ -14,4 +14,4 @@ import { t } from '../xml';
 //     isValid: (date: Date) => date instanceof Date,
 //   });
 // };
-export const yyyyMmDd = () => t.date();
+export const yyyyMmDd = () => t.label({ label: 'yyyy-mm-dd', value: t.date() });

@@ -17,6 +17,9 @@ export type BeatUnitTied = ReturnType<typeof BeatUnitTied>;
 
 export const BeatUnitTied = xml.element(
   'beat-unit-tied',
-  { attributes: {}, content: [t.required(BeatUnit), t.zeroOrMore(BeatUnitDot)] as const },
+  {
+    attributes: {},
+    content: [t.required(BeatUnit), t.label({ label: 'beat-unit-dots', value: t.zeroOrMore(BeatUnitDot) })] as const,
+  },
   {}
 );

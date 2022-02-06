@@ -14,6 +14,9 @@ export type FrameStrings = ReturnType<typeof FrameStrings>;
 
 export const FrameStrings = xml.element(
   'frame-strings',
-  { attributes: {}, content: [t.required(dataTypes.positiveInteger())] as const },
+  {
+    attributes: {},
+    content: [t.label({ label: 'lines-size', value: t.required(dataTypes.positiveInteger()) })] as const,
+  },
   {}
 );

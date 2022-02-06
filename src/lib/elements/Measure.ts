@@ -30,24 +30,27 @@ export const Measure = xml.element(
   {
     attributes: {},
     content: [
-      t.zeroOrMore(
-        t.choices(
-          Note,
-          Backup,
-          Forward,
-          Direction,
-          Attributes,
-          Harmony,
-          FiguredBass,
-          Print,
-          Sound,
-          Listening,
-          Barline,
-          Grouping,
-          Link,
-          Bookmark
-        )
-      ),
+      t.label({
+        label: 'measures',
+        value: t.zeroOrMore(
+          t.choices(
+            Note,
+            Backup,
+            Forward,
+            Direction,
+            Attributes,
+            Harmony,
+            FiguredBass,
+            Print,
+            Sound,
+            Listening,
+            Barline,
+            Grouping,
+            Link,
+            Bookmark
+          )
+        ),
+      }),
     ] as const,
   },
   {}

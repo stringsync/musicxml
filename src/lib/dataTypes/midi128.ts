@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/midi-128/}
  */
-export const midi128 = () => t.int({ min: 1, max: 128 });
+export const midi128 = () => t.label({ label: 'midi128', value: t.int({ min: 1, max: 128 }) });

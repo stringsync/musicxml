@@ -9,5 +9,8 @@ import { t } from '../xml';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/arrow-style/}
  */
 export const arrowStyle = () => {
-  return t.choices(...(['combined', 'double', 'filled', 'hollow', 'other', 'paired', 'single'] as const));
+  return t.label({
+    label: 'arrow-style',
+    value: t.choices(...(['combined', 'double', 'filled', 'hollow', 'other', 'paired', 'single'] as const)),
+  });
 };

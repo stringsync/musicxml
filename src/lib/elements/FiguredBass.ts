@@ -143,7 +143,12 @@ export const FiguredBass = xml.element(
        */
       valign: t.optional(dataTypes.valign()),
     },
-    content: [t.oneOrMore(Figure), t.optional(Duration), t.optional(Footnote), t.optional(Level)] as const,
+    content: [
+      t.label({ label: 'figures', value: t.oneOrMore(Figure) }),
+      t.optional(Duration),
+      t.optional(Footnote),
+      t.optional(Level),
+    ] as const,
   },
   {}
 );

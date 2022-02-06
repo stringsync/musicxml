@@ -29,7 +29,7 @@ export const InstrumentChange = xml.element(
     },
     content: [
       t.optional(InstrumentSound),
-      t.zeroOrMore(t.choices(Solo, Ensemble)),
+      t.label({ label: 'instrument-type', value: t.zeroOrMore(t.choices(Solo, Ensemble)) }),
       t.optional(VirtualInstrument),
     ] as const,
   },

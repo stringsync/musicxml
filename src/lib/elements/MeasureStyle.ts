@@ -58,7 +58,9 @@ export const MeasureStyle = xml.element(
        */
       number: t.optional(dataTypes.staffNumber()),
     },
-    content: [t.choices(MultipleRest, MeasureRepeat, BeatRepeat, Slash)] as const,
+    content: [
+      t.label({ label: 'measure-style', value: t.choices(MultipleRest, MeasureRepeat, BeatRepeat, Slash) }),
+    ] as const,
   },
   {}
 );

@@ -160,12 +160,15 @@ export const Sound = xml.element(
       tocoda: t.optional(dataTypes.token()),
     },
     content: [
-      t.zeroOrMore([
-        t.optional(InstrumentChange),
-        t.optional(MidiDevice),
-        t.optional(MidiInstrument),
-        t.optional(Play),
-      ]),
+      t.label({
+        label: 'playbacks',
+        value: t.zeroOrMore([
+          t.optional(InstrumentChange),
+          t.optional(MidiDevice),
+          t.optional(MidiInstrument),
+          t.optional(Play),
+        ]),
+      }),
       t.optional(Swing),
       t.optional(Offset),
     ] as const,

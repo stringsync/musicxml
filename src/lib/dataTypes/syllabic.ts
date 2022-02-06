@@ -6,4 +6,6 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/syllabic/}
  */
-export const syllabic = () => t.choices(...(['begin', 'end', 'middle', 'single'] as const));
+export const syllabic = () => {
+  return t.label({ label: 'syllabic', value: t.choices(...(['begin', 'end', 'middle', 'single'] as const)) });
+};

@@ -23,7 +23,11 @@ export const PartList = xml.element(
   'part-list',
   {
     attributes: {},
-    content: [t.zeroOrMore(PartGroup), t.required(ScorePart), t.zeroOrMore(t.choices(PartGroup, ScorePart))] as const,
+    content: [
+      t.label({ label: 'part-groups', value: t.zeroOrMore(PartGroup) }),
+      t.required(ScorePart),
+      t.label({ label: 'parts', value: t.zeroOrMore(t.choices(PartGroup, ScorePart)) }),
+    ] as const,
   },
   {}
 );

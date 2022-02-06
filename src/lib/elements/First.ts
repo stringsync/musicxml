@@ -14,6 +14,9 @@ export type First = ReturnType<typeof First>;
 
 export const First = xml.element(
   'first',
-  { attributes: {}, content: [t.required(dataTypes.positiveInteger())] as const },
+  {
+    attributes: {},
+    content: [t.label({ label: 'swing-ratio', value: t.required(dataTypes.positiveInteger()) })] as const,
+  },
   {}
 );

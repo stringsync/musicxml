@@ -116,7 +116,22 @@ export const Percussion = xml.element(
       valign: t.optional(dataTypes.valign()),
     },
     content: [
-      t.choices(Glass, Metal, Wood, Pitched, Membrane, Effect, Timpani, Beater, Stick, StickLocation, OtherPercussion),
+      t.label({
+        label: 'percussion',
+        value: t.choices(
+          Glass,
+          Metal,
+          Wood,
+          Pitched,
+          Membrane,
+          Effect,
+          Timpani,
+          Beater,
+          Stick,
+          StickLocation,
+          OtherPercussion
+        ),
+      }),
     ] as const,
   },
   {}

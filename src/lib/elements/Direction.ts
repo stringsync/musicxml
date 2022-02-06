@@ -31,7 +31,7 @@ export const Direction = xml.element(
   {
     attributes: {},
     content: [
-      t.oneOrMore(DirectionType),
+      t.label({ label: 'direction-types', value: t.oneOrMore(DirectionType) }),
       t.optional(Offset),
       t.optional(Footnote),
       t.optional(Level),

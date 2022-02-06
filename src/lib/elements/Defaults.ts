@@ -34,8 +34,8 @@ export const Defaults = xml.element(
       t.optional(Appearance),
       t.optional(MusicFont),
       t.optional(WordFont),
-      t.zeroOrMore(LyricFont),
-      t.zeroOrMore(LyricLanguage),
+      t.label({ label: 'lyric-fonts', value: t.zeroOrMore(LyricFont) }),
+      t.label({ label: 'lyric-languages', value: t.zeroOrMore(LyricLanguage) }),
     ] as const,
   },
   {}

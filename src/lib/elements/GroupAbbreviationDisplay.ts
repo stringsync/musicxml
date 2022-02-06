@@ -28,7 +28,7 @@ export const GroupAbbreviationDisplay = xml.element(
        */
       ['print-object']: t.optional(dataTypes.yesNo()),
     },
-    content: [t.zeroOrMore(t.choices(DisplayText, AccidentalText))] as const,
+    content: [t.label({ label: 'texts', value: t.zeroOrMore(t.choices(DisplayText, AccidentalText)) })] as const,
   },
   {}
 );

@@ -14,6 +14,9 @@ export type FrameFrets = ReturnType<typeof FrameFrets>;
 
 export const FrameFrets = xml.element(
   'frame-frets',
-  { attributes: {}, content: [t.required(dataTypes.positiveInteger())] as const },
+  {
+    attributes: {},
+    content: [t.label({ label: 'space-size', value: t.required(dataTypes.positiveInteger()) })] as const,
+  },
   {}
 );

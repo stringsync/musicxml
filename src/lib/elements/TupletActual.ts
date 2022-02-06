@@ -18,6 +18,13 @@ export type TupletActual = ReturnType<typeof TupletActual>;
 
 export const TupletActual = xml.element(
   'tuplet-actual',
-  { attributes: {}, content: [t.optional(TupletNumber), t.optional(TupletType), t.zeroOrMore(TupletDot)] as const },
+  {
+    attributes: {},
+    content: [
+      t.optional(TupletNumber),
+      t.optional(TupletType),
+      t.label({ label: 'tuplet-dots', value: t.zeroOrMore(TupletDot) }),
+    ] as const,
+  },
   {}
 );

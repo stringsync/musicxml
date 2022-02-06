@@ -6,17 +6,20 @@ import { t } from '../xml';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/fermata-shape/}
  */
 export const fermataShape = () => {
-  return t.choices(
-    ...([
-      '',
-      'normal',
-      'angled',
-      'square',
-      'double-angled',
-      'double-square',
-      'double-dot',
-      'half-curve',
-      'curlew',
-    ] as const)
-  );
+  return t.label({
+    label: 'fermata-shape',
+    value: t.choices(
+      ...([
+        '',
+        'normal',
+        'angled',
+        'square',
+        'double-angled',
+        'double-square',
+        'double-dot',
+        'half-curve',
+        'curlew',
+      ] as const)
+    ),
+  });
 };

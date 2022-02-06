@@ -38,9 +38,9 @@ export const ScoreTimewise = xml.element(
       t.optional(MovementTitle),
       t.optional(Identification),
       t.optional(Defaults),
-      t.zeroOrMore(Credit),
+      t.label({ label: 'credits', value: t.zeroOrMore(Credit) }),
       t.required(PartList),
-      t.oneOrMore(Measure),
+      t.label({ label: 'measures', value: t.oneOrMore(Measure) }),
     ] as const,
   },
   {}

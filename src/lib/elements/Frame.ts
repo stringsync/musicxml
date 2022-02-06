@@ -112,7 +112,12 @@ export const Frame = xml.element(
 
       width: t.optional(dataTypes.tenths()),
     },
-    content: [t.required(FrameStrings), t.required(FrameFrets), t.optional(FirstFret), t.oneOrMore(FrameNote)] as const,
+    content: [
+      t.required(FrameStrings),
+      t.required(FrameFrets),
+      t.optional(FirstFret),
+      t.label({ label: 'frame-notes', value: t.oneOrMore(FrameNote) }),
+    ] as const,
   },
   {}
 );

@@ -44,13 +44,16 @@ export const Credit = xml.element(
       page: t.optional(dataTypes.positiveInteger()),
     },
     content: [
-      t.zeroOrMore(CreditType),
-      t.zeroOrMore(Link),
-      t.zeroOrMore(Bookmark),
-      t.choices(CreditImage, [
-        t.choices(CreditWords, CreditSymbol),
-        t.zeroOrMore([t.zeroOrMore(Link), t.zeroOrMore(Bookmark), t.choices(CreditWords, CreditSymbol)] as const),
-      ] as const),
+      t.label({ label: 'credit-types', value: t.zeroOrMore(CreditType) }),
+      t.label({ label: 'links', value: t.zeroOrMore(Link) }),
+      t.label({ label: 'bookmarks', value: t.zeroOrMore(Bookmark) }),
+      t.label({
+        label: 'credit-detail',
+        value: t.choices(CreditImage, [
+          t.choices(CreditWords, CreditSymbol),
+          t.zeroOrMore([t.zeroOrMore(Link), t.zeroOrMore(Bookmark), t.choices(CreditWords, CreditSymbol)] as const),
+        ] as const),
+      }),
     ] as const,
   },
   {}

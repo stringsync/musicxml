@@ -68,7 +68,7 @@ export const Print = xml.element(
     content: [
       t.optional(PageLayout),
       t.optional(SystemLayout),
-      t.zeroOrMore(StaffLayout),
+      t.label({ label: 'staff-layouts', value: t.zeroOrMore(StaffLayout) }),
       t.optional(MeasureLayout),
       t.optional(MeasureNumbering),
       t.optional(PartNameDisplay),

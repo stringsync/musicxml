@@ -48,24 +48,27 @@ export const Notations = xml.element(
     content: [
       t.optional(Footnote),
       t.optional(Level),
-      t.zeroOrMore(
-        t.choices(
-          Tied,
-          Slur,
-          Tuplet,
-          Glissando,
-          Slide,
-          Ornaments,
-          Technical,
-          Articulations,
-          Dynamics,
-          Fermata,
-          Arpeggiate,
-          NonArpeggiate,
-          AccidentalMark,
-          OtherNotation
-        )
-      ),
+      t.label({
+        label: 'notations',
+        value: t.zeroOrMore(
+          t.choices(
+            Tied,
+            Slur,
+            Tuplet,
+            Glissando,
+            Slide,
+            Ornaments,
+            Technical,
+            Articulations,
+            Dynamics,
+            Fermata,
+            Arpeggiate,
+            NonArpeggiate,
+            AccidentalMark,
+            OtherNotation
+          )
+        ),
+      }),
     ] as const,
   },
   {}

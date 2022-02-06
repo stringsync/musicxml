@@ -16,6 +16,6 @@ export type OctaveChange = ReturnType<typeof OctaveChange>;
 
 export const OctaveChange = xml.element(
   'octave-change',
-  { attributes: {}, content: [t.required(dataTypes.integer())] as const },
+  { attributes: {}, content: [t.label({ label: 'octave-change', value: t.required(dataTypes.integer()) })] as const },
   {}
 );

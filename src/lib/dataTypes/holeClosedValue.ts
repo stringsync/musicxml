@@ -5,4 +5,6 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/hole-closed-value/}
  */
-export const holeClosedValue = () => t.choices(...(['yes', 'no', 'half'] as const));
+export const holeClosedValue = () => {
+  return t.label({ label: 'hole-closed-value', value: t.choices(...(['yes', 'no', 'half'] as const)) });
+};

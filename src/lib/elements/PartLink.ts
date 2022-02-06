@@ -59,7 +59,10 @@ export const PartLink = xml.element(
        */
       ['xlink:type']: t.optional(dataTypes.xlink.type()),
     },
-    content: [t.zeroOrMore(InstrumentLink), t.zeroOrMore(GroupLink)] as const,
+    content: [
+      t.label({ label: 'instrument-links', value: t.zeroOrMore(InstrumentLink) }),
+      t.label({ label: 'group-links', value: t.zeroOrMore(GroupLink) }),
+    ] as const,
   },
   {}
 );

@@ -143,13 +143,16 @@ export const Harmony = xml.element(
       type: t.optional(dataTypes.harmonyType()),
     },
     content: [
-      t.oneOrMore([
-        t.choices(Root, Numeral, Function),
-        t.required(Kind),
-        t.optional(Inversion),
-        t.optional(Bass),
-        t.zeroOrMore(Degree),
-      ]),
+      t.label({
+        label: 'harmony',
+        value: t.oneOrMore([
+          t.choices(Root, Numeral, Function),
+          t.required(Kind),
+          t.optional(Inversion),
+          t.optional(Bass),
+          t.zeroOrMore(Degree),
+        ]),
+      }),
       t.optional(Frame),
       t.optional(Offset),
       t.optional(Footnote),

@@ -99,7 +99,11 @@ export const Bend = xml.element(
        */
       shape: t.optional(dataTypes.bendShape()),
     },
-    content: [t.required(BendAlter), t.zeroOrMore(t.choices(PreBend, Release)), t.optional(WithBar)] as const,
+    content: [
+      t.required(BendAlter),
+      t.label({ label: 'bends', value: t.zeroOrMore(t.choices(PreBend, Release)) }),
+      t.optional(WithBar),
+    ] as const,
   },
   {}
 );

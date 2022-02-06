@@ -41,7 +41,7 @@ export const Grouping = xml.element(
        */
       number: t.optional(dataTypes.token()),
     },
-    content: [t.zeroOrMore(Feature)] as const,
+    content: [t.label({ label: 'features', value: t.zeroOrMore(Feature) })] as const,
   },
   {}
 );

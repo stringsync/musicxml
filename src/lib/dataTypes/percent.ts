@@ -5,4 +5,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/percent/}
  */
-export const percent = () => t.float({ min: 0, max: 100 });
+export const percent = () => t.label({ label: 'percent', value: t.float({ min: 0, max: 100 }) });

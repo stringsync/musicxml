@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/semitones/}
  */
-export const semitones = () => t.float();
+export const semitones = () => t.label({ label: 'semitones', value: t.float() });

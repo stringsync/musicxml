@@ -42,7 +42,10 @@ export const BeatRepeat = xml.element(
       ['use-dots']: t.optional(dataTypes.yesNo()),
     },
     content: [
-      t.optional([t.optional([t.required(SlashType), t.zeroOrMore(SlashDot)]), t.zeroOrMore(ExceptVoice)]),
+      t.label({
+        label: 'beat-repeat',
+        value: t.optional([t.optional([t.required(SlashType), t.zeroOrMore(SlashDot)]), t.zeroOrMore(ExceptVoice)]),
+      }),
     ] as const,
   },
   {}

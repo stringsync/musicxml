@@ -23,7 +23,7 @@ export const Scordatura = xml.element(
        */
       id: t.optional(dataTypes.id()),
     },
-    content: [t.oneOrMore(Accord)] as const,
+    content: [t.label({ label: 'accords', value: t.oneOrMore(Accord) })] as const,
   },
   {}
 );

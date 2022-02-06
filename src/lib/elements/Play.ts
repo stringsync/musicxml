@@ -28,7 +28,7 @@ export const Play = xml.element(
        */
       id: t.optional(dataTypes.id()),
     },
-    content: [t.zeroOrMore(t.choices(Ipa, Mute, SemiPitched, OtherPlay))] as const,
+    content: [t.label({ label: 'play', value: t.zeroOrMore(t.choices(Ipa, Mute, SemiPitched, OtherPlay)) })] as const,
   },
   {}
 );

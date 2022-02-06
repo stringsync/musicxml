@@ -32,7 +32,10 @@ export const Interchangeable = xml.element(
        */
       symbol: t.optional(dataTypes.timeSymbol()),
     },
-    content: [t.optional(TimeRelation), t.oneOrMore([t.required(Beats), t.required(BeatType)])] as const,
+    content: [
+      t.optional(TimeRelation),
+      t.label({ label: 'beats', value: t.oneOrMore([t.required(Beats), t.required(BeatType)]) }),
+    ] as const,
   },
   {}
 );

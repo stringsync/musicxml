@@ -24,11 +24,11 @@ export const Appearance = xml.element(
   {
     attributes: {},
     content: [
-      t.zeroOrMore(LineWidth),
-      t.zeroOrMore(NoteSize),
-      t.zeroOrMore(Distance),
-      t.zeroOrMore(Glyph),
-      t.zeroOrMore(OtherAppearance),
+      t.label({ label: 'line-widths', value: t.zeroOrMore(LineWidth) }),
+      t.label({ label: 'notes', value: t.zeroOrMore(NoteSize) }),
+      t.label({ label: 'distances', value: t.zeroOrMore(Distance) }),
+      t.label({ label: 'glyphs', value: t.zeroOrMore(Glyph) }),
+      t.label({ label: 'other-appearances', value: t.zeroOrMore(OtherAppearance) }),
     ] as const,
   },
   {}

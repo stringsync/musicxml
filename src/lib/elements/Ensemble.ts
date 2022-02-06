@@ -15,6 +15,9 @@ export type Ensemble = ReturnType<typeof Ensemble>;
 
 export const Ensemble = xml.element(
   'ensemble',
-  { attributes: {}, content: [t.required(dataTypes.positiveIntegerOrEmpty())] as const },
+  {
+    attributes: {},
+    content: [t.label({ label: 'size', value: t.required(dataTypes.positiveIntegerOrEmpty()) })] as const,
+  },
   {}
 );

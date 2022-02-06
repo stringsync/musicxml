@@ -5,4 +5,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/tremolo-marks/}
  */
-export const tremoloMarks = () => t.int({ min: 0, max: 8 });
+export const tremoloMarks = () => t.label({ label: 'tremolo-marks', value: t.int({ min: 0, max: 8 }) });

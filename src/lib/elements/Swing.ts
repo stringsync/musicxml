@@ -32,7 +32,10 @@ export const Swing = xml.element(
   {
     attributes: {},
     content: [
-      t.choices(Straight, [t.required(First), t.required(Second), t.optional(SwingType)] as const),
+      t.label({
+        label: 'swing',
+        value: t.choices(Straight, [t.required(First), t.required(Second), t.optional(SwingType)] as const),
+      }),
       t.optional(SwingStyle),
     ] as const,
   },

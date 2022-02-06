@@ -100,11 +100,14 @@ export const Key = xml.element(
       ['relative-y']: t.optional(dataTypes.tenths()),
     },
     content: [
-      t.choices(
-        [t.optional(Cancel), t.required(Fifths), t.optional(Mode)],
-        t.zeroOrMore([t.required(KeyStep), t.required(KeyAlter), t.optional(KeyAccidental)]),
-        t.zeroOrMore(KeyOctave)
-      ),
+      t.label({
+        label: 'key',
+        value: t.choices(
+          [t.optional(Cancel), t.required(Fifths), t.optional(Mode)],
+          t.zeroOrMore([t.required(KeyStep), t.required(KeyAlter), t.optional(KeyAccidental)]),
+          t.zeroOrMore(KeyOctave)
+        ),
+      }),
     ] as const,
   },
   {}

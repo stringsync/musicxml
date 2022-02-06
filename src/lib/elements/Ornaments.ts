@@ -40,26 +40,29 @@ export const Ornaments = xml.element(
       id: t.optional(dataTypes.id()),
     },
     content: [
-      t.zeroOrMore(
-        t.choices(
-          TrillMark,
-          Turn,
-          DelayedTurn,
-          InvertedTurn,
-          DelayedInvertedTurn,
-          VerticalTurn,
-          InvertedVerticalTurn,
-          Shake,
-          WavyLine,
-          Mordent,
-          InvertedMordent,
-          Schleifer,
-          Tremolo,
-          Haydn,
-          OtherOrnament
-        )
-      ),
-      t.zeroOrMore(AccidentalMark),
+      t.label({
+        label: 'ornaments',
+        value: t.zeroOrMore(
+          t.choices(
+            TrillMark,
+            Turn,
+            DelayedTurn,
+            InvertedTurn,
+            DelayedInvertedTurn,
+            VerticalTurn,
+            InvertedVerticalTurn,
+            Shake,
+            WavyLine,
+            Mordent,
+            InvertedMordent,
+            Schleifer,
+            Tremolo,
+            Haydn,
+            OtherOrnament
+          )
+        ),
+      }),
+      t.label({ label: 'accidental-marks', value: t.zeroOrMore(AccidentalMark) }),
     ] as const,
   },
   {}

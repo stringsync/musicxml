@@ -41,7 +41,7 @@ export const MetronomeTuplet = xml.element(
     content: [
       t.required(ActualNotes),
       t.required(NormalNotes),
-      t.optional([t.required(NormalType), t.zeroOrMore(NormalDot)]),
+      t.label({ label: 'normal', value: t.optional([t.required(NormalType), t.zeroOrMore(NormalDot)]) }),
     ] as const,
   },
   {}
