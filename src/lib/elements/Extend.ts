@@ -27,27 +27,27 @@ export const Extend = xml.element(
        * the origin is changed relative to the start of the first measure on the system, and these values are used when
        * the current measure or a succeeding measure starts a new system. Positive x is right and negative x is left.
        */
-      ['default-x']: t.optional(dataTypes.tenths()),
+      ['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
 
       /**
        * Changes the computation of the default vertical position. The origin is changed relative to the top line of the
        * staff. Positive y is up and negative y is down.
        */
-      ['default-y']: t.optional(dataTypes.tenths()),
+      ['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
 
       /**
        * Changes the horizontal position relative to the default position, either as computed by the individual program,
        * or as overridden by the default-x attribute. Positive x is right and negative x is left. It should be
        * interpreted in the context of the `<offset>` element or directive attribute if those are present.
        */
-      ['relative-x']: t.optional(dataTypes.tenths()),
+      ['relative-x']: t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
 
       /**
        * Changes the vertical position relative to the default position, either as computed by the individual program,
        * or as overridden by the default-y attribute. Positive y is up and negative y is down. It should be interpreted
        * in the context of the placement attribute if that is present.
        */
-      ['relative-y']: t.optional(dataTypes.tenths()),
+      ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
 
       /**
        * Indicates if this is the start, stop, or continuation of the extension. Before Version 3.0 this attribute was

@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/divisions/}
  */
-export const divisions = () => t.label({ label: 'divisions', value: t.float() });
+export const divisions = () => t.float();

@@ -33,7 +33,7 @@ export const Barline = xml.element(
        * Used for playback when there is a `<coda>` child element. Indicates the end point for a forward jump to a coda
        * sign. If there are multiple jumps, the value of these parameters can be used to name and distinguish them.
        */
-      coda: t.optional(dataTypes.token()),
+      coda: t.label({ label: 'coda-token', value: t.optional(dataTypes.token()) }),
 
       /**
        * If the segno or coda attributes are used, the divisions attribute can be used to indicate the number of
@@ -61,7 +61,7 @@ export const Barline = xml.element(
        * segno sign. If there are multiple jumps, the value of these parameters can be used to name and distinguish
        * them.
        */
-      segno: t.optional(dataTypes.token()),
+      segno: t.label({ label: 'segno-token', value: t.optional(dataTypes.token()) }),
     },
     content: [
       t.optional(BarStyle),

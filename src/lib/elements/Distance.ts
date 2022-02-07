@@ -21,7 +21,7 @@ export const Distance = xml.element(
        */
       type: t.required(dataTypes.distanceType()),
     },
-    content: [t.required(dataTypes.tenths())] as const,
+    content: [t.label({ label: 'distance', value: t.required(dataTypes.tenths()) })] as const,
   },
   {}
 );

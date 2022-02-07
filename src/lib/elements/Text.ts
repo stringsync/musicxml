@@ -38,13 +38,13 @@ export const Text = xml.element(
        * the origin is changed relative to the start of the first measure on the system, and these values are used when
        * the current measure or a succeeding measure starts a new system. Positive x is right and negative x is left.
        */
-      ['default-x']: t.optional(dataTypes.tenths()),
+      ['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
 
       /**
        * Changes the computation of the default vertical position. The origin is changed relative to the top line of the
        * staff. Positive y is up and negative y is down.
        */
-      ['default-y']: t.optional(dataTypes.tenths()),
+      ['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
 
       /**
        * A comma-separated list of font names.

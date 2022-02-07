@@ -14,6 +14,6 @@ export type PageWidth = ReturnType<typeof PageWidth>;
 
 export const PageWidth = xml.element(
   'page-width',
-  { attributes: {}, content: [t.required(dataTypes.tenths())] as const },
+  { attributes: {}, content: [t.label({ label: 'page-width', value: t.required(dataTypes.tenths()) })] as const },
   {}
 );

@@ -15,6 +15,6 @@ export type SystemDistance = ReturnType<typeof SystemDistance>;
 
 export const SystemDistance = xml.element(
   'system-distance',
-  { attributes: {}, content: [t.required(dataTypes.tenths())] as const },
+  { attributes: {}, content: [t.label({ label: 'system-distance', value: t.required(dataTypes.tenths()) })] as const },
   {}
 );

@@ -15,6 +15,6 @@ export type Volume = ReturnType<typeof Volume>;
 
 export const Volume = xml.element(
   'volume',
-  { attributes: {}, content: [t.required(dataTypes.percent())] as const },
+  { attributes: {}, content: [t.label({ label: 'volume', value: t.required(dataTypes.percent()) })] as const },
   {}
 );

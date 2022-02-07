@@ -14,6 +14,6 @@ export type LeftMargin = ReturnType<typeof LeftMargin>;
 
 export const LeftMargin = xml.element(
   'left-margin',
-  { attributes: {}, content: [t.required(dataTypes.tenths())] as const },
+  { attributes: {}, content: [t.label({ label: 'left-margin', value: t.required(dataTypes.tenths()) })] as const },
   {}
 );

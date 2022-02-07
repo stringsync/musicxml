@@ -16,6 +16,9 @@ export type Elevation = ReturnType<typeof Elevation>;
 
 export const Elevation = xml.element(
   'elevation',
-  { attributes: {}, content: [t.required(dataTypes.rotationDegrees())] as const },
+  {
+    attributes: {},
+    content: [t.label({ label: 'elevation', value: t.required(dataTypes.rotationDegrees()) })] as const,
+  },
   {}
 );

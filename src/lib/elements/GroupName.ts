@@ -31,7 +31,7 @@ export const GroupName = xml.element(
        * MusicXML file that can understand both features should generally rely on this attribute for its greater
        * accuracy.
        */
-      ['default-x']: t.optional(dataTypes.tenths()),
+      ['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
 
       /**
        * Changes the computation of the default vertical position. The origin is changed relative to the top line of the
@@ -41,7 +41,7 @@ export const GroupName = xml.element(
        * MusicXML file that can understand both attributes should generally rely on this attribute for its greater
        * accuracy.
        */
-      ['default-y']: t.optional(dataTypes.tenths()),
+      ['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
 
       /**
        * A comma-separated list of font names.
@@ -75,14 +75,14 @@ export const GroupName = xml.element(
        * or as overridden by the default-x attribute. Positive x is right and negative x is left. It should be
        * interpreted in the context of the `<offset>` element or directive attribute if those are present.
        */
-      ['relative-x']: t.optional(dataTypes.tenths()),
+      ['relative-x']: t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
 
       /**
        * Changes the vertical position relative to the default position, either as computed by the individual program,
        * or as overridden by the default-y attribute. Positive y is up and negative y is down. It should be interpreted
        * in the context of the placement attribute if that is present.
        */
-      ['relative-y']: t.optional(dataTypes.tenths()),
+      ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
     },
     content: [t.required(dataTypes.string())] as const,
   },

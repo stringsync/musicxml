@@ -14,4 +14,8 @@ import { t, xml } from '../xml';
  */
 export type Tenths = ReturnType<typeof Tenths>;
 
-export const Tenths = xml.element('tenths', { attributes: {}, content: [t.required(dataTypes.tenths())] as const }, {});
+export const Tenths = xml.element(
+  'tenths',
+  { attributes: {}, content: [t.label({ label: 'tenths', value: t.required(dataTypes.tenths()) })] as const },
+  {}
+);

@@ -21,7 +21,7 @@ export const LineWidth = xml.element(
        */
       type: t.required(dataTypes.lineWidthType()),
     },
-    content: [t.required(dataTypes.tenths())] as const,
+    content: [t.label({ label: 'line-width', value: t.required(dataTypes.tenths()) })] as const,
   },
   {}
 );

@@ -16,6 +16,6 @@ export type Pan = ReturnType<typeof Pan>;
 
 export const Pan = xml.element(
   'pan',
-  { attributes: {}, content: [t.required(dataTypes.rotationDegrees())] as const },
+  { attributes: {}, content: [t.label({ label: 'pan', value: t.required(dataTypes.rotationDegrees()) })] as const },
   {}
 );

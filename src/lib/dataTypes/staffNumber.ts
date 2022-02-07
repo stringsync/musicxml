@@ -6,4 +6,4 @@ import { t } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/staff-number/}
  */
-export const staffNumber = () => t.label({ label: 'staff-number', value: t.int({ min: 1 }) });
+export const staffNumber = () => t.int({ min: 1 });

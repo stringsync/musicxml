@@ -14,6 +14,6 @@ export type BottomMargin = ReturnType<typeof BottomMargin>;
 
 export const BottomMargin = xml.element(
   'bottom-margin',
-  { attributes: {}, content: [t.required(dataTypes.tenths())] as const },
+  { attributes: {}, content: [t.label({ label: 'bottom-margin', value: t.required(dataTypes.tenths()) })] as const },
   {}
 );

@@ -15,6 +15,9 @@ export type TopSystemDistance = ReturnType<typeof TopSystemDistance>;
 
 export const TopSystemDistance = xml.element(
   'top-system-distance',
-  { attributes: {}, content: [t.required(dataTypes.tenths())] as const },
+  {
+    attributes: {},
+    content: [t.label({ label: 'top-system-distance', value: t.required(dataTypes.tenths()) })] as const,
+  },
   {}
 );

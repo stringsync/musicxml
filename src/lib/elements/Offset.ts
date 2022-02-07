@@ -27,7 +27,7 @@ export const Offset = xml.element(
        */
       sound: t.optional(dataTypes.yesNo()),
     },
-    content: [t.required(dataTypes.divisions())] as const,
+    content: [t.label({ label: 'offset', value: t.required(dataTypes.divisions()) })] as const,
   },
   {}
 );

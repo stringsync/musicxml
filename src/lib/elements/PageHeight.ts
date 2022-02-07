@@ -14,6 +14,6 @@ export type PageHeight = ReturnType<typeof PageHeight>;
 
 export const PageHeight = xml.element(
   'page-height',
-  { attributes: {}, content: [t.required(dataTypes.tenths())] as const },
+  { attributes: {}, content: [t.label({ label: 'page-height', value: t.required(dataTypes.tenths()) })] as const },
   {}
 );

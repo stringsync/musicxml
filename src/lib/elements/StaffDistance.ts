@@ -15,6 +15,6 @@ export type StaffDistance = ReturnType<typeof StaffDistance>;
 
 export const StaffDistance = xml.element(
   'staff-distance',
-  { attributes: {}, content: [t.required(dataTypes.tenths())] as const },
+  { attributes: {}, content: [t.label({ label: 'staff-distance', value: t.required(dataTypes.tenths()) })] as const },
   {}
 );

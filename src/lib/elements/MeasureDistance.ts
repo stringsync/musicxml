@@ -16,6 +16,6 @@ export type MeasureDistance = ReturnType<typeof MeasureDistance>;
 
 export const MeasureDistance = xml.element(
   'measure-distance',
-  { attributes: {}, content: [t.required(dataTypes.tenths())] as const },
+  { attributes: {}, content: [t.label({ label: 'measure-distance', value: t.required(dataTypes.tenths()) })] as const },
   {}
 );
