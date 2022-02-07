@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
-interface XMLElement<A extends Record<string, any>, C extends any[]> {
+export interface XMLElement<A extends Record<string, any>, C extends any[]> {
   attributes: A;
   contents: C;
 }

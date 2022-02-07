@@ -339,7 +339,7 @@ ${contentsAccessorMethodLiterals}
 
 const getXmlElementInterfaceLiteral = (): string => {
   return `
-interface XMLElement<A extends Record<string, any>, C extends any[]> {
+export interface XMLElement<A extends Record<string, any>, C extends any[]> {
   attributes: A;
   contents: C;
 }`;
