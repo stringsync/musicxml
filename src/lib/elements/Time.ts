@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Beats } from './Beats';
 import { BeatType } from './BeatType';
 import { Interchangeable } from './Interchangeable';
@@ -18,21 +18,12 @@ import { SenzaMisura } from './SenzaMisura';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time/}
  */
-export type Time = ReturnType<typeof Time>;
-
-export const Time = xml.element(
-  'time',
-  {
-    attributes: {},
-    content: [
-      t.label({
-        label: 'time',
-        value: t.choices(
-          [t.oneOrMore([t.required(Beats), t.required(BeatType)]), t.optional(Interchangeable)] as const,
-          SenzaMisura
-        ),
-      }),
-    ] as const,
-  },
-  {}
-);
+export const Time = schema('time', {}, [
+  t.label({
+    label: 'time',
+    value: t.choices(
+      [t.oneOrMore([t.required(Beats), t.required(BeatType)]), t.optional(Interchangeable)] as const,
+      SenzaMisura
+    ),
+  }),
+] as const);

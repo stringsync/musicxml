@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<rfz>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rfz/}
  */
-export type Rfz = ReturnType<typeof Rfz>;
-
-export const Rfz = xml.element('rfz', { attributes: {}, content: [] as const }, {});
+export const Rfz = schema('rfz', {}, [] as const);

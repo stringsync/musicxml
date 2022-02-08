@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The number-of-lines type is used to specify the number of lines in text decoration attributes.
  *

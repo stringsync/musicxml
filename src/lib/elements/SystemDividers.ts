@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { LeftDivider } from './LeftDivider';
 
 /**
@@ -15,10 +15,4 @@ import { LeftDivider } from './LeftDivider';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-dividers/}
  */
-export type SystemDividers = ReturnType<typeof SystemDividers>;
-
-export const SystemDividers = xml.element(
-  'system-dividers',
-  { attributes: {}, content: [t.required(LeftDivider)] as const },
-  {}
-);
+export const SystemDividers = schema('system-dividers', {}, [t.required(LeftDivider)] as const);

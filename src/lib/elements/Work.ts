@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Opus } from './Opus';
 import { WorkNumber } from './WorkNumber';
 import { WorkTitle } from './WorkTitle';
@@ -13,13 +13,4 @@ import { WorkTitle } from './WorkTitle';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work/}
  */
-export type Work = ReturnType<typeof Work>;
-
-export const Work = xml.element(
-  'work',
-  {
-    attributes: {},
-    content: [t.optional(WorkNumber), t.optional(WorkTitle), t.optional(Opus)] as const,
-  },
-  {}
-);
+export const Work = schema('work', {}, [t.optional(WorkNumber), t.optional(WorkTitle), t.optional(Opus)] as const);

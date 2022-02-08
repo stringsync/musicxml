@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The stick-material type represents the material being displayed in a stick pictogram.
  *

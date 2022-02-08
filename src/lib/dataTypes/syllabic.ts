@@ -1,4 +1,4 @@
-import { t } from '../xml';
+import { t } from '../schema';
 
 /**
  * Lyric hyphenation is indicated by the syllabic type. The single, begin, end, and middle values represent

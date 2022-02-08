@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<credit-image>` element
@@ -12,78 +12,73 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-image/}
  */
-export type CreditImage = ReturnType<typeof CreditImage>;
-
-export const CreditImage = xml.element(
+export const CreditImage = schema(
   'credit-image',
   {
-    attributes: {
-      /**
-       * Changes the computation of the default horizontal position. The origin is changed relative to the bottom
-       * left-hand corner of the specified page. Positive x is right and negative x is left.
-       */
-      ['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
+    /**
+     * Changes the computation of the default horizontal position. The origin is changed relative to the bottom
+     * left-hand corner of the specified page. Positive x is right and negative x is left.
+     */
+    ['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
 
-      /**
-       * Changes the computation of the default vertical position. The origin is changed relative to the bottom
-       * left-hand corner of the specified page. Positive y is up and negative y is down.
-       */
-      ['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
+    /**
+     * Changes the computation of the default vertical position. The origin is changed relative to the bottom
+     * left-hand corner of the specified page. Positive y is up and negative y is down.
+     */
+    ['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
 
-      /**
-       * Indicates horizontal alignment to the left, center, or right of the image. Default is implementation-dependent.
-       */
-      halign: t.optional(dataTypes.leftCenterRight()),
+    /**
+     * Indicates horizontal alignment to the left, center, or right of the image. Default is implementation-dependent.
+     */
+    halign: t.optional(dataTypes.leftCenterRight()),
 
-      /**
-       * Used to size and scale an image. The image should be scaled independently in X and Y if both height and width
-       * are specified. If only height is specified, the image should be scaled proportionally to fit in the specified Y
-       * dimension.
-       */
-      height: t.optional(dataTypes.tenths()),
+    /**
+     * Used to size and scale an image. The image should be scaled independently in X and Y if both height and width
+     * are specified. If only height is specified, the image should be scaled proportionally to fit in the specified Y
+     * dimension.
+     */
+    height: t.optional(dataTypes.tenths()),
 
-      /**
-       * Specifies an ID that is unique to the entire document.
-       */
-      id: t.optional(dataTypes.id()),
+    /**
+     * Specifies an ID that is unique to the entire document.
+     */
+    id: t.optional(dataTypes.id()),
 
-      /**
-       * Changes the horizontal position relative to the default position, either as computed by the individual program,
-       * or as overridden by the default-x attribute. Positive x is right and negative x is left.
-       */
-      ['relative-x']: t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
+    /**
+     * Changes the horizontal position relative to the default position, either as computed by the individual program,
+     * or as overridden by the default-x attribute. Positive x is right and negative x is left.
+     */
+    ['relative-x']: t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
 
-      /**
-       * Changes the vertical position relative to the default position, either as computed by the individual program,
-       * or as overridden by the default-y attribute. Positive y is up and negative y is down.
-       */
-      ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
+    /**
+     * Changes the vertical position relative to the default position, either as computed by the individual program,
+     * or as overridden by the default-y attribute. Positive y is up and negative y is down.
+     */
+    ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
 
-      /**
-       * The URL for the image file.
-       */
-      source: t.optional(dataTypes.anyURI()),
+    /**
+     * The URL for the image file.
+     */
+    source: t.optional(dataTypes.anyURI()),
 
-      /**
-       * The MIME type for the image file format. Typical choices include application/postscript, image/gif, image/jpeg,
-       * image/png, and image/tiff.
-       */
-      type: t.optional(dataTypes.token()),
+    /**
+     * The MIME type for the image file format. Typical choices include application/postscript, image/gif, image/jpeg,
+     * image/png, and image/tiff.
+     */
+    type: t.optional(dataTypes.token()),
 
-      /**
-       * Indicates vertical alignment to the top, middle, or bottom of the image. The default is
-       * implementation-dependent.
-       */
-      valign: t.optional(dataTypes.valignImage()),
+    /**
+     * Indicates vertical alignment to the top, middle, or bottom of the image. The default is
+     * implementation-dependent.
+     */
+    valign: t.optional(dataTypes.valignImage()),
 
-      /**
-       * Used to size and scale an image. The image should be scaled independently in X and Y if both height and width
-       * are specified. If only width is specified, the image should be scaled proportionally to fit in the specified X
-       * dimension.
-       */
-      width: t.optional(dataTypes.tenths()),
-    },
-    content: [] as const,
+    /**
+     * Used to size and scale an image. The image should be scaled independently in X and Y if both height and width
+     * are specified. If only width is specified, the image should be scaled proportionally to fit in the specified X
+     * dimension.
+     */
+    width: t.optional(dataTypes.tenths()),
   },
-  {}
+  [] as const
 );

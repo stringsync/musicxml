@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Group } from './Group';
 import { Identification } from './Identification';
 import { MidiDevice } from './MidiDevice';
@@ -23,24 +23,15 @@ import { ScoreInstrument } from './ScoreInstrument';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-part/}
  */
-export type ScorePart = ReturnType<typeof ScorePart>;
-
-export const ScorePart = xml.element(
-  'score-part',
-  {
-    attributes: {},
-    content: [
-      t.optional(Identification),
-      t.label({ label: 'part-links', value: t.zeroOrMore(PartLink) }),
-      t.required(PartName),
-      t.optional(PartNameDisplay),
-      t.optional(PartAbbreviation),
-      t.optional(PartAbbreviationDisplay),
-      t.label({ label: 'groups', value: t.zeroOrMore(Group) }),
-      t.label({ label: 'score-instruments', value: t.zeroOrMore(ScoreInstrument) }),
-      t.label({ label: 'players', value: t.zeroOrMore(Player) }),
-      t.label({ label: 'midis', value: t.zeroOrMore(t.choices(MidiDevice, MidiInstrument)) }),
-    ] as const,
-  },
-  {}
-);
+export const ScorePart = schema('score-part', {}, [
+  t.optional(Identification),
+  t.label({ label: 'part-links', value: t.zeroOrMore(PartLink) }),
+  t.required(PartName),
+  t.optional(PartNameDisplay),
+  t.optional(PartAbbreviation),
+  t.optional(PartAbbreviationDisplay),
+  t.label({ label: 'groups', value: t.zeroOrMore(Group) }),
+  t.label({ label: 'score-instruments', value: t.zeroOrMore(ScoreInstrument) }),
+  t.label({ label: 'players', value: t.zeroOrMore(Player) }),
+  t.label({ label: 'midis', value: t.zeroOrMore(t.choices(MidiDevice, MidiInstrument)) }),
+] as const);

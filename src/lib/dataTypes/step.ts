@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The step type represents a step of the diatonic scale, represented using the English letters A through G.
  *

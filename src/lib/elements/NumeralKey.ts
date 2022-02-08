@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { NumeralFifths } from './NumeralFifths';
 import { NumeralMode } from './NumeralMode';
 
@@ -13,18 +13,13 @@ import { NumeralMode } from './NumeralMode';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral-key/}
  */
-export type NumeralKey = ReturnType<typeof NumeralKey>;
-
-export const NumeralKey = xml.element(
+export const NumeralKey = schema(
   'numeral-key',
   {
-    attributes: {
-      /**
-       * Specifies whether or not to print an object. It is yes if not specified.
-       */
-      ['print-object']: t.optional(dataTypes.yesNo()),
-    },
-    content: [t.required(NumeralFifths), t.required(NumeralMode)] as const,
+    /**
+     * Specifies whether or not to print an object. It is yes if not specified.
+     */
+    ['print-object']: t.optional(dataTypes.yesNo()),
   },
-  {}
+  [t.required(NumeralFifths), t.required(NumeralMode)] as const
 );

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Arrow } from './Arrow';
 import { Bend } from './Bend';
 import { BrassBend } from './BrassBend';
@@ -42,57 +42,52 @@ import { UpBow } from './UpBow';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/technical/}
  */
-export type Technical = ReturnType<typeof Technical>;
-
-export const Technical = xml.element(
+export const Technical = schema(
   'technical',
   {
-    attributes: {
-      /**
-       * Specifies an ID that is unique to the entire document.
-       */
-      id: t.optional(dataTypes.id()),
-    },
-    content: [
-      t.label({
-        label: 'technicals',
-        value: t.zeroOrMore(
-          t.choices(
-            UpBow,
-            DownBow,
-            Harmonic,
-            OpenString,
-            ThumbPosition,
-            Fingering,
-            Pluck,
-            DoubleTongue,
-            TripleTongue,
-            Stopped,
-            SnapPizzicato,
-            Fret,
-            String,
-            HammerOn,
-            PullOff,
-            Bend,
-            Tap,
-            Heel,
-            Toe,
-            Fingernails,
-            Hole,
-            Arrow,
-            Handbell,
-            BrassBend,
-            Flip,
-            Smear,
-            Open,
-            HalfMuted,
-            HarmonMute,
-            Golpe,
-            OtherTechnical
-          )
-        ),
-      }),
-    ] as const,
+    /**
+     * Specifies an ID that is unique to the entire document.
+     */
+    id: t.optional(dataTypes.id()),
   },
-  {}
+  [
+    t.label({
+      label: 'technicals',
+      value: t.zeroOrMore(
+        t.choices(
+          UpBow,
+          DownBow,
+          Harmonic,
+          OpenString,
+          ThumbPosition,
+          Fingering,
+          Pluck,
+          DoubleTongue,
+          TripleTongue,
+          Stopped,
+          SnapPizzicato,
+          Fret,
+          String,
+          HammerOn,
+          PullOff,
+          Bend,
+          Tap,
+          Heel,
+          Toe,
+          Fingernails,
+          Hole,
+          Arrow,
+          Handbell,
+          BrassBend,
+          Flip,
+          Smear,
+          Open,
+          HalfMuted,
+          HarmonMute,
+          Golpe,
+          OtherTechnical
+        )
+      ),
+    }),
+  ] as const
 );

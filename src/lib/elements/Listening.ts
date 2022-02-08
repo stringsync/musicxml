@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Offset } from './Offset';
 import { OtherListening } from './OtherListening';
 import { Sync } from './Sync';
@@ -22,16 +22,7 @@ import { Sync } from './Sync';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/listening/}
  */
-export type Listening = ReturnType<typeof Listening>;
-
-export const Listening = xml.element(
-  'listening',
-  {
-    attributes: {},
-    content: [
-      t.label({ label: 'listening', value: t.oneOrMore(t.choices(Sync, OtherListening)) }),
-      t.optional(Offset),
-    ] as const,
-  },
-  {}
-);
+export const Listening = schema('listening', {}, [
+  t.label({ label: 'listening', value: t.oneOrMore(t.choices(Sync, OtherListening)) }),
+  t.optional(Offset),
+] as const);

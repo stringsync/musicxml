@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 export const noteheadValue = () => {
   return t.label({
     label: 'notehead-value',

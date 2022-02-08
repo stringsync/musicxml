@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Ensemble } from './Ensemble';
 import { InstrumentAbbreviation } from './InstrumentAbbreviation';
 import { InstrumentName } from './InstrumentName';
@@ -23,24 +23,19 @@ import { VirtualInstrument } from './VirtualInstrument';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-instrument/}
  */
-export type ScoreInstrument = ReturnType<typeof ScoreInstrument>;
-
-export const ScoreInstrument = xml.element(
+export const ScoreInstrument = schema(
   'score-instrument',
   {
-    attributes: {
-      /**
-       * An identifier for this `<score-instrument>` that is unique to this document.
-       */
-      id: t.required(dataTypes.id()),
-    },
-    content: [
-      t.required(InstrumentName),
-      t.optional(InstrumentAbbreviation),
-      t.optional(InstrumentSound),
-      t.label({ label: 'instrument-type', value: t.zeroOrMore(t.choices(Solo, Ensemble)) }),
-      t.optional(VirtualInstrument),
-    ] as const,
+    /**
+     * An identifier for this `<score-instrument>` that is unique to this document.
+     */
+    id: t.required(dataTypes.id()),
   },
-  {}
+  [
+    t.required(InstrumentName),
+    t.optional(InstrumentAbbreviation),
+    t.optional(InstrumentSound),
+    t.label({ label: 'instrument-type', value: t.zeroOrMore(t.choices(Solo, Ensemble)) }),
+    t.optional(VirtualInstrument),
+  ] as const
 );

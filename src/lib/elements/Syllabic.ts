@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<syllabic>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/syllabic/}
  */
-export type Syllabic = ReturnType<typeof Syllabic>;
-
-export const Syllabic = xml.element(
-  'syllabic',
-  { attributes: {}, content: [t.required(dataTypes.syllabic())] as const },
-  {}
-);
+export const Syllabic = schema('syllabic', {}, [t.required(dataTypes.syllabic())] as const);

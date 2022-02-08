@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<bar-style>` element
@@ -10,18 +10,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bar-style/}
  */
-export type BarStyle = ReturnType<typeof BarStyle>;
-
-export const BarStyle = xml.element(
+export const BarStyle = schema(
   'bar-style',
   {
-    attributes: {
-      /**
-       * Indicates the color of an element.
-       */
-      color: t.optional(dataTypes.color()),
-    },
-    content: [t.required(dataTypes.barStyle())] as const,
+    /**
+     * Indicates the color of an element.
+     */
+    color: t.optional(dataTypes.color()),
   },
-  {}
+  [t.required(dataTypes.barStyle())] as const
 );

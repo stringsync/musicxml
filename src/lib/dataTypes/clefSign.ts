@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 export const clefSign = () => {
   return t.label({
     label: 'clef-sign',

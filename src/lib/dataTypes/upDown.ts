@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The up-down type is used for the direction of arrows and other pointed symbols like vertical accents, indicating
  * which way the tip is pointing.

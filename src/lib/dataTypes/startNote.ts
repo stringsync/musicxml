@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The start-note type describes the starting note of trills and mordents for playback, relative to the current note.
  *

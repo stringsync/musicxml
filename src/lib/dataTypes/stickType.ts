@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The stick-type type represents the shape of pictograms where the material in the stick, mallet, or beater is
  * represented in the pictogram.

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<glyph>` element
@@ -18,18 +18,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/glyph/}
  */
-export type Glyph = ReturnType<typeof Glyph>;
-
-export const Glyph = xml.element(
+export const Glyph = schema(
   'glyph',
   {
-    attributes: {
-      /**
-       * The type of glyph that is being defined.
-       */
-      type: t.required(dataTypes.glyphType()),
-    },
-    content: [t.required(dataTypes.smuflGlyphName())] as const,
+    /**
+     * The type of glyph that is being defined.
+     */
+    type: t.required(dataTypes.glyphType()),
   },
-  {}
+  [t.required(dataTypes.smuflGlyphName())] as const
 );

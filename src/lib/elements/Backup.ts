@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Duration } from './Duration';
 import { Footnote } from './Footnote';
 import { Level } from './Level';
@@ -15,10 +15,4 @@ import { Level } from './Level';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/backup/}
  */
-export type Backup = ReturnType<typeof Backup>;
-
-export const Backup = xml.element(
-  'backup',
-  { attributes: {}, content: [t.required(Duration), t.optional(Footnote), t.optional(Level)] as const },
-  {}
-);
+export const Backup = schema('backup', {}, [t.required(Duration), t.optional(Footnote), t.optional(Level)] as const);

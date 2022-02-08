@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The fan type represents the type of beam fanning present on a note, used to represent accelerandos and ritardandos.
  *

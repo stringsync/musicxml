@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<encoding-description>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/encoding-description/}
  */
-export type EncodingDescription = ReturnType<typeof EncodingDescription>;
-
-export const EncodingDescription = xml.element(
-  'encoding-description',
-  { attributes: {}, content: [t.required(dataTypes.string())] as const },
-  {}
-);
+export const EncodingDescription = schema('encoding-description', {}, [t.required(dataTypes.string())] as const);

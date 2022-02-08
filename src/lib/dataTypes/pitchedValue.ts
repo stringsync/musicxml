@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The pitched-value type represents pictograms for pitched percussion instruments. The chimes and tubular chimes values
  * distinguish the single-line and double-line versions of the pictogram.

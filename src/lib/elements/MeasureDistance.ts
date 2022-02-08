@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<measure-distance>` element
@@ -12,10 +12,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-distance/}
  */
-export type MeasureDistance = ReturnType<typeof MeasureDistance>;
-
-export const MeasureDistance = xml.element(
-  'measure-distance',
-  { attributes: {}, content: [t.label({ label: 'measure-distance', value: t.required(dataTypes.tenths()) })] as const },
-  {}
-);
+export const MeasureDistance = schema('measure-distance', {}, [
+  t.label({ label: 'measure-distance', value: t.required(dataTypes.tenths()) }),
+] as const);

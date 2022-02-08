@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<numeral-fifths>` element
@@ -10,10 +10,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral-fifths/}
  */
-export type NumeralFifths = ReturnType<typeof NumeralFifths>;
-
-export const NumeralFifths = xml.element(
-  'numeral-fifths',
-  { attributes: {}, content: [t.required(dataTypes.fifths())] as const },
-  {}
-);
+export const NumeralFifths = schema('numeral-fifths', {}, [t.required(dataTypes.fifths())] as const);

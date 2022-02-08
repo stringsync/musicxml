@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Ipa } from './Ipa';
 import { Mute } from './Mute';
 import { OtherPlay } from './OtherPlay';
@@ -17,18 +17,13 @@ import { SemiPitched } from './SemiPitched';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/play/}
  */
-export type Play = ReturnType<typeof Play>;
-
-export const Play = xml.element(
+export const Play = schema(
   'play',
   {
-    attributes: {
-      /**
-       * Refers to a specific `<score-instrument>` to which this playback applies.
-       */
-      id: t.optional(dataTypes.id()),
-    },
-    content: [t.label({ label: 'play', value: t.zeroOrMore(t.choices(Ipa, Mute, SemiPitched, OtherPlay)) })] as const,
+    /**
+     * Refers to a specific `<score-instrument>` to which this playback applies.
+     */
+    id: t.optional(dataTypes.id()),
   },
-  {}
+  [t.label({ label: 'play', value: t.zeroOrMore(t.choices(Ipa, Mute, SemiPitched, OtherPlay)) })] as const
 );

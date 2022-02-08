@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { DisplayOctave } from './DisplayOctave';
 import { DisplayStep } from './DisplayStep';
 
@@ -13,18 +13,13 @@ import { DisplayStep } from './DisplayStep';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rest/}
  */
-export type Rest = ReturnType<typeof Rest>;
-
-export const Rest = xml.element(
+export const Rest = schema(
   'rest',
   {
-    attributes: {
-      /**
-       * If yes, this indicates this is a complete measure rest.
-       */
-      measure: t.optional(dataTypes.yesNo()),
-    },
-    content: [t.required(DisplayStep), t.required(DisplayOctave)] as const,
+    /**
+     * If yes, this indicates this is a complete measure rest.
+     */
+    measure: t.optional(dataTypes.yesNo()),
   },
-  {}
+  [t.required(DisplayStep), t.required(DisplayOctave)] as const
 );

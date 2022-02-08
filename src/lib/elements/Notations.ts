@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { AccidentalMark } from './AccidentalMark';
 import { Arpeggiate } from './Arpeggiate';
 import { Articulations } from './Articulations';
@@ -29,47 +29,42 @@ import { Tuplet } from './Tuplet';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/notations/}
  */
-export type Notations = ReturnType<typeof Notations>;
-
-export const Notations = xml.element(
+export const Notations = schema(
   'notations',
   {
-    attributes: {
-      /**
-       * Specifies an ID that is unique to the entire document.
-       */
-      id: t.optional(dataTypes.id()),
+    /**
+     * Specifies an ID that is unique to the entire document.
+     */
+    id: t.optional(dataTypes.id()),
 
-      /**
-       * Specifies whether or not to print an object. It is yes if not specified.
-       */
-      ['print-object']: t.optional(dataTypes.yesNo()),
-    },
-    content: [
-      t.optional(Footnote),
-      t.optional(Level),
-      t.label({
-        label: 'notations',
-        value: t.zeroOrMore(
-          t.choices(
-            Tied,
-            Slur,
-            Tuplet,
-            Glissando,
-            Slide,
-            Ornaments,
-            Technical,
-            Articulations,
-            Dynamics,
-            Fermata,
-            Arpeggiate,
-            NonArpeggiate,
-            AccidentalMark,
-            OtherNotation
-          )
-        ),
-      }),
-    ] as const,
+    /**
+     * Specifies whether or not to print an object. It is yes if not specified.
+     */
+    ['print-object']: t.optional(dataTypes.yesNo()),
   },
-  {}
+  [
+    t.optional(Footnote),
+    t.optional(Level),
+    t.label({
+      label: 'notations',
+      value: t.zeroOrMore(
+        t.choices(
+          Tied,
+          Slur,
+          Tuplet,
+          Glissando,
+          Slide,
+          Ornaments,
+          Technical,
+          Articulations,
+          Dynamics,
+          Fermata,
+          Arpeggiate,
+          NonArpeggiate,
+          AccidentalMark,
+          OtherNotation
+        )
+      ),
+    }),
+  ] as const
 );

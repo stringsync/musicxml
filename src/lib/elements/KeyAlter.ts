@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<key-alter>` element
@@ -12,10 +12,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key-alter/}
  */
-export type KeyAlter = ReturnType<typeof KeyAlter>;
-
-export const KeyAlter = xml.element(
-  'key-alter',
-  { attributes: {}, content: [t.required(dataTypes.semitones())] as const },
-  {}
-);
+export const KeyAlter = schema('key-alter', {}, [t.required(dataTypes.semitones())] as const);

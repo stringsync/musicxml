@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The show-frets type indicates whether to show tablature frets as numbers (0, 1, 2) or letters (a, b, c). The default
  * choice is numbers.

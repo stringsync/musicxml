@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The show-tuplet type indicates whether to show a part of a tuplet relating to the tuplet-actual element, both the
  * tuplet-actual and tuplet-normal elements, or neither.

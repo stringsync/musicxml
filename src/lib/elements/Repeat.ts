@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<repeat>` element
@@ -10,35 +10,30 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/repeat/}
  */
-export type Repeat = ReturnType<typeof Repeat>;
-
-export const Repeat = xml.element(
+export const Repeat = schema(
   'repeat',
   {
-    attributes: {
-      /**
-       * The start of the repeat has a forward direction while the end of the repeat has a backward direction.
-       */
-      direction: t.required(dataTypes.backwardForward()),
+    /**
+     * The start of the repeat has a forward direction while the end of the repeat has a backward direction.
+     */
+    direction: t.required(dataTypes.backwardForward()),
 
-      /**
-       * Indicates if the repeats are played after a jump due to a da capo or dal segno. It is only used with backward
-       * repeats that are not part of an ending.
-       */
-      ['after-jump']: t.optional(dataTypes.yesNo()),
+    /**
+     * Indicates if the repeats are played after a jump due to a da capo or dal segno. It is only used with backward
+     * repeats that are not part of an ending.
+     */
+    ['after-jump']: t.optional(dataTypes.yesNo()),
 
-      /**
-       * Indicates the number of times the repeated section is played. It is only used with backward repeats that are not
-       * part of an ending.
-       */
-      times: t.optional(dataTypes.nonNegativeInteger()),
+    /**
+     * Indicates the number of times the repeated section is played. It is only used with backward repeats that are not
+     * part of an ending.
+     */
+    times: t.optional(dataTypes.nonNegativeInteger()),
 
-      /**
-       * Indicates whether the repeat has winged extensions that appear above and below the barline.
-       */
-      winged: t.optional(dataTypes.winged()),
-    },
-    content: [] as const,
+    /**
+     * Indicates whether the repeat has winged extensions that appear above and below the barline.
+     */
+    winged: t.optional(dataTypes.winged()),
   },
-  {}
+  [] as const
 );

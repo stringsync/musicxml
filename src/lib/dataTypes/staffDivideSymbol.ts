@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The staff-divide-symbol type is used for staff division symbols. The down, up, and up-down values correspond to SMuFL
  * code points U+E00B, U+E00C, and U+E00D respectively.

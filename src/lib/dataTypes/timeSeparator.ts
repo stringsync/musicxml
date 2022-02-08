@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The time-separator type indicates how to display the arrangement between the beats and beat-type values in a time
  * signature. The default value is none. The horizontal, diagonal, and vertical values represent horizontal, diagonal

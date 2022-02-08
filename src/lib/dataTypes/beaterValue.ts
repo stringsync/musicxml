@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The beater-value type represents pictograms for beaters, mallets, and sticks that do not have different materials
  * represented in the pictogram.

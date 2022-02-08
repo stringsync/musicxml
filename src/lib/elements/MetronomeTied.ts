@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<metronome-tied>` element
@@ -12,18 +12,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-tied/}
  */
-export type MetronomeTied = ReturnType<typeof MetronomeTied>;
-
-export const MetronomeTied = xml.element(
+export const MetronomeTied = schema(
   'metronome-tied',
   {
-    attributes: {
-      /**
-       * Indicates if this is the start or stop of the tie.
-       */
-      type: t.required(dataTypes.startStop()),
-    },
-    content: [] as const,
+    /**
+     * Indicates if this is the start or stop of the tie.
+     */
+    type: t.required(dataTypes.startStop()),
   },
-  {}
+  [] as const
 );

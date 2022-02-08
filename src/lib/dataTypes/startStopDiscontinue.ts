@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The start-stop-discontinue type is used to specify `<ending>` types.
  *

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<frame-strings>` element
@@ -10,13 +10,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/frame-strings/}
  */
-export type FrameStrings = ReturnType<typeof FrameStrings>;
-
-export const FrameStrings = xml.element(
-  'frame-strings',
-  {
-    attributes: {},
-    content: [t.label({ label: 'lines-size', value: t.required(dataTypes.positiveInteger()) })] as const,
-  },
-  {}
-);
+export const FrameStrings = schema('frame-strings', {}, [
+  t.label({ label: 'lines-size', value: t.required(dataTypes.positiveInteger()) }),
+] as const);

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { AccidentalText } from './AccidentalText';
 import { DisplayText } from './DisplayText';
 
@@ -17,18 +17,13 @@ import { DisplayText } from './DisplayText';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-abbreviation-display/}
  */
-export type PartAbbreviationDisplay = ReturnType<typeof PartAbbreviationDisplay>;
-
-export const PartAbbreviationDisplay = xml.element(
+export const PartAbbreviationDisplay = schema(
   'part-abbreviation-display',
   {
-    attributes: {
-      /**
-       * Specifies whether or not to print an object. It is yes if not specified.
-       */
-      ['print-object']: t.optional(dataTypes.yesNo()),
-    },
-    content: [t.label({ label: 'texts', value: t.zeroOrMore(t.choices(DisplayText, AccidentalText)) })] as const,
+    /**
+     * Specifies whether or not to print an object. It is yes if not specified.
+     */
+    ['print-object']: t.optional(dataTypes.yesNo()),
   },
-  {}
+  [t.label({ label: 'texts', value: t.zeroOrMore(t.choices(DisplayText, AccidentalText)) })] as const
 );

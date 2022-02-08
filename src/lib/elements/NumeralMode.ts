@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<numeral-mode>` element
@@ -10,10 +10,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral-mode/}
  */
-export type NumeralMode = ReturnType<typeof NumeralMode>;
-
-export const NumeralMode = xml.element(
-  'numeral-mode',
-  { attributes: {}, content: [t.required(dataTypes.numeralMode())] as const },
-  {}
-);
+export const NumeralMode = schema('numeral-mode', {}, [t.required(dataTypes.numeralMode())] as const);

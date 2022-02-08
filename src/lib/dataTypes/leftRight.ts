@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The left-right type is used to indicate whether one element appears to the left or the right of another element.
  *

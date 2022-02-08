@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * Octaves are represented by the numbers 0 to 9, where 4 indicates the octave started by middle C.
  *

@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The percent type specifies a percentage from 0 to 100.
  *

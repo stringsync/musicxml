@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { MiscellaneousField } from './MiscellaneousField';
 
 /**
@@ -11,13 +11,6 @@ import { MiscellaneousField } from './MiscellaneousField';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/miscellaneous/}
  */
-export type Miscellaneous = ReturnType<typeof Miscellaneous>;
-
-export const Miscellaneous = xml.element(
-  'miscellaneous',
-  {
-    attributes: {},
-    content: [t.label({ label: 'miscellaneous-fields', value: t.zeroOrMore(MiscellaneousField) })] as const,
-  },
-  {}
-);
+export const Miscellaneous = schema('miscellaneous', {}, [
+  t.label({ label: 'miscellaneous-fields', value: t.zeroOrMore(MiscellaneousField) }),
+] as const);

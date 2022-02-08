@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<wait>` element
@@ -12,23 +12,18 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/wait/}
  */
-export type Wait = ReturnType<typeof Wait>;
-
-export const Wait = xml.element(
+export const Wait = schema(
   'wait',
   {
-    attributes: {
-      /**
-       * Restricts the `<wait>` to apply to a single player.
-       */
-      player: t.optional(dataTypes.idref()),
+    /**
+     * Restricts the `<wait>` to apply to a single player.
+     */
+    player: t.optional(dataTypes.idref()),
 
-      /**
-       * Restricts the `<wait>` to apply to a set of times through a repeated section.
-       */
-      ['time-only']: t.optional(dataTypes.timeOnly()),
-    },
-    content: [] as const,
+    /**
+     * Restricts the `<wait>` to apply to a set of times through a repeated section.
+     */
+    ['time-only']: t.optional(dataTypes.timeOnly()),
   },
-  {}
+  [] as const
 );

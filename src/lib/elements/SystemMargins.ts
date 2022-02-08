@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { LeftMargin } from './LeftMargin';
 import { RightMargin } from './RightMargin';
 
@@ -11,10 +11,4 @@ import { RightMargin } from './RightMargin';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-margins/}
  */
-export type SystemMargins = ReturnType<typeof SystemMargins>;
-
-export const SystemMargins = xml.element(
-  'system-margins',
-  { attributes: {}, content: [t.required(LeftMargin), t.required(RightMargin)] as const },
-  {}
-);
+export const SystemMargins = schema('system-margins', {}, [t.required(LeftMargin), t.required(RightMargin)] as const);

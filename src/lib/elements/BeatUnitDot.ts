@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<beat-unit-dot>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beat-unit-dot/}
  */
-export type BeatUnitDot = ReturnType<typeof BeatUnitDot>;
-
-export const BeatUnitDot = xml.element('beat-unit-dot', { attributes: {}, content: [] as const }, {});
+export const BeatUnitDot = schema('beat-unit-dot', {}, [] as const);

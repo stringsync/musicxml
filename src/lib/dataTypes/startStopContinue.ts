@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The start-stop-continue type is used for an attribute of musical elements that can either start or stop, but also
  * need to refer to an intermediate point in the symbol, as for complex slurs or for formatting of symbols across system

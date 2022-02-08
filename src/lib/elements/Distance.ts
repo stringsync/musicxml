@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<distance>` element
@@ -10,18 +10,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/distance/}
  */
-export type Distance = ReturnType<typeof Distance>;
-
-export const Distance = xml.element(
+export const Distance = schema(
   'distance',
   {
-    attributes: {
-      /**
-       * The type of distance being defined.
-       */
-      type: t.required(dataTypes.distanceType()),
-    },
-    content: [t.label({ label: 'distance', value: t.required(dataTypes.tenths()) })] as const,
+    /**
+     * The type of distance being defined.
+     */
+    type: t.required(dataTypes.distanceType()),
   },
-  {}
+  [t.label({ label: 'distance', value: t.required(dataTypes.tenths()) })] as const
 );

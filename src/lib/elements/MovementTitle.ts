@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<movement-title>` element
@@ -10,13 +10,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/movement-title/}
  */
-export type MovementTitle = ReturnType<typeof MovementTitle>;
-
-export const MovementTitle = xml.element(
-  'movement-title',
-  {
-    attributes: {},
-    content: [dataTypes.string()] as const,
-  },
-  {}
-);
+export const MovementTitle = schema('movement-title', {}, [dataTypes.string()] as const);

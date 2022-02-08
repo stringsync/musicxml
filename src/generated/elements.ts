@@ -1,24 +1,22 @@
 /* eslint-disable @typescript-eslint/ban-types */
-
-export interface XMLElement<A extends Record<string, any>, C extends any[]> {
-  attributes: A;
-  contents: C;
-}
+import { XMLElement } from '../lib/schema';
+import * as xml from '../lib/xml';
 
 export type WorkNumberAttributes = Record<string, unknown>;
 
 export type WorkNumberContents = [string];
 
-export class WorkNumber implements XMLElement<WorkNumberAttributes, WorkNumberContents> {
-  static readonly elementName = 'work-number';
-  static readonly schema = { attributes: {}, content: [{ type: 'string' }] };
+export class WorkNumber implements XMLElement<'work-number', WorkNumberAttributes, WorkNumberContents> {
+  static readonly schema = { name: 'work-number', attributes: {}, contents: [{ type: 'string' }] } as const;
+
+  readonly schema = WorkNumber.schema;
 
   attributes: WorkNumberAttributes;
   contents: WorkNumberContents;
 
   constructor(opts?: { attributes?: Partial<WorkNumberAttributes>; content?: WorkNumberContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, WorkNumber.schema) as WorkNumberAttributes;
+    this.contents = opts?.content ?? xml.zero(WorkNumber.schema.contents);
   }
 
   getText(): string {
@@ -33,16 +31,17 @@ export type WorkTitleAttributes = Record<string, unknown>;
 
 export type WorkTitleContents = [string];
 
-export class WorkTitle implements XMLElement<WorkTitleAttributes, WorkTitleContents> {
-  static readonly elementName = 'work-title';
-  static readonly schema = { attributes: {}, content: [{ type: 'string' }] };
+export class WorkTitle implements XMLElement<'work-title', WorkTitleAttributes, WorkTitleContents> {
+  static readonly schema = { name: 'work-title', attributes: {}, contents: [{ type: 'string' }] } as const;
+
+  readonly schema = WorkTitle.schema;
 
   attributes: WorkTitleAttributes;
   contents: WorkTitleContents;
 
   constructor(opts?: { attributes?: Partial<WorkTitleAttributes>; content?: WorkTitleContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, WorkTitle.schema) as WorkTitleAttributes;
+    this.contents = opts?.content ?? xml.zero(WorkTitle.schema.contents);
   }
 
   getText(): string {
@@ -64,9 +63,9 @@ export type OpusAttributes = {
 
 export type OpusContents = [];
 
-export class Opus implements XMLElement<OpusAttributes, OpusContents> {
-  static readonly elementName = 'opus';
+export class Opus implements XMLElement<'opus', OpusAttributes, OpusContents> {
   static readonly schema = {
+    name: 'opus',
     attributes: {
       'xlink:href': { type: 'required', value: { type: 'string' } },
       'xlink:actuate': {
@@ -81,25 +80,17 @@ export class Opus implements XMLElement<OpusAttributes, OpusContents> {
       'xlink:title': { type: 'optional', value: { type: 'string' } },
       'xlink:type': { type: 'optional', value: { type: 'choices', choices: ['simple'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Opus.schema;
 
   attributes: OpusAttributes;
   contents: OpusContents;
 
   constructor(opts?: { attributes?: Partial<OpusAttributes>; content?: OpusContents }) {
-    this.attributes = Object.assign(
-      {
-        ['xlink:href']: '',
-        ['xlink:actuate']: null,
-        ['xlink:role']: null,
-        ['xlink:show']: null,
-        ['xlink:title']: null,
-        ['xlink:type']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Opus.schema) as OpusAttributes;
+    this.contents = opts?.content ?? xml.zero(Opus.schema.contents);
   }
   getXlinkHref(): string {
     return this.attributes['xlink:href'];
@@ -143,23 +134,25 @@ export type WorkAttributes = Record<string, unknown>;
 
 export type WorkContents = [WorkNumber | null, WorkTitle | null, Opus | null];
 
-export class Work implements XMLElement<WorkAttributes, WorkContents> {
-  static readonly elementName = 'work';
+export class Work implements XMLElement<'work', WorkAttributes, WorkContents> {
   static readonly schema = {
+    name: 'work',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: WorkNumber },
       { type: 'optional', value: WorkTitle },
       { type: 'optional', value: Opus },
     ],
-  };
+  } as const;
+
+  readonly schema = Work.schema;
 
   attributes: WorkAttributes;
   contents: WorkContents;
 
   constructor(opts?: { attributes?: Partial<WorkAttributes>; content?: WorkContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Work.schema) as WorkAttributes;
+    this.contents = opts?.content ?? xml.zero(Work.schema.contents);
   }
 
   getWorkNumber(): WorkNumber | null {
@@ -186,16 +179,17 @@ export type MovementNumberAttributes = Record<string, unknown>;
 
 export type MovementNumberContents = [string];
 
-export class MovementNumber implements XMLElement<MovementNumberAttributes, MovementNumberContents> {
-  static readonly elementName = 'movement-number';
-  static readonly schema = { attributes: {}, content: [{ type: 'string' }] };
+export class MovementNumber implements XMLElement<'movement-number', MovementNumberAttributes, MovementNumberContents> {
+  static readonly schema = { name: 'movement-number', attributes: {}, contents: [{ type: 'string' }] } as const;
+
+  readonly schema = MovementNumber.schema;
 
   attributes: MovementNumberAttributes;
   contents: MovementNumberContents;
 
   constructor(opts?: { attributes?: Partial<MovementNumberAttributes>; content?: MovementNumberContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, MovementNumber.schema) as MovementNumberAttributes;
+    this.contents = opts?.content ?? xml.zero(MovementNumber.schema.contents);
   }
 
   getText(): string {
@@ -210,16 +204,17 @@ export type MovementTitleAttributes = Record<string, unknown>;
 
 export type MovementTitleContents = [string];
 
-export class MovementTitle implements XMLElement<MovementTitleAttributes, MovementTitleContents> {
-  static readonly elementName = 'movement-title';
-  static readonly schema = { attributes: {}, content: [{ type: 'string' }] };
+export class MovementTitle implements XMLElement<'movement-title', MovementTitleAttributes, MovementTitleContents> {
+  static readonly schema = { name: 'movement-title', attributes: {}, contents: [{ type: 'string' }] } as const;
+
+  readonly schema = MovementTitle.schema;
 
   attributes: MovementTitleAttributes;
   contents: MovementTitleContents;
 
   constructor(opts?: { attributes?: Partial<MovementTitleAttributes>; content?: MovementTitleContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, MovementTitle.schema) as MovementTitleAttributes;
+    this.contents = opts?.content ?? xml.zero(MovementTitle.schema.contents);
   }
 
   getText(): string {
@@ -234,19 +229,21 @@ export type CreatorAttributes = { type: string | null };
 
 export type CreatorContents = [string];
 
-export class Creator implements XMLElement<CreatorAttributes, CreatorContents> {
-  static readonly elementName = 'creator';
+export class Creator implements XMLElement<'creator', CreatorAttributes, CreatorContents> {
   static readonly schema = {
+    name: 'creator',
     attributes: { type: { type: 'optional', value: { type: 'string' } } },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Creator.schema;
 
   attributes: CreatorAttributes;
   contents: CreatorContents;
 
   constructor(opts?: { attributes?: Partial<CreatorAttributes>; content?: CreatorContents }) {
-    this.attributes = Object.assign({ ['type']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Creator.schema) as CreatorAttributes;
+    this.contents = opts?.content ?? xml.zero(Creator.schema.contents);
   }
   getType(): string | null {
     return this.attributes['type'];
@@ -266,19 +263,21 @@ export type RightsAttributes = { type: string | null };
 
 export type RightsContents = [string];
 
-export class Rights implements XMLElement<RightsAttributes, RightsContents> {
-  static readonly elementName = 'rights';
+export class Rights implements XMLElement<'rights', RightsAttributes, RightsContents> {
   static readonly schema = {
+    name: 'rights',
     attributes: { type: { type: 'optional', value: { type: 'string' } } },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Rights.schema;
 
   attributes: RightsAttributes;
   contents: RightsContents;
 
   constructor(opts?: { attributes?: Partial<RightsAttributes>; content?: RightsContents }) {
-    this.attributes = Object.assign({ ['type']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Rights.schema) as RightsAttributes;
+    this.contents = opts?.content ?? xml.zero(Rights.schema.contents);
   }
   getType(): string | null {
     return this.attributes['type'];
@@ -298,19 +297,21 @@ export type EncodingDateAttributes = Record<string, unknown>;
 
 export type EncodingDateContents = [Date];
 
-export class EncodingDate implements XMLElement<EncodingDateAttributes, EncodingDateContents> {
-  static readonly elementName = 'encoding-date';
+export class EncodingDate implements XMLElement<'encoding-date', EncodingDateAttributes, EncodingDateContents> {
   static readonly schema = {
+    name: 'encoding-date',
     attributes: {},
-    content: [{ type: 'required', value: { type: 'label', label: 'yyyy-mm-dd', value: { type: 'date' } } }],
-  };
+    contents: [{ type: 'required', value: { type: 'label', label: 'yyyy-mm-dd', value: { type: 'date' } } }],
+  } as const;
+
+  readonly schema = EncodingDate.schema;
 
   attributes: EncodingDateAttributes;
   contents: EncodingDateContents;
 
   constructor(opts?: { attributes?: Partial<EncodingDateAttributes>; content?: EncodingDateContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new Date(1970, 0, 1, 0, 0, 0, 0)];
+    this.attributes = xml.mergeZero(opts?.attributes, EncodingDate.schema) as EncodingDateAttributes;
+    this.contents = opts?.content ?? xml.zero(EncodingDate.schema.contents);
   }
 
   getYyyyMmDd(): Date {
@@ -325,19 +326,21 @@ export type EncoderAttributes = { type: string | null };
 
 export type EncoderContents = [string];
 
-export class Encoder implements XMLElement<EncoderAttributes, EncoderContents> {
-  static readonly elementName = 'encoder';
+export class Encoder implements XMLElement<'encoder', EncoderAttributes, EncoderContents> {
   static readonly schema = {
+    name: 'encoder',
     attributes: { type: { type: 'optional', value: { type: 'string' } } },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Encoder.schema;
 
   attributes: EncoderAttributes;
   contents: EncoderContents;
 
   constructor(opts?: { attributes?: Partial<EncoderAttributes>; content?: EncoderContents }) {
-    this.attributes = Object.assign({ ['type']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Encoder.schema) as EncoderAttributes;
+    this.contents = opts?.content ?? xml.zero(Encoder.schema.contents);
   }
   getType(): string | null {
     return this.attributes['type'];
@@ -357,16 +360,17 @@ export type SoftwareAttributes = Record<string, unknown>;
 
 export type SoftwareContents = [string];
 
-export class Software implements XMLElement<SoftwareAttributes, SoftwareContents> {
-  static readonly elementName = 'software';
-  static readonly schema = { attributes: {}, content: [{ type: 'string' }] };
+export class Software implements XMLElement<'software', SoftwareAttributes, SoftwareContents> {
+  static readonly schema = { name: 'software', attributes: {}, contents: [{ type: 'string' }] } as const;
+
+  readonly schema = Software.schema;
 
   attributes: SoftwareAttributes;
   contents: SoftwareContents;
 
   constructor(opts?: { attributes?: Partial<SoftwareAttributes>; content?: SoftwareContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Software.schema) as SoftwareAttributes;
+    this.contents = opts?.content ?? xml.zero(Software.schema.contents);
   }
 
   getText(): string {
@@ -381,16 +385,23 @@ export type EncodingDescriptionAttributes = Record<string, unknown>;
 
 export type EncodingDescriptionContents = [string];
 
-export class EncodingDescription implements XMLElement<EncodingDescriptionAttributes, EncodingDescriptionContents> {
-  static readonly elementName = 'encoding-description';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class EncodingDescription
+  implements XMLElement<'encoding-description', EncodingDescriptionAttributes, EncodingDescriptionContents>
+{
+  static readonly schema = {
+    name: 'encoding-description',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = EncodingDescription.schema;
 
   attributes: EncodingDescriptionAttributes;
   contents: EncodingDescriptionContents;
 
   constructor(opts?: { attributes?: Partial<EncodingDescriptionAttributes>; content?: EncodingDescriptionContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, EncodingDescription.schema) as EncodingDescriptionAttributes;
+    this.contents = opts?.content ?? xml.zero(EncodingDescription.schema.contents);
   }
 
   getText(): string {
@@ -410,27 +421,26 @@ export type SupportsAttributes = {
 
 export type SupportsContents = [];
 
-export class Supports implements XMLElement<SupportsAttributes, SupportsContents> {
-  static readonly elementName = 'supports';
+export class Supports implements XMLElement<'supports', SupportsAttributes, SupportsContents> {
   static readonly schema = {
+    name: 'supports',
     attributes: {
       element: { type: 'required', value: { type: 'string' } },
       type: { type: 'required', value: { type: 'choices', choices: ['yes', 'no'] } },
       attribute: { type: 'optional', value: { type: 'string' } },
       value: { type: 'optional', value: { type: 'string' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Supports.schema;
 
   attributes: SupportsAttributes;
   contents: SupportsContents;
 
   constructor(opts?: { attributes?: Partial<SupportsAttributes>; content?: SupportsContents }) {
-    this.attributes = Object.assign(
-      { ['element']: '', ['type']: 'yes', ['attribute']: null, ['value']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Supports.schema) as SupportsAttributes;
+    this.contents = opts?.content ?? xml.zero(Supports.schema.contents);
   }
   getElement(): string {
     return this.attributes['element'];
@@ -464,11 +474,11 @@ export type EncodingContents = [
   Array<[EncodingDate | null, Encoder | null, Software | null, EncodingDescription | null, Supports | null]>
 ];
 
-export class Encoding implements XMLElement<EncodingAttributes, EncodingContents> {
-  static readonly elementName = 'encoding';
+export class Encoding implements XMLElement<'encoding', EncodingAttributes, EncodingContents> {
   static readonly schema = {
+    name: 'encoding',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'encodings',
@@ -484,14 +494,16 @@ export class Encoding implements XMLElement<EncodingAttributes, EncodingContents
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Encoding.schema;
 
   attributes: EncodingAttributes;
   contents: EncodingContents;
 
   constructor(opts?: { attributes?: Partial<EncodingAttributes>; content?: EncodingContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(opts?.attributes, Encoding.schema) as EncodingAttributes;
+    this.contents = opts?.content ?? xml.zero(Encoding.schema.contents);
   }
 
   getEncodings(): Array<
@@ -512,16 +524,21 @@ export type SourceAttributes = Record<string, unknown>;
 
 export type SourceContents = [string | null];
 
-export class Source implements XMLElement<SourceAttributes, SourceContents> {
-  static readonly elementName = 'source';
-  static readonly schema = { attributes: {}, content: [{ type: 'optional', value: { type: 'string' } }] };
+export class Source implements XMLElement<'source', SourceAttributes, SourceContents> {
+  static readonly schema = {
+    name: 'source',
+    attributes: {},
+    contents: [{ type: 'optional', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Source.schema;
 
   attributes: SourceAttributes;
   contents: SourceContents;
 
   constructor(opts?: { attributes?: Partial<SourceAttributes>; content?: SourceContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null];
+    this.attributes = xml.mergeZero(opts?.attributes, Source.schema) as SourceAttributes;
+    this.contents = opts?.content ?? xml.zero(Source.schema.contents);
   }
 
   getText(): string | null {
@@ -536,19 +553,21 @@ export type RelationAttributes = { type: string | null };
 
 export type RelationContents = [string];
 
-export class Relation implements XMLElement<RelationAttributes, RelationContents> {
-  static readonly elementName = 'relation';
+export class Relation implements XMLElement<'relation', RelationAttributes, RelationContents> {
   static readonly schema = {
+    name: 'relation',
     attributes: { type: { type: 'optional', value: { type: 'string' } } },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Relation.schema;
 
   attributes: RelationAttributes;
   contents: RelationContents;
 
   constructor(opts?: { attributes?: Partial<RelationAttributes>; content?: RelationContents }) {
-    this.attributes = Object.assign({ ['type']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Relation.schema) as RelationAttributes;
+    this.contents = opts?.content ?? xml.zero(Relation.schema.contents);
   }
   getType(): string | null {
     return this.attributes['type'];
@@ -568,19 +587,23 @@ export type MiscellaneousFieldAttributes = { name: string };
 
 export type MiscellaneousFieldContents = [string];
 
-export class MiscellaneousField implements XMLElement<MiscellaneousFieldAttributes, MiscellaneousFieldContents> {
-  static readonly elementName = 'miscellaneous-field';
+export class MiscellaneousField
+  implements XMLElement<'miscellaneous-field', MiscellaneousFieldAttributes, MiscellaneousFieldContents>
+{
   static readonly schema = {
+    name: 'miscellaneous-field',
     attributes: { name: { type: 'required', value: { type: 'string' } } },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = MiscellaneousField.schema;
 
   attributes: MiscellaneousFieldAttributes;
   contents: MiscellaneousFieldContents;
 
   constructor(opts?: { attributes?: Partial<MiscellaneousFieldAttributes>; content?: MiscellaneousFieldContents }) {
-    this.attributes = Object.assign({ ['name']: '' }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, MiscellaneousField.schema) as MiscellaneousFieldAttributes;
+    this.contents = opts?.content ?? xml.zero(MiscellaneousField.schema.contents);
   }
   getName(): string {
     return this.attributes['name'];
@@ -600,21 +623,23 @@ export type MiscellaneousAttributes = Record<string, unknown>;
 
 export type MiscellaneousContents = [Array<MiscellaneousField>];
 
-export class Miscellaneous implements XMLElement<MiscellaneousAttributes, MiscellaneousContents> {
-  static readonly elementName = 'miscellaneous';
+export class Miscellaneous implements XMLElement<'miscellaneous', MiscellaneousAttributes, MiscellaneousContents> {
   static readonly schema = {
+    name: 'miscellaneous',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'miscellaneous-fields', value: { type: 'zeroOrMore', value: MiscellaneousField } },
     ],
-  };
+  } as const;
+
+  readonly schema = Miscellaneous.schema;
 
   attributes: MiscellaneousAttributes;
   contents: MiscellaneousContents;
 
   constructor(opts?: { attributes?: Partial<MiscellaneousAttributes>; content?: MiscellaneousContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(opts?.attributes, Miscellaneous.schema) as MiscellaneousAttributes;
+    this.contents = opts?.content ?? xml.zero(Miscellaneous.schema.contents);
   }
 
   getMiscellaneousFields(): Array<MiscellaneousField> {
@@ -636,11 +661,11 @@ export type IdentificationContents = [
   Miscellaneous | null
 ];
 
-export class Identification implements XMLElement<IdentificationAttributes, IdentificationContents> {
-  static readonly elementName = 'identification';
+export class Identification implements XMLElement<'identification', IdentificationAttributes, IdentificationContents> {
   static readonly schema = {
+    name: 'identification',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'creators', value: { type: 'zeroOrMore', value: Creator } },
       { type: 'label', label: 'rights', value: { type: 'zeroOrMore', value: Rights } },
       { type: 'optional', value: Encoding },
@@ -648,14 +673,16 @@ export class Identification implements XMLElement<IdentificationAttributes, Iden
       { type: 'label', label: 'relations', value: { type: 'zeroOrMore', value: Relation } },
       { type: 'optional', value: Miscellaneous },
     ],
-  };
+  } as const;
+
+  readonly schema = Identification.schema;
 
   attributes: IdentificationAttributes;
   contents: IdentificationContents;
 
   constructor(opts?: { attributes?: Partial<IdentificationAttributes>; content?: IdentificationContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[], [], null, null, [], null];
+    this.attributes = xml.mergeZero(opts?.attributes, Identification.schema) as IdentificationAttributes;
+    this.contents = opts?.content ?? xml.zero(Identification.schema.contents);
   }
 
   getCreators(): Array<Creator> {
@@ -700,24 +727,26 @@ export type MillimetersAttributes = Record<string, unknown>;
 
 export type MillimetersContents = [number];
 
-export class Millimeters implements XMLElement<MillimetersAttributes, MillimetersContents> {
-  static readonly elementName = 'millimeters';
+export class Millimeters implements XMLElement<'millimeters', MillimetersAttributes, MillimetersContents> {
   static readonly schema = {
+    name: 'millimeters',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'millimeters', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Millimeters.schema;
 
   attributes: MillimetersAttributes;
   contents: MillimetersContents;
 
   constructor(opts?: { attributes?: Partial<MillimetersAttributes>; content?: MillimetersContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Millimeters.schema) as MillimetersAttributes;
+    this.contents = opts?.content ?? xml.zero(Millimeters.schema.contents);
   }
 
   getMillimeters(): number {
@@ -732,21 +761,23 @@ export type TenthsAttributes = Record<string, unknown>;
 
 export type TenthsContents = [number];
 
-export class Tenths implements XMLElement<TenthsAttributes, TenthsContents> {
-  static readonly elementName = 'tenths';
+export class Tenths implements XMLElement<'tenths', TenthsAttributes, TenthsContents> {
   static readonly schema = {
+    name: 'tenths',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'tenths', value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } } },
     ],
-  };
+  } as const;
+
+  readonly schema = Tenths.schema;
 
   attributes: TenthsAttributes;
   contents: TenthsContents;
 
   constructor(opts?: { attributes?: Partial<TenthsAttributes>; content?: TenthsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Tenths.schema) as TenthsAttributes;
+    this.contents = opts?.content ?? xml.zero(Tenths.schema.contents);
   }
 
   getTenths(): number {
@@ -761,22 +792,24 @@ export type ScalingAttributes = Record<string, unknown>;
 
 export type ScalingContents = [Millimeters, Tenths];
 
-export class Scaling implements XMLElement<ScalingAttributes, ScalingContents> {
-  static readonly elementName = 'scaling';
+export class Scaling implements XMLElement<'scaling', ScalingAttributes, ScalingContents> {
   static readonly schema = {
+    name: 'scaling',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: Millimeters },
       { type: 'required', value: Tenths },
     ],
-  };
+  } as const;
+
+  readonly schema = Scaling.schema;
 
   attributes: ScalingAttributes;
   contents: ScalingContents;
 
   constructor(opts?: { attributes?: Partial<ScalingAttributes>; content?: ScalingContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new Millimeters(), new Tenths()];
+    this.attributes = xml.mergeZero(opts?.attributes, Scaling.schema) as ScalingAttributes;
+    this.contents = opts?.content ?? xml.zero(Scaling.schema.contents);
   }
 
   getMillimeters(): Millimeters {
@@ -797,16 +830,17 @@ export type ConcertScoreAttributes = Record<string, unknown>;
 
 export type ConcertScoreContents = [];
 
-export class ConcertScore implements XMLElement<ConcertScoreAttributes, ConcertScoreContents> {
-  static readonly elementName = 'concert-score';
-  static readonly schema = { attributes: {}, content: [] };
+export class ConcertScore implements XMLElement<'concert-score', ConcertScoreAttributes, ConcertScoreContents> {
+  static readonly schema = { name: 'concert-score', attributes: {}, contents: [] } as const;
+
+  readonly schema = ConcertScore.schema;
 
   attributes: ConcertScoreAttributes;
   contents: ConcertScoreContents;
 
   constructor(opts?: { attributes?: Partial<ConcertScoreAttributes>; content?: ConcertScoreContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, ConcertScore.schema) as ConcertScoreAttributes;
+    this.contents = opts?.content ?? xml.zero(ConcertScore.schema.contents);
   }
 }
 
@@ -814,25 +848,27 @@ export type PageHeightAttributes = Record<string, unknown>;
 
 export type PageHeightContents = [number];
 
-export class PageHeight implements XMLElement<PageHeightAttributes, PageHeightContents> {
-  static readonly elementName = 'page-height';
+export class PageHeight implements XMLElement<'page-height', PageHeightAttributes, PageHeightContents> {
   static readonly schema = {
+    name: 'page-height',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'page-height',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = PageHeight.schema;
 
   attributes: PageHeightAttributes;
   contents: PageHeightContents;
 
   constructor(opts?: { attributes?: Partial<PageHeightAttributes>; content?: PageHeightContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, PageHeight.schema) as PageHeightAttributes;
+    this.contents = opts?.content ?? xml.zero(PageHeight.schema.contents);
   }
 
   getPageHeight(): number {
@@ -847,25 +883,27 @@ export type PageWidthAttributes = Record<string, unknown>;
 
 export type PageWidthContents = [number];
 
-export class PageWidth implements XMLElement<PageWidthAttributes, PageWidthContents> {
-  static readonly elementName = 'page-width';
+export class PageWidth implements XMLElement<'page-width', PageWidthAttributes, PageWidthContents> {
   static readonly schema = {
+    name: 'page-width',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'page-width',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = PageWidth.schema;
 
   attributes: PageWidthAttributes;
   contents: PageWidthContents;
 
   constructor(opts?: { attributes?: Partial<PageWidthAttributes>; content?: PageWidthContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, PageWidth.schema) as PageWidthAttributes;
+    this.contents = opts?.content ?? xml.zero(PageWidth.schema.contents);
   }
 
   getPageWidth(): number {
@@ -880,25 +918,27 @@ export type LeftMarginAttributes = Record<string, unknown>;
 
 export type LeftMarginContents = [number];
 
-export class LeftMargin implements XMLElement<LeftMarginAttributes, LeftMarginContents> {
-  static readonly elementName = 'left-margin';
+export class LeftMargin implements XMLElement<'left-margin', LeftMarginAttributes, LeftMarginContents> {
   static readonly schema = {
+    name: 'left-margin',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'left-margin',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = LeftMargin.schema;
 
   attributes: LeftMarginAttributes;
   contents: LeftMarginContents;
 
   constructor(opts?: { attributes?: Partial<LeftMarginAttributes>; content?: LeftMarginContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, LeftMargin.schema) as LeftMarginAttributes;
+    this.contents = opts?.content ?? xml.zero(LeftMargin.schema.contents);
   }
 
   getLeftMargin(): number {
@@ -913,16 +953,17 @@ export type RightMarginAttributes = Record<string, unknown>;
 
 export type RightMarginContents = [];
 
-export class RightMargin implements XMLElement<RightMarginAttributes, RightMarginContents> {
-  static readonly elementName = 'right-margin';
-  static readonly schema = { attributes: {}, content: [] };
+export class RightMargin implements XMLElement<'right-margin', RightMarginAttributes, RightMarginContents> {
+  static readonly schema = { name: 'right-margin', attributes: {}, contents: [] } as const;
+
+  readonly schema = RightMargin.schema;
 
   attributes: RightMarginAttributes;
   contents: RightMarginContents;
 
   constructor(opts?: { attributes?: Partial<RightMarginAttributes>; content?: RightMarginContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, RightMargin.schema) as RightMarginAttributes;
+    this.contents = opts?.content ?? xml.zero(RightMargin.schema.contents);
   }
 }
 
@@ -930,25 +971,27 @@ export type TopMarginAttributes = Record<string, unknown>;
 
 export type TopMarginContents = [number];
 
-export class TopMargin implements XMLElement<TopMarginAttributes, TopMarginContents> {
-  static readonly elementName = 'top-margin';
+export class TopMargin implements XMLElement<'top-margin', TopMarginAttributes, TopMarginContents> {
   static readonly schema = {
+    name: 'top-margin',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'top-margin',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = TopMargin.schema;
 
   attributes: TopMarginAttributes;
   contents: TopMarginContents;
 
   constructor(opts?: { attributes?: Partial<TopMarginAttributes>; content?: TopMarginContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, TopMargin.schema) as TopMarginAttributes;
+    this.contents = opts?.content ?? xml.zero(TopMargin.schema.contents);
   }
 
   getTopMargin(): number {
@@ -963,25 +1006,27 @@ export type BottomMarginAttributes = Record<string, unknown>;
 
 export type BottomMarginContents = [number];
 
-export class BottomMargin implements XMLElement<BottomMarginAttributes, BottomMarginContents> {
-  static readonly elementName = 'bottom-margin';
+export class BottomMargin implements XMLElement<'bottom-margin', BottomMarginAttributes, BottomMarginContents> {
   static readonly schema = {
+    name: 'bottom-margin',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'bottom-margin',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = BottomMargin.schema;
 
   attributes: BottomMarginAttributes;
   contents: BottomMarginContents;
 
   constructor(opts?: { attributes?: Partial<BottomMarginAttributes>; content?: BottomMarginContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, BottomMargin.schema) as BottomMarginAttributes;
+    this.contents = opts?.content ?? xml.zero(BottomMargin.schema.contents);
   }
 
   getBottomMargin(): number {
@@ -996,24 +1041,26 @@ export type PageMarginsAttributes = { type: 'both' | 'even' | 'odd' | null };
 
 export type PageMarginsContents = [LeftMargin, RightMargin, TopMargin, BottomMargin];
 
-export class PageMargins implements XMLElement<PageMarginsAttributes, PageMarginsContents> {
-  static readonly elementName = 'page-margins';
+export class PageMargins implements XMLElement<'page-margins', PageMarginsAttributes, PageMarginsContents> {
   static readonly schema = {
+    name: 'page-margins',
     attributes: { type: { type: 'optional', value: { type: 'choices', choices: ['both', 'even', 'odd'] } } },
-    content: [
+    contents: [
       { type: 'required', value: LeftMargin },
       { type: 'required', value: RightMargin },
       { type: 'required', value: TopMargin },
       { type: 'required', value: BottomMargin },
     ],
-  };
+  } as const;
+
+  readonly schema = PageMargins.schema;
 
   attributes: PageMarginsAttributes;
   contents: PageMarginsContents;
 
   constructor(opts?: { attributes?: Partial<PageMarginsAttributes>; content?: PageMarginsContents }) {
-    this.attributes = Object.assign({ ['type']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [new LeftMargin(), new RightMargin(), new TopMargin(), new BottomMargin()];
+    this.attributes = xml.mergeZero(opts?.attributes, PageMargins.schema) as PageMarginsAttributes;
+    this.contents = opts?.content ?? xml.zero(PageMargins.schema.contents);
   }
   getType(): 'both' | 'even' | 'odd' | null {
     return this.attributes['type'];
@@ -1051,11 +1098,11 @@ export type PageLayoutAttributes = Record<string, unknown>;
 
 export type PageLayoutContents = [PageHeight | null, PageWidth | null, [] | [PageMargins] | [PageMargins, PageMargins]];
 
-export class PageLayout implements XMLElement<PageLayoutAttributes, PageLayoutContents> {
-  static readonly elementName = 'page-layout';
+export class PageLayout implements XMLElement<'page-layout', PageLayoutAttributes, PageLayoutContents> {
   static readonly schema = {
+    name: 'page-layout',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: PageHeight },
       { type: 'optional', value: PageWidth },
       {
@@ -1064,14 +1111,16 @@ export class PageLayout implements XMLElement<PageLayoutAttributes, PageLayoutCo
         value: { type: 'choices', choices: [[], [PageMargins], [PageMargins, PageMargins]] },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = PageLayout.schema;
 
   attributes: PageLayoutAttributes;
   contents: PageLayoutContents;
 
   constructor(opts?: { attributes?: Partial<PageLayoutAttributes>; content?: PageLayoutContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, []];
+    this.attributes = xml.mergeZero(opts?.attributes, PageLayout.schema) as PageLayoutAttributes;
+    this.contents = opts?.content ?? xml.zero(PageLayout.schema.contents);
   }
 
   getPageHeight(): PageHeight | null {
@@ -1098,22 +1147,24 @@ export type SystemMarginsAttributes = Record<string, unknown>;
 
 export type SystemMarginsContents = [LeftMargin, RightMargin];
 
-export class SystemMargins implements XMLElement<SystemMarginsAttributes, SystemMarginsContents> {
-  static readonly elementName = 'system-margins';
+export class SystemMargins implements XMLElement<'system-margins', SystemMarginsAttributes, SystemMarginsContents> {
   static readonly schema = {
+    name: 'system-margins',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: LeftMargin },
       { type: 'required', value: RightMargin },
     ],
-  };
+  } as const;
+
+  readonly schema = SystemMargins.schema;
 
   attributes: SystemMarginsAttributes;
   contents: SystemMarginsContents;
 
   constructor(opts?: { attributes?: Partial<SystemMarginsAttributes>; content?: SystemMarginsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new LeftMargin(), new RightMargin()];
+    this.attributes = xml.mergeZero(opts?.attributes, SystemMargins.schema) as SystemMarginsAttributes;
+    this.contents = opts?.content ?? xml.zero(SystemMargins.schema.contents);
   }
 
   getLeftMargin(): LeftMargin {
@@ -1134,25 +1185,27 @@ export type SystemDistanceAttributes = Record<string, unknown>;
 
 export type SystemDistanceContents = [number];
 
-export class SystemDistance implements XMLElement<SystemDistanceAttributes, SystemDistanceContents> {
-  static readonly elementName = 'system-distance';
+export class SystemDistance implements XMLElement<'system-distance', SystemDistanceAttributes, SystemDistanceContents> {
   static readonly schema = {
+    name: 'system-distance',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'system-distance',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = SystemDistance.schema;
 
   attributes: SystemDistanceAttributes;
   contents: SystemDistanceContents;
 
   constructor(opts?: { attributes?: Partial<SystemDistanceAttributes>; content?: SystemDistanceContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, SystemDistance.schema) as SystemDistanceAttributes;
+    this.contents = opts?.content ?? xml.zero(SystemDistance.schema.contents);
   }
 
   getSystemDistance(): number {
@@ -1167,25 +1220,29 @@ export type TopSystemDistanceAttributes = Record<string, unknown>;
 
 export type TopSystemDistanceContents = [number];
 
-export class TopSystemDistance implements XMLElement<TopSystemDistanceAttributes, TopSystemDistanceContents> {
-  static readonly elementName = 'top-system-distance';
+export class TopSystemDistance
+  implements XMLElement<'top-system-distance', TopSystemDistanceAttributes, TopSystemDistanceContents>
+{
   static readonly schema = {
+    name: 'top-system-distance',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'top-system-distance',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = TopSystemDistance.schema;
 
   attributes: TopSystemDistanceAttributes;
   contents: TopSystemDistanceContents;
 
   constructor(opts?: { attributes?: Partial<TopSystemDistanceAttributes>; content?: TopSystemDistanceContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, TopSystemDistance.schema) as TopSystemDistanceAttributes;
+    this.contents = opts?.content ?? xml.zero(TopSystemDistance.schema.contents);
   }
 
   getTopSystemDistance(): number {
@@ -1200,23 +1257,25 @@ export type SystemLayoutAttributes = Record<string, unknown>;
 
 export type SystemLayoutContents = [SystemMargins | null, SystemDistance | null, TopSystemDistance | null];
 
-export class SystemLayout implements XMLElement<SystemLayoutAttributes, SystemLayoutContents> {
-  static readonly elementName = 'system-layout';
+export class SystemLayout implements XMLElement<'system-layout', SystemLayoutAttributes, SystemLayoutContents> {
   static readonly schema = {
+    name: 'system-layout',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: SystemMargins },
       { type: 'optional', value: SystemDistance },
       { type: 'optional', value: TopSystemDistance },
     ],
-  };
+  } as const;
+
+  readonly schema = SystemLayout.schema;
 
   attributes: SystemLayoutAttributes;
   contents: SystemLayoutContents;
 
   constructor(opts?: { attributes?: Partial<SystemLayoutAttributes>; content?: SystemLayoutContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, SystemLayout.schema) as SystemLayoutAttributes;
+    this.contents = opts?.content ?? xml.zero(SystemLayout.schema.contents);
   }
 
   getSystemMargins(): SystemMargins | null {
@@ -1264,9 +1323,9 @@ export type LineWidthAttributes = {
 
 export type LineWidthContents = [number];
 
-export class LineWidth implements XMLElement<LineWidthAttributes, LineWidthContents> {
-  static readonly elementName = 'line-width';
+export class LineWidth implements XMLElement<'line-width', LineWidthAttributes, LineWidthContents> {
   static readonly schema = {
+    name: 'line-width',
     attributes: {
       type: {
         type: 'required',
@@ -1296,21 +1355,23 @@ export class LineWidth implements XMLElement<LineWidthAttributes, LineWidthConte
         },
       },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'line-width',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = LineWidth.schema;
 
   attributes: LineWidthAttributes;
   contents: LineWidthContents;
 
   constructor(opts?: { attributes?: Partial<LineWidthAttributes>; content?: LineWidthContents }) {
-    this.attributes = Object.assign({ ['type']: 'beam' }, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, LineWidth.schema) as LineWidthAttributes;
+    this.contents = opts?.content ?? xml.zero(LineWidth.schema.contents);
   }
   getType():
     | 'beam'
@@ -1370,21 +1431,23 @@ export type NoteSizeAttributes = { type: 'cue' | 'grace' | 'grace-cue' | 'large'
 
 export type NoteSizeContents = [];
 
-export class NoteSize implements XMLElement<NoteSizeAttributes, NoteSizeContents> {
-  static readonly elementName = 'note-size';
+export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, NoteSizeContents> {
   static readonly schema = {
+    name: 'note-size',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['cue', 'grace', 'grace-cue', 'large'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = NoteSize.schema;
 
   attributes: NoteSizeAttributes;
   contents: NoteSizeContents;
 
   constructor(opts?: { attributes?: Partial<NoteSizeAttributes>; content?: NoteSizeContents }) {
-    this.attributes = Object.assign({ ['type']: 'cue' }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, NoteSize.schema) as NoteSizeAttributes;
+    this.contents = opts?.content ?? xml.zero(NoteSize.schema.contents);
   }
   getType(): 'cue' | 'grace' | 'grace-cue' | 'large' {
     return this.attributes['type'];
@@ -1398,25 +1461,27 @@ export type DistanceAttributes = { type: 'beam' | 'hyphen' };
 
 export type DistanceContents = [number];
 
-export class Distance implements XMLElement<DistanceAttributes, DistanceContents> {
-  static readonly elementName = 'distance';
+export class Distance implements XMLElement<'distance', DistanceAttributes, DistanceContents> {
   static readonly schema = {
+    name: 'distance',
     attributes: { type: { type: 'required', value: { type: 'choices', choices: ['beam', 'hyphen'] } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'distance',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Distance.schema;
 
   attributes: DistanceAttributes;
   contents: DistanceContents;
 
   constructor(opts?: { attributes?: Partial<DistanceAttributes>; content?: DistanceContents }) {
-    this.attributes = Object.assign({ ['type']: 'beam' }, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Distance.schema) as DistanceAttributes;
+    this.contents = opts?.content ?? xml.zero(Distance.schema.contents);
   }
   getType(): 'beam' | 'hyphen' {
     return this.attributes['type'];
@@ -1450,9 +1515,9 @@ export type GlyphAttributes = {
 
 export type GlyphContents = [string];
 
-export class Glyph implements XMLElement<GlyphAttributes, GlyphContents> {
-  static readonly elementName = 'glyph';
+export class Glyph implements XMLElement<'glyph', GlyphAttributes, GlyphContents> {
   static readonly schema = {
+    name: 'glyph',
     attributes: {
       type: {
         type: 'required',
@@ -1475,15 +1540,17 @@ export class Glyph implements XMLElement<GlyphAttributes, GlyphContents> {
         },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Glyph.schema;
 
   attributes: GlyphAttributes;
   contents: GlyphContents;
 
   constructor(opts?: { attributes?: Partial<GlyphAttributes>; content?: GlyphContents }) {
-    this.attributes = Object.assign({ ['type']: 'quarter-rest' }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Glyph.schema) as GlyphAttributes;
+    this.contents = opts?.content ?? xml.zero(Glyph.schema.contents);
   }
   getType():
     | 'quarter-rest'
@@ -1529,19 +1596,23 @@ export type OtherAppearanceAttributes = { type: string };
 
 export type OtherAppearanceContents = [string];
 
-export class OtherAppearance implements XMLElement<OtherAppearanceAttributes, OtherAppearanceContents> {
-  static readonly elementName = 'other-appearance';
+export class OtherAppearance
+  implements XMLElement<'other-appearance', OtherAppearanceAttributes, OtherAppearanceContents>
+{
   static readonly schema = {
+    name: 'other-appearance',
     attributes: { type: { type: 'required', value: { type: 'string' } } },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = OtherAppearance.schema;
 
   attributes: OtherAppearanceAttributes;
   contents: OtherAppearanceContents;
 
   constructor(opts?: { attributes?: Partial<OtherAppearanceAttributes>; content?: OtherAppearanceContents }) {
-    this.attributes = Object.assign({ ['type']: '' }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherAppearance.schema) as OtherAppearanceAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherAppearance.schema.contents);
   }
   getType(): string {
     return this.attributes['type'];
@@ -1567,25 +1638,27 @@ export type AppearanceContents = [
   Array<OtherAppearance>
 ];
 
-export class Appearance implements XMLElement<AppearanceAttributes, AppearanceContents> {
-  static readonly elementName = 'appearance';
+export class Appearance implements XMLElement<'appearance', AppearanceAttributes, AppearanceContents> {
   static readonly schema = {
+    name: 'appearance',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'line-widths', value: { type: 'zeroOrMore', value: LineWidth } },
       { type: 'label', label: 'notes', value: { type: 'zeroOrMore', value: NoteSize } },
       { type: 'label', label: 'distances', value: { type: 'zeroOrMore', value: Distance } },
       { type: 'label', label: 'glyphs', value: { type: 'zeroOrMore', value: Glyph } },
       { type: 'label', label: 'other-appearances', value: { type: 'zeroOrMore', value: OtherAppearance } },
     ],
-  };
+  } as const;
+
+  readonly schema = Appearance.schema;
 
   attributes: AppearanceAttributes;
   contents: AppearanceContents;
 
   constructor(opts?: { attributes?: Partial<AppearanceAttributes>; content?: AppearanceContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[], [], [], [], []];
+    this.attributes = xml.mergeZero(opts?.attributes, Appearance.schema) as AppearanceAttributes;
+    this.contents = opts?.content ?? xml.zero(Appearance.schema.contents);
   }
 
   getLineWidths(): Array<LineWidth> {
@@ -1629,9 +1702,9 @@ export type MusicFontAttributes = {
 
 export type MusicFontContents = [];
 
-export class MusicFont implements XMLElement<MusicFontAttributes, MusicFontContents> {
-  static readonly elementName = 'music-font';
+export class MusicFont implements XMLElement<'music-font', MusicFontAttributes, MusicFontContents> {
   static readonly schema = {
+    name: 'music-font',
     attributes: {
       'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
       'font-size': {
@@ -1647,18 +1720,17 @@ export class MusicFont implements XMLElement<MusicFontAttributes, MusicFontConte
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = MusicFont.schema;
 
   attributes: MusicFontAttributes;
   contents: MusicFontContents;
 
   constructor(opts?: { attributes?: Partial<MusicFontAttributes>; content?: MusicFontContents }) {
-    this.attributes = Object.assign(
-      { ['font-family']: null, ['font-size']: null, ['font-style']: null, ['font-weight']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, MusicFont.schema) as MusicFontAttributes;
+    this.contents = opts?.content ?? xml.zero(MusicFont.schema.contents);
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
@@ -1697,9 +1769,9 @@ export type WordFontAttributes = {
 
 export type WordFontContents = [];
 
-export class WordFont implements XMLElement<WordFontAttributes, WordFontContents> {
-  static readonly elementName = 'word-font';
+export class WordFont implements XMLElement<'word-font', WordFontAttributes, WordFontContents> {
   static readonly schema = {
+    name: 'word-font',
     attributes: {
       'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
       'font-size': {
@@ -1715,18 +1787,17 @@ export class WordFont implements XMLElement<WordFontAttributes, WordFontContents
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = WordFont.schema;
 
   attributes: WordFontAttributes;
   contents: WordFontContents;
 
   constructor(opts?: { attributes?: Partial<WordFontAttributes>; content?: WordFontContents }) {
-    this.attributes = Object.assign(
-      { ['font-family']: null, ['font-size']: null, ['font-style']: null, ['font-weight']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, WordFont.schema) as WordFontAttributes;
+    this.contents = opts?.content ?? xml.zero(WordFont.schema.contents);
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
@@ -1767,9 +1838,9 @@ export type LyricFontAttributes = {
 
 export type LyricFontContents = [];
 
-export class LyricFont implements XMLElement<LyricFontAttributes, LyricFontContents> {
-  static readonly elementName = 'lyric-font';
+export class LyricFont implements XMLElement<'lyric-font', LyricFontAttributes, LyricFontContents> {
   static readonly schema = {
+    name: 'lyric-font',
     attributes: {
       'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
       'font-size': {
@@ -1787,25 +1858,17 @@ export class LyricFont implements XMLElement<LyricFontAttributes, LyricFontConte
       name: { type: 'optional', value: { type: 'string' } },
       number: { type: 'optional', value: { type: 'string' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = LyricFont.schema;
 
   attributes: LyricFontAttributes;
   contents: LyricFontContents;
 
   constructor(opts?: { attributes?: Partial<LyricFontAttributes>; content?: LyricFontContents }) {
-    this.attributes = Object.assign(
-      {
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['name']: null,
-        ['number']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, LyricFont.schema) as LyricFontAttributes;
+    this.contents = opts?.content ?? xml.zero(LyricFont.schema.contents);
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
@@ -1851,23 +1914,25 @@ export type LyricLanguageAttributes = { 'xml:lang': string; name: string | null;
 
 export type LyricLanguageContents = [];
 
-export class LyricLanguage implements XMLElement<LyricLanguageAttributes, LyricLanguageContents> {
-  static readonly elementName = 'lyric-language';
+export class LyricLanguage implements XMLElement<'lyric-language', LyricLanguageAttributes, LyricLanguageContents> {
   static readonly schema = {
+    name: 'lyric-language',
     attributes: {
       'xml:lang': { type: 'required', value: { type: 'string' } },
       name: { type: 'optional', value: { type: 'string' } },
       number: { type: 'optional', value: { type: 'string' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = LyricLanguage.schema;
 
   attributes: LyricLanguageAttributes;
   contents: LyricLanguageContents;
 
   constructor(opts?: { attributes?: Partial<LyricLanguageAttributes>; content?: LyricLanguageContents }) {
-    this.attributes = Object.assign({ ['xml:lang']: '', ['name']: null, ['number']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, LyricLanguage.schema) as LyricLanguageAttributes;
+    this.contents = opts?.content ?? xml.zero(LyricLanguage.schema.contents);
   }
   getXmlLang(): string {
     return this.attributes['xml:lang'];
@@ -1903,11 +1968,11 @@ export type DefaultsContents = [
   Array<LyricLanguage>
 ];
 
-export class Defaults implements XMLElement<DefaultsAttributes, DefaultsContents> {
-  static readonly elementName = 'defaults';
+export class Defaults implements XMLElement<'defaults', DefaultsAttributes, DefaultsContents> {
   static readonly schema = {
+    name: 'defaults',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: Scaling },
       { type: 'optional', value: ConcertScore },
       { type: 'optional', value: PageLayout },
@@ -1918,14 +1983,16 @@ export class Defaults implements XMLElement<DefaultsAttributes, DefaultsContents
       { type: 'label', label: 'lyric-fonts', value: { type: 'zeroOrMore', value: LyricFont } },
       { type: 'label', label: 'lyric-languages', value: { type: 'zeroOrMore', value: LyricLanguage } },
     ],
-  };
+  } as const;
+
+  readonly schema = Defaults.schema;
 
   attributes: DefaultsAttributes;
   contents: DefaultsContents;
 
   constructor(opts?: { attributes?: Partial<DefaultsAttributes>; content?: DefaultsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, null, null, null, null, null, [], []];
+    this.attributes = xml.mergeZero(opts?.attributes, Defaults.schema) as DefaultsAttributes;
+    this.contents = opts?.content ?? xml.zero(Defaults.schema.contents);
   }
 
   getScaling(): Scaling | null {
@@ -1988,16 +2055,21 @@ export type CreditTypeAttributes = Record<string, unknown>;
 
 export type CreditTypeContents = [string];
 
-export class CreditType implements XMLElement<CreditTypeAttributes, CreditTypeContents> {
-  static readonly elementName = 'credit-type';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class CreditType implements XMLElement<'credit-type', CreditTypeAttributes, CreditTypeContents> {
+  static readonly schema = {
+    name: 'credit-type',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = CreditType.schema;
 
   attributes: CreditTypeAttributes;
   contents: CreditTypeContents;
 
   constructor(opts?: { attributes?: Partial<CreditTypeAttributes>; content?: CreditTypeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, CreditType.schema) as CreditTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(CreditType.schema.contents);
   }
 
   getText(): string {
@@ -2026,9 +2098,9 @@ export type LinkAttributes = {
 
 export type LinkContents = [];
 
-export class Link implements XMLElement<LinkAttributes, LinkContents> {
-  static readonly elementName = 'link';
+export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
   static readonly schema = {
+    name: 'link',
     attributes: {
       'xlink:href': { type: 'required', value: { type: 'string' } },
       'default-x': {
@@ -2066,32 +2138,17 @@ export class Link implements XMLElement<LinkAttributes, LinkContents> {
       'xlink:title': { type: 'optional', value: { type: 'string' } },
       'xlink:type': { type: 'optional', value: { type: 'choices', choices: ['simple'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Link.schema;
 
   attributes: LinkAttributes;
   contents: LinkContents;
 
   constructor(opts?: { attributes?: Partial<LinkAttributes>; content?: LinkContents }) {
-    this.attributes = Object.assign(
-      {
-        ['xlink:href']: '',
-        ['default-x']: null,
-        ['default-y']: null,
-        ['element']: null,
-        ['name']: null,
-        ['position']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['xlink:actuate']: null,
-        ['xlink:role']: null,
-        ['xlink:show']: null,
-        ['xlink:title']: null,
-        ['xlink:type']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Link.schema) as LinkAttributes;
+    this.contents = opts?.content ?? xml.zero(Link.schema.contents);
   }
   getXlinkHref(): string {
     return this.attributes['xlink:href'];
@@ -2177,27 +2234,26 @@ export type BookmarkAttributes = { id: string; element: string | null; name: str
 
 export type BookmarkContents = [];
 
-export class Bookmark implements XMLElement<BookmarkAttributes, BookmarkContents> {
-  static readonly elementName = 'bookmark';
+export class Bookmark implements XMLElement<'bookmark', BookmarkAttributes, BookmarkContents> {
   static readonly schema = {
+    name: 'bookmark',
     attributes: {
       id: { type: 'required', value: { type: 'string' } },
       element: { type: 'optional', value: { type: 'string' } },
       name: { type: 'optional', value: { type: 'string' } },
       position: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Bookmark.schema;
 
   attributes: BookmarkAttributes;
   contents: BookmarkContents;
 
   constructor(opts?: { attributes?: Partial<BookmarkAttributes>; content?: BookmarkContents }) {
-    this.attributes = Object.assign(
-      { ['id']: '', ['element']: null, ['name']: null, ['position']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Bookmark.schema) as BookmarkAttributes;
+    this.contents = opts?.content ?? xml.zero(Bookmark.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -2241,9 +2297,9 @@ export type CreditImageAttributes = {
 
 export type CreditImageContents = [];
 
-export class CreditImage implements XMLElement<CreditImageAttributes, CreditImageContents> {
-  static readonly elementName = 'credit-image';
+export class CreditImage implements XMLElement<'credit-image', CreditImageAttributes, CreditImageContents> {
   static readonly schema = {
+    name: 'credit-image',
     attributes: {
       'default-x': {
         type: 'label',
@@ -2273,30 +2329,17 @@ export class CreditImage implements XMLElement<CreditImageAttributes, CreditImag
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom'] } },
       width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = CreditImage.schema;
 
   attributes: CreditImageAttributes;
   contents: CreditImageContents;
 
   constructor(opts?: { attributes?: Partial<CreditImageAttributes>; content?: CreditImageContents }) {
-    this.attributes = Object.assign(
-      {
-        ['default-x']: null,
-        ['default-y']: null,
-        ['halign']: null,
-        ['height']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['source']: null,
-        ['type']: null,
-        ['valign']: null,
-        ['width']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, CreditImage.schema) as CreditImageAttributes;
+    this.contents = opts?.content ?? xml.zero(CreditImage.schema.contents);
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
@@ -2409,9 +2452,9 @@ export type CreditWordsAttributes = {
 
 export type CreditWordsContents = [];
 
-export class CreditWords implements XMLElement<CreditWordsAttributes, CreditWordsContents> {
-  static readonly elementName = 'credit-words';
+export class CreditWords implements XMLElement<'credit-words', CreditWordsAttributes, CreditWordsContents> {
   static readonly schema = {
+    name: 'credit-words',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -2489,42 +2532,17 @@ export class CreditWords implements XMLElement<CreditWordsAttributes, CreditWord
       'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = CreditWords.schema;
 
   attributes: CreditWordsAttributes;
   contents: CreditWordsContents;
 
   constructor(opts?: { attributes?: Partial<CreditWordsAttributes>; content?: CreditWordsContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['dir']: null,
-        ['enclosure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['justify']: null,
-        ['letter-spacing']: null,
-        ['line-height']: null,
-        ['line-through']: null,
-        ['overline']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['rotation']: null,
-        ['underline']: null,
-        ['valign']: null,
-        ['xml:lang']: null,
-        ['xml:space']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, CreditWords.schema) as CreditWordsAttributes;
+    this.contents = opts?.content ?? xml.zero(CreditWords.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -2741,9 +2759,9 @@ export type CreditSymbolAttributes = {
 
 export type CreditSymbolContents = [string];
 
-export class CreditSymbol implements XMLElement<CreditSymbolAttributes, CreditSymbolContents> {
-  static readonly elementName = 'credit-symbol';
+export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAttributes, CreditSymbolContents> {
   static readonly schema = {
+    name: 'credit-symbol',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -2819,40 +2837,17 @@ export class CreditSymbol implements XMLElement<CreditSymbolAttributes, CreditSy
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = CreditSymbol.schema;
 
   attributes: CreditSymbolAttributes;
   contents: CreditSymbolContents;
 
   constructor(opts?: { attributes?: Partial<CreditSymbolAttributes>; content?: CreditSymbolContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['dir']: null,
-        ['enclosure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['justify']: null,
-        ['letter-spacing']: null,
-        ['line-height']: null,
-        ['line-through']: null,
-        ['overline']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['rotation']: null,
-        ['underline']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, CreditSymbol.schema) as CreditSymbolAttributes;
+    this.contents = opts?.content ?? xml.zero(CreditSymbol.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -3031,14 +3026,14 @@ export type CreditContents = [
   CreditImage | [CreditWords | CreditSymbol, Array<[Array<Link>, Array<Bookmark>, CreditWords | CreditSymbol]>]
 ];
 
-export class Credit implements XMLElement<CreditAttributes, CreditContents> {
-  static readonly elementName = 'credit';
+export class Credit implements XMLElement<'credit', CreditAttributes, CreditContents> {
   static readonly schema = {
+    name: 'credit',
     attributes: {
       id: { type: 'optional', value: { type: 'string' } },
       page: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
-    content: [
+    contents: [
       { type: 'label', label: 'credit-types', value: { type: 'zeroOrMore', value: CreditType } },
       { type: 'label', label: 'links', value: { type: 'zeroOrMore', value: Link } },
       { type: 'label', label: 'bookmarks', value: { type: 'zeroOrMore', value: Bookmark } },
@@ -3064,14 +3059,16 @@ export class Credit implements XMLElement<CreditAttributes, CreditContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Credit.schema;
 
   attributes: CreditAttributes;
   contents: CreditContents;
 
   constructor(opts?: { attributes?: Partial<CreditAttributes>; content?: CreditContents }) {
-    this.attributes = Object.assign({ ['id']: null, ['page']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[], [], [], new CreditImage()];
+    this.attributes = xml.mergeZero(opts?.attributes, Credit.schema) as CreditAttributes;
+    this.contents = opts?.content ?? xml.zero(Credit.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -3132,9 +3129,9 @@ export type GroupNameAttributes = {
 
 export type GroupNameContents = [string];
 
-export class GroupName implements XMLElement<GroupNameAttributes, GroupNameContents> {
-  static readonly elementName = 'group-name';
+export class GroupName implements XMLElement<'group-name', GroupNameAttributes, GroupNameContents> {
   static readonly schema = {
+    name: 'group-name',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -3172,29 +3169,17 @@ export class GroupName implements XMLElement<GroupNameAttributes, GroupNameConte
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = GroupName.schema;
 
   attributes: GroupNameAttributes;
   contents: GroupNameContents;
 
   constructor(opts?: { attributes?: Partial<GroupNameAttributes>; content?: GroupNameContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['justify']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, GroupName.schema) as GroupNameAttributes;
+    this.contents = opts?.content ?? xml.zero(GroupName.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -3308,9 +3293,9 @@ export type DisplayTextAttributes = {
 
 export type DisplayTextContents = [string | null];
 
-export class DisplayText implements XMLElement<DisplayTextAttributes, DisplayTextContents> {
-  static readonly elementName = 'display-text';
+export class DisplayText implements XMLElement<'display-text', DisplayTextAttributes, DisplayTextContents> {
   static readonly schema = {
+    name: 'display-text',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -3387,41 +3372,17 @@ export class DisplayText implements XMLElement<DisplayTextAttributes, DisplayTex
       'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    content: [{ type: 'optional', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'optional', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = DisplayText.schema;
 
   attributes: DisplayTextAttributes;
   contents: DisplayTextContents;
 
   constructor(opts?: { attributes?: Partial<DisplayTextAttributes>; content?: DisplayTextContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['dir']: null,
-        ['enclosure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['justify']: null,
-        ['letter-spacing']: null,
-        ['line-height']: null,
-        ['line-through']: null,
-        ['overline']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['rotation']: null,
-        ['underline']: null,
-        ['valign']: null,
-        ['xml:lang']: null,
-        ['xml:space']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [null];
+    this.attributes = xml.mergeZero(opts?.attributes, DisplayText.schema) as DisplayTextAttributes;
+    this.contents = opts?.content ?? xml.zero(DisplayText.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -3640,9 +3601,9 @@ export type AccidentalTextAttributes = {
 
 export type AccidentalTextContents = [];
 
-export class AccidentalText implements XMLElement<AccidentalTextAttributes, AccidentalTextContents> {
-  static readonly elementName = 'accidental-text';
+export class AccidentalText implements XMLElement<'accidental-text', AccidentalTextAttributes, AccidentalTextContents> {
   static readonly schema = {
+    name: 'accidental-text',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -3720,42 +3681,17 @@ export class AccidentalText implements XMLElement<AccidentalTextAttributes, Acci
       'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = AccidentalText.schema;
 
   attributes: AccidentalTextAttributes;
   contents: AccidentalTextContents;
 
   constructor(opts?: { attributes?: Partial<AccidentalTextAttributes>; content?: AccidentalTextContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['dir']: null,
-        ['enclosure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['justify']: null,
-        ['letter-spacing']: null,
-        ['line-height']: null,
-        ['line-through']: null,
-        ['overline']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['rotation']: null,
-        ['smufl']: null,
-        ['underline']: null,
-        ['valign']: null,
-        ['xml:lang']: null,
-        ['xml:space']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, AccidentalText.schema) as AccidentalTextAttributes;
+    this.contents = opts?.content ?? xml.zero(AccidentalText.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -3935,25 +3871,29 @@ export type GroupNameDisplayAttributes = { 'print-object': 'yes' | 'no' | null }
 
 export type GroupNameDisplayContents = [Array<DisplayText | AccidentalText>];
 
-export class GroupNameDisplay implements XMLElement<GroupNameDisplayAttributes, GroupNameDisplayContents> {
-  static readonly elementName = 'group-name-display';
+export class GroupNameDisplay
+  implements XMLElement<'group-name-display', GroupNameDisplayAttributes, GroupNameDisplayContents>
+{
   static readonly schema = {
+    name: 'group-name-display',
     attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'texts',
         value: { type: 'zeroOrMore', value: { type: 'choices', choices: [DisplayText, AccidentalText] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = GroupNameDisplay.schema;
 
   attributes: GroupNameDisplayAttributes;
   contents: GroupNameDisplayContents;
 
   constructor(opts?: { attributes?: Partial<GroupNameDisplayAttributes>; content?: GroupNameDisplayContents }) {
-    this.attributes = Object.assign({ ['print-object']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(opts?.attributes, GroupNameDisplay.schema) as GroupNameDisplayAttributes;
+    this.contents = opts?.content ?? xml.zero(GroupNameDisplay.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -3984,9 +3924,11 @@ export type GroupAbbreviationAttributes = {
 
 export type GroupAbbreviationContents = [];
 
-export class GroupAbbreviation implements XMLElement<GroupAbbreviationAttributes, GroupAbbreviationContents> {
-  static readonly elementName = 'group-abbreviation';
+export class GroupAbbreviation
+  implements XMLElement<'group-abbreviation', GroupAbbreviationAttributes, GroupAbbreviationContents>
+{
   static readonly schema = {
+    name: 'group-abbreviation',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -4024,29 +3966,17 @@ export class GroupAbbreviation implements XMLElement<GroupAbbreviationAttributes
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = GroupAbbreviation.schema;
 
   attributes: GroupAbbreviationAttributes;
   contents: GroupAbbreviationContents;
 
   constructor(opts?: { attributes?: Partial<GroupAbbreviationAttributes>; content?: GroupAbbreviationContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['justify']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, GroupAbbreviation.schema) as GroupAbbreviationAttributes;
+    this.contents = opts?.content ?? xml.zero(GroupAbbreviation.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -4117,19 +4047,22 @@ export type GroupAbbreviationDisplayAttributes = { 'print-object': 'yes' | 'no' 
 export type GroupAbbreviationDisplayContents = [Array<DisplayText | AccidentalText>];
 
 export class GroupAbbreviationDisplay
-  implements XMLElement<GroupAbbreviationDisplayAttributes, GroupAbbreviationDisplayContents>
+  implements
+    XMLElement<'group-abbreviation-display', GroupAbbreviationDisplayAttributes, GroupAbbreviationDisplayContents>
 {
-  static readonly elementName = 'group-abbreviation-display';
   static readonly schema = {
+    name: 'group-abbreviation-display',
     attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'texts',
         value: { type: 'zeroOrMore', value: { type: 'choices', choices: [DisplayText, AccidentalText] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = GroupAbbreviationDisplay.schema;
 
   attributes: GroupAbbreviationDisplayAttributes;
   contents: GroupAbbreviationDisplayContents;
@@ -4138,8 +4071,11 @@ export class GroupAbbreviationDisplay
     attributes?: Partial<GroupAbbreviationDisplayAttributes>;
     content?: GroupAbbreviationDisplayContents;
   }) {
-    this.attributes = Object.assign({ ['print-object']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(
+      opts?.attributes,
+      GroupAbbreviationDisplay.schema
+    ) as GroupAbbreviationDisplayAttributes;
+    this.contents = opts?.content ?? xml.zero(GroupAbbreviationDisplay.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -4165,9 +4101,9 @@ export type GroupSymbolAttributes = {
 
 export type GroupSymbolContents = ['none' | 'brace' | 'bracket' | 'line' | 'square'];
 
-export class GroupSymbol implements XMLElement<GroupSymbolAttributes, GroupSymbolContents> {
-  static readonly elementName = 'group-symbol';
+export class GroupSymbol implements XMLElement<'group-symbol', GroupSymbolAttributes, GroupSymbolContents> {
   static readonly schema = {
+    name: 'group-symbol',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -4191,7 +4127,7 @@ export class GroupSymbol implements XMLElement<GroupSymbolAttributes, GroupSymbo
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -4201,17 +4137,16 @@ export class GroupSymbol implements XMLElement<GroupSymbolAttributes, GroupSymbo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = GroupSymbol.schema;
 
   attributes: GroupSymbolAttributes;
   contents: GroupSymbolContents;
 
   constructor(opts?: { attributes?: Partial<GroupSymbolAttributes>; content?: GroupSymbolContents }) {
-    this.attributes = Object.assign(
-      { ['color']: null, ['default-x']: null, ['default-y']: null, ['relative-x']: null, ['relative-y']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['none'];
+    this.attributes = xml.mergeZero(opts?.attributes, GroupSymbol.schema) as GroupSymbolAttributes;
+    this.contents = opts?.content ?? xml.zero(GroupSymbol.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -4255,11 +4190,11 @@ export type GroupBarlineAttributes = { color: string | null };
 
 export type GroupBarlineContents = ['yes' | 'no' | 'Mensurstrich'];
 
-export class GroupBarline implements XMLElement<GroupBarlineAttributes, GroupBarlineContents> {
-  static readonly elementName = 'group-barline';
+export class GroupBarline implements XMLElement<'group-barline', GroupBarlineAttributes, GroupBarlineContents> {
   static readonly schema = {
+    name: 'group-barline',
     attributes: { color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } } },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -4269,14 +4204,16 @@ export class GroupBarline implements XMLElement<GroupBarlineAttributes, GroupBar
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = GroupBarline.schema;
 
   attributes: GroupBarlineAttributes;
   contents: GroupBarlineContents;
 
   constructor(opts?: { attributes?: Partial<GroupBarlineAttributes>; content?: GroupBarlineContents }) {
-    this.attributes = Object.assign({ ['color']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['yes'];
+    this.attributes = xml.mergeZero(opts?.attributes, GroupBarline.schema) as GroupBarlineAttributes;
+    this.contents = opts?.content ?? xml.zero(GroupBarline.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -4296,16 +4233,17 @@ export type GroupTimeAttributes = Record<string, unknown>;
 
 export type GroupTimeContents = [];
 
-export class GroupTime implements XMLElement<GroupTimeAttributes, GroupTimeContents> {
-  static readonly elementName = 'group-time';
-  static readonly schema = { attributes: {}, content: [] };
+export class GroupTime implements XMLElement<'group-time', GroupTimeAttributes, GroupTimeContents> {
+  static readonly schema = { name: 'group-time', attributes: {}, contents: [] } as const;
+
+  readonly schema = GroupTime.schema;
 
   attributes: GroupTimeAttributes;
   contents: GroupTimeContents;
 
   constructor(opts?: { attributes?: Partial<GroupTimeAttributes>; content?: GroupTimeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, GroupTime.schema) as GroupTimeAttributes;
+    this.contents = opts?.content ?? xml.zero(GroupTime.schema.contents);
   }
 }
 
@@ -4351,9 +4289,9 @@ export type FootnoteAttributes = {
 
 export type FootnoteContents = [string];
 
-export class Footnote implements XMLElement<FootnoteAttributes, FootnoteContents> {
-  static readonly elementName = 'footnote';
+export class Footnote implements XMLElement<'footnote', FootnoteAttributes, FootnoteContents> {
   static readonly schema = {
+    name: 'footnote',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -4430,41 +4368,17 @@ export class Footnote implements XMLElement<FootnoteAttributes, FootnoteContents
       'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Footnote.schema;
 
   attributes: FootnoteAttributes;
   contents: FootnoteContents;
 
   constructor(opts?: { attributes?: Partial<FootnoteAttributes>; content?: FootnoteContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['dir']: null,
-        ['enclosure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['justify']: null,
-        ['letter-spacing']: null,
-        ['line-height']: null,
-        ['line-through']: null,
-        ['overline']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['rotation']: null,
-        ['underline']: null,
-        ['valign']: null,
-        ['xml:lang']: null,
-        ['xml:space']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Footnote.schema) as FootnoteAttributes;
+    this.contents = opts?.content ?? xml.zero(Footnote.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -4650,9 +4564,9 @@ export type LevelAttributes = {
 
 export type LevelContents = [string];
 
-export class Level implements XMLElement<LevelAttributes, LevelContents> {
-  static readonly elementName = 'level';
+export class Level implements XMLElement<'level', LevelAttributes, LevelContents> {
   static readonly schema = {
+    name: 'level',
     attributes: {
       bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -4660,18 +4574,17 @@ export class Level implements XMLElement<LevelAttributes, LevelContents> {
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
       type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop', 'single'] } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Level.schema;
 
   attributes: LevelAttributes;
   contents: LevelContents;
 
   constructor(opts?: { attributes?: Partial<LevelAttributes>; content?: LevelContents }) {
-    this.attributes = Object.assign(
-      { ['bracket']: null, ['parentheses']: null, ['reference']: null, ['size']: null, ['type']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Level.schema) as LevelAttributes;
+    this.contents = opts?.content ?? xml.zero(Level.schema.contents);
   }
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
@@ -4725,14 +4638,14 @@ export type PartGroupContents = [
   Level | null
 ];
 
-export class PartGroup implements XMLElement<PartGroupAttributes, PartGroupContents> {
-  static readonly elementName = 'part-group';
+export class PartGroup implements XMLElement<'part-group', PartGroupAttributes, PartGroupContents> {
   static readonly schema = {
+    name: 'part-group',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       number: { type: 'optional', value: { type: 'string' } },
     },
-    content: [
+    contents: [
       { type: 'optional', value: GroupName },
       { type: 'optional', value: GroupNameDisplay },
       { type: 'optional', value: GroupAbbreviation },
@@ -4743,14 +4656,16 @@ export class PartGroup implements XMLElement<PartGroupAttributes, PartGroupConte
       { type: 'optional', value: Footnote },
       { type: 'optional', value: Level },
     ],
-  };
+  } as const;
+
+  readonly schema = PartGroup.schema;
 
   attributes: PartGroupAttributes;
   contents: PartGroupContents;
 
   constructor(opts?: { attributes?: Partial<PartGroupAttributes>; content?: PartGroupContents }) {
-    this.attributes = Object.assign({ ['type']: 'start', ['number']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, null, null, null, null, null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, PartGroup.schema) as PartGroupAttributes;
+    this.contents = opts?.content ?? xml.zero(PartGroup.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -4824,16 +4739,21 @@ export type InstrumentLinkAttributes = { id: string };
 
 export type InstrumentLinkContents = [];
 
-export class InstrumentLink implements XMLElement<InstrumentLinkAttributes, InstrumentLinkContents> {
-  static readonly elementName = 'instrument-link';
-  static readonly schema = { attributes: { id: { type: 'required', value: { type: 'string' } } }, content: [] };
+export class InstrumentLink implements XMLElement<'instrument-link', InstrumentLinkAttributes, InstrumentLinkContents> {
+  static readonly schema = {
+    name: 'instrument-link',
+    attributes: { id: { type: 'required', value: { type: 'string' } } },
+    contents: [],
+  } as const;
+
+  readonly schema = InstrumentLink.schema;
 
   attributes: InstrumentLinkAttributes;
   contents: InstrumentLinkContents;
 
   constructor(opts?: { attributes?: Partial<InstrumentLinkAttributes>; content?: InstrumentLinkContents }) {
-    this.attributes = Object.assign({ ['id']: '' }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, InstrumentLink.schema) as InstrumentLinkAttributes;
+    this.contents = opts?.content ?? xml.zero(InstrumentLink.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -4847,16 +4767,21 @@ export type GroupLinkAttributes = Record<string, unknown>;
 
 export type GroupLinkContents = [string];
 
-export class GroupLink implements XMLElement<GroupLinkAttributes, GroupLinkContents> {
-  static readonly elementName = 'group-link';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class GroupLink implements XMLElement<'group-link', GroupLinkAttributes, GroupLinkContents> {
+  static readonly schema = {
+    name: 'group-link',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = GroupLink.schema;
 
   attributes: GroupLinkAttributes;
   contents: GroupLinkContents;
 
   constructor(opts?: { attributes?: Partial<GroupLinkAttributes>; content?: GroupLinkContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, GroupLink.schema) as GroupLinkAttributes;
+    this.contents = opts?.content ?? xml.zero(GroupLink.schema.contents);
   }
 
   getText(): string {
@@ -4878,9 +4803,9 @@ export type PartLinkAttributes = {
 
 export type PartLinkContents = [Array<InstrumentLink>, Array<GroupLink>];
 
-export class PartLink implements XMLElement<PartLinkAttributes, PartLinkContents> {
-  static readonly elementName = 'part-link';
+export class PartLink implements XMLElement<'part-link', PartLinkAttributes, PartLinkContents> {
   static readonly schema = {
+    name: 'part-link',
     attributes: {
       'xlink:href': { type: 'required', value: { type: 'string' } },
       'xlink:actuate': {
@@ -4895,28 +4820,20 @@ export class PartLink implements XMLElement<PartLinkAttributes, PartLinkContents
       'xlink:title': { type: 'optional', value: { type: 'string' } },
       'xlink:type': { type: 'optional', value: { type: 'choices', choices: ['simple'] } },
     },
-    content: [
+    contents: [
       { type: 'label', label: 'instrument-links', value: { type: 'zeroOrMore', value: InstrumentLink } },
       { type: 'label', label: 'group-links', value: { type: 'zeroOrMore', value: GroupLink } },
     ],
-  };
+  } as const;
+
+  readonly schema = PartLink.schema;
 
   attributes: PartLinkAttributes;
   contents: PartLinkContents;
 
   constructor(opts?: { attributes?: Partial<PartLinkAttributes>; content?: PartLinkContents }) {
-    this.attributes = Object.assign(
-      {
-        ['xlink:href']: '',
-        ['xlink:actuate']: null,
-        ['xlink:role']: null,
-        ['xlink:show']: null,
-        ['xlink:title']: null,
-        ['xlink:type']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [[], []];
+    this.attributes = xml.mergeZero(opts?.attributes, PartLink.schema) as PartLinkAttributes;
+    this.contents = opts?.content ?? xml.zero(PartLink.schema.contents);
   }
   getXlinkHref(): string {
     return this.attributes['xlink:href'];
@@ -4984,9 +4901,9 @@ export type PartNameAttributes = {
 
 export type PartNameContents = [string];
 
-export class PartName implements XMLElement<PartNameAttributes, PartNameContents> {
-  static readonly elementName = 'part-name';
+export class PartName implements XMLElement<'part-name', PartNameAttributes, PartNameContents> {
   static readonly schema = {
+    name: 'part-name',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -5025,30 +4942,17 @@ export class PartName implements XMLElement<PartNameAttributes, PartNameContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = PartName.schema;
 
   attributes: PartNameAttributes;
   contents: PartNameContents;
 
   constructor(opts?: { attributes?: Partial<PartNameAttributes>; content?: PartNameContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['justify']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, PartName.schema) as PartNameAttributes;
+    this.contents = opts?.content ?? xml.zero(PartName.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -5130,25 +5034,29 @@ export type PartNameDisplayAttributes = { 'print-object': 'yes' | 'no' | null };
 
 export type PartNameDisplayContents = [Array<DisplayText | AccidentalText>];
 
-export class PartNameDisplay implements XMLElement<PartNameDisplayAttributes, PartNameDisplayContents> {
-  static readonly elementName = 'part-name-display';
+export class PartNameDisplay
+  implements XMLElement<'part-name-display', PartNameDisplayAttributes, PartNameDisplayContents>
+{
   static readonly schema = {
+    name: 'part-name-display',
     attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'texts',
         value: { type: 'zeroOrMore', value: { type: 'choices', choices: [DisplayText, AccidentalText] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = PartNameDisplay.schema;
 
   attributes: PartNameDisplayAttributes;
   contents: PartNameDisplayContents;
 
   constructor(opts?: { attributes?: Partial<PartNameDisplayAttributes>; content?: PartNameDisplayContents }) {
-    this.attributes = Object.assign({ ['print-object']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(opts?.attributes, PartNameDisplay.schema) as PartNameDisplayAttributes;
+    this.contents = opts?.content ?? xml.zero(PartNameDisplay.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -5180,9 +5088,11 @@ export type PartAbbreviationAttributes = {
 
 export type PartAbbreviationContents = [string];
 
-export class PartAbbreviation implements XMLElement<PartAbbreviationAttributes, PartAbbreviationContents> {
-  static readonly elementName = 'part-abbreviation';
+export class PartAbbreviation
+  implements XMLElement<'part-abbreviation', PartAbbreviationAttributes, PartAbbreviationContents>
+{
   static readonly schema = {
+    name: 'part-abbreviation',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -5221,30 +5131,17 @@ export class PartAbbreviation implements XMLElement<PartAbbreviationAttributes, 
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = PartAbbreviation.schema;
 
   attributes: PartAbbreviationAttributes;
   contents: PartAbbreviationContents;
 
   constructor(opts?: { attributes?: Partial<PartAbbreviationAttributes>; content?: PartAbbreviationContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['justify']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, PartAbbreviation.schema) as PartAbbreviationAttributes;
+    this.contents = opts?.content ?? xml.zero(PartAbbreviation.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -5327,19 +5224,22 @@ export type PartAbbreviationDisplayAttributes = { 'print-object': 'yes' | 'no' |
 export type PartAbbreviationDisplayContents = [Array<DisplayText | AccidentalText>];
 
 export class PartAbbreviationDisplay
-  implements XMLElement<PartAbbreviationDisplayAttributes, PartAbbreviationDisplayContents>
+  implements
+    XMLElement<'part-abbreviation-display', PartAbbreviationDisplayAttributes, PartAbbreviationDisplayContents>
 {
-  static readonly elementName = 'part-abbreviation-display';
   static readonly schema = {
+    name: 'part-abbreviation-display',
     attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'texts',
         value: { type: 'zeroOrMore', value: { type: 'choices', choices: [DisplayText, AccidentalText] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = PartAbbreviationDisplay.schema;
 
   attributes: PartAbbreviationDisplayAttributes;
   contents: PartAbbreviationDisplayContents;
@@ -5348,8 +5248,11 @@ export class PartAbbreviationDisplay
     attributes?: Partial<PartAbbreviationDisplayAttributes>;
     content?: PartAbbreviationDisplayContents;
   }) {
-    this.attributes = Object.assign({ ['print-object']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(
+      opts?.attributes,
+      PartAbbreviationDisplay.schema
+    ) as PartAbbreviationDisplayAttributes;
+    this.contents = opts?.content ?? xml.zero(PartAbbreviationDisplay.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -5369,16 +5272,21 @@ export type GroupAttributes = Record<string, unknown>;
 
 export type GroupContents = [string];
 
-export class Group implements XMLElement<GroupAttributes, GroupContents> {
-  static readonly elementName = 'group';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class Group implements XMLElement<'group', GroupAttributes, GroupContents> {
+  static readonly schema = {
+    name: 'group',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Group.schema;
 
   attributes: GroupAttributes;
   contents: GroupContents;
 
   constructor(opts?: { attributes?: Partial<GroupAttributes>; content?: GroupContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Group.schema) as GroupAttributes;
+    this.contents = opts?.content ?? xml.zero(Group.schema.contents);
   }
 
   getText(): string {
@@ -5393,16 +5301,21 @@ export type InstrumentNameAttributes = Record<string, unknown>;
 
 export type InstrumentNameContents = [string];
 
-export class InstrumentName implements XMLElement<InstrumentNameAttributes, InstrumentNameContents> {
-  static readonly elementName = 'instrument-name';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class InstrumentName implements XMLElement<'instrument-name', InstrumentNameAttributes, InstrumentNameContents> {
+  static readonly schema = {
+    name: 'instrument-name',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = InstrumentName.schema;
 
   attributes: InstrumentNameAttributes;
   contents: InstrumentNameContents;
 
   constructor(opts?: { attributes?: Partial<InstrumentNameAttributes>; content?: InstrumentNameContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, InstrumentName.schema) as InstrumentNameAttributes;
+    this.contents = opts?.content ?? xml.zero(InstrumentName.schema.contents);
   }
 
   getText(): string {
@@ -5418,10 +5331,15 @@ export type InstrumentAbbreviationAttributes = Record<string, unknown>;
 export type InstrumentAbbreviationContents = [string];
 
 export class InstrumentAbbreviation
-  implements XMLElement<InstrumentAbbreviationAttributes, InstrumentAbbreviationContents>
+  implements XMLElement<'instrument-abbreviation', InstrumentAbbreviationAttributes, InstrumentAbbreviationContents>
 {
-  static readonly elementName = 'instrument-abbreviation';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+  static readonly schema = {
+    name: 'instrument-abbreviation',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = InstrumentAbbreviation.schema;
 
   attributes: InstrumentAbbreviationAttributes;
   contents: InstrumentAbbreviationContents;
@@ -5430,8 +5348,11 @@ export class InstrumentAbbreviation
     attributes?: Partial<InstrumentAbbreviationAttributes>;
     content?: InstrumentAbbreviationContents;
   }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(
+      opts?.attributes,
+      InstrumentAbbreviation.schema
+    ) as InstrumentAbbreviationAttributes;
+    this.contents = opts?.content ?? xml.zero(InstrumentAbbreviation.schema.contents);
   }
 
   getText(): string {
@@ -5446,16 +5367,23 @@ export type InstrumentSoundAttributes = Record<string, unknown>;
 
 export type InstrumentSoundContents = [string];
 
-export class InstrumentSound implements XMLElement<InstrumentSoundAttributes, InstrumentSoundContents> {
-  static readonly elementName = 'instrument-sound';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class InstrumentSound
+  implements XMLElement<'instrument-sound', InstrumentSoundAttributes, InstrumentSoundContents>
+{
+  static readonly schema = {
+    name: 'instrument-sound',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = InstrumentSound.schema;
 
   attributes: InstrumentSoundAttributes;
   contents: InstrumentSoundContents;
 
   constructor(opts?: { attributes?: Partial<InstrumentSoundAttributes>; content?: InstrumentSoundContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, InstrumentSound.schema) as InstrumentSoundAttributes;
+    this.contents = opts?.content ?? xml.zero(InstrumentSound.schema.contents);
   }
 
   getText(): string {
@@ -5470,16 +5398,17 @@ export type SoloAttributes = Record<string, unknown>;
 
 export type SoloContents = [];
 
-export class Solo implements XMLElement<SoloAttributes, SoloContents> {
-  static readonly elementName = 'solo';
-  static readonly schema = { attributes: {}, content: [] };
+export class Solo implements XMLElement<'solo', SoloAttributes, SoloContents> {
+  static readonly schema = { name: 'solo', attributes: {}, contents: [] } as const;
+
+  readonly schema = Solo.schema;
 
   attributes: SoloAttributes;
   contents: SoloContents;
 
   constructor(opts?: { attributes?: Partial<SoloAttributes>; content?: SoloContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Solo.schema) as SoloAttributes;
+    this.contents = opts?.content ?? xml.zero(Solo.schema.contents);
   }
 }
 
@@ -5487,25 +5416,27 @@ export type EnsembleAttributes = Record<string, unknown>;
 
 export type EnsembleContents = ['' | number];
 
-export class Ensemble implements XMLElement<EnsembleAttributes, EnsembleContents> {
-  static readonly elementName = 'ensemble';
+export class Ensemble implements XMLElement<'ensemble', EnsembleAttributes, EnsembleContents> {
   static readonly schema = {
+    name: 'ensemble',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'size',
         value: { type: 'required', value: { type: 'choices', choices: ['', { type: 'int', min: 1, max: Infinity }] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Ensemble.schema;
 
   attributes: EnsembleAttributes;
   contents: EnsembleContents;
 
   constructor(opts?: { attributes?: Partial<EnsembleAttributes>; content?: EnsembleContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Ensemble.schema) as EnsembleAttributes;
+    this.contents = opts?.content ?? xml.zero(Ensemble.schema.contents);
   }
 
   getSize(): '' | number {
@@ -5520,16 +5451,21 @@ export type VirtualLibraryAttributes = Record<string, unknown>;
 
 export type VirtualLibraryContents = [string];
 
-export class VirtualLibrary implements XMLElement<VirtualLibraryAttributes, VirtualLibraryContents> {
-  static readonly elementName = 'virtual-library';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class VirtualLibrary implements XMLElement<'virtual-library', VirtualLibraryAttributes, VirtualLibraryContents> {
+  static readonly schema = {
+    name: 'virtual-library',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = VirtualLibrary.schema;
 
   attributes: VirtualLibraryAttributes;
   contents: VirtualLibraryContents;
 
   constructor(opts?: { attributes?: Partial<VirtualLibraryAttributes>; content?: VirtualLibraryContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, VirtualLibrary.schema) as VirtualLibraryAttributes;
+    this.contents = opts?.content ?? xml.zero(VirtualLibrary.schema.contents);
   }
 
   getText(): string {
@@ -5544,16 +5480,21 @@ export type VirtualNameAttributes = Record<string, unknown>;
 
 export type VirtualNameContents = [string];
 
-export class VirtualName implements XMLElement<VirtualNameAttributes, VirtualNameContents> {
-  static readonly elementName = 'virtual-name';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class VirtualName implements XMLElement<'virtual-name', VirtualNameAttributes, VirtualNameContents> {
+  static readonly schema = {
+    name: 'virtual-name',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = VirtualName.schema;
 
   attributes: VirtualNameAttributes;
   contents: VirtualNameContents;
 
   constructor(opts?: { attributes?: Partial<VirtualNameAttributes>; content?: VirtualNameContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, VirtualName.schema) as VirtualNameAttributes;
+    this.contents = opts?.content ?? xml.zero(VirtualName.schema.contents);
   }
 
   getText(): string {
@@ -5568,22 +5509,26 @@ export type VirtualInstrumentAttributes = Record<string, unknown>;
 
 export type VirtualInstrumentContents = [VirtualLibrary | null, VirtualName | null];
 
-export class VirtualInstrument implements XMLElement<VirtualInstrumentAttributes, VirtualInstrumentContents> {
-  static readonly elementName = 'virtual-instrument';
+export class VirtualInstrument
+  implements XMLElement<'virtual-instrument', VirtualInstrumentAttributes, VirtualInstrumentContents>
+{
   static readonly schema = {
+    name: 'virtual-instrument',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: VirtualLibrary },
       { type: 'optional', value: VirtualName },
     ],
-  };
+  } as const;
+
+  readonly schema = VirtualInstrument.schema;
 
   attributes: VirtualInstrumentAttributes;
   contents: VirtualInstrumentContents;
 
   constructor(opts?: { attributes?: Partial<VirtualInstrumentAttributes>; content?: VirtualInstrumentContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, VirtualInstrument.schema) as VirtualInstrumentAttributes;
+    this.contents = opts?.content ?? xml.zero(VirtualInstrument.schema.contents);
   }
 
   getVirtualLibrary(): VirtualLibrary | null {
@@ -5610,11 +5555,13 @@ export type ScoreInstrumentContents = [
   VirtualInstrument | null
 ];
 
-export class ScoreInstrument implements XMLElement<ScoreInstrumentAttributes, ScoreInstrumentContents> {
-  static readonly elementName = 'score-instrument';
+export class ScoreInstrument
+  implements XMLElement<'score-instrument', ScoreInstrumentAttributes, ScoreInstrumentContents>
+{
   static readonly schema = {
+    name: 'score-instrument',
     attributes: { id: { type: 'required', value: { type: 'string' } } },
-    content: [
+    contents: [
       { type: 'required', value: InstrumentName },
       { type: 'optional', value: InstrumentAbbreviation },
       { type: 'optional', value: InstrumentSound },
@@ -5625,14 +5572,16 @@ export class ScoreInstrument implements XMLElement<ScoreInstrumentAttributes, Sc
       },
       { type: 'optional', value: VirtualInstrument },
     ],
-  };
+  } as const;
+
+  readonly schema = ScoreInstrument.schema;
 
   attributes: ScoreInstrumentAttributes;
   contents: ScoreInstrumentContents;
 
   constructor(opts?: { attributes?: Partial<ScoreInstrumentAttributes>; content?: ScoreInstrumentContents }) {
-    this.attributes = Object.assign({ ['id']: '' }, opts?.attributes);
-    this.contents = opts?.content ?? [new InstrumentName(), null, null, [], null];
+    this.attributes = xml.mergeZero(opts?.attributes, ScoreInstrument.schema) as ScoreInstrumentAttributes;
+    this.contents = opts?.content ?? xml.zero(ScoreInstrument.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -5676,16 +5625,21 @@ export type PlayerAttributes = { id: string };
 
 export type PlayerContents = [];
 
-export class Player implements XMLElement<PlayerAttributes, PlayerContents> {
-  static readonly elementName = 'player';
-  static readonly schema = { attributes: { id: { type: 'required', value: { type: 'string' } } }, content: [] };
+export class Player implements XMLElement<'player', PlayerAttributes, PlayerContents> {
+  static readonly schema = {
+    name: 'player',
+    attributes: { id: { type: 'required', value: { type: 'string' } } },
+    contents: [],
+  } as const;
+
+  readonly schema = Player.schema;
 
   attributes: PlayerAttributes;
   contents: PlayerContents;
 
   constructor(opts?: { attributes?: Partial<PlayerAttributes>; content?: PlayerContents }) {
-    this.attributes = Object.assign({ ['id']: '' }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Player.schema) as PlayerAttributes;
+    this.contents = opts?.content ?? xml.zero(Player.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -5699,22 +5653,24 @@ export type MidiDeviceAttributes = { id: string | null; port: number | null };
 
 export type MidiDeviceContents = [string];
 
-export class MidiDevice implements XMLElement<MidiDeviceAttributes, MidiDeviceContents> {
-  static readonly elementName = 'midi-device';
+export class MidiDevice implements XMLElement<'midi-device', MidiDeviceAttributes, MidiDeviceContents> {
   static readonly schema = {
+    name: 'midi-device',
     attributes: {
       id: { type: 'optional', value: { type: 'string' } },
       port: { type: 'optional', value: { type: 'label', label: 'midi16', value: { type: 'int', min: 1, max: 16 } } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = MidiDevice.schema;
 
   attributes: MidiDeviceAttributes;
   contents: MidiDeviceContents;
 
   constructor(opts?: { attributes?: Partial<MidiDeviceAttributes>; content?: MidiDeviceContents }) {
-    this.attributes = Object.assign({ ['id']: null, ['port']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, MidiDevice.schema) as MidiDeviceAttributes;
+    this.contents = opts?.content ?? xml.zero(MidiDevice.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -5740,19 +5696,23 @@ export type MidiChannelAttributes = Record<string, unknown>;
 
 export type MidiChannelContents = [number];
 
-export class MidiChannel implements XMLElement<MidiChannelAttributes, MidiChannelContents> {
-  static readonly elementName = 'midi-channel';
+export class MidiChannel implements XMLElement<'midi-channel', MidiChannelAttributes, MidiChannelContents> {
   static readonly schema = {
+    name: 'midi-channel',
     attributes: {},
-    content: [{ type: 'required', value: { type: 'label', label: 'midi16', value: { type: 'int', min: 1, max: 16 } } }],
-  };
+    contents: [
+      { type: 'required', value: { type: 'label', label: 'midi16', value: { type: 'int', min: 1, max: 16 } } },
+    ],
+  } as const;
+
+  readonly schema = MidiChannel.schema;
 
   attributes: MidiChannelAttributes;
   contents: MidiChannelContents;
 
   constructor(opts?: { attributes?: Partial<MidiChannelAttributes>; content?: MidiChannelContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, MidiChannel.schema) as MidiChannelAttributes;
+    this.contents = opts?.content ?? xml.zero(MidiChannel.schema.contents);
   }
 
   getMidi16(): number {
@@ -5767,16 +5727,21 @@ export type MidiNameAttributes = Record<string, unknown>;
 
 export type MidiNameContents = [string];
 
-export class MidiName implements XMLElement<MidiNameAttributes, MidiNameContents> {
-  static readonly elementName = 'midi-name';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class MidiName implements XMLElement<'midi-name', MidiNameAttributes, MidiNameContents> {
+  static readonly schema = {
+    name: 'midi-name',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = MidiName.schema;
 
   attributes: MidiNameAttributes;
   contents: MidiNameContents;
 
   constructor(opts?: { attributes?: Partial<MidiNameAttributes>; content?: MidiNameContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, MidiName.schema) as MidiNameAttributes;
+    this.contents = opts?.content ?? xml.zero(MidiName.schema.contents);
   }
 
   getText(): string {
@@ -5791,21 +5756,23 @@ export type MidiBankAttributes = Record<string, unknown>;
 
 export type MidiBankContents = [number];
 
-export class MidiBank implements XMLElement<MidiBankAttributes, MidiBankContents> {
-  static readonly elementName = 'midi-bank';
+export class MidiBank implements XMLElement<'midi-bank', MidiBankAttributes, MidiBankContents> {
   static readonly schema = {
+    name: 'midi-bank',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: { type: 'label', label: 'midi16384', value: { type: 'int', min: 1, max: 16384 } } },
     ],
-  };
+  } as const;
+
+  readonly schema = MidiBank.schema;
 
   attributes: MidiBankAttributes;
   contents: MidiBankContents;
 
   constructor(opts?: { attributes?: Partial<MidiBankAttributes>; content?: MidiBankContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, MidiBank.schema) as MidiBankAttributes;
+    this.contents = opts?.content ?? xml.zero(MidiBank.schema.contents);
   }
 
   getMidi16384(): number {
@@ -5820,21 +5787,23 @@ export type MidiProgramAttributes = Record<string, unknown>;
 
 export type MidiProgramContents = [number];
 
-export class MidiProgram implements XMLElement<MidiProgramAttributes, MidiProgramContents> {
-  static readonly elementName = 'midi-program';
+export class MidiProgram implements XMLElement<'midi-program', MidiProgramAttributes, MidiProgramContents> {
   static readonly schema = {
+    name: 'midi-program',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: { type: 'label', label: 'midi128', value: { type: 'int', min: 1, max: 128 } } },
     ],
-  };
+  } as const;
+
+  readonly schema = MidiProgram.schema;
 
   attributes: MidiProgramAttributes;
   contents: MidiProgramContents;
 
   constructor(opts?: { attributes?: Partial<MidiProgramAttributes>; content?: MidiProgramContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, MidiProgram.schema) as MidiProgramAttributes;
+    this.contents = opts?.content ?? xml.zero(MidiProgram.schema.contents);
   }
 
   getMidi128(): number {
@@ -5849,21 +5818,23 @@ export type MidiUnpitchedAttributes = Record<string, unknown>;
 
 export type MidiUnpitchedContents = [number];
 
-export class MidiUnpitched implements XMLElement<MidiUnpitchedAttributes, MidiUnpitchedContents> {
-  static readonly elementName = 'midi-unpitched';
+export class MidiUnpitched implements XMLElement<'midi-unpitched', MidiUnpitchedAttributes, MidiUnpitchedContents> {
   static readonly schema = {
+    name: 'midi-unpitched',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: { type: 'label', label: 'midi128', value: { type: 'int', min: 1, max: 128 } } },
     ],
-  };
+  } as const;
+
+  readonly schema = MidiUnpitched.schema;
 
   attributes: MidiUnpitchedAttributes;
   contents: MidiUnpitchedContents;
 
   constructor(opts?: { attributes?: Partial<MidiUnpitchedAttributes>; content?: MidiUnpitchedContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, MidiUnpitched.schema) as MidiUnpitchedAttributes;
+    this.contents = opts?.content ?? xml.zero(MidiUnpitched.schema.contents);
   }
 
   getMidi128(): number {
@@ -5878,21 +5849,23 @@ export type VolumeAttributes = Record<string, unknown>;
 
 export type VolumeContents = [number];
 
-export class Volume implements XMLElement<VolumeAttributes, VolumeContents> {
-  static readonly elementName = 'volume';
+export class Volume implements XMLElement<'volume', VolumeAttributes, VolumeContents> {
   static readonly schema = {
+    name: 'volume',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'volume', value: { type: 'required', value: { type: 'float', min: 0, max: 100 } } },
     ],
-  };
+  } as const;
+
+  readonly schema = Volume.schema;
 
   attributes: VolumeAttributes;
   contents: VolumeContents;
 
   constructor(opts?: { attributes?: Partial<VolumeAttributes>; content?: VolumeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Volume.schema) as VolumeAttributes;
+    this.contents = opts?.content ?? xml.zero(Volume.schema.contents);
   }
 
   getVolume(): number {
@@ -5907,21 +5880,23 @@ export type PanAttributes = Record<string, unknown>;
 
 export type PanContents = [number];
 
-export class Pan implements XMLElement<PanAttributes, PanContents> {
-  static readonly elementName = 'pan';
+export class Pan implements XMLElement<'pan', PanAttributes, PanContents> {
   static readonly schema = {
+    name: 'pan',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'pan', value: { type: 'required', value: { type: 'float', min: -180, max: 180 } } },
     ],
-  };
+  } as const;
+
+  readonly schema = Pan.schema;
 
   attributes: PanAttributes;
   contents: PanContents;
 
   constructor(opts?: { attributes?: Partial<PanAttributes>; content?: PanContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Pan.schema) as PanAttributes;
+    this.contents = opts?.content ?? xml.zero(Pan.schema.contents);
   }
 
   getPan(): number {
@@ -5936,21 +5911,23 @@ export type ElevationAttributes = Record<string, unknown>;
 
 export type ElevationContents = [number];
 
-export class Elevation implements XMLElement<ElevationAttributes, ElevationContents> {
-  static readonly elementName = 'elevation';
+export class Elevation implements XMLElement<'elevation', ElevationAttributes, ElevationContents> {
   static readonly schema = {
+    name: 'elevation',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'elevation', value: { type: 'required', value: { type: 'float', min: -180, max: 180 } } },
     ],
-  };
+  } as const;
+
+  readonly schema = Elevation.schema;
 
   attributes: ElevationAttributes;
   contents: ElevationContents;
 
   constructor(opts?: { attributes?: Partial<ElevationAttributes>; content?: ElevationContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Elevation.schema) as ElevationAttributes;
+    this.contents = opts?.content ?? xml.zero(Elevation.schema.contents);
   }
 
   getElevation(): number {
@@ -5974,11 +5951,11 @@ export type MidiInstrumentContents = [
   Elevation | null
 ];
 
-export class MidiInstrument implements XMLElement<MidiInstrumentAttributes, MidiInstrumentContents> {
-  static readonly elementName = 'midi-instrument';
+export class MidiInstrument implements XMLElement<'midi-instrument', MidiInstrumentAttributes, MidiInstrumentContents> {
   static readonly schema = {
+    name: 'midi-instrument',
     attributes: { id: { type: 'required', value: { type: 'string' } } },
-    content: [
+    contents: [
       { type: 'optional', value: MidiChannel },
       { type: 'optional', value: MidiName },
       { type: 'optional', value: MidiBank },
@@ -5988,14 +5965,16 @@ export class MidiInstrument implements XMLElement<MidiInstrumentAttributes, Midi
       { type: 'optional', value: Pan },
       { type: 'optional', value: Elevation },
     ],
-  };
+  } as const;
+
+  readonly schema = MidiInstrument.schema;
 
   attributes: MidiInstrumentAttributes;
   contents: MidiInstrumentContents;
 
   constructor(opts?: { attributes?: Partial<MidiInstrumentAttributes>; content?: MidiInstrumentContents }) {
-    this.attributes = Object.assign({ ['id']: '' }, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, null, null, null, null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, MidiInstrument.schema) as MidiInstrumentAttributes;
+    this.contents = opts?.content ?? xml.zero(MidiInstrument.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -6068,11 +6047,11 @@ export type ScorePartContents = [
   Array<MidiDevice | MidiInstrument>
 ];
 
-export class ScorePart implements XMLElement<ScorePartAttributes, ScorePartContents> {
-  static readonly elementName = 'score-part';
+export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, ScorePartContents> {
   static readonly schema = {
+    name: 'score-part',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: Identification },
       { type: 'label', label: 'part-links', value: { type: 'zeroOrMore', value: PartLink } },
       { type: 'required', value: PartName },
@@ -6088,14 +6067,16 @@ export class ScorePart implements XMLElement<ScorePartAttributes, ScorePartConte
         value: { type: 'zeroOrMore', value: { type: 'choices', choices: [MidiDevice, MidiInstrument] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = ScorePart.schema;
 
   attributes: ScorePartAttributes;
   contents: ScorePartContents;
 
   constructor(opts?: { attributes?: Partial<ScorePartAttributes>; content?: ScorePartContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, [], new PartName(), null, null, null, [], [], [], []];
+    this.attributes = xml.mergeZero(opts?.attributes, ScorePart.schema) as ScorePartAttributes;
+    this.contents = opts?.content ?? xml.zero(ScorePart.schema.contents);
   }
 
   getIdentification(): Identification | null {
@@ -6164,11 +6145,11 @@ export type PartListAttributes = Record<string, unknown>;
 
 export type PartListContents = [Array<PartGroup>, ScorePart, Array<PartGroup | ScorePart>];
 
-export class PartList implements XMLElement<PartListAttributes, PartListContents> {
-  static readonly elementName = 'part-list';
+export class PartList implements XMLElement<'part-list', PartListAttributes, PartListContents> {
   static readonly schema = {
+    name: 'part-list',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'part-groups', value: { type: 'zeroOrMore', value: PartGroup } },
       { type: 'required', value: ScorePart },
       {
@@ -6177,14 +6158,16 @@ export class PartList implements XMLElement<PartListAttributes, PartListContents
         value: { type: 'zeroOrMore', value: { type: 'choices', choices: [PartGroup, ScorePart] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = PartList.schema;
 
   attributes: PartListAttributes;
   contents: PartListContents;
 
   constructor(opts?: { attributes?: Partial<PartListAttributes>; content?: PartListContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[], new ScorePart(), []];
+    this.attributes = xml.mergeZero(opts?.attributes, PartList.schema) as PartListAttributes;
+    this.contents = opts?.content ?? xml.zero(PartList.schema.contents);
   }
 
   getPartGroups(): Array<PartGroup> {
@@ -6211,16 +6194,17 @@ export type PartAttributes = Record<string, unknown>;
 
 export type PartContents = [];
 
-export class Part implements XMLElement<PartAttributes, PartContents> {
-  static readonly elementName = 'part';
-  static readonly schema = { attributes: {}, content: [] };
+export class Part implements XMLElement<'part', PartAttributes, PartContents> {
+  static readonly schema = { name: 'part', attributes: {}, contents: [] } as const;
+
+  readonly schema = Part.schema;
 
   attributes: PartAttributes;
   contents: PartContents;
 
   constructor(opts?: { attributes?: Partial<PartAttributes>; content?: PartContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Part.schema) as PartAttributes;
+    this.contents = opts?.content ?? xml.zero(Part.schema.contents);
   }
 }
 
@@ -6233,27 +6217,26 @@ export type GraceAttributes = {
 
 export type GraceContents = [];
 
-export class Grace implements XMLElement<GraceAttributes, GraceContents> {
-  static readonly elementName = 'grace';
+export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents> {
   static readonly schema = {
+    name: 'grace',
     attributes: {
       'make-time': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'steal-time-following': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'steal-time-previous': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Grace.schema;
 
   attributes: GraceAttributes;
   contents: GraceContents;
 
   constructor(opts?: { attributes?: Partial<GraceAttributes>; content?: GraceContents }) {
-    this.attributes = Object.assign(
-      { ['make-time']: null, ['slash']: null, ['steal-time-following']: null, ['steal-time-previous']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Grace.schema) as GraceAttributes;
+    this.contents = opts?.content ?? xml.zero(Grace.schema.contents);
   }
   getMakeTime(): number | null {
     return this.attributes['make-time'];
@@ -6285,16 +6268,17 @@ export type ChordAttributes = Record<string, unknown>;
 
 export type ChordContents = [];
 
-export class Chord implements XMLElement<ChordAttributes, ChordContents> {
-  static readonly elementName = 'chord';
-  static readonly schema = { attributes: {}, content: [] };
+export class Chord implements XMLElement<'chord', ChordAttributes, ChordContents> {
+  static readonly schema = { name: 'chord', attributes: {}, contents: [] } as const;
+
+  readonly schema = Chord.schema;
 
   attributes: ChordAttributes;
   contents: ChordContents;
 
   constructor(opts?: { attributes?: Partial<ChordAttributes>; content?: ChordContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Chord.schema) as ChordAttributes;
+    this.contents = opts?.content ?? xml.zero(Chord.schema.contents);
   }
 }
 
@@ -6302,11 +6286,11 @@ export type StepAttributes = Record<string, unknown>;
 
 export type StepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
 
-export class Step implements XMLElement<StepAttributes, StepContents> {
-  static readonly elementName = 'step';
+export class Step implements XMLElement<'step', StepAttributes, StepContents> {
   static readonly schema = {
+    name: 'step',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -6316,14 +6300,16 @@ export class Step implements XMLElement<StepAttributes, StepContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Step.schema;
 
   attributes: StepAttributes;
   contents: StepContents;
 
   constructor(opts?: { attributes?: Partial<StepAttributes>; content?: StepContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['A'];
+    this.attributes = xml.mergeZero(opts?.attributes, Step.schema) as StepAttributes;
+    this.contents = opts?.content ?? xml.zero(Step.schema.contents);
   }
 
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
@@ -6338,24 +6324,26 @@ export type AlterAttributes = Record<string, unknown>;
 
 export type AlterContents = [number];
 
-export class Alter implements XMLElement<AlterAttributes, AlterContents> {
-  static readonly elementName = 'alter';
+export class Alter implements XMLElement<'alter', AlterAttributes, AlterContents> {
   static readonly schema = {
+    name: 'alter',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'semitones', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Alter.schema;
 
   attributes: AlterAttributes;
   contents: AlterContents;
 
   constructor(opts?: { attributes?: Partial<AlterAttributes>; content?: AlterContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Alter.schema) as AlterAttributes;
+    this.contents = opts?.content ?? xml.zero(Alter.schema.contents);
   }
 
   getSemitones(): number {
@@ -6370,19 +6358,21 @@ export type OctaveAttributes = Record<string, unknown>;
 
 export type OctaveContents = [number];
 
-export class Octave implements XMLElement<OctaveAttributes, OctaveContents> {
-  static readonly elementName = 'octave';
+export class Octave implements XMLElement<'octave', OctaveAttributes, OctaveContents> {
   static readonly schema = {
+    name: 'octave',
     attributes: {},
-    content: [{ type: 'required', value: { type: 'label', label: 'octave', value: { type: 'int', min: 0, max: 9 } } }],
-  };
+    contents: [{ type: 'required', value: { type: 'label', label: 'octave', value: { type: 'int', min: 0, max: 9 } } }],
+  } as const;
+
+  readonly schema = Octave.schema;
 
   attributes: OctaveAttributes;
   contents: OctaveContents;
 
   constructor(opts?: { attributes?: Partial<OctaveAttributes>; content?: OctaveContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Octave.schema) as OctaveAttributes;
+    this.contents = opts?.content ?? xml.zero(Octave.schema.contents);
   }
 
   getOctave(): number {
@@ -6397,23 +6387,25 @@ export type PitchAttributes = Record<string, unknown>;
 
 export type PitchContents = [Step, Alter | null, Octave];
 
-export class Pitch implements XMLElement<PitchAttributes, PitchContents> {
-  static readonly elementName = 'pitch';
+export class Pitch implements XMLElement<'pitch', PitchAttributes, PitchContents> {
   static readonly schema = {
+    name: 'pitch',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: Step },
       { type: 'optional', value: Alter },
       { type: 'required', value: Octave },
     ],
-  };
+  } as const;
+
+  readonly schema = Pitch.schema;
 
   attributes: PitchAttributes;
   contents: PitchContents;
 
   constructor(opts?: { attributes?: Partial<PitchAttributes>; content?: PitchContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new Step(), null, new Octave()];
+    this.attributes = xml.mergeZero(opts?.attributes, Pitch.schema) as PitchAttributes;
+    this.contents = opts?.content ?? xml.zero(Pitch.schema.contents);
   }
 
   getStep(): Step {
@@ -6440,11 +6432,11 @@ export type DisplayStepAttributes = Record<string, unknown>;
 
 export type DisplayStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
 
-export class DisplayStep implements XMLElement<DisplayStepAttributes, DisplayStepContents> {
-  static readonly elementName = 'display-step';
+export class DisplayStep implements XMLElement<'display-step', DisplayStepAttributes, DisplayStepContents> {
   static readonly schema = {
+    name: 'display-step',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -6454,14 +6446,16 @@ export class DisplayStep implements XMLElement<DisplayStepAttributes, DisplaySte
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = DisplayStep.schema;
 
   attributes: DisplayStepAttributes;
   contents: DisplayStepContents;
 
   constructor(opts?: { attributes?: Partial<DisplayStepAttributes>; content?: DisplayStepContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['A'];
+    this.attributes = xml.mergeZero(opts?.attributes, DisplayStep.schema) as DisplayStepAttributes;
+    this.contents = opts?.content ?? xml.zero(DisplayStep.schema.contents);
   }
 
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
@@ -6476,19 +6470,21 @@ export type DisplayOctaveAttributes = Record<string, unknown>;
 
 export type DisplayOctaveContents = [number];
 
-export class DisplayOctave implements XMLElement<DisplayOctaveAttributes, DisplayOctaveContents> {
-  static readonly elementName = 'display-octave';
+export class DisplayOctave implements XMLElement<'display-octave', DisplayOctaveAttributes, DisplayOctaveContents> {
   static readonly schema = {
+    name: 'display-octave',
     attributes: {},
-    content: [{ type: 'required', value: { type: 'label', label: 'octave', value: { type: 'int', min: 0, max: 9 } } }],
-  };
+    contents: [{ type: 'required', value: { type: 'label', label: 'octave', value: { type: 'int', min: 0, max: 9 } } }],
+  } as const;
+
+  readonly schema = DisplayOctave.schema;
 
   attributes: DisplayOctaveAttributes;
   contents: DisplayOctaveContents;
 
   constructor(opts?: { attributes?: Partial<DisplayOctaveAttributes>; content?: DisplayOctaveContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, DisplayOctave.schema) as DisplayOctaveAttributes;
+    this.contents = opts?.content ?? xml.zero(DisplayOctave.schema.contents);
   }
 
   getOctave(): number {
@@ -6503,22 +6499,24 @@ export type UnpitchedAttributes = Record<string, unknown>;
 
 export type UnpitchedContents = [DisplayStep, DisplayOctave];
 
-export class Unpitched implements XMLElement<UnpitchedAttributes, UnpitchedContents> {
-  static readonly elementName = 'unpitched';
+export class Unpitched implements XMLElement<'unpitched', UnpitchedAttributes, UnpitchedContents> {
   static readonly schema = {
+    name: 'unpitched',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: DisplayStep },
       { type: 'required', value: DisplayOctave },
     ],
-  };
+  } as const;
+
+  readonly schema = Unpitched.schema;
 
   attributes: UnpitchedAttributes;
   contents: UnpitchedContents;
 
   constructor(opts?: { attributes?: Partial<UnpitchedAttributes>; content?: UnpitchedContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new DisplayStep(), new DisplayOctave()];
+    this.attributes = xml.mergeZero(opts?.attributes, Unpitched.schema) as UnpitchedAttributes;
+    this.contents = opts?.content ?? xml.zero(Unpitched.schema.contents);
   }
 
   getDisplayStep(): DisplayStep {
@@ -6539,22 +6537,24 @@ export type RestAttributes = { measure: 'yes' | 'no' | null };
 
 export type RestContents = [DisplayStep, DisplayOctave];
 
-export class Rest implements XMLElement<RestAttributes, RestContents> {
-  static readonly elementName = 'rest';
+export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
   static readonly schema = {
+    name: 'rest',
     attributes: { measure: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-    content: [
+    contents: [
       { type: 'required', value: DisplayStep },
       { type: 'required', value: DisplayOctave },
     ],
-  };
+  } as const;
+
+  readonly schema = Rest.schema;
 
   attributes: RestAttributes;
   contents: RestContents;
 
   constructor(opts?: { attributes?: Partial<RestAttributes>; content?: RestContents }) {
-    this.attributes = Object.assign({ ['measure']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [new DisplayStep(), new DisplayOctave()];
+    this.attributes = xml.mergeZero(opts?.attributes, Rest.schema) as RestAttributes;
+    this.contents = opts?.content ?? xml.zero(Rest.schema.contents);
   }
   getMeasure(): 'yes' | 'no' | null {
     return this.attributes['measure'];
@@ -6580,22 +6580,24 @@ export type TieAttributes = { type: 'start' | 'stop'; 'time-only': string | null
 
 export type TieContents = [];
 
-export class Tie implements XMLElement<TieAttributes, TieContents> {
-  static readonly elementName = 'tie';
+export class Tie implements XMLElement<'tie', TieAttributes, TieContents> {
   static readonly schema = {
+    name: 'tie',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Tie.schema;
 
   attributes: TieAttributes;
   contents: TieContents;
 
   constructor(opts?: { attributes?: Partial<TieAttributes>; content?: TieContents }) {
-    this.attributes = Object.assign({ ['type']: 'start', ['time-only']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Tie.schema) as TieAttributes;
+    this.contents = opts?.content ?? xml.zero(Tie.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -6615,16 +6617,17 @@ export type CueAttributes = Record<string, unknown>;
 
 export type CueContents = [];
 
-export class Cue implements XMLElement<CueAttributes, CueContents> {
-  static readonly elementName = 'cue';
-  static readonly schema = { attributes: {}, content: [] };
+export class Cue implements XMLElement<'cue', CueAttributes, CueContents> {
+  static readonly schema = { name: 'cue', attributes: {}, contents: [] } as const;
+
+  readonly schema = Cue.schema;
 
   attributes: CueAttributes;
   contents: CueContents;
 
   constructor(opts?: { attributes?: Partial<CueAttributes>; content?: CueContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Cue.schema) as CueAttributes;
+    this.contents = opts?.content ?? xml.zero(Cue.schema.contents);
   }
 }
 
@@ -6632,24 +6635,26 @@ export type DurationAttributes = Record<string, unknown>;
 
 export type DurationContents = [number];
 
-export class Duration implements XMLElement<DurationAttributes, DurationContents> {
-  static readonly elementName = 'duration';
+export class Duration implements XMLElement<'duration', DurationAttributes, DurationContents> {
   static readonly schema = {
+    name: 'duration',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'positive-divisions', value: { type: 'float', min: 1, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Duration.schema;
 
   attributes: DurationAttributes;
   contents: DurationContents;
 
   constructor(opts?: { attributes?: Partial<DurationAttributes>; content?: DurationContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Duration.schema) as DurationAttributes;
+    this.contents = opts?.content ?? xml.zero(Duration.schema.contents);
   }
 
   getPositiveDivisions(): number {
@@ -6664,16 +6669,21 @@ export type InstrumentAttributes = { id: string };
 
 export type InstrumentContents = [];
 
-export class Instrument implements XMLElement<InstrumentAttributes, InstrumentContents> {
-  static readonly elementName = 'instrument';
-  static readonly schema = { attributes: { id: { type: 'required', value: { type: 'string' } } }, content: [] };
+export class Instrument implements XMLElement<'instrument', InstrumentAttributes, InstrumentContents> {
+  static readonly schema = {
+    name: 'instrument',
+    attributes: { id: { type: 'required', value: { type: 'string' } } },
+    contents: [],
+  } as const;
+
+  readonly schema = Instrument.schema;
 
   attributes: InstrumentAttributes;
   contents: InstrumentContents;
 
   constructor(opts?: { attributes?: Partial<InstrumentAttributes>; content?: InstrumentContents }) {
-    this.attributes = Object.assign({ ['id']: '' }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Instrument.schema) as InstrumentAttributes;
+    this.contents = opts?.content ?? xml.zero(Instrument.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -6687,16 +6697,21 @@ export type VoiceAttributes = Record<string, unknown>;
 
 export type VoiceContents = [string];
 
-export class Voice implements XMLElement<VoiceAttributes, VoiceContents> {
-  static readonly elementName = 'voice';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class Voice implements XMLElement<'voice', VoiceAttributes, VoiceContents> {
+  static readonly schema = {
+    name: 'voice',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Voice.schema;
 
   attributes: VoiceAttributes;
   contents: VoiceContents;
 
   constructor(opts?: { attributes?: Partial<VoiceAttributes>; content?: VoiceContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Voice.schema) as VoiceAttributes;
+    this.contents = opts?.content ?? xml.zero(Voice.schema.contents);
   }
 
   getText(): string {
@@ -6727,13 +6742,13 @@ export type TypeContents = [
   | 'maxima'
 ];
 
-export class Type implements XMLElement<TypeAttributes, TypeContents> {
-  static readonly elementName = 'type';
+export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
   static readonly schema = {
+    name: 'type',
     attributes: {
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -6762,14 +6777,16 @@ export class Type implements XMLElement<TypeAttributes, TypeContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Type.schema;
 
   attributes: TypeAttributes;
   contents: TypeContents;
 
   constructor(opts?: { attributes?: Partial<TypeAttributes>; content?: TypeContents }) {
-    this.attributes = Object.assign({ ['size']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['whole'];
+    this.attributes = xml.mergeZero(opts?.attributes, Type.schema) as TypeAttributes;
+    this.contents = opts?.content ?? xml.zero(Type.schema.contents);
   }
   getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
     return this.attributes['size'];
@@ -6832,9 +6849,9 @@ export type DotAttributes = {
 
 export type DotContents = [];
 
-export class Dot implements XMLElement<DotAttributes, DotContents> {
-  static readonly elementName = 'dot';
+export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
   static readonly schema = {
+    name: 'dot',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -6872,29 +6889,17 @@ export class Dot implements XMLElement<DotAttributes, DotContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Dot.schema;
 
   attributes: DotAttributes;
   contents: DotContents;
 
   constructor(opts?: { attributes?: Partial<DotAttributes>; content?: DotContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Dot.schema) as DotAttributes;
+    this.contents = opts?.content ?? xml.zero(Dot.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -7022,9 +7027,9 @@ export type AccidentalContents = [
   | 'koron'
 ];
 
-export class Accidental implements XMLElement<AccidentalAttributes, AccidentalContents> {
-  static readonly elementName = 'accidental';
+export class Accidental implements XMLElement<'accidental', AccidentalAttributes, AccidentalContents> {
   static readonly schema = {
+    name: 'accidental',
     attributes: {
       bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       cautionary: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -7067,7 +7072,7 @@ export class Accidental implements XMLElement<AccidentalAttributes, AccidentalCo
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
       smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -7122,33 +7127,16 @@ export class Accidental implements XMLElement<AccidentalAttributes, AccidentalCo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Accidental.schema;
 
   attributes: AccidentalAttributes;
   contents: AccidentalContents;
 
   constructor(opts?: { attributes?: Partial<AccidentalAttributes>; content?: AccidentalContents }) {
-    this.attributes = Object.assign(
-      {
-        ['bracket']: null,
-        ['cautionary']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['editorial']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['parentheses']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['size']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['other'];
+    this.attributes = xml.mergeZero(opts?.attributes, Accidental.schema) as AccidentalAttributes;
+    this.contents = opts?.content ?? xml.zero(Accidental.schema.contents);
   }
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
@@ -7338,16 +7326,21 @@ export type ActualNotesAttributes = Record<string, unknown>;
 
 export type ActualNotesContents = [string];
 
-export class ActualNotes implements XMLElement<ActualNotesAttributes, ActualNotesContents> {
-  static readonly elementName = 'actual-notes';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class ActualNotes implements XMLElement<'actual-notes', ActualNotesAttributes, ActualNotesContents> {
+  static readonly schema = {
+    name: 'actual-notes',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = ActualNotes.schema;
 
   attributes: ActualNotesAttributes;
   contents: ActualNotesContents;
 
   constructor(opts?: { attributes?: Partial<ActualNotesAttributes>; content?: ActualNotesContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, ActualNotes.schema) as ActualNotesAttributes;
+    this.contents = opts?.content ?? xml.zero(ActualNotes.schema.contents);
   }
 
   getText(): string {
@@ -7362,16 +7355,21 @@ export type NormalNotesAttributes = Record<string, unknown>;
 
 export type NormalNotesContents = [string];
 
-export class NormalNotes implements XMLElement<NormalNotesAttributes, NormalNotesContents> {
-  static readonly elementName = 'normal-notes';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class NormalNotes implements XMLElement<'normal-notes', NormalNotesAttributes, NormalNotesContents> {
+  static readonly schema = {
+    name: 'normal-notes',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = NormalNotes.schema;
 
   attributes: NormalNotesAttributes;
   contents: NormalNotesContents;
 
   constructor(opts?: { attributes?: Partial<NormalNotesAttributes>; content?: NormalNotesContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, NormalNotes.schema) as NormalNotesAttributes;
+    this.contents = opts?.content ?? xml.zero(NormalNotes.schema.contents);
   }
 
   getText(): string {
@@ -7402,11 +7400,11 @@ export type NormalTypeContents = [
   | 'maxima'
 ];
 
-export class NormalType implements XMLElement<NormalTypeAttributes, NormalTypeContents> {
-  static readonly elementName = 'normal-type';
+export class NormalType implements XMLElement<'normal-type', NormalTypeAttributes, NormalTypeContents> {
   static readonly schema = {
+    name: 'normal-type',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -7435,14 +7433,16 @@ export class NormalType implements XMLElement<NormalTypeAttributes, NormalTypeCo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = NormalType.schema;
 
   attributes: NormalTypeAttributes;
   contents: NormalTypeContents;
 
   constructor(opts?: { attributes?: Partial<NormalTypeAttributes>; content?: NormalTypeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['whole'];
+    this.attributes = xml.mergeZero(opts?.attributes, NormalType.schema) as NormalTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(NormalType.schema.contents);
   }
 
   getNoteTypeValue():
@@ -7489,16 +7489,17 @@ export type NormalDotAttributes = Record<string, unknown>;
 
 export type NormalDotContents = [];
 
-export class NormalDot implements XMLElement<NormalDotAttributes, NormalDotContents> {
-  static readonly elementName = 'normal-dot';
-  static readonly schema = { attributes: {}, content: [] };
+export class NormalDot implements XMLElement<'normal-dot', NormalDotAttributes, NormalDotContents> {
+  static readonly schema = { name: 'normal-dot', attributes: {}, contents: [] } as const;
+
+  readonly schema = NormalDot.schema;
 
   attributes: NormalDotAttributes;
   contents: NormalDotContents;
 
   constructor(opts?: { attributes?: Partial<NormalDotAttributes>; content?: NormalDotContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, NormalDot.schema) as NormalDotAttributes;
+    this.contents = opts?.content ?? xml.zero(NormalDot.schema.contents);
   }
 }
 
@@ -7506,11 +7507,13 @@ export type TimeModificationAttributes = Record<string, unknown>;
 
 export type TimeModificationContents = [ActualNotes, NormalNotes, [NormalType, Array<NormalDot>] | null];
 
-export class TimeModification implements XMLElement<TimeModificationAttributes, TimeModificationContents> {
-  static readonly elementName = 'time-modification';
+export class TimeModification
+  implements XMLElement<'time-modification', TimeModificationAttributes, TimeModificationContents>
+{
   static readonly schema = {
+    name: 'time-modification',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: ActualNotes },
       { type: 'required', value: NormalNotes },
       {
@@ -7525,14 +7528,16 @@ export class TimeModification implements XMLElement<TimeModificationAttributes, 
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = TimeModification.schema;
 
   attributes: TimeModificationAttributes;
   contents: TimeModificationContents;
 
   constructor(opts?: { attributes?: Partial<TimeModificationAttributes>; content?: TimeModificationContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new ActualNotes(), new NormalNotes(), null];
+    this.attributes = xml.mergeZero(opts?.attributes, TimeModification.schema) as TimeModificationAttributes;
+    this.contents = opts?.content ?? xml.zero(TimeModification.schema.contents);
   }
 
   getActualNotes(): ActualNotes {
@@ -7565,9 +7570,9 @@ export type StemAttributes = {
 
 export type StemContents = [];
 
-export class Stem implements XMLElement<StemAttributes, StemContents> {
-  static readonly elementName = 'stem';
+export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
   static readonly schema = {
+    name: 'stem',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -7591,18 +7596,17 @@ export class Stem implements XMLElement<StemAttributes, StemContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Stem.schema;
 
   attributes: StemAttributes;
   contents: StemContents;
 
   constructor(opts?: { attributes?: Partial<StemAttributes>; content?: StemContents }) {
-    this.attributes = Object.assign(
-      { ['color']: null, ['default-x']: null, ['default-y']: null, ['relative-x']: null, ['relative-y']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Stem.schema) as StemAttributes;
+    this.contents = opts?.content ?? xml.zero(Stem.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -7678,9 +7682,9 @@ export type NoteheadContents = [
   | 'x'
 ];
 
-export class Notehead implements XMLElement<NoteheadAttributes, NoteheadContents> {
-  static readonly elementName = 'notehead';
+export class Notehead implements XMLElement<'notehead', NoteheadAttributes, NoteheadContents> {
   static readonly schema = {
+    name: 'notehead',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       filled: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -7700,7 +7704,7 @@ export class Notehead implements XMLElement<NoteheadAttributes, NoteheadContents
       parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -7742,26 +7746,16 @@ export class Notehead implements XMLElement<NoteheadAttributes, NoteheadContents
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Notehead.schema;
 
   attributes: NoteheadAttributes;
   contents: NoteheadContents;
 
   constructor(opts?: { attributes?: Partial<NoteheadAttributes>; content?: NoteheadContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['filled']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['parentheses']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['other'];
+    this.attributes = xml.mergeZero(opts?.attributes, Notehead.schema) as NoteheadAttributes;
+    this.contents = opts?.content ?? xml.zero(Notehead.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -7883,19 +7877,21 @@ export type NoteheadTextAttributes = Record<string, unknown>;
 
 export type NoteheadTextContents = [Array<[DisplayText, AccidentalText]>];
 
-export class NoteheadText implements XMLElement<NoteheadTextAttributes, NoteheadTextContents> {
-  static readonly elementName = 'notehead-text';
+export class NoteheadText implements XMLElement<'notehead-text', NoteheadTextAttributes, NoteheadTextContents> {
   static readonly schema = {
+    name: 'notehead-text',
     attributes: {},
-    content: [{ type: 'label', label: 'texts', value: { type: 'oneOrMore', value: [DisplayText, AccidentalText] } }],
-  };
+    contents: [{ type: 'label', label: 'texts', value: { type: 'oneOrMore', value: [DisplayText, AccidentalText] } }],
+  } as const;
+
+  readonly schema = NoteheadText.schema;
 
   attributes: NoteheadTextAttributes;
   contents: NoteheadTextContents;
 
   constructor(opts?: { attributes?: Partial<NoteheadTextAttributes>; content?: NoteheadTextContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[[new DisplayText(), new AccidentalText()]]];
+    this.attributes = xml.mergeZero(opts?.attributes, NoteheadText.schema) as NoteheadTextAttributes;
+    this.contents = opts?.content ?? xml.zero(NoteheadText.schema.contents);
   }
 
   getTexts(): Array<[DisplayText, AccidentalText]> {
@@ -7910,21 +7906,23 @@ export type StaffAttributes = Record<string, unknown>;
 
 export type StaffContents = [number];
 
-export class Staff implements XMLElement<StaffAttributes, StaffContents> {
-  static readonly elementName = 'staff';
+export class Staff implements XMLElement<'staff', StaffAttributes, StaffContents> {
   static readonly schema = {
+    name: 'staff',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'staff', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
     ],
-  };
+  } as const;
+
+  readonly schema = Staff.schema;
 
   attributes: StaffAttributes;
   contents: StaffContents;
 
   constructor(opts?: { attributes?: Partial<StaffAttributes>; content?: StaffContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Staff.schema) as StaffAttributes;
+    this.contents = opts?.content ?? xml.zero(Staff.schema.contents);
   }
 
   getStaff(): number {
@@ -7945,9 +7943,9 @@ export type BeamAttributes = {
 
 export type BeamContents = ['backward hook' | 'begin' | 'continue' | 'end' | 'forward hook'];
 
-export class Beam implements XMLElement<BeamAttributes, BeamContents> {
-  static readonly elementName = 'beam';
+export class Beam implements XMLElement<'beam', BeamAttributes, BeamContents> {
   static readonly schema = {
+    name: 'beam',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       fan: { type: 'optional', value: { type: 'choices', choices: ['accel', 'none', 'rit'] } },
@@ -7955,7 +7953,7 @@ export class Beam implements XMLElement<BeamAttributes, BeamContents> {
       number: { type: 'optional', value: { type: 'int', min: 1, max: 8 } },
       repeater: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -7965,17 +7963,16 @@ export class Beam implements XMLElement<BeamAttributes, BeamContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Beam.schema;
 
   attributes: BeamAttributes;
   contents: BeamContents;
 
   constructor(opts?: { attributes?: Partial<BeamAttributes>; content?: BeamContents }) {
-    this.attributes = Object.assign(
-      { ['color']: null, ['fan']: null, ['id']: null, ['number']: null, ['repeater']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['backward hook'];
+    this.attributes = xml.mergeZero(opts?.attributes, Beam.schema) as BeamAttributes;
+    this.contents = opts?.content ?? xml.zero(Beam.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -8037,9 +8034,9 @@ export type TiedAttributes = {
 
 export type TiedContents = [];
 
-export class Tied implements XMLElement<TiedAttributes, TiedContents> {
-  static readonly elementName = 'tied';
+export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
   static readonly schema = {
+    name: 'tied',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue', 'let-ring'] } },
       'bezier-x': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
@@ -8075,36 +8072,17 @@ export class Tied implements XMLElement<TiedAttributes, TiedContents> {
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Tied.schema;
 
   attributes: TiedAttributes;
   contents: TiedContents;
 
   constructor(opts?: { attributes?: Partial<TiedAttributes>; content?: TiedContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'start',
-        ['bezier-x']: null,
-        ['bezier-x2']: null,
-        ['bezier-y']: null,
-        ['bezier-y2']: null,
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['id']: null,
-        ['line-type']: null,
-        ['number']: null,
-        ['orientation']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['space-length']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Tied.schema) as TiedAttributes;
+    this.contents = opts?.content ?? xml.zero(Tied.schema.contents);
   }
   getType(): 'start' | 'stop' | 'continue' | 'let-ring' {
     return this.attributes['type'];
@@ -8232,9 +8210,9 @@ export type SlurAttributes = {
 
 export type SlurContents = [];
 
-export class Slur implements XMLElement<SlurAttributes, SlurContents> {
-  static readonly elementName = 'slur';
+export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
   static readonly schema = {
+    name: 'slur',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
       'bezier-x': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
@@ -8270,36 +8248,17 @@ export class Slur implements XMLElement<SlurAttributes, SlurContents> {
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Slur.schema;
 
   attributes: SlurAttributes;
   contents: SlurContents;
 
   constructor(opts?: { attributes?: Partial<SlurAttributes>; content?: SlurContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'start',
-        ['bezier-x']: null,
-        ['bezier-x2']: null,
-        ['bezier-y']: null,
-        ['bezier-y2']: null,
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['id']: null,
-        ['line-type']: null,
-        ['number']: null,
-        ['orientation']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['space-length']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Slur.schema) as SlurAttributes;
+    this.contents = opts?.content ?? xml.zero(Slur.schema.contents);
   }
   getType(): 'start' | 'stop' | 'continue' {
     return this.attributes['type'];
@@ -8415,9 +8374,9 @@ export type TupletNumberAttributes = {
 
 export type TupletNumberContents = [string];
 
-export class TupletNumber implements XMLElement<TupletNumberAttributes, TupletNumberContents> {
-  static readonly elementName = 'tuplet-number';
+export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAttributes, TupletNumberContents> {
   static readonly schema = {
+    name: 'tuplet-number',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
@@ -8434,18 +8393,17 @@ export class TupletNumber implements XMLElement<TupletNumberAttributes, TupletNu
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = TupletNumber.schema;
 
   attributes: TupletNumberAttributes;
   contents: TupletNumberContents;
 
   constructor(opts?: { attributes?: Partial<TupletNumberAttributes>; content?: TupletNumberContents }) {
-    this.attributes = Object.assign(
-      { ['color']: null, ['font-family']: null, ['font-size']: null, ['font-style']: null, ['font-weight']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, TupletNumber.schema) as TupletNumberAttributes;
+    this.contents = opts?.content ?? xml.zero(TupletNumber.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -8497,9 +8455,9 @@ export type TupletTypeAttributes = {
 
 export type TupletTypeContents = [];
 
-export class TupletType implements XMLElement<TupletTypeAttributes, TupletTypeContents> {
-  static readonly elementName = 'tuplet-type';
+export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttributes, TupletTypeContents> {
   static readonly schema = {
+    name: 'tuplet-type',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
@@ -8516,18 +8474,17 @@ export class TupletType implements XMLElement<TupletTypeAttributes, TupletTypeCo
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = TupletType.schema;
 
   attributes: TupletTypeAttributes;
   contents: TupletTypeContents;
 
   constructor(opts?: { attributes?: Partial<TupletTypeAttributes>; content?: TupletTypeContents }) {
-    this.attributes = Object.assign(
-      { ['color']: null, ['font-family']: null, ['font-size']: null, ['font-style']: null, ['font-weight']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, TupletType.schema) as TupletTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(TupletType.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -8573,9 +8530,9 @@ export type TupletDotAttributes = {
 
 export type TupletDotContents = [];
 
-export class TupletDot implements XMLElement<TupletDotAttributes, TupletDotContents> {
-  static readonly elementName = 'tuplet-dot';
+export class TupletDot implements XMLElement<'tuplet-dot', TupletDotAttributes, TupletDotContents> {
   static readonly schema = {
+    name: 'tuplet-dot',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
@@ -8592,18 +8549,17 @@ export class TupletDot implements XMLElement<TupletDotAttributes, TupletDotConte
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = TupletDot.schema;
 
   attributes: TupletDotAttributes;
   contents: TupletDotContents;
 
   constructor(opts?: { attributes?: Partial<TupletDotAttributes>; content?: TupletDotContents }) {
-    this.attributes = Object.assign(
-      { ['color']: null, ['font-family']: null, ['font-size']: null, ['font-style']: null, ['font-weight']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, TupletDot.schema) as TupletDotAttributes;
+    this.contents = opts?.content ?? xml.zero(TupletDot.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -8643,23 +8599,25 @@ export type TupletActualAttributes = Record<string, unknown>;
 
 export type TupletActualContents = [TupletNumber | null, TupletType | null, Array<TupletDot>];
 
-export class TupletActual implements XMLElement<TupletActualAttributes, TupletActualContents> {
-  static readonly elementName = 'tuplet-actual';
+export class TupletActual implements XMLElement<'tuplet-actual', TupletActualAttributes, TupletActualContents> {
   static readonly schema = {
+    name: 'tuplet-actual',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: TupletNumber },
       { type: 'optional', value: TupletType },
       { type: 'label', label: 'tuplet-dots', value: { type: 'zeroOrMore', value: TupletDot } },
     ],
-  };
+  } as const;
+
+  readonly schema = TupletActual.schema;
 
   attributes: TupletActualAttributes;
   contents: TupletActualContents;
 
   constructor(opts?: { attributes?: Partial<TupletActualAttributes>; content?: TupletActualContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, []];
+    this.attributes = xml.mergeZero(opts?.attributes, TupletActual.schema) as TupletActualAttributes;
+    this.contents = opts?.content ?? xml.zero(TupletActual.schema.contents);
   }
 
   getTupletNumber(): TupletNumber | null {
@@ -8686,23 +8644,25 @@ export type TupletNormalAttributes = Record<string, unknown>;
 
 export type TupletNormalContents = [TupletNumber | null, TupletType | null, Array<TupletDot>];
 
-export class TupletNormal implements XMLElement<TupletNormalAttributes, TupletNormalContents> {
-  static readonly elementName = 'tuplet-normal';
+export class TupletNormal implements XMLElement<'tuplet-normal', TupletNormalAttributes, TupletNormalContents> {
   static readonly schema = {
+    name: 'tuplet-normal',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: TupletNumber },
       { type: 'optional', value: TupletType },
       { type: 'label', label: 'tuplet-dots', value: { type: 'zeroOrMore', value: TupletDot } },
     ],
-  };
+  } as const;
+
+  readonly schema = TupletNormal.schema;
 
   attributes: TupletNormalAttributes;
   contents: TupletNormalContents;
 
   constructor(opts?: { attributes?: Partial<TupletNormalAttributes>; content?: TupletNormalContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, []];
+    this.attributes = xml.mergeZero(opts?.attributes, TupletNormal.schema) as TupletNormalAttributes;
+    this.contents = opts?.content ?? xml.zero(TupletNormal.schema.contents);
   }
 
   getTupletNumber(): TupletNumber | null {
@@ -8742,9 +8702,9 @@ export type TupletAttributes = {
 
 export type TupletContents = [TupletActual | null, TupletNormal | null];
 
-export class Tuplet implements XMLElement<TupletAttributes, TupletContents> {
-  static readonly elementName = 'tuplet';
+export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletContents> {
   static readonly schema = {
+    name: 'tuplet',
     attributes: {
       type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop'] } },
       bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -8775,34 +8735,20 @@ export class Tuplet implements XMLElement<TupletAttributes, TupletContents> {
       'show-number': { type: 'optional', value: { type: 'choices', choices: ['none', 'actual', 'both'] } },
       'show-type': { type: 'optional', value: { type: 'choices', choices: ['none', 'actual', 'both'] } },
     },
-    content: [
+    contents: [
       { type: 'optional', value: TupletActual },
       { type: 'optional', value: TupletNormal },
     ],
-  };
+  } as const;
+
+  readonly schema = Tuplet.schema;
 
   attributes: TupletAttributes;
   contents: TupletContents;
 
   constructor(opts?: { attributes?: Partial<TupletAttributes>; content?: TupletContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: null,
-        ['bracket']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['id']: null,
-        ['line-shape']: null,
-        ['number']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['show-number']: null,
-        ['show-type']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Tuplet.schema) as TupletAttributes;
+    this.contents = opts?.content ?? xml.zero(Tuplet.schema.contents);
   }
   getType(): 'start' | 'stop' | null {
     return this.attributes['type'];
@@ -8910,9 +8856,9 @@ export type GlissandoAttributes = {
 
 export type GlissandoContents = [string];
 
-export class Glissando implements XMLElement<GlissandoAttributes, GlissandoContents> {
-  static readonly elementName = 'glissando';
+export class Glissando implements XMLElement<'glissando', GlissandoAttributes, GlissandoContents> {
   static readonly schema = {
+    name: 'glissando',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -8955,34 +8901,17 @@ export class Glissando implements XMLElement<GlissandoAttributes, GlissandoConte
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Glissando.schema;
 
   attributes: GlissandoAttributes;
   contents: GlissandoContents;
 
   constructor(opts?: { attributes?: Partial<GlissandoAttributes>; content?: GlissandoContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'start',
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['line-type']: null,
-        ['number']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['space-length']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Glissando.schema) as GlissandoAttributes;
+    this.contents = opts?.content ?? xml.zero(Glissando.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -9108,9 +9037,9 @@ export type SlideAttributes = {
 
 export type SlideContents = [string];
 
-export class Slide implements XMLElement<SlideAttributes, SlideContents> {
-  static readonly elementName = 'slide';
+export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents> {
   static readonly schema = {
+    name: 'slide',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -9157,38 +9086,17 @@ export class Slide implements XMLElement<SlideAttributes, SlideContents> {
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Slide.schema;
 
   attributes: SlideAttributes;
   contents: SlideContents;
 
   constructor(opts?: { attributes?: Partial<SlideAttributes>; content?: SlideContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'start',
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['first-beat']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['last-beat']: null,
-        ['line-type']: null,
-        ['number']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['space-length']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Slide.schema) as SlideAttributes;
+    this.contents = opts?.content ?? xml.zero(Slide.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -9336,9 +9244,9 @@ export type TrillMarkAttributes = {
 
 export type TrillMarkContents = [];
 
-export class TrillMark implements XMLElement<TrillMarkAttributes, TrillMarkContents> {
-  static readonly elementName = 'trill-mark';
+export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, TrillMarkContents> {
   static readonly schema = {
+    name: 'trill-mark',
     attributes: {
       acccelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
@@ -9383,36 +9291,17 @@ export class TrillMark implements XMLElement<TrillMarkAttributes, TrillMarkConte
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = TrillMark.schema;
 
   attributes: TrillMarkAttributes;
   contents: TrillMarkContents;
 
   constructor(opts?: { attributes?: Partial<TrillMarkAttributes>; content?: TrillMarkContents }) {
-    this.attributes = Object.assign(
-      {
-        ['acccelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, TrillMark.schema) as TrillMarkAttributes;
+    this.contents = opts?.content ?? xml.zero(TrillMark.schema.contents);
   }
   getAcccelerate(): 'yes' | 'no' | null {
     return this.attributes['acccelerate'];
@@ -9543,9 +9432,9 @@ export type TurnAttributes = {
 
 export type TurnContents = [];
 
-export class Turn implements XMLElement<TurnAttributes, TurnContents> {
-  static readonly elementName = 'turn';
+export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
   static readonly schema = {
+    name: 'turn',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
@@ -9591,37 +9480,17 @@ export class Turn implements XMLElement<TurnAttributes, TurnContents> {
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Turn.schema;
 
   attributes: TurnAttributes;
   contents: TurnContents;
 
   constructor(opts?: { attributes?: Partial<TurnAttributes>; content?: TurnContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['slash']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Turn.schema) as TurnAttributes;
+    this.contents = opts?.content ?? xml.zero(Turn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -9758,9 +9627,9 @@ export type DelayedTurnAttributes = {
 
 export type DelayedTurnContents = [];
 
-export class DelayedTurn implements XMLElement<DelayedTurnAttributes, DelayedTurnContents> {
-  static readonly elementName = 'delayed-turn';
+export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttributes, DelayedTurnContents> {
   static readonly schema = {
+    name: 'delayed-turn',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
@@ -9806,37 +9675,17 @@ export class DelayedTurn implements XMLElement<DelayedTurnAttributes, DelayedTur
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = DelayedTurn.schema;
 
   attributes: DelayedTurnAttributes;
   contents: DelayedTurnContents;
 
   constructor(opts?: { attributes?: Partial<DelayedTurnAttributes>; content?: DelayedTurnContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['slash']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, DelayedTurn.schema) as DelayedTurnAttributes;
+    this.contents = opts?.content ?? xml.zero(DelayedTurn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -9973,9 +9822,9 @@ export type InvertedTurnAttributes = {
 
 export type InvertedTurnContents = [];
 
-export class InvertedTurn implements XMLElement<InvertedTurnAttributes, InvertedTurnContents> {
-  static readonly elementName = 'inverted-turn';
+export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAttributes, InvertedTurnContents> {
   static readonly schema = {
+    name: 'inverted-turn',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
@@ -10021,37 +9870,17 @@ export class InvertedTurn implements XMLElement<InvertedTurnAttributes, Inverted
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = InvertedTurn.schema;
 
   attributes: InvertedTurnAttributes;
   contents: InvertedTurnContents;
 
   constructor(opts?: { attributes?: Partial<InvertedTurnAttributes>; content?: InvertedTurnContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['slash']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, InvertedTurn.schema) as InvertedTurnAttributes;
+    this.contents = opts?.content ?? xml.zero(InvertedTurn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -10188,9 +10017,11 @@ export type DelayedInvertedTurnAttributes = {
 
 export type DelayedInvertedTurnContents = [];
 
-export class DelayedInvertedTurn implements XMLElement<DelayedInvertedTurnAttributes, DelayedInvertedTurnContents> {
-  static readonly elementName = 'delayed-inverted-turn';
+export class DelayedInvertedTurn
+  implements XMLElement<'delayed-inverted-turn', DelayedInvertedTurnAttributes, DelayedInvertedTurnContents>
+{
   static readonly schema = {
+    name: 'delayed-inverted-turn',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
@@ -10236,37 +10067,17 @@ export class DelayedInvertedTurn implements XMLElement<DelayedInvertedTurnAttrib
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = DelayedInvertedTurn.schema;
 
   attributes: DelayedInvertedTurnAttributes;
   contents: DelayedInvertedTurnContents;
 
   constructor(opts?: { attributes?: Partial<DelayedInvertedTurnAttributes>; content?: DelayedInvertedTurnContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['slash']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, DelayedInvertedTurn.schema) as DelayedInvertedTurnAttributes;
+    this.contents = opts?.content ?? xml.zero(DelayedInvertedTurn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -10402,9 +10213,9 @@ export type VerticalTurnAttributes = {
 
 export type VerticalTurnContents = [];
 
-export class VerticalTurn implements XMLElement<VerticalTurnAttributes, VerticalTurnContents> {
-  static readonly elementName = 'vertical-turn';
+export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAttributes, VerticalTurnContents> {
   static readonly schema = {
+    name: 'vertical-turn',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
@@ -10449,36 +10260,17 @@ export class VerticalTurn implements XMLElement<VerticalTurnAttributes, Vertical
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = VerticalTurn.schema;
 
   attributes: VerticalTurnAttributes;
   contents: VerticalTurnContents;
 
   constructor(opts?: { attributes?: Partial<VerticalTurnAttributes>; content?: VerticalTurnContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, VerticalTurn.schema) as VerticalTurnAttributes;
+    this.contents = opts?.content ?? xml.zero(VerticalTurn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -10608,9 +10400,11 @@ export type InvertedVerticalTurnAttributes = {
 
 export type InvertedVerticalTurnContents = [];
 
-export class InvertedVerticalTurn implements XMLElement<InvertedVerticalTurnAttributes, InvertedVerticalTurnContents> {
-  static readonly elementName = 'inverted-vertical-turn';
+export class InvertedVerticalTurn
+  implements XMLElement<'inverted-vertical-turn', InvertedVerticalTurnAttributes, InvertedVerticalTurnContents>
+{
   static readonly schema = {
+    name: 'inverted-vertical-turn',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
@@ -10655,36 +10449,17 @@ export class InvertedVerticalTurn implements XMLElement<InvertedVerticalTurnAttr
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = InvertedVerticalTurn.schema;
 
   attributes: InvertedVerticalTurnAttributes;
   contents: InvertedVerticalTurnContents;
 
   constructor(opts?: { attributes?: Partial<InvertedVerticalTurnAttributes>; content?: InvertedVerticalTurnContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, InvertedVerticalTurn.schema) as InvertedVerticalTurnAttributes;
+    this.contents = opts?.content ?? xml.zero(InvertedVerticalTurn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -10814,9 +10589,9 @@ export type ShakeAttributes = {
 
 export type ShakeContents = [];
 
-export class Shake implements XMLElement<ShakeAttributes, ShakeContents> {
-  static readonly elementName = 'shake';
+export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents> {
   static readonly schema = {
+    name: 'shake',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
@@ -10861,36 +10636,17 @@ export class Shake implements XMLElement<ShakeAttributes, ShakeContents> {
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Shake.schema;
 
   attributes: ShakeAttributes;
   contents: ShakeContents;
 
   constructor(opts?: { attributes?: Partial<ShakeAttributes>; content?: ShakeContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Shake.schema) as ShakeAttributes;
+    this.contents = opts?.content ?? xml.zero(Shake.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -11019,9 +10775,9 @@ export type WavyLineAttributes = {
 
 export type WavyLineContents = [];
 
-export class WavyLine implements XMLElement<WavyLineAttributes, WavyLineContents> {
-  static readonly elementName = 'wavy-line';
+export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, WavyLineContents> {
   static readonly schema = {
+    name: 'wavy-line',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -11056,35 +10812,17 @@ export class WavyLine implements XMLElement<WavyLineAttributes, WavyLineContents
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = WavyLine.schema;
 
   attributes: WavyLineAttributes;
   contents: WavyLineContents;
 
   constructor(opts?: { attributes?: Partial<WavyLineAttributes>; content?: WavyLineContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'start',
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['last-beat']: null,
-        ['number']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['smufl']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, WavyLine.schema) as WavyLineAttributes;
+    this.contents = opts?.content ?? xml.zero(WavyLine.schema.contents);
   }
   getType(): 'start' | 'stop' | 'continue' {
     return this.attributes['type'];
@@ -11209,9 +10947,9 @@ export type MordentAttributes = {
 
 export type MordentContents = [];
 
-export class Mordent implements XMLElement<MordentAttributes, MordentContents> {
-  static readonly elementName = 'mordent';
+export class Mordent implements XMLElement<'mordent', MordentAttributes, MordentContents> {
   static readonly schema = {
+    name: 'mordent',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       approach: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
@@ -11259,39 +10997,17 @@ export class Mordent implements XMLElement<MordentAttributes, MordentContents> {
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Mordent.schema;
 
   attributes: MordentAttributes;
   contents: MordentContents;
 
   constructor(opts?: { attributes?: Partial<MordentAttributes>; content?: MordentContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['approach']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['departure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['long']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Mordent.schema) as MordentAttributes;
+    this.contents = opts?.content ?? xml.zero(Mordent.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -11442,9 +11158,11 @@ export type InvertedMordentAttributes = {
 
 export type InvertedMordentContents = [];
 
-export class InvertedMordent implements XMLElement<InvertedMordentAttributes, InvertedMordentContents> {
-  static readonly elementName = 'inverted-mordent';
+export class InvertedMordent
+  implements XMLElement<'inverted-mordent', InvertedMordentAttributes, InvertedMordentContents>
+{
   static readonly schema = {
+    name: 'inverted-mordent',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       approach: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
@@ -11492,39 +11210,17 @@ export class InvertedMordent implements XMLElement<InvertedMordentAttributes, In
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = InvertedMordent.schema;
 
   attributes: InvertedMordentAttributes;
   contents: InvertedMordentContents;
 
   constructor(opts?: { attributes?: Partial<InvertedMordentAttributes>; content?: InvertedMordentContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['approach']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['departure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['long']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, InvertedMordent.schema) as InvertedMordentAttributes;
+    this.contents = opts?.content ?? xml.zero(InvertedMordent.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -11665,9 +11361,9 @@ export type SchleiferAttributes = {
 
 export type SchleiferContents = [];
 
-export class Schleifer implements XMLElement<SchleiferAttributes, SchleiferContents> {
-  static readonly elementName = 'schleifer';
+export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, SchleiferContents> {
   static readonly schema = {
+    name: 'schleifer',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -11705,29 +11401,17 @@ export class Schleifer implements XMLElement<SchleiferAttributes, SchleiferConte
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Schleifer.schema;
 
   attributes: SchleiferAttributes;
   contents: SchleiferContents;
 
   constructor(opts?: { attributes?: Partial<SchleiferAttributes>; content?: SchleiferContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Schleifer.schema) as SchleiferAttributes;
+    this.contents = opts?.content ?? xml.zero(Schleifer.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -11810,9 +11494,9 @@ export type TremoloAttributes = {
 
 export type TremoloContents = [number];
 
-export class Tremolo implements XMLElement<TremoloAttributes, TremoloContents> {
-  static readonly elementName = 'tremolo';
+export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, TremoloContents> {
   static readonly schema = {
+    name: 'tremolo',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -11852,33 +11536,19 @@ export class Tremolo implements XMLElement<TremoloAttributes, TremoloContents> {
       smufl: { type: 'optional', value: { type: 'string' } },
       type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop', 'single', 'unmeasured'] } },
     },
-    content: [
+    contents: [
       { type: 'required', value: { type: 'label', label: 'tremolo-marks', value: { type: 'int', min: 0, max: 8 } } },
     ],
-  };
+  } as const;
+
+  readonly schema = Tremolo.schema;
 
   attributes: TremoloAttributes;
   contents: TremoloContents;
 
   constructor(opts?: { attributes?: Partial<TremoloAttributes>; content?: TremoloContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-        ['type']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Tremolo.schema) as TremoloAttributes;
+    this.contents = opts?.content ?? xml.zero(Tremolo.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -11984,9 +11654,9 @@ export type HaydnAttributes = {
 
 export type HaydnContents = [];
 
-export class Haydn implements XMLElement<HaydnAttributes, HaydnContents> {
-  static readonly elementName = 'haydn';
+export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents> {
   static readonly schema = {
+    name: 'haydn',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
@@ -12031,36 +11701,17 @@ export class Haydn implements XMLElement<HaydnAttributes, HaydnContents> {
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Haydn.schema;
 
   attributes: HaydnAttributes;
   contents: HaydnContents;
 
   constructor(opts?: { attributes?: Partial<HaydnAttributes>; content?: HaydnContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['second-beat']: null,
-        ['start-note']: null,
-        ['trill-step']: null,
-        ['two-note-turn']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Haydn.schema) as HaydnAttributes;
+    this.contents = opts?.content ?? xml.zero(Haydn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -12184,9 +11835,9 @@ export type OtherOrnamentAttributes = {
 
 export type OtherOrnamentContents = [string];
 
-export class OtherOrnament implements XMLElement<OtherOrnamentAttributes, OtherOrnamentContents> {
-  static readonly elementName = 'other-ornament';
+export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnamentAttributes, OtherOrnamentContents> {
   static readonly schema = {
+    name: 'other-ornament',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -12225,30 +11876,17 @@ export class OtherOrnament implements XMLElement<OtherOrnamentAttributes, OtherO
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = OtherOrnament.schema;
 
   attributes: OtherOrnamentAttributes;
   contents: OtherOrnamentContents;
 
   constructor(opts?: { attributes?: Partial<OtherOrnamentAttributes>; content?: OtherOrnamentContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherOrnament.schema) as OtherOrnamentAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherOrnament.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -12388,9 +12026,9 @@ export type AccidentalMarkContents = [
   | 'koron'
 ];
 
-export class AccidentalMark implements XMLElement<AccidentalMarkAttributes, AccidentalMarkContents> {
-  static readonly elementName = 'accidental-mark';
+export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalMarkAttributes, AccidentalMarkContents> {
   static readonly schema = {
+    name: 'accidental-mark',
     attributes: {
       bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -12433,7 +12071,7 @@ export class AccidentalMark implements XMLElement<AccidentalMarkAttributes, Acci
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
       smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -12488,33 +12126,16 @@ export class AccidentalMark implements XMLElement<AccidentalMarkAttributes, Acci
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = AccidentalMark.schema;
 
   attributes: AccidentalMarkAttributes;
   contents: AccidentalMarkContents;
 
   constructor(opts?: { attributes?: Partial<AccidentalMarkAttributes>; content?: AccidentalMarkContents }) {
-    this.attributes = Object.assign(
-      {
-        ['bracket']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['parentheses']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['size']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['other'];
+    this.attributes = xml.mergeZero(opts?.attributes, AccidentalMark.schema) as AccidentalMarkAttributes;
+    this.contents = opts?.content ?? xml.zero(AccidentalMark.schema.contents);
   }
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
@@ -12723,11 +12344,11 @@ export type OrnamentsContents = [
   Array<AccidentalMark>
 ];
 
-export class Ornaments implements XMLElement<OrnamentsAttributes, OrnamentsContents> {
-  static readonly elementName = 'ornaments';
+export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, OrnamentsContents> {
   static readonly schema = {
+    name: 'ornaments',
     attributes: { id: { type: 'optional', value: { type: 'string' } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'ornaments',
@@ -12757,14 +12378,16 @@ export class Ornaments implements XMLElement<OrnamentsAttributes, OrnamentsConte
       },
       { type: 'label', label: 'accidental-marks', value: { type: 'zeroOrMore', value: AccidentalMark } },
     ],
-  };
+  } as const;
+
+  readonly schema = Ornaments.schema;
 
   attributes: OrnamentsAttributes;
   contents: OrnamentsContents;
 
   constructor(opts?: { attributes?: Partial<OrnamentsAttributes>; content?: OrnamentsContents }) {
-    this.attributes = Object.assign({ ['id']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[], []];
+    this.attributes = xml.mergeZero(opts?.attributes, Ornaments.schema) as OrnamentsAttributes;
+    this.contents = opts?.content ?? xml.zero(Ornaments.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -12835,9 +12458,9 @@ export type UpBowAttributes = {
 
 export type UpBowContents = [];
 
-export class UpBow implements XMLElement<UpBowAttributes, UpBowContents> {
-  static readonly elementName = 'up-bow';
+export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContents> {
   static readonly schema = {
+    name: 'up-bow',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -12875,29 +12498,17 @@ export class UpBow implements XMLElement<UpBowAttributes, UpBowContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = UpBow.schema;
 
   attributes: UpBowAttributes;
   contents: UpBowContents;
 
   constructor(opts?: { attributes?: Partial<UpBowAttributes>; content?: UpBowContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, UpBow.schema) as UpBowAttributes;
+    this.contents = opts?.content ?? xml.zero(UpBow.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -12978,9 +12589,9 @@ export type DownBowAttributes = {
 
 export type DownBowContents = [];
 
-export class DownBow implements XMLElement<DownBowAttributes, DownBowContents> {
-  static readonly elementName = 'down-bow';
+export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBowContents> {
   static readonly schema = {
+    name: 'down-bow',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -13018,29 +12629,17 @@ export class DownBow implements XMLElement<DownBowAttributes, DownBowContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = DownBow.schema;
 
   attributes: DownBowAttributes;
   contents: DownBowContents;
 
   constructor(opts?: { attributes?: Partial<DownBowAttributes>; content?: DownBowContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, DownBow.schema) as DownBowAttributes;
+    this.contents = opts?.content ?? xml.zero(DownBow.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13110,16 +12709,17 @@ export type NaturalAttributes = Record<string, unknown>;
 
 export type NaturalContents = [];
 
-export class Natural implements XMLElement<NaturalAttributes, NaturalContents> {
-  static readonly elementName = 'natural';
-  static readonly schema = { attributes: {}, content: [] };
+export class Natural implements XMLElement<'natural', NaturalAttributes, NaturalContents> {
+  static readonly schema = { name: 'natural', attributes: {}, contents: [] } as const;
+
+  readonly schema = Natural.schema;
 
   attributes: NaturalAttributes;
   contents: NaturalContents;
 
   constructor(opts?: { attributes?: Partial<NaturalAttributes>; content?: NaturalContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Natural.schema) as NaturalAttributes;
+    this.contents = opts?.content ?? xml.zero(Natural.schema.contents);
   }
 }
 
@@ -13127,16 +12727,17 @@ export type ArtificialAttributes = Record<string, unknown>;
 
 export type ArtificialContents = [];
 
-export class Artificial implements XMLElement<ArtificialAttributes, ArtificialContents> {
-  static readonly elementName = 'artificial';
-  static readonly schema = { attributes: {}, content: [] };
+export class Artificial implements XMLElement<'artificial', ArtificialAttributes, ArtificialContents> {
+  static readonly schema = { name: 'artificial', attributes: {}, contents: [] } as const;
+
+  readonly schema = Artificial.schema;
 
   attributes: ArtificialAttributes;
   contents: ArtificialContents;
 
   constructor(opts?: { attributes?: Partial<ArtificialAttributes>; content?: ArtificialContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Artificial.schema) as ArtificialAttributes;
+    this.contents = opts?.content ?? xml.zero(Artificial.schema.contents);
   }
 }
 
@@ -13144,16 +12745,17 @@ export type BasePitchAttributes = Record<string, unknown>;
 
 export type BasePitchContents = [];
 
-export class BasePitch implements XMLElement<BasePitchAttributes, BasePitchContents> {
-  static readonly elementName = 'base-pitch';
-  static readonly schema = { attributes: {}, content: [] };
+export class BasePitch implements XMLElement<'base-pitch', BasePitchAttributes, BasePitchContents> {
+  static readonly schema = { name: 'base-pitch', attributes: {}, contents: [] } as const;
+
+  readonly schema = BasePitch.schema;
 
   attributes: BasePitchAttributes;
   contents: BasePitchContents;
 
   constructor(opts?: { attributes?: Partial<BasePitchAttributes>; content?: BasePitchContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, BasePitch.schema) as BasePitchAttributes;
+    this.contents = opts?.content ?? xml.zero(BasePitch.schema.contents);
   }
 }
 
@@ -13161,16 +12763,17 @@ export type TouchingPitchAttributes = Record<string, unknown>;
 
 export type TouchingPitchContents = [];
 
-export class TouchingPitch implements XMLElement<TouchingPitchAttributes, TouchingPitchContents> {
-  static readonly elementName = 'touching-pitch';
-  static readonly schema = { attributes: {}, content: [] };
+export class TouchingPitch implements XMLElement<'touching-pitch', TouchingPitchAttributes, TouchingPitchContents> {
+  static readonly schema = { name: 'touching-pitch', attributes: {}, contents: [] } as const;
+
+  readonly schema = TouchingPitch.schema;
 
   attributes: TouchingPitchAttributes;
   contents: TouchingPitchContents;
 
   constructor(opts?: { attributes?: Partial<TouchingPitchAttributes>; content?: TouchingPitchContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, TouchingPitch.schema) as TouchingPitchAttributes;
+    this.contents = opts?.content ?? xml.zero(TouchingPitch.schema.contents);
   }
 }
 
@@ -13178,16 +12781,17 @@ export type SoundingPitchAttributes = Record<string, unknown>;
 
 export type SoundingPitchContents = [];
 
-export class SoundingPitch implements XMLElement<SoundingPitchAttributes, SoundingPitchContents> {
-  static readonly elementName = 'sounding-pitch';
-  static readonly schema = { attributes: {}, content: [] };
+export class SoundingPitch implements XMLElement<'sounding-pitch', SoundingPitchAttributes, SoundingPitchContents> {
+  static readonly schema = { name: 'sounding-pitch', attributes: {}, contents: [] } as const;
+
+  readonly schema = SoundingPitch.schema;
 
   attributes: SoundingPitchAttributes;
   contents: SoundingPitchContents;
 
   constructor(opts?: { attributes?: Partial<SoundingPitchAttributes>; content?: SoundingPitchContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, SoundingPitch.schema) as SoundingPitchAttributes;
+    this.contents = opts?.content ?? xml.zero(SoundingPitch.schema.contents);
   }
 }
 
@@ -13207,9 +12811,9 @@ export type HarmonicAttributes = {
 
 export type HarmonicContents = [Array<Natural | Artificial>, Array<BasePitch | TouchingPitch | SoundingPitch>];
 
-export class Harmonic implements XMLElement<HarmonicAttributes, HarmonicContents> {
-  static readonly elementName = 'harmonic';
+export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, HarmonicContents> {
   static readonly schema = {
+    name: 'harmonic',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -13248,7 +12852,7 @@ export class Harmonic implements XMLElement<HarmonicAttributes, HarmonicContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'types',
@@ -13260,29 +12864,16 @@ export class Harmonic implements XMLElement<HarmonicAttributes, HarmonicContents
         value: { type: 'zeroOrMore', value: { type: 'choices', choices: [BasePitch, TouchingPitch, SoundingPitch] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Harmonic.schema;
 
   attributes: HarmonicAttributes;
   contents: HarmonicContents;
 
   constructor(opts?: { attributes?: Partial<HarmonicAttributes>; content?: HarmonicContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [[], []];
+    this.attributes = xml.mergeZero(opts?.attributes, Harmonic.schema) as HarmonicAttributes;
+    this.contents = opts?.content ?? xml.zero(Harmonic.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13381,9 +12972,9 @@ export type OpenStringAttributes = {
 
 export type OpenStringContents = [];
 
-export class OpenString implements XMLElement<OpenStringAttributes, OpenStringContents> {
-  static readonly elementName = 'open-string';
+export class OpenString implements XMLElement<'open-string', OpenStringAttributes, OpenStringContents> {
   static readonly schema = {
+    name: 'open-string',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -13421,29 +13012,17 @@ export class OpenString implements XMLElement<OpenStringAttributes, OpenStringCo
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = OpenString.schema;
 
   attributes: OpenStringAttributes;
   contents: OpenStringContents;
 
   constructor(opts?: { attributes?: Partial<OpenStringAttributes>; content?: OpenStringContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, OpenString.schema) as OpenStringAttributes;
+    this.contents = opts?.content ?? xml.zero(OpenString.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13524,9 +13103,9 @@ export type ThumbPositionAttributes = {
 
 export type ThumbPositionContents = [];
 
-export class ThumbPosition implements XMLElement<ThumbPositionAttributes, ThumbPositionContents> {
-  static readonly elementName = 'thumb-position';
+export class ThumbPosition implements XMLElement<'thumb-position', ThumbPositionAttributes, ThumbPositionContents> {
   static readonly schema = {
+    name: 'thumb-position',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -13564,29 +13143,17 @@ export class ThumbPosition implements XMLElement<ThumbPositionAttributes, ThumbP
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = ThumbPosition.schema;
 
   attributes: ThumbPositionAttributes;
   contents: ThumbPositionContents;
 
   constructor(opts?: { attributes?: Partial<ThumbPositionAttributes>; content?: ThumbPositionContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, ThumbPosition.schema) as ThumbPositionAttributes;
+    this.contents = opts?.content ?? xml.zero(ThumbPosition.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13669,9 +13236,9 @@ export type FingeringAttributes = {
 
 export type FingeringContents = [];
 
-export class Fingering implements XMLElement<FingeringAttributes, FingeringContents> {
-  static readonly elementName = 'fingering';
+export class Fingering implements XMLElement<'fingering', FingeringAttributes, FingeringContents> {
   static readonly schema = {
+    name: 'fingering',
     attributes: {
       alternate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -13711,31 +13278,17 @@ export class Fingering implements XMLElement<FingeringAttributes, FingeringConte
       },
       substitution: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Fingering.schema;
 
   attributes: FingeringAttributes;
   contents: FingeringContents;
 
   constructor(opts?: { attributes?: Partial<FingeringAttributes>; content?: FingeringContents }) {
-    this.attributes = Object.assign(
-      {
-        ['alternate']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['substitution']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Fingering.schema) as FingeringAttributes;
+    this.contents = opts?.content ?? xml.zero(Fingering.schema.contents);
   }
   getAlternate(): 'yes' | 'no' | null {
     return this.attributes['alternate'];
@@ -13828,9 +13381,9 @@ export type PluckAttributes = {
 
 export type PluckContents = [string];
 
-export class Pluck implements XMLElement<PluckAttributes, PluckContents> {
-  static readonly elementName = 'pluck';
+export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents> {
   static readonly schema = {
+    name: 'pluck',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -13868,29 +13421,17 @@ export class Pluck implements XMLElement<PluckAttributes, PluckContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Pluck.schema;
 
   attributes: PluckAttributes;
   contents: PluckContents;
 
   constructor(opts?: { attributes?: Partial<PluckAttributes>; content?: PluckContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Pluck.schema) as PluckAttributes;
+    this.contents = opts?.content ?? xml.zero(Pluck.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13977,9 +13518,9 @@ export type DoubleTongueAttributes = {
 
 export type DoubleTongueContents = [];
 
-export class DoubleTongue implements XMLElement<DoubleTongueAttributes, DoubleTongueContents> {
-  static readonly elementName = 'double-tongue';
+export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAttributes, DoubleTongueContents> {
   static readonly schema = {
+    name: 'double-tongue',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -14017,29 +13558,17 @@ export class DoubleTongue implements XMLElement<DoubleTongueAttributes, DoubleTo
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = DoubleTongue.schema;
 
   attributes: DoubleTongueAttributes;
   contents: DoubleTongueContents;
 
   constructor(opts?: { attributes?: Partial<DoubleTongueAttributes>; content?: DoubleTongueContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, DoubleTongue.schema) as DoubleTongueAttributes;
+    this.contents = opts?.content ?? xml.zero(DoubleTongue.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -14120,9 +13649,9 @@ export type TripleTongueAttributes = {
 
 export type TripleTongueContents = [];
 
-export class TripleTongue implements XMLElement<TripleTongueAttributes, TripleTongueContents> {
-  static readonly elementName = 'triple-tongue';
+export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAttributes, TripleTongueContents> {
   static readonly schema = {
+    name: 'triple-tongue',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -14160,29 +13689,17 @@ export class TripleTongue implements XMLElement<TripleTongueAttributes, TripleTo
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = TripleTongue.schema;
 
   attributes: TripleTongueAttributes;
   contents: TripleTongueContents;
 
   constructor(opts?: { attributes?: Partial<TripleTongueAttributes>; content?: TripleTongueContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, TripleTongue.schema) as TripleTongueAttributes;
+    this.contents = opts?.content ?? xml.zero(TripleTongue.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -14263,9 +13780,9 @@ export type StoppedAttributes = {
 
 export type StoppedContents = [];
 
-export class Stopped implements XMLElement<StoppedAttributes, StoppedContents> {
-  static readonly elementName = 'stopped';
+export class Stopped implements XMLElement<'stopped', StoppedAttributes, StoppedContents> {
   static readonly schema = {
+    name: 'stopped',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -14303,29 +13820,17 @@ export class Stopped implements XMLElement<StoppedAttributes, StoppedContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Stopped.schema;
 
   attributes: StoppedAttributes;
   contents: StoppedContents;
 
   constructor(opts?: { attributes?: Partial<StoppedAttributes>; content?: StoppedContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Stopped.schema) as StoppedAttributes;
+    this.contents = opts?.content ?? xml.zero(Stopped.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -14406,9 +13911,9 @@ export type SnapPizzicatoAttributes = {
 
 export type SnapPizzicatoContents = [];
 
-export class SnapPizzicato implements XMLElement<SnapPizzicatoAttributes, SnapPizzicatoContents> {
-  static readonly elementName = 'snap-pizzicato';
+export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicatoAttributes, SnapPizzicatoContents> {
   static readonly schema = {
+    name: 'snap-pizzicato',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -14446,29 +13951,17 @@ export class SnapPizzicato implements XMLElement<SnapPizzicatoAttributes, SnapPi
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = SnapPizzicato.schema;
 
   attributes: SnapPizzicatoAttributes;
   contents: SnapPizzicatoContents;
 
   constructor(opts?: { attributes?: Partial<SnapPizzicatoAttributes>; content?: SnapPizzicatoContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, SnapPizzicato.schema) as SnapPizzicatoAttributes;
+    this.contents = opts?.content ?? xml.zero(SnapPizzicato.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -14544,9 +14037,9 @@ export type FretAttributes = {
 
 export type FretContents = [string];
 
-export class Fret implements XMLElement<FretAttributes, FretContents> {
-  static readonly elementName = 'fret';
+export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
   static readonly schema = {
+    name: 'fret',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
@@ -14563,18 +14056,17 @@ export class Fret implements XMLElement<FretAttributes, FretContents> {
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Fret.schema;
 
   attributes: FretAttributes;
   contents: FretContents;
 
   constructor(opts?: { attributes?: Partial<FretAttributes>; content?: FretContents }) {
-    this.attributes = Object.assign(
-      { ['color']: null, ['font-family']: null, ['font-size']: null, ['font-style']: null, ['font-weight']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Fret.schema) as FretAttributes;
+    this.contents = opts?.content ?? xml.zero(Fret.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -14631,9 +14123,9 @@ export type StringAttributes = {
 
 export type StringContents = [];
 
-export class String implements XMLElement<StringAttributes, StringContents> {
-  static readonly elementName = 'string';
+export class String implements XMLElement<'string', StringAttributes, StringContents> {
   static readonly schema = {
+    name: 'string',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -14671,29 +14163,17 @@ export class String implements XMLElement<StringAttributes, StringContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = String.schema;
 
   attributes: StringAttributes;
   contents: StringContents;
 
   constructor(opts?: { attributes?: Partial<StringAttributes>; content?: StringContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, String.schema) as StringAttributes;
+    this.contents = opts?.content ?? xml.zero(String.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -14775,9 +14255,9 @@ export type HammerOnAttributes = {
 
 export type HammerOnContents = [string];
 
-export class HammerOn implements XMLElement<HammerOnAttributes, HammerOnContents> {
-  static readonly elementName = 'hammer-on';
+export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, HammerOnContents> {
   static readonly schema = {
+    name: 'hammer-on',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -14816,30 +14296,17 @@ export class HammerOn implements XMLElement<HammerOnAttributes, HammerOnContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = HammerOn.schema;
 
   attributes: HammerOnAttributes;
   contents: HammerOnContents;
 
   constructor(opts?: { attributes?: Partial<HammerOnAttributes>; content?: HammerOnContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'start',
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, HammerOn.schema) as HammerOnAttributes;
+    this.contents = opts?.content ?? xml.zero(HammerOn.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -14933,9 +14400,9 @@ export type PullOffAttributes = {
 
 export type PullOffContents = [];
 
-export class PullOff implements XMLElement<PullOffAttributes, PullOffContents> {
-  static readonly elementName = 'pull-off';
+export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOffContents> {
   static readonly schema = {
+    name: 'pull-off',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -14974,30 +14441,17 @@ export class PullOff implements XMLElement<PullOffAttributes, PullOffContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = PullOff.schema;
 
   attributes: PullOffAttributes;
   contents: PullOffContents;
 
   constructor(opts?: { attributes?: Partial<PullOffAttributes>; content?: PullOffContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'start',
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, PullOff.schema) as PullOffAttributes;
+    this.contents = opts?.content ?? xml.zero(PullOff.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -15073,24 +14527,26 @@ export type BendAlterAttributes = Record<string, unknown>;
 
 export type BendAlterContents = [number];
 
-export class BendAlter implements XMLElement<BendAlterAttributes, BendAlterContents> {
-  static readonly elementName = 'bend-alter';
+export class BendAlter implements XMLElement<'bend-alter', BendAlterAttributes, BendAlterContents> {
   static readonly schema = {
+    name: 'bend-alter',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'semitones', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = BendAlter.schema;
 
   attributes: BendAlterAttributes;
   contents: BendAlterContents;
 
   constructor(opts?: { attributes?: Partial<BendAlterAttributes>; content?: BendAlterContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, BendAlter.schema) as BendAlterAttributes;
+    this.contents = opts?.content ?? xml.zero(BendAlter.schema.contents);
   }
 
   getSemitones(): number {
@@ -15105,16 +14561,17 @@ export type PreBendAttributes = Record<string, unknown>;
 
 export type PreBendContents = [];
 
-export class PreBend implements XMLElement<PreBendAttributes, PreBendContents> {
-  static readonly elementName = 'pre-bend';
-  static readonly schema = { attributes: {}, content: [] };
+export class PreBend implements XMLElement<'pre-bend', PreBendAttributes, PreBendContents> {
+  static readonly schema = { name: 'pre-bend', attributes: {}, contents: [] } as const;
+
+  readonly schema = PreBend.schema;
 
   attributes: PreBendAttributes;
   contents: PreBendContents;
 
   constructor(opts?: { attributes?: Partial<PreBendAttributes>; content?: PreBendContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, PreBend.schema) as PreBendAttributes;
+    this.contents = opts?.content ?? xml.zero(PreBend.schema.contents);
   }
 }
 
@@ -15122,19 +14579,21 @@ export type ReleaseAttributes = { offset: number | null };
 
 export type ReleaseContents = [];
 
-export class Release implements XMLElement<ReleaseAttributes, ReleaseContents> {
-  static readonly elementName = 'release';
+export class Release implements XMLElement<'release', ReleaseAttributes, ReleaseContents> {
   static readonly schema = {
+    name: 'release',
     attributes: { offset: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } } },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Release.schema;
 
   attributes: ReleaseAttributes;
   contents: ReleaseContents;
 
   constructor(opts?: { attributes?: Partial<ReleaseAttributes>; content?: ReleaseContents }) {
-    this.attributes = Object.assign({ ['offset']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Release.schema) as ReleaseAttributes;
+    this.contents = opts?.content ?? xml.zero(Release.schema.contents);
   }
   getOffset(): number | null {
     return this.attributes['offset'];
@@ -15160,9 +14619,9 @@ export type WithBarAttributes = {
 
 export type WithBarContents = [string];
 
-export class WithBar implements XMLElement<WithBarAttributes, WithBarContents> {
-  static readonly elementName = 'with-bar';
+export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBarContents> {
   static readonly schema = {
+    name: 'with-bar',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -15201,30 +14660,17 @@ export class WithBar implements XMLElement<WithBarAttributes, WithBarContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = WithBar.schema;
 
   attributes: WithBarAttributes;
   contents: WithBarContents;
 
   constructor(opts?: { attributes?: Partial<WithBarAttributes>; content?: WithBarContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['first-beat']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, WithBar.schema) as WithBarAttributes;
+    this.contents = opts?.content ?? xml.zero(WithBar.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -15321,9 +14767,9 @@ export type BendAttributes = {
 
 export type BendContents = [BendAlter, Array<PreBend | Release>, WithBar | null];
 
-export class Bend implements XMLElement<BendAttributes, BendContents> {
-  static readonly elementName = 'bend';
+export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
   static readonly schema = {
+    name: 'bend',
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
@@ -15365,7 +14811,7 @@ export class Bend implements XMLElement<BendAttributes, BendContents> {
       },
       shape: { type: 'optional', value: { type: 'choices', choices: ['angled', 'curved'] } },
     },
-    content: [
+    contents: [
       { type: 'required', value: BendAlter },
       {
         type: 'label',
@@ -15374,32 +14820,16 @@ export class Bend implements XMLElement<BendAttributes, BendContents> {
       },
       { type: 'optional', value: WithBar },
     ],
-  };
+  } as const;
+
+  readonly schema = Bend.schema;
 
   attributes: BendAttributes;
   contents: BendContents;
 
   constructor(opts?: { attributes?: Partial<BendAttributes>; content?: BendContents }) {
-    this.attributes = Object.assign(
-      {
-        ['accelerate']: null,
-        ['beats']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['first-beat']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['last-beat']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['shape']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [new BendAlter(), [], null];
+    this.attributes = xml.mergeZero(opts?.attributes, Bend.schema) as BendAttributes;
+    this.contents = opts?.content ?? xml.zero(Bend.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -15523,9 +14953,9 @@ export type TapAttributes = {
 
 export type TapContents = [string | null];
 
-export class Tap implements XMLElement<TapAttributes, TapContents> {
-  static readonly elementName = 'tap';
+export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
   static readonly schema = {
+    name: 'tap',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -15564,30 +14994,17 @@ export class Tap implements XMLElement<TapAttributes, TapContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'optional', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'optional', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Tap.schema;
 
   attributes: TapAttributes;
   contents: TapContents;
 
   constructor(opts?: { attributes?: Partial<TapAttributes>; content?: TapContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['hand']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [null];
+    this.attributes = xml.mergeZero(opts?.attributes, Tap.schema) as TapAttributes;
+    this.contents = opts?.content ?? xml.zero(Tap.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -15681,9 +15098,9 @@ export type HeelAttributes = {
 
 export type HeelContents = [];
 
-export class Heel implements XMLElement<HeelAttributes, HeelContents> {
-  static readonly elementName = 'heel';
+export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
   static readonly schema = {
+    name: 'heel',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -15722,30 +15139,17 @@ export class Heel implements XMLElement<HeelAttributes, HeelContents> {
       },
       substitution: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Heel.schema;
 
   attributes: HeelAttributes;
   contents: HeelContents;
 
   constructor(opts?: { attributes?: Partial<HeelAttributes>; content?: HeelContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['substitution']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Heel.schema) as HeelAttributes;
+    this.contents = opts?.content ?? xml.zero(Heel.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -15833,9 +15237,9 @@ export type ToeAttributes = {
 
 export type ToeContents = [];
 
-export class Toe implements XMLElement<ToeAttributes, ToeContents> {
-  static readonly elementName = 'toe';
+export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
   static readonly schema = {
+    name: 'toe',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -15874,30 +15278,17 @@ export class Toe implements XMLElement<ToeAttributes, ToeContents> {
       },
       substitution: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Toe.schema;
 
   attributes: ToeAttributes;
   contents: ToeContents;
 
   constructor(opts?: { attributes?: Partial<ToeAttributes>; content?: ToeContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['substitution']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Toe.schema) as ToeAttributes;
+    this.contents = opts?.content ?? xml.zero(Toe.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -15984,9 +15375,9 @@ export type FingernailsAttributes = {
 
 export type FingernailsContents = [];
 
-export class Fingernails implements XMLElement<FingernailsAttributes, FingernailsContents> {
-  static readonly elementName = 'fingernails';
+export class Fingernails implements XMLElement<'fingernails', FingernailsAttributes, FingernailsContents> {
   static readonly schema = {
+    name: 'fingernails',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -16024,29 +15415,17 @@ export class Fingernails implements XMLElement<FingernailsAttributes, Fingernail
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Fingernails.schema;
 
   attributes: FingernailsAttributes;
   contents: FingernailsContents;
 
   constructor(opts?: { attributes?: Partial<FingernailsAttributes>; content?: FingernailsContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Fingernails.schema) as FingernailsAttributes;
+    this.contents = opts?.content ?? xml.zero(Fingernails.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16116,16 +15495,21 @@ export type HoleTypeAttributes = Record<string, unknown>;
 
 export type HoleTypeContents = [string];
 
-export class HoleType implements XMLElement<HoleTypeAttributes, HoleTypeContents> {
-  static readonly elementName = 'hole-type';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class HoleType implements XMLElement<'hole-type', HoleTypeAttributes, HoleTypeContents> {
+  static readonly schema = {
+    name: 'hole-type',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = HoleType.schema;
 
   attributes: HoleTypeAttributes;
   contents: HoleTypeContents;
 
   constructor(opts?: { attributes?: Partial<HoleTypeAttributes>; content?: HoleTypeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, HoleType.schema) as HoleTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(HoleType.schema.contents);
   }
 
   getText(): string {
@@ -16140,13 +15524,13 @@ export type HoleClosedAttributes = { location: 'bottom' | 'left' | 'right' | 'to
 
 export type HoleClosedContents = ['yes' | 'no' | 'half'];
 
-export class HoleClosed implements XMLElement<HoleClosedAttributes, HoleClosedContents> {
-  static readonly elementName = 'hole-closed';
+export class HoleClosed implements XMLElement<'hole-closed', HoleClosedAttributes, HoleClosedContents> {
   static readonly schema = {
+    name: 'hole-closed',
     attributes: {
       location: { type: 'optional', value: { type: 'choices', choices: ['bottom', 'left', 'right', 'top'] } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -16156,14 +15540,16 @@ export class HoleClosed implements XMLElement<HoleClosedAttributes, HoleClosedCo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = HoleClosed.schema;
 
   attributes: HoleClosedAttributes;
   contents: HoleClosedContents;
 
   constructor(opts?: { attributes?: Partial<HoleClosedAttributes>; content?: HoleClosedContents }) {
-    this.attributes = Object.assign({ ['location']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['yes'];
+    this.attributes = xml.mergeZero(opts?.attributes, HoleClosed.schema) as HoleClosedAttributes;
+    this.contents = opts?.content ?? xml.zero(HoleClosed.schema.contents);
   }
   getLocation(): 'bottom' | 'left' | 'right' | 'top' | null {
     return this.attributes['location'];
@@ -16183,16 +15569,21 @@ export type HoleShapeAttributes = Record<string, unknown>;
 
 export type HoleShapeContents = [string];
 
-export class HoleShape implements XMLElement<HoleShapeAttributes, HoleShapeContents> {
-  static readonly elementName = 'hole-shape';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class HoleShape implements XMLElement<'hole-shape', HoleShapeAttributes, HoleShapeContents> {
+  static readonly schema = {
+    name: 'hole-shape',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = HoleShape.schema;
 
   attributes: HoleShapeAttributes;
   contents: HoleShapeContents;
 
   constructor(opts?: { attributes?: Partial<HoleShapeAttributes>; content?: HoleShapeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, HoleShape.schema) as HoleShapeAttributes;
+    this.contents = opts?.content ?? xml.zero(HoleShape.schema.contents);
   }
 
   getText(): string {
@@ -16218,9 +15609,9 @@ export type HoleAttributes = {
 
 export type HoleContents = [HoleType | null, HoleClosed, HoleShape | null];
 
-export class Hole implements XMLElement<HoleAttributes, HoleContents> {
-  static readonly elementName = 'hole';
+export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
   static readonly schema = {
+    name: 'hole',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -16258,33 +15649,21 @@ export class Hole implements XMLElement<HoleAttributes, HoleContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [
+    contents: [
       { type: 'optional', value: HoleType },
       { type: 'required', value: HoleClosed },
       { type: 'optional', value: HoleShape },
     ],
-  };
+  } as const;
+
+  readonly schema = Hole.schema;
 
   attributes: HoleAttributes;
   contents: HoleContents;
 
   constructor(opts?: { attributes?: Partial<HoleAttributes>; content?: HoleContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [null, new HoleClosed(), null];
+    this.attributes = xml.mergeZero(opts?.attributes, Hole.schema) as HoleAttributes;
+    this.contents = opts?.content ?? xml.zero(Hole.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16386,11 +15765,11 @@ export type ArrowDirectionContents = [
   | 'up down'
 ];
 
-export class ArrowDirection implements XMLElement<ArrowDirectionAttributes, ArrowDirectionContents> {
-  static readonly elementName = 'arrow-direction';
+export class ArrowDirection implements XMLElement<'arrow-direction', ArrowDirectionAttributes, ArrowDirectionContents> {
   static readonly schema = {
+    name: 'arrow-direction',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -16417,14 +15796,16 @@ export class ArrowDirection implements XMLElement<ArrowDirectionAttributes, Arro
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = ArrowDirection.schema;
 
   attributes: ArrowDirectionAttributes;
   contents: ArrowDirectionContents;
 
   constructor(opts?: { attributes?: Partial<ArrowDirectionAttributes>; content?: ArrowDirectionContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['down'];
+    this.attributes = xml.mergeZero(opts?.attributes, ArrowDirection.schema) as ArrowDirectionAttributes;
+    this.contents = opts?.content ?? xml.zero(ArrowDirection.schema.contents);
   }
 
   getArrowDirections():
@@ -16467,11 +15848,11 @@ export type ArrowStyleAttributes = Record<string, unknown>;
 
 export type ArrowStyleContents = ['combined' | 'double' | 'filled' | 'hollow' | 'other' | 'paired' | 'single'];
 
-export class ArrowStyle implements XMLElement<ArrowStyleAttributes, ArrowStyleContents> {
-  static readonly elementName = 'arrow-style';
+export class ArrowStyle implements XMLElement<'arrow-style', ArrowStyleAttributes, ArrowStyleContents> {
   static readonly schema = {
+    name: 'arrow-style',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -16481,14 +15862,16 @@ export class ArrowStyle implements XMLElement<ArrowStyleAttributes, ArrowStyleCo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = ArrowStyle.schema;
 
   attributes: ArrowStyleAttributes;
   contents: ArrowStyleContents;
 
   constructor(opts?: { attributes?: Partial<ArrowStyleAttributes>; content?: ArrowStyleContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['combined'];
+    this.attributes = xml.mergeZero(opts?.attributes, ArrowStyle.schema) as ArrowStyleAttributes;
+    this.contents = opts?.content ?? xml.zero(ArrowStyle.schema.contents);
   }
 
   getArrowStyle(): 'combined' | 'double' | 'filled' | 'hollow' | 'other' | 'paired' | 'single' {
@@ -16503,16 +15886,17 @@ export type ArrowheadAttributes = Record<string, unknown>;
 
 export type ArrowheadContents = [];
 
-export class Arrowhead implements XMLElement<ArrowheadAttributes, ArrowheadContents> {
-  static readonly elementName = 'arrowhead';
-  static readonly schema = { attributes: {}, content: [] };
+export class Arrowhead implements XMLElement<'arrowhead', ArrowheadAttributes, ArrowheadContents> {
+  static readonly schema = { name: 'arrowhead', attributes: {}, contents: [] } as const;
+
+  readonly schema = Arrowhead.schema;
 
   attributes: ArrowheadAttributes;
   contents: ArrowheadContents;
 
   constructor(opts?: { attributes?: Partial<ArrowheadAttributes>; content?: ArrowheadContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Arrowhead.schema) as ArrowheadAttributes;
+    this.contents = opts?.content ?? xml.zero(Arrowhead.schema.contents);
   }
 }
 
@@ -16520,11 +15904,11 @@ export type CircularArrowAttributes = Record<string, unknown>;
 
 export type CircularArrowContents = ['anticlockwise' | 'clockwise'];
 
-export class CircularArrow implements XMLElement<CircularArrowAttributes, CircularArrowContents> {
-  static readonly elementName = 'circular-arrow';
+export class CircularArrow implements XMLElement<'circular-arrow', CircularArrowAttributes, CircularArrowContents> {
   static readonly schema = {
+    name: 'circular-arrow',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -16534,14 +15918,16 @@ export class CircularArrow implements XMLElement<CircularArrowAttributes, Circul
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = CircularArrow.schema;
 
   attributes: CircularArrowAttributes;
   contents: CircularArrowContents;
 
   constructor(opts?: { attributes?: Partial<CircularArrowAttributes>; content?: CircularArrowContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['anticlockwise'];
+    this.attributes = xml.mergeZero(opts?.attributes, CircularArrow.schema) as CircularArrowAttributes;
+    this.contents = opts?.content ?? xml.zero(CircularArrow.schema.contents);
   }
 
   getCircularArrow(): 'anticlockwise' | 'clockwise' {
@@ -16568,9 +15954,9 @@ export type ArrowAttributes = {
 
 export type ArrowContents = [ArrowDirection, ArrowStyle | null, Arrowhead | null, CircularArrow | null];
 
-export class Arrow implements XMLElement<ArrowAttributes, ArrowContents> {
-  static readonly elementName = 'arrow';
+export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents> {
   static readonly schema = {
+    name: 'arrow',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -16609,35 +15995,22 @@ export class Arrow implements XMLElement<ArrowAttributes, ArrowContents> {
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
-    content: [
+    contents: [
       { type: 'required', value: ArrowDirection },
       { type: 'optional', value: ArrowStyle },
       { type: 'optional', value: Arrowhead },
       { type: 'optional', value: CircularArrow },
     ],
-  };
+  } as const;
+
+  readonly schema = Arrow.schema;
 
   attributes: ArrowAttributes;
   contents: ArrowContents;
 
   constructor(opts?: { attributes?: Partial<ArrowAttributes>; content?: ArrowContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [new ArrowDirection(), null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Arrow.schema) as ArrowAttributes;
+    this.contents = opts?.content ?? xml.zero(Arrow.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16761,9 +16134,9 @@ export type HandbellContents = [
   | 'swing'
 ];
 
-export class Handbell implements XMLElement<HandbellAttributes, HandbellContents> {
-  static readonly elementName = 'handbell';
+export class Handbell implements XMLElement<'handbell', HandbellAttributes, HandbellContents> {
   static readonly schema = {
+    name: 'handbell',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -16801,7 +16174,7 @@ export class Handbell implements XMLElement<HandbellAttributes, HandbellContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -16827,28 +16200,16 @@ export class Handbell implements XMLElement<HandbellAttributes, HandbellContents
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Handbell.schema;
 
   attributes: HandbellAttributes;
   contents: HandbellContents;
 
   constructor(opts?: { attributes?: Partial<HandbellAttributes>; content?: HandbellContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['belltree'];
+    this.attributes = xml.mergeZero(opts?.attributes, Handbell.schema) as HandbellAttributes;
+    this.contents = opts?.content ?? xml.zero(Handbell.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16961,9 +16322,9 @@ export type BrassBendAttributes = {
 
 export type BrassBendContents = [];
 
-export class BrassBend implements XMLElement<BrassBendAttributes, BrassBendContents> {
-  static readonly elementName = 'brass-bend';
+export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, BrassBendContents> {
   static readonly schema = {
+    name: 'brass-bend',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -17001,29 +16362,17 @@ export class BrassBend implements XMLElement<BrassBendAttributes, BrassBendConte
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = BrassBend.schema;
 
   attributes: BrassBendAttributes;
   contents: BrassBendContents;
 
   constructor(opts?: { attributes?: Partial<BrassBendAttributes>; content?: BrassBendContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, BrassBend.schema) as BrassBendAttributes;
+    this.contents = opts?.content ?? xml.zero(BrassBend.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17104,9 +16453,9 @@ export type FlipAttributes = {
 
 export type FlipContents = [];
 
-export class Flip implements XMLElement<FlipAttributes, FlipContents> {
-  static readonly elementName = 'flip';
+export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
   static readonly schema = {
+    name: 'flip',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -17144,29 +16493,17 @@ export class Flip implements XMLElement<FlipAttributes, FlipContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Flip.schema;
 
   attributes: FlipAttributes;
   contents: FlipContents;
 
   constructor(opts?: { attributes?: Partial<FlipAttributes>; content?: FlipContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Flip.schema) as FlipAttributes;
+    this.contents = opts?.content ?? xml.zero(Flip.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17247,9 +16584,9 @@ export type SmearAttributes = {
 
 export type SmearContents = [];
 
-export class Smear implements XMLElement<SmearAttributes, SmearContents> {
-  static readonly elementName = 'smear';
+export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents> {
   static readonly schema = {
+    name: 'smear',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -17287,29 +16624,17 @@ export class Smear implements XMLElement<SmearAttributes, SmearContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Smear.schema;
 
   attributes: SmearAttributes;
   contents: SmearContents;
 
   constructor(opts?: { attributes?: Partial<SmearAttributes>; content?: SmearContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Smear.schema) as SmearAttributes;
+    this.contents = opts?.content ?? xml.zero(Smear.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17391,9 +16716,9 @@ export type OpenAttributes = {
 
 export type OpenContents = [];
 
-export class Open implements XMLElement<OpenAttributes, OpenContents> {
-  static readonly elementName = 'open';
+export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
   static readonly schema = {
+    name: 'open',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -17432,30 +16757,17 @@ export class Open implements XMLElement<OpenAttributes, OpenContents> {
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Open.schema;
 
   attributes: OpenAttributes;
   contents: OpenContents;
 
   constructor(opts?: { attributes?: Partial<OpenAttributes>; content?: OpenContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Open.schema) as OpenAttributes;
+    this.contents = opts?.content ?? xml.zero(Open.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17543,9 +16855,9 @@ export type HalfMutedAttributes = {
 
 export type HalfMutedContents = [];
 
-export class HalfMuted implements XMLElement<HalfMutedAttributes, HalfMutedContents> {
-  static readonly elementName = 'half-muted';
+export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, HalfMutedContents> {
   static readonly schema = {
+    name: 'half-muted',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -17584,30 +16896,17 @@ export class HalfMuted implements XMLElement<HalfMutedAttributes, HalfMutedConte
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = HalfMuted.schema;
 
   attributes: HalfMutedAttributes;
   contents: HalfMutedContents;
 
   constructor(opts?: { attributes?: Partial<HalfMutedAttributes>; content?: HalfMutedContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, HalfMuted.schema) as HalfMutedAttributes;
+    this.contents = opts?.content ?? xml.zero(HalfMuted.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17683,13 +16982,13 @@ export type HarmonClosedAttributes = { location: 'bottom' | 'left' | 'right' | '
 
 export type HarmonClosedContents = ['yes' | 'no' | 'half'];
 
-export class HarmonClosed implements XMLElement<HarmonClosedAttributes, HarmonClosedContents> {
-  static readonly elementName = 'harmon-closed';
+export class HarmonClosed implements XMLElement<'harmon-closed', HarmonClosedAttributes, HarmonClosedContents> {
   static readonly schema = {
+    name: 'harmon-closed',
     attributes: {
       location: { type: 'optional', value: { type: 'choices', choices: ['bottom', 'left', 'right', 'top'] } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -17699,14 +16998,16 @@ export class HarmonClosed implements XMLElement<HarmonClosedAttributes, HarmonCl
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = HarmonClosed.schema;
 
   attributes: HarmonClosedAttributes;
   contents: HarmonClosedContents;
 
   constructor(opts?: { attributes?: Partial<HarmonClosedAttributes>; content?: HarmonClosedContents }) {
-    this.attributes = Object.assign({ ['location']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['yes'];
+    this.attributes = xml.mergeZero(opts?.attributes, HarmonClosed.schema) as HarmonClosedAttributes;
+    this.contents = opts?.content ?? xml.zero(HarmonClosed.schema.contents);
   }
   getLocation(): 'bottom' | 'left' | 'right' | 'top' | null {
     return this.attributes['location'];
@@ -17738,9 +17039,9 @@ export type HarmonMuteAttributes = {
 
 export type HarmonMuteContents = [HarmonClosed];
 
-export class HarmonMute implements XMLElement<HarmonMuteAttributes, HarmonMuteContents> {
-  static readonly elementName = 'harmon-mute';
+export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttributes, HarmonMuteContents> {
   static readonly schema = {
+    name: 'harmon-mute',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -17779,30 +17080,17 @@ export class HarmonMute implements XMLElement<HarmonMuteAttributes, HarmonMuteCo
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
-    content: [{ type: 'required', value: HarmonClosed }],
-  };
+    contents: [{ type: 'required', value: HarmonClosed }],
+  } as const;
+
+  readonly schema = HarmonMute.schema;
 
   attributes: HarmonMuteAttributes;
   contents: HarmonMuteContents;
 
   constructor(opts?: { attributes?: Partial<HarmonMuteAttributes>; content?: HarmonMuteContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [new HarmonClosed()];
+    this.attributes = xml.mergeZero(opts?.attributes, HarmonMute.schema) as HarmonMuteAttributes;
+    this.contents = opts?.content ?? xml.zero(HarmonMute.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17895,9 +17183,9 @@ export type GolpeAttributes = {
 
 export type GolpeContents = [];
 
-export class Golpe implements XMLElement<GolpeAttributes, GolpeContents> {
-  static readonly elementName = 'golpe';
+export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents> {
   static readonly schema = {
+    name: 'golpe',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -17935,29 +17223,17 @@ export class Golpe implements XMLElement<GolpeAttributes, GolpeContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Golpe.schema;
 
   attributes: GolpeAttributes;
   contents: GolpeContents;
 
   constructor(opts?: { attributes?: Partial<GolpeAttributes>; content?: GolpeContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Golpe.schema) as GolpeAttributes;
+    this.contents = opts?.content ?? xml.zero(Golpe.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18039,9 +17315,9 @@ export type OtherTechnicalAttributes = {
 
 export type OtherTechnicalContents = [string | null];
 
-export class OtherTechnical implements XMLElement<OtherTechnicalAttributes, OtherTechnicalContents> {
-  static readonly elementName = 'other-technical';
+export class OtherTechnical implements XMLElement<'other-technical', OtherTechnicalAttributes, OtherTechnicalContents> {
   static readonly schema = {
+    name: 'other-technical',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -18080,30 +17356,17 @@ export class OtherTechnical implements XMLElement<OtherTechnicalAttributes, Othe
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
-    content: [{ type: 'optional', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'optional', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = OtherTechnical.schema;
 
   attributes: OtherTechnicalAttributes;
   contents: OtherTechnicalContents;
 
   constructor(opts?: { attributes?: Partial<OtherTechnicalAttributes>; content?: OtherTechnicalContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [null];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherTechnical.schema) as OtherTechnicalAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherTechnical.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18219,11 +17482,11 @@ export type TechnicalContents = [
   >
 ];
 
-export class Technical implements XMLElement<TechnicalAttributes, TechnicalContents> {
-  static readonly elementName = 'technical';
+export class Technical implements XMLElement<'technical', TechnicalAttributes, TechnicalContents> {
   static readonly schema = {
+    name: 'technical',
     attributes: { id: { type: 'optional', value: { type: 'string' } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'technicals',
@@ -18268,14 +17531,16 @@ export class Technical implements XMLElement<TechnicalAttributes, TechnicalConte
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Technical.schema;
 
   attributes: TechnicalAttributes;
   contents: TechnicalContents;
 
   constructor(opts?: { attributes?: Partial<TechnicalAttributes>; content?: TechnicalContents }) {
-    this.attributes = Object.assign({ ['id']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(opts?.attributes, Technical.schema) as TechnicalAttributes;
+    this.contents = opts?.content ?? xml.zero(Technical.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -18372,9 +17637,9 @@ export type AccentAttributes = {
 
 export type AccentContents = [];
 
-export class Accent implements XMLElement<AccentAttributes, AccentContents> {
-  static readonly elementName = 'accent';
+export class Accent implements XMLElement<'accent', AccentAttributes, AccentContents> {
   static readonly schema = {
+    name: 'accent',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -18412,29 +17677,17 @@ export class Accent implements XMLElement<AccentAttributes, AccentContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Accent.schema;
 
   attributes: AccentAttributes;
   contents: AccentContents;
 
   constructor(opts?: { attributes?: Partial<AccentAttributes>; content?: AccentContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Accent.schema) as AccentAttributes;
+    this.contents = opts?.content ?? xml.zero(Accent.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18516,9 +17769,9 @@ export type StrongAccentAttributes = {
 
 export type StrongAccentContents = [];
 
-export class StrongAccent implements XMLElement<StrongAccentAttributes, StrongAccentContents> {
-  static readonly elementName = 'strong-accent';
+export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAttributes, StrongAccentContents> {
   static readonly schema = {
+    name: 'strong-accent',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -18557,30 +17810,17 @@ export class StrongAccent implements XMLElement<StrongAccentAttributes, StrongAc
       },
       'up-down': { type: 'optional', value: { type: 'choices', choices: ['up', 'down'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = StrongAccent.schema;
 
   attributes: StrongAccentAttributes;
   contents: StrongAccentContents;
 
   constructor(opts?: { attributes?: Partial<StrongAccentAttributes>; content?: StrongAccentContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['up-down']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, StrongAccent.schema) as StrongAccentAttributes;
+    this.contents = opts?.content ?? xml.zero(StrongAccent.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18667,9 +17907,9 @@ export type StaccatoAttributes = {
 
 export type StaccatoContents = [];
 
-export class Staccato implements XMLElement<StaccatoAttributes, StaccatoContents> {
-  static readonly elementName = 'staccato';
+export class Staccato implements XMLElement<'staccato', StaccatoAttributes, StaccatoContents> {
   static readonly schema = {
+    name: 'staccato',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -18707,29 +17947,17 @@ export class Staccato implements XMLElement<StaccatoAttributes, StaccatoContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Staccato.schema;
 
   attributes: StaccatoAttributes;
   contents: StaccatoContents;
 
   constructor(opts?: { attributes?: Partial<StaccatoAttributes>; content?: StaccatoContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Staccato.schema) as StaccatoAttributes;
+    this.contents = opts?.content ?? xml.zero(Staccato.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18810,9 +18038,9 @@ export type TenutoAttributes = {
 
 export type TenutoContents = [];
 
-export class Tenuto implements XMLElement<TenutoAttributes, TenutoContents> {
-  static readonly elementName = 'tenuto';
+export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoContents> {
   static readonly schema = {
+    name: 'tenuto',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -18850,29 +18078,17 @@ export class Tenuto implements XMLElement<TenutoAttributes, TenutoContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Tenuto.schema;
 
   attributes: TenutoAttributes;
   contents: TenutoContents;
 
   constructor(opts?: { attributes?: Partial<TenutoAttributes>; content?: TenutoContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Tenuto.schema) as TenutoAttributes;
+    this.contents = opts?.content ?? xml.zero(Tenuto.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18953,9 +18169,9 @@ export type DetachedLegatoAttributes = {
 
 export type DetachedLegatoContents = [];
 
-export class DetachedLegato implements XMLElement<DetachedLegatoAttributes, DetachedLegatoContents> {
-  static readonly elementName = 'detached-legato';
+export class DetachedLegato implements XMLElement<'detached-legato', DetachedLegatoAttributes, DetachedLegatoContents> {
   static readonly schema = {
+    name: 'detached-legato',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -18993,29 +18209,17 @@ export class DetachedLegato implements XMLElement<DetachedLegatoAttributes, Deta
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = DetachedLegato.schema;
 
   attributes: DetachedLegatoAttributes;
   contents: DetachedLegatoContents;
 
   constructor(opts?: { attributes?: Partial<DetachedLegatoAttributes>; content?: DetachedLegatoContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, DetachedLegato.schema) as DetachedLegatoAttributes;
+    this.contents = opts?.content ?? xml.zero(DetachedLegato.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19096,9 +18300,9 @@ export type StaccatissimoAttributes = {
 
 export type StaccatissimoContents = [];
 
-export class Staccatissimo implements XMLElement<StaccatissimoAttributes, StaccatissimoContents> {
-  static readonly elementName = 'staccatissimo';
+export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoAttributes, StaccatissimoContents> {
   static readonly schema = {
+    name: 'staccatissimo',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -19136,29 +18340,17 @@ export class Staccatissimo implements XMLElement<StaccatissimoAttributes, Stacca
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Staccatissimo.schema;
 
   attributes: StaccatissimoAttributes;
   contents: StaccatissimoContents;
 
   constructor(opts?: { attributes?: Partial<StaccatissimoAttributes>; content?: StaccatissimoContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Staccatissimo.schema) as StaccatissimoAttributes;
+    this.contents = opts?.content ?? xml.zero(Staccatissimo.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19239,9 +18431,9 @@ export type SpiccatoAttributes = {
 
 export type SpiccatoContents = [];
 
-export class Spiccato implements XMLElement<SpiccatoAttributes, SpiccatoContents> {
-  static readonly elementName = 'spiccato';
+export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, SpiccatoContents> {
   static readonly schema = {
+    name: 'spiccato',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -19279,29 +18471,17 @@ export class Spiccato implements XMLElement<SpiccatoAttributes, SpiccatoContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Spiccato.schema;
 
   attributes: SpiccatoAttributes;
   contents: SpiccatoContents;
 
   constructor(opts?: { attributes?: Partial<SpiccatoAttributes>; content?: SpiccatoContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Spiccato.schema) as SpiccatoAttributes;
+    this.contents = opts?.content ?? xml.zero(Spiccato.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19382,9 +18562,9 @@ export type ScoopAttributes = {
 
 export type ScoopContents = [];
 
-export class Scoop implements XMLElement<ScoopAttributes, ScoopContents> {
-  static readonly elementName = 'scoop';
+export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents> {
   static readonly schema = {
+    name: 'scoop',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -19422,29 +18602,17 @@ export class Scoop implements XMLElement<ScoopAttributes, ScoopContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Scoop.schema;
 
   attributes: ScoopAttributes;
   contents: ScoopContents;
 
   constructor(opts?: { attributes?: Partial<ScoopAttributes>; content?: ScoopContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Scoop.schema) as ScoopAttributes;
+    this.contents = opts?.content ?? xml.zero(Scoop.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19530,9 +18698,9 @@ export type PlopAttributes = {
 
 export type PlopContents = [];
 
-export class Plop implements XMLElement<PlopAttributes, PlopContents> {
-  static readonly elementName = 'plop';
+export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
   static readonly schema = {
+    name: 'plop',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
@@ -19575,34 +18743,17 @@ export class Plop implements XMLElement<PlopAttributes, PlopContents> {
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Plop.schema;
 
   attributes: PlopAttributes;
   contents: PlopContents;
 
   constructor(opts?: { attributes?: Partial<PlopAttributes>; content?: PlopContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['line-length']: null,
-        ['line-shape']: null,
-        ['line-type']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['space-length']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Plop.schema) as PlopAttributes;
+    this.contents = opts?.content ?? xml.zero(Plop.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19718,9 +18869,9 @@ export type DoitAttributes = {
 
 export type DoitContents = [];
 
-export class Doit implements XMLElement<DoitAttributes, DoitContents> {
-  static readonly elementName = 'doit';
+export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
   static readonly schema = {
+    name: 'doit',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
@@ -19763,34 +18914,17 @@ export class Doit implements XMLElement<DoitAttributes, DoitContents> {
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Doit.schema;
 
   attributes: DoitAttributes;
   contents: DoitContents;
 
   constructor(opts?: { attributes?: Partial<DoitAttributes>; content?: DoitContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['line-length']: null,
-        ['line-shape']: null,
-        ['line-type']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['space-length']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Doit.schema) as DoitAttributes;
+    this.contents = opts?.content ?? xml.zero(Doit.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19906,9 +19040,9 @@ export type FalloffAttributes = {
 
 export type FalloffContents = [];
 
-export class Falloff implements XMLElement<FalloffAttributes, FalloffContents> {
-  static readonly elementName = 'falloff';
+export class Falloff implements XMLElement<'falloff', FalloffAttributes, FalloffContents> {
   static readonly schema = {
+    name: 'falloff',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
@@ -19951,34 +19085,17 @@ export class Falloff implements XMLElement<FalloffAttributes, FalloffContents> {
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Falloff.schema;
 
   attributes: FalloffAttributes;
   contents: FalloffContents;
 
   constructor(opts?: { attributes?: Partial<FalloffAttributes>; content?: FalloffContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['line-length']: null,
-        ['line-shape']: null,
-        ['line-type']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['space-length']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Falloff.schema) as FalloffAttributes;
+    this.contents = opts?.content ?? xml.zero(Falloff.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -20089,9 +19206,9 @@ export type BreathMarkAttributes = {
 
 export type BreathMarkContents = ['comma' | 'tick' | 'upbow' | 'salzedo' | ''];
 
-export class BreathMark implements XMLElement<BreathMarkAttributes, BreathMarkContents> {
-  static readonly elementName = 'breath-mark';
+export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttributes, BreathMarkContents> {
   static readonly schema = {
+    name: 'breath-mark',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -20129,7 +19246,7 @@ export class BreathMark implements XMLElement<BreathMarkAttributes, BreathMarkCo
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -20139,28 +19256,16 @@ export class BreathMark implements XMLElement<BreathMarkAttributes, BreathMarkCo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = BreathMark.schema;
 
   attributes: BreathMarkAttributes;
   contents: BreathMarkContents;
 
   constructor(opts?: { attributes?: Partial<BreathMarkAttributes>; content?: BreathMarkContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['comma'];
+    this.attributes = xml.mergeZero(opts?.attributes, BreathMark.schema) as BreathMarkAttributes;
+    this.contents = opts?.content ?? xml.zero(BreathMark.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -20247,9 +19352,9 @@ export type CaesuraAttributes = {
 
 export type CaesuraContents = ['normal' | 'thick' | 'short' | 'curved' | 'single' | ''];
 
-export class Caesura implements XMLElement<CaesuraAttributes, CaesuraContents> {
-  static readonly elementName = 'caesura';
+export class Caesura implements XMLElement<'caesura', CaesuraAttributes, CaesuraContents> {
   static readonly schema = {
+    name: 'caesura',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -20287,7 +19392,7 @@ export class Caesura implements XMLElement<CaesuraAttributes, CaesuraContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -20297,28 +19402,16 @@ export class Caesura implements XMLElement<CaesuraAttributes, CaesuraContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Caesura.schema;
 
   attributes: CaesuraAttributes;
   contents: CaesuraContents;
 
   constructor(opts?: { attributes?: Partial<CaesuraAttributes>; content?: CaesuraContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['normal'];
+    this.attributes = xml.mergeZero(opts?.attributes, Caesura.schema) as CaesuraAttributes;
+    this.contents = opts?.content ?? xml.zero(Caesura.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -20405,9 +19498,9 @@ export type StressAttributes = {
 
 export type StressContents = [];
 
-export class Stress implements XMLElement<StressAttributes, StressContents> {
-  static readonly elementName = 'stress';
+export class Stress implements XMLElement<'stress', StressAttributes, StressContents> {
   static readonly schema = {
+    name: 'stress',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -20445,29 +19538,17 @@ export class Stress implements XMLElement<StressAttributes, StressContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Stress.schema;
 
   attributes: StressAttributes;
   contents: StressContents;
 
   constructor(opts?: { attributes?: Partial<StressAttributes>; content?: StressContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Stress.schema) as StressAttributes;
+    this.contents = opts?.content ?? xml.zero(Stress.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -20548,9 +19629,9 @@ export type UnstressAttributes = {
 
 export type UnstressContents = [];
 
-export class Unstress implements XMLElement<UnstressAttributes, UnstressContents> {
-  static readonly elementName = 'unstress';
+export class Unstress implements XMLElement<'unstress', UnstressAttributes, UnstressContents> {
   static readonly schema = {
+    name: 'unstress',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -20588,29 +19669,17 @@ export class Unstress implements XMLElement<UnstressAttributes, UnstressContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Unstress.schema;
 
   attributes: UnstressAttributes;
   contents: UnstressContents;
 
   constructor(opts?: { attributes?: Partial<UnstressAttributes>; content?: UnstressContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Unstress.schema) as UnstressAttributes;
+    this.contents = opts?.content ?? xml.zero(Unstress.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -20691,9 +19760,9 @@ export type SoftAccessAttributes = {
 
 export type SoftAccessContents = [];
 
-export class SoftAccess implements XMLElement<SoftAccessAttributes, SoftAccessContents> {
-  static readonly elementName = 'soft-access';
+export class SoftAccess implements XMLElement<'soft-access', SoftAccessAttributes, SoftAccessContents> {
   static readonly schema = {
+    name: 'soft-access',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -20731,29 +19800,17 @@ export class SoftAccess implements XMLElement<SoftAccessAttributes, SoftAccessCo
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = SoftAccess.schema;
 
   attributes: SoftAccessAttributes;
   contents: SoftAccessContents;
 
   constructor(opts?: { attributes?: Partial<SoftAccessAttributes>; content?: SoftAccessContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, SoftAccess.schema) as SoftAccessAttributes;
+    this.contents = opts?.content ?? xml.zero(SoftAccess.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -20835,9 +19892,11 @@ export type OtherArticulationAttributes = {
 
 export type OtherArticulationContents = [];
 
-export class OtherArticulation implements XMLElement<OtherArticulationAttributes, OtherArticulationContents> {
-  static readonly elementName = 'other-articulation';
+export class OtherArticulation
+  implements XMLElement<'other-articulation', OtherArticulationAttributes, OtherArticulationContents>
+{
   static readonly schema = {
+    name: 'other-articulation',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -20876,30 +19935,17 @@ export class OtherArticulation implements XMLElement<OtherArticulationAttributes
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = OtherArticulation.schema;
 
   attributes: OtherArticulationAttributes;
   contents: OtherArticulationContents;
 
   constructor(opts?: { attributes?: Partial<OtherArticulationAttributes>; content?: OtherArticulationContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherArticulation.schema) as OtherArticulationAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherArticulation.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -20995,11 +20041,11 @@ export type ArticulationsContents = [
   >
 ];
 
-export class Articulations implements XMLElement<ArticulationsAttributes, ArticulationsContents> {
-  static readonly elementName = 'articulations';
+export class Articulations implements XMLElement<'articulations', ArticulationsAttributes, ArticulationsContents> {
   static readonly schema = {
+    name: 'articulations',
     attributes: { id: { type: 'optional', value: { type: 'string' } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'articulations',
@@ -21030,14 +20076,16 @@ export class Articulations implements XMLElement<ArticulationsAttributes, Articu
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Articulations.schema;
 
   attributes: ArticulationsAttributes;
   contents: ArticulationsContents;
 
   constructor(opts?: { attributes?: Partial<ArticulationsAttributes>; content?: ArticulationsContents }) {
-    this.attributes = Object.assign({ ['id']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(opts?.attributes, Articulations.schema) as ArticulationsAttributes;
+    this.contents = opts?.content ?? xml.zero(Articulations.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -21095,16 +20143,17 @@ export type PAttributes = Record<string, unknown>;
 
 export type PContents = [];
 
-export class P implements XMLElement<PAttributes, PContents> {
-  static readonly elementName = 'p';
-  static readonly schema = { attributes: {}, content: [] };
+export class P implements XMLElement<'p', PAttributes, PContents> {
+  static readonly schema = { name: 'p', attributes: {}, contents: [] } as const;
+
+  readonly schema = P.schema;
 
   attributes: PAttributes;
   contents: PContents;
 
   constructor(opts?: { attributes?: Partial<PAttributes>; content?: PContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, P.schema) as PAttributes;
+    this.contents = opts?.content ?? xml.zero(P.schema.contents);
   }
 }
 
@@ -21112,16 +20161,17 @@ export type PpAttributes = Record<string, unknown>;
 
 export type PpContents = [];
 
-export class Pp implements XMLElement<PpAttributes, PpContents> {
-  static readonly elementName = 'pp';
-  static readonly schema = { attributes: {}, content: [] };
+export class Pp implements XMLElement<'pp', PpAttributes, PpContents> {
+  static readonly schema = { name: 'pp', attributes: {}, contents: [] } as const;
+
+  readonly schema = Pp.schema;
 
   attributes: PpAttributes;
   contents: PpContents;
 
   constructor(opts?: { attributes?: Partial<PpAttributes>; content?: PpContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Pp.schema) as PpAttributes;
+    this.contents = opts?.content ?? xml.zero(Pp.schema.contents);
   }
 }
 
@@ -21129,16 +20179,17 @@ export type PppAttributes = Record<string, unknown>;
 
 export type PppContents = [];
 
-export class Ppp implements XMLElement<PppAttributes, PppContents> {
-  static readonly elementName = 'ppp';
-  static readonly schema = { attributes: {}, content: [] };
+export class Ppp implements XMLElement<'ppp', PppAttributes, PppContents> {
+  static readonly schema = { name: 'ppp', attributes: {}, contents: [] } as const;
+
+  readonly schema = Ppp.schema;
 
   attributes: PppAttributes;
   contents: PppContents;
 
   constructor(opts?: { attributes?: Partial<PppAttributes>; content?: PppContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Ppp.schema) as PppAttributes;
+    this.contents = opts?.content ?? xml.zero(Ppp.schema.contents);
   }
 }
 
@@ -21146,16 +20197,17 @@ export type PpppAttributes = Record<string, unknown>;
 
 export type PpppContents = [];
 
-export class Pppp implements XMLElement<PpppAttributes, PpppContents> {
-  static readonly elementName = 'pppp';
-  static readonly schema = { attributes: {}, content: [] };
+export class Pppp implements XMLElement<'pppp', PpppAttributes, PpppContents> {
+  static readonly schema = { name: 'pppp', attributes: {}, contents: [] } as const;
+
+  readonly schema = Pppp.schema;
 
   attributes: PpppAttributes;
   contents: PpppContents;
 
   constructor(opts?: { attributes?: Partial<PpppAttributes>; content?: PpppContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Pppp.schema) as PpppAttributes;
+    this.contents = opts?.content ?? xml.zero(Pppp.schema.contents);
   }
 }
 
@@ -21163,16 +20215,17 @@ export type PppppAttributes = Record<string, unknown>;
 
 export type PppppContents = [];
 
-export class Ppppp implements XMLElement<PppppAttributes, PppppContents> {
-  static readonly elementName = 'ppppp';
-  static readonly schema = { attributes: {}, content: [] };
+export class Ppppp implements XMLElement<'ppppp', PppppAttributes, PppppContents> {
+  static readonly schema = { name: 'ppppp', attributes: {}, contents: [] } as const;
+
+  readonly schema = Ppppp.schema;
 
   attributes: PppppAttributes;
   contents: PppppContents;
 
   constructor(opts?: { attributes?: Partial<PppppAttributes>; content?: PppppContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Ppppp.schema) as PppppAttributes;
+    this.contents = opts?.content ?? xml.zero(Ppppp.schema.contents);
   }
 }
 
@@ -21180,16 +20233,17 @@ export type PpppppAttributes = Record<string, unknown>;
 
 export type PpppppContents = [];
 
-export class Pppppp implements XMLElement<PpppppAttributes, PpppppContents> {
-  static readonly elementName = 'pppppp';
-  static readonly schema = { attributes: {}, content: [] };
+export class Pppppp implements XMLElement<'pppppp', PpppppAttributes, PpppppContents> {
+  static readonly schema = { name: 'pppppp', attributes: {}, contents: [] } as const;
+
+  readonly schema = Pppppp.schema;
 
   attributes: PpppppAttributes;
   contents: PpppppContents;
 
   constructor(opts?: { attributes?: Partial<PpppppAttributes>; content?: PpppppContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Pppppp.schema) as PpppppAttributes;
+    this.contents = opts?.content ?? xml.zero(Pppppp.schema.contents);
   }
 }
 
@@ -21197,16 +20251,17 @@ export type FAttributes = Record<string, unknown>;
 
 export type FContents = [];
 
-export class F implements XMLElement<FAttributes, FContents> {
-  static readonly elementName = 'f';
-  static readonly schema = { attributes: {}, content: [] };
+export class F implements XMLElement<'f', FAttributes, FContents> {
+  static readonly schema = { name: 'f', attributes: {}, contents: [] } as const;
+
+  readonly schema = F.schema;
 
   attributes: FAttributes;
   contents: FContents;
 
   constructor(opts?: { attributes?: Partial<FAttributes>; content?: FContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, F.schema) as FAttributes;
+    this.contents = opts?.content ?? xml.zero(F.schema.contents);
   }
 }
 
@@ -21214,16 +20269,17 @@ export type FfAttributes = Record<string, unknown>;
 
 export type FfContents = [];
 
-export class Ff implements XMLElement<FfAttributes, FfContents> {
-  static readonly elementName = 'ff';
-  static readonly schema = { attributes: {}, content: [] };
+export class Ff implements XMLElement<'ff', FfAttributes, FfContents> {
+  static readonly schema = { name: 'ff', attributes: {}, contents: [] } as const;
+
+  readonly schema = Ff.schema;
 
   attributes: FfAttributes;
   contents: FfContents;
 
   constructor(opts?: { attributes?: Partial<FfAttributes>; content?: FfContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Ff.schema) as FfAttributes;
+    this.contents = opts?.content ?? xml.zero(Ff.schema.contents);
   }
 }
 
@@ -21231,16 +20287,17 @@ export type FffAttributes = Record<string, unknown>;
 
 export type FffContents = [];
 
-export class Fff implements XMLElement<FffAttributes, FffContents> {
-  static readonly elementName = 'fff';
-  static readonly schema = { attributes: {}, content: [] };
+export class Fff implements XMLElement<'fff', FffAttributes, FffContents> {
+  static readonly schema = { name: 'fff', attributes: {}, contents: [] } as const;
+
+  readonly schema = Fff.schema;
 
   attributes: FffAttributes;
   contents: FffContents;
 
   constructor(opts?: { attributes?: Partial<FffAttributes>; content?: FffContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Fff.schema) as FffAttributes;
+    this.contents = opts?.content ?? xml.zero(Fff.schema.contents);
   }
 }
 
@@ -21248,16 +20305,17 @@ export type FfffAttributes = Record<string, unknown>;
 
 export type FfffContents = [];
 
-export class Ffff implements XMLElement<FfffAttributes, FfffContents> {
-  static readonly elementName = 'ffff';
-  static readonly schema = { attributes: {}, content: [] };
+export class Ffff implements XMLElement<'ffff', FfffAttributes, FfffContents> {
+  static readonly schema = { name: 'ffff', attributes: {}, contents: [] } as const;
+
+  readonly schema = Ffff.schema;
 
   attributes: FfffAttributes;
   contents: FfffContents;
 
   constructor(opts?: { attributes?: Partial<FfffAttributes>; content?: FfffContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Ffff.schema) as FfffAttributes;
+    this.contents = opts?.content ?? xml.zero(Ffff.schema.contents);
   }
 }
 
@@ -21265,16 +20323,17 @@ export type FffffAttributes = Record<string, unknown>;
 
 export type FffffContents = [];
 
-export class Fffff implements XMLElement<FffffAttributes, FffffContents> {
-  static readonly elementName = 'fffff';
-  static readonly schema = { attributes: {}, content: [] };
+export class Fffff implements XMLElement<'fffff', FffffAttributes, FffffContents> {
+  static readonly schema = { name: 'fffff', attributes: {}, contents: [] } as const;
+
+  readonly schema = Fffff.schema;
 
   attributes: FffffAttributes;
   contents: FffffContents;
 
   constructor(opts?: { attributes?: Partial<FffffAttributes>; content?: FffffContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Fffff.schema) as FffffAttributes;
+    this.contents = opts?.content ?? xml.zero(Fffff.schema.contents);
   }
 }
 
@@ -21282,16 +20341,17 @@ export type FfffffAttributes = Record<string, unknown>;
 
 export type FfffffContents = [];
 
-export class Ffffff implements XMLElement<FfffffAttributes, FfffffContents> {
-  static readonly elementName = 'ffffff';
-  static readonly schema = { attributes: {}, content: [] };
+export class Ffffff implements XMLElement<'ffffff', FfffffAttributes, FfffffContents> {
+  static readonly schema = { name: 'ffffff', attributes: {}, contents: [] } as const;
+
+  readonly schema = Ffffff.schema;
 
   attributes: FfffffAttributes;
   contents: FfffffContents;
 
   constructor(opts?: { attributes?: Partial<FfffffAttributes>; content?: FfffffContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Ffffff.schema) as FfffffAttributes;
+    this.contents = opts?.content ?? xml.zero(Ffffff.schema.contents);
   }
 }
 
@@ -21299,16 +20359,17 @@ export type MpAttributes = Record<string, unknown>;
 
 export type MpContents = [];
 
-export class Mp implements XMLElement<MpAttributes, MpContents> {
-  static readonly elementName = 'mp';
-  static readonly schema = { attributes: {}, content: [] };
+export class Mp implements XMLElement<'mp', MpAttributes, MpContents> {
+  static readonly schema = { name: 'mp', attributes: {}, contents: [] } as const;
+
+  readonly schema = Mp.schema;
 
   attributes: MpAttributes;
   contents: MpContents;
 
   constructor(opts?: { attributes?: Partial<MpAttributes>; content?: MpContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Mp.schema) as MpAttributes;
+    this.contents = opts?.content ?? xml.zero(Mp.schema.contents);
   }
 }
 
@@ -21316,16 +20377,17 @@ export type MfAttributes = Record<string, unknown>;
 
 export type MfContents = [];
 
-export class Mf implements XMLElement<MfAttributes, MfContents> {
-  static readonly elementName = 'mf';
-  static readonly schema = { attributes: {}, content: [] };
+export class Mf implements XMLElement<'mf', MfAttributes, MfContents> {
+  static readonly schema = { name: 'mf', attributes: {}, contents: [] } as const;
+
+  readonly schema = Mf.schema;
 
   attributes: MfAttributes;
   contents: MfContents;
 
   constructor(opts?: { attributes?: Partial<MfAttributes>; content?: MfContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Mf.schema) as MfAttributes;
+    this.contents = opts?.content ?? xml.zero(Mf.schema.contents);
   }
 }
 
@@ -21333,16 +20395,17 @@ export type SfAttributes = Record<string, unknown>;
 
 export type SfContents = [];
 
-export class Sf implements XMLElement<SfAttributes, SfContents> {
-  static readonly elementName = 'sf';
-  static readonly schema = { attributes: {}, content: [] };
+export class Sf implements XMLElement<'sf', SfAttributes, SfContents> {
+  static readonly schema = { name: 'sf', attributes: {}, contents: [] } as const;
+
+  readonly schema = Sf.schema;
 
   attributes: SfAttributes;
   contents: SfContents;
 
   constructor(opts?: { attributes?: Partial<SfAttributes>; content?: SfContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Sf.schema) as SfAttributes;
+    this.contents = opts?.content ?? xml.zero(Sf.schema.contents);
   }
 }
 
@@ -21350,16 +20413,17 @@ export type SfpAttributes = Record<string, unknown>;
 
 export type SfpContents = [];
 
-export class Sfp implements XMLElement<SfpAttributes, SfpContents> {
-  static readonly elementName = 'sfp';
-  static readonly schema = { attributes: {}, content: [] };
+export class Sfp implements XMLElement<'sfp', SfpAttributes, SfpContents> {
+  static readonly schema = { name: 'sfp', attributes: {}, contents: [] } as const;
+
+  readonly schema = Sfp.schema;
 
   attributes: SfpAttributes;
   contents: SfpContents;
 
   constructor(opts?: { attributes?: Partial<SfpAttributes>; content?: SfpContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Sfp.schema) as SfpAttributes;
+    this.contents = opts?.content ?? xml.zero(Sfp.schema.contents);
   }
 }
 
@@ -21367,16 +20431,17 @@ export type SfppAttributes = Record<string, unknown>;
 
 export type SfppContents = [];
 
-export class Sfpp implements XMLElement<SfppAttributes, SfppContents> {
-  static readonly elementName = 'sfpp';
-  static readonly schema = { attributes: {}, content: [] };
+export class Sfpp implements XMLElement<'sfpp', SfppAttributes, SfppContents> {
+  static readonly schema = { name: 'sfpp', attributes: {}, contents: [] } as const;
+
+  readonly schema = Sfpp.schema;
 
   attributes: SfppAttributes;
   contents: SfppContents;
 
   constructor(opts?: { attributes?: Partial<SfppAttributes>; content?: SfppContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Sfpp.schema) as SfppAttributes;
+    this.contents = opts?.content ?? xml.zero(Sfpp.schema.contents);
   }
 }
 
@@ -21384,16 +20449,17 @@ export type FpAttributes = Record<string, unknown>;
 
 export type FpContents = [];
 
-export class Fp implements XMLElement<FpAttributes, FpContents> {
-  static readonly elementName = 'fp';
-  static readonly schema = { attributes: {}, content: [] };
+export class Fp implements XMLElement<'fp', FpAttributes, FpContents> {
+  static readonly schema = { name: 'fp', attributes: {}, contents: [] } as const;
+
+  readonly schema = Fp.schema;
 
   attributes: FpAttributes;
   contents: FpContents;
 
   constructor(opts?: { attributes?: Partial<FpAttributes>; content?: FpContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Fp.schema) as FpAttributes;
+    this.contents = opts?.content ?? xml.zero(Fp.schema.contents);
   }
 }
 
@@ -21401,16 +20467,17 @@ export type RfAttributes = Record<string, unknown>;
 
 export type RfContents = [];
 
-export class Rf implements XMLElement<RfAttributes, RfContents> {
-  static readonly elementName = 'rf';
-  static readonly schema = { attributes: {}, content: [] };
+export class Rf implements XMLElement<'rf', RfAttributes, RfContents> {
+  static readonly schema = { name: 'rf', attributes: {}, contents: [] } as const;
+
+  readonly schema = Rf.schema;
 
   attributes: RfAttributes;
   contents: RfContents;
 
   constructor(opts?: { attributes?: Partial<RfAttributes>; content?: RfContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Rf.schema) as RfAttributes;
+    this.contents = opts?.content ?? xml.zero(Rf.schema.contents);
   }
 }
 
@@ -21418,16 +20485,17 @@ export type RfzAttributes = Record<string, unknown>;
 
 export type RfzContents = [];
 
-export class Rfz implements XMLElement<RfzAttributes, RfzContents> {
-  static readonly elementName = 'rfz';
-  static readonly schema = { attributes: {}, content: [] };
+export class Rfz implements XMLElement<'rfz', RfzAttributes, RfzContents> {
+  static readonly schema = { name: 'rfz', attributes: {}, contents: [] } as const;
+
+  readonly schema = Rfz.schema;
 
   attributes: RfzAttributes;
   contents: RfzContents;
 
   constructor(opts?: { attributes?: Partial<RfzAttributes>; content?: RfzContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Rfz.schema) as RfzAttributes;
+    this.contents = opts?.content ?? xml.zero(Rfz.schema.contents);
   }
 }
 
@@ -21435,16 +20503,17 @@ export type SfzAttributes = Record<string, unknown>;
 
 export type SfzContents = [];
 
-export class Sfz implements XMLElement<SfzAttributes, SfzContents> {
-  static readonly elementName = 'sfz';
-  static readonly schema = { attributes: {}, content: [] };
+export class Sfz implements XMLElement<'sfz', SfzAttributes, SfzContents> {
+  static readonly schema = { name: 'sfz', attributes: {}, contents: [] } as const;
+
+  readonly schema = Sfz.schema;
 
   attributes: SfzAttributes;
   contents: SfzContents;
 
   constructor(opts?: { attributes?: Partial<SfzAttributes>; content?: SfzContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Sfz.schema) as SfzAttributes;
+    this.contents = opts?.content ?? xml.zero(Sfz.schema.contents);
   }
 }
 
@@ -21452,16 +20521,17 @@ export type SffzAttributes = Record<string, unknown>;
 
 export type SffzContents = [];
 
-export class Sffz implements XMLElement<SffzAttributes, SffzContents> {
-  static readonly elementName = 'sffz';
-  static readonly schema = { attributes: {}, content: [] };
+export class Sffz implements XMLElement<'sffz', SffzAttributes, SffzContents> {
+  static readonly schema = { name: 'sffz', attributes: {}, contents: [] } as const;
+
+  readonly schema = Sffz.schema;
 
   attributes: SffzAttributes;
   contents: SffzContents;
 
   constructor(opts?: { attributes?: Partial<SffzAttributes>; content?: SffzContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Sffz.schema) as SffzAttributes;
+    this.contents = opts?.content ?? xml.zero(Sffz.schema.contents);
   }
 }
 
@@ -21469,16 +20539,17 @@ export type FzAttributes = Record<string, unknown>;
 
 export type FzContents = [];
 
-export class Fz implements XMLElement<FzAttributes, FzContents> {
-  static readonly elementName = 'fz';
-  static readonly schema = { attributes: {}, content: [] };
+export class Fz implements XMLElement<'fz', FzAttributes, FzContents> {
+  static readonly schema = { name: 'fz', attributes: {}, contents: [] } as const;
+
+  readonly schema = Fz.schema;
 
   attributes: FzAttributes;
   contents: FzContents;
 
   constructor(opts?: { attributes?: Partial<FzAttributes>; content?: FzContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Fz.schema) as FzAttributes;
+    this.contents = opts?.content ?? xml.zero(Fz.schema.contents);
   }
 }
 
@@ -21486,16 +20557,17 @@ export type NAttributes = Record<string, unknown>;
 
 export type NContents = [];
 
-export class N implements XMLElement<NAttributes, NContents> {
-  static readonly elementName = 'n';
-  static readonly schema = { attributes: {}, content: [] };
+export class N implements XMLElement<'n', NAttributes, NContents> {
+  static readonly schema = { name: 'n', attributes: {}, contents: [] } as const;
+
+  readonly schema = N.schema;
 
   attributes: NAttributes;
   contents: NContents;
 
   constructor(opts?: { attributes?: Partial<NAttributes>; content?: NContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, N.schema) as NAttributes;
+    this.contents = opts?.content ?? xml.zero(N.schema.contents);
   }
 }
 
@@ -21503,16 +20575,17 @@ export type PfAttributes = Record<string, unknown>;
 
 export type PfContents = [];
 
-export class Pf implements XMLElement<PfAttributes, PfContents> {
-  static readonly elementName = 'pf';
-  static readonly schema = { attributes: {}, content: [] };
+export class Pf implements XMLElement<'pf', PfAttributes, PfContents> {
+  static readonly schema = { name: 'pf', attributes: {}, contents: [] } as const;
+
+  readonly schema = Pf.schema;
 
   attributes: PfAttributes;
   contents: PfContents;
 
   constructor(opts?: { attributes?: Partial<PfAttributes>; content?: PfContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Pf.schema) as PfAttributes;
+    this.contents = opts?.content ?? xml.zero(Pf.schema.contents);
   }
 }
 
@@ -21520,16 +20593,17 @@ export type SfzpAttributes = Record<string, unknown>;
 
 export type SfzpContents = [];
 
-export class Sfzp implements XMLElement<SfzpAttributes, SfzpContents> {
-  static readonly elementName = 'sfzp';
-  static readonly schema = { attributes: {}, content: [] };
+export class Sfzp implements XMLElement<'sfzp', SfzpAttributes, SfzpContents> {
+  static readonly schema = { name: 'sfzp', attributes: {}, contents: [] } as const;
+
+  readonly schema = Sfzp.schema;
 
   attributes: SfzpAttributes;
   contents: SfzpContents;
 
   constructor(opts?: { attributes?: Partial<SfzpAttributes>; content?: SfzpContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Sfzp.schema) as SfzpAttributes;
+    this.contents = opts?.content ?? xml.zero(Sfzp.schema.contents);
   }
 }
 
@@ -21537,19 +20611,21 @@ export type OtherDynamicsAttributes = { smufl: string | null };
 
 export type OtherDynamicsContents = [string];
 
-export class OtherDynamics implements XMLElement<OtherDynamicsAttributes, OtherDynamicsContents> {
-  static readonly elementName = 'other-dynamics';
+export class OtherDynamics implements XMLElement<'other-dynamics', OtherDynamicsAttributes, OtherDynamicsContents> {
   static readonly schema = {
+    name: 'other-dynamics',
     attributes: { smufl: { type: 'optional', value: { type: 'string' } } },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = OtherDynamics.schema;
 
   attributes: OtherDynamicsAttributes;
   contents: OtherDynamicsContents;
 
   constructor(opts?: { attributes?: Partial<OtherDynamicsAttributes>; content?: OtherDynamicsContents }) {
-    this.attributes = Object.assign({ ['smufl']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherDynamics.schema) as OtherDynamicsAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherDynamics.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -21633,9 +20709,9 @@ export type DynamicsContents = [
   >
 ];
 
-export class Dynamics implements XMLElement<DynamicsAttributes, DynamicsContents> {
-  static readonly elementName = 'dynamics';
+export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, DynamicsContents> {
   static readonly schema = {
+    name: 'dynamics',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -21701,7 +20777,7 @@ export class Dynamics implements XMLElement<DynamicsAttributes, DynamicsContents
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'dynamics',
@@ -21743,35 +20819,16 @@ export class Dynamics implements XMLElement<DynamicsAttributes, DynamicsContents
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Dynamics.schema;
 
   attributes: DynamicsAttributes;
   contents: DynamicsContents;
 
   constructor(opts?: { attributes?: Partial<DynamicsAttributes>; content?: DynamicsContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['enclosure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['overline']: null,
-        ['placement']: null,
-        ['line-through']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['underline']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(opts?.attributes, Dynamics.schema) as DynamicsAttributes;
+    this.contents = opts?.content ?? xml.zero(Dynamics.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -21995,9 +21052,9 @@ export type FermataContents = [
   '' | 'normal' | 'angled' | 'square' | 'double-angled' | 'double-square' | 'double-dot' | 'half-curve' | 'curlew'
 ];
 
-export class Fermata implements XMLElement<FermataAttributes, FermataContents> {
-  static readonly elementName = 'fermata';
+export class Fermata implements XMLElement<'fermata', FermataAttributes, FermataContents> {
   static readonly schema = {
+    name: 'fermata',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -22036,7 +21093,7 @@ export class Fermata implements XMLElement<FermataAttributes, FermataContents> {
       },
       type: { type: 'optional', value: { type: 'choices', choices: ['upright', 'inverted'] } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -22059,29 +21116,16 @@ export class Fermata implements XMLElement<FermataAttributes, FermataContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Fermata.schema;
 
   attributes: FermataAttributes;
   contents: FermataContents;
 
   constructor(opts?: { attributes?: Partial<FermataAttributes>; content?: FermataContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['type']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Fermata.schema) as FermataAttributes;
+    this.contents = opts?.content ?? xml.zero(Fermata.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -22194,9 +21238,9 @@ export type ArpeggiateAttributes = {
 
 export type ArpeggiateContents = [];
 
-export class Arpeggiate implements XMLElement<ArpeggiateAttributes, ArpeggiateContents> {
-  static readonly elementName = 'arpeggiate';
+export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes, ArpeggiateContents> {
   static readonly schema = {
+    name: 'arpeggiate',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -22225,29 +21269,17 @@ export class Arpeggiate implements XMLElement<ArpeggiateAttributes, ArpeggiateCo
       },
       unbroken: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Arpeggiate.schema;
 
   attributes: ArpeggiateAttributes;
   contents: ArpeggiateContents;
 
   constructor(opts?: { attributes?: Partial<ArpeggiateAttributes>; content?: ArpeggiateContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['direction']: null,
-        ['id']: null,
-        ['number']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['unbroken']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Arpeggiate.schema) as ArpeggiateAttributes;
+    this.contents = opts?.content ?? xml.zero(Arpeggiate.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -22325,9 +21357,9 @@ export type NonArpeggiateAttributes = {
 
 export type NonArpeggiateContents = [];
 
-export class NonArpeggiate implements XMLElement<NonArpeggiateAttributes, NonArpeggiateContents> {
-  static readonly elementName = 'non-arpeggiate';
+export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiateAttributes, NonArpeggiateContents> {
   static readonly schema = {
+    name: 'non-arpeggiate',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['top', 'bottom'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -22355,28 +21387,17 @@ export class NonArpeggiate implements XMLElement<NonArpeggiateAttributes, NonArp
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = NonArpeggiate.schema;
 
   attributes: NonArpeggiateAttributes;
   contents: NonArpeggiateContents;
 
   constructor(opts?: { attributes?: Partial<NonArpeggiateAttributes>; content?: NonArpeggiateContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'top',
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['id']: null,
-        ['number']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, NonArpeggiate.schema) as NonArpeggiateAttributes;
+    this.contents = opts?.content ?? xml.zero(NonArpeggiate.schema.contents);
   }
   getType(): 'top' | 'bottom' {
     return this.attributes['type'];
@@ -22449,9 +21470,9 @@ export type OtherNotationAttributes = {
 
 export type OtherNotationContents = [string];
 
-export class OtherNotation implements XMLElement<OtherNotationAttributes, OtherNotationContents> {
-  static readonly elementName = 'other-notation';
+export class OtherNotation implements XMLElement<'other-notation', OtherNotationAttributes, OtherNotationContents> {
   static readonly schema = {
+    name: 'other-notation',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'single'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -22480,29 +21501,17 @@ export class OtherNotation implements XMLElement<OtherNotationAttributes, OtherN
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = OtherNotation.schema;
 
   attributes: OtherNotationAttributes;
   contents: OtherNotationContents;
 
   constructor(opts?: { attributes?: Partial<OtherNotationAttributes>; content?: OtherNotationContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'start',
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['id']: null,
-        ['number']: null,
-        ['placement']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherNotation.schema) as OtherNotationAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherNotation.schema.contents);
   }
   getType(): 'start' | 'stop' | 'single' {
     return this.attributes['type'];
@@ -22595,14 +21604,14 @@ export type NotationsContents = [
   >
 ];
 
-export class Notations implements XMLElement<NotationsAttributes, NotationsContents> {
-  static readonly elementName = 'notations';
+export class Notations implements XMLElement<'notations', NotationsAttributes, NotationsContents> {
   static readonly schema = {
+    name: 'notations',
     attributes: {
       id: { type: 'optional', value: { type: 'string' } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    content: [
+    contents: [
       { type: 'optional', value: Footnote },
       { type: 'optional', value: Level },
       {
@@ -22632,14 +21641,16 @@ export class Notations implements XMLElement<NotationsAttributes, NotationsConte
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Notations.schema;
 
   attributes: NotationsAttributes;
   contents: NotationsContents;
 
   constructor(opts?: { attributes?: Partial<NotationsAttributes>; content?: NotationsContents }) {
-    this.attributes = Object.assign({ ['id']: null, ['print-object']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, []];
+    this.attributes = xml.mergeZero(opts?.attributes, Notations.schema) as NotationsAttributes;
+    this.contents = opts?.content ?? xml.zero(Notations.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -22709,11 +21720,11 @@ export type SyllabicAttributes = Record<string, unknown>;
 
 export type SyllabicContents = ['begin' | 'end' | 'middle' | 'single'];
 
-export class Syllabic implements XMLElement<SyllabicAttributes, SyllabicContents> {
-  static readonly elementName = 'syllabic';
+export class Syllabic implements XMLElement<'syllabic', SyllabicAttributes, SyllabicContents> {
   static readonly schema = {
+    name: 'syllabic',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -22723,14 +21734,16 @@ export class Syllabic implements XMLElement<SyllabicAttributes, SyllabicContents
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Syllabic.schema;
 
   attributes: SyllabicAttributes;
   contents: SyllabicContents;
 
   constructor(opts?: { attributes?: Partial<SyllabicAttributes>; content?: SyllabicContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['begin'];
+    this.attributes = xml.mergeZero(opts?.attributes, Syllabic.schema) as SyllabicAttributes;
+    this.contents = opts?.content ?? xml.zero(Syllabic.schema.contents);
   }
 
   getSyllabic(): 'begin' | 'end' | 'middle' | 'single' {
@@ -22760,9 +21773,9 @@ export type TextAttributes = {
 
 export type TextContents = [];
 
-export class Text implements XMLElement<TextAttributes, TextContents> {
-  static readonly elementName = 'text';
+export class Text implements XMLElement<'text', TextAttributes, TextContents> {
   static readonly schema = {
+    name: 'text',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
@@ -22799,33 +21812,17 @@ export class Text implements XMLElement<TextAttributes, TextContents> {
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       'xml:lang': { type: 'optional', value: { type: 'string' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Text.schema;
 
   attributes: TextAttributes;
   contents: TextContents;
 
   constructor(opts?: { attributes?: Partial<TextAttributes>; content?: TextContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['dir']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['letter-spacing']: null,
-        ['line-through']: null,
-        ['overline']: null,
-        ['rotation']: null,
-        ['underline']: null,
-        ['xml:lang']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Text.schema) as TextAttributes;
+    this.contents = opts?.content ?? xml.zero(Text.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -22926,9 +21923,9 @@ export type ElisionAttributes = {
 
 export type ElisionContents = [];
 
-export class Elision implements XMLElement<ElisionAttributes, ElisionContents> {
-  static readonly elementName = 'elision';
+export class Elision implements XMLElement<'elision', ElisionAttributes, ElisionContents> {
   static readonly schema = {
+    name: 'elision',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
@@ -22946,25 +21943,17 @@ export class Elision implements XMLElement<ElisionAttributes, ElisionContents> {
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'lyrics' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Elision.schema;
 
   attributes: ElisionAttributes;
   contents: ElisionContents;
 
   constructor(opts?: { attributes?: Partial<ElisionAttributes>; content?: ElisionContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['smufl']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Elision.schema) as ElisionAttributes;
+    this.contents = opts?.content ?? xml.zero(Elision.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -23017,9 +22006,9 @@ export type ExtendAttributes = {
 
 export type ExtendContents = [];
 
-export class Extend implements XMLElement<ExtendAttributes, ExtendContents> {
-  static readonly elementName = 'extend';
+export class Extend implements XMLElement<'extend', ExtendAttributes, ExtendContents> {
   static readonly schema = {
+    name: 'extend',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -23044,25 +22033,17 @@ export class Extend implements XMLElement<ExtendAttributes, ExtendContents> {
       },
       type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Extend.schema;
 
   attributes: ExtendAttributes;
   contents: ExtendContents;
 
   constructor(opts?: { attributes?: Partial<ExtendAttributes>; content?: ExtendContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['type']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Extend.schema) as ExtendAttributes;
+    this.contents = opts?.content ?? xml.zero(Extend.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -23106,16 +22087,17 @@ export type LaughingAttributes = Record<string, unknown>;
 
 export type LaughingContents = [];
 
-export class Laughing implements XMLElement<LaughingAttributes, LaughingContents> {
-  static readonly elementName = 'laughing';
-  static readonly schema = { attributes: {}, content: [] };
+export class Laughing implements XMLElement<'laughing', LaughingAttributes, LaughingContents> {
+  static readonly schema = { name: 'laughing', attributes: {}, contents: [] } as const;
+
+  readonly schema = Laughing.schema;
 
   attributes: LaughingAttributes;
   contents: LaughingContents;
 
   constructor(opts?: { attributes?: Partial<LaughingAttributes>; content?: LaughingContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Laughing.schema) as LaughingAttributes;
+    this.contents = opts?.content ?? xml.zero(Laughing.schema.contents);
   }
 }
 
@@ -23123,16 +22105,17 @@ export type HummingAttributes = Record<string, unknown>;
 
 export type HummingContents = [];
 
-export class Humming implements XMLElement<HummingAttributes, HummingContents> {
-  static readonly elementName = 'humming';
-  static readonly schema = { attributes: {}, content: [] };
+export class Humming implements XMLElement<'humming', HummingAttributes, HummingContents> {
+  static readonly schema = { name: 'humming', attributes: {}, contents: [] } as const;
+
+  readonly schema = Humming.schema;
 
   attributes: HummingAttributes;
   contents: HummingContents;
 
   constructor(opts?: { attributes?: Partial<HummingAttributes>; content?: HummingContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Humming.schema) as HummingAttributes;
+    this.contents = opts?.content ?? xml.zero(Humming.schema.contents);
   }
 }
 
@@ -23140,16 +22123,17 @@ export type EndLineAttributes = Record<string, unknown>;
 
 export type EndLineContents = [];
 
-export class EndLine implements XMLElement<EndLineAttributes, EndLineContents> {
-  static readonly elementName = 'end-line';
-  static readonly schema = { attributes: {}, content: [] };
+export class EndLine implements XMLElement<'end-line', EndLineAttributes, EndLineContents> {
+  static readonly schema = { name: 'end-line', attributes: {}, contents: [] } as const;
+
+  readonly schema = EndLine.schema;
 
   attributes: EndLineAttributes;
   contents: EndLineContents;
 
   constructor(opts?: { attributes?: Partial<EndLineAttributes>; content?: EndLineContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, EndLine.schema) as EndLineAttributes;
+    this.contents = opts?.content ?? xml.zero(EndLine.schema.contents);
   }
 }
 
@@ -23157,16 +22141,17 @@ export type EndParagraphAttributes = Record<string, unknown>;
 
 export type EndParagraphContents = [];
 
-export class EndParagraph implements XMLElement<EndParagraphAttributes, EndParagraphContents> {
-  static readonly elementName = 'end-paragraph';
-  static readonly schema = { attributes: {}, content: [] };
+export class EndParagraph implements XMLElement<'end-paragraph', EndParagraphAttributes, EndParagraphContents> {
+  static readonly schema = { name: 'end-paragraph', attributes: {}, contents: [] } as const;
+
+  readonly schema = EndParagraph.schema;
 
   attributes: EndParagraphAttributes;
   contents: EndParagraphContents;
 
   constructor(opts?: { attributes?: Partial<EndParagraphAttributes>; content?: EndParagraphContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, EndParagraph.schema) as EndParagraphAttributes;
+    this.contents = opts?.content ?? xml.zero(EndParagraph.schema.contents);
   }
 }
 
@@ -23193,9 +22178,9 @@ export type LyricContents = [
   Level | null
 ];
 
-export class Lyric implements XMLElement<LyricAttributes, LyricContents> {
-  static readonly elementName = 'lyric';
+export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents> {
   static readonly schema = {
+    name: 'lyric',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -23226,7 +22211,7 @@ export class Lyric implements XMLElement<LyricAttributes, LyricContents> {
       },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'lyric',
@@ -23261,30 +22246,16 @@ export class Lyric implements XMLElement<LyricAttributes, LyricContents> {
       { type: 'optional', value: Footnote },
       { type: 'optional', value: Level },
     ],
-  };
+  } as const;
+
+  readonly schema = Lyric.schema;
 
   attributes: LyricAttributes;
   contents: LyricContents;
 
   constructor(opts?: { attributes?: Partial<LyricAttributes>; content?: LyricContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['id']: null,
-        ['justify']: null,
-        ['name']: null,
-        ['number']: null,
-        ['placement']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['time-only']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [[null, new Text(), []], null, null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Lyric.schema) as LyricAttributes;
+    this.contents = opts?.content ?? xml.zero(Lyric.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -23396,16 +22367,21 @@ export type IpaAttributes = Record<string, unknown>;
 
 export type IpaContents = [string];
 
-export class Ipa implements XMLElement<IpaAttributes, IpaContents> {
-  static readonly elementName = 'ipa';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class Ipa implements XMLElement<'ipa', IpaAttributes, IpaContents> {
+  static readonly schema = {
+    name: 'ipa',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Ipa.schema;
 
   attributes: IpaAttributes;
   contents: IpaContents;
 
   constructor(opts?: { attributes?: Partial<IpaAttributes>; content?: IpaContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Ipa.schema) as IpaAttributes;
+    this.contents = opts?.content ?? xml.zero(Ipa.schema.contents);
   }
 
   getText(): string {
@@ -23436,11 +22412,11 @@ export type MuteContents = [
   | 'straight'
 ];
 
-export class Mute implements XMLElement<MuteAttributes, MuteContents> {
-  static readonly elementName = 'mute';
+export class Mute implements XMLElement<'mute', MuteAttributes, MuteContents> {
   static readonly schema = {
+    name: 'mute',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -23469,14 +22445,16 @@ export class Mute implements XMLElement<MuteAttributes, MuteContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Mute.schema;
 
   attributes: MuteAttributes;
   contents: MuteContents;
 
   constructor(opts?: { attributes?: Partial<MuteAttributes>; content?: MuteContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['on'];
+    this.attributes = xml.mergeZero(opts?.attributes, Mute.schema) as MuteAttributes;
+    this.contents = opts?.content ?? xml.zero(Mute.schema.contents);
   }
 
   getMute():
@@ -23523,11 +22501,11 @@ export type SemiPitchedAttributes = Record<string, unknown>;
 
 export type SemiPitchedContents = ['high' | 'low' | 'medium' | 'medium-high' | 'medium-low' | 'very-low'];
 
-export class SemiPitched implements XMLElement<SemiPitchedAttributes, SemiPitchedContents> {
-  static readonly elementName = 'semi-pitched';
+export class SemiPitched implements XMLElement<'semi-pitched', SemiPitchedAttributes, SemiPitchedContents> {
   static readonly schema = {
+    name: 'semi-pitched',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -23537,14 +22515,16 @@ export class SemiPitched implements XMLElement<SemiPitchedAttributes, SemiPitche
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = SemiPitched.schema;
 
   attributes: SemiPitchedAttributes;
   contents: SemiPitchedContents;
 
   constructor(opts?: { attributes?: Partial<SemiPitchedAttributes>; content?: SemiPitchedContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['high'];
+    this.attributes = xml.mergeZero(opts?.attributes, SemiPitched.schema) as SemiPitchedAttributes;
+    this.contents = opts?.content ?? xml.zero(SemiPitched.schema.contents);
   }
 
   getSemiPitched(): 'high' | 'low' | 'medium' | 'medium-high' | 'medium-low' | 'very-low' {
@@ -23559,16 +22539,21 @@ export type OtherPlayAttributes = { type: string };
 
 export type OtherPlayContents = [];
 
-export class OtherPlay implements XMLElement<OtherPlayAttributes, OtherPlayContents> {
-  static readonly elementName = 'other-play';
-  static readonly schema = { attributes: { type: { type: 'required', value: { type: 'string' } } }, content: [] };
+export class OtherPlay implements XMLElement<'other-play', OtherPlayAttributes, OtherPlayContents> {
+  static readonly schema = {
+    name: 'other-play',
+    attributes: { type: { type: 'required', value: { type: 'string' } } },
+    contents: [],
+  } as const;
+
+  readonly schema = OtherPlay.schema;
 
   attributes: OtherPlayAttributes;
   contents: OtherPlayContents;
 
   constructor(opts?: { attributes?: Partial<OtherPlayAttributes>; content?: OtherPlayContents }) {
-    this.attributes = Object.assign({ ['type']: '' }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherPlay.schema) as OtherPlayAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherPlay.schema.contents);
   }
   getType(): string {
     return this.attributes['type'];
@@ -23582,25 +22567,27 @@ export type PlayAttributes = { id: string | null };
 
 export type PlayContents = [Array<Ipa | Mute | SemiPitched | OtherPlay>];
 
-export class Play implements XMLElement<PlayAttributes, PlayContents> {
-  static readonly elementName = 'play';
+export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
   static readonly schema = {
+    name: 'play',
     attributes: { id: { type: 'optional', value: { type: 'string' } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'play',
         value: { type: 'zeroOrMore', value: { type: 'choices', choices: [Ipa, Mute, SemiPitched, OtherPlay] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Play.schema;
 
   attributes: PlayAttributes;
   contents: PlayContents;
 
   constructor(opts?: { attributes?: Partial<PlayAttributes>; content?: PlayContents }) {
-    this.attributes = Object.assign({ ['id']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(opts?.attributes, Play.schema) as PlayAttributes;
+    this.contents = opts?.content ?? xml.zero(Play.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -23620,23 +22607,25 @@ export type AssessAttributes = { type: 'yes' | 'no'; player: string | null; 'tim
 
 export type AssessContents = [];
 
-export class Assess implements XMLElement<AssessAttributes, AssessContents> {
-  static readonly elementName = 'assess';
+export class Assess implements XMLElement<'assess', AssessAttributes, AssessContents> {
   static readonly schema = {
+    name: 'assess',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['yes', 'no'] } },
       player: { type: 'optional', value: { type: 'string' } },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Assess.schema;
 
   attributes: AssessAttributes;
   contents: AssessContents;
 
   constructor(opts?: { attributes?: Partial<AssessAttributes>; content?: AssessContents }) {
-    this.attributes = Object.assign({ ['type']: 'yes', ['player']: null, ['time-only']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Assess.schema) as AssessAttributes;
+    this.contents = opts?.content ?? xml.zero(Assess.schema.contents);
   }
   getType(): 'yes' | 'no' {
     return this.attributes['type'];
@@ -23662,22 +22651,24 @@ export type WaitAttributes = { player: string | null; 'time-only': string | null
 
 export type WaitContents = [];
 
-export class Wait implements XMLElement<WaitAttributes, WaitContents> {
-  static readonly elementName = 'wait';
+export class Wait implements XMLElement<'wait', WaitAttributes, WaitContents> {
   static readonly schema = {
+    name: 'wait',
     attributes: {
       player: { type: 'optional', value: { type: 'string' } },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Wait.schema;
 
   attributes: WaitAttributes;
   contents: WaitContents;
 
   constructor(opts?: { attributes?: Partial<WaitAttributes>; content?: WaitContents }) {
-    this.attributes = Object.assign({ ['player']: null, ['time-only']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Wait.schema) as WaitAttributes;
+    this.contents = opts?.content ?? xml.zero(Wait.schema.contents);
   }
   getPlayer(): string | null {
     return this.attributes['player'];
@@ -23697,23 +22688,25 @@ export type OtherListenAttributes = { type: string; player: string | null; 'time
 
 export type OtherListenContents = [string];
 
-export class OtherListen implements XMLElement<OtherListenAttributes, OtherListenContents> {
-  static readonly elementName = 'other-listen';
+export class OtherListen implements XMLElement<'other-listen', OtherListenAttributes, OtherListenContents> {
   static readonly schema = {
+    name: 'other-listen',
     attributes: {
       type: { type: 'required', value: { type: 'string' } },
       player: { type: 'optional', value: { type: 'string' } },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = OtherListen.schema;
 
   attributes: OtherListenAttributes;
   contents: OtherListenContents;
 
   constructor(opts?: { attributes?: Partial<OtherListenAttributes>; content?: OtherListenContents }) {
-    this.attributes = Object.assign({ ['type']: '', ['player']: null, ['time-only']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherListen.schema) as OtherListenAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherListen.schema.contents);
   }
   getType(): string {
     return this.attributes['type'];
@@ -23745,25 +22738,27 @@ export type ListenAttributes = Record<string, unknown>;
 
 export type ListenContents = [Array<Assess | Wait | OtherListen>];
 
-export class Listen implements XMLElement<ListenAttributes, ListenContents> {
-  static readonly elementName = 'listen';
+export class Listen implements XMLElement<'listen', ListenAttributes, ListenContents> {
   static readonly schema = {
+    name: 'listen',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'listens',
         value: { type: 'oneOrMore', value: { type: 'choices', choices: [Assess, Wait, OtherListen] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Listen.schema;
 
   attributes: ListenAttributes;
   contents: ListenContents;
 
   constructor(opts?: { attributes?: Partial<ListenAttributes>; content?: ListenContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[new Assess()]];
+    this.attributes = xml.mergeZero(opts?.attributes, Listen.schema) as ListenAttributes;
+    this.contents = opts?.content ?? xml.zero(Listen.schema.contents);
   }
 
   getListens(): Array<Assess | Wait | OtherListen> {
@@ -23838,9 +22833,9 @@ export type NoteContents = [
   Listen | null
 ];
 
-export class Note implements XMLElement<NoteAttributes, NoteContents> {
-  static readonly elementName = 'note';
+export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
   static readonly schema = {
+    name: 'note',
     attributes: {
       attack: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -23889,7 +22884,7 @@ export class Note implements XMLElement<NoteAttributes, NoteContents> {
       release: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'note',
@@ -23959,58 +22954,16 @@ export class Note implements XMLElement<NoteAttributes, NoteContents> {
       { type: 'optional', value: Play },
       { type: 'optional', value: Listen },
     ],
-  };
+  } as const;
+
+  readonly schema = Note.schema;
 
   attributes: NoteAttributes;
   contents: NoteContents;
 
   constructor(opts?: { attributes?: Partial<NoteAttributes>; content?: NoteContents }) {
-    this.attributes = Object.assign(
-      {
-        ['attack']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['dynamics']: null,
-        ['end-dynamics']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['pizzicato']: null,
-        ['print-dot']: null,
-        ['print-leger']: null,
-        ['print-lyric']: null,
-        ['print-object']: null,
-        ['print-spacing']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['release']: null,
-        ['time-only']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [
-      [new Grace(), [null, new Pitch(), []]],
-      [],
-      null,
-      null,
-      null,
-      null,
-      [],
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      [],
-      [],
-      [],
-      null,
-      null,
-    ];
+    this.attributes = xml.mergeZero(opts?.attributes, Note.schema) as NoteAttributes;
+    this.contents = opts?.content ?? xml.zero(Note.schema.contents);
   }
   getAttack(): number | null {
     return this.attributes['attack'];
@@ -24292,23 +23245,25 @@ export type BackupAttributes = Record<string, unknown>;
 
 export type BackupContents = [Duration, Footnote | null, Level | null];
 
-export class Backup implements XMLElement<BackupAttributes, BackupContents> {
-  static readonly elementName = 'backup';
+export class Backup implements XMLElement<'backup', BackupAttributes, BackupContents> {
   static readonly schema = {
+    name: 'backup',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: Duration },
       { type: 'optional', value: Footnote },
       { type: 'optional', value: Level },
     ],
-  };
+  } as const;
+
+  readonly schema = Backup.schema;
 
   attributes: BackupAttributes;
   contents: BackupContents;
 
   constructor(opts?: { attributes?: Partial<BackupAttributes>; content?: BackupContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new Duration(), null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Backup.schema) as BackupAttributes;
+    this.contents = opts?.content ?? xml.zero(Backup.schema.contents);
   }
 
   getDuration(): Duration {
@@ -24335,25 +23290,27 @@ export type ForwardAttributes = Record<string, unknown>;
 
 export type ForwardContents = [Duration, Footnote | null, Level | null, Voice | null, Staff | null];
 
-export class Forward implements XMLElement<ForwardAttributes, ForwardContents> {
-  static readonly elementName = 'forward';
+export class Forward implements XMLElement<'forward', ForwardAttributes, ForwardContents> {
   static readonly schema = {
+    name: 'forward',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: Duration },
       { type: 'optional', value: Footnote },
       { type: 'optional', value: Level },
       { type: 'optional', value: Voice },
       { type: 'optional', value: Staff },
     ],
-  };
+  } as const;
+
+  readonly schema = Forward.schema;
 
   attributes: ForwardAttributes;
   contents: ForwardContents;
 
   constructor(opts?: { attributes?: Partial<ForwardAttributes>; content?: ForwardContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new Duration(), null, null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Forward.schema) as ForwardAttributes;
+    this.contents = opts?.content ?? xml.zero(Forward.schema.contents);
   }
 
   getDuration(): Duration {
@@ -24430,9 +23387,9 @@ export type RehearsalAttributes = {
 
 export type RehearsalContents = [string];
 
-export class Rehearsal implements XMLElement<RehearsalAttributes, RehearsalContents> {
-  static readonly elementName = 'rehearsal';
+export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, RehearsalContents> {
   static readonly schema = {
+    name: 'rehearsal',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -24509,41 +23466,17 @@ export class Rehearsal implements XMLElement<RehearsalAttributes, RehearsalConte
       'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Rehearsal.schema;
 
   attributes: RehearsalAttributes;
   contents: RehearsalContents;
 
   constructor(opts?: { attributes?: Partial<RehearsalAttributes>; content?: RehearsalContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['dir']: null,
-        ['enclosure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['letter-spacing']: null,
-        ['line-height']: null,
-        ['line-through']: null,
-        ['overline']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['rotation']: null,
-        ['underline']: null,
-        ['valign']: null,
-        ['xml:lang']: null,
-        ['xml:space']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Rehearsal.schema) as RehearsalAttributes;
+    this.contents = opts?.content ?? xml.zero(Rehearsal.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -24737,9 +23670,9 @@ export type SegnoAttributes = {
 
 export type SegnoContents = [];
 
-export class Segno implements XMLElement<SegnoAttributes, SegnoContents> {
-  static readonly elementName = 'segno';
+export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents> {
   static readonly schema = {
+    name: 'segno',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -24780,32 +23713,17 @@ export class Segno implements XMLElement<SegnoAttributes, SegnoContents> {
       smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Segno.schema;
 
   attributes: SegnoAttributes;
   contents: SegnoContents;
 
   constructor(opts?: { attributes?: Partial<SegnoAttributes>; content?: SegnoContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Segno.schema) as SegnoAttributes;
+    this.contents = opts?.content ?? xml.zero(Segno.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -24907,9 +23825,9 @@ export type CodaAttributes = {
 
 export type CodaContents = [];
 
-export class Coda implements XMLElement<CodaAttributes, CodaContents> {
-  static readonly elementName = 'coda';
+export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
   static readonly schema = {
+    name: 'coda',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -24950,32 +23868,17 @@ export class Coda implements XMLElement<CodaAttributes, CodaContents> {
       smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Coda.schema;
 
   attributes: CodaAttributes;
   contents: CodaContents;
 
   constructor(opts?: { attributes?: Partial<CodaAttributes>; content?: CodaContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Coda.schema) as CodaAttributes;
+    this.contents = opts?.content ?? xml.zero(Coda.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -25102,9 +24005,9 @@ export type WordsAttributes = {
 
 export type WordsContents = [string];
 
-export class Words implements XMLElement<WordsAttributes, WordsContents> {
-  static readonly elementName = 'words';
+export class Words implements XMLElement<'words', WordsAttributes, WordsContents> {
   static readonly schema = {
+    name: 'words',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -25182,42 +24085,17 @@ export class Words implements XMLElement<WordsAttributes, WordsContents> {
       'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Words.schema;
 
   attributes: WordsAttributes;
   contents: WordsContents;
 
   constructor(opts?: { attributes?: Partial<WordsAttributes>; content?: WordsContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['dir']: null,
-        ['enclosure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['justify']: null,
-        ['letter-spacing']: null,
-        ['line-height']: null,
-        ['line-through']: null,
-        ['overline']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['rotation']: null,
-        ['underline']: null,
-        ['valign']: null,
-        ['xml:lang']: null,
-        ['xml:space']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Words.schema) as WordsAttributes;
+    this.contents = opts?.content ?? xml.zero(Words.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -25440,9 +24318,9 @@ export type SymbolAttributes = {
 
 export type SymbolContents = [];
 
-export class Symbol implements XMLElement<SymbolAttributes, SymbolContents> {
-  static readonly elementName = 'symbol';
+export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolContents> {
   static readonly schema = {
+    name: 'symbol',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -25518,40 +24396,17 @@ export class Symbol implements XMLElement<SymbolAttributes, SymbolContents> {
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Symbol.schema;
 
   attributes: SymbolAttributes;
   contents: SymbolContents;
 
   constructor(opts?: { attributes?: Partial<SymbolAttributes>; content?: SymbolContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['dir']: null,
-        ['enclosure']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['justify']: null,
-        ['letter-spacing']: null,
-        ['line-height']: null,
-        ['line-through']: null,
-        ['overline']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['rotation']: null,
-        ['underline']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Symbol.schema) as SymbolAttributes;
+    this.contents = opts?.content ?? xml.zero(Symbol.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -25733,9 +24588,9 @@ export type WedgeAttributes = {
 
 export type WedgeContents = [];
 
-export class Wedge implements XMLElement<WedgeAttributes, WedgeContents> {
-  static readonly elementName = 'wedge';
+export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents> {
   static readonly schema = {
+    name: 'wedge',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['crescendo', 'diminuendo', 'stop', 'continue'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -25767,32 +24622,17 @@ export class Wedge implements XMLElement<WedgeAttributes, WedgeContents> {
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       spread: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Wedge.schema;
 
   attributes: WedgeAttributes;
   contents: WedgeContents;
 
   constructor(opts?: { attributes?: Partial<WedgeAttributes>; content?: WedgeContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'crescendo',
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['id']: null,
-        ['line-type']: null,
-        ['niente']: null,
-        ['number']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['space-length']: null,
-        ['spread']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Wedge.schema) as WedgeAttributes;
+    this.contents = opts?.content ?? xml.zero(Wedge.schema.contents);
   }
   getType(): 'crescendo' | 'diminuendo' | 'stop' | 'continue' {
     return this.attributes['type'];
@@ -25889,9 +24729,9 @@ export type DashesAttributes = {
 
 export type DashesContents = [];
 
-export class Dashes implements XMLElement<DashesAttributes, DashesContents> {
-  static readonly elementName = 'dashes';
+export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesContents> {
   static readonly schema = {
+    name: 'dashes',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -25920,29 +24760,17 @@ export class Dashes implements XMLElement<DashesAttributes, DashesContents> {
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Dashes.schema;
 
   attributes: DashesAttributes;
   contents: DashesContents;
 
   constructor(opts?: { attributes?: Partial<DashesAttributes>; content?: DashesContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'start',
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['id']: null,
-        ['number']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['space-length']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Dashes.schema) as DashesAttributes;
+    this.contents = opts?.content ?? xml.zero(Dashes.schema.contents);
   }
   getType(): 'start' | 'stop' | 'continue' {
     return this.attributes['type'];
@@ -26024,9 +24852,9 @@ export type BracketAttributes = {
 
 export type BracketContents = [];
 
-export class Bracket implements XMLElement<BracketAttributes, BracketContents> {
-  static readonly elementName = 'bracket';
+export class Bracket implements XMLElement<'bracket', BracketAttributes, BracketContents> {
   static readonly schema = {
+    name: 'bracket',
     attributes: {
       'line-end': { type: 'required', value: { type: 'choices', choices: ['none', 'up', 'down', 'both', 'arrow'] } },
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
@@ -26058,32 +24886,17 @@ export class Bracket implements XMLElement<BracketAttributes, BracketContents> {
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Bracket.schema;
 
   attributes: BracketAttributes;
   contents: BracketContents;
 
   constructor(opts?: { attributes?: Partial<BracketAttributes>; content?: BracketContents }) {
-    this.attributes = Object.assign(
-      {
-        ['line-end']: 'none',
-        ['type']: 'start',
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['end-length']: null,
-        ['id']: null,
-        ['line-type']: null,
-        ['number']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['space-length']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Bracket.schema) as BracketAttributes;
+    this.contents = opts?.content ?? xml.zero(Bracket.schema.contents);
   }
   getLineEnd(): 'none' | 'up' | 'down' | 'both' | 'arrow' {
     return this.attributes['line-end'];
@@ -26185,9 +24998,9 @@ export type PedalAttributes = {
 
 export type PedalContents = [];
 
-export class Pedal implements XMLElement<PedalAttributes, PedalContents> {
-  static readonly elementName = 'pedal';
+export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents> {
   static readonly schema = {
+    name: 'pedal',
     attributes: {
       type: {
         type: 'required',
@@ -26236,34 +25049,17 @@ export class Pedal implements XMLElement<PedalAttributes, PedalContents> {
       },
       sign: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Pedal.schema;
 
   attributes: PedalAttributes;
   contents: PedalContents;
 
   constructor(opts?: { attributes?: Partial<PedalAttributes>; content?: PedalContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'start',
-        ['abbreviated']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['line']: null,
-        ['number']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['sign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Pedal.schema) as PedalAttributes;
+    this.contents = opts?.content ?? xml.zero(Pedal.schema.contents);
   }
   getType(): 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discountiue' | 'resume' {
     return this.attributes['type'];
@@ -26379,11 +25175,11 @@ export type BeatUnitContents = [
   | 'maxima'
 ];
 
-export class BeatUnit implements XMLElement<BeatUnitAttributes, BeatUnitContents> {
-  static readonly elementName = 'beat-unit';
+export class BeatUnit implements XMLElement<'beat-unit', BeatUnitAttributes, BeatUnitContents> {
   static readonly schema = {
+    name: 'beat-unit',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -26412,14 +25208,16 @@ export class BeatUnit implements XMLElement<BeatUnitAttributes, BeatUnitContents
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = BeatUnit.schema;
 
   attributes: BeatUnitAttributes;
   contents: BeatUnitContents;
 
   constructor(opts?: { attributes?: Partial<BeatUnitAttributes>; content?: BeatUnitContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['whole'];
+    this.attributes = xml.mergeZero(opts?.attributes, BeatUnit.schema) as BeatUnitAttributes;
+    this.contents = opts?.content ?? xml.zero(BeatUnit.schema.contents);
   }
 
   getNoteTypeValue():
@@ -26466,16 +25264,17 @@ export type BeatUnitDotAttributes = Record<string, unknown>;
 
 export type BeatUnitDotContents = [];
 
-export class BeatUnitDot implements XMLElement<BeatUnitDotAttributes, BeatUnitDotContents> {
-  static readonly elementName = 'beat-unit-dot';
-  static readonly schema = { attributes: {}, content: [] };
+export class BeatUnitDot implements XMLElement<'beat-unit-dot', BeatUnitDotAttributes, BeatUnitDotContents> {
+  static readonly schema = { name: 'beat-unit-dot', attributes: {}, contents: [] } as const;
+
+  readonly schema = BeatUnitDot.schema;
 
   attributes: BeatUnitDotAttributes;
   contents: BeatUnitDotContents;
 
   constructor(opts?: { attributes?: Partial<BeatUnitDotAttributes>; content?: BeatUnitDotContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, BeatUnitDot.schema) as BeatUnitDotAttributes;
+    this.contents = opts?.content ?? xml.zero(BeatUnitDot.schema.contents);
   }
 }
 
@@ -26483,22 +25282,24 @@ export type BeatUnitTiedAttributes = Record<string, unknown>;
 
 export type BeatUnitTiedContents = [BeatUnit, Array<BeatUnitDot>];
 
-export class BeatUnitTied implements XMLElement<BeatUnitTiedAttributes, BeatUnitTiedContents> {
-  static readonly elementName = 'beat-unit-tied';
+export class BeatUnitTied implements XMLElement<'beat-unit-tied', BeatUnitTiedAttributes, BeatUnitTiedContents> {
   static readonly schema = {
+    name: 'beat-unit-tied',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: BeatUnit },
       { type: 'label', label: 'beat-unit-dots', value: { type: 'zeroOrMore', value: BeatUnitDot } },
     ],
-  };
+  } as const;
+
+  readonly schema = BeatUnitTied.schema;
 
   attributes: BeatUnitTiedAttributes;
   contents: BeatUnitTiedContents;
 
   constructor(opts?: { attributes?: Partial<BeatUnitTiedAttributes>; content?: BeatUnitTiedContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new BeatUnit(), []];
+    this.attributes = xml.mergeZero(opts?.attributes, BeatUnitTied.schema) as BeatUnitTiedAttributes;
+    this.contents = opts?.content ?? xml.zero(BeatUnitTied.schema.contents);
   }
 
   getBeatUnit(): BeatUnit {
@@ -26524,9 +25325,9 @@ export type PerMinuteAttributes = {
 
 export type PerMinuteContents = [string];
 
-export class PerMinute implements XMLElement<PerMinuteAttributes, PerMinuteContents> {
-  static readonly elementName = 'per-minute';
+export class PerMinute implements XMLElement<'per-minute', PerMinuteAttributes, PerMinuteContents> {
   static readonly schema = {
+    name: 'per-minute',
     attributes: {
       'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
       'font-size': {
@@ -26542,18 +25343,17 @@ export class PerMinute implements XMLElement<PerMinuteAttributes, PerMinuteConte
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = PerMinute.schema;
 
   attributes: PerMinuteAttributes;
   contents: PerMinuteContents;
 
   constructor(opts?: { attributes?: Partial<PerMinuteAttributes>; content?: PerMinuteContents }) {
-    this.attributes = Object.assign(
-      { ['font-family']: null, ['font-size']: null, ['font-style']: null, ['font-weight']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, PerMinute.schema) as PerMinuteAttributes;
+    this.contents = opts?.content ?? xml.zero(PerMinute.schema.contents);
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
@@ -26593,16 +25393,19 @@ export type MetronomeArrowsAttributes = Record<string, unknown>;
 
 export type MetronomeArrowsContents = [];
 
-export class MetronomeArrows implements XMLElement<MetronomeArrowsAttributes, MetronomeArrowsContents> {
-  static readonly elementName = 'metronome-arrows';
-  static readonly schema = { attributes: {}, content: [] };
+export class MetronomeArrows
+  implements XMLElement<'metronome-arrows', MetronomeArrowsAttributes, MetronomeArrowsContents>
+{
+  static readonly schema = { name: 'metronome-arrows', attributes: {}, contents: [] } as const;
+
+  readonly schema = MetronomeArrows.schema;
 
   attributes: MetronomeArrowsAttributes;
   contents: MetronomeArrowsContents;
 
   constructor(opts?: { attributes?: Partial<MetronomeArrowsAttributes>; content?: MetronomeArrowsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, MetronomeArrows.schema) as MetronomeArrowsAttributes;
+    this.contents = opts?.content ?? xml.zero(MetronomeArrows.schema.contents);
   }
 }
 
@@ -26626,11 +25429,11 @@ export type MetronomeTypeContents = [
   | 'maxima'
 ];
 
-export class MetronomeType implements XMLElement<MetronomeTypeAttributes, MetronomeTypeContents> {
-  static readonly elementName = 'metronome-type';
+export class MetronomeType implements XMLElement<'metronome-type', MetronomeTypeAttributes, MetronomeTypeContents> {
   static readonly schema = {
+    name: 'metronome-type',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -26659,14 +25462,16 @@ export class MetronomeType implements XMLElement<MetronomeTypeAttributes, Metron
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = MetronomeType.schema;
 
   attributes: MetronomeTypeAttributes;
   contents: MetronomeTypeContents;
 
   constructor(opts?: { attributes?: Partial<MetronomeTypeAttributes>; content?: MetronomeTypeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['whole'];
+    this.attributes = xml.mergeZero(opts?.attributes, MetronomeType.schema) as MetronomeTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(MetronomeType.schema.contents);
   }
 
   getNoteTypeValue():
@@ -26713,16 +25518,17 @@ export type MetronomeDotAttributes = Record<string, unknown>;
 
 export type MetronomeDotContents = [];
 
-export class MetronomeDot implements XMLElement<MetronomeDotAttributes, MetronomeDotContents> {
-  static readonly elementName = 'metronome-dot';
-  static readonly schema = { attributes: {}, content: [] };
+export class MetronomeDot implements XMLElement<'metronome-dot', MetronomeDotAttributes, MetronomeDotContents> {
+  static readonly schema = { name: 'metronome-dot', attributes: {}, contents: [] } as const;
+
+  readonly schema = MetronomeDot.schema;
 
   attributes: MetronomeDotAttributes;
   contents: MetronomeDotContents;
 
   constructor(opts?: { attributes?: Partial<MetronomeDotAttributes>; content?: MetronomeDotContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, MetronomeDot.schema) as MetronomeDotAttributes;
+    this.contents = opts?.content ?? xml.zero(MetronomeDot.schema.contents);
   }
 }
 
@@ -26730,11 +25536,11 @@ export type MetronomeBeamAttributes = { number: number | null };
 
 export type MetronomeBeamContents = ['backward hook' | 'begin' | 'continue' | 'end' | 'forward hook'];
 
-export class MetronomeBeam implements XMLElement<MetronomeBeamAttributes, MetronomeBeamContents> {
-  static readonly elementName = 'metronome-beam';
+export class MetronomeBeam implements XMLElement<'metronome-beam', MetronomeBeamAttributes, MetronomeBeamContents> {
   static readonly schema = {
+    name: 'metronome-beam',
     attributes: { number: { type: 'optional', value: { type: 'int', min: 1, max: 8 } } },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -26744,14 +25550,16 @@ export class MetronomeBeam implements XMLElement<MetronomeBeamAttributes, Metron
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = MetronomeBeam.schema;
 
   attributes: MetronomeBeamAttributes;
   contents: MetronomeBeamContents;
 
   constructor(opts?: { attributes?: Partial<MetronomeBeamAttributes>; content?: MetronomeBeamContents }) {
-    this.attributes = Object.assign({ ['number']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['backward hook'];
+    this.attributes = xml.mergeZero(opts?.attributes, MetronomeBeam.schema) as MetronomeBeamAttributes;
+    this.contents = opts?.content ?? xml.zero(MetronomeBeam.schema.contents);
   }
   getNumber(): number | null {
     return this.attributes['number'];
@@ -26771,19 +25579,21 @@ export type MetronomeTiedAttributes = { type: 'start' | 'stop' };
 
 export type MetronomeTiedContents = [];
 
-export class MetronomeTied implements XMLElement<MetronomeTiedAttributes, MetronomeTiedContents> {
-  static readonly elementName = 'metronome-tied';
+export class MetronomeTied implements XMLElement<'metronome-tied', MetronomeTiedAttributes, MetronomeTiedContents> {
   static readonly schema = {
+    name: 'metronome-tied',
     attributes: { type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } } },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = MetronomeTied.schema;
 
   attributes: MetronomeTiedAttributes;
   contents: MetronomeTiedContents;
 
   constructor(opts?: { attributes?: Partial<MetronomeTiedAttributes>; content?: MetronomeTiedContents }) {
-    this.attributes = Object.assign({ ['type']: 'start' }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, MetronomeTied.schema) as MetronomeTiedAttributes;
+    this.contents = opts?.content ?? xml.zero(MetronomeTied.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -26801,15 +25611,17 @@ export type MetronomeTupletAttributes = {
 
 export type MetronomeTupletContents = [ActualNotes, NormalNotes, [NormalType, Array<NormalDot>] | null];
 
-export class MetronomeTuplet implements XMLElement<MetronomeTupletAttributes, MetronomeTupletContents> {
-  static readonly elementName = 'metronome-tuplet';
+export class MetronomeTuplet
+  implements XMLElement<'metronome-tuplet', MetronomeTupletAttributes, MetronomeTupletContents>
+{
   static readonly schema = {
+    name: 'metronome-tuplet',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'show-number': { type: 'optional', value: { type: 'choices', choices: ['none', 'actual', 'both'] } },
     },
-    content: [
+    contents: [
       { type: 'required', value: ActualNotes },
       { type: 'required', value: NormalNotes },
       {
@@ -26824,14 +25636,16 @@ export class MetronomeTuplet implements XMLElement<MetronomeTupletAttributes, Me
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = MetronomeTuplet.schema;
 
   attributes: MetronomeTupletAttributes;
   contents: MetronomeTupletContents;
 
   constructor(opts?: { attributes?: Partial<MetronomeTupletAttributes>; content?: MetronomeTupletContents }) {
-    this.attributes = Object.assign({ ['type']: 'start', ['bracket']: null, ['show-number']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [new ActualNotes(), new NormalNotes(), null];
+    this.attributes = xml.mergeZero(opts?.attributes, MetronomeTuplet.schema) as MetronomeTupletAttributes;
+    this.contents = opts?.content ?? xml.zero(MetronomeTuplet.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -26881,25 +25695,27 @@ export type MetronomeNoteContents = [
   MetronomeTuplet | null
 ];
 
-export class MetronomeNote implements XMLElement<MetronomeNoteAttributes, MetronomeNoteContents> {
-  static readonly elementName = 'metronome-note';
+export class MetronomeNote implements XMLElement<'metronome-note', MetronomeNoteAttributes, MetronomeNoteContents> {
   static readonly schema = {
+    name: 'metronome-note',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: MetronomeType },
       { type: 'label', label: 'metronome-dots', value: { type: 'zeroOrMore', value: MetronomeDot } },
       { type: 'label', label: 'metronome-beams', value: { type: 'zeroOrMore', value: MetronomeBeam } },
       { type: 'optional', value: MetronomeTied },
       { type: 'optional', value: MetronomeTuplet },
     ],
-  };
+  } as const;
+
+  readonly schema = MetronomeNote.schema;
 
   attributes: MetronomeNoteAttributes;
   contents: MetronomeNoteContents;
 
   constructor(opts?: { attributes?: Partial<MetronomeNoteAttributes>; content?: MetronomeNoteContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new MetronomeType(), [], [], null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, MetronomeNote.schema) as MetronomeNoteAttributes;
+    this.contents = opts?.content ?? xml.zero(MetronomeNote.schema.contents);
   }
 
   getMetronomeType(): MetronomeType {
@@ -26938,16 +25754,23 @@ export type MetronomeRelationAttributes = Record<string, unknown>;
 
 export type MetronomeRelationContents = [string | null];
 
-export class MetronomeRelation implements XMLElement<MetronomeRelationAttributes, MetronomeRelationContents> {
-  static readonly elementName = 'metronome-relation';
-  static readonly schema = { attributes: {}, content: [{ type: 'optional', value: { type: 'string' } }] };
+export class MetronomeRelation
+  implements XMLElement<'metronome-relation', MetronomeRelationAttributes, MetronomeRelationContents>
+{
+  static readonly schema = {
+    name: 'metronome-relation',
+    attributes: {},
+    contents: [{ type: 'optional', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = MetronomeRelation.schema;
 
   attributes: MetronomeRelationAttributes;
   contents: MetronomeRelationContents;
 
   constructor(opts?: { attributes?: Partial<MetronomeRelationAttributes>; content?: MetronomeRelationContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null];
+    this.attributes = xml.mergeZero(opts?.attributes, MetronomeRelation.schema) as MetronomeRelationAttributes;
+    this.contents = opts?.content ?? xml.zero(MetronomeRelation.schema.contents);
   }
 
   getText(): string | null {
@@ -26981,9 +25804,9 @@ export type MetronomeContents = [
   | [MetronomeArrows | null, Array<MetronomeNote>, [MetronomeRelation, Array<MetronomeNote>] | null]
 ];
 
-export class Metronome implements XMLElement<MetronomeAttributes, MetronomeContents> {
-  static readonly elementName = 'metronome';
+export class Metronome implements XMLElement<'metronome', MetronomeAttributes, MetronomeContents> {
   static readonly schema = {
+    name: 'metronome',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -27026,7 +25849,7 @@ export class Metronome implements XMLElement<MetronomeAttributes, MetronomeConte
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'metronome',
@@ -27064,33 +25887,16 @@ export class Metronome implements XMLElement<MetronomeAttributes, MetronomeConte
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Metronome.schema;
 
   attributes: MetronomeAttributes;
   contents: MetronomeContents;
 
   constructor(opts?: { attributes?: Partial<MetronomeAttributes>; content?: MetronomeContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['justify']: null,
-        ['parentheses']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [[new BeatUnit(), [], [], new PerMinute()]];
+    this.attributes = xml.mergeZero(opts?.attributes, Metronome.schema) as MetronomeAttributes;
+    this.contents = opts?.content ?? xml.zero(Metronome.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -27228,9 +26034,9 @@ export type OctaveShiftAttributes = {
 
 export type OctaveShiftContents = [];
 
-export class OctaveShift implements XMLElement<OctaveShiftAttributes, OctaveShiftContents> {
-  static readonly elementName = 'octave-shift';
+export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttributes, OctaveShiftContents> {
   static readonly schema = {
+    name: 'octave-shift',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['up', 'down', 'stop', 'continue'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -27273,34 +26079,17 @@ export class OctaveShift implements XMLElement<OctaveShiftAttributes, OctaveShif
       size: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = OctaveShift.schema;
 
   attributes: OctaveShiftAttributes;
   contents: OctaveShiftContents;
 
   constructor(opts?: { attributes?: Partial<OctaveShiftAttributes>; content?: OctaveShiftContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'up',
-        ['color']: null,
-        ['dash-length']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['number']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['size']: null,
-        ['space-length']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, OctaveShift.schema) as OctaveShiftAttributes;
+    this.contents = opts?.content ?? xml.zero(OctaveShift.schema.contents);
   }
   getType(): 'up' | 'down' | 'stop' | 'continue' {
     return this.attributes['type'];
@@ -27413,9 +26202,9 @@ export type HarpPedalsAttributes = {
 
 export type HarpPedalsContents = [];
 
-export class HarpPedals implements XMLElement<HarpPedalsAttributes, HarpPedalsContents> {
-  static readonly elementName = 'harp-pedals';
+export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttributes, HarpPedalsContents> {
   static readonly schema = {
+    name: 'harp-pedals',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -27455,31 +26244,17 @@ export class HarpPedals implements XMLElement<HarpPedalsAttributes, HarpPedalsCo
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = HarpPedals.schema;
 
   attributes: HarpPedalsAttributes;
   contents: HarpPedalsContents;
 
   constructor(opts?: { attributes?: Partial<HarpPedalsAttributes>; content?: HarpPedalsContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, HarpPedals.schema) as HarpPedalsAttributes;
+    this.contents = opts?.content ?? xml.zero(HarpPedals.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -27574,9 +26349,9 @@ export type DampAttributes = {
 
 export type DampContents = [];
 
-export class Damp implements XMLElement<DampAttributes, DampContents> {
-  static readonly elementName = 'damp';
+export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
   static readonly schema = {
+    name: 'damp',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -27616,31 +26391,17 @@ export class Damp implements XMLElement<DampAttributes, DampContents> {
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Damp.schema;
 
   attributes: DampAttributes;
   contents: DampContents;
 
   constructor(opts?: { attributes?: Partial<DampAttributes>; content?: DampContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Damp.schema) as DampAttributes;
+    this.contents = opts?.content ?? xml.zero(Damp.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -27735,9 +26496,9 @@ export type DampAllAttributes = {
 
 export type DampAllContents = [];
 
-export class DampAll implements XMLElement<DampAllAttributes, DampAllContents> {
-  static readonly elementName = 'damp-all';
+export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAllContents> {
   static readonly schema = {
+    name: 'damp-all',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -27777,31 +26538,17 @@ export class DampAll implements XMLElement<DampAllAttributes, DampAllContents> {
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = DampAll.schema;
 
   attributes: DampAllAttributes;
   contents: DampAllContents;
 
   constructor(opts?: { attributes?: Partial<DampAllAttributes>; content?: DampAllContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, DampAll.schema) as DampAllAttributes;
+    this.contents = opts?.content ?? xml.zero(DampAll.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -27896,9 +26643,9 @@ export type EyeglassesAttributes = {
 
 export type EyeglassesContents = [];
 
-export class Eyeglasses implements XMLElement<EyeglassesAttributes, EyeglassesContents> {
-  static readonly elementName = 'eyeglasses';
+export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes, EyeglassesContents> {
   static readonly schema = {
+    name: 'eyeglasses',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -27938,31 +26685,17 @@ export class Eyeglasses implements XMLElement<EyeglassesAttributes, EyeglassesCo
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Eyeglasses.schema;
 
   attributes: EyeglassesAttributes;
   contents: EyeglassesContents;
 
   constructor(opts?: { attributes?: Partial<EyeglassesAttributes>; content?: EyeglassesContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Eyeglasses.schema) as EyeglassesAttributes;
+    this.contents = opts?.content ?? xml.zero(Eyeglasses.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -28057,9 +26790,9 @@ export type StringMuteAttributes = {
 
 export type StringMuteContents = [];
 
-export class StringMute implements XMLElement<StringMuteAttributes, StringMuteContents> {
-  static readonly elementName = 'string-mute';
+export class StringMute implements XMLElement<'string-mute', StringMuteAttributes, StringMuteContents> {
   static readonly schema = {
+    name: 'string-mute',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -28099,31 +26832,17 @@ export class StringMute implements XMLElement<StringMuteAttributes, StringMuteCo
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = StringMute.schema;
 
   attributes: StringMuteAttributes;
   contents: StringMuteContents;
 
   constructor(opts?: { attributes?: Partial<StringMuteAttributes>; content?: StringMuteContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, StringMute.schema) as StringMuteAttributes;
+    this.contents = opts?.content ?? xml.zero(StringMute.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -28205,11 +26924,11 @@ export type TuningStepAttributes = Record<string, unknown>;
 
 export type TuningStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
 
-export class TuningStep implements XMLElement<TuningStepAttributes, TuningStepContents> {
-  static readonly elementName = 'tuning-step';
+export class TuningStep implements XMLElement<'tuning-step', TuningStepAttributes, TuningStepContents> {
   static readonly schema = {
+    name: 'tuning-step',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -28219,14 +26938,16 @@ export class TuningStep implements XMLElement<TuningStepAttributes, TuningStepCo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = TuningStep.schema;
 
   attributes: TuningStepAttributes;
   contents: TuningStepContents;
 
   constructor(opts?: { attributes?: Partial<TuningStepAttributes>; content?: TuningStepContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['A'];
+    this.attributes = xml.mergeZero(opts?.attributes, TuningStep.schema) as TuningStepAttributes;
+    this.contents = opts?.content ?? xml.zero(TuningStep.schema.contents);
   }
 
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
@@ -28241,24 +26962,26 @@ export type TuningAlterAttributes = Record<string, unknown>;
 
 export type TuningAlterContents = [number];
 
-export class TuningAlter implements XMLElement<TuningAlterAttributes, TuningAlterContents> {
-  static readonly elementName = 'tuning-alter';
+export class TuningAlter implements XMLElement<'tuning-alter', TuningAlterAttributes, TuningAlterContents> {
   static readonly schema = {
+    name: 'tuning-alter',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'semitones', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = TuningAlter.schema;
 
   attributes: TuningAlterAttributes;
   contents: TuningAlterContents;
 
   constructor(opts?: { attributes?: Partial<TuningAlterAttributes>; content?: TuningAlterContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, TuningAlter.schema) as TuningAlterAttributes;
+    this.contents = opts?.content ?? xml.zero(TuningAlter.schema.contents);
   }
 
   getSemitones(): number {
@@ -28273,19 +26996,21 @@ export type TuningOctaveAttributes = Record<string, unknown>;
 
 export type TuningOctaveContents = [number];
 
-export class TuningOctave implements XMLElement<TuningOctaveAttributes, TuningOctaveContents> {
-  static readonly elementName = 'tuning-octave';
+export class TuningOctave implements XMLElement<'tuning-octave', TuningOctaveAttributes, TuningOctaveContents> {
   static readonly schema = {
+    name: 'tuning-octave',
     attributes: {},
-    content: [{ type: 'required', value: { type: 'label', label: 'octave', value: { type: 'int', min: 0, max: 9 } } }],
-  };
+    contents: [{ type: 'required', value: { type: 'label', label: 'octave', value: { type: 'int', min: 0, max: 9 } } }],
+  } as const;
+
+  readonly schema = TuningOctave.schema;
 
   attributes: TuningOctaveAttributes;
   contents: TuningOctaveContents;
 
   constructor(opts?: { attributes?: Partial<TuningOctaveAttributes>; content?: TuningOctaveContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, TuningOctave.schema) as TuningOctaveAttributes;
+    this.contents = opts?.content ?? xml.zero(TuningOctave.schema.contents);
   }
 
   getOctave(): number {
@@ -28300,23 +27025,25 @@ export type AccordAttributes = Record<string, unknown>;
 
 export type AccordContents = [TuningStep, TuningAlter | null, TuningOctave];
 
-export class Accord implements XMLElement<AccordAttributes, AccordContents> {
-  static readonly elementName = 'accord';
+export class Accord implements XMLElement<'accord', AccordAttributes, AccordContents> {
   static readonly schema = {
+    name: 'accord',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: TuningStep },
       { type: 'optional', value: TuningAlter },
       { type: 'required', value: TuningOctave },
     ],
-  };
+  } as const;
+
+  readonly schema = Accord.schema;
 
   attributes: AccordAttributes;
   contents: AccordContents;
 
   constructor(opts?: { attributes?: Partial<AccordAttributes>; content?: AccordContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new TuningStep(), null, new TuningOctave()];
+    this.attributes = xml.mergeZero(opts?.attributes, Accord.schema) as AccordAttributes;
+    this.contents = opts?.content ?? xml.zero(Accord.schema.contents);
   }
 
   getTuningStep(): TuningStep {
@@ -28343,19 +27070,21 @@ export type ScordaturaAttributes = { id: string | null };
 
 export type ScordaturaContents = [Array<Accord>];
 
-export class Scordatura implements XMLElement<ScordaturaAttributes, ScordaturaContents> {
-  static readonly elementName = 'scordatura';
+export class Scordatura implements XMLElement<'scordatura', ScordaturaAttributes, ScordaturaContents> {
   static readonly schema = {
+    name: 'scordatura',
     attributes: { id: { type: 'optional', value: { type: 'string' } } },
-    content: [{ type: 'label', label: 'accords', value: { type: 'oneOrMore', value: Accord } }],
-  };
+    contents: [{ type: 'label', label: 'accords', value: { type: 'oneOrMore', value: Accord } }],
+  } as const;
+
+  readonly schema = Scordatura.schema;
 
   attributes: ScordaturaAttributes;
   contents: ScordaturaContents;
 
   constructor(opts?: { attributes?: Partial<ScordaturaAttributes>; content?: ScordaturaContents }) {
-    this.attributes = Object.assign({ ['id']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[new Accord()]];
+    this.attributes = xml.mergeZero(opts?.attributes, Scordatura.schema) as ScordaturaAttributes;
+    this.contents = opts?.content ?? xml.zero(Scordatura.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -28386,9 +27115,9 @@ export type ImageAttributes = {
 
 export type ImageContents = [];
 
-export class Image implements XMLElement<ImageAttributes, ImageContents> {
-  static readonly elementName = 'image';
+export class Image implements XMLElement<'image', ImageAttributes, ImageContents> {
   static readonly schema = {
+    name: 'image',
     attributes: {
       source: { type: 'required', value: { type: 'string' } },
       type: { type: 'required', value: { type: 'string' } },
@@ -28417,29 +27146,17 @@ export class Image implements XMLElement<ImageAttributes, ImageContents> {
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
       width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Image.schema;
 
   attributes: ImageAttributes;
   contents: ImageContents;
 
   constructor(opts?: { attributes?: Partial<ImageAttributes>; content?: ImageContents }) {
-    this.attributes = Object.assign(
-      {
-        ['source']: '',
-        ['type']: '',
-        ['default-x']: null,
-        ['default-y']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-        ['width']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Image.schema) as ImageAttributes;
+    this.contents = opts?.content ?? xml.zero(Image.schema.contents);
   }
   getSource(): string {
     return this.attributes['source'];
@@ -28522,9 +27239,9 @@ export type PrincipalVoiceAttributes = {
 
 export type PrincipalVoiceContents = [string];
 
-export class PrincipalVoice implements XMLElement<PrincipalVoiceAttributes, PrincipalVoiceContents> {
-  static readonly elementName = 'principal-voice';
+export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVoiceAttributes, PrincipalVoiceContents> {
   static readonly schema = {
+    name: 'principal-voice',
     attributes: {
       symbol: {
         type: 'required',
@@ -28569,33 +27286,17 @@ export class PrincipalVoice implements XMLElement<PrincipalVoiceAttributes, Prin
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = PrincipalVoice.schema;
 
   attributes: PrincipalVoiceAttributes;
   contents: PrincipalVoiceContents;
 
   constructor(opts?: { attributes?: Partial<PrincipalVoiceAttributes>; content?: PrincipalVoiceContents }) {
-    this.attributes = Object.assign(
-      {
-        ['symbol']: 'none',
-        ['type']: 'start',
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, PrincipalVoice.schema) as PrincipalVoiceAttributes;
+    this.contents = opts?.content ?? xml.zero(PrincipalVoice.schema.contents);
   }
   getSymbol(): 'none' | 'Hauptstimme' | 'Nebenstimme' | 'plain' {
     return this.attributes['symbol'];
@@ -28695,11 +27396,11 @@ export type GlassAttributes = { smufl: string | null };
 
 export type GlassContents = ['glass harmonica' | 'glass harp' | 'wind chimes'];
 
-export class Glass implements XMLElement<GlassAttributes, GlassContents> {
-  static readonly elementName = 'glass';
+export class Glass implements XMLElement<'glass', GlassAttributes, GlassContents> {
   static readonly schema = {
+    name: 'glass',
     attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -28709,14 +27410,16 @@ export class Glass implements XMLElement<GlassAttributes, GlassContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Glass.schema;
 
   attributes: GlassAttributes;
   contents: GlassContents;
 
   constructor(opts?: { attributes?: Partial<GlassAttributes>; content?: GlassContents }) {
-    this.attributes = Object.assign({ ['smufl']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['glass harmonica'];
+    this.attributes = xml.mergeZero(opts?.attributes, Glass.schema) as GlassAttributes;
+    this.contents = opts?.content ?? xml.zero(Glass.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -28769,11 +27472,11 @@ export type MetalContents = [
   | 'Vietnamese hat'
 ];
 
-export class Metal implements XMLElement<MetalAttributes, MetalContents> {
-  static readonly elementName = 'metal';
+export class Metal implements XMLElement<'metal', MetalAttributes, MetalContents> {
   static readonly schema = {
+    name: 'metal',
     attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -28819,14 +27522,16 @@ export class Metal implements XMLElement<MetalAttributes, MetalContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Metal.schema;
 
   attributes: MetalAttributes;
   contents: MetalContents;
 
   constructor(opts?: { attributes?: Partial<MetalAttributes>; content?: MetalContents }) {
-    this.attributes = Object.assign({ ['smufl']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['agogo'];
+    this.attributes = xml.mergeZero(opts?.attributes, Metal.schema) as MetalAttributes;
+    this.contents = opts?.content ?? xml.zero(Metal.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -28934,11 +27639,11 @@ export type WoodContents = [
   | 'wood block'
 ];
 
-export class Wood implements XMLElement<WoodAttributes, WoodContents> {
-  static readonly elementName = 'wood';
+export class Wood implements XMLElement<'wood', WoodAttributes, WoodContents> {
   static readonly schema = {
+    name: 'wood',
     attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -28973,14 +27678,16 @@ export class Wood implements XMLElement<WoodAttributes, WoodContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Wood.schema;
 
   attributes: WoodAttributes;
   contents: WoodContents;
 
   constructor(opts?: { attributes?: Partial<WoodAttributes>; content?: WoodContents }) {
-    this.attributes = Object.assign({ ['smufl']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['bamboo scraper'];
+    this.attributes = xml.mergeZero(opts?.attributes, Wood.schema) as WoodAttributes;
+    this.contents = opts?.content ?? xml.zero(Wood.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -29044,19 +27751,21 @@ export type PitchedAttributes = { smufl: string | null };
 
 export type PitchedContents = [];
 
-export class Pitched implements XMLElement<PitchedAttributes, PitchedContents> {
-  static readonly elementName = 'pitched';
+export class Pitched implements XMLElement<'pitched', PitchedAttributes, PitchedContents> {
   static readonly schema = {
+    name: 'pitched',
     attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Pitched.schema;
 
   attributes: PitchedAttributes;
   contents: PitchedContents;
 
   constructor(opts?: { attributes?: Partial<PitchedAttributes>; content?: PitchedContents }) {
-    this.attributes = Object.assign({ ['smufl']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Pitched.schema) as PitchedAttributes;
+    this.contents = opts?.content ?? xml.zero(Pitched.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -29088,11 +27797,11 @@ export type MembraneContents = [
   | 'tomtom'
 ];
 
-export class Membrane implements XMLElement<MembraneAttributes, MembraneContents> {
-  static readonly elementName = 'membrane';
+export class Membrane implements XMLElement<'membrane', MembraneAttributes, MembraneContents> {
   static readonly schema = {
+    name: 'membrane',
     attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -29123,14 +27832,16 @@ export class Membrane implements XMLElement<MembraneAttributes, MembraneContents
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Membrane.schema;
 
   attributes: MembraneAttributes;
   contents: MembraneContents;
 
   constructor(opts?: { attributes?: Partial<MembraneAttributes>; content?: MembraneContents }) {
-    this.attributes = Object.assign({ ['smufl']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['bass drum'];
+    this.attributes = xml.mergeZero(opts?.attributes, Membrane.schema) as MembraneAttributes;
+    this.contents = opts?.content ?? xml.zero(Membrane.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -29203,11 +27914,11 @@ export type EffectContents = [
   | 'wind whistle'
 ];
 
-export class Effect implements XMLElement<EffectAttributes, EffectContents> {
-  static readonly elementName = 'effect';
+export class Effect implements XMLElement<'effect', EffectAttributes, EffectContents> {
   static readonly schema = {
+    name: 'effect',
     attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -29237,14 +27948,16 @@ export class Effect implements XMLElement<EffectAttributes, EffectContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Effect.schema;
 
   attributes: EffectAttributes;
   contents: EffectContents;
 
   constructor(opts?: { attributes?: Partial<EffectAttributes>; content?: EffectContents }) {
-    this.attributes = Object.assign({ ['smufl']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['anvil'];
+    this.attributes = xml.mergeZero(opts?.attributes, Effect.schema) as EffectAttributes;
+    this.contents = opts?.content ?? xml.zero(Effect.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -29298,19 +28011,21 @@ export type TimpaniAttributes = { smufl: string | null };
 
 export type TimpaniContents = [];
 
-export class Timpani implements XMLElement<TimpaniAttributes, TimpaniContents> {
-  static readonly elementName = 'timpani';
+export class Timpani implements XMLElement<'timpani', TimpaniAttributes, TimpaniContents> {
   static readonly schema = {
+    name: 'timpani',
     attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Timpani.schema;
 
   attributes: TimpaniAttributes;
   contents: TimpaniContents;
 
   constructor(opts?: { attributes?: Partial<TimpaniAttributes>; content?: TimpaniContents }) {
-    this.attributes = Object.assign({ ['smufl']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Timpani.schema) as TimpaniAttributes;
+    this.contents = opts?.content ?? xml.zero(Timpani.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -29347,9 +28062,9 @@ export type BeaterContents = [
   | 'wire brush'
 ];
 
-export class Beater implements XMLElement<BeaterAttributes, BeaterContents> {
-  static readonly elementName = 'beater';
+export class Beater implements XMLElement<'beater', BeaterAttributes, BeaterContents> {
   static readonly schema = {
+    name: 'beater',
     attributes: {
       tip: {
         type: 'optional',
@@ -29359,7 +28074,7 @@ export class Beater implements XMLElement<BeaterAttributes, BeaterContents> {
         },
       },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -29393,14 +28108,16 @@ export class Beater implements XMLElement<BeaterAttributes, BeaterContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Beater.schema;
 
   attributes: BeaterAttributes;
   contents: BeaterContents;
 
   constructor(opts?: { attributes?: Partial<BeaterAttributes>; content?: BeaterContents }) {
-    this.attributes = Object.assign({ ['tip']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['bow'];
+    this.attributes = xml.mergeZero(opts?.attributes, Beater.schema) as BeaterAttributes;
+    this.contents = opts?.content ?? xml.zero(Beater.schema.contents);
   }
   getTip(): 'down' | 'left' | 'northeast' | 'northwest' | 'right' | 'southeast' | 'southwest' | 'up' | null {
     return this.attributes['tip'];
@@ -29473,11 +28190,11 @@ export type StickTypeContents = [
   | 'yarn'
 ];
 
-export class StickType implements XMLElement<StickTypeAttributes, StickTypeContents> {
-  static readonly elementName = 'stick-type';
+export class StickType implements XMLElement<'stick-type', StickTypeAttributes, StickTypeContents> {
   static readonly schema = {
+    name: 'stick-type',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -29501,14 +28218,16 @@ export class StickType implements XMLElement<StickTypeAttributes, StickTypeConte
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = StickType.schema;
 
   attributes: StickTypeAttributes;
   contents: StickTypeContents;
 
   constructor(opts?: { attributes?: Partial<StickTypeAttributes>; content?: StickTypeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['bass drum'];
+    this.attributes = xml.mergeZero(opts?.attributes, StickType.schema) as StickTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(StickType.schema.contents);
   }
 
   getStickType():
@@ -29545,11 +28264,11 @@ export type StickMaterialAttributes = Record<string, unknown>;
 
 export type StickMaterialContents = ['x' | 'hard' | 'medium' | 'shaded' | 'soft'];
 
-export class StickMaterial implements XMLElement<StickMaterialAttributes, StickMaterialContents> {
-  static readonly elementName = 'stick-material';
+export class StickMaterial implements XMLElement<'stick-material', StickMaterialAttributes, StickMaterialContents> {
   static readonly schema = {
+    name: 'stick-material',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -29559,14 +28278,16 @@ export class StickMaterial implements XMLElement<StickMaterialAttributes, StickM
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = StickMaterial.schema;
 
   attributes: StickMaterialAttributes;
   contents: StickMaterialContents;
 
   constructor(opts?: { attributes?: Partial<StickMaterialAttributes>; content?: StickMaterialContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['x'];
+    this.attributes = xml.mergeZero(opts?.attributes, StickMaterial.schema) as StickMaterialAttributes;
+    this.contents = opts?.content ?? xml.zero(StickMaterial.schema.contents);
   }
 
   getStickMaterial(): 'x' | 'hard' | 'medium' | 'shaded' | 'soft' {
@@ -29585,9 +28306,9 @@ export type StickAttributes = {
 
 export type StickContents = [StickType, StickMaterial];
 
-export class Stick implements XMLElement<StickAttributes, StickContents> {
-  static readonly elementName = 'stick';
+export class Stick implements XMLElement<'stick', StickAttributes, StickContents> {
   static readonly schema = {
+    name: 'stick',
     attributes: {
       'dashed-circle': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -29599,21 +28320,20 @@ export class Stick implements XMLElement<StickAttributes, StickContents> {
         },
       },
     },
-    content: [
+    contents: [
       { type: 'required', value: StickType },
       { type: 'required', value: StickMaterial },
     ],
-  };
+  } as const;
+
+  readonly schema = Stick.schema;
 
   attributes: StickAttributes;
   contents: StickContents;
 
   constructor(opts?: { attributes?: Partial<StickAttributes>; content?: StickContents }) {
-    this.attributes = Object.assign(
-      { ['dashed-circle']: null, ['parentheses']: null, ['tip']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [new StickType(), new StickMaterial()];
+    this.attributes = xml.mergeZero(opts?.attributes, Stick.schema) as StickAttributes;
+    this.contents = opts?.content ?? xml.zero(Stick.schema.contents);
   }
   getDashedCircle(): 'yes' | 'no' | null {
     return this.attributes['dashed-circle'];
@@ -29651,11 +28371,11 @@ export type StickLocationAttributes = Record<string, unknown>;
 
 export type StickLocationContents = ['center' | 'cymbal bell' | 'cymbal edge' | 'rim'];
 
-export class StickLocation implements XMLElement<StickLocationAttributes, StickLocationContents> {
-  static readonly elementName = 'stick-location';
+export class StickLocation implements XMLElement<'stick-location', StickLocationAttributes, StickLocationContents> {
   static readonly schema = {
+    name: 'stick-location',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -29665,14 +28385,16 @@ export class StickLocation implements XMLElement<StickLocationAttributes, StickL
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = StickLocation.schema;
 
   attributes: StickLocationAttributes;
   contents: StickLocationContents;
 
   constructor(opts?: { attributes?: Partial<StickLocationAttributes>; content?: StickLocationContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['center'];
+    this.attributes = xml.mergeZero(opts?.attributes, StickLocation.schema) as StickLocationAttributes;
+    this.contents = opts?.content ?? xml.zero(StickLocation.schema.contents);
   }
 
   getStickLocation(): 'center' | 'cymbal bell' | 'cymbal edge' | 'rim' {
@@ -29687,19 +28409,23 @@ export type OtherPercussionAttributes = { smufl: string | null };
 
 export type OtherPercussionContents = [string];
 
-export class OtherPercussion implements XMLElement<OtherPercussionAttributes, OtherPercussionContents> {
-  static readonly elementName = 'other-percussion';
+export class OtherPercussion
+  implements XMLElement<'other-percussion', OtherPercussionAttributes, OtherPercussionContents>
+{
   static readonly schema = {
+    name: 'other-percussion',
     attributes: { smufl: { type: 'optional', value: { type: 'string' } } },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = OtherPercussion.schema;
 
   attributes: OtherPercussionAttributes;
   contents: OtherPercussionContents;
 
   constructor(opts?: { attributes?: Partial<OtherPercussionAttributes>; content?: OtherPercussionContents }) {
-    this.attributes = Object.assign({ ['smufl']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherPercussion.schema) as OtherPercussionAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherPercussion.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -29734,9 +28460,9 @@ export type PercussionContents = [
   Glass | Metal | Wood | Pitched | Membrane | Effect | Timpani | Beater | Stick | StickLocation | OtherPercussion
 ];
 
-export class Percussion implements XMLElement<PercussionAttributes, PercussionContents> {
-  static readonly elementName = 'percussion';
+export class Percussion implements XMLElement<'percussion', PercussionAttributes, PercussionContents> {
   static readonly schema = {
+    name: 'percussion',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -29776,7 +28502,7 @@ export class Percussion implements XMLElement<PercussionAttributes, PercussionCo
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'percussion',
@@ -29798,30 +28524,16 @@ export class Percussion implements XMLElement<PercussionAttributes, PercussionCo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Percussion.schema;
 
   attributes: PercussionAttributes;
   contents: PercussionContents;
 
   constructor(opts?: { attributes?: Partial<PercussionAttributes>; content?: PercussionContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [new Glass()];
+    this.attributes = xml.mergeZero(opts?.attributes, Percussion.schema) as PercussionAttributes;
+    this.contents = opts?.content ?? xml.zero(Percussion.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -29933,16 +28645,17 @@ export type AccordionHighAttributes = Record<string, unknown>;
 
 export type AccordionHighContents = [];
 
-export class AccordionHigh implements XMLElement<AccordionHighAttributes, AccordionHighContents> {
-  static readonly elementName = 'accordion-high';
-  static readonly schema = { attributes: {}, content: [] };
+export class AccordionHigh implements XMLElement<'accordion-high', AccordionHighAttributes, AccordionHighContents> {
+  static readonly schema = { name: 'accordion-high', attributes: {}, contents: [] } as const;
+
+  readonly schema = AccordionHigh.schema;
 
   attributes: AccordionHighAttributes;
   contents: AccordionHighContents;
 
   constructor(opts?: { attributes?: Partial<AccordionHighAttributes>; content?: AccordionHighContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, AccordionHigh.schema) as AccordionHighAttributes;
+    this.contents = opts?.content ?? xml.zero(AccordionHigh.schema.contents);
   }
 }
 
@@ -29950,16 +28663,19 @@ export type AccordionMiddleAttributes = Record<string, unknown>;
 
 export type AccordionMiddleContents = [];
 
-export class AccordionMiddle implements XMLElement<AccordionMiddleAttributes, AccordionMiddleContents> {
-  static readonly elementName = 'accordion-middle';
-  static readonly schema = { attributes: {}, content: [] };
+export class AccordionMiddle
+  implements XMLElement<'accordion-middle', AccordionMiddleAttributes, AccordionMiddleContents>
+{
+  static readonly schema = { name: 'accordion-middle', attributes: {}, contents: [] } as const;
+
+  readonly schema = AccordionMiddle.schema;
 
   attributes: AccordionMiddleAttributes;
   contents: AccordionMiddleContents;
 
   constructor(opts?: { attributes?: Partial<AccordionMiddleAttributes>; content?: AccordionMiddleContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, AccordionMiddle.schema) as AccordionMiddleAttributes;
+    this.contents = opts?.content ?? xml.zero(AccordionMiddle.schema.contents);
   }
 }
 
@@ -29967,16 +28683,17 @@ export type AccordionLowAttributes = Record<string, unknown>;
 
 export type AccordionLowContents = [];
 
-export class AccordionLow implements XMLElement<AccordionLowAttributes, AccordionLowContents> {
-  static readonly elementName = 'accordion-low';
-  static readonly schema = { attributes: {}, content: [] };
+export class AccordionLow implements XMLElement<'accordion-low', AccordionLowAttributes, AccordionLowContents> {
+  static readonly schema = { name: 'accordion-low', attributes: {}, contents: [] } as const;
+
+  readonly schema = AccordionLow.schema;
 
   attributes: AccordionLowAttributes;
   contents: AccordionLowContents;
 
   constructor(opts?: { attributes?: Partial<AccordionLowAttributes>; content?: AccordionLowContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, AccordionLow.schema) as AccordionLowAttributes;
+    this.contents = opts?.content ?? xml.zero(AccordionLow.schema.contents);
   }
 }
 
@@ -29998,10 +28715,10 @@ export type AccordionRegistrationAttributes = {
 export type AccordionRegistrationContents = [AccordionHigh | null, AccordionMiddle | null, AccordionLow | null];
 
 export class AccordionRegistration
-  implements XMLElement<AccordionRegistrationAttributes, AccordionRegistrationContents>
+  implements XMLElement<'accordion-registration', AccordionRegistrationAttributes, AccordionRegistrationContents>
 {
-  static readonly elementName = 'accordion-registration';
   static readonly schema = {
+    name: 'accordion-registration',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -30041,12 +28758,14 @@ export class AccordionRegistration
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [
+    contents: [
       { type: 'optional', value: AccordionHigh },
       { type: 'optional', value: AccordionMiddle },
       { type: 'optional', value: AccordionLow },
     ],
-  };
+  } as const;
+
+  readonly schema = AccordionRegistration.schema;
 
   attributes: AccordionRegistrationAttributes;
   contents: AccordionRegistrationContents;
@@ -30055,24 +28774,8 @@ export class AccordionRegistration
     attributes?: Partial<AccordionRegistrationAttributes>;
     content?: AccordionRegistrationContents;
   }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, AccordionRegistration.schema) as AccordionRegistrationAttributes;
+    this.contents = opts?.content ?? xml.zero(AccordionRegistration.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -30186,9 +28889,9 @@ export type StaffDivideAttributes = {
 
 export type StaffDivideContents = [];
 
-export class StaffDivide implements XMLElement<StaffDivideAttributes, StaffDivideContents> {
-  static readonly elementName = 'staff-divide';
+export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttributes, StaffDivideContents> {
   static readonly schema = {
+    name: 'staff-divide',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['down', 'up', 'up-down'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -30229,32 +28932,17 @@ export class StaffDivide implements XMLElement<StaffDivideAttributes, StaffDivid
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = StaffDivide.schema;
 
   attributes: StaffDivideAttributes;
   contents: StaffDivideContents;
 
   constructor(opts?: { attributes?: Partial<StaffDivideAttributes>; content?: StaffDivideContents }) {
-    this.attributes = Object.assign(
-      {
-        ['type']: 'down',
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, StaffDivide.schema) as StaffDivideAttributes;
+    this.contents = opts?.content ?? xml.zero(StaffDivide.schema.contents);
   }
   getType(): 'down' | 'up' | 'up-down' {
     return this.attributes['type'];
@@ -30357,9 +29045,9 @@ export type OtherDirectionAttributes = {
 
 export type OtherDirectionContents = [];
 
-export class OtherDirection implements XMLElement<OtherDirectionAttributes, OtherDirectionContents> {
-  static readonly elementName = 'other-direction';
+export class OtherDirection implements XMLElement<'other-direction', OtherDirectionAttributes, OtherDirectionContents> {
   static readonly schema = {
+    name: 'other-direction',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -30401,33 +29089,17 @@ export class OtherDirection implements XMLElement<OtherDirectionAttributes, Othe
       smufl: { type: 'optional', value: { type: 'string' } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = OtherDirection.schema;
 
   attributes: OtherDirectionAttributes;
   contents: OtherDirectionContents;
 
   constructor(opts?: { attributes?: Partial<OtherDirectionAttributes>; content?: OtherDirectionContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['smufl']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherDirection.schema) as OtherDirectionAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherDirection.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -30545,11 +29217,11 @@ export type DirectionTypeContents = [
   | OtherDirection
 ];
 
-export class DirectionType implements XMLElement<DirectionTypeAttributes, DirectionTypeContents> {
-  static readonly elementName = 'direction-type';
+export class DirectionType implements XMLElement<'direction-type', DirectionTypeAttributes, DirectionTypeContents> {
   static readonly schema = {
+    name: 'direction-type',
     attributes: { id: { type: 'optional', value: { type: 'string' } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'direction-type',
@@ -30583,14 +29255,16 @@ export class DirectionType implements XMLElement<DirectionTypeAttributes, Direct
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = DirectionType.schema;
 
   attributes: DirectionTypeAttributes;
   contents: DirectionTypeContents;
 
   constructor(opts?: { attributes?: Partial<DirectionTypeAttributes>; content?: DirectionTypeContents }) {
-    this.attributes = Object.assign({ ['id']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [[new Rehearsal()]];
+    this.attributes = xml.mergeZero(opts?.attributes, DirectionType.schema) as DirectionTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(DirectionType.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -30658,25 +29332,27 @@ export type OffsetAttributes = { sound: 'yes' | 'no' | null };
 
 export type OffsetContents = [number];
 
-export class Offset implements XMLElement<OffsetAttributes, OffsetContents> {
-  static readonly elementName = 'offset';
+export class Offset implements XMLElement<'offset', OffsetAttributes, OffsetContents> {
   static readonly schema = {
+    name: 'offset',
     attributes: { sound: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'offset',
         value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Offset.schema;
 
   attributes: OffsetAttributes;
   contents: OffsetContents;
 
   constructor(opts?: { attributes?: Partial<OffsetAttributes>; content?: OffsetContents }) {
-    this.attributes = Object.assign({ ['sound']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Offset.schema) as OffsetAttributes;
+    this.contents = opts?.content ?? xml.zero(Offset.schema.contents);
   }
   getSound(): 'yes' | 'no' | null {
     return this.attributes['sound'];
@@ -30696,11 +29372,13 @@ export type InstrumentChangeAttributes = { id: string };
 
 export type InstrumentChangeContents = [InstrumentSound | null, Array<Solo | Ensemble>, VirtualInstrument | null];
 
-export class InstrumentChange implements XMLElement<InstrumentChangeAttributes, InstrumentChangeContents> {
-  static readonly elementName = 'instrument-change';
+export class InstrumentChange
+  implements XMLElement<'instrument-change', InstrumentChangeAttributes, InstrumentChangeContents>
+{
   static readonly schema = {
+    name: 'instrument-change',
     attributes: { id: { type: 'required', value: { type: 'string' } } },
-    content: [
+    contents: [
       { type: 'optional', value: InstrumentSound },
       {
         type: 'label',
@@ -30709,14 +29387,16 @@ export class InstrumentChange implements XMLElement<InstrumentChangeAttributes, 
       },
       { type: 'optional', value: VirtualInstrument },
     ],
-  };
+  } as const;
+
+  readonly schema = InstrumentChange.schema;
 
   attributes: InstrumentChangeAttributes;
   contents: InstrumentChangeContents;
 
   constructor(opts?: { attributes?: Partial<InstrumentChangeAttributes>; content?: InstrumentChangeContents }) {
-    this.attributes = Object.assign({ ['id']: '' }, opts?.attributes);
-    this.contents = opts?.content ?? [null, [], null];
+    this.attributes = xml.mergeZero(opts?.attributes, InstrumentChange.schema) as InstrumentChangeAttributes;
+    this.contents = opts?.content ?? xml.zero(InstrumentChange.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -30748,16 +29428,17 @@ export type StraightAttributes = Record<string, unknown>;
 
 export type StraightContents = [];
 
-export class Straight implements XMLElement<StraightAttributes, StraightContents> {
-  static readonly elementName = 'straight';
-  static readonly schema = { attributes: {}, content: [] };
+export class Straight implements XMLElement<'straight', StraightAttributes, StraightContents> {
+  static readonly schema = { name: 'straight', attributes: {}, contents: [] } as const;
+
+  readonly schema = Straight.schema;
 
   attributes: StraightAttributes;
   contents: StraightContents;
 
   constructor(opts?: { attributes?: Partial<StraightAttributes>; content?: StraightContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Straight.schema) as StraightAttributes;
+    this.contents = opts?.content ?? xml.zero(Straight.schema.contents);
   }
 }
 
@@ -30765,25 +29446,27 @@ export type FirstAttributes = Record<string, unknown>;
 
 export type FirstContents = [number];
 
-export class First implements XMLElement<FirstAttributes, FirstContents> {
-  static readonly elementName = 'first';
+export class First implements XMLElement<'first', FirstAttributes, FirstContents> {
   static readonly schema = {
+    name: 'first',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'swing-ratio',
         value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = First.schema;
 
   attributes: FirstAttributes;
   contents: FirstContents;
 
   constructor(opts?: { attributes?: Partial<FirstAttributes>; content?: FirstContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, First.schema) as FirstAttributes;
+    this.contents = opts?.content ?? xml.zero(First.schema.contents);
   }
 
   getSwingRatio(): number {
@@ -30798,21 +29481,23 @@ export type SecondAttributes = Record<string, unknown>;
 
 export type SecondContents = [number];
 
-export class Second implements XMLElement<SecondAttributes, SecondContents> {
-  static readonly elementName = 'second';
+export class Second implements XMLElement<'second', SecondAttributes, SecondContents> {
   static readonly schema = {
+    name: 'second',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'second', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
     ],
-  };
+  } as const;
+
+  readonly schema = Second.schema;
 
   attributes: SecondAttributes;
   contents: SecondContents;
 
   constructor(opts?: { attributes?: Partial<SecondAttributes>; content?: SecondContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Second.schema) as SecondAttributes;
+    this.contents = opts?.content ?? xml.zero(Second.schema.contents);
   }
 
   getSecond(): number {
@@ -30827,24 +29512,26 @@ export type SwingTypeAttributes = Record<string, unknown>;
 
 export type SwingTypeContents = ['eighth' | '16th'];
 
-export class SwingType implements XMLElement<SwingTypeAttributes, SwingTypeContents> {
-  static readonly elementName = 'swing-type';
+export class SwingType implements XMLElement<'swing-type', SwingTypeAttributes, SwingTypeContents> {
   static readonly schema = {
+    name: 'swing-type',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'eighth', value: { type: 'choices', choices: ['eighth', '16th'] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = SwingType.schema;
 
   attributes: SwingTypeAttributes;
   contents: SwingTypeContents;
 
   constructor(opts?: { attributes?: Partial<SwingTypeAttributes>; content?: SwingTypeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['eighth'];
+    this.attributes = xml.mergeZero(opts?.attributes, SwingType.schema) as SwingTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(SwingType.schema.contents);
   }
 
   getEighth(): 'eighth' | '16th' {
@@ -30859,16 +29546,21 @@ export type SwingStyleAttributes = Record<string, unknown>;
 
 export type SwingStyleContents = [string];
 
-export class SwingStyle implements XMLElement<SwingStyleAttributes, SwingStyleContents> {
-  static readonly elementName = 'swing-style';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class SwingStyle implements XMLElement<'swing-style', SwingStyleAttributes, SwingStyleContents> {
+  static readonly schema = {
+    name: 'swing-style',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = SwingStyle.schema;
 
   attributes: SwingStyleAttributes;
   contents: SwingStyleContents;
 
   constructor(opts?: { attributes?: Partial<SwingStyleAttributes>; content?: SwingStyleContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, SwingStyle.schema) as SwingStyleAttributes;
+    this.contents = opts?.content ?? xml.zero(SwingStyle.schema.contents);
   }
 
   getText(): string {
@@ -30883,11 +29575,11 @@ export type SwingAttributes = Record<string, unknown>;
 
 export type SwingContents = [Straight | [First, Second, SwingType | null], SwingStyle | null];
 
-export class Swing implements XMLElement<SwingAttributes, SwingContents> {
-  static readonly elementName = 'swing';
+export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents> {
   static readonly schema = {
+    name: 'swing',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'swing',
@@ -30905,14 +29597,16 @@ export class Swing implements XMLElement<SwingAttributes, SwingContents> {
       },
       { type: 'optional', value: SwingStyle },
     ],
-  };
+  } as const;
+
+  readonly schema = Swing.schema;
 
   attributes: SwingAttributes;
   contents: SwingContents;
 
   constructor(opts?: { attributes?: Partial<SwingAttributes>; content?: SwingContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new Straight(), null];
+    this.attributes = xml.mergeZero(opts?.attributes, Swing.schema) as SwingAttributes;
+    this.contents = opts?.content ?? xml.zero(Swing.schema.contents);
   }
 
   getSwing(): Straight | [First, Second, SwingType | null] {
@@ -30956,9 +29650,9 @@ export type SoundContents = [
   Offset | null
 ];
 
-export class Sound implements XMLElement<SoundAttributes, SoundContents> {
-  static readonly elementName = 'sound';
+export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents> {
   static readonly schema = {
+    name: 'sound',
     attributes: {
       coda: { type: 'optional', value: { type: 'string' } },
       dacapo: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -30979,7 +29673,7 @@ export class Sound implements XMLElement<SoundAttributes, SoundContents> {
       'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
       tocoda: { type: 'optional', value: { type: 'string' } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'playbacks',
@@ -30996,36 +29690,16 @@ export class Sound implements XMLElement<SoundAttributes, SoundContents> {
       { type: 'optional', value: Swing },
       { type: 'optional', value: Offset },
     ],
-  };
+  } as const;
+
+  readonly schema = Sound.schema;
 
   attributes: SoundAttributes;
   contents: SoundContents;
 
   constructor(opts?: { attributes?: Partial<SoundAttributes>; content?: SoundContents }) {
-    this.attributes = Object.assign(
-      {
-        ['coda']: null,
-        ['dacapo']: null,
-        ['dalsegno']: null,
-        ['damper-pedal']: null,
-        ['divisions']: null,
-        ['dynamics']: null,
-        ['elevation']: null,
-        ['fine']: null,
-        ['forward-repeat']: null,
-        ['id']: null,
-        ['pan']: null,
-        ['pizzicato']: null,
-        ['segno']: null,
-        ['soft-pedal']: null,
-        ['sostenuto-pedal']: null,
-        ['tempo']: null,
-        ['time-only']: null,
-        ['tocoda']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [[], null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Sound.schema) as SoundAttributes;
+    this.contents = opts?.content ?? xml.zero(Sound.schema.contents);
   }
   getCoda(): string | null {
     return this.attributes['coda'];
@@ -31166,9 +29840,9 @@ export type SyncAttributes = {
 
 export type SyncContents = [];
 
-export class Sync implements XMLElement<SyncAttributes, SyncContents> {
-  static readonly elementName = 'sync';
+export class Sync implements XMLElement<'sync', SyncAttributes, SyncContents> {
   static readonly schema = {
+    name: 'sync',
     attributes: {
       type: {
         type: 'required',
@@ -31178,18 +29852,17 @@ export class Sync implements XMLElement<SyncAttributes, SyncContents> {
       player: { type: 'optional', value: { type: 'string' } },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Sync.schema;
 
   attributes: SyncAttributes;
   contents: SyncContents;
 
   constructor(opts?: { attributes?: Partial<SyncAttributes>; content?: SyncContents }) {
-    this.attributes = Object.assign(
-      { ['type']: 'none', ['latency']: null, ['player']: null, ['time-only']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Sync.schema) as SyncAttributes;
+    this.contents = opts?.content ?? xml.zero(Sync.schema.contents);
   }
   getType(): 'none' | 'tempo' | 'mostly-tempo' | 'mostly-event' | 'event' | 'always-event' {
     return this.attributes['type'];
@@ -31221,23 +29894,25 @@ export type OtherListeningAttributes = { type: string; player: string | null; 't
 
 export type OtherListeningContents = [string];
 
-export class OtherListening implements XMLElement<OtherListeningAttributes, OtherListeningContents> {
-  static readonly elementName = 'other-listening';
+export class OtherListening implements XMLElement<'other-listening', OtherListeningAttributes, OtherListeningContents> {
   static readonly schema = {
+    name: 'other-listening',
     attributes: {
       type: { type: 'required', value: { type: 'string' } },
       player: { type: 'optional', value: { type: 'string' } },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = OtherListening.schema;
 
   attributes: OtherListeningAttributes;
   contents: OtherListeningContents;
 
   constructor(opts?: { attributes?: Partial<OtherListeningAttributes>; content?: OtherListeningContents }) {
-    this.attributes = Object.assign({ ['type']: '', ['player']: null, ['time-only']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, OtherListening.schema) as OtherListeningAttributes;
+    this.contents = opts?.content ?? xml.zero(OtherListening.schema.contents);
   }
   getType(): string {
     return this.attributes['type'];
@@ -31269,11 +29944,11 @@ export type ListeningAttributes = Record<string, unknown>;
 
 export type ListeningContents = [Array<Sync | OtherListening>, Offset | null];
 
-export class Listening implements XMLElement<ListeningAttributes, ListeningContents> {
-  static readonly elementName = 'listening';
+export class Listening implements XMLElement<'listening', ListeningAttributes, ListeningContents> {
   static readonly schema = {
+    name: 'listening',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'listening',
@@ -31281,14 +29956,16 @@ export class Listening implements XMLElement<ListeningAttributes, ListeningConte
       },
       { type: 'optional', value: Offset },
     ],
-  };
+  } as const;
+
+  readonly schema = Listening.schema;
 
   attributes: ListeningAttributes;
   contents: ListeningContents;
 
   constructor(opts?: { attributes?: Partial<ListeningAttributes>; content?: ListeningContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[new Sync()], null];
+    this.attributes = xml.mergeZero(opts?.attributes, Listening.schema) as ListeningAttributes;
+    this.contents = opts?.content ?? xml.zero(Listening.schema.contents);
   }
 
   getListening(): Array<Sync | OtherListening> {
@@ -31318,11 +29995,11 @@ export type DirectionContents = [
   Listening | null
 ];
 
-export class Direction implements XMLElement<DirectionAttributes, DirectionContents> {
-  static readonly elementName = 'direction';
+export class Direction implements XMLElement<'direction', DirectionAttributes, DirectionContents> {
   static readonly schema = {
+    name: 'direction',
     attributes: {},
-    content: [
+    contents: [
       { type: 'label', label: 'direction-types', value: { type: 'oneOrMore', value: DirectionType } },
       { type: 'optional', value: Offset },
       { type: 'optional', value: Footnote },
@@ -31332,14 +30009,16 @@ export class Direction implements XMLElement<DirectionAttributes, DirectionConte
       { type: 'optional', value: Sound },
       { type: 'optional', value: Listening },
     ],
-  };
+  } as const;
+
+  readonly schema = Direction.schema;
 
   attributes: DirectionAttributes;
   contents: DirectionContents;
 
   constructor(opts?: { attributes?: Partial<DirectionAttributes>; content?: DirectionContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[new DirectionType()], null, null, null, null, null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Direction.schema) as DirectionAttributes;
+    this.contents = opts?.content ?? xml.zero(Direction.schema.contents);
   }
 
   getDirectionTypes(): Array<DirectionType> {
@@ -31396,24 +30075,26 @@ export type DivisionsAttributes = Record<string, unknown>;
 
 export type DivisionsContents = [number];
 
-export class Divisions implements XMLElement<DivisionsAttributes, DivisionsContents> {
-  static readonly elementName = 'divisions';
+export class Divisions implements XMLElement<'divisions', DivisionsAttributes, DivisionsContents> {
   static readonly schema = {
+    name: 'divisions',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'positive-divisions', value: { type: 'float', min: 1, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Divisions.schema;
 
   attributes: DivisionsAttributes;
   contents: DivisionsContents;
 
   constructor(opts?: { attributes?: Partial<DivisionsAttributes>; content?: DivisionsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Divisions.schema) as DivisionsAttributes;
+    this.contents = opts?.content ?? xml.zero(Divisions.schema.contents);
   }
 
   getPositiveDivisions(): number {
@@ -31428,26 +30109,28 @@ export type CancelAttributes = { location: 'left' | 'right' | 'beforeBarline' | 
 
 export type CancelContents = [number];
 
-export class Cancel implements XMLElement<CancelAttributes, CancelContents> {
-  static readonly elementName = 'cancel';
+export class Cancel implements XMLElement<'cancel', CancelAttributes, CancelContents> {
   static readonly schema = {
+    name: 'cancel',
     attributes: {
       location: { type: 'optional', value: { type: 'choices', choices: ['left', 'right', 'beforeBarline'] } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'fifths', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Cancel.schema;
 
   attributes: CancelAttributes;
   contents: CancelContents;
 
   constructor(opts?: { attributes?: Partial<CancelAttributes>; content?: CancelContents }) {
-    this.attributes = Object.assign({ ['location']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Cancel.schema) as CancelAttributes;
+    this.contents = opts?.content ?? xml.zero(Cancel.schema.contents);
   }
   getLocation(): 'left' | 'right' | 'beforeBarline' | null {
     return this.attributes['location'];
@@ -31467,24 +30150,26 @@ export type FifthsAttributes = Record<string, unknown>;
 
 export type FifthsContents = [number | null];
 
-export class Fifths implements XMLElement<FifthsAttributes, FifthsContents> {
-  static readonly elementName = 'fifths';
+export class Fifths implements XMLElement<'fifths', FifthsAttributes, FifthsContents> {
   static readonly schema = {
+    name: 'fifths',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'optional',
         value: { type: 'label', label: 'fifths', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Fifths.schema;
 
   attributes: FifthsAttributes;
   contents: FifthsContents;
 
   constructor(opts?: { attributes?: Partial<FifthsAttributes>; content?: FifthsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null];
+    this.attributes = xml.mergeZero(opts?.attributes, Fifths.schema) as FifthsAttributes;
+    this.contents = opts?.content ?? xml.zero(Fifths.schema.contents);
   }
 
   getFifths(): number | null {
@@ -31511,11 +30196,11 @@ export type ModeContents = [
   | string
 ];
 
-export class Mode implements XMLElement<ModeAttributes, ModeContents> {
-  static readonly elementName = 'mode';
+export class Mode implements XMLElement<'mode', ModeAttributes, ModeContents> {
   static readonly schema = {
+    name: 'mode',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -31540,14 +30225,16 @@ export class Mode implements XMLElement<ModeAttributes, ModeContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Mode.schema;
 
   attributes: ModeAttributes;
   contents: ModeContents;
 
   constructor(opts?: { attributes?: Partial<ModeAttributes>; content?: ModeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['none'];
+    this.attributes = xml.mergeZero(opts?.attributes, Mode.schema) as ModeAttributes;
+    this.contents = opts?.content ?? xml.zero(Mode.schema.contents);
   }
 
   getMode():
@@ -31586,11 +30273,11 @@ export type KeyStepAttributes = Record<string, unknown>;
 
 export type KeyStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
 
-export class KeyStep implements XMLElement<KeyStepAttributes, KeyStepContents> {
-  static readonly elementName = 'key-step';
+export class KeyStep implements XMLElement<'key-step', KeyStepAttributes, KeyStepContents> {
   static readonly schema = {
+    name: 'key-step',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -31600,14 +30287,16 @@ export class KeyStep implements XMLElement<KeyStepAttributes, KeyStepContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = KeyStep.schema;
 
   attributes: KeyStepAttributes;
   contents: KeyStepContents;
 
   constructor(opts?: { attributes?: Partial<KeyStepAttributes>; content?: KeyStepContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['A'];
+    this.attributes = xml.mergeZero(opts?.attributes, KeyStep.schema) as KeyStepAttributes;
+    this.contents = opts?.content ?? xml.zero(KeyStep.schema.contents);
   }
 
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
@@ -31622,24 +30311,26 @@ export type KeyAlterAttributes = Record<string, unknown>;
 
 export type KeyAlterContents = [number];
 
-export class KeyAlter implements XMLElement<KeyAlterAttributes, KeyAlterContents> {
-  static readonly elementName = 'key-alter';
+export class KeyAlter implements XMLElement<'key-alter', KeyAlterAttributes, KeyAlterContents> {
   static readonly schema = {
+    name: 'key-alter',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'semitones', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = KeyAlter.schema;
 
   attributes: KeyAlterAttributes;
   contents: KeyAlterContents;
 
   constructor(opts?: { attributes?: Partial<KeyAlterAttributes>; content?: KeyAlterContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, KeyAlter.schema) as KeyAlterAttributes;
+    this.contents = opts?.content ?? xml.zero(KeyAlter.schema.contents);
   }
 
   getSemitones(): number {
@@ -31696,11 +30387,11 @@ export type KeyAccidentalContents = [
   | 'koron'
 ];
 
-export class KeyAccidental implements XMLElement<KeyAccidentalAttributes, KeyAccidentalContents> {
-  static readonly elementName = 'key-accidental';
+export class KeyAccidental implements XMLElement<'key-accidental', KeyAccidentalAttributes, KeyAccidentalContents> {
   static readonly schema = {
+    name: 'key-accidental',
     attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } } },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -31755,14 +30446,16 @@ export class KeyAccidental implements XMLElement<KeyAccidentalAttributes, KeyAcc
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = KeyAccidental.schema;
 
   attributes: KeyAccidentalAttributes;
   contents: KeyAccidentalContents;
 
   constructor(opts?: { attributes?: Partial<KeyAccidentalAttributes>; content?: KeyAccidentalContents }) {
-    this.attributes = Object.assign({ ['smufl']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['other'];
+    this.attributes = xml.mergeZero(opts?.attributes, KeyAccidental.schema) as KeyAccidentalAttributes;
+    this.contents = opts?.content ?? xml.zero(KeyAccidental.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -31866,22 +30559,24 @@ export type KeyOctaveAttributes = { number: number; cancel: 'yes' | 'no' | null 
 
 export type KeyOctaveContents = [number];
 
-export class KeyOctave implements XMLElement<KeyOctaveAttributes, KeyOctaveContents> {
-  static readonly elementName = 'key-octave';
+export class KeyOctave implements XMLElement<'key-octave', KeyOctaveAttributes, KeyOctaveContents> {
   static readonly schema = {
+    name: 'key-octave',
     attributes: {
       number: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
       cancel: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    content: [{ type: 'required', value: { type: 'label', label: 'octave', value: { type: 'int', min: 0, max: 9 } } }],
-  };
+    contents: [{ type: 'required', value: { type: 'label', label: 'octave', value: { type: 'int', min: 0, max: 9 } } }],
+  } as const;
+
+  readonly schema = KeyOctave.schema;
 
   attributes: KeyOctaveAttributes;
   contents: KeyOctaveContents;
 
   constructor(opts?: { attributes?: Partial<KeyOctaveAttributes>; content?: KeyOctaveContents }) {
-    this.attributes = Object.assign({ ['number']: 0, ['cancel']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, KeyOctave.schema) as KeyOctaveAttributes;
+    this.contents = opts?.content ?? xml.zero(KeyOctave.schema.contents);
   }
   getNumber(): number {
     return this.attributes['number'];
@@ -31922,9 +30617,9 @@ export type KeyContents = [
   [Cancel | null, Fifths, Mode | null] | Array<[KeyStep, KeyAlter, KeyAccidental | null]> | Array<KeyOctave>
 ];
 
-export class Key implements XMLElement<KeyAttributes, KeyContents> {
-  static readonly elementName = 'key';
+export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
   static readonly schema = {
+    name: 'key',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -31964,7 +30659,7 @@ export class Key implements XMLElement<KeyAttributes, KeyContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'key',
@@ -31989,30 +30684,16 @@ export class Key implements XMLElement<KeyAttributes, KeyContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Key.schema;
 
   attributes: KeyAttributes;
   contents: KeyContents;
 
   constructor(opts?: { attributes?: Partial<KeyAttributes>; content?: KeyContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['number']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [[null, new Fifths(), null]];
+    this.attributes = xml.mergeZero(opts?.attributes, Key.schema) as KeyAttributes;
+    this.contents = opts?.content ?? xml.zero(Key.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -32102,16 +30783,21 @@ export type BeatsAttributes = Record<string, unknown>;
 
 export type BeatsContents = [string];
 
-export class Beats implements XMLElement<BeatsAttributes, BeatsContents> {
-  static readonly elementName = 'beats';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class Beats implements XMLElement<'beats', BeatsAttributes, BeatsContents> {
+  static readonly schema = {
+    name: 'beats',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Beats.schema;
 
   attributes: BeatsAttributes;
   contents: BeatsContents;
 
   constructor(opts?: { attributes?: Partial<BeatsAttributes>; content?: BeatsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Beats.schema) as BeatsAttributes;
+    this.contents = opts?.content ?? xml.zero(Beats.schema.contents);
   }
 
   getText(): string {
@@ -32126,16 +30812,21 @@ export type BeatTypeAttributes = Record<string, unknown>;
 
 export type BeatTypeContents = [string];
 
-export class BeatType implements XMLElement<BeatTypeAttributes, BeatTypeContents> {
-  static readonly elementName = 'beat-type';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class BeatType implements XMLElement<'beat-type', BeatTypeAttributes, BeatTypeContents> {
+  static readonly schema = {
+    name: 'beat-type',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = BeatType.schema;
 
   attributes: BeatTypeAttributes;
   contents: BeatTypeContents;
 
   constructor(opts?: { attributes?: Partial<BeatTypeAttributes>; content?: BeatTypeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, BeatType.schema) as BeatTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(BeatType.schema.contents);
   }
 
   getText(): string {
@@ -32150,11 +30841,11 @@ export type TimeRelationAttributes = Record<string, unknown>;
 
 export type TimeRelationContents = ['space' | 'bracket' | 'equals' | 'hyphen' | 'parentheses' | 'slash'];
 
-export class TimeRelation implements XMLElement<TimeRelationAttributes, TimeRelationContents> {
-  static readonly elementName = 'time-relation';
+export class TimeRelation implements XMLElement<'time-relation', TimeRelationAttributes, TimeRelationContents> {
   static readonly schema = {
+    name: 'time-relation',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -32164,14 +30855,16 @@ export class TimeRelation implements XMLElement<TimeRelationAttributes, TimeRela
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = TimeRelation.schema;
 
   attributes: TimeRelationAttributes;
   contents: TimeRelationContents;
 
   constructor(opts?: { attributes?: Partial<TimeRelationAttributes>; content?: TimeRelationContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['space'];
+    this.attributes = xml.mergeZero(opts?.attributes, TimeRelation.schema) as TimeRelationAttributes;
+    this.contents = opts?.content ?? xml.zero(TimeRelation.schema.contents);
   }
 
   getTimeRelation(): 'space' | 'bracket' | 'equals' | 'hyphen' | 'parentheses' | 'slash' {
@@ -32189,9 +30882,11 @@ export type InterchangeableAttributes = {
 
 export type InterchangeableContents = [TimeRelation | null, Array<[Beats, BeatType]>];
 
-export class Interchangeable implements XMLElement<InterchangeableAttributes, InterchangeableContents> {
-  static readonly elementName = 'interchangeable';
+export class Interchangeable
+  implements XMLElement<'interchangeable', InterchangeableAttributes, InterchangeableContents>
+{
   static readonly schema = {
+    name: 'interchangeable',
     attributes: {
       separator: {
         type: 'optional',
@@ -32202,7 +30897,7 @@ export class Interchangeable implements XMLElement<InterchangeableAttributes, In
         value: { type: 'choices', choices: ['normal', 'common', 'cut', 'dotted-note', 'note', 'single-number'] },
       },
     },
-    content: [
+    contents: [
       { type: 'optional', value: TimeRelation },
       {
         type: 'label',
@@ -32216,14 +30911,16 @@ export class Interchangeable implements XMLElement<InterchangeableAttributes, In
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Interchangeable.schema;
 
   attributes: InterchangeableAttributes;
   contents: InterchangeableContents;
 
   constructor(opts?: { attributes?: Partial<InterchangeableAttributes>; content?: InterchangeableContents }) {
-    this.attributes = Object.assign({ ['separator']: null, ['symbol']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [null, [[new Beats(), new BeatType()]]];
+    this.attributes = xml.mergeZero(opts?.attributes, Interchangeable.schema) as InterchangeableAttributes;
+    this.contents = opts?.content ?? xml.zero(Interchangeable.schema.contents);
   }
   getSeparator(): 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null {
     return this.attributes['separator'];
@@ -32255,16 +30952,21 @@ export type SenzaMisuraAttributes = Record<string, unknown>;
 
 export type SenzaMisuraContents = [string];
 
-export class SenzaMisura implements XMLElement<SenzaMisuraAttributes, SenzaMisuraContents> {
-  static readonly elementName = 'senza-misura';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class SenzaMisura implements XMLElement<'senza-misura', SenzaMisuraAttributes, SenzaMisuraContents> {
+  static readonly schema = {
+    name: 'senza-misura',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = SenzaMisura.schema;
 
   attributes: SenzaMisuraAttributes;
   contents: SenzaMisuraContents;
 
   constructor(opts?: { attributes?: Partial<SenzaMisuraAttributes>; content?: SenzaMisuraContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, SenzaMisura.schema) as SenzaMisuraAttributes;
+    this.contents = opts?.content ?? xml.zero(SenzaMisura.schema.contents);
   }
 
   getText(): string {
@@ -32279,11 +30981,11 @@ export type TimeAttributes = Record<string, unknown>;
 
 export type TimeContents = [[Array<[Beats, BeatType]>, Interchangeable | null] | SenzaMisura];
 
-export class Time implements XMLElement<TimeAttributes, TimeContents> {
-  static readonly elementName = 'time';
+export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
   static readonly schema = {
+    name: 'time',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'time',
@@ -32305,14 +31007,16 @@ export class Time implements XMLElement<TimeAttributes, TimeContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Time.schema;
 
   attributes: TimeAttributes;
   contents: TimeContents;
 
   constructor(opts?: { attributes?: Partial<TimeAttributes>; content?: TimeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[[[new Beats(), new BeatType()]], null]];
+    this.attributes = xml.mergeZero(opts?.attributes, Time.schema) as TimeAttributes;
+    this.contents = opts?.content ?? xml.zero(Time.schema.contents);
   }
 
   getTime(): [Array<[Beats, BeatType]>, Interchangeable | null] | SenzaMisura {
@@ -32327,16 +31031,21 @@ export type StavesAttributes = Record<string, unknown>;
 
 export type StavesContents = [string];
 
-export class Staves implements XMLElement<StavesAttributes, StavesContents> {
-  static readonly elementName = 'staves';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class Staves implements XMLElement<'staves', StavesAttributes, StavesContents> {
+  static readonly schema = {
+    name: 'staves',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Staves.schema;
 
   attributes: StavesAttributes;
   contents: StavesContents;
 
   constructor(opts?: { attributes?: Partial<StavesAttributes>; content?: StavesContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Staves.schema) as StavesAttributes;
+    this.contents = opts?.content ?? xml.zero(Staves.schema.contents);
   }
 
   getText(): string {
@@ -32363,9 +31072,9 @@ export type PartSymbolAttributes = {
 
 export type PartSymbolContents = ['none' | 'brace' | 'bracket' | 'line' | 'square'];
 
-export class PartSymbol implements XMLElement<PartSymbolAttributes, PartSymbolContents> {
-  static readonly elementName = 'part-symbol';
+export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttributes, PartSymbolContents> {
   static readonly schema = {
+    name: 'part-symbol',
     attributes: {
       'bottom-staff': { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -32404,7 +31113,7 @@ export class PartSymbol implements XMLElement<PartSymbolAttributes, PartSymbolCo
       },
       'top-staff': { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -32414,29 +31123,16 @@ export class PartSymbol implements XMLElement<PartSymbolAttributes, PartSymbolCo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = PartSymbol.schema;
 
   attributes: PartSymbolAttributes;
   contents: PartSymbolContents;
 
   constructor(opts?: { attributes?: Partial<PartSymbolAttributes>; content?: PartSymbolContents }) {
-    this.attributes = Object.assign(
-      {
-        ['bottom-staff']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['top-staff']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['none'];
+    this.attributes = xml.mergeZero(opts?.attributes, PartSymbol.schema) as PartSymbolAttributes;
+    this.contents = opts?.content ?? xml.zero(PartSymbol.schema.contents);
   }
   getBottomStaff(): number | null {
     return this.attributes['bottom-staff'];
@@ -32518,16 +31214,21 @@ export type InstrumentsAttributes = Record<string, unknown>;
 
 export type InstrumentsContents = [string];
 
-export class Instruments implements XMLElement<InstrumentsAttributes, InstrumentsContents> {
-  static readonly elementName = 'instruments';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class Instruments implements XMLElement<'instruments', InstrumentsAttributes, InstrumentsContents> {
+  static readonly schema = {
+    name: 'instruments',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Instruments.schema;
 
   attributes: InstrumentsAttributes;
   contents: InstrumentsContents;
 
   constructor(opts?: { attributes?: Partial<InstrumentsAttributes>; content?: InstrumentsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Instruments.schema) as InstrumentsAttributes;
+    this.contents = opts?.content ?? xml.zero(Instruments.schema.contents);
   }
 
   getText(): string {
@@ -32542,11 +31243,11 @@ export type SignAttributes = Record<string, unknown>;
 
 export type SignContents = ['G' | 'F' | 'C' | 'percussion' | 'TAB' | 'jianpu' | 'none'];
 
-export class Sign implements XMLElement<SignAttributes, SignContents> {
-  static readonly elementName = 'sign';
+export class Sign implements XMLElement<'sign', SignAttributes, SignContents> {
   static readonly schema = {
+    name: 'sign',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -32556,14 +31257,16 @@ export class Sign implements XMLElement<SignAttributes, SignContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Sign.schema;
 
   attributes: SignAttributes;
   contents: SignContents;
 
   constructor(opts?: { attributes?: Partial<SignAttributes>; content?: SignContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['G'];
+    this.attributes = xml.mergeZero(opts?.attributes, Sign.schema) as SignAttributes;
+    this.contents = opts?.content ?? xml.zero(Sign.schema.contents);
   }
 
   getClefSign(): 'G' | 'F' | 'C' | 'percussion' | 'TAB' | 'jianpu' | 'none' {
@@ -32578,24 +31281,26 @@ export type LineAttributes = Record<string, unknown>;
 
 export type LineContents = [number];
 
-export class Line implements XMLElement<LineAttributes, LineContents> {
-  static readonly elementName = 'line';
+export class Line implements XMLElement<'line', LineAttributes, LineContents> {
   static readonly schema = {
+    name: 'line',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'staff-line-position', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Line.schema;
 
   attributes: LineAttributes;
   contents: LineContents;
 
   constructor(opts?: { attributes?: Partial<LineAttributes>; content?: LineContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Line.schema) as LineAttributes;
+    this.contents = opts?.content ?? xml.zero(Line.schema.contents);
   }
 
   getStaffLinePosition(): number {
@@ -32610,25 +31315,29 @@ export type ClefOctaveChangeAttributes = Record<string, unknown>;
 
 export type ClefOctaveChangeContents = [number];
 
-export class ClefOctaveChange implements XMLElement<ClefOctaveChangeAttributes, ClefOctaveChangeContents> {
-  static readonly elementName = 'clef-octave-change';
+export class ClefOctaveChange
+  implements XMLElement<'clef-octave-change', ClefOctaveChangeAttributes, ClefOctaveChangeContents>
+{
   static readonly schema = {
+    name: 'clef-octave-change',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'clef-octave-change',
         value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = ClefOctaveChange.schema;
 
   attributes: ClefOctaveChangeAttributes;
   contents: ClefOctaveChangeContents;
 
   constructor(opts?: { attributes?: Partial<ClefOctaveChangeAttributes>; content?: ClefOctaveChangeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, ClefOctaveChange.schema) as ClefOctaveChangeAttributes;
+    this.contents = opts?.content ?? xml.zero(ClefOctaveChange.schema.contents);
   }
 
   getClefOctaveChange(): number {
@@ -32659,9 +31368,9 @@ export type ClefAttributes = {
 
 export type ClefContents = [Sign, Line | null, ClefOctaveChange | null];
 
-export class Clef implements XMLElement<ClefAttributes, ClefContents> {
-  static readonly elementName = 'clef';
+export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
   static readonly schema = {
+    name: 'clef',
     attributes: {
       additional: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'after-barline': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -32704,38 +31413,21 @@ export class Clef implements XMLElement<ClefAttributes, ClefContents> {
       },
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
     },
-    content: [
+    contents: [
       { type: 'required', value: Sign },
       { type: 'optional', value: Line },
       { type: 'optional', value: ClefOctaveChange },
     ],
-  };
+  } as const;
+
+  readonly schema = Clef.schema;
 
   attributes: ClefAttributes;
   contents: ClefContents;
 
   constructor(opts?: { attributes?: Partial<ClefAttributes>; content?: ClefContents }) {
-    this.attributes = Object.assign(
-      {
-        ['additional']: null,
-        ['after-barline']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['number']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['size']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [new Sign(), null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Clef.schema) as ClefAttributes;
+    this.contents = opts?.content ?? xml.zero(Clef.schema.contents);
   }
   getAdditional(): 'yes' | 'no' | null {
     return this.attributes['additional'];
@@ -32853,11 +31545,11 @@ export type StaffTypeAttributes = Record<string, unknown>;
 
 export type StaffTypeContents = ['regular' | 'alternate' | 'cue' | 'editorial' | 'ossia'];
 
-export class StaffType implements XMLElement<StaffTypeAttributes, StaffTypeContents> {
-  static readonly elementName = 'staff-type';
+export class StaffType implements XMLElement<'staff-type', StaffTypeAttributes, StaffTypeContents> {
   static readonly schema = {
+    name: 'staff-type',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -32867,14 +31559,16 @@ export class StaffType implements XMLElement<StaffTypeAttributes, StaffTypeConte
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = StaffType.schema;
 
   attributes: StaffTypeAttributes;
   contents: StaffTypeContents;
 
   constructor(opts?: { attributes?: Partial<StaffTypeAttributes>; content?: StaffTypeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['regular'];
+    this.attributes = xml.mergeZero(opts?.attributes, StaffType.schema) as StaffTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(StaffType.schema.contents);
   }
 
   getStaffType(): 'regular' | 'alternate' | 'cue' | 'editorial' | 'ossia' {
@@ -32889,16 +31583,21 @@ export type StaffLinesAttributes = Record<string, unknown>;
 
 export type StaffLinesContents = [string];
 
-export class StaffLines implements XMLElement<StaffLinesAttributes, StaffLinesContents> {
-  static readonly elementName = 'staff-lines';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class StaffLines implements XMLElement<'staff-lines', StaffLinesAttributes, StaffLinesContents> {
+  static readonly schema = {
+    name: 'staff-lines',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = StaffLines.schema;
 
   attributes: StaffLinesAttributes;
   contents: StaffLinesContents;
 
   constructor(opts?: { attributes?: Partial<StaffLinesAttributes>; content?: StaffLinesContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, StaffLines.schema) as StaffLinesAttributes;
+    this.contents = opts?.content ?? xml.zero(StaffLines.schema.contents);
   }
 
   getText(): string {
@@ -32919,9 +31618,9 @@ export type LineDetailAttributes = {
 
 export type LineDetailContents = [];
 
-export class LineDetail implements XMLElement<LineDetailAttributes, LineDetailContents> {
-  static readonly elementName = 'line-detail';
+export class LineDetail implements XMLElement<'line-detail', LineDetailAttributes, LineDetailContents> {
   static readonly schema = {
+    name: 'line-detail',
     attributes: {
       line: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -32929,18 +31628,17 @@ export class LineDetail implements XMLElement<LineDetailAttributes, LineDetailCo
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = LineDetail.schema;
 
   attributes: LineDetailAttributes;
   contents: LineDetailContents;
 
   constructor(opts?: { attributes?: Partial<LineDetailAttributes>; content?: LineDetailContents }) {
-    this.attributes = Object.assign(
-      { ['line']: 0, ['color']: null, ['line-type']: null, ['print-object']: null, ['width']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, LineDetail.schema) as LineDetailAttributes;
+    this.contents = opts?.content ?? xml.zero(LineDetail.schema.contents);
   }
   getLine(): number {
     return this.attributes['line'];
@@ -32978,23 +31676,25 @@ export type StaffTuningAttributes = { line: number };
 
 export type StaffTuningContents = [TuningStep, TuningAlter | null, TuningOctave];
 
-export class StaffTuning implements XMLElement<StaffTuningAttributes, StaffTuningContents> {
-  static readonly elementName = 'staff-tuning';
+export class StaffTuning implements XMLElement<'staff-tuning', StaffTuningAttributes, StaffTuningContents> {
   static readonly schema = {
+    name: 'staff-tuning',
     attributes: { line: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
-    content: [
+    contents: [
       { type: 'required', value: TuningStep },
       { type: 'optional', value: TuningAlter },
       { type: 'required', value: TuningOctave },
     ],
-  };
+  } as const;
+
+  readonly schema = StaffTuning.schema;
 
   attributes: StaffTuningAttributes;
   contents: StaffTuningContents;
 
   constructor(opts?: { attributes?: Partial<StaffTuningAttributes>; content?: StaffTuningContents }) {
-    this.attributes = Object.assign({ ['line']: 0 }, opts?.attributes);
-    this.contents = opts?.content ?? [new TuningStep(), null, new TuningOctave()];
+    this.attributes = xml.mergeZero(opts?.attributes, StaffTuning.schema) as StaffTuningAttributes;
+    this.contents = opts?.content ?? xml.zero(StaffTuning.schema.contents);
   }
   getLine(): number {
     return this.attributes['line'];
@@ -33026,16 +31726,21 @@ export type CapoAttributes = Record<string, unknown>;
 
 export type CapoContents = [string];
 
-export class Capo implements XMLElement<CapoAttributes, CapoContents> {
-  static readonly elementName = 'capo';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class Capo implements XMLElement<'capo', CapoAttributes, CapoContents> {
+  static readonly schema = {
+    name: 'capo',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Capo.schema;
 
   attributes: CapoAttributes;
   contents: CapoContents;
 
   constructor(opts?: { attributes?: Partial<CapoAttributes>; content?: CapoContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Capo.schema) as CapoAttributes;
+    this.contents = opts?.content ?? xml.zero(Capo.schema.contents);
   }
 
   getText(): string {
@@ -33050,25 +31755,27 @@ export type StaffSizeAttributes = { scaling: number | null };
 
 export type StaffSizeContents = [number];
 
-export class StaffSize implements XMLElement<StaffSizeAttributes, StaffSizeContents> {
-  static readonly elementName = 'staff-size';
+export class StaffSize implements XMLElement<'staff-size', StaffSizeAttributes, StaffSizeContents> {
   static readonly schema = {
+    name: 'staff-size',
     attributes: { scaling: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'staff-size',
         value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = StaffSize.schema;
 
   attributes: StaffSizeAttributes;
   contents: StaffSizeContents;
 
   constructor(opts?: { attributes?: Partial<StaffSizeAttributes>; content?: StaffSizeContents }) {
-    this.attributes = Object.assign({ ['scaling']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, StaffSize.schema) as StaffSizeAttributes;
+    this.contents = opts?.content ?? xml.zero(StaffSize.schema.contents);
   }
   getScaling(): number | null {
     return this.attributes['scaling'];
@@ -33099,16 +31806,16 @@ export type StaffDetailsContents = [
   StaffSize | null
 ];
 
-export class StaffDetails implements XMLElement<StaffDetailsAttributes, StaffDetailsContents> {
-  static readonly elementName = 'staff-details';
+export class StaffDetails implements XMLElement<'staff-details', StaffDetailsAttributes, StaffDetailsContents> {
   static readonly schema = {
+    name: 'staff-details',
     attributes: {
       number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'print-spacing': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'show-frets': { type: 'optional', value: { type: 'choices', choices: ['letters', 'numbers'] } },
     },
-    content: [
+    contents: [
       { type: 'optional', value: StaffType },
       {
         type: 'label',
@@ -33125,17 +31832,16 @@ export class StaffDetails implements XMLElement<StaffDetailsAttributes, StaffDet
       { type: 'optional', value: Capo },
       { type: 'optional', value: StaffSize },
     ],
-  };
+  } as const;
+
+  readonly schema = StaffDetails.schema;
 
   attributes: StaffDetailsAttributes;
   contents: StaffDetailsContents;
 
   constructor(opts?: { attributes?: Partial<StaffDetailsAttributes>; content?: StaffDetailsContents }) {
-    this.attributes = Object.assign(
-      { ['number']: null, ['print-object']: null, ['print-spacing']: null, ['show-frets']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [null, null, [], null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, StaffDetails.schema) as StaffDetailsAttributes;
+    this.contents = opts?.content ?? xml.zero(StaffDetails.schema.contents);
   }
   getNumber(): number | null {
     return this.attributes['number'];
@@ -33197,25 +31903,27 @@ export type DiatonicAttributes = Record<string, unknown>;
 
 export type DiatonicContents = [number];
 
-export class Diatonic implements XMLElement<DiatonicAttributes, DiatonicContents> {
-  static readonly elementName = 'diatonic';
+export class Diatonic implements XMLElement<'diatonic', DiatonicAttributes, DiatonicContents> {
   static readonly schema = {
+    name: 'diatonic',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'diatonic',
         value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Diatonic.schema;
 
   attributes: DiatonicAttributes;
   contents: DiatonicContents;
 
   constructor(opts?: { attributes?: Partial<DiatonicAttributes>; content?: DiatonicContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Diatonic.schema) as DiatonicAttributes;
+    this.contents = opts?.content ?? xml.zero(Diatonic.schema.contents);
   }
 
   getDiatonic(): number {
@@ -33230,24 +31938,26 @@ export type ChromaticAttributes = Record<string, unknown>;
 
 export type ChromaticContents = [number];
 
-export class Chromatic implements XMLElement<ChromaticAttributes, ChromaticContents> {
-  static readonly elementName = 'chromatic';
+export class Chromatic implements XMLElement<'chromatic', ChromaticAttributes, ChromaticContents> {
   static readonly schema = {
+    name: 'chromatic',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'semitones', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Chromatic.schema;
 
   attributes: ChromaticAttributes;
   contents: ChromaticContents;
 
   constructor(opts?: { attributes?: Partial<ChromaticAttributes>; content?: ChromaticContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, Chromatic.schema) as ChromaticAttributes;
+    this.contents = opts?.content ?? xml.zero(Chromatic.schema.contents);
   }
 
   getSemitones(): number {
@@ -33262,25 +31972,27 @@ export type OctaveChangeAttributes = Record<string, unknown>;
 
 export type OctaveChangeContents = [number];
 
-export class OctaveChange implements XMLElement<OctaveChangeAttributes, OctaveChangeContents> {
-  static readonly elementName = 'octave-change';
+export class OctaveChange implements XMLElement<'octave-change', OctaveChangeAttributes, OctaveChangeContents> {
   static readonly schema = {
+    name: 'octave-change',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'octave-change',
         value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = OctaveChange.schema;
 
   attributes: OctaveChangeAttributes;
   contents: OctaveChangeContents;
 
   constructor(opts?: { attributes?: Partial<OctaveChangeAttributes>; content?: OctaveChangeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, OctaveChange.schema) as OctaveChangeAttributes;
+    this.contents = opts?.content ?? xml.zero(OctaveChange.schema.contents);
   }
 
   getOctaveChange(): number {
@@ -33295,19 +32007,21 @@ export type DoubleAttributes = { above: 'yes' | 'no' | null };
 
 export type DoubleContents = [];
 
-export class Double implements XMLElement<DoubleAttributes, DoubleContents> {
-  static readonly elementName = 'double';
+export class Double implements XMLElement<'double', DoubleAttributes, DoubleContents> {
   static readonly schema = {
+    name: 'double',
     attributes: { above: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Double.schema;
 
   attributes: DoubleAttributes;
   contents: DoubleContents;
 
   constructor(opts?: { attributes?: Partial<DoubleAttributes>; content?: DoubleContents }) {
-    this.attributes = Object.assign({ ['above']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Double.schema) as DoubleAttributes;
+    this.contents = opts?.content ?? xml.zero(Double.schema.contents);
   }
   getAbove(): 'yes' | 'no' | null {
     return this.attributes['above'];
@@ -33321,27 +32035,29 @@ export type TransposeAttributes = { id: string | null; number: number | null };
 
 export type TransposeContents = [Diatonic | null, Chromatic, OctaveChange | null, Double | null];
 
-export class Transpose implements XMLElement<TransposeAttributes, TransposeContents> {
-  static readonly elementName = 'transpose';
+export class Transpose implements XMLElement<'transpose', TransposeAttributes, TransposeContents> {
   static readonly schema = {
+    name: 'transpose',
     attributes: {
       id: { type: 'optional', value: { type: 'string' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
-    content: [
+    contents: [
       { type: 'optional', value: Diatonic },
       { type: 'required', value: Chromatic },
       { type: 'optional', value: OctaveChange },
       { type: 'optional', value: Double },
     ],
-  };
+  } as const;
+
+  readonly schema = Transpose.schema;
 
   attributes: TransposeAttributes;
   contents: TransposeContents;
 
   constructor(opts?: { attributes?: Partial<TransposeAttributes>; content?: TransposeContents }) {
-    this.attributes = Object.assign({ ['id']: null, ['number']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [null, new Chromatic(), null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Transpose.schema) as TransposeAttributes;
+    this.contents = opts?.content ?? xml.zero(Transpose.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -33385,23 +32101,25 @@ export type PartClefAttributes = Record<string, unknown>;
 
 export type PartClefContents = [Sign, Line | null, ClefOctaveChange | null];
 
-export class PartClef implements XMLElement<PartClefAttributes, PartClefContents> {
-  static readonly elementName = 'part-clef';
+export class PartClef implements XMLElement<'part-clef', PartClefAttributes, PartClefContents> {
   static readonly schema = {
+    name: 'part-clef',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: Sign },
       { type: 'optional', value: Line },
       { type: 'optional', value: ClefOctaveChange },
     ],
-  };
+  } as const;
+
+  readonly schema = PartClef.schema;
 
   attributes: PartClefAttributes;
   contents: PartClefContents;
 
   constructor(opts?: { attributes?: Partial<PartClefAttributes>; content?: PartClefContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new Sign(), null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, PartClef.schema) as PartClefAttributes;
+    this.contents = opts?.content ?? xml.zero(PartClef.schema.contents);
   }
 
   getSign(): Sign {
@@ -33428,24 +32146,26 @@ export type PartTransposeAttributes = Record<string, unknown>;
 
 export type PartTransposeContents = [Diatonic | null, Chromatic, OctaveChange | null, Double | null];
 
-export class PartTranspose implements XMLElement<PartTransposeAttributes, PartTransposeContents> {
-  static readonly elementName = 'part-transpose';
+export class PartTranspose implements XMLElement<'part-transpose', PartTransposeAttributes, PartTransposeContents> {
   static readonly schema = {
+    name: 'part-transpose',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: Diatonic },
       { type: 'required', value: Chromatic },
       { type: 'optional', value: OctaveChange },
       { type: 'optional', value: Double },
     ],
-  };
+  } as const;
+
+  readonly schema = PartTranspose.schema;
 
   attributes: PartTransposeAttributes;
   contents: PartTransposeContents;
 
   constructor(opts?: { attributes?: Partial<PartTransposeAttributes>; content?: PartTransposeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, new Chromatic(), null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, PartTranspose.schema) as PartTransposeAttributes;
+    this.contents = opts?.content ?? xml.zero(PartTranspose.schema.contents);
   }
 
   getDiatonic(): Diatonic | null {
@@ -33478,25 +32198,27 @@ export type ForPartAttributes = { id: string | null; number: number | null };
 
 export type ForPartContents = [PartClef | null, PartTranspose];
 
-export class ForPart implements XMLElement<ForPartAttributes, ForPartContents> {
-  static readonly elementName = 'for-part';
+export class ForPart implements XMLElement<'for-part', ForPartAttributes, ForPartContents> {
   static readonly schema = {
+    name: 'for-part',
     attributes: {
       id: { type: 'optional', value: { type: 'string' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
-    content: [
+    contents: [
       { type: 'optional', value: PartClef },
       { type: 'required', value: PartTranspose },
     ],
-  };
+  } as const;
+
+  readonly schema = ForPart.schema;
 
   attributes: ForPartAttributes;
   contents: ForPartContents;
 
   constructor(opts?: { attributes?: Partial<ForPartAttributes>; content?: ForPartContents }) {
-    this.attributes = Object.assign({ ['id']: null, ['number']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [null, new PartTranspose()];
+    this.attributes = xml.mergeZero(opts?.attributes, ForPart.schema) as ForPartAttributes;
+    this.contents = opts?.content ?? xml.zero(ForPart.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -33539,9 +32261,9 @@ export type DirectiveAttributes = {
 
 export type DirectiveContents = [string];
 
-export class Directive implements XMLElement<DirectiveAttributes, DirectiveContents> {
-  static readonly elementName = 'directive';
+export class Directive implements XMLElement<'directive', DirectiveAttributes, DirectiveContents> {
   static readonly schema = {
+    name: 'directive',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -33579,29 +32301,17 @@ export class Directive implements XMLElement<DirectiveAttributes, DirectiveConte
       },
       'xml:lang': { type: 'optional', value: { type: 'string' } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Directive.schema;
 
   attributes: DirectiveAttributes;
   contents: DirectiveContents;
 
   constructor(opts?: { attributes?: Partial<DirectiveAttributes>; content?: DirectiveContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['xml:lang']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Directive.schema) as DirectiveAttributes;
+    this.contents = opts?.content ?? xml.zero(Directive.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -33677,25 +32387,27 @@ export type MultipleRestAttributes = { 'use-symbols': 'yes' | 'no' | null };
 
 export type MultipleRestContents = [number];
 
-export class MultipleRest implements XMLElement<MultipleRestAttributes, MultipleRestContents> {
-  static readonly elementName = 'multiple-rest';
+export class MultipleRest implements XMLElement<'multiple-rest', MultipleRestAttributes, MultipleRestContents> {
   static readonly schema = {
+    name: 'multiple-rest',
     attributes: { 'use-symbols': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'multiple-rest',
         value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = MultipleRest.schema;
 
   attributes: MultipleRestAttributes;
   contents: MultipleRestContents;
 
   constructor(opts?: { attributes?: Partial<MultipleRestAttributes>; content?: MultipleRestContents }) {
-    this.attributes = Object.assign({ ['use-symbols']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, MultipleRest.schema) as MultipleRestAttributes;
+    this.contents = opts?.content ?? xml.zero(MultipleRest.schema.contents);
   }
   getUseSymbols(): 'yes' | 'no' | null {
     return this.attributes['use-symbols'];
@@ -33715,28 +32427,30 @@ export type MeasureRepeatAttributes = { type: 'start' | 'stop'; slashes: number 
 
 export type MeasureRepeatContents = ['' | number];
 
-export class MeasureRepeat implements XMLElement<MeasureRepeatAttributes, MeasureRepeatContents> {
-  static readonly elementName = 'measure-repeat';
+export class MeasureRepeat implements XMLElement<'measure-repeat', MeasureRepeatAttributes, MeasureRepeatContents> {
   static readonly schema = {
+    name: 'measure-repeat',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       slashes: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'measure-repeat',
         value: { type: 'required', value: { type: 'choices', choices: ['', { type: 'int', min: 1, max: Infinity }] } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = MeasureRepeat.schema;
 
   attributes: MeasureRepeatAttributes;
   contents: MeasureRepeatContents;
 
   constructor(opts?: { attributes?: Partial<MeasureRepeatAttributes>; content?: MeasureRepeatContents }) {
-    this.attributes = Object.assign({ ['type']: 'start', ['slashes']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, MeasureRepeat.schema) as MeasureRepeatAttributes;
+    this.contents = opts?.content ?? xml.zero(MeasureRepeat.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -33778,11 +32492,11 @@ export type SlashTypeContents = [
   | 'maxima'
 ];
 
-export class SlashType implements XMLElement<SlashTypeAttributes, SlashTypeContents> {
-  static readonly elementName = 'slash-type';
+export class SlashType implements XMLElement<'slash-type', SlashTypeAttributes, SlashTypeContents> {
   static readonly schema = {
+    name: 'slash-type',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -33811,14 +32525,16 @@ export class SlashType implements XMLElement<SlashTypeAttributes, SlashTypeConte
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = SlashType.schema;
 
   attributes: SlashTypeAttributes;
   contents: SlashTypeContents;
 
   constructor(opts?: { attributes?: Partial<SlashTypeAttributes>; content?: SlashTypeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['whole'];
+    this.attributes = xml.mergeZero(opts?.attributes, SlashType.schema) as SlashTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(SlashType.schema.contents);
   }
 
   getNoteTypeValue():
@@ -33865,16 +32581,17 @@ export type SlashDotAttributes = Record<string, unknown>;
 
 export type SlashDotContents = [];
 
-export class SlashDot implements XMLElement<SlashDotAttributes, SlashDotContents> {
-  static readonly elementName = 'slash-dot';
-  static readonly schema = { attributes: {}, content: [] };
+export class SlashDot implements XMLElement<'slash-dot', SlashDotAttributes, SlashDotContents> {
+  static readonly schema = { name: 'slash-dot', attributes: {}, contents: [] } as const;
+
+  readonly schema = SlashDot.schema;
 
   attributes: SlashDotAttributes;
   contents: SlashDotContents;
 
   constructor(opts?: { attributes?: Partial<SlashDotAttributes>; content?: SlashDotContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, SlashDot.schema) as SlashDotAttributes;
+    this.contents = opts?.content ?? xml.zero(SlashDot.schema.contents);
   }
 }
 
@@ -33882,16 +32599,21 @@ export type ExceptVoiceAttributes = Record<string, unknown>;
 
 export type ExceptVoiceContents = [string];
 
-export class ExceptVoice implements XMLElement<ExceptVoiceAttributes, ExceptVoiceContents> {
-  static readonly elementName = 'except-voice';
-  static readonly schema = { attributes: {}, content: [{ type: 'required', value: { type: 'string' } }] };
+export class ExceptVoice implements XMLElement<'except-voice', ExceptVoiceAttributes, ExceptVoiceContents> {
+  static readonly schema = {
+    name: 'except-voice',
+    attributes: {},
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = ExceptVoice.schema;
 
   attributes: ExceptVoiceAttributes;
   contents: ExceptVoiceContents;
 
   constructor(opts?: { attributes?: Partial<ExceptVoiceAttributes>; content?: ExceptVoiceContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, ExceptVoice.schema) as ExceptVoiceAttributes;
+    this.contents = opts?.content ?? xml.zero(ExceptVoice.schema.contents);
   }
 
   getText(): string {
@@ -33906,15 +32628,15 @@ export type BeatRepeatAttributes = { type: 'start' | 'stop'; slashes: number | n
 
 export type BeatRepeatContents = [[[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null];
 
-export class BeatRepeat implements XMLElement<BeatRepeatAttributes, BeatRepeatContents> {
-  static readonly elementName = 'beat-repeat';
+export class BeatRepeat implements XMLElement<'beat-repeat', BeatRepeatAttributes, BeatRepeatContents> {
   static readonly schema = {
+    name: 'beat-repeat',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       slashes: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
       'use-dots': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'beat-repeat',
@@ -33933,14 +32655,16 @@ export class BeatRepeat implements XMLElement<BeatRepeatAttributes, BeatRepeatCo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = BeatRepeat.schema;
 
   attributes: BeatRepeatAttributes;
   contents: BeatRepeatContents;
 
   constructor(opts?: { attributes?: Partial<BeatRepeatAttributes>; content?: BeatRepeatContents }) {
-    this.attributes = Object.assign({ ['type']: 'start', ['slashes']: null, ['use-dots']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [null];
+    this.attributes = xml.mergeZero(opts?.attributes, BeatRepeat.schema) as BeatRepeatAttributes;
+    this.contents = opts?.content ?? xml.zero(BeatRepeat.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -33976,15 +32700,15 @@ export type SlashAttributes = {
 
 export type SlashContents = [[[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null];
 
-export class Slash implements XMLElement<SlashAttributes, SlashContents> {
-  static readonly elementName = 'slash';
+export class Slash implements XMLElement<'slash', SlashAttributes, SlashContents> {
   static readonly schema = {
+    name: 'slash',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       'use-dots': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'use-stems': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'slash',
@@ -34003,14 +32727,16 @@ export class Slash implements XMLElement<SlashAttributes, SlashContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Slash.schema;
 
   attributes: SlashAttributes;
   contents: SlashContents;
 
   constructor(opts?: { attributes?: Partial<SlashAttributes>; content?: SlashContents }) {
-    this.attributes = Object.assign({ ['type']: 'start', ['use-dots']: null, ['use-stems']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [null];
+    this.attributes = xml.mergeZero(opts?.attributes, Slash.schema) as SlashAttributes;
+    this.contents = opts?.content ?? xml.zero(Slash.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -34050,9 +32776,9 @@ export type MeasureStyleAttributes = {
 
 export type MeasureStyleContents = [MultipleRest | MeasureRepeat | BeatRepeat | Slash];
 
-export class MeasureStyle implements XMLElement<MeasureStyleAttributes, MeasureStyleContents> {
-  static readonly elementName = 'measure-style';
+export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAttributes, MeasureStyleContents> {
   static readonly schema = {
+    name: 'measure-style',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
@@ -34071,32 +32797,23 @@ export class MeasureStyle implements XMLElement<MeasureStyleAttributes, MeasureS
       id: { type: 'optional', value: { type: 'string' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'measure-style',
         value: { type: 'choices', choices: [MultipleRest, MeasureRepeat, BeatRepeat, Slash] },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = MeasureStyle.schema;
 
   attributes: MeasureStyleAttributes;
   contents: MeasureStyleContents;
 
   constructor(opts?: { attributes?: Partial<MeasureStyleAttributes>; content?: MeasureStyleContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['number']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [new MultipleRest()];
+    this.attributes = xml.mergeZero(opts?.attributes, MeasureStyle.schema) as MeasureStyleAttributes;
+    this.contents = opts?.content ?? xml.zero(MeasureStyle.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -34168,11 +32885,11 @@ export type AttributesContents = [
   Array<MeasureStyle>
 ];
 
-export class Attributes implements XMLElement<AttributesAttributes, AttributesContents> {
-  static readonly elementName = 'attributes';
+export class Attributes implements XMLElement<'attributes', AttributesAttributes, AttributesContents> {
   static readonly schema = {
+    name: 'attributes',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: Footnote },
       { type: 'optional', value: Level },
       { type: 'optional', value: Divisions },
@@ -34197,14 +32914,16 @@ export class Attributes implements XMLElement<AttributesAttributes, AttributesCo
       { type: 'label', label: 'directives', value: { type: 'zeroOrMore', value: Directive } },
       { type: 'label', label: 'measure-styles', value: { type: 'zeroOrMore', value: MeasureStyle } },
     ],
-  };
+  } as const;
+
+  readonly schema = Attributes.schema;
 
   attributes: AttributesAttributes;
   contents: AttributesContents;
 
   constructor(opts?: { attributes?: Partial<AttributesAttributes>; content?: AttributesContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, null, [], [], null, null, null, [], [], [], [], []];
+    this.attributes = xml.mergeZero(opts?.attributes, Attributes.schema) as AttributesAttributes;
+    this.contents = opts?.content ?? xml.zero(Attributes.schema.contents);
   }
 
   getFootnote(): Footnote | null {
@@ -34302,9 +33021,9 @@ export type RootStepAttributes = {
 
 export type RootStepContents = [];
 
-export class RootStep implements XMLElement<RootStepAttributes, RootStepContents> {
-  static readonly elementName = 'root-step';
+export class RootStep implements XMLElement<'root-step', RootStepAttributes, RootStepContents> {
   static readonly schema = {
+    name: 'root-step',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -34342,29 +33061,17 @@ export class RootStep implements XMLElement<RootStepAttributes, RootStepContents
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = RootStep.schema;
 
   attributes: RootStepAttributes;
   contents: RootStepContents;
 
   constructor(opts?: { attributes?: Partial<RootStepAttributes>; content?: RootStepContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['text']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, RootStep.schema) as RootStepAttributes;
+    this.contents = opts?.content ?? xml.zero(RootStep.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -34446,9 +33153,9 @@ export type RootAlterAttributes = {
 
 export type RootAlterContents = [number];
 
-export class RootAlter implements XMLElement<RootAlterAttributes, RootAlterContents> {
-  static readonly elementName = 'root-alter';
+export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, RootAlterContents> {
   static readonly schema = {
+    name: 'root-alter',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -34487,35 +33194,22 @@ export class RootAlter implements XMLElement<RootAlterAttributes, RootAlterConte
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'semitones', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = RootAlter.schema;
 
   attributes: RootAlterAttributes;
   contents: RootAlterContents;
 
   constructor(opts?: { attributes?: Partial<RootAlterAttributes>; content?: RootAlterContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['location']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, RootAlter.schema) as RootAlterAttributes;
+    this.contents = opts?.content ?? xml.zero(RootAlter.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -34597,22 +33291,24 @@ export type RootAttributes = Record<string, unknown>;
 
 export type RootContents = [RootStep, RootAlter | null];
 
-export class Root implements XMLElement<RootAttributes, RootContents> {
-  static readonly elementName = 'root';
+export class Root implements XMLElement<'root', RootAttributes, RootContents> {
   static readonly schema = {
+    name: 'root',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: RootStep },
       { type: 'optional', value: RootAlter },
     ],
-  };
+  } as const;
+
+  readonly schema = Root.schema;
 
   attributes: RootAttributes;
   contents: RootContents;
 
   constructor(opts?: { attributes?: Partial<RootAttributes>; content?: RootContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new RootStep(), null];
+    this.attributes = xml.mergeZero(opts?.attributes, Root.schema) as RootAttributes;
+    this.contents = opts?.content ?? xml.zero(Root.schema.contents);
   }
 
   getRootStep(): RootStep {
@@ -34644,9 +33340,9 @@ export type NumeralRootAttributes = {
 
 export type NumeralRootContents = [number];
 
-export class NumeralRoot implements XMLElement<NumeralRootAttributes, NumeralRootContents> {
-  static readonly elementName = 'numeral-root';
+export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttributes, NumeralRootContents> {
   static readonly schema = {
+    name: 'numeral-root',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -34684,31 +33380,19 @@ export class NumeralRoot implements XMLElement<NumeralRootAttributes, NumeralRoo
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
-    content: [
+    contents: [
       { type: 'required', value: { type: 'label', label: 'numeral-value', value: { type: 'int', min: 1, max: 7 } } },
     ],
-  };
+  } as const;
+
+  readonly schema = NumeralRoot.schema;
 
   attributes: NumeralRootAttributes;
   contents: NumeralRootContents;
 
   constructor(opts?: { attributes?: Partial<NumeralRootAttributes>; content?: NumeralRootContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['text']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, NumeralRoot.schema) as NumeralRootAttributes;
+    this.contents = opts?.content ?? xml.zero(NumeralRoot.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -34797,9 +33481,9 @@ export type NumeralAlterAttributes = {
 
 export type NumeralAlterContents = [number];
 
-export class NumeralAlter implements XMLElement<NumeralAlterAttributes, NumeralAlterContents> {
-  static readonly elementName = 'numeral-alter';
+export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAttributes, NumeralAlterContents> {
   static readonly schema = {
+    name: 'numeral-alter',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -34839,36 +33523,22 @@ export class NumeralAlter implements XMLElement<NumeralAlterAttributes, NumeralA
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'semitones', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = NumeralAlter.schema;
 
   attributes: NumeralAlterAttributes;
   contents: NumeralAlterContents;
 
   constructor(opts?: { attributes?: Partial<NumeralAlterAttributes>; content?: NumeralAlterContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['location']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['text']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, NumeralAlter.schema) as NumeralAlterAttributes;
+    this.contents = opts?.content ?? xml.zero(NumeralAlter.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -34956,24 +33626,26 @@ export type NumeralFifthsAttributes = Record<string, unknown>;
 
 export type NumeralFifthsContents = [number];
 
-export class NumeralFifths implements XMLElement<NumeralFifthsAttributes, NumeralFifthsContents> {
-  static readonly elementName = 'numeral-fifths';
+export class NumeralFifths implements XMLElement<'numeral-fifths', NumeralFifthsAttributes, NumeralFifthsContents> {
   static readonly schema = {
+    name: 'numeral-fifths',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'fifths', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = NumeralFifths.schema;
 
   attributes: NumeralFifthsAttributes;
   contents: NumeralFifthsContents;
 
   constructor(opts?: { attributes?: Partial<NumeralFifthsAttributes>; content?: NumeralFifthsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, NumeralFifths.schema) as NumeralFifthsAttributes;
+    this.contents = opts?.content ?? xml.zero(NumeralFifths.schema.contents);
   }
 
   getFifths(): number {
@@ -34988,11 +33660,11 @@ export type NumeralModeAttributes = Record<string, unknown>;
 
 export type NumeralModeContents = ['major' | 'harmonic minor' | 'melodic minor' | 'minor' | 'natural minor'];
 
-export class NumeralMode implements XMLElement<NumeralModeAttributes, NumeralModeContents> {
-  static readonly elementName = 'numeral-mode';
+export class NumeralMode implements XMLElement<'numeral-mode', NumeralModeAttributes, NumeralModeContents> {
   static readonly schema = {
+    name: 'numeral-mode',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -35002,14 +33674,16 @@ export class NumeralMode implements XMLElement<NumeralModeAttributes, NumeralMod
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = NumeralMode.schema;
 
   attributes: NumeralModeAttributes;
   contents: NumeralModeContents;
 
   constructor(opts?: { attributes?: Partial<NumeralModeAttributes>; content?: NumeralModeContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? ['major'];
+    this.attributes = xml.mergeZero(opts?.attributes, NumeralMode.schema) as NumeralModeAttributes;
+    this.contents = opts?.content ?? xml.zero(NumeralMode.schema.contents);
   }
 
   getNumeralMode(): 'major' | 'harmonic minor' | 'melodic minor' | 'minor' | 'natural minor' {
@@ -35024,22 +33698,24 @@ export type NumeralKeyAttributes = { 'print-object': 'yes' | 'no' | null };
 
 export type NumeralKeyContents = [NumeralFifths, NumeralMode];
 
-export class NumeralKey implements XMLElement<NumeralKeyAttributes, NumeralKeyContents> {
-  static readonly elementName = 'numeral-key';
+export class NumeralKey implements XMLElement<'numeral-key', NumeralKeyAttributes, NumeralKeyContents> {
   static readonly schema = {
+    name: 'numeral-key',
     attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-    content: [
+    contents: [
       { type: 'required', value: NumeralFifths },
       { type: 'required', value: NumeralMode },
     ],
-  };
+  } as const;
+
+  readonly schema = NumeralKey.schema;
 
   attributes: NumeralKeyAttributes;
   contents: NumeralKeyContents;
 
   constructor(opts?: { attributes?: Partial<NumeralKeyAttributes>; content?: NumeralKeyContents }) {
-    this.attributes = Object.assign({ ['print-object']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [new NumeralFifths(), new NumeralMode()];
+    this.attributes = xml.mergeZero(opts?.attributes, NumeralKey.schema) as NumeralKeyAttributes;
+    this.contents = opts?.content ?? xml.zero(NumeralKey.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -35065,23 +33741,25 @@ export type NumeralAttributes = Record<string, unknown>;
 
 export type NumeralContents = [NumeralRoot, NumeralAlter | null, NumeralKey | null];
 
-export class Numeral implements XMLElement<NumeralAttributes, NumeralContents> {
-  static readonly elementName = 'numeral';
+export class Numeral implements XMLElement<'numeral', NumeralAttributes, NumeralContents> {
   static readonly schema = {
+    name: 'numeral',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: NumeralRoot },
       { type: 'optional', value: NumeralAlter },
       { type: 'optional', value: NumeralKey },
     ],
-  };
+  } as const;
+
+  readonly schema = Numeral.schema;
 
   attributes: NumeralAttributes;
   contents: NumeralContents;
 
   constructor(opts?: { attributes?: Partial<NumeralAttributes>; content?: NumeralContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new NumeralRoot(), null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Numeral.schema) as NumeralAttributes;
+    this.contents = opts?.content ?? xml.zero(Numeral.schema.contents);
   }
 
   getNumeralRoot(): NumeralRoot {
@@ -35118,9 +33796,9 @@ export type FunctionAttributes = {
 
 export type FunctionContents = [string];
 
-export class Function implements XMLElement<FunctionAttributes, FunctionContents> {
-  static readonly elementName = 'function';
+export class Function implements XMLElement<'function', FunctionAttributes, FunctionContents> {
   static readonly schema = {
+    name: 'function',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -35157,28 +33835,17 @@ export class Function implements XMLElement<FunctionAttributes, FunctionContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Function.schema;
 
   attributes: FunctionAttributes;
   contents: FunctionContents;
 
   constructor(opts?: { attributes?: Partial<FunctionAttributes>; content?: FunctionContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Function.schema) as FunctionAttributes;
+    this.contents = opts?.content ?? xml.zero(Function.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -35299,9 +33966,9 @@ export type KindContents = [
   | 'Tristan'
 ];
 
-export class Kind implements XMLElement<KindAttributes, KindContents> {
-  static readonly elementName = 'kind';
+export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
   static readonly schema = {
+    name: 'kind',
     attributes: {
       'bracket-degrees': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -35345,7 +34012,7 @@ export class Kind implements XMLElement<KindAttributes, KindContents> {
       'use-symbols': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -35392,34 +34059,16 @@ export class Kind implements XMLElement<KindAttributes, KindContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Kind.schema;
 
   attributes: KindAttributes;
   contents: KindContents;
 
   constructor(opts?: { attributes?: Partial<KindAttributes>; content?: KindContents }) {
-    this.attributes = Object.assign(
-      {
-        ['bracket-degrees']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['parentheses-degrees']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['stack-degrees']: null,
-        ['text']: null,
-        ['use-symbols']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['none'];
+    this.attributes = xml.mergeZero(opts?.attributes, Kind.schema) as KindAttributes;
+    this.contents = opts?.content ?? xml.zero(Kind.schema.contents);
   }
   getBracketDegrees(): 'yes' | 'no' | null {
     return this.attributes['bracket-degrees'];
@@ -35610,9 +34259,9 @@ export type InversionAttributes = {
 
 export type InversionContents = [string];
 
-export class Inversion implements XMLElement<InversionAttributes, InversionContents> {
-  static readonly elementName = 'inversion';
+export class Inversion implements XMLElement<'inversion', InversionAttributes, InversionContents> {
   static readonly schema = {
+    name: 'inversion',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -35650,29 +34299,17 @@ export class Inversion implements XMLElement<InversionAttributes, InversionConte
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
-    content: [{ type: 'label', label: 'inversion', value: { type: 'required', value: { type: 'string' } } }],
-  };
+    contents: [{ type: 'label', label: 'inversion', value: { type: 'required', value: { type: 'string' } } }],
+  } as const;
+
+  readonly schema = Inversion.schema;
 
   attributes: InversionAttributes;
   contents: InversionContents;
 
   constructor(opts?: { attributes?: Partial<InversionAttributes>; content?: InversionContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['text']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Inversion.schema) as InversionAttributes;
+    this.contents = opts?.content ?? xml.zero(Inversion.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -35758,9 +34395,9 @@ export type BassSeparatorAttributes = {
 
 export type BassSeparatorContents = [string];
 
-export class BassSeparator implements XMLElement<BassSeparatorAttributes, BassSeparatorContents> {
-  static readonly elementName = 'bass-separator';
+export class BassSeparator implements XMLElement<'bass-separator', BassSeparatorAttributes, BassSeparatorContents> {
   static readonly schema = {
+    name: 'bass-separator',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -35797,28 +34434,17 @@ export class BassSeparator implements XMLElement<BassSeparatorAttributes, BassSe
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = BassSeparator.schema;
 
   attributes: BassSeparatorAttributes;
   contents: BassSeparatorContents;
 
   constructor(opts?: { attributes?: Partial<BassSeparatorAttributes>; content?: BassSeparatorContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, BassSeparator.schema) as BassSeparatorAttributes;
+    this.contents = opts?.content ?? xml.zero(BassSeparator.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -35899,9 +34525,9 @@ export type BassStepAttributes = {
 
 export type BassStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
 
-export class BassStep implements XMLElement<BassStepAttributes, BassStepContents> {
-  static readonly elementName = 'bass-step';
+export class BassStep implements XMLElement<'bass-step', BassStepAttributes, BassStepContents> {
   static readonly schema = {
+    name: 'bass-step',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -35939,7 +34565,7 @@ export class BassStep implements XMLElement<BassStepAttributes, BassStepContents
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -35949,28 +34575,16 @@ export class BassStep implements XMLElement<BassStepAttributes, BassStepContents
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = BassStep.schema;
 
   attributes: BassStepAttributes;
   contents: BassStepContents;
 
   constructor(opts?: { attributes?: Partial<BassStepAttributes>; content?: BassStepContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['text']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['A'];
+    this.attributes = xml.mergeZero(opts?.attributes, BassStep.schema) as BassStepAttributes;
+    this.contents = opts?.content ?? xml.zero(BassStep.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -36058,9 +34672,9 @@ export type BassAlterAttributes = {
 
 export type BassAlterContents = [number];
 
-export class BassAlter implements XMLElement<BassAlterAttributes, BassAlterContents> {
-  static readonly elementName = 'bass-alter';
+export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, BassAlterContents> {
   static readonly schema = {
+    name: 'bass-alter',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -36099,35 +34713,22 @@ export class BassAlter implements XMLElement<BassAlterAttributes, BassAlterConte
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: { type: 'label', label: 'semitones', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = BassAlter.schema;
 
   attributes: BassAlterAttributes;
   contents: BassAlterContents;
 
   constructor(opts?: { attributes?: Partial<BassAlterAttributes>; content?: BassAlterContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['location']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, BassAlter.schema) as BassAlterAttributes;
+    this.contents = opts?.content ?? xml.zero(BassAlter.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -36209,25 +34810,27 @@ export type BassAttributes = { arrangement: 'horizontal' | 'vertical' | 'diagona
 
 export type BassContents = [BassSeparator | null, BassStep, BassAlter | null];
 
-export class Bass implements XMLElement<BassAttributes, BassContents> {
-  static readonly elementName = 'bass';
+export class Bass implements XMLElement<'bass', BassAttributes, BassContents> {
   static readonly schema = {
+    name: 'bass',
     attributes: {
       arrangement: { type: 'optional', value: { type: 'choices', choices: ['horizontal', 'vertical', 'diagonal'] } },
     },
-    content: [
+    contents: [
       { type: 'optional', value: BassSeparator },
       { type: 'required', value: BassStep },
       { type: 'optional', value: BassAlter },
     ],
-  };
+  } as const;
+
+  readonly schema = Bass.schema;
 
   attributes: BassAttributes;
   contents: BassContents;
 
   constructor(opts?: { attributes?: Partial<BassAttributes>; content?: BassContents }) {
-    this.attributes = Object.assign({ ['arrangement']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [null, new BassStep(), null];
+    this.attributes = xml.mergeZero(opts?.attributes, Bass.schema) as BassAttributes;
+    this.contents = opts?.content ?? xml.zero(Bass.schema.contents);
   }
   getArrangement(): 'horizontal' | 'vertical' | 'diagonal' | null {
     return this.attributes['arrangement'];
@@ -36271,9 +34874,9 @@ export type DegreeValueAttributes = {
 
 export type DegreeValueContents = [number];
 
-export class DegreeValue implements XMLElement<DegreeValueAttributes, DegreeValueContents> {
-  static readonly elementName = 'degree-value';
+export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttributes, DegreeValueContents> {
   static readonly schema = {
+    name: 'degree-value',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -36315,36 +34918,23 @@ export class DegreeValue implements XMLElement<DegreeValueAttributes, DegreeValu
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'degree-value',
         value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = DegreeValue.schema;
 
   attributes: DegreeValueAttributes;
   contents: DegreeValueContents;
 
   constructor(opts?: { attributes?: Partial<DegreeValueAttributes>; content?: DegreeValueContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['symbol']: null,
-        ['text']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, DegreeValue.schema) as DegreeValueAttributes;
+    this.contents = opts?.content ?? xml.zero(DegreeValue.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -36437,9 +35027,9 @@ export type DegreeAlterAttributes = {
 
 export type DegreeAlterContents = [];
 
-export class DegreeAlter implements XMLElement<DegreeAlterAttributes, DegreeAlterContents> {
-  static readonly elementName = 'degree-alter';
+export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttributes, DegreeAlterContents> {
   static readonly schema = {
+    name: 'degree-alter',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -36477,29 +35067,17 @@ export class DegreeAlter implements XMLElement<DegreeAlterAttributes, DegreeAlte
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = DegreeAlter.schema;
 
   attributes: DegreeAlterAttributes;
   contents: DegreeAlterContents;
 
   constructor(opts?: { attributes?: Partial<DegreeAlterAttributes>; content?: DegreeAlterContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['plus-minus']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, DegreeAlter.schema) as DegreeAlterAttributes;
+    this.contents = opts?.content ?? xml.zero(DegreeAlter.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -36580,9 +35158,9 @@ export type DegreeTypeAttributes = {
 
 export type DegreeTypeContents = ['add' | 'alter' | 'subtract'];
 
-export class DegreeType implements XMLElement<DegreeTypeAttributes, DegreeTypeContents> {
-  static readonly elementName = 'degree-type';
+export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttributes, DegreeTypeContents> {
   static readonly schema = {
+    name: 'degree-type',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -36620,7 +35198,7 @@ export class DegreeType implements XMLElement<DegreeTypeAttributes, DegreeTypeCo
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -36630,28 +35208,16 @@ export class DegreeType implements XMLElement<DegreeTypeAttributes, DegreeTypeCo
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = DegreeType.schema;
 
   attributes: DegreeTypeAttributes;
   contents: DegreeTypeContents;
 
   constructor(opts?: { attributes?: Partial<DegreeTypeAttributes>; content?: DegreeTypeContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['text']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['add'];
+    this.attributes = xml.mergeZero(opts?.attributes, DegreeType.schema) as DegreeTypeAttributes;
+    this.contents = opts?.content ?? xml.zero(DegreeType.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -36727,23 +35293,25 @@ export type DegreeAttributes = { 'print-object': 'yes' | 'no' | null };
 
 export type DegreeContents = [DegreeValue, DegreeAlter, DegreeType];
 
-export class Degree implements XMLElement<DegreeAttributes, DegreeContents> {
-  static readonly elementName = 'degree';
+export class Degree implements XMLElement<'degree', DegreeAttributes, DegreeContents> {
   static readonly schema = {
+    name: 'degree',
     attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-    content: [
+    contents: [
       { type: 'required', value: DegreeValue },
       { type: 'required', value: DegreeAlter },
       { type: 'required', value: DegreeType },
     ],
-  };
+  } as const;
+
+  readonly schema = Degree.schema;
 
   attributes: DegreeAttributes;
   contents: DegreeContents;
 
   constructor(opts?: { attributes?: Partial<DegreeAttributes>; content?: DegreeContents }) {
-    this.attributes = Object.assign({ ['print-object']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [new DegreeValue(), new DegreeAlter(), new DegreeType()];
+    this.attributes = xml.mergeZero(opts?.attributes, Degree.schema) as DegreeAttributes;
+    this.contents = opts?.content ?? xml.zero(Degree.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -36775,25 +35343,27 @@ export type FrameStringsAttributes = Record<string, unknown>;
 
 export type FrameStringsContents = [number];
 
-export class FrameStrings implements XMLElement<FrameStringsAttributes, FrameStringsContents> {
-  static readonly elementName = 'frame-strings';
+export class FrameStrings implements XMLElement<'frame-strings', FrameStringsAttributes, FrameStringsContents> {
   static readonly schema = {
+    name: 'frame-strings',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'lines-size',
         value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = FrameStrings.schema;
 
   attributes: FrameStringsAttributes;
   contents: FrameStringsContents;
 
   constructor(opts?: { attributes?: Partial<FrameStringsAttributes>; content?: FrameStringsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, FrameStrings.schema) as FrameStringsAttributes;
+    this.contents = opts?.content ?? xml.zero(FrameStrings.schema.contents);
   }
 
   getLinesSize(): number {
@@ -36808,25 +35378,27 @@ export type FrameFretsAttributes = Record<string, unknown>;
 
 export type FrameFretsContents = [number];
 
-export class FrameFrets implements XMLElement<FrameFretsAttributes, FrameFretsContents> {
-  static readonly elementName = 'frame-frets';
+export class FrameFrets implements XMLElement<'frame-frets', FrameFretsAttributes, FrameFretsContents> {
   static readonly schema = {
+    name: 'frame-frets',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'space-size',
         value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = FrameFrets.schema;
 
   attributes: FrameFretsAttributes;
   contents: FrameFretsContents;
 
   constructor(opts?: { attributes?: Partial<FrameFretsAttributes>; content?: FrameFretsContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, FrameFrets.schema) as FrameFretsAttributes;
+    this.contents = opts?.content ?? xml.zero(FrameFrets.schema.contents);
   }
 
   getSpaceSize(): number {
@@ -36841,24 +35413,26 @@ export type FirstFretAttributes = { location: 'left' | 'right' | null; text: str
 
 export type FirstFretContents = [number];
 
-export class FirstFret implements XMLElement<FirstFretAttributes, FirstFretContents> {
-  static readonly elementName = 'first-fret';
+export class FirstFret implements XMLElement<'first-fret', FirstFretAttributes, FirstFretContents> {
   static readonly schema = {
+    name: 'first-fret',
     attributes: {
       location: { type: 'optional', value: { type: 'choices', choices: ['left', 'right'] } },
       text: { type: 'optional', value: { type: 'string' } },
     },
-    content: [
+    contents: [
       { type: 'label', label: 'fret', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
     ],
-  };
+  } as const;
+
+  readonly schema = FirstFret.schema;
 
   attributes: FirstFretAttributes;
   contents: FirstFretContents;
 
   constructor(opts?: { attributes?: Partial<FirstFretAttributes>; content?: FirstFretContents }) {
-    this.attributes = Object.assign({ ['location']: null, ['text']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, FirstFret.schema) as FirstFretAttributes;
+    this.contents = opts?.content ?? xml.zero(FirstFret.schema.contents);
   }
   getLocation(): 'left' | 'right' | null {
     return this.attributes['location'];
@@ -36884,22 +35458,24 @@ export type BarreAttributes = { type: 'start' | 'stop'; color: string | null };
 
 export type BarreContents = [];
 
-export class Barre implements XMLElement<BarreAttributes, BarreContents> {
-  static readonly elementName = 'barre';
+export class Barre implements XMLElement<'barre', BarreAttributes, BarreContents> {
   static readonly schema = {
+    name: 'barre',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Barre.schema;
 
   attributes: BarreAttributes;
   contents: BarreContents;
 
   constructor(opts?: { attributes?: Partial<BarreAttributes>; content?: BarreContents }) {
-    this.attributes = Object.assign({ ['type']: 'start', ['color']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Barre.schema) as BarreAttributes;
+    this.contents = opts?.content ?? xml.zero(Barre.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -36919,24 +35495,26 @@ export type FrameNoteAttributes = Record<string, unknown>;
 
 export type FrameNoteContents = [String, Fret, Fingering | null, Barre | null];
 
-export class FrameNote implements XMLElement<FrameNoteAttributes, FrameNoteContents> {
-  static readonly elementName = 'frame-note';
+export class FrameNote implements XMLElement<'frame-note', FrameNoteAttributes, FrameNoteContents> {
   static readonly schema = {
+    name: 'frame-note',
     attributes: {},
-    content: [
+    contents: [
       { type: 'required', value: String },
       { type: 'required', value: Fret },
       { type: 'optional', value: Fingering },
       { type: 'optional', value: Barre },
     ],
-  };
+  } as const;
+
+  readonly schema = FrameNote.schema;
 
   attributes: FrameNoteAttributes;
   contents: FrameNoteContents;
 
   constructor(opts?: { attributes?: Partial<FrameNoteAttributes>; content?: FrameNoteContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [new String(), new Fret(), null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, FrameNote.schema) as FrameNoteAttributes;
+    this.contents = opts?.content ?? xml.zero(FrameNote.schema.contents);
   }
 
   getString(): String {
@@ -36985,9 +35563,9 @@ export type FrameAttributes = {
 
 export type FrameContents = [FrameStrings, FrameFrets, FirstFret | null, Array<FrameNote>];
 
-export class Frame implements XMLElement<FrameAttributes, FrameContents> {
-  static readonly elementName = 'frame';
+export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents> {
   static readonly schema = {
+    name: 'frame',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -37030,39 +35608,22 @@ export class Frame implements XMLElement<FrameAttributes, FrameContents> {
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom'] } },
       width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [
+    contents: [
       { type: 'required', value: FrameStrings },
       { type: 'required', value: FrameFrets },
       { type: 'optional', value: FirstFret },
       { type: 'label', label: 'frame-notes', value: { type: 'oneOrMore', value: FrameNote } },
     ],
-  };
+  } as const;
+
+  readonly schema = Frame.schema;
 
   attributes: FrameAttributes;
   contents: FrameContents;
 
   constructor(opts?: { attributes?: Partial<FrameAttributes>; content?: FrameContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['halign']: null,
-        ['height']: null,
-        ['id']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['unplayed']: null,
-        ['valign']: null,
-        ['width']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [new FrameStrings(), new FrameFrets(), null, [new FrameNote()]];
+    this.attributes = xml.mergeZero(opts?.attributes, Frame.schema) as FrameAttributes;
+    this.contents = opts?.content ?? xml.zero(Frame.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -37210,9 +35771,9 @@ export type HarmonyContents = [
   Staff | null
 ];
 
-export class Harmony implements XMLElement<HarmonyAttributes, HarmonyContents> {
-  static readonly elementName = 'harmony';
+export class Harmony implements XMLElement<'harmony', HarmonyAttributes, HarmonyContents> {
   static readonly schema = {
+    name: 'harmony',
     attributes: {
       arrangement: { type: 'optional', value: { type: 'choices', choices: ['horizontal', 'vertical', 'diagonal'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
@@ -37256,7 +35817,7 @@ export class Harmony implements XMLElement<HarmonyAttributes, HarmonyContents> {
       system: { type: 'optional', value: { type: 'choices', choices: ['none', 'only-top', 'also-top'] } },
       type: { type: 'optional', value: { type: 'choices', choices: ['alternate', 'explicit', 'implied'] } },
     },
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'harmony',
@@ -37277,34 +35838,16 @@ export class Harmony implements XMLElement<HarmonyAttributes, HarmonyContents> {
       { type: 'optional', value: Level },
       { type: 'optional', value: Staff },
     ],
-  };
+  } as const;
+
+  readonly schema = Harmony.schema;
 
   attributes: HarmonyAttributes;
   contents: HarmonyContents;
 
   constructor(opts?: { attributes?: Partial<HarmonyAttributes>; content?: HarmonyContents }) {
-    this.attributes = Object.assign(
-      {
-        ['arrangement']: null,
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['id']: null,
-        ['placement']: null,
-        ['print-frame']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['system']: null,
-        ['type']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [[[new Root(), new Kind(), null, null, []]], null, null, null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Harmony.schema) as HarmonyAttributes;
+    this.contents = opts?.content ?? xml.zero(Harmony.schema.contents);
   }
   getArrangement(): 'horizontal' | 'vertical' | 'diagonal' | null {
     return this.attributes['arrangement'];
@@ -37456,9 +35999,9 @@ export type PrefixAttributes = {
 
 export type PrefixContents = [string];
 
-export class Prefix implements XMLElement<PrefixAttributes, PrefixContents> {
-  static readonly elementName = 'prefix';
+export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixContents> {
   static readonly schema = {
+    name: 'prefix',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -37495,28 +36038,17 @@ export class Prefix implements XMLElement<PrefixAttributes, PrefixContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Prefix.schema;
 
   attributes: PrefixAttributes;
   contents: PrefixContents;
 
   constructor(opts?: { attributes?: Partial<PrefixAttributes>; content?: PrefixContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Prefix.schema) as PrefixAttributes;
+    this.contents = opts?.content ?? xml.zero(Prefix.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -37596,9 +36128,9 @@ export type FigureNumberAttributes = {
 
 export type FigureNumberContents = [];
 
-export class FigureNumber implements XMLElement<FigureNumberAttributes, FigureNumberContents> {
-  static readonly elementName = 'figure-number';
+export class FigureNumber implements XMLElement<'figure-number', FigureNumberAttributes, FigureNumberContents> {
   static readonly schema = {
+    name: 'figure-number',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -37635,28 +36167,17 @@ export class FigureNumber implements XMLElement<FigureNumberAttributes, FigureNu
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = FigureNumber.schema;
 
   attributes: FigureNumberAttributes;
   contents: FigureNumberContents;
 
   constructor(opts?: { attributes?: Partial<FigureNumberAttributes>; content?: FigureNumberContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, FigureNumber.schema) as FigureNumberAttributes;
+    this.contents = opts?.content ?? xml.zero(FigureNumber.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -37730,9 +36251,9 @@ export type SuffixAttributes = {
 
 export type SuffixContents = [string];
 
-export class Suffix implements XMLElement<SuffixAttributes, SuffixContents> {
-  static readonly elementName = 'suffix';
+export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixContents> {
   static readonly schema = {
+    name: 'suffix',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -37769,28 +36290,17 @@ export class Suffix implements XMLElement<SuffixAttributes, SuffixContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Suffix.schema;
 
   attributes: SuffixAttributes;
   contents: SuffixContents;
 
   constructor(opts?: { attributes?: Partial<SuffixAttributes>; content?: SuffixContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Suffix.schema) as SuffixAttributes;
+    this.contents = opts?.content ?? xml.zero(Suffix.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -37867,11 +36377,11 @@ export type FigureContents = [
   Level | null
 ];
 
-export class Figure implements XMLElement<FigureAttributes, FigureContents> {
-  static readonly elementName = 'figure';
+export class Figure implements XMLElement<'figure', FigureAttributes, FigureContents> {
   static readonly schema = {
+    name: 'figure',
     attributes: {},
-    content: [
+    contents: [
       { type: 'optional', value: Prefix },
       { type: 'optional', value: FigureNumber },
       { type: 'optional', value: Suffix },
@@ -37879,14 +36389,16 @@ export class Figure implements XMLElement<FigureAttributes, FigureContents> {
       { type: 'optional', value: Footnote },
       { type: 'optional', value: Level },
     ],
-  };
+  } as const;
+
+  readonly schema = Figure.schema;
 
   attributes: FigureAttributes;
   contents: FigureContents;
 
   constructor(opts?: { attributes?: Partial<FigureAttributes>; content?: FigureContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, null, null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Figure.schema) as FigureAttributes;
+    this.contents = opts?.content ?? xml.zero(Figure.schema.contents);
   }
 
   getPrefix(): Prefix | null {
@@ -37950,9 +36462,9 @@ export type FiguredBassAttributes = {
 
 export type FiguredBassContents = [Array<Figure>, Duration | null, Footnote | null, Level | null];
 
-export class FiguredBass implements XMLElement<FiguredBassAttributes, FiguredBassContents> {
-  static readonly elementName = 'figured-bass';
+export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttributes, FiguredBassContents> {
   static readonly schema = {
+    name: 'figured-bass',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -37998,42 +36510,22 @@ export class FiguredBass implements XMLElement<FiguredBassAttributes, FiguredBas
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [
+    contents: [
       { type: 'label', label: 'figures', value: { type: 'oneOrMore', value: Figure } },
       { type: 'optional', value: Duration },
       { type: 'optional', value: Footnote },
       { type: 'optional', value: Level },
     ],
-  };
+  } as const;
+
+  readonly schema = FiguredBass.schema;
 
   attributes: FiguredBassAttributes;
   contents: FiguredBassContents;
 
   constructor(opts?: { attributes?: Partial<FiguredBassAttributes>; content?: FiguredBassContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['id']: null,
-        ['parentheses']: null,
-        ['placement']: null,
-        ['print-dot']: null,
-        ['print-lyric']: null,
-        ['print-object']: null,
-        ['print-spacing']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [[new Figure()], null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, FiguredBass.schema) as FiguredBassAttributes;
+    this.contents = opts?.content ?? xml.zero(FiguredBass.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -38175,25 +36667,27 @@ export type StaffDistanceAttributes = Record<string, unknown>;
 
 export type StaffDistanceContents = [number];
 
-export class StaffDistance implements XMLElement<StaffDistanceAttributes, StaffDistanceContents> {
-  static readonly elementName = 'staff-distance';
+export class StaffDistance implements XMLElement<'staff-distance', StaffDistanceAttributes, StaffDistanceContents> {
   static readonly schema = {
+    name: 'staff-distance',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'staff-distance',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = StaffDistance.schema;
 
   attributes: StaffDistanceAttributes;
   contents: StaffDistanceContents;
 
   constructor(opts?: { attributes?: Partial<StaffDistanceAttributes>; content?: StaffDistanceContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, StaffDistance.schema) as StaffDistanceAttributes;
+    this.contents = opts?.content ?? xml.zero(StaffDistance.schema.contents);
   }
 
   getStaffDistance(): number {
@@ -38208,19 +36702,21 @@ export type StaffLayoutAttributes = { number: number | null };
 
 export type StaffLayoutContents = [StaffDistance | null];
 
-export class StaffLayout implements XMLElement<StaffLayoutAttributes, StaffLayoutContents> {
-  static readonly elementName = 'staff-layout';
+export class StaffLayout implements XMLElement<'staff-layout', StaffLayoutAttributes, StaffLayoutContents> {
   static readonly schema = {
+    name: 'staff-layout',
     attributes: { number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } } },
-    content: [{ type: 'optional', value: StaffDistance }],
-  };
+    contents: [{ type: 'optional', value: StaffDistance }],
+  } as const;
+
+  readonly schema = StaffLayout.schema;
 
   attributes: StaffLayoutAttributes;
   contents: StaffLayoutContents;
 
   constructor(opts?: { attributes?: Partial<StaffLayoutAttributes>; content?: StaffLayoutContents }) {
-    this.attributes = Object.assign({ ['number']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [null];
+    this.attributes = xml.mergeZero(opts?.attributes, StaffLayout.schema) as StaffLayoutAttributes;
+    this.contents = opts?.content ?? xml.zero(StaffLayout.schema.contents);
   }
   getNumber(): number | null {
     return this.attributes['number'];
@@ -38240,25 +36736,29 @@ export type MeasureDistanceAttributes = Record<string, unknown>;
 
 export type MeasureDistanceContents = [number];
 
-export class MeasureDistance implements XMLElement<MeasureDistanceAttributes, MeasureDistanceContents> {
-  static readonly elementName = 'measure-distance';
+export class MeasureDistance
+  implements XMLElement<'measure-distance', MeasureDistanceAttributes, MeasureDistanceContents>
+{
   static readonly schema = {
+    name: 'measure-distance',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'measure-distance',
         value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = MeasureDistance.schema;
 
   attributes: MeasureDistanceAttributes;
   contents: MeasureDistanceContents;
 
   constructor(opts?: { attributes?: Partial<MeasureDistanceAttributes>; content?: MeasureDistanceContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [0];
+    this.attributes = xml.mergeZero(opts?.attributes, MeasureDistance.schema) as MeasureDistanceAttributes;
+    this.contents = opts?.content ?? xml.zero(MeasureDistance.schema.contents);
   }
 
   getMeasureDistance(): number {
@@ -38273,16 +36773,21 @@ export type MeasureLayoutAttributes = Record<string, unknown>;
 
 export type MeasureLayoutContents = [MeasureDistance | null];
 
-export class MeasureLayout implements XMLElement<MeasureLayoutAttributes, MeasureLayoutContents> {
-  static readonly elementName = 'measure-layout';
-  static readonly schema = { attributes: {}, content: [{ type: 'optional', value: MeasureDistance }] };
+export class MeasureLayout implements XMLElement<'measure-layout', MeasureLayoutAttributes, MeasureLayoutContents> {
+  static readonly schema = {
+    name: 'measure-layout',
+    attributes: {},
+    contents: [{ type: 'optional', value: MeasureDistance }],
+  } as const;
+
+  readonly schema = MeasureLayout.schema;
 
   attributes: MeasureLayoutAttributes;
   contents: MeasureLayoutContents;
 
   constructor(opts?: { attributes?: Partial<MeasureLayoutAttributes>; content?: MeasureLayoutContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [null];
+    this.attributes = xml.mergeZero(opts?.attributes, MeasureLayout.schema) as MeasureLayoutAttributes;
+    this.contents = opts?.content ?? xml.zero(MeasureLayout.schema.contents);
   }
 
   getMeasureDistance(): MeasureDistance | null {
@@ -38313,9 +36818,11 @@ export type MeasureNumberingAttributes = {
 
 export type MeasureNumberingContents = ['none' | 'measure' | 'system'];
 
-export class MeasureNumbering implements XMLElement<MeasureNumberingAttributes, MeasureNumberingContents> {
-  static readonly elementName = 'measure-numbering';
+export class MeasureNumbering
+  implements XMLElement<'measure-numbering', MeasureNumberingAttributes, MeasureNumberingContents>
+{
   static readonly schema = {
+    name: 'measure-numbering',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
       'default-x': {
@@ -38361,7 +36868,7 @@ export class MeasureNumbering implements XMLElement<MeasureNumberingAttributes, 
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -38371,33 +36878,16 @@ export class MeasureNumbering implements XMLElement<MeasureNumberingAttributes, 
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = MeasureNumbering.schema;
 
   attributes: MeasureNumberingAttributes;
   contents: MeasureNumberingContents;
 
   constructor(opts?: { attributes?: Partial<MeasureNumberingAttributes>; content?: MeasureNumberingContents }) {
-    this.attributes = Object.assign(
-      {
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['halign']: null,
-        ['multiple-rest-always']: null,
-        ['multiple-rest-range']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['staff']: null,
-        ['system']: null,
-        ['valign']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? ['none'];
+    this.attributes = xml.mergeZero(opts?.attributes, MeasureNumbering.schema) as MeasureNumberingAttributes;
+    this.contents = opts?.content ?? xml.zero(MeasureNumbering.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -38518,9 +37008,9 @@ export type PrintContents = [
   PartAbbreviationDisplay | null
 ];
 
-export class Print implements XMLElement<PrintAttributes, PrintContents> {
-  static readonly elementName = 'print';
+export class Print implements XMLElement<'print', PrintAttributes, PrintContents> {
   static readonly schema = {
+    name: 'print',
     attributes: {
       'blank-page': { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
       id: { type: 'optional', value: { type: 'string' } },
@@ -38529,7 +37019,7 @@ export class Print implements XMLElement<PrintAttributes, PrintContents> {
       'page-number': { type: 'optional', value: { type: 'string' } },
       'staff-spacing': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [
+    contents: [
       { type: 'optional', value: PageLayout },
       { type: 'optional', value: SystemLayout },
       { type: 'label', label: 'staff-layouts', value: { type: 'zeroOrMore', value: StaffLayout } },
@@ -38538,24 +37028,16 @@ export class Print implements XMLElement<PrintAttributes, PrintContents> {
       { type: 'optional', value: PartNameDisplay },
       { type: 'optional', value: PartAbbreviationDisplay },
     ],
-  };
+  } as const;
+
+  readonly schema = Print.schema;
 
   attributes: PrintAttributes;
   contents: PrintContents;
 
   constructor(opts?: { attributes?: Partial<PrintAttributes>; content?: PrintContents }) {
-    this.attributes = Object.assign(
-      {
-        ['blank-page']: null,
-        ['id']: null,
-        ['new-page']: null,
-        ['new-system']: null,
-        ['page-number']: null,
-        ['staff-spacing']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [null, null, [], null, null, null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Print.schema) as PrintAttributes;
+    this.contents = opts?.content ?? xml.zero(Print.schema.contents);
   }
   getBlankPage(): number | null {
     return this.attributes['blank-page'];
@@ -38653,11 +37135,11 @@ export type BarStyleContents = [
   | 'tick'
 ];
 
-export class BarStyle implements XMLElement<BarStyleAttributes, BarStyleContents> {
-  static readonly elementName = 'bar-style';
+export class BarStyle implements XMLElement<'bar-style', BarStyleAttributes, BarStyleContents> {
   static readonly schema = {
+    name: 'bar-style',
     attributes: { color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } } },
-    content: [
+    contents: [
       {
         type: 'required',
         value: {
@@ -38682,14 +37164,16 @@ export class BarStyle implements XMLElement<BarStyleAttributes, BarStyleContents
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = BarStyle.schema;
 
   attributes: BarStyleAttributes;
   contents: BarStyleContents;
 
   constructor(opts?: { attributes?: Partial<BarStyleAttributes>; content?: BarStyleContents }) {
-    this.attributes = Object.assign({ ['color']: null }, opts?.attributes);
-    this.contents = opts?.content ?? ['none'];
+    this.attributes = xml.mergeZero(opts?.attributes, BarStyle.schema) as BarStyleAttributes;
+    this.contents = opts?.content ?? xml.zero(BarStyle.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -38750,9 +37234,9 @@ export type EndingAttributes = {
 
 export type EndingContents = [string];
 
-export class Ending implements XMLElement<EndingAttributes, EndingContents> {
-  static readonly elementName = 'ending';
+export class Ending implements XMLElement<'ending', EndingAttributes, EndingContents> {
   static readonly schema = {
+    name: 'ending',
     attributes: {
       number: { type: 'required', value: { type: 'regex', pattern: {}, zero: '' } },
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'discontinue'] } },
@@ -38796,35 +37280,17 @@ export class Ending implements XMLElement<EndingAttributes, EndingContents> {
       'text-x': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'text-y': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Ending.schema;
 
   attributes: EndingAttributes;
   contents: EndingContents;
 
   constructor(opts?: { attributes?: Partial<EndingAttributes>; content?: EndingContents }) {
-    this.attributes = Object.assign(
-      {
-        ['number']: '',
-        ['type']: 'start',
-        ['color']: null,
-        ['default-x']: null,
-        ['default-y']: null,
-        ['end-length']: null,
-        ['font-family']: null,
-        ['font-size']: null,
-        ['font-style']: null,
-        ['font-weight']: null,
-        ['print-object']: null,
-        ['relative-x']: null,
-        ['relative-y']: null,
-        ['system']: null,
-        ['text-x']: null,
-        ['text-y']: null,
-      },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Ending.schema) as EndingAttributes;
+    this.contents = opts?.content ?? xml.zero(Ending.schema.contents);
   }
   getNumber(): string {
     return this.attributes['number'];
@@ -38941,9 +37407,9 @@ export type RepeatAttributes = {
 
 export type RepeatContents = [];
 
-export class Repeat implements XMLElement<RepeatAttributes, RepeatContents> {
-  static readonly elementName = 'repeat';
+export class Repeat implements XMLElement<'repeat', RepeatAttributes, RepeatContents> {
   static readonly schema = {
+    name: 'repeat',
     attributes: {
       direction: { type: 'required', value: { type: 'choices', choices: ['backward', 'forward'] } },
       'after-jump': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -38953,18 +37419,17 @@ export class Repeat implements XMLElement<RepeatAttributes, RepeatContents> {
         value: { type: 'choices', choices: ['none', 'straight', 'curved', 'double-straight', 'double-curved'] },
       },
     },
-    content: [],
-  };
+    contents: [],
+  } as const;
+
+  readonly schema = Repeat.schema;
 
   attributes: RepeatAttributes;
   contents: RepeatContents;
 
   constructor(opts?: { attributes?: Partial<RepeatAttributes>; content?: RepeatContents }) {
-    this.attributes = Object.assign(
-      { ['direction']: 'backward', ['after-jump']: null, ['times']: null, ['winged']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [];
+    this.attributes = xml.mergeZero(opts?.attributes, Repeat.schema) as RepeatAttributes;
+    this.contents = opts?.content ?? xml.zero(Repeat.schema.contents);
   }
   getDirection(): 'backward' | 'forward' {
     return this.attributes['direction'];
@@ -39012,9 +37477,9 @@ export type BarlineContents = [
   Repeat | null
 ];
 
-export class Barline implements XMLElement<BarlineAttributes, BarlineContents> {
-  static readonly elementName = 'barline';
+export class Barline implements XMLElement<'barline', BarlineAttributes, BarlineContents> {
   static readonly schema = {
+    name: 'barline',
     attributes: {
       coda: { type: 'label', label: 'coda-token', value: { type: 'optional', value: { type: 'string' } } },
       divisions: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
@@ -39022,7 +37487,7 @@ export class Barline implements XMLElement<BarlineAttributes, BarlineContents> {
       location: { type: 'optional', value: { type: 'choices', choices: ['right', 'left', 'middle'] } },
       segno: { type: 'label', label: 'segno-token', value: { type: 'optional', value: { type: 'string' } } },
     },
-    content: [
+    contents: [
       { type: 'optional', value: BarStyle },
       { type: 'optional', value: Footnote },
       { type: 'optional', value: Level },
@@ -39033,17 +37498,16 @@ export class Barline implements XMLElement<BarlineAttributes, BarlineContents> {
       { type: 'optional', value: Ending },
       { type: 'optional', value: Repeat },
     ],
-  };
+  } as const;
+
+  readonly schema = Barline.schema;
 
   attributes: BarlineAttributes;
   contents: BarlineContents;
 
   constructor(opts?: { attributes?: Partial<BarlineAttributes>; content?: BarlineContents }) {
-    this.attributes = Object.assign(
-      { ['coda']: null, ['divisions']: null, ['id']: null, ['location']: null, ['segno']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [null, null, null, null, null, null, [], null, null];
+    this.attributes = xml.mergeZero(opts?.attributes, Barline.schema) as BarlineAttributes;
+    this.contents = opts?.content ?? xml.zero(Barline.schema.contents);
   }
   getCodaToken(): string | null {
     return this.attributes['coda'];
@@ -39135,19 +37599,21 @@ export type FeatureAttributes = { type: string | null };
 
 export type FeatureContents = [string];
 
-export class Feature implements XMLElement<FeatureAttributes, FeatureContents> {
-  static readonly elementName = 'feature';
+export class Feature implements XMLElement<'feature', FeatureAttributes, FeatureContents> {
   static readonly schema = {
+    name: 'feature',
     attributes: { type: { type: 'optional', value: { type: 'string' } } },
-    content: [{ type: 'required', value: { type: 'string' } }],
-  };
+    contents: [{ type: 'required', value: { type: 'string' } }],
+  } as const;
+
+  readonly schema = Feature.schema;
 
   attributes: FeatureAttributes;
   contents: FeatureContents;
 
   constructor(opts?: { attributes?: Partial<FeatureAttributes>; content?: FeatureContents }) {
-    this.attributes = Object.assign({ ['type']: null }, opts?.attributes);
-    this.contents = opts?.content ?? [''];
+    this.attributes = xml.mergeZero(opts?.attributes, Feature.schema) as FeatureAttributes;
+    this.contents = opts?.content ?? xml.zero(Feature.schema.contents);
   }
   getType(): string | null {
     return this.attributes['type'];
@@ -39172,27 +37638,26 @@ export type GroupingAttributes = {
 
 export type GroupingContents = [Array<Feature>];
 
-export class Grouping implements XMLElement<GroupingAttributes, GroupingContents> {
-  static readonly elementName = 'grouping';
+export class Grouping implements XMLElement<'grouping', GroupingAttributes, GroupingContents> {
   static readonly schema = {
+    name: 'grouping',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'single'] } },
       id: { type: 'optional', value: { type: 'string' } },
       'member-of': { type: 'optional', value: { type: 'string' } },
       number: { type: 'optional', value: { type: 'string' } },
     },
-    content: [{ type: 'label', label: 'features', value: { type: 'zeroOrMore', value: Feature } }],
-  };
+    contents: [{ type: 'label', label: 'features', value: { type: 'zeroOrMore', value: Feature } }],
+  } as const;
+
+  readonly schema = Grouping.schema;
 
   attributes: GroupingAttributes;
   contents: GroupingContents;
 
   constructor(opts?: { attributes?: Partial<GroupingAttributes>; content?: GroupingContents }) {
-    this.attributes = Object.assign(
-      { ['type']: 'start', ['id']: null, ['member-of']: null, ['number']: null },
-      opts?.attributes
-    );
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(opts?.attributes, Grouping.schema) as GroupingAttributes;
+    this.contents = opts?.content ?? xml.zero(Grouping.schema.contents);
   }
   getType(): 'start' | 'stop' | 'single' {
     return this.attributes['type'];
@@ -39247,11 +37712,11 @@ export type MeasureContents = [
   >
 ];
 
-export class Measure implements XMLElement<MeasureAttributes, MeasureContents> {
-  static readonly elementName = 'measure';
+export class Measure implements XMLElement<'measure', MeasureAttributes, MeasureContents> {
   static readonly schema = {
+    name: 'measure',
     attributes: {},
-    content: [
+    contents: [
       {
         type: 'label',
         label: 'measures',
@@ -39279,14 +37744,16 @@ export class Measure implements XMLElement<MeasureAttributes, MeasureContents> {
         },
       },
     ],
-  };
+  } as const;
+
+  readonly schema = Measure.schema;
 
   attributes: MeasureAttributes;
   contents: MeasureContents;
 
   constructor(opts?: { attributes?: Partial<MeasureAttributes>; content?: MeasureContents }) {
-    this.attributes = Object.assign({}, opts?.attributes);
-    this.contents = opts?.content ?? [[]];
+    this.attributes = xml.mergeZero(opts?.attributes, Measure.schema) as MeasureAttributes;
+    this.contents = opts?.content ?? xml.zero(Measure.schema.contents);
   }
 
   getMeasures(): Array<
@@ -39343,11 +37810,11 @@ export type ScorePartwiseContents = [
   Array<Measure>
 ];
 
-export class ScorePartwise implements XMLElement<ScorePartwiseAttributes, ScorePartwiseContents> {
-  static readonly elementName = 'score-partwise';
+export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwiseAttributes, ScorePartwiseContents> {
   static readonly schema = {
+    name: 'score-partwise',
     attributes: { version: { type: 'constant', value: '4.0' } },
-    content: [
+    contents: [
       { type: 'optional', value: Work },
       { type: 'optional', value: MovementNumber },
       { type: 'optional', value: MovementTitle },
@@ -39358,14 +37825,16 @@ export class ScorePartwise implements XMLElement<ScorePartwiseAttributes, ScoreP
       { type: 'label', label: 'parts', value: { type: 'oneOrMore', value: Part } },
       { type: 'label', label: 'measures', value: { type: 'oneOrMore', value: Measure } },
     ],
-  };
+  } as const;
+
+  readonly schema = ScorePartwise.schema;
 
   attributes: ScorePartwiseAttributes;
   contents: ScorePartwiseContents;
 
   constructor(opts?: { attributes?: Partial<ScorePartwiseAttributes>; content?: ScorePartwiseContents }) {
-    this.attributes = Object.assign({ ['version']: '4.0' }, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, null, null, null, [], new PartList(), [new Part()], [new Measure()]];
+    this.attributes = xml.mergeZero(opts?.attributes, ScorePartwise.schema) as ScorePartwiseAttributes;
+    this.contents = opts?.content ?? xml.zero(ScorePartwise.schema.contents);
   }
   getVersion(): '4.0' {
     return this.attributes['version'];
@@ -39442,11 +37911,11 @@ export type ScoreTimewiseContents = [
   Array<Measure>
 ];
 
-export class ScoreTimewise implements XMLElement<ScoreTimewiseAttributes, ScoreTimewiseContents> {
-  static readonly elementName = 'score-timewise';
+export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewiseAttributes, ScoreTimewiseContents> {
   static readonly schema = {
+    name: 'score-timewise',
     attributes: { version: { type: 'constant', value: '4.0' } },
-    content: [
+    contents: [
       { type: 'optional', value: Work },
       { type: 'optional', value: MovementNumber },
       { type: 'optional', value: MovementTitle },
@@ -39456,14 +37925,16 @@ export class ScoreTimewise implements XMLElement<ScoreTimewiseAttributes, ScoreT
       { type: 'required', value: PartList },
       { type: 'label', label: 'measures', value: { type: 'oneOrMore', value: Measure } },
     ],
-  };
+  } as const;
+
+  readonly schema = ScoreTimewise.schema;
 
   attributes: ScoreTimewiseAttributes;
   contents: ScoreTimewiseContents;
 
   constructor(opts?: { attributes?: Partial<ScoreTimewiseAttributes>; content?: ScoreTimewiseContents }) {
-    this.attributes = Object.assign({ ['version']: '4.0' }, opts?.attributes);
-    this.contents = opts?.content ?? [null, null, null, null, null, [], new PartList(), [new Measure()]];
+    this.attributes = xml.mergeZero(opts?.attributes, ScoreTimewise.schema) as ScoreTimewiseAttributes;
+    this.contents = opts?.content ?? xml.zero(ScoreTimewise.schema.contents);
   }
   getVersion(): '4.0' {
     return this.attributes['version'];

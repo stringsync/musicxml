@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The ending-number type is used to specify either a comma-separated list of positive integers without leading zeros,
  * or a string of zero or more spaces. It is used for the number attribute of the `<ending>` element. The zero or more

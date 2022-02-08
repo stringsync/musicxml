@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<instrument-link>` element
@@ -12,18 +12,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instrument-link/}
  */
-export type InstrumentLink = ReturnType<typeof InstrumentLink>;
-
-export const InstrumentLink = xml.element(
+export const InstrumentLink = schema(
   'instrument-link',
   {
-    attributes: {
-      /**
-       * Refers to a `<score-instrument>` id attribute.
-       */
-      id: t.required(dataTypes.idref()),
-    },
-    content: [] as const,
+    /**
+     * Refers to a `<score-instrument>` id attribute.
+     */
+    id: t.required(dataTypes.idref()),
   },
-  {}
+  [] as const
 );

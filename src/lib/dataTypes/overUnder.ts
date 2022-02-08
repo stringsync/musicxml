@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The over-under type is used to indicate whether the tips of curved lines such as slurs and ties are overhand
  * (tips down) or underhand (tips up).

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<other-listen>` element
@@ -10,28 +10,23 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-listen/}
  */
-export type OtherListen = ReturnType<typeof OtherListen>;
-
-export const OtherListen = xml.element(
+export const OtherListen = schema(
   'other-listen',
   {
-    attributes: {
-      /**
-       * Indicates the type of listening to which the element content applies.
-       */
-      type: t.required(dataTypes.token()),
+    /**
+     * Indicates the type of listening to which the element content applies.
+     */
+    type: t.required(dataTypes.token()),
 
-      /**
-       * Restricts the element to apply to a single player.
-       */
-      player: t.optional(dataTypes.idref()),
+    /**
+     * Restricts the element to apply to a single player.
+     */
+    player: t.optional(dataTypes.idref()),
 
-      /**
-       * Restrict the element to apply to a set of times through a repeated section.
-       */
-      ['time-only']: t.optional(dataTypes.timeOnly()),
-    },
-    content: [t.required(dataTypes.string())] as const,
+    /**
+     * Restrict the element to apply to a set of times through a repeated section.
+     */
+    ['time-only']: t.optional(dataTypes.timeOnly()),
   },
-  {}
+  [t.required(dataTypes.string())] as const
 );

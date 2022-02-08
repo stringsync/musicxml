@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The start-stop-single type is used for an attribute of musical elements that can be used for either multi-note or
  * single-note musical elements, as for groupings.

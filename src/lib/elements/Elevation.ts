@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<elevation>` element
@@ -12,13 +12,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/elevation/}
  */
-export type Elevation = ReturnType<typeof Elevation>;
-
-export const Elevation = xml.element(
-  'elevation',
-  {
-    attributes: {},
-    content: [t.label({ label: 'elevation', value: t.required(dataTypes.rotationDegrees()) })] as const,
-  },
-  {}
-);
+export const Elevation = schema('elevation', {}, [
+  t.label({ label: 'elevation', value: t.required(dataTypes.rotationDegrees()) }),
+] as const);

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<normal-notes>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/normal-notes/}
  */
-export type NormalNotes = ReturnType<typeof NormalNotes>;
-
-export const NormalNotes = xml.element(
-  'normal-notes',
-  { attributes: {}, content: [t.required(dataTypes.nonNegativeInteger())] as const },
-  {}
-);
+export const NormalNotes = schema('normal-notes', {}, [t.required(dataTypes.nonNegativeInteger())] as const);

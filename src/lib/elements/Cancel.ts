@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<cancel>` element
@@ -13,18 +13,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/cancel/}
  */
-export type Cancel = ReturnType<typeof Cancel>;
-
-export const Cancel = xml.element(
+export const Cancel = schema(
   'cancel',
   {
-    attributes: {
-      /**
-       * Indicates where the cancellation appears relative to the new key signature. It is left if not specified.
-       */
-      location: t.optional(dataTypes.cancelLocation()),
-    },
-    content: [t.required(dataTypes.fifths())] as const,
+    /**
+     * Indicates where the cancellation appears relative to the new key signature. It is left if not specified.
+     */
+    location: t.optional(dataTypes.cancelLocation()),
   },
-  {}
+  [t.required(dataTypes.fifths())] as const
 );

@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<artificial>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/artificial/}
  */
-export type Artificial = ReturnType<typeof Artificial>;
-
-export const Artificial = xml.element('artificial', { attributes: {}, content: [] as const }, {});
+export const Artificial = schema('artificial', {}, [] as const);

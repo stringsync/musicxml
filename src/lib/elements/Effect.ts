@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<effect>` element
@@ -10,18 +10,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/effect/}
  */
-export type Effect = ReturnType<typeof Effect>;
-
-export const Effect = xml.element(
+export const Effect = schema(
   'effect',
   {
-    attributes: {
-      /**
-       * Distinguishes different SMuFL stylistic alternates.
-       */
-      smufl: t.optional(dataTypes.smuflPictogramGlyphName()),
-    },
-    content: [t.required(dataTypes.effectValue())] as const,
+    /**
+     * Distinguishes different SMuFL stylistic alternates.
+     */
+    smufl: t.optional(dataTypes.smuflPictogramGlyphName()),
   },
-  {}
+  [t.required(dataTypes.effectValue())] as const
 );

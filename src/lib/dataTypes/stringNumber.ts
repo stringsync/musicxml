@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The string-number type indicates a string number. Strings are numbered from high to low, with 1 being the highest
  * pitched full-length string.

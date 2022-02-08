@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<metronome-dot>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-dot/}
  */
-export type MetronomeDot = ReturnType<typeof MetronomeDot>;
-
-export const MetronomeDot = xml.element('metronome-dot', { attributes: {}, content: [] as const }, {});
+export const MetronomeDot = schema('metronome-dot', {}, [] as const);

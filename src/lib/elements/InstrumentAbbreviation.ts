@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<instrument-abbreviation>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instrument-abbreviation/}
  */
-export type InstrumentAbbreviation = ReturnType<typeof InstrumentAbbreviation>;
-
-export const InstrumentAbbreviation = xml.element(
-  'instrument-abbreviation',
-  { attributes: {}, content: [t.required(dataTypes.string())] as const },
-  {}
-);
+export const InstrumentAbbreviation = schema('instrument-abbreviation', {}, [t.required(dataTypes.string())] as const);

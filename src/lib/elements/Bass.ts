@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { BassAlter } from './BassAlter';
 import { BassSeparator } from './BassSeparator';
 import { BassStep } from './BassStep';
@@ -15,18 +15,13 @@ import { BassStep } from './BassStep';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bass/}
  */
-export type Bass = ReturnType<typeof Bass>;
-
-export const Bass = xml.element(
+export const Bass = schema(
   'bass',
   {
-    attributes: {
-      /**
-       * Specifies where the bass is displayed relative to what precedes it.
-       */
-      arrangement: t.optional(dataTypes.harmonyArrangement()),
-    },
-    content: [t.optional(BassSeparator), t.required(BassStep), t.optional(BassAlter)] as const,
+    /**
+     * Specifies where the bass is displayed relative to what precedes it.
+     */
+    arrangement: t.optional(dataTypes.harmonyArrangement()),
   },
-  {}
+  [t.optional(BassSeparator), t.required(BassStep), t.optional(BassAlter)] as const
 );

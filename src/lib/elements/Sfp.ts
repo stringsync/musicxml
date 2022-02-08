@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<sfp>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sfp/}
  */
-export type Sfp = ReturnType<typeof Sfp>;
-
-export const Sfp = xml.element('sfp', { attributes: {}, content: [] as const }, {});
+export const Sfp = schema('sfp', {}, [] as const);

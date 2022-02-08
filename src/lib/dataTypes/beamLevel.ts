@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The MusicXML format supports six levels of beaming, up to 1024th notes. Unlike the number-level type, the beam-level
  * type identifies concurrent beams in a beam group. It does not distinguish overlapping beams such as grace notes

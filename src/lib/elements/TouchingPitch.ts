@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<touching-pitch>` element
@@ -10,6 +10,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/touching-pitch/}
  */
-export type TouchingPitch = ReturnType<typeof TouchingPitch>;
-
-export const TouchingPitch = xml.element('touching-pitch', { attributes: {}, content: [] as const }, {});
+export const TouchingPitch = schema('touching-pitch', {}, [] as const);

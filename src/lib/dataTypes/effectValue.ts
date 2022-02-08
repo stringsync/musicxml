@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The effect-value type represents pictograms for sound effect percussion instruments. The cannon, lotus flute, and
  * megaphone values are in addition to Stone's list.

@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The valign-image type is used to indicate vertical alignment for images and graphics, so it does not include a
  * baseline value. Defaults are implementation-dependent.

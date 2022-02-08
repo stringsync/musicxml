@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<cue>` element
@@ -11,6 +11,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/cue/}
  */
-export type Cue = ReturnType<typeof Cue>;
-
-export const Cue = xml.element('cue', { attributes: {}, content: [] as const }, {});
+export const Cue = schema('cue', {}, [] as const);

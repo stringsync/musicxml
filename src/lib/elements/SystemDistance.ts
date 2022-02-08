@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<system-distance>` element
@@ -11,10 +11,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-distance/}
  */
-export type SystemDistance = ReturnType<typeof SystemDistance>;
-
-export const SystemDistance = xml.element(
-  'system-distance',
-  { attributes: {}, content: [t.label({ label: 'system-distance', value: t.required(dataTypes.tenths()) })] as const },
-  {}
-);
+export const SystemDistance = schema('system-distance', {}, [
+  t.label({ label: 'system-distance', value: t.required(dataTypes.tenths()) }),
+] as const);

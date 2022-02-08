@@ -1,34 +1,35 @@
 import { MusicXMLError } from '../errors';
-import * as helpers from './helpers';
+import { DescriptorChild, XMLElement } from '../schema';
+import * as util from '../util';
 import { isValid } from './isValid';
 import { toString } from './toString';
-import { Child, RawXMLElement, XMLElement } from './types';
+import { RawXMLElement } from './types';
 import { zero } from './zero';
 
-export const toRawXMLElement = (element: XMLElement<any, any, any>): RawXMLElement => {
+export const toRawXMLElement = (element: XMLElement): RawXMLElement => {
   const attributes: any = {};
   for (const key of Object.keys(element.attributes)) {
     attributes[key] = toString(element.attributes[key], element.schema.attributes[key]);
   }
 
   const children = new Array<RawXMLElement>();
-  for (let ndx = 0; ndx < element.schema.content.length; ndx++) {
-    const value = element.content[ndx];
-    const child = element.schema.content[ndx];
+  for (let ndx = 0; ndx < element.schema.contents.length; ndx++) {
+    const value = element.contents[ndx];
+    const child = element.schema.contents[ndx];
     children.push(...resolve(value, child));
   }
 
-  return { type: 'element', name: element.name, attributes, children };
+  return { type: 'element', name: element.schema.name, attributes, children };
 };
 
-const resolve = (value: any, child: Child): RawXMLElement[] => {
-  if (helpers.isString(child)) {
+const resolve = (value: any, child: DescriptorChild): RawXMLElement[] => {
+  if (util.isString(child)) {
     return [{ type: 'text', text: toString(value, child) }];
   }
-  if (helpers.isNumber(child)) {
+  if (util.isNumber(child)) {
     return [{ type: 'text', text: toString(value, child) }];
   }
-  if (helpers.isDescriptor(child)) {
+  if (util.isDescriptor(child)) {
     switch (child.type) {
       case 'string':
       case 'int':
@@ -54,10 +55,10 @@ const resolve = (value: any, child: Child): RawXMLElement[] => {
         return resolve(isValid(value, child) ? value : zero(child), child.include);
     }
   }
-  if (helpers.isXMLElement(value)) {
+  if (util.isXMLElement(value)) {
     return [toRawXMLElement(value)];
   }
-  if (helpers.isArray(value)) {
+  if (util.isArray(value)) {
     return value.flatMap(resolve);
   }
   throw new MusicXMLError({

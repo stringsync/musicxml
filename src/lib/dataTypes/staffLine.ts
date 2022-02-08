@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The staff-line type indicates the line on a given staff. Staff lines are numbered from bottom to top, with 1 being
  * the bottom line on a staff.

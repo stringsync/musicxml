@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<clef-octave-change>` element
@@ -10,13 +10,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/clef-octave-change/}
  */
-export type ClefOctaveChange = ReturnType<typeof ClefOctaveChange>;
-
-export const ClefOctaveChange = xml.element(
-  'clef-octave-change',
-  {
-    attributes: {},
-    content: [t.label({ label: 'clef-octave-change', value: t.required(dataTypes.integer()) })] as const,
-  },
-  {}
-);
+export const ClefOctaveChange = schema('clef-octave-change', {}, [
+  t.label({ label: 'clef-octave-change', value: t.required(dataTypes.integer()) }),
+] as const);

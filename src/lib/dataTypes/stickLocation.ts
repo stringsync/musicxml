@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The stick-location type represents pictograms for the location of sticks, beaters, or mallets on cymbals, gongs,
  * drums, and other instruments.

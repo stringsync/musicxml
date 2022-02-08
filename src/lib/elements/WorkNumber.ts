@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<work-number>` element
@@ -10,6 +10,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work-number/}
  */
-export type WorkNumber = ReturnType<typeof WorkNumber>;
-
-export const WorkNumber = xml.element('work-number', { attributes: {}, content: [dataTypes.string()] as const }, {});
+export const WorkNumber = schema('work-number', {}, [dataTypes.string()] as const);

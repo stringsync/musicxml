@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The line-length type distinguishes between different line lengths for doit, falloff, plop, and scoop articulations.
  *

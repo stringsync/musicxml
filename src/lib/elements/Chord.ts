@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<chord>` element
@@ -18,6 +18,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/chord/}
  */
-export type Chord = ReturnType<typeof Chord>;
-
-export const Chord = xml.element('chord', { attributes: {}, content: [] as const }, {});
+export const Chord = schema('chord', {}, [] as const);

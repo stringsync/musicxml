@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The glyph-type defines what type of glyph is being defined in a `<glyph>` element. Values include:
  *

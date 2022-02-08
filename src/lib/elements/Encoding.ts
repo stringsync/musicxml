@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Encoder } from './Encoder';
 import { EncodingDate } from './EncodingDate';
 import { EncodingDescription } from './EncodingDescription';
@@ -15,24 +15,15 @@ import { Supports } from './Supports';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/encoding/}
  */
-export type Encoding = ReturnType<typeof Encoding>;
-
-export const Encoding = xml.element(
-  'encoding',
-  {
-    attributes: {},
-    content: [
-      t.label({
-        label: 'encodings',
-        value: t.zeroOrMore([
-          t.optional(EncodingDate),
-          t.optional(Encoder),
-          t.optional(Software),
-          t.optional(EncodingDescription),
-          t.optional(Supports),
-        ]),
-      }),
-    ] as const,
-  },
-  {}
-);
+export const Encoding = schema('encoding', {}, [
+  t.label({
+    label: 'encodings',
+    value: t.zeroOrMore([
+      t.optional(EncodingDate),
+      t.optional(Encoder),
+      t.optional(Software),
+      t.optional(EncodingDescription),
+      t.optional(Supports),
+    ]),
+  }),
+] as const);

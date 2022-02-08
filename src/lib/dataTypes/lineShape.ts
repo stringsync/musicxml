@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The line-shape type distinguishes between straight and curved lines.
  *

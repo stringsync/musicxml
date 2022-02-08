@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<membrane>` element
@@ -10,18 +10,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/membrane/}
  */
-export type Membrane = ReturnType<typeof Membrane>;
-
-export const Membrane = xml.element(
+export const Membrane = schema(
   'membrane',
   {
-    attributes: {
-      /**
-       * Distinguishes different SMuFL stylistic alternates.
-       */
-      smufl: t.optional(dataTypes.smuflPictogramGlyphName()),
-    },
-    content: [t.required(dataTypes.membraneValue())] as const,
+    /**
+     * Distinguishes different SMuFL stylistic alternates.
+     */
+    smufl: t.optional(dataTypes.smuflPictogramGlyphName()),
   },
-  {}
+  [t.required(dataTypes.membraneValue())] as const
 );

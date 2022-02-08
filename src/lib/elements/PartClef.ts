@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { ClefOctaveChange } from './ClefOctaveChange';
 import { Line } from './Line';
 import { Sign } from './Sign';
@@ -16,10 +16,8 @@ import { Sign } from './Sign';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-clef/}
  */
-export type PartClef = ReturnType<typeof PartClef>;
-
-export const PartClef = xml.element(
-  'part-clef',
-  { attributes: {}, content: [t.required(Sign), t.optional(Line), t.optional(ClefOctaveChange)] as const },
-  {}
-);
+export const PartClef = schema('part-clef', {}, [
+  t.required(Sign),
+  t.optional(Line),
+  t.optional(ClefOctaveChange),
+] as const);

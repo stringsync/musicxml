@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<except-voice>` element
@@ -12,10 +12,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/except-voice/}
  */
-export type ExceptVoice = ReturnType<typeof ExceptVoice>;
-
-export const ExceptVoice = xml.element(
-  'except-voice',
-  { attributes: {}, content: [t.required(dataTypes.string())] as const },
-  {}
-);
+export const ExceptVoice = schema('except-voice', {}, [t.required(dataTypes.string())] as const);

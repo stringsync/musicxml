@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<end-paragraph>` element
@@ -10,6 +10,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/end-paragraph/}
  */
-export type EndParagraph = ReturnType<typeof EndParagraph>;
-
-export const EndParagraph = xml.element('end-paragraph', { attributes: {}, content: [] as const }, {});
+export const EndParagraph = schema('end-paragraph', {}, [] as const);

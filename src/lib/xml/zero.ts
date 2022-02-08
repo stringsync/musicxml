@@ -1,15 +1,15 @@
 import { MusicXMLError } from '../errors';
-import * as helpers from './helpers';
-import { Child } from './types';
+import { DescriptorChild } from '../schema';
+import * as util from '../util';
 
-export const zero = <T extends Child>(child: T): any => {
-  if (helpers.isString(child)) {
+export const zero = <T extends DescriptorChild>(child: T): any => {
+  if (util.isString(child)) {
     return child;
   }
-  if (helpers.isNumber(child)) {
+  if (util.isNumber(child)) {
     return child;
   }
-  if (helpers.isDescriptor(child)) {
+  if (util.isDescriptor(child)) {
     switch (child.type) {
       case 'string':
         return '';
@@ -37,13 +37,13 @@ export const zero = <T extends Child>(child: T): any => {
         return zero(child.include);
     }
   }
-  if (helpers.isXMLElementFactory(child)) {
-    return child();
+  if (util.isXMLElementCtor(child)) {
+    return new child();
   }
-  if (helpers.isFunction(child)) {
+  if (util.isFunction(child)) {
     return zero(child());
   }
-  if (helpers.isArray(child)) {
+  if (util.isArray(child)) {
     return child.map(zero);
   }
   throw new MusicXMLError({

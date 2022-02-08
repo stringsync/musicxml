@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The tip-direction type represents the direction in which the tip of a stick or beater points, using Unicode arrow
  * terminology.

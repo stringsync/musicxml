@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<beats>` element
@@ -10,6 +10,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beats/}
  */
-export type Beats = ReturnType<typeof Beats>;
-
-export const Beats = xml.element('beats', { attributes: {}, content: [t.required(dataTypes.string())] as const }, {});
+export const Beats = schema('beats', {}, [t.required(dataTypes.string())] as const);

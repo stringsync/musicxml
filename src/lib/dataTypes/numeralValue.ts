@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The numeral-value type represents a Roman numeral or Nashville number value as a positive integer from 1 to 7.
  *

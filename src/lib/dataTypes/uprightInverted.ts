@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The upright-inverted type describes the appearance of a fermata element. The value is upright if not specified.
  *

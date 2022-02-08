@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The number of tremolo marks is represented by a number from 0 to 8: the same as beam-level with 0 added.
  *

@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { RootAlter } from './RootAlter';
 import { RootStep } from './RootStep';
 
@@ -13,10 +13,4 @@ import { RootStep } from './RootStep';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/root/}
  */
-export type Root = ReturnType<typeof Root>;
-
-export const Root = xml.element(
-  'root',
-  { attributes: {}, content: [t.required(RootStep), t.optional(RootAlter)] as const },
-  {}
-);
+export const Root = schema('root', {}, [t.required(RootStep), t.optional(RootAlter)] as const);

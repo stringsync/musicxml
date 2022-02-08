@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Distance } from './Distance';
 import { Glyph } from './Glyph';
 import { LineWidth } from './LineWidth';
@@ -17,19 +17,10 @@ import { OtherAppearance } from './OtherAppearance';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/appearance/}
  */
-export type Appearance = ReturnType<typeof Appearance>;
-
-export const Appearance = xml.element(
-  'appearance',
-  {
-    attributes: {},
-    content: [
-      t.label({ label: 'line-widths', value: t.zeroOrMore(LineWidth) }),
-      t.label({ label: 'notes', value: t.zeroOrMore(NoteSize) }),
-      t.label({ label: 'distances', value: t.zeroOrMore(Distance) }),
-      t.label({ label: 'glyphs', value: t.zeroOrMore(Glyph) }),
-      t.label({ label: 'other-appearances', value: t.zeroOrMore(OtherAppearance) }),
-    ] as const,
-  },
-  {}
-);
+export const Appearance = schema('appearance', {}, [
+  t.label({ label: 'line-widths', value: t.zeroOrMore(LineWidth) }),
+  t.label({ label: 'notes', value: t.zeroOrMore(NoteSize) }),
+  t.label({ label: 'distances', value: t.zeroOrMore(Distance) }),
+  t.label({ label: 'glyphs', value: t.zeroOrMore(Glyph) }),
+  t.label({ label: 'other-appearances', value: t.zeroOrMore(OtherAppearance) }),
+] as const);

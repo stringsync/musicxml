@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { PageHeight } from './PageHeight';
 import { PageMargins } from './PageMargins';
 import { PageWidth } from './PageWidth';
@@ -18,20 +18,11 @@ import { PageWidth } from './PageWidth';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-layout/}
  */
-export type PageLayout = ReturnType<typeof PageLayout>;
-
-export const PageLayout = xml.element(
-  'page-layout',
-  {
-    attributes: {},
-    content: [
-      t.optional(PageHeight),
-      t.optional(PageWidth),
-      t.label({
-        label: 'page-margins',
-        value: t.choices([] as const, [PageMargins] as const, [PageMargins, PageMargins] as const),
-      }),
-    ] as const,
-  },
-  {}
-);
+export const PageLayout = schema('page-layout', {}, [
+  t.optional(PageHeight),
+  t.optional(PageWidth),
+  t.label({
+    label: 'page-margins',
+    value: t.choices([] as const, [PageMargins] as const, [PageMargins, PageMargins] as const),
+  }),
+] as const);

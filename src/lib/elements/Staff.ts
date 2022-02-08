@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<staff>` element
@@ -11,10 +11,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff/}
  */
-export type Staff = ReturnType<typeof Staff>;
-
-export const Staff = xml.element(
-  'staff',
-  { attributes: {}, content: [t.label({ label: 'staff', value: t.required(dataTypes.positiveInteger()) })] as const },
-  {}
-);
+export const Staff = schema('staff', {}, [
+  t.label({ label: 'staff', value: t.required(dataTypes.positiveInteger()) }),
+] as const);

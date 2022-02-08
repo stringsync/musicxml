@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { NumeralAlter } from './NumeralAlter';
 import { NumeralKey } from './NumeralKey';
 import { NumeralRoot } from './NumeralRoot';
@@ -13,10 +13,8 @@ import { NumeralRoot } from './NumeralRoot';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral/}
  */
-export type Numeral = ReturnType<typeof Numeral>;
-
-export const Numeral = xml.element(
-  'numeral',
-  { attributes: {}, content: [t.required(NumeralRoot), t.optional(NumeralAlter), t.optional(NumeralKey)] as const },
-  {}
-);
+export const Numeral = schema('numeral', {}, [
+  t.required(NumeralRoot),
+  t.optional(NumeralAlter),
+  t.optional(NumeralKey),
+] as const);

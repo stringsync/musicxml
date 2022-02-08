@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<time-relation>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time-relation/}
  */
-export type TimeRelation = ReturnType<typeof TimeRelation>;
-
-export const TimeRelation = xml.element(
-  'time-relation',
-  { attributes: {}, content: [t.required(dataTypes.timeRelation())] as const },
-  {}
-);
+export const TimeRelation = schema('time-relation', {}, [t.required(dataTypes.timeRelation())] as const);

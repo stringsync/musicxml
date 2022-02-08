@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<elision>` element
@@ -13,43 +13,38 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/elision/}
  */
-export type Elision = ReturnType<typeof Elision>;
-
-export const Elision = xml.element(
+export const Elision = schema(
   'elision',
   {
-    attributes: {
-      /**
-       * Indicates the color of an element.
-       */
-      color: t.optional(dataTypes.color()),
+    /**
+     * Indicates the color of an element.
+     */
+    color: t.optional(dataTypes.color()),
 
-      /**
-       * A comma-separated list of font names.
-       */
-      ['font-family']: t.optional(dataTypes.fontFamily()),
+    /**
+     * A comma-separated list of font names.
+     */
+    ['font-family']: t.optional(dataTypes.fontFamily()),
 
-      /**
-       * One of the CSS sizes or a numeric point size.
-       */
-      ['font-size']: t.optional(dataTypes.fontSize()),
+    /**
+     * One of the CSS sizes or a numeric point size.
+     */
+    ['font-size']: t.optional(dataTypes.fontSize()),
 
-      /**
-       * Normal or italic style.
-       */
-      ['font-style']: t.optional(dataTypes.fontStyle()),
+    /**
+     * Normal or italic style.
+     */
+    ['font-style']: t.optional(dataTypes.fontStyle()),
 
-      /**
-       * Normal or bold weight.
-       */
-      ['font-weight']: t.optional(dataTypes.fontWeight()),
+    /**
+     * Normal or bold weight.
+     */
+    ['font-weight']: t.optional(dataTypes.fontWeight()),
 
-      /**
-       * Used to specify the elision symbol to use if the element text content is empty. It is ignored otherwise.
-       */
-      smufl: t.optional(dataTypes.smuflLyricsGlyphName()),
-    },
-    content: [] as const,
+    /**
+     * Used to specify the elision symbol to use if the element text content is empty. It is ignored otherwise.
+     */
+    smufl: t.optional(dataTypes.smuflLyricsGlyphName()),
   },
-  {}
+  [] as const
 );

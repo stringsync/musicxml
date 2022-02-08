@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { MetronomeBeam } from './MetronomeBeam';
 import { MetronomeDot } from './MetronomeDot';
 import { MetronomeTied } from './MetronomeTied';
@@ -14,19 +14,10 @@ import { MetronomeType } from './MetronomeType';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-note/}
  */
-export type MetronomeNote = ReturnType<typeof MetronomeNote>;
-
-export const MetronomeNote = xml.element(
-  'metronome-note',
-  {
-    attributes: {},
-    content: [
-      t.required(MetronomeType),
-      t.label({ label: 'metronome-dots', value: t.zeroOrMore(MetronomeDot) }),
-      t.label({ label: 'metronome-beams', value: t.zeroOrMore(MetronomeBeam) }),
-      t.optional(MetronomeTied),
-      t.optional(MetronomeTuplet),
-    ] as const,
-  },
-  {}
-);
+export const MetronomeNote = schema('metronome-note', {}, [
+  t.required(MetronomeType),
+  t.label({ label: 'metronome-dots', value: t.zeroOrMore(MetronomeDot) }),
+  t.label({ label: 'metronome-beams', value: t.zeroOrMore(MetronomeBeam) }),
+  t.optional(MetronomeTied),
+  t.optional(MetronomeTuplet),
+] as const);

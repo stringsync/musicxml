@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<tuning-step>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuning-step/}
  */
-export type TuningStep = ReturnType<typeof TuningStep>;
-
-export const TuningStep = xml.element(
-  'tuning-step',
-  { attributes: {}, content: [t.required(dataTypes.step())] as const },
-  {}
-);
+export const TuningStep = schema('tuning-step', {}, [t.required(dataTypes.step())] as const);

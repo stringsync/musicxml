@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<hole-closed>` element
@@ -10,18 +10,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/hole-closed/}
  */
-export type HoleClosed = ReturnType<typeof HoleClosed>;
-
-export const HoleClosed = xml.element(
+export const HoleClosed = schema(
   'hole-closed',
   {
-    attributes: {
-      /**
-       * Indicates which portion of the hole is filled in when the element value is half.
-       */
-      location: t.optional(dataTypes.holeClosedLocation()),
-    },
-    content: [t.required(dataTypes.holeClosedValue())] as const,
+    /**
+     * Indicates which portion of the hole is filled in when the element value is half.
+     */
+    location: t.optional(dataTypes.holeClosedLocation()),
   },
-  {}
+  [t.required(dataTypes.holeClosedValue())] as const
 );

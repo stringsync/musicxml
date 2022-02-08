@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<natural>` element
@@ -10,6 +10,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/natural/}
  */
-export type Natural = ReturnType<typeof Natural>;
-
-export const Natural = xml.element('natural', { attributes: {}, content: [] as const }, {});
+export const Natural = schema('natural', {}, [] as const);

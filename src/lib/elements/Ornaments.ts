@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { AccidentalMark } from './AccidentalMark';
 import { DelayedInvertedTurn } from './DelayedInvertedTurn';
 import { DelayedTurn } from './DelayedTurn';
@@ -28,42 +28,37 @@ import { WavyLine } from './WavyLine';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ornaments/}
  */
-export type Ornaments = ReturnType<typeof Ornaments>;
-
-export const Ornaments = xml.element(
+export const Ornaments = schema(
   'ornaments',
   {
-    attributes: {
-      /**
-       * Specifies an ID that is unique to the entire document.
-       */
-      id: t.optional(dataTypes.id()),
-    },
-    content: [
-      t.label({
-        label: 'ornaments',
-        value: t.zeroOrMore(
-          t.choices(
-            TrillMark,
-            Turn,
-            DelayedTurn,
-            InvertedTurn,
-            DelayedInvertedTurn,
-            VerticalTurn,
-            InvertedVerticalTurn,
-            Shake,
-            WavyLine,
-            Mordent,
-            InvertedMordent,
-            Schleifer,
-            Tremolo,
-            Haydn,
-            OtherOrnament
-          )
-        ),
-      }),
-      t.label({ label: 'accidental-marks', value: t.zeroOrMore(AccidentalMark) }),
-    ] as const,
+    /**
+     * Specifies an ID that is unique to the entire document.
+     */
+    id: t.optional(dataTypes.id()),
   },
-  {}
+  [
+    t.label({
+      label: 'ornaments',
+      value: t.zeroOrMore(
+        t.choices(
+          TrillMark,
+          Turn,
+          DelayedTurn,
+          InvertedTurn,
+          DelayedInvertedTurn,
+          VerticalTurn,
+          InvertedVerticalTurn,
+          Shake,
+          WavyLine,
+          Mordent,
+          InvertedMordent,
+          Schleifer,
+          Tremolo,
+          Haydn,
+          OtherOrnament
+        )
+      ),
+    }),
+    t.label({ label: 'accidental-marks', value: t.zeroOrMore(AccidentalMark) }),
+  ] as const
 );

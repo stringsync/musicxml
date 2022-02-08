@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { MeasureDistance } from './MeasureDistance';
 
 /**
@@ -11,10 +11,4 @@ import { MeasureDistance } from './MeasureDistance';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-layout/}
  */
-export type MeasureLayout = ReturnType<typeof MeasureLayout>;
-
-export const MeasureLayout = xml.element(
-  'measure-layout',
-  { attributes: {}, content: [t.optional(MeasureDistance)] as const },
-  {}
-);
+export const MeasureLayout = schema('measure-layout', {}, [t.optional(MeasureDistance)] as const);

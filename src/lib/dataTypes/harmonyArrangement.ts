@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The harmony-arrangement type indicates how stacked chords and bass notes are displayed within a harmony element. The
  * horizontal value specifies that the second element appears to the right of the first. The vertical value specifies

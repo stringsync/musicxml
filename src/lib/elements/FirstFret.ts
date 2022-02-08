@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<first-fret>` element
@@ -11,23 +11,18 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/first-fret/}
  */
-export type FirstFret = ReturnType<typeof FirstFret>;
-
-export const FirstFret = xml.element(
+export const FirstFret = schema(
   'first-fret',
   {
-    attributes: {
-      /**
-       * Indicates whether the text appears to the left or right of the frame.
-       */
-      location: t.optional(dataTypes.leftRight()),
+    /**
+     * Indicates whether the text appears to the left or right of the frame.
+     */
+    location: t.optional(dataTypes.leftRight()),
 
-      /**
-       * Indicates how the first fret is represented in the fret diagram.
-       */
-      text: t.optional(dataTypes.token()),
-    },
-    content: [t.label({ label: 'fret', value: t.required(dataTypes.positiveInteger()) })] as const,
+    /**
+     * Indicates how the first fret is represented in the fret diagram.
+     */
+    text: t.optional(dataTypes.token()),
   },
-  {}
+  [t.label({ label: 'fret', value: t.required(dataTypes.positiveInteger()) })] as const
 );

@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The degree-type-value type indicates whether the current degree element is an addition, alteration, or subtraction to
  * the kind of the current chord in the harmony element.

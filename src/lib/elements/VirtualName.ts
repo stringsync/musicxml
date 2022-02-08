@@ -1,6 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
-
+import { schema, t } from '../schema';
 /**
  * The `<virtual-name>` element
  *
@@ -10,10 +9,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/virtual-name/}
  */
-export type VirtualName = ReturnType<typeof VirtualName>;
-
-export const VirtualName = xml.element(
-  'virtual-name',
-  { attributes: {}, content: [t.required(dataTypes.string())] as const },
-  {}
-);
+export const VirtualName = schema('virtual-name', {}, [t.required(dataTypes.string())] as const);

@@ -1,6 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
-
+import { schema, t } from '../schema';
 /**
  * The `<ipa>` element
  *
@@ -11,6 +10,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ipa/}
  */
-export type Ipa = ReturnType<typeof Ipa>;
-
-export const Ipa = xml.element('ipa', { attributes: {}, content: [t.required(dataTypes.string())] as const }, {});
+export const Ipa = schema('ipa', {}, [t.required(dataTypes.string())] as const);

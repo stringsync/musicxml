@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The note-size-type type indicates the type of note size being defined by a `<note-size>` element.
  *

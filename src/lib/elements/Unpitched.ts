@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { DisplayOctave } from './DisplayOctave';
 import { DisplayStep } from './DisplayStep';
 
@@ -14,10 +14,4 @@ import { DisplayStep } from './DisplayStep';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/unpitched/}
  */
-export type Unpitched = ReturnType<typeof Unpitched>;
-
-export const Unpitched = xml.element(
-  'unpitched',
-  { attributes: {}, content: [t.required(DisplayStep), t.required(DisplayOctave)] as const },
-  {}
-);
+export const Unpitched = schema('unpitched', {}, [t.required(DisplayStep), t.required(DisplayOctave)] as const);

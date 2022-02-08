@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<end-line>` element
@@ -10,6 +10,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/end-line/}
  */
-export type EndLine = ReturnType<typeof EndLine>;
-
-export const EndLine = xml.element('end-line', { attributes: {}, content: [] as const }, {});
+export const EndLine = schema('end-line', {}, [] as const);

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<supports>` element
@@ -14,36 +14,31 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/supports/}
  */
-export type Supports = ReturnType<typeof Supports>;
-
-export const Supports = xml.element(
+export const Supports = schema(
   'supports',
   {
-    attributes: {
-      /**
-       * Indicates the element that is supported or not by the encoding.
-       */
-      element: t.required(dataTypes.nmtoken()),
+    /**
+     * Indicates the element that is supported or not by the encoding.
+     */
+    element: t.required(dataTypes.nmtoken()),
 
-      /**
-       * If yes, the absence of a particular element with a specified attribute or value is meaningful. It indicates
-       * that this information is not present in the score. If no, the absence is not meaningful because the encoding
-       * does not include this type of information.
-       */
-      type: t.required(dataTypes.yesNo()),
+    /**
+     * If yes, the absence of a particular element with a specified attribute or value is meaningful. It indicates
+     * that this information is not present in the score. If no, the absence is not meaningful because the encoding
+     * does not include this type of information.
+     */
+    type: t.required(dataTypes.yesNo()),
 
-      /**
-       * Indicates a specific element attribute that is supported or not by the encoding.
-       */
-      attribute: t.optional(dataTypes.nmtoken()),
+    /**
+     * Indicates a specific element attribute that is supported or not by the encoding.
+     */
+    attribute: t.optional(dataTypes.nmtoken()),
 
-      /**
-       * Indicates a specific attribute value that is supported or not by the encoding. Only used together with the
-       * attribute attribute.
-       */
-      value: t.optional(dataTypes.token()),
-    },
-    content: [] as const,
+    /**
+     * Indicates a specific attribute value that is supported or not by the encoding. Only used together with the
+     * attribute attribute.
+     */
+    value: t.optional(dataTypes.token()),
   },
-  {}
+  [] as const
 );

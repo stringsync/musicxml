@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The harmony-type type differentiates different types of harmonies when alternate harmonies are possible.
  *

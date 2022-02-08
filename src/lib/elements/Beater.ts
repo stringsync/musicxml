@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<beater>` element
@@ -11,18 +11,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beater/}
  */
-export type Beater = ReturnType<typeof Beater>;
-
-export const Beater = xml.element(
+export const Beater = schema(
   'beater',
   {
-    attributes: {
-      /**
-       * Indicates the direction in which the tip of the beater points.
-       */
-      tip: t.optional(dataTypes.tipDirection()),
-    },
-    content: [t.required(dataTypes.beaterValue())] as const,
+    /**
+     * Indicates the direction in which the tip of the beater points.
+     */
+    tip: t.optional(dataTypes.tipDirection()),
   },
-  {}
+  [t.required(dataTypes.beaterValue())] as const
 );

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<offset>` element
@@ -13,21 +13,16 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/offset/}
  */
-export type Offset = ReturnType<typeof Offset>;
-
-export const Offset = xml.element(
+export const Offset = schema(
   'offset',
   {
-    attributes: {
-      /**
-       * The offset affects the visual appearance of the direction. If the sound attribute is yes, then the offset
-       * affects playback and listening too. If it is no, then any `<sound>` or `<listening>` associated with the
-       * `<direction>` takes effect at the current location. It is no if not specified for compatibility with earlier
-       * MusicXML versions.
-       */
-      sound: t.optional(dataTypes.yesNo()),
-    },
-    content: [t.label({ label: 'offset', value: t.required(dataTypes.divisions()) })] as const,
+    /**
+     * The offset affects the visual appearance of the direction. If the sound attribute is yes, then the offset
+     * affects playback and listening too. If it is no, then any `<sound>` or `<listening>` associated with the
+     * `<direction>` takes effect at the current location. It is no if not specified for compatibility with earlier
+     * MusicXML versions.
+     */
+    sound: t.optional(dataTypes.yesNo()),
   },
-  {}
+  [t.label({ label: 'offset', value: t.required(dataTypes.divisions()) })] as const
 );

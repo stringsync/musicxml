@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The text-direction type is used to adjust and override the Unicode bidirectional text algorithm, similar to the
  * Directionality data category in the

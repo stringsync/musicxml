@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The line-type type distinguishes between solid, dashed, dotted, and wavy lines.
  *

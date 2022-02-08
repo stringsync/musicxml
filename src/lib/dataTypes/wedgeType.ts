@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The wedge-type type is used to specify `<wedge>` types.
  *

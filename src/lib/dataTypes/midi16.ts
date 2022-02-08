@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The midi-16 type is used to express MIDI 1.0 values that range from 1 to 16.
  *

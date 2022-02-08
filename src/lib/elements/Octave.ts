@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<octave>` element
@@ -10,6 +10,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/octave/}
  */
-export type Octave = ReturnType<typeof Octave>;
-
-export const Octave = xml.element('octave', { attributes: {}, content: [t.required(dataTypes.octave())] as const }, {});
+export const Octave = schema('octave', {}, [t.required(dataTypes.octave())] as const);

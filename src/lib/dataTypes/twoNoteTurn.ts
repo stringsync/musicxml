@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The two-note-turn type describes the ending notes of trills and mordents for playback, relative to the current note.
  *

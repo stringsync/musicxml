@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<pre-bend> element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pre-bend/}
  */
-export type PreBend = ReturnType<typeof PreBend>;
-
-export const PreBend = xml.element('pre-bend', { attributes: {}, content: [] as const }, {});
+export const PreBend = schema('pre-bend', {}, [] as const);

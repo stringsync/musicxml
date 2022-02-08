@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The hole-closed-value type represents whether the hole is closed, open, or half-open.
  *

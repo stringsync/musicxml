@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<note-size>` element
@@ -12,18 +12,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note-size/}
  */
-export type NoteSize = ReturnType<typeof NoteSize>;
-
-export const NoteSize = xml.element(
+export const NoteSize = schema(
   'note-size',
   {
-    attributes: {
-      /**
-       * The type of note size being defined.
-       */
-      type: t.required(dataTypes.noteSizeType()),
-    },
-    content: [] as const,
+    /**
+     * The type of note size being defined.
+     */
+    type: t.required(dataTypes.noteSizeType()),
   },
-  {}
+  [] as const
 );

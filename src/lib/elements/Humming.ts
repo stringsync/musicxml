@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<humming>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/humming/}
  */
-export type Humming = ReturnType<typeof Humming>;
-
-export const Humming = xml.element('humming', { attributes: {}, content: [] as const }, {});
+export const Humming = schema('humming', {}, [] as const);

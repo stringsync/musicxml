@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<metronome-type>` element
@@ -10,10 +10,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-type/}
  */
-export type MetronomeType = ReturnType<typeof MetronomeType>;
-
-export const MetronomeType = xml.element(
-  'metronome-type',
-  { attributes: {}, content: [t.required(dataTypes.noteTypeValue())] as const },
-  {}
-);
+export const MetronomeType = schema('metronome-type', {}, [t.required(dataTypes.noteTypeValue())] as const);

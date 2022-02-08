@@ -1,10 +1,11 @@
 import { LabelDescriptor } from '.';
 import { MusicXMLError } from '../errors';
 import {
-  Child,
   ChoicesDescriptor,
+  CommentDescriptor,
   ConstantDescriptor,
   DateDescriptor,
+  DescriptorChild,
   FloatDescriptor,
   IntDescriptor,
   NotDescriptor,
@@ -33,6 +34,11 @@ export type NotDescriptorOpts<I, E> = {
 
 export type LabelDescriptorOpts<T> = {
   label: string;
+  value: T;
+};
+
+export type CommentDescriptorOpts<T> = {
+  comment: string;
   value: T;
 };
 
@@ -151,14 +157,14 @@ export class t {
     };
   }
 
-  static optional<T extends Child>(value: T): OptionalDescriptor<T> {
+  static optional<T extends DescriptorChild>(value: T): OptionalDescriptor<T> {
     return {
       type: 'optional',
       value,
     };
   }
 
-  static required<T extends Child>(value: T): RequiredDescriptor<T> {
+  static required<T extends DescriptorChild>(value: T): RequiredDescriptor<T> {
     return {
       type: 'required',
       value,
@@ -173,21 +179,29 @@ export class t {
     };
   }
 
-  static zeroOrMore<T extends Child>(value: T): ZeroOrMoreDescriptor<T> {
+  static comment<T>(opts: CommentDescriptorOpts<T>): CommentDescriptor<T> {
+    return {
+      type: 'comment',
+      comment: opts.comment,
+      value: opts.value,
+    };
+  }
+
+  static zeroOrMore<T extends DescriptorChild>(value: T): ZeroOrMoreDescriptor<T> {
     return {
       type: 'zeroOrMore',
       value,
     };
   }
 
-  static oneOrMore<T extends Child>(value: T): OneOrMoreDescriptor<T> {
+  static oneOrMore<T extends DescriptorChild>(value: T): OneOrMoreDescriptor<T> {
     return {
       type: 'oneOrMore',
       value,
     };
   }
 
-  static not<I extends Child, E extends Child>(opts: NotDescriptorOpts<I, E>): NotDescriptor<I, E> {
+  static not<I extends DescriptorChild, E extends DescriptorChild>(opts: NotDescriptorOpts<I, E>): NotDescriptor<I, E> {
     return {
       type: 'not',
       include: opts.include,

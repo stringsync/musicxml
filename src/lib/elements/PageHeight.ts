@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<page-height>` element
@@ -10,10 +10,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-height/}
  */
-export type PageHeight = ReturnType<typeof PageHeight>;
-
-export const PageHeight = xml.element(
-  'page-height',
-  { attributes: {}, content: [t.label({ label: 'page-height', value: t.required(dataTypes.tenths()) })] as const },
-  {}
-);
+export const PageHeight = schema('page-height', {}, [
+  t.label({ label: 'page-height', value: t.required(dataTypes.tenths()) }),
+] as const);

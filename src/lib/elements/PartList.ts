@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { PartGroup } from './PartGroup';
 import { ScorePart } from './ScorePart';
 
@@ -17,17 +17,8 @@ import { ScorePart } from './ScorePart';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-list/}
  */
-export type PartList = ReturnType<typeof PartList>;
-
-export const PartList = xml.element(
-  'part-list',
-  {
-    attributes: {},
-    content: [
-      t.label({ label: 'part-groups', value: t.zeroOrMore(PartGroup) }),
-      t.required(ScorePart),
-      t.label({ label: 'parts', value: t.zeroOrMore(t.choices(PartGroup, ScorePart)) }),
-    ] as const,
-  },
-  {}
-);
+export const PartList = schema('part-list', {}, [
+  t.label({ label: 'part-groups', value: t.zeroOrMore(PartGroup) }),
+  t.required(ScorePart),
+  t.label({ label: 'parts', value: t.zeroOrMore(t.choices(PartGroup, ScorePart)) }),
+] as const);

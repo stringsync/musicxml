@@ -1,19 +1,22 @@
 import { MusicXMLError } from '../errors';
-import * as helpers from './helpers';
+import { Descriptor, DescriptorChild } from '../schema';
+import * as util from '../util';
 import { isValid } from './isValid';
-import { Child, Descriptor } from './types';
 import { zero } from './zero';
 
-export const toString = <T extends Extract<Child, string | number | Descriptor>>(value: any, child: T): string => {
+export const toString = <T extends Extract<DescriptorChild, string | number | Descriptor>>(
+  value: any,
+  child: T
+): string => {
   value = isValid(value, child) ? value : zero(child);
 
-  if (helpers.isString(child)) {
+  if (util.isString(child)) {
     return value;
   }
-  if (helpers.isNumber(child)) {
+  if (util.isNumber(child)) {
     return value;
   }
-  if (helpers.isDescriptor(child)) {
+  if (util.isDescriptor(child)) {
     switch (child.type) {
       case 'string':
         return value;
@@ -30,7 +33,7 @@ export const toString = <T extends Extract<Child, string | number | Descriptor>>
       case 'choices':
         return String(value);
       case 'optional':
-        return helpers.isNull(value) ? '' : String(value);
+        return util.isNull(value) ? '' : String(value);
       case 'required':
         return String(value);
       case 'not':

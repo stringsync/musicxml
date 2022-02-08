@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The top-bottom type is used to indicate the top or bottom part of a vertical shape like non-arpeggiate.
  *

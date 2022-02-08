@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { BeatUnit } from './BeatUnit';
 import { BeatUnitDot } from './BeatUnitDot';
 
@@ -13,13 +13,7 @@ import { BeatUnitDot } from './BeatUnitDot';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beat-unit-tied/}
  */
-export type BeatUnitTied = ReturnType<typeof BeatUnitTied>;
-
-export const BeatUnitTied = xml.element(
-  'beat-unit-tied',
-  {
-    attributes: {},
-    content: [t.required(BeatUnit), t.label({ label: 'beat-unit-dots', value: t.zeroOrMore(BeatUnitDot) })] as const,
-  },
-  {}
-);
+export const BeatUnitTied = schema('beat-unit-tied', {}, [
+  t.required(BeatUnit),
+  t.label({ label: 'beat-unit-dots', value: t.zeroOrMore(BeatUnitDot) }),
+] as const);

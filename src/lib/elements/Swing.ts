@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { First } from './First';
 import { Second } from './Second';
 import { Straight } from './Straight';
@@ -25,19 +25,10 @@ import { SwingType } from './SwingType';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/swing/}
  */
-export type Swing = ReturnType<typeof Swing>;
-
-export const Swing = xml.element(
-  'swing',
-  {
-    attributes: {},
-    content: [
-      t.label({
-        label: 'swing',
-        value: t.choices(Straight, [t.required(First), t.required(Second), t.optional(SwingType)] as const),
-      }),
-      t.optional(SwingStyle),
-    ] as const,
-  },
-  {}
-);
+export const Swing = schema('swing', {}, [
+  t.label({
+    label: 'swing',
+    value: t.choices(Straight, [t.required(First), t.required(Second), t.optional(SwingType)] as const),
+  }),
+  t.optional(SwingStyle),
+] as const);

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Bass } from './Bass';
 import { Degree } from './Degree';
 import { Footnote } from './Footnote';
@@ -37,128 +37,123 @@ import { Staff } from './Staff';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harmony/}
  */
-export type Harmony = ReturnType<typeof Harmony>;
-
-export const Harmony = xml.element(
+export const Harmony = schema(
   'harmony',
   {
-    attributes: {
-      /**
-       * Specifies how multiple harmony-chords are arranged relative to each other. Harmony-chords with vertical
-       * arrangement are separated by horizontal lines. Harmony-chords with diagonal or horizontal arrangement are
-       * separated by diagonal lines or slashes.
-       */
-      arrangement: t.optional(dataTypes.harmonyArrangement()),
+    /**
+     * Specifies how multiple harmony-chords are arranged relative to each other. Harmony-chords with vertical
+     * arrangement are separated by horizontal lines. Harmony-chords with diagonal or horizontal arrangement are
+     * separated by diagonal lines or slashes.
+     */
+    arrangement: t.optional(dataTypes.harmonyArrangement()),
 
-      /**
-       * Indicates the color of an element.
-       */
-      color: t.optional(dataTypes.color()),
+    /**
+     * Indicates the color of an element.
+     */
+    color: t.optional(dataTypes.color()),
 
-      /**
-       * 	Changes the computation of the default horizontal position. The origin is changed relative to the left-hand
-       * side of the note or the musical position within the bar. Positive x is right and negative x is left.
-       *
-       * This attribute provides higher-resolution positioning data than the `<offset>` element. Applications reading a
-       * MusicXML file that can understand both features should generally rely on this attribute for its greater
-       * accuracy.
-       */
-      ['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
+    /**
+     * 	Changes the computation of the default horizontal position. The origin is changed relative to the left-hand
+     * side of the note or the musical position within the bar. Positive x is right and negative x is left.
+     *
+     * This attribute provides higher-resolution positioning data than the `<offset>` element. Applications reading a
+     * MusicXML file that can understand both features should generally rely on this attribute for its greater
+     * accuracy.
+     */
+    ['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
 
-      /**
-       * Changes the computation of the default vertical position. The origin is changed relative to the top line of the
-       * staff. Positive y is up and negative y is down.
-       *
-       * This attribute provides higher-resolution positioning data than the placement attribute. Applications reading a
-       * MusicXML file that can understand both attributes should generally rely on this attribute for its greater
-       * accuracy.
-       */
-      ['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
+    /**
+     * Changes the computation of the default vertical position. The origin is changed relative to the top line of the
+     * staff. Positive y is up and negative y is down.
+     *
+     * This attribute provides higher-resolution positioning data than the placement attribute. Applications reading a
+     * MusicXML file that can understand both attributes should generally rely on this attribute for its greater
+     * accuracy.
+     */
+    ['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
 
-      /**
-       * A comma-separated list of font names.
-       */
-      ['font-family']: t.optional(dataTypes.fontFamily()),
+    /**
+     * A comma-separated list of font names.
+     */
+    ['font-family']: t.optional(dataTypes.fontFamily()),
 
-      /**
-       * One of the CSS sizes or a numeric point size.
-       */
-      ['font-size']: t.optional(dataTypes.fontSize()),
+    /**
+     * One of the CSS sizes or a numeric point size.
+     */
+    ['font-size']: t.optional(dataTypes.fontSize()),
 
-      /**
-       * Normal or italic style.
-       */
-      ['font-style']: t.optional(dataTypes.fontStyle()),
+    /**
+     * Normal or italic style.
+     */
+    ['font-style']: t.optional(dataTypes.fontStyle()),
 
-      /**
-       * Normal or bold weight.
-       */
-      ['font-weight']: t.optional(dataTypes.fontWeight()),
+    /**
+     * Normal or bold weight.
+     */
+    ['font-weight']: t.optional(dataTypes.fontWeight()),
 
-      /**
-       * Specifies an ID that is unique to the entire document.
-       */
-      id: t.optional(dataTypes.id()),
+    /**
+     * Specifies an ID that is unique to the entire document.
+     */
+    id: t.optional(dataTypes.id()),
 
-      /**
-       * Indicates whether something is above or below another element, such as a note or a notation.
-       */
-      placement: t.optional(dataTypes.aboveBelow()),
+    /**
+     * Indicates whether something is above or below another element, such as a note or a notation.
+     */
+    placement: t.optional(dataTypes.aboveBelow()),
 
-      /**
-       * Specifies the printing of a frame or fretboard diagram.
-       */
-      ['print-frame']: t.optional(dataTypes.yesNo()),
+    /**
+     * Specifies the printing of a frame or fretboard diagram.
+     */
+    ['print-frame']: t.optional(dataTypes.yesNo()),
 
-      /**
-       * Specifies whether or not to print an object. It is yes if not specified.
-       */
-      ['print-object']: t.optional(dataTypes.yesNo()),
+    /**
+     * Specifies whether or not to print an object. It is yes if not specified.
+     */
+    ['print-object']: t.optional(dataTypes.yesNo()),
 
-      /**
-       * Changes the horizontal position relative to the default position, either as computed by the individual
-       * program, or as overridden by the default-x attribute. Positive x is right and negative x is left. It should be
-       * interpreted in the context of the <offset> element or directive attribute if those are present.
-       */
-      ['relative-x']: t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
+    /**
+     * Changes the horizontal position relative to the default position, either as computed by the individual
+     * program, or as overridden by the default-x attribute. Positive x is right and negative x is left. It should be
+     * interpreted in the context of the <offset> element or directive attribute if those are present.
+     */
+    ['relative-x']: t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
 
-      /**
-       * Changes the horizontal position relative to the default position, either as computed by the individual
-       * program, or as overridden by the default-x attribute. Positive x is right and negative x is left. It should be
-       * interpreted in the context of the <offset> element or directive attribute if those are present.
-       */
-      ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
+    /**
+     * Changes the horizontal position relative to the default position, either as computed by the individual
+     * program, or as overridden by the default-x attribute. Positive x is right and negative x is left. It should be
+     * interpreted in the context of the <offset> element or directive attribute if those are present.
+     */
+    ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
 
-      /**
-       * Distinguishes elements that are associated with a system rather than the particular part where the element
-       * appears.
-       */
-      system: t.optional(dataTypes.systemRelation()),
+    /**
+     * Distinguishes elements that are associated with a system rather than the particular part where the element
+     * appears.
+     */
+    system: t.optional(dataTypes.systemRelation()),
 
-      /**
-       * If there are alternate harmonies possible, this can be specified using multiple `<harmony>` elements
-       * differentiated by type. Explicit harmonies have all note present in the music; implied have some notes missing
-       * but implied; alternate represents alternate analyses.
-       */
-      type: t.optional(dataTypes.harmonyType()),
-    },
-    content: [
-      t.label({
-        label: 'harmony',
-        value: t.oneOrMore([
-          t.choices(Root, Numeral, Function),
-          t.required(Kind),
-          t.optional(Inversion),
-          t.optional(Bass),
-          t.zeroOrMore(Degree),
-        ]),
-      }),
-      t.optional(Frame),
-      t.optional(Offset),
-      t.optional(Footnote),
-      t.optional(Level),
-      t.optional(Staff),
-    ] as const,
+    /**
+     * If there are alternate harmonies possible, this can be specified using multiple `<harmony>` elements
+     * differentiated by type. Explicit harmonies have all note present in the music; implied have some notes missing
+     * but implied; alternate represents alternate analyses.
+     */
+    type: t.optional(dataTypes.harmonyType()),
   },
-  {}
+  [
+    t.label({
+      label: 'harmony',
+      value: t.oneOrMore([
+        t.choices(Root, Numeral, Function),
+        t.required(Kind),
+        t.optional(Inversion),
+        t.optional(Bass),
+        t.zeroOrMore(Degree),
+      ]),
+    }),
+    t.optional(Frame),
+    t.optional(Offset),
+    t.optional(Footnote),
+    t.optional(Level),
+    t.optional(Staff),
+  ] as const
 );

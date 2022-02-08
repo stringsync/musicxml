@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Clef } from './Clef';
 import { Directive } from './Directive';
 import { Divisions } from './Divisions';
@@ -25,27 +25,18 @@ import { Transpose } from './Transpose';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/attributes/}
  */
-export type Attributes = ReturnType<typeof Attributes>;
-
-export const Attributes = xml.element(
-  'attributes',
-  {
-    attributes: {},
-    content: [
-      t.optional(Footnote),
-      t.optional(Level),
-      t.optional(Divisions),
-      t.label({ label: 'keys', value: t.zeroOrMore(Key) }),
-      t.label({ label: 'times', value: t.zeroOrMore(Time) }),
-      t.optional(Staves),
-      t.optional(PartSymbol),
-      t.optional(Instruments),
-      t.label({ label: 'clefs', value: t.zeroOrMore(Clef) }),
-      t.label({ label: 'staff-details', value: t.zeroOrMore(StaffDetails) }),
-      t.label({ label: 'transpositions', value: t.choices(t.zeroOrMore(Transpose), t.zeroOrMore(ForPart)) }),
-      t.label({ label: 'directives', value: t.zeroOrMore(Directive) }),
-      t.label({ label: 'measure-styles', value: t.zeroOrMore(MeasureStyle) }),
-    ] as const,
-  },
-  {}
-);
+export const Attributes = schema('attributes', {}, [
+  t.optional(Footnote),
+  t.optional(Level),
+  t.optional(Divisions),
+  t.label({ label: 'keys', value: t.zeroOrMore(Key) }),
+  t.label({ label: 'times', value: t.zeroOrMore(Time) }),
+  t.optional(Staves),
+  t.optional(PartSymbol),
+  t.optional(Instruments),
+  t.label({ label: 'clefs', value: t.zeroOrMore(Clef) }),
+  t.label({ label: 'staff-details', value: t.zeroOrMore(StaffDetails) }),
+  t.label({ label: 'transpositions', value: t.choices(t.zeroOrMore(Transpose), t.zeroOrMore(ForPart)) }),
+  t.label({ label: 'directives', value: t.zeroOrMore(Directive) }),
+  t.label({ label: 'measure-styles', value: t.zeroOrMore(MeasureStyle) }),
+] as const);

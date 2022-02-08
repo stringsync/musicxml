@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Assess } from './Assess';
 import { OtherListen } from './OtherListen';
 import { Wait } from './Wait';
@@ -15,13 +15,6 @@ import { Wait } from './Wait';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/listen/}
  */
-export type Listen = ReturnType<typeof Listen>;
-
-export const Listen = xml.element(
-  'listen',
-  {
-    attributes: {},
-    content: [t.label({ label: 'listens', value: t.oneOrMore(t.choices(Assess, Wait, OtherListen)) })] as const,
-  },
-  {}
-);
+export const Listen = schema('listen', {}, [
+  t.label({ label: 'listens', value: t.oneOrMore(t.choices(Assess, Wait, OtherListen)) }),
+] as const);

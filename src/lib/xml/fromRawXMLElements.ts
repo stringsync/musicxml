@@ -1,29 +1,25 @@
 import { MusicXMLError } from '../errors';
-import { Cursor } from '../util';
-import { fromString } from './fromString';
-import * as helpers from './helpers';
 import {
-  Child,
   ChoicesDescriptor,
   Descriptor,
-  DescriptorValue,
+  DescriptorChild,
   FloatDescriptor,
   IntDescriptor,
   OneOrMoreDescriptor,
   OptionalDescriptor,
-  RawXMLElement,
   RequiredDescriptor,
-  Resolution,
   StringDescriptor,
-  XMLElementFactory,
+  XMLElement,
+  XMLElementCtor,
   ZeroOrMoreDescriptor,
-} from './types';
+} from '../schema';
+import * as util from '../util';
+import { Cursor } from '../util';
+import { fromString } from './fromString';
+import { RawXMLElement, Resolution } from './types';
 import { zero } from './zero';
 
-export const fromRawXMLElements = <T extends Descriptor | Descriptor[]>(
-  elements: RawXMLElement[],
-  child: T
-): DescriptorValue<T> => {
+export const fromRawXMLElements = <T extends Descriptor[]>(elements: RawXMLElement[], child: T): XMLElement[] => {
   const res = resolve(Cursor.from(elements), child);
   switch (res.type) {
     case 'resolved':
@@ -34,17 +30,17 @@ export const fromRawXMLElements = <T extends Descriptor | Descriptor[]>(
   }
 };
 
-const resolve = (cursor: Cursor<RawXMLElement>, child: Child): Resolution => {
+const resolve = (cursor: Cursor<RawXMLElement>, child: DescriptorChild): Resolution => {
   if (cursor.done()) {
     return { type: 'zero', value: zero(child) };
   }
-  if (helpers.isString(child)) {
+  if (util.isString(child)) {
     return resolveConstant(cursor, child);
   }
-  if (helpers.isNumber(child)) {
+  if (util.isNumber(child)) {
     return resolveConstant(cursor, child);
   }
-  if (helpers.isDescriptor(child)) {
+  if (util.isDescriptor(child)) {
     switch (child.type) {
       case 'optional':
       case 'required':
@@ -62,13 +58,13 @@ const resolve = (cursor: Cursor<RawXMLElement>, child: Child): Resolution => {
         return resolvePrimitive(cursor, child);
     }
   }
-  if (helpers.isXMLElementFactory(child)) {
+  if (util.isXMLElementCtor(child)) {
     return resolveElement(cursor, child);
   }
-  if (helpers.isFunction(child)) {
+  if (util.isFunction(child)) {
     return resolve(cursor, child());
   }
-  if (helpers.isArray(child)) {
+  if (util.isArray(child)) {
     return resolveArray(cursor, child);
   }
   throw new MusicXMLError({
@@ -166,7 +162,7 @@ const resolveMulti = (
   }
 };
 
-const resolveContent = (cursor: Cursor<RawXMLElement>, descriptors: Descriptor[]) => {
+const resolveContent = (cursor: Cursor<RawXMLElement>, descriptors: Descriptor[] | ReadonlyArray<Descriptor>) => {
   const content = new Array<any>();
   for (const descriptor of descriptors) {
     const resolution = resolve(cursor, descriptor);
@@ -182,23 +178,23 @@ const resolveContent = (cursor: Cursor<RawXMLElement>, descriptors: Descriptor[]
   return content;
 };
 
-const resolveElement = (cursor: Cursor<RawXMLElement>, factory: XMLElementFactory<any, any, any>): Resolution => {
+const resolveElement = (cursor: Cursor<RawXMLElement>, ctor: XMLElementCtor): Resolution => {
   const element = cursor.get();
-  if (element.type === 'element' && element.name === factory.elementName) {
+  if (element.type === 'element' && element.name === ctor.schema.name) {
     cursor.next();
 
     const attributes: any = {};
     for (const [name, value] of Object.entries(element.attributes)) {
-      if (name in factory.schema.attributes) {
-        const descriptor = factory.schema.attributes[name];
+      if (name in ctor.schema.attributes) {
+        const descriptor = ctor.schema.attributes[name];
         attributes[name] = fromString(value, descriptor);
       }
     }
 
-    const content = resolveContent(Cursor.from(element.children), factory.schema.content);
+    const content = resolveContent(Cursor.from(element.children), ctor.schema.contents);
     return {
       type: 'resolved',
-      value: factory({ attributes, content }),
+      value: new ctor({ attributes, content }),
     };
   }
 

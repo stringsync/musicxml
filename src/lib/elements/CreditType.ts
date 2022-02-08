@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<credit-type>` element
@@ -22,10 +22,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-type/}
  */
-export type CreditType = ReturnType<typeof CreditType>;
-
-export const CreditType = xml.element(
-  'credit-type',
-  { attributes: {}, content: [t.required(dataTypes.string())] as const },
-  {}
-);
+export const CreditType = schema('credit-type', {}, [t.required(dataTypes.string())] as const);

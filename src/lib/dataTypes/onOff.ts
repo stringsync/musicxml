@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The on-off type is used for notation elements such as string mutes.
  *

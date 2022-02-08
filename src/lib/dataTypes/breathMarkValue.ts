@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 export const breathMarkValue = () => {
   return t.label({
     label: 'breath-mark-value',

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { StaffDistance } from './StaffDistance';
 
 /**
@@ -13,18 +13,13 @@ import { StaffDistance } from './StaffDistance';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/}
  */
-export type StaffLayout = ReturnType<typeof StaffLayout>;
-
-export const StaffLayout = xml.element(
+export const StaffLayout = schema(
   'staff-layout',
   {
-    attributes: {
-      /**
-       * Refers to staff numbers within the part, from top to bottom on the system. A value of 1 is used if not present.
-       */
-      number: t.optional(dataTypes.staffNumber()),
-    },
-    content: [t.optional(StaffDistance)] as const,
+    /**
+     * Refers to staff numbers within the part, from top to bottom on the system. A value of 1 is used if not present.
+     */
+    number: t.optional(dataTypes.staffNumber()),
   },
-  {}
+  [t.optional(StaffDistance)] as const
 );

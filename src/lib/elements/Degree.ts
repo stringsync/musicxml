@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { DegreeAlter } from './DegreeAlter';
 import { DegreeType } from './DegreeType';
 import { DegreeValue } from './DegreeValue';
@@ -18,18 +18,13 @@ import { DegreeValue } from './DegreeValue';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/degree/}
  */
-export type Degree = ReturnType<typeof Degree>;
-
-export const Degree = xml.element(
+export const Degree = schema(
   'degree',
   {
-    attributes: {
-      /**
-       * Specifies whether or not to print an object. It is yes if not specified.
-       */
-      ['print-object']: t.optional(dataTypes.yesNo()),
-    },
-    content: [t.required(DegreeValue), t.required(DegreeAlter), t.required(DegreeType)] as const,
+    /**
+     * Specifies whether or not to print an object. It is yes if not specified.
+     */
+    ['print-object']: t.optional(dataTypes.yesNo()),
   },
-  {}
+  [t.required(DegreeValue), t.required(DegreeAlter), t.required(DegreeType)] as const
 );

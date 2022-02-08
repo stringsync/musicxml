@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { AccidentalText } from './AccidentalText';
 import { DisplayText } from './DisplayText';
 
@@ -14,13 +14,6 @@ import { DisplayText } from './DisplayText';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/notehead-text/}
  */
-export type NoteheadText = ReturnType<typeof NoteheadText>;
-
-export const NoteheadText = xml.element(
-  'notehead-text',
-  {
-    attributes: {},
-    content: [t.label({ label: 'texts', value: t.oneOrMore([DisplayText, AccidentalText]) })] as const,
-  },
-  {}
-);
+export const NoteheadText = schema('notehead-text', {}, [
+  t.label({ label: 'texts', value: t.oneOrMore([DisplayText, AccidentalText]) }),
+] as const);

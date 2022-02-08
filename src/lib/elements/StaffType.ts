@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The <staff-type> element
@@ -10,10 +10,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-type/}
  */
-export type StaffType = ReturnType<typeof StaffType>;
-
-export const StaffType = xml.element(
-  'staff-type',
-  { attributes: {}, content: [t.required(dataTypes.staffType())] as const },
-  {}
-);
+export const StaffType = schema('staff-type', {}, [t.required(dataTypes.staffType())] as const);

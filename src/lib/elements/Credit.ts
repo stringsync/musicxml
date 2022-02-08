@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Bookmark } from './Bookmark';
 import { CreditImage } from './CreditImage';
 import { CreditSymbol } from './CreditSymbol';
@@ -25,36 +25,31 @@ import { Link } from './Link';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit/}
  */
-export type Credit = ReturnType<typeof Credit>;
-
-export const Credit = xml.element(
+export const Credit = schema(
   'credit',
   {
-    attributes: {
-      /**
-       * Specifies an ID that is unique to the entire document.
-       */
-      id: t.optional(dataTypes.id()),
+    /**
+     * Specifies an ID that is unique to the entire document.
+     */
+    id: t.optional(dataTypes.id()),
 
-      /**
-       * Specifies the page number where the `<credit>` should appear. This is an integer value that starts with 1 for
-       * the first page. Its value is 1 if not specified. Since credits occur before the music, these page numbers do
-       * not refer to the page numbering specified by the `<print>` element's page-number attribute.
-       */
-      page: t.optional(dataTypes.positiveInteger()),
-    },
-    content: [
-      t.label({ label: 'credit-types', value: t.zeroOrMore(CreditType) }),
-      t.label({ label: 'links', value: t.zeroOrMore(Link) }),
-      t.label({ label: 'bookmarks', value: t.zeroOrMore(Bookmark) }),
-      t.label({
-        label: 'credit-detail',
-        value: t.choices(CreditImage, [
-          t.choices(CreditWords, CreditSymbol),
-          t.zeroOrMore([t.zeroOrMore(Link), t.zeroOrMore(Bookmark), t.choices(CreditWords, CreditSymbol)] as const),
-        ] as const),
-      }),
-    ] as const,
+    /**
+     * Specifies the page number where the `<credit>` should appear. This is an integer value that starts with 1 for
+     * the first page. Its value is 1 if not specified. Since credits occur before the music, these page numbers do
+     * not refer to the page numbering specified by the `<print>` element's page-number attribute.
+     */
+    page: t.optional(dataTypes.positiveInteger()),
   },
-  {}
+  [
+    t.label({ label: 'credit-types', value: t.zeroOrMore(CreditType) }),
+    t.label({ label: 'links', value: t.zeroOrMore(Link) }),
+    t.label({ label: 'bookmarks', value: t.zeroOrMore(Bookmark) }),
+    t.label({
+      label: 'credit-detail',
+      value: t.choices(CreditImage, [
+        t.choices(CreditWords, CreditSymbol),
+        t.zeroOrMore([t.zeroOrMore(Link), t.zeroOrMore(Bookmark), t.choices(CreditWords, CreditSymbol)] as const),
+      ] as const),
+    }),
+  ] as const
 );

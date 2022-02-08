@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The time-symbol type indicates how to display a time signature. The normal value is the usual fractional display, and
  * is the implied symbol type if none is specified. Other options are the common and cut time symbols, as well as a

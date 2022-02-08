@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The css-font-size type includes the CSS font sizes used as an alternative to a numeric point size. In CSS these refer
  * to an entry in a table of font sizes computed and kept by the user agent. The scaling is relative to the reference

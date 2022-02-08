@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The numeral-mode type specifies the mode similar to the mode type, but with a restricted set of values. The different
  * minor values are used to interpret `<numeral-root>` values of 6 and 7 when present in a minor key. The harmonic minor

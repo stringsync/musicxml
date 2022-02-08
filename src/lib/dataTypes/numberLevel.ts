@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * Slurs, tuplets, and many other features can be concurrent and overlap within a single musical part. The number-level
  * entity distinguishes up to 16 concurrent objects of the same type when the objects overlap in MusicXML document

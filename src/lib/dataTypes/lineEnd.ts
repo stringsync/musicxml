@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The line-end type specifies if there is a jog up or down (or both), an arrow, or nothing at the start or end of a
  * bracket.

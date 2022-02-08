@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<fz>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fz/}
  */
-export type Fz = ReturnType<typeof Fz>;
-
-export const Fz = xml.element('fz', { attributes: {}, content: [] as const }, {});
+export const Fz = schema('fz', {}, [] as const);

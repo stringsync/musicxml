@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<midi-bank>` element
@@ -10,10 +10,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/midi-bank/}
  */
-export type MidiBank = ReturnType<typeof MidiBank>;
-
-export const MidiBank = xml.element(
-  'midi-bank',
-  { attributes: {}, content: [t.required(dataTypes.midi16384())] as const },
-  {}
-);
+export const MidiBank = schema('midi-bank', {}, [t.required(dataTypes.midi16384())] as const);

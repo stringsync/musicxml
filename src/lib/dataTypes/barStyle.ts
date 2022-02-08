@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The bar-style type represents barline style information. Choices are regular, dotted, dashed, heavy, light-light,
  * light-heavy, heavy-light, heavy-heavy, tick (a short stroke through the top line), short (a partial barline between

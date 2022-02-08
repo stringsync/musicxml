@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<source>` element
@@ -11,6 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/source/}
  */
-export type Source = ReturnType<typeof Source>;
-
-export const Source = xml.element('source', { attributes: {}, content: [t.optional(dataTypes.string())] as const }, {});
+export const Source = schema('source', {}, [t.optional(dataTypes.string())] as const);

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<metronome-relation>` element
@@ -12,10 +12,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-relation/}
  */
-export type MetronomeRelation = ReturnType<typeof MetronomeRelation>;
-
-export const MetronomeRelation = xml.element(
-  'metronome-relation',
-  { attributes: {}, content: [t.optional(dataTypes.string())] as const },
-  {}
-);
+export const MetronomeRelation = schema('metronome-relation', {}, [t.optional(dataTypes.string())] as const);

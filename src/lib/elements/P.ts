@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<p>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/p/}
  */
-export type P = ReturnType<typeof P>;
-
-export const P = xml.element('p', { attributes: {}, content: [] as const }, {});
+export const P = schema('p', {}, [] as const);

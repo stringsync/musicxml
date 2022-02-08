@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { ExceptVoice } from './ExceptVoice';
 import { SlashDot } from './SlashDot';
 import { SlashType } from './SlashType';
@@ -19,34 +19,29 @@ import { SlashType } from './SlashType';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beat-repeat/}
  */
-export type BeatRepeat = ReturnType<typeof BeatRepeat>;
-
-export const BeatRepeat = xml.element(
+export const BeatRepeat = schema(
   'beat-repeat',
   {
-    attributes: {
-      /**
-       * Indicates the starting or stopping point of the section displaying the beat repeat symbols.
-       */
-      type: t.required(dataTypes.startStop()),
+    /**
+     * Indicates the starting or stopping point of the section displaying the beat repeat symbols.
+     */
+    type: t.required(dataTypes.startStop()),
 
-      /**
-       * Specifies the number of slashes to use in the symbol. The value is 1 if not specified.
-       */
-      slashes: t.optional(dataTypes.positiveInteger()),
+    /**
+     * Specifies the number of slashes to use in the symbol. The value is 1 if not specified.
+     */
+    slashes: t.optional(dataTypes.positiveInteger()),
 
-      /**
-       * Indicates whether or not to use dots as well (for instance, with mixed rhythm patterns). The value is no if not
-       * specified.
-       */
-      ['use-dots']: t.optional(dataTypes.yesNo()),
-    },
-    content: [
-      t.label({
-        label: 'beat-repeat',
-        value: t.optional([t.optional([t.required(SlashType), t.zeroOrMore(SlashDot)]), t.zeroOrMore(ExceptVoice)]),
-      }),
-    ] as const,
+    /**
+     * Indicates whether or not to use dots as well (for instance, with mixed rhythm patterns). The value is no if not
+     * specified.
+     */
+    ['use-dots']: t.optional(dataTypes.yesNo()),
   },
-  {}
+  [
+    t.label({
+      label: 'beat-repeat',
+      value: t.optional([t.optional([t.required(SlashType), t.zeroOrMore(SlashDot)]), t.zeroOrMore(ExceptVoice)]),
+    }),
+  ] as const
 );

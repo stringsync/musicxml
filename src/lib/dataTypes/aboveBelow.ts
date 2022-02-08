@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The above-below type is used to indicate whether one element appears above or below another element.
  *

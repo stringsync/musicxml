@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The symbol-size type is used to distinguish between full, cue sized, grace cue sized, and oversized symbols.
  *

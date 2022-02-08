@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The tremolo-type is used to distinguish double-note, single-note, and unmeasured tremolos.
  *

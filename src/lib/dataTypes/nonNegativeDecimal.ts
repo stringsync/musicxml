@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The non-negative-decimal type specifies a non-negative decimal value.
  *

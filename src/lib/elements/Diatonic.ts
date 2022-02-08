@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<diatonic>` element
@@ -12,10 +12,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/diatonic/}
  */
-export type Diatonic = ReturnType<typeof Diatonic>;
-
-export const Diatonic = xml.element(
-  'diatonic',
-  { attributes: {}, content: [t.label({ label: 'diatonic', value: t.required(dataTypes.integer()) })] as const },
-  {}
-);
+export const Diatonic = schema('diatonic', {}, [
+  t.label({ label: 'diatonic', value: t.required(dataTypes.integer()) }),
+] as const);

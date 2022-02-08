@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The accidental-value type represents notated accidentals supported by MusicXML. In the MusicXML 2.0 DTD this was a
  * string with values that could be included. The XSD strengthens the data typing to an enumerated list. The quarter-

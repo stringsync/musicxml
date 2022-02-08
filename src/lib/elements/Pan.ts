@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<pan>` element
@@ -12,10 +12,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pan/}
  */
-export type Pan = ReturnType<typeof Pan>;
-
-export const Pan = xml.element(
-  'pan',
-  { attributes: {}, content: [t.label({ label: 'pan', value: t.required(dataTypes.rotationDegrees()) })] as const },
-  {}
-);
+export const Pan = schema('pan', {}, [
+  t.label({ label: 'pan', value: t.required(dataTypes.rotationDegrees()) }),
+] as const);

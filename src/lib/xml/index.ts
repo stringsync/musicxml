@@ -1,3 +1,7 @@
-export * from './t';
-export * from './types';
-export * as xml from './xml';
+export * from './fromRawXMLElements';
+export * from './fromString';
+export * from './isValid';
+export * from './mergeZero';
+export * from './toRawXMLElement';
+export * from './toString';
+export * from './zero';

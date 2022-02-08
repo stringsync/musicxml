@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The start-stop type is used for an attribute of musical elements that can either start or stop, such as tuplets.
  *

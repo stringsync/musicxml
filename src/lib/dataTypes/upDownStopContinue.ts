@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The up-down-stop-continue type is used for octave-shift elements, indicating the direction of the shift from their
  * true pitched values because of printing difficulty.

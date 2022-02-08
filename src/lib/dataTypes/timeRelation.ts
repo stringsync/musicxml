@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The time-relation type indicates the symbol used to represent the interchangeable aspect of dual time signatures.
  *

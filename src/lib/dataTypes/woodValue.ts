@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 export const woodValue = () => {
   return t.label({
     label: 'wood-value',

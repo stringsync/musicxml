@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<concert-score>` element
@@ -14,6 +14,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/concert-score/}
  */
-export type ConcertScore = ReturnType<typeof ConcertScore>;
-
-export const ConcertScore = xml.element('concert-score', { attributes: {}, content: [] as const }, {});
+export const ConcertScore = schema('concert-score', {}, [] as const);

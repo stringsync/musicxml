@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Appearance } from './Appearance';
 import { ConcertScore } from './ConcertScore';
 import { LyricFont } from './LyricFont';
@@ -20,23 +20,14 @@ import { WordFont } from './WordFont';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/}
  */
-export type Defaults = ReturnType<typeof Defaults>;
-
-export const Defaults = xml.element(
-  'defaults',
-  {
-    attributes: {},
-    content: [
-      t.optional(Scaling),
-      t.optional(ConcertScore),
-      t.optional(PageLayout),
-      t.optional(SystemLayout),
-      t.optional(Appearance),
-      t.optional(MusicFont),
-      t.optional(WordFont),
-      t.label({ label: 'lyric-fonts', value: t.zeroOrMore(LyricFont) }),
-      t.label({ label: 'lyric-languages', value: t.zeroOrMore(LyricLanguage) }),
-    ] as const,
-  },
-  {}
-);
+export const Defaults = schema('defaults', {}, [
+  t.optional(Scaling),
+  t.optional(ConcertScore),
+  t.optional(PageLayout),
+  t.optional(SystemLayout),
+  t.optional(Appearance),
+  t.optional(MusicFont),
+  t.optional(WordFont),
+  t.label({ label: 'lyric-fonts', value: t.zeroOrMore(LyricFont) }),
+  t.label({ label: 'lyric-languages', value: t.zeroOrMore(LyricLanguage) }),
+] as const);

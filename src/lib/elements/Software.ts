@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<software>` element
@@ -9,6 +9,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/software/}
  */
-export type Software = ReturnType<typeof Software>;
-
-export const Software = xml.element('software', { attributes: {}, content: [t.string()] as const }, {});
+export const Software = schema('software', {}, [t.string()] as const);

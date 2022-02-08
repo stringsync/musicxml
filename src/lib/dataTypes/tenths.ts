@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The tenths type is a number representing tenths of interline staff space (positive or negative). Both integer and
  * decimal values are allowed, such as 5 for a half space and 2.5 for a quarter space. Interline space is measured from

@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The color type indicates the color of an element. Color may be represented as hexadecimal RGB triples, as in HTML, or
  * as hexadecimal ARGB tuples, with the A indicating alpha of transparency. An alpha value of 00 is totally transparent;

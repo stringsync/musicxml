@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The milliseconds type represents an integral number of milliseconds.
  *

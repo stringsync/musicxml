@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<key>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key/}
  */
-export type KeyStep = ReturnType<typeof KeyStep>;
-
-export const KeyStep = xml.element(
-  'key-step',
-  { attributes: {}, content: [t.required(dataTypes.step())] as const },
-  {}
-);
+export const KeyStep = schema('key-step', {}, [t.required(dataTypes.step())] as const);

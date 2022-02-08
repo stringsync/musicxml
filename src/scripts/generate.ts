@@ -3,10 +3,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as elements from '../lib/elements';
 import { MusicXMLError } from '../lib/errors';
-import { Child, XMLElementFactory, XMLElementSchema } from '../lib/xml';
-import * as helpers from '../lib/xml/helpers';
-
-type AnyFactory = XMLElementFactory<string, XMLElementSchema<any, any>, Record<string, any>>;
+import { DescriptorChild, XMLElementSchema } from '../lib/schema';
+import * as util from '../lib/util';
 
 const OUTPUT_PATH = path.join(__dirname, '..', 'generated', 'elements.ts');
 
@@ -30,18 +28,18 @@ const toCamelCase = (string: string): string => {
   return uncapitalize(toPascalCase(string));
 };
 
-const getClassName = (factory: AnyFactory): string => {
-  return toPascalCase(factory.elementName);
+const getClassName = (factory: XMLElementSchema): string => {
+  return toPascalCase(factory.name);
 };
 
-const getTypeLiteral = (child: Child): string => {
-  if (helpers.isString(child)) {
+const getTypeLiteral = (child: DescriptorChild): string => {
+  if (util.isString(child)) {
     return `'${child}'`;
   }
-  if (helpers.isNumber(child)) {
+  if (util.isNumber(child)) {
     return child.toString();
   }
-  if (helpers.isDescriptor(child)) {
+  if (util.isDescriptor(child)) {
     switch (child.type) {
       case 'string':
       case 'regex':
@@ -68,13 +66,13 @@ const getTypeLiteral = (child: Child): string => {
         return `Exclude<${getTypeLiteral(child.include)}, ${getTypeLiteral(child.exclude)}>`;
     }
   }
-  if (helpers.isXMLElementFactory(child)) {
+  if (util.isXMLElementSchema(child)) {
     return getClassName(child);
   }
-  if (helpers.isFunction(child)) {
+  if (util.isFunction(child)) {
     return getTypeLiteral(child());
   }
-  if (helpers.isArray(child)) {
+  if (util.isArray(child)) {
     return `[${child.map(getTypeLiteral).join(', ')}]`;
   }
   throw new MusicXMLError({
@@ -84,91 +82,24 @@ const getTypeLiteral = (child: Child): string => {
   });
 };
 
-const getZeroValueLiteral = (child: Child): string => {
-  if (helpers.isString(child)) {
-    return `'${child}'`;
-  }
-  if (helpers.isNumber(child)) {
-    return child.toString();
-  }
-  if (helpers.isDescriptor(child)) {
-    switch (child.type) {
-      case 'string':
-        return `''`;
-      case 'regex':
-        return `'${child.zero}'`;
-      case 'int':
-      case 'float':
-        return '0';
-      case 'date':
-        return 'new Date(1970, 0, 1, 0, 0, 0, 0)';
-      case 'constant':
-        return `${getZeroValueLiteral(child.value)}`;
-      case 'choices':
-        return getZeroValueLiteral(child.choices[0]);
-      case 'optional':
-        return 'null';
-      case 'required':
-      case 'label':
-        return getZeroValueLiteral(child.value);
-      case 'zeroOrMore':
-        return '[]';
-      case 'oneOrMore':
-        return `[${getZeroValueLiteral(child.value)}]`;
-      case 'not':
-        return getZeroValueLiteral(child.include);
-    }
-  }
-  if (helpers.isXMLElementFactory(child)) {
-    return `new ${getClassName(child)}()`;
-  }
-  if (helpers.isFunction(child)) {
-    return getZeroValueLiteral(child());
-  }
-  if (helpers.isArray(child)) {
-    return `[${child.map(getZeroValueLiteral).join(', ')}]`;
-  }
-  throw new MusicXMLError({
-    symptom: 'cannot compute zero value literal',
-    context: { child },
-    remedy: 'use a different child or update getZeroValueLiteral',
-  });
-};
-
-const getAttributesTypeLiteral = (factory: AnyFactory): string => {
+const getAttributesTypeLiteral = (schema: XMLElementSchema): string => {
   const attributes = new Array<string>();
-  for (const [key, value] of Object.entries(factory.schema.attributes)) {
-    attributes.push(`'${key}': ${getTypeLiteral(value as Child)}`);
+  for (const [key, value] of Object.entries(schema.attributes)) {
+    attributes.push(`'${key}': ${getTypeLiteral(value as DescriptorChild)}`);
   }
   return attributes.length > 0 ? `{ ${attributes.join(', ')} }` : 'Record<string, unknown>';
 };
 
-const getAttributesZeroValueLiteral = (factory: AnyFactory): string => {
-  const attributes = new Array<string>();
-  for (const [key, value] of Object.entries(factory.schema.attributes)) {
-    attributes.push(`['${key}']: ${getZeroValueLiteral(value as Child)}`);
-  }
-  return attributes.length > 0 ? `{ ${attributes.join(', ')} }` : '{}';
-};
-
-const getContentsTypeLiteral = (factory: AnyFactory): string => {
+const getContentsTypeLiteral = (schema: XMLElementSchema): string => {
   const contents = new Array<string>();
-  for (const content of factory.schema.content) {
+  for (const content of schema.contents) {
     contents.push(getTypeLiteral(content));
   }
   return `[${contents.join(', ')}]`;
 };
 
-const getContentsZeroValueLiteral = (factory: AnyFactory): string => {
-  const contents = new Array<string>();
-  for (const content of factory.schema.content) {
-    contents.push(getZeroValueLiteral(content));
-  }
-  return `[${contents.join(', ')}]`;
-};
-
-const getAttributeLabel = (child: Child): string => {
-  if (helpers.isDescriptor(child)) {
+const getAttributeLabel = (child: DescriptorChild): string => {
+  if (util.isDescriptor(child)) {
     switch (child.type) {
       case 'label':
         return child.label;
@@ -180,11 +111,11 @@ const getAttributeLabel = (child: Child): string => {
   return '';
 };
 
-const getAttributeAccessorMethodLiterals = (factory: AnyFactory): string => {
+const getAttributeAccessorMethodLiterals = (schema: XMLElementSchema): string => {
   const methods = new Array<string>();
-  for (const [key, value] of Object.entries(factory.schema.attributes)) {
-    const name = getAttributeLabel(value as Child) || key;
-    const typeLiteral = getTypeLiteral(value as Child);
+  for (const [key, value] of Object.entries(schema.attributes)) {
+    const name = getAttributeLabel(value) || key;
+    const typeLiteral = getTypeLiteral(value);
     methods.push(`  get${toPascalCase(decolonize(name))}(): ${typeLiteral} { return this.attributes['${key}']; }`);
     methods.push(
       `  set${toPascalCase(decolonize(name))}(${toCamelCase(
@@ -195,27 +126,27 @@ const getAttributeAccessorMethodLiterals = (factory: AnyFactory): string => {
   return methods.join('\n');
 };
 
-const getSchemaLiteral = (factory: AnyFactory): string => {
+const getSchemaLiteral = (schema: XMLElementSchema): string => {
   const dfs = (value: any): string => {
-    if (helpers.isString(value)) {
+    if (util.isString(value)) {
       return `'${value}'`;
     }
-    if (helpers.isNumber(value)) {
+    if (util.isNumber(value)) {
       return value.toString();
     }
-    if (helpers.isNull(value)) {
+    if (util.isNull(value)) {
       return 'null';
     }
-    if (helpers.isArray(value)) {
+    if (util.isArray(value)) {
       return `[${value.map(dfs).join(', ')}]`;
     }
-    if (helpers.isXMLElementFactory(value)) {
-      return toPascalCase(value.elementName);
+    if (util.isXMLElementSchema(value)) {
+      return toPascalCase(value.name);
     }
-    if (helpers.isFunction(value)) {
+    if (util.isFunction(value)) {
       return dfs(value());
     }
-    if (helpers.isObject(value)) {
+    if (util.isObject(value)) {
       return Object.keys(value).length > 0
         ? `{ ${Object.entries(value)
             .map(([k, v]) => `'${k}': ${dfs(v)}`)
@@ -228,14 +159,14 @@ const getSchemaLiteral = (factory: AnyFactory): string => {
       remedy: 'use a different value or update getSchemaLiteral',
     });
   };
-  return dfs(factory.schema);
+  return `{ name: ${dfs(schema.name)}, attributes: ${dfs(schema.attributes)}, contents: ${dfs(schema.contents)} }`;
 };
 
-const getContentsAccessorMethodLiterals = (factory: AnyFactory): string => {
-  const contents = factory.schema.content;
+const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): string => {
+  const contents = schema.contents;
 
-  const hasTextNode = (child: Child): boolean => {
-    if (helpers.isDescriptor(child)) {
+  const hasTextNode = (child: DescriptorChild): boolean => {
+    if (util.isDescriptor(child)) {
       switch (child.type) {
         case 'string':
         case 'regex':
@@ -249,8 +180,8 @@ const getContentsAccessorMethodLiterals = (factory: AnyFactory): string => {
     return false;
   };
 
-  const getAccessorName = (child: Child): string => {
-    if (helpers.isDescriptor(child)) {
+  const getAccessorName = (child: DescriptorChild): string => {
+    if (util.isDescriptor(child)) {
       switch (child.type) {
         case 'string':
         case 'regex':
@@ -262,12 +193,12 @@ const getContentsAccessorMethodLiterals = (factory: AnyFactory): string => {
           return child.label;
       }
     }
-    if (helpers.isXMLElementFactory(child)) {
-      return child.elementName;
+    if (util.isXMLElementSchema(child)) {
+      return child.name;
     }
     throw new MusicXMLError({
       symptom: 'cannot compute content accessor name',
-      context: { child, elementName: factory.elementName },
+      context: { child, elementName: schema.name },
       remedy: 'add a label, or make sure the leaf child is a factory',
     });
   };
@@ -281,7 +212,7 @@ const getContentsAccessorMethodLiterals = (factory: AnyFactory): string => {
   if (numTextNodes > 1) {
     throw new MusicXMLError({
       symptom: 'too many text nodes',
-      context: { numTextNodes, factory },
+      context: { numTextNodes, factory: schema },
       remedy: 'use labels for all text nodes',
     });
   }
@@ -301,61 +232,53 @@ const getContentsAccessorMethodLiterals = (factory: AnyFactory): string => {
   return methods.join('\n');
 };
 
-const toClassLiteral = (factory: AnyFactory): string => {
-  const className = getClassName(factory);
+const toClassLiteral = (schema: XMLElementSchema): string => {
+  const className = getClassName(schema);
 
-  const schemaLiteral = getSchemaLiteral(factory);
+  const schemaLiteral = getSchemaLiteral(schema);
 
   const attributesTypeName = `${className}Attributes`;
-  const attributesTypeLiteral = getAttributesTypeLiteral(factory);
-  const attributesZeroValueLiteral = getAttributesZeroValueLiteral(factory);
-  const attributesAccessorMethodLiterals = getAttributeAccessorMethodLiterals(factory);
+  const attributesTypeLiteral = getAttributesTypeLiteral(schema);
+  const attributesAccessorMethodLiterals = getAttributeAccessorMethodLiterals(schema);
 
   const contentsTypeName = `${className}Contents`;
-  const contentsTypeLiteral = getContentsTypeLiteral(factory);
-  const contentsZeroValueLiteral = getContentsZeroValueLiteral(factory);
-  const contentsAccessorMethodLiterals = getContentsAccessorMethodLiterals(factory);
+  const contentsTypeLiteral = getContentsTypeLiteral(schema);
+  const contentsAccessorMethodLiterals = getContentsAccessorMethodLiterals(schema);
 
   return `
 export type ${attributesTypeName} = ${attributesTypeLiteral};
 
 export type ${contentsTypeName} = ${contentsTypeLiteral};
 
-export class ${className} implements XMLElement<${attributesTypeName}, ${contentsTypeName}> {
-  static readonly elementName = '${factory.elementName}';
-  static readonly schema = ${schemaLiteral};
+export class ${className} implements XMLElement<'${schema.name}', ${attributesTypeName}, ${contentsTypeName}> {
+  static readonly schema = ${schemaLiteral} as const;
+
+  readonly schema = ${className}.schema;
 
   attributes: ${attributesTypeName};
   contents: ${contentsTypeName};
 
   constructor(opts?: { attributes?: Partial<${attributesTypeName}>; content?: ${contentsTypeName} }) {
-    this.attributes = Object.assign(${attributesZeroValueLiteral}, opts?.attributes);
-    this.contents = opts?.content ?? ${contentsZeroValueLiteral};
+    this.attributes = xml.mergeZero(opts?.attributes, ${className}.schema) as ${attributesTypeName};
+    this.contents = opts?.content ?? xml.zero(${className}.schema.contents);
   }
 ${attributesAccessorMethodLiterals}
 ${contentsAccessorMethodLiterals}
 }`;
 };
 
-const getXmlElementInterfaceLiteral = (): string => {
-  return `
-export interface XMLElement<A extends Record<string, any>, C extends any[]> {
-  attributes: A;
-  contents: C;
-}`;
-};
-
-const generateFileContents = (roots: AnyFactory[]): string => {
+const generateFileContents = (roots: XMLElementSchema[]): string => {
   const literals = new Array<string>();
   const seen = new Set<string>();
 
   literals.push('/* eslint-disable @typescript-eslint/ban-types */');
-  literals.push(getXmlElementInterfaceLiteral());
+  literals.push(`import { XMLElement, XMLElementSchema } from '../lib/schema';`);
+  literals.push(`import * as xml from '../lib/xml`);
 
   // Dependencies must appear first in the file, which is why we're going through the trouble of traversing the
   // tree dfs in-order.
-  const dfs = (child: Child): void => {
-    if (helpers.isDescriptor(child)) {
+  const dfs = (child: DescriptorChild): void => {
+    if (util.isDescriptor(child)) {
       switch (child.type) {
         case 'label':
         case 'optional':
@@ -369,14 +292,14 @@ const generateFileContents = (roots: AnyFactory[]): string => {
           return child.choices.forEach(dfs);
       }
     }
-    if (helpers.isXMLElementFactory(child)) {
-      dfs(child.schema.content);
-      if (!seen.has(child.elementName)) {
-        seen.add(child.elementName);
+    if (util.isXMLElementSchema(child)) {
+      dfs(child.contents);
+      if (!seen.has(child.name)) {
+        seen.add(child.name);
         literals.push(toClassLiteral(child));
       }
     }
-    if (helpers.isArray(child)) {
+    if (util.isArray(child)) {
       return child.forEach(dfs);
     }
   };

@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * See the definition in the W3C XML Schema standard.
  *

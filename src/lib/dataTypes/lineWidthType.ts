@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The line-width-type defines what type of line is being defined in a <line-width> element. Values include:
  *

@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The mode type is used to specify major/minor and other mode distinctions. Valid mode values include major, minor,
  * dorian, phrygian, lydian, mixolydian, aeolian, ionian, locrian, and none.

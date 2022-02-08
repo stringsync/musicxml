@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<relation>` element
@@ -11,18 +11,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/relation/}
  */
-export type Relation = ReturnType<typeof Relation>;
-
-export const Relation = xml.element(
+export const Relation = schema(
   'relation',
   {
-    attributes: {
-      /**
-       * Standard type values are music, words, and arrangement, but other types may be used.
-       */
-      type: t.optional(dataTypes.token()),
-    },
-    content: [t.required(dataTypes.string())] as const,
+    /**
+     * Standard type values are music, words, and arrangement, but other types may be used.
+     */
+    type: t.optional(dataTypes.token()),
   },
-  {}
+  [t.required(dataTypes.string())] as const
 );

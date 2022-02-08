@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { TuningAlter } from './TuningAlter';
 import { TuningOctave } from './TuningOctave';
 import { TuningStep } from './TuningStep';
@@ -13,10 +13,4 @@ import { TuningStep } from './TuningStep';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accord/}
  */
-export type Accord = ReturnType<typeof Accord>;
-
-export const Accord = xml.element(
-  'accord',
-  { attributes: {}, content: [t.required(TuningStep), t.optional(TuningAlter), t.required(TuningOctave)] as const },
-  {}
-);
+export const Accord = schema('accord', {}, [t.required(TuningStep), t.optional(TuningAlter), t.required(TuningOctave)]);

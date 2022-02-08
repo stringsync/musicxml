@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 export const enclosureShape = () => {
   return t.choices(
     ...([

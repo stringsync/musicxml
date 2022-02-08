@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<accordion-high>` element
@@ -10,6 +10,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accordion-high/}
  */
-export type AccordionHigh = ReturnType<typeof AccordionHigh>;
-
-export const AccordionHigh = xml.element('accordion-high', { attributes: {}, content: [] as const }, {});
+export const AccordionHigh = schema('accordion-high', {}, [] as const);

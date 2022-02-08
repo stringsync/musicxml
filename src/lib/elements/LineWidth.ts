@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<line-width>` element
@@ -10,18 +10,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/line-width/}
  */
-export type LineWidth = ReturnType<typeof LineWidth>;
-
-export const LineWidth = xml.element(
+export const LineWidth = schema(
   'line-width',
   {
-    attributes: {
-      /**
-       * The type of line whose width is being defined.
-       */
-      type: t.required(dataTypes.lineWidthType()),
-    },
-    content: [t.label({ label: 'line-width', value: t.required(dataTypes.tenths()) })] as const,
+    /**
+     * The type of line whose width is being defined.
+     */
+    type: t.required(dataTypes.lineWidthType()),
   },
-  {}
+  [t.label({ label: 'line-width', value: t.required(dataTypes.tenths()) })] as const
 );

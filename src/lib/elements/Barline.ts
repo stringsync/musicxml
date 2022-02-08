@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { BarStyle } from './BarStyle';
 import { Coda } from './Coda';
 import { Ending } from './Ending';
@@ -23,57 +23,52 @@ import { WavyLine } from './WavyLine';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/barline/}
  */
-export type Barline = ReturnType<typeof Barline>;
-
-export const Barline = xml.element(
+export const Barline = schema(
   'barline',
   {
-    attributes: {
-      /**
-       * Used for playback when there is a `<coda>` child element. Indicates the end point for a forward jump to a coda
-       * sign. If there are multiple jumps, the value of these parameters can be used to name and distinguish them.
-       */
-      coda: t.label({ label: 'coda-token', value: t.optional(dataTypes.token()) }),
+    /**
+     * Used for playback when there is a `<coda>` child element. Indicates the end point for a forward jump to a coda
+     * sign. If there are multiple jumps, the value of these parameters can be used to name and distinguish them.
+     */
+    coda: t.label({ label: 'coda-token', value: t.optional(dataTypes.token()) }),
 
-      /**
-       * If the segno or coda attributes are used, the divisions attribute can be used to indicate the number of
-       * divisions per quarter note. Otherwise sound and MIDI generating programs may have to recompute this.
-       */
-      divisions: t.optional(dataTypes.divisions()),
+    /**
+     * If the segno or coda attributes are used, the divisions attribute can be used to indicate the number of
+     * divisions per quarter note. Otherwise sound and MIDI generating programs may have to recompute this.
+     */
+    divisions: t.optional(dataTypes.divisions()),
 
-      /**
-       * Specifies an ID that is unique to the entire document.
-       */
-      id: t.optional(dataTypes.id()),
+    /**
+     * Specifies an ID that is unique to the entire document.
+     */
+    id: t.optional(dataTypes.id()),
 
-      /**
-       * Barlines have a location attribute to make it easier to process barlines independently of the other musical
-       * data in a score. It is often easier to set up measures separately from entering notes. The location attribute
-       * must match where the `<barline>` element occurs within the rest of the musical data in the score. If location
-       * is left, it should be the first element in the measure, aside from the `<print>`, `<bookmark>`, and `<link>`
-       * elements. If location is right, it should be the last element, again with the possible exception of the
-       * `<print>`, `<bookmark>`, and `<link>` elements. The default value is right.
-       */
-      location: t.optional(dataTypes.rightLeftMiddle()),
+    /**
+     * Barlines have a location attribute to make it easier to process barlines independently of the other musical
+     * data in a score. It is often easier to set up measures separately from entering notes. The location attribute
+     * must match where the `<barline>` element occurs within the rest of the musical data in the score. If location
+     * is left, it should be the first element in the measure, aside from the `<print>`, `<bookmark>`, and `<link>`
+     * elements. If location is right, it should be the last element, again with the possible exception of the
+     * `<print>`, `<bookmark>`, and `<link>` elements. The default value is right.
+     */
+    location: t.optional(dataTypes.rightLeftMiddle()),
 
-      /**
-       * Used for playback when there is a `<segno>` child element. Indicates the end point for a backward jump to a
-       * segno sign. If there are multiple jumps, the value of these parameters can be used to name and distinguish
-       * them.
-       */
-      segno: t.label({ label: 'segno-token', value: t.optional(dataTypes.token()) }),
-    },
-    content: [
-      t.optional(BarStyle),
-      t.optional(Footnote),
-      t.optional(Level),
-      t.optional(WavyLine),
-      t.optional(Segno),
-      t.optional(Coda),
-      t.label({ label: 'fermatas', value: t.choices([], [Fermata], [Fermata, Fermata]) }),
-      t.optional(Ending),
-      t.optional(Repeat),
-    ] as const,
+    /**
+     * Used for playback when there is a `<segno>` child element. Indicates the end point for a backward jump to a
+     * segno sign. If there are multiple jumps, the value of these parameters can be used to name and distinguish
+     * them.
+     */
+    segno: t.label({ label: 'segno-token', value: t.optional(dataTypes.token()) }),
   },
-  {}
+  [
+    t.optional(BarStyle),
+    t.optional(Footnote),
+    t.optional(Level),
+    t.optional(WavyLine),
+    t.optional(Segno),
+    t.optional(Coda),
+    t.label({ label: 'fermatas', value: t.choices([], [Fermata], [Fermata, Fermata]) }),
+    t.optional(Ending),
+    t.optional(Repeat),
+  ] as const
 );

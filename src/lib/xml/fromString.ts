@@ -1,22 +1,23 @@
 import { MusicXMLError } from '../errors';
-import * as helpers from './helpers';
+import { Descriptor, DescriptorChild } from '../schema';
+import * as util from '../util';
 import { isValid } from './isValid';
-import { Child, Descriptor, Resolution } from './types';
+import { Resolution } from './types';
 import { zero } from './zero';
 
-export const fromString = (value: string, child: Extract<Child, string | number | Descriptor>): any => {
+export const fromString = (value: string, child: Extract<DescriptorChild, string | number | Descriptor>): any => {
   const resolve = (v: any): Resolution => {
     return isValid(v, child) ? { type: 'resolved', value: v } : { type: 'none', value: undefined };
   };
 
-  const dfs = (value: string, child: Extract<Child, string | number | Descriptor>): Resolution => {
-    if (helpers.isString(child)) {
+  const dfs = (value: string, child: Extract<DescriptorChild, string | number | Descriptor>): Resolution => {
+    if (util.isString(child)) {
       return resolve(value);
     }
-    if (helpers.isNumber(child)) {
+    if (util.isNumber(child)) {
       return resolve(value);
     }
-    if (helpers.isDescriptor(child)) {
+    if (util.isDescriptor(child)) {
       switch (child.type) {
         case 'string':
           return resolve(value);

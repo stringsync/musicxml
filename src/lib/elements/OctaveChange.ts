@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<octave-change>` element
@@ -12,10 +12,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/octave-change/}
  */
-export type OctaveChange = ReturnType<typeof OctaveChange>;
-
-export const OctaveChange = xml.element(
-  'octave-change',
-  { attributes: {}, content: [t.label({ label: 'octave-change', value: t.required(dataTypes.integer()) })] as const },
-  {}
-);
+export const OctaveChange = schema('octave-change', {}, [
+  t.label({ label: 'octave-change', value: t.required(dataTypes.integer()) }),
+] as const);

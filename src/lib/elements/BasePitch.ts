@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<base-pitch>` element
@@ -10,6 +10,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/base-pitch/}
  */
-export type BasePitch = ReturnType<typeof BasePitch>;
-
-export const BasePitch = xml.element('base-pitch', { attributes: {}, content: [] as const }, {});
+export const BasePitch = schema('base-pitch', {}, [] as const);

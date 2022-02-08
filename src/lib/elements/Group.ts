@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<group>` element
@@ -11,6 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group/}
  */
-export type Group = ReturnType<typeof Group>;
-
-export const Group = xml.element('group', { attributes: {}, content: [t.required(dataTypes.string())] as const }, {});
+export const Group = schema('group', {}, [t.required(dataTypes.string())] as const);

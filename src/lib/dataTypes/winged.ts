@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The winged attribute indicates whether the repeat has winged extensions that appear above and below the barline. The
  * straight and curved values represent single wings, while the double-straight and double-curved values represent

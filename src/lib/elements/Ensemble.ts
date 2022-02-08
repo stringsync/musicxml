@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<ensemble>` element
@@ -11,13 +11,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ensemble/}
  */
-export type Ensemble = ReturnType<typeof Ensemble>;
-
-export const Ensemble = xml.element(
-  'ensemble',
-  {
-    attributes: {},
-    content: [t.label({ label: 'size', value: t.required(dataTypes.positiveIntegerOrEmpty()) })] as const,
-  },
-  {}
-);
+export const Ensemble = schema('ensemble', {}, [
+  t.label({ label: 'size', value: t.required(dataTypes.positiveIntegerOrEmpty()) }),
+] as const);

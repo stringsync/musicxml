@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The valign type is used to indicate vertical alignment to the top, middle, bottom, or baseline of the text. Defaults
  * are implementation-dependent.

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<double>` element
@@ -11,20 +11,15 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/double/}
  */
-export type Double = ReturnType<typeof Double>;
-
-export const Double = xml.element(
+export const Double = schema(
   'double',
   {
-    attributes: {
-      /**
-       * If the above attribute is set to yes, the doubling is one octave above what is written, as for mixed flute /
-       * piccolo parts in band literature. Otherwise the doubling is one octave below what is written, as for mixed
-       * cello / bass parts in orchestral literature.
-       */
-      above: t.optional(dataTypes.yesNo()),
-    },
-    content: [] as const,
+    /**
+     * If the above attribute is set to yes, the doubling is one octave above what is written, as for mixed flute /
+     * piccolo parts in band literature. Otherwise the doubling is one octave below what is written, as for mixed
+     * cello / bass parts in orchestral literature.
+     */
+    above: t.optional(dataTypes.yesNo()),
   },
-  {}
+  [] as const
 );

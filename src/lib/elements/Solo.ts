@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<solo>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/solo/}
  */
-export type Solo = ReturnType<typeof Solo>;
-
-export const Solo = xml.element('solo', { attributes: {}, content: [] as const }, {});
+export const Solo = schema('solo', {}, [] as const);

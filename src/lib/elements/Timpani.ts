@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<timpani>` element
@@ -10,18 +10,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/timpani/}
  */
-export type Timpani = ReturnType<typeof Timpani>;
-
-export const Timpani = xml.element(
+export const Timpani = schema(
   'timpani',
   {
-    attributes: {
-      /**
-       * Distinguishes different SMuFL stylistic alternates.
-       */
-      smufl: t.optional(dataTypes.smuflPictogramGlyphName()),
-    },
-    content: [] as const,
+    /**
+     * Distinguishes different SMuFL stylistic alternates.
+     */
+    smufl: t.optional(dataTypes.smuflPictogramGlyphName()),
   },
-  {}
+  [] as const
 );

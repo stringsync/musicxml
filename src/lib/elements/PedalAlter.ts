@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<pedal-alter>` element
@@ -10,10 +10,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pedal-alter/}
  */
-export type PedalAlter = ReturnType<typeof PedalAlter>;
-
-export const PedalAlter = xml.element(
-  'pedal-alter',
-  { attributes: {}, content: [t.required(dataTypes.semitones())] as const },
-  {}
-);
+export const PedalAlter = schema('pedal-alter', {}, [t.required(dataTypes.semitones())] as const);

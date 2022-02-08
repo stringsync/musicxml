@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The distance-type defines what type of distance is being defined in a <distance> element. Values include:
  *

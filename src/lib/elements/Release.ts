@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<release>` element
@@ -12,18 +12,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/release/}
  */
-export type Release = ReturnType<typeof Release>;
-
-export const Release = xml.element(
+export const Release = schema(
   'release',
   {
-    attributes: {
-      /**
-       * Specifies where the release starts in terms of divisions relative to the current note.
-       */
-      offset: t.optional(dataTypes.divisions()),
-    },
-    content: [] as const,
+    /**
+     * Specifies where the release starts in terms of divisions relative to the current note.
+     */
+    offset: t.optional(dataTypes.divisions()),
   },
-  {}
+  [] as const
 );

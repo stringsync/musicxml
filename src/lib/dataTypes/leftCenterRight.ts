@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The left-center-right type is used to define horizontal alignment and text justification.
  *

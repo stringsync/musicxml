@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The group-barline-value type indicates if the group should have common barlines.
  *

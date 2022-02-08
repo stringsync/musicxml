@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<other-play>` element
@@ -10,18 +10,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-play/}
  */
-export type OtherPlay = ReturnType<typeof OtherPlay>;
-
-export const OtherPlay = xml.element(
+export const OtherPlay = schema(
   'other-play',
   {
-    attributes: {
-      /**
-       * Indicates the type of playback to which the element content applies.
-       */
-      type: t.required(dataTypes.token()),
-    },
-    content: [] as const,
+    /**
+     * Indicates the type of playback to which the element content applies.
+     */
+    type: t.required(dataTypes.token()),
   },
-  {}
+  [] as const
 );

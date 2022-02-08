@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Beats } from './Beats';
 import { BeatType } from './BeatType';
 import { TimeRelation } from './TimeRelation';
@@ -14,28 +14,23 @@ import { TimeRelation } from './TimeRelation';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/interchangeable/}
  */
-export type Interchangeable = ReturnType<typeof Interchangeable>;
-
-export const Interchangeable = xml.element(
+export const Interchangeable = schema(
   'interchangeable',
   {
-    attributes: {
-      /**
-       * Indicates how to display the arrangement between the `<beats>` and `<beat-type>` values in the second of the dual
-       * time signatures.
-       */
-      separator: t.optional(dataTypes.timeSeparator()),
+    /**
+     * Indicates how to display the arrangement between the `<beats>` and `<beat-type>` values in the second of the dual
+     * time signatures.
+     */
+    separator: t.optional(dataTypes.timeSeparator()),
 
-      /**
-       * Indicates how to display the second of the dual time signatures, such as by using common and cut time symbols
-       * or a single number display.
-       */
-      symbol: t.optional(dataTypes.timeSymbol()),
-    },
-    content: [
-      t.optional(TimeRelation),
-      t.label({ label: 'beats', value: t.oneOrMore([t.required(Beats), t.required(BeatType)]) }),
-    ] as const,
+    /**
+     * Indicates how to display the second of the dual time signatures, such as by using common and cut time symbols
+     * or a single number display.
+     */
+    symbol: t.optional(dataTypes.timeSymbol()),
   },
-  {}
+  [
+    t.optional(TimeRelation),
+    t.label({ label: 'beats', value: t.oneOrMore([t.required(Beats), t.required(BeatType)]) }),
+  ] as const
 );

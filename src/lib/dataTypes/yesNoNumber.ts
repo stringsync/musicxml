@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The yes-no-number type is used for attributes that can be either boolean or numeric values.
  *

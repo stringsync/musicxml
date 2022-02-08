@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The arrow-style type represents the style of an arrow, using Unicode arrow terminology. Filled and hollow arrows
  * indicate polygonal single arrows. Paired arrows are duplicate single arrows in the same direction. Combined arrows

@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The time-only type is used to indicate that a particular playback- or listening-related element only applies
  * particular times through a repeated section. The value is a comma-separated list of positive integers arranged in

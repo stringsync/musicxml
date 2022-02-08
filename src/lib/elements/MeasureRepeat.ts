@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<measure-repeat>` element
@@ -18,23 +18,18 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-repeat/}
  */
-export type MeasureRepeat = ReturnType<typeof MeasureRepeat>;
-
-export const MeasureRepeat = xml.element(
+export const MeasureRepeat = schema(
   'measure-repeat',
   {
-    attributes: {
-      /**
-       * Indicates the starting or stopping point of the section displaying the measure repeat symbols.
-       */
-      type: t.required(dataTypes.startStop()),
+    /**
+     * Indicates the starting or stopping point of the section displaying the measure repeat symbols.
+     */
+    type: t.required(dataTypes.startStop()),
 
-      /**
-       * Specifies the number of slashes to use in the symbol. The value is 1 if not specified.
-       */
-      slashes: t.optional(dataTypes.positiveInteger()),
-    },
-    content: [t.label({ label: 'measure-repeat', value: t.required(dataTypes.positiveIntegerOrEmpty()) })] as const,
+    /**
+     * Specifies the number of slashes to use in the symbol. The value is 1 if not specified.
+     */
+    slashes: t.optional(dataTypes.positiveInteger()),
   },
-  {}
+  [t.label({ label: 'measure-repeat', value: t.required(dataTypes.positiveIntegerOrEmpty()) })] as const
 );

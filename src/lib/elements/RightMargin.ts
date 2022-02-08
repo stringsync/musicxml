@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<right-margin>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/right-margin/}
  */
-export type RightMargin = ReturnType<typeof RightMargin>;
-
-export const RightMargin = xml.element('right-margin', { attributes: {}, content: [] as const }, {});
+export const RightMargin = schema('right-margin', {}, [] as const);

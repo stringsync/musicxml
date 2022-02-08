@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<millimeters>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/millimeters/}
  */
-export type Millimeters = ReturnType<typeof Millimeters>;
-
-export const Millimeters = xml.element(
-  'millimeters',
-  { attributes: {}, content: [t.required(dataTypes.millimeters())] as const },
-  {}
-);
+export const Millimeters = schema('millimeters', {}, [t.required(dataTypes.millimeters())] as const);

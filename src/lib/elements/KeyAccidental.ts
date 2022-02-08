@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<key-accidental>` element
@@ -13,18 +13,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key-accidental/}
  */
-export type KeyAccidental = ReturnType<typeof KeyAccidental>;
-
-export const KeyAccidental = xml.element(
+export const KeyAccidental = schema(
   'key-accidental',
   {
-    attributes: {
-      /**
-       * Specifies a Standard Music Font Layout (SMuFL) accidental character by its canonical glyph name.
-       */
-      smufl: t.optional(dataTypes.smuflAccidentalGlyphName()),
-    },
-    content: [t.required(dataTypes.accidentalValue())] as const,
+    /**
+     * Specifies a Standard Music Font Layout (SMuFL) accidental character by its canonical glyph name.
+     */
+    smufl: t.optional(dataTypes.smuflAccidentalGlyphName()),
   },
-  {}
+  [t.required(dataTypes.accidentalValue())] as const
 );

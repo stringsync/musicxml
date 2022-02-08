@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The measure-numbering-value type describes how measure numbers are displayed on this part: no numbers, numbers every
  * measure, or numbers every system.

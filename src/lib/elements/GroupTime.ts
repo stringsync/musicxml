@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<group-time>` element
@@ -10,6 +10,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-time/}
  */
-export type GroupTime = ReturnType<typeof GroupTime>;
-
-export const GroupTime = xml.element('group-time', { attributes: {}, content: [] as const }, {});
+export const GroupTime = schema('group-time', {}, [] as const);

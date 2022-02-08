@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<rights>` element
@@ -12,19 +12,14 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rights/}
  */
-export type Rights = ReturnType<typeof Rights>;
-
-export const Rights = xml.element(
+export const Rights = schema(
   'rights',
   {
-    attributes: {
-      /**
-       * Standard type values are music, words, and arrangement, but other types may be used. This attribute is only
-       * needed when there are multiple `<rights>` elements.
-       */
-      type: t.optional(dataTypes.token()),
-    },
-    content: [t.required(dataTypes.string())] as const,
+    /**
+     * Standard type values are music, words, and arrangement, but other types may be used. This attribute is only
+     * needed when there are multiple `<rights>` elements.
+     */
+    type: t.optional(dataTypes.token()),
   },
-  {}
+  [t.required(dataTypes.string())] as const
 );

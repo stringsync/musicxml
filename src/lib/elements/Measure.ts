@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Attributes } from './Attributes';
 import { Backup } from './Backup';
 import { Barline } from './Barline';
@@ -23,35 +23,26 @@ import { Sound } from './Sound';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-partwise/}
  */
-export type Measure = ReturnType<typeof Measure>;
-
-export const Measure = xml.element(
-  'measure',
-  {
-    attributes: {},
-    content: [
-      t.label({
-        label: 'measures',
-        value: t.zeroOrMore(
-          t.choices(
-            Note,
-            Backup,
-            Forward,
-            Direction,
-            Attributes,
-            Harmony,
-            FiguredBass,
-            Print,
-            Sound,
-            Listening,
-            Barline,
-            Grouping,
-            Link,
-            Bookmark
-          )
-        ),
-      }),
-    ] as const,
-  },
-  {}
-);
+export const Measure = schema('measure', {}, [
+  t.label({
+    label: 'measures',
+    value: t.zeroOrMore(
+      t.choices(
+        Note,
+        Backup,
+        Forward,
+        Direction,
+        Attributes,
+        Harmony,
+        FiguredBass,
+        Print,
+        Sound,
+        Listening,
+        Barline,
+        Grouping,
+        Link,
+        Bookmark
+      )
+    ),
+  }),
+] as const);

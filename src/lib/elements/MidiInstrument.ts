@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Elevation } from './Elevation';
 import { MidiBank } from './MidiBank';
 import { MidiChannel } from './MidiChannel';
@@ -19,27 +19,22 @@ import { Volume } from './Volume';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/midi-instrument/}
  */
-export type MidiInstrument = ReturnType<typeof MidiInstrument>;
-
-export const MidiInstrument = xml.element(
+export const MidiInstrument = schema(
   'midi-instrument',
   {
-    attributes: {
-      /**
-       * Refers to the `<score-instrument>` element affected by the change.
-       */
-      id: t.required(dataTypes.idref()),
-    },
-    content: [
-      t.optional(MidiChannel),
-      t.optional(MidiName),
-      t.optional(MidiBank),
-      t.optional(MidiProgram),
-      t.optional(MidiUnpitched),
-      t.optional(Volume),
-      t.optional(Pan),
-      t.optional(Elevation),
-    ] as const,
+    /**
+     * Refers to the `<score-instrument>` element affected by the change.
+     */
+    id: t.required(dataTypes.idref()),
   },
-  {}
+  [
+    t.optional(MidiChannel),
+    t.optional(MidiName),
+    t.optional(MidiBank),
+    t.optional(MidiProgram),
+    t.optional(MidiUnpitched),
+    t.optional(Volume),
+    t.optional(Pan),
+    t.optional(Elevation),
+  ] as const
 );

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<metronome-beam>` element
@@ -11,19 +11,14 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-beam/}
  */
-export type MetronomeBeam = ReturnType<typeof MetronomeBeam>;
-
-export const MetronomeBeam = xml.element(
+export const MetronomeBeam = schema(
   'metronome-beam',
   {
-    attributes: {
-      /**
-       * Indicates eighth note through 1024th note beams using number values 1 thru 8 respectively. The default value is
-       * 1.
-       */
-      number: t.optional(dataTypes.beamLevel()),
-    },
-    content: [t.required(dataTypes.beamValue())] as const,
+    /**
+     * Indicates eighth note through 1024th note beams using number values 1 thru 8 respectively. The default value is
+     * 1.
+     */
+    number: t.optional(dataTypes.beamLevel()),
   },
-  {}
+  [t.required(dataTypes.beamValue())] as const
 );

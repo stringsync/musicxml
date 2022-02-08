@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<straight>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/straight/}
  */
-export type Straight = ReturnType<typeof Straight>;
-
-export const Straight = xml.element('straight', { attributes: {}, content: [] as const }, {});
+export const Straight = schema('straight', {}, [] as const);

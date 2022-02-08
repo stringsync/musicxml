@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The sync-type type specifies the style that a score following application should use to synchronize an accompaniment
  * with a performer.

@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The backward-forward type is used to specify repeat directions. The start of the repeat has a forward direction while
  * the end of the repeat has a backward direction.

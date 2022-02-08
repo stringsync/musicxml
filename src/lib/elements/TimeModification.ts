@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { ActualNotes } from './ActualNotes';
 import { NormalDot } from './NormalDot';
 import { NormalNotes } from './NormalNotes';
@@ -16,17 +16,8 @@ import { NormalType } from './NormalType';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time-modification/}
  */
-export type TimeModification = ReturnType<typeof TimeModification>;
-
-export const TimeModification = xml.element(
-  'time-modification',
-  {
-    attributes: {},
-    content: [
-      t.required(ActualNotes),
-      t.required(NormalNotes),
-      t.label({ label: 'normal', value: t.optional([t.required(NormalType), t.zeroOrMore(NormalDot)]) }),
-    ] as const,
-  },
-  {}
-);
+export const TimeModification = schema('time-modification', {}, [
+  t.required(ActualNotes),
+  t.required(NormalNotes),
+  t.label({ label: 'normal', value: t.optional([t.required(NormalType), t.zeroOrMore(NormalDot)]) }),
+] as const);

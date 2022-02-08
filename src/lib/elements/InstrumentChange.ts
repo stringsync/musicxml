@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Ensemble } from './Ensemble';
 import { InstrumentSound } from './InstrumentSound';
 import { Solo } from './Solo';
@@ -16,22 +16,17 @@ import { VirtualInstrument } from './VirtualInstrument';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instrument-change/}
  */
-export type InstrumentChange = ReturnType<typeof InstrumentChange>;
-
-export const InstrumentChange = xml.element(
+export const InstrumentChange = schema(
   'instrument-change',
   {
-    attributes: {
-      /**
-       * Refers to the `<score-instrument>` affected by the change.
-       */
-      id: t.required(dataTypes.idref()),
-    },
-    content: [
-      t.optional(InstrumentSound),
-      t.label({ label: 'instrument-type', value: t.zeroOrMore(t.choices(Solo, Ensemble)) }),
-      t.optional(VirtualInstrument),
-    ] as const,
+    /**
+     * Refers to the `<score-instrument>` affected by the change.
+     */
+    id: t.required(dataTypes.idref()),
   },
-  {}
+  [
+    t.optional(InstrumentSound),
+    t.label({ label: 'instrument-type', value: t.zeroOrMore(t.choices(Solo, Ensemble)) }),
+    t.optional(VirtualInstrument),
+  ] as const
 );

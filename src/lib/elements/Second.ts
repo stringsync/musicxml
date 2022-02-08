@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<second>` element
@@ -10,10 +10,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/second/}
  */
-export type Second = ReturnType<typeof Second>;
-
-export const Second = xml.element(
-  'second',
-  { attributes: {}, content: [t.label({ label: 'second', value: t.required(dataTypes.positiveInteger()) })] as const },
-  {}
-);
+export const Second = schema('second', {}, [
+  t.label({ label: 'second', value: t.required(dataTypes.positiveInteger()) }),
+] as const);

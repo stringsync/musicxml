@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The mute type represents muting playback for different instruments, including brass, winds, and strings. The on and
  * off values are used for undifferentiated mutes. The remaining values represent specific mutes.

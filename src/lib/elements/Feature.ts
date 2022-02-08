@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<feature>` element
@@ -11,18 +11,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/feature/}
  */
-export type Feature = ReturnType<typeof Feature>;
-
-export const Feature = xml.element(
+export const Feature = schema(
   'feature',
   {
-    attributes: {
-      /**
-       * Represents the type of the feature. This type is flexible to allow for different analyses.
-       */
-      type: t.optional(dataTypes.token()),
-    },
-    content: [t.required(dataTypes.string())] as const,
+    /**
+     * Represents the type of the feature. This type is flexible to allow for different analyses.
+     */
+    type: t.optional(dataTypes.token()),
   },
-  {}
+  [t.required(dataTypes.string())] as const
 );

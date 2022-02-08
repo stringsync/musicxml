@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The degree-symbol-value type indicates which symbol should be used in specifying a degree.
  *

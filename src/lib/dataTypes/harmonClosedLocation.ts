@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The harmon-closed-location type indicates which portion of the symbol is filled in when the corresponding
  * harmon-closed-value is half.

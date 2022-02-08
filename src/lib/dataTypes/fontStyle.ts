@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The font-style type represents a simplified version of the
  * [CSS font-style property.](https://www.w3.org/TR/2018/REC-css-fonts-3-20180920/#font-prop-desc)

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<harmon-closed>` element
@@ -10,18 +10,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harmon-closed/}
  */
-export type HarmonClosed = ReturnType<typeof HarmonClosed>;
-
-export const HarmonClosed = xml.element(
+export const HarmonClosed = schema(
   'harmon-closed',
   {
-    attributes: {
-      /**
-       * Indicates which portion of the symbol is filled in when the element value is half.
-       */
-      location: t.optional(dataTypes.harmonClosedLocation()),
-    },
-    content: [t.required(dataTypes.harmonClosedValue())] as const,
+    /**
+     * Indicates which portion of the symbol is filled in when the element value is half.
+     */
+    location: t.optional(dataTypes.harmonClosedLocation()),
   },
-  {}
+  [t.required(dataTypes.harmonClosedValue())] as const
 );

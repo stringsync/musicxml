@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Creator } from './Creator';
 import { Encoding } from './Encoding';
 import { Miscellaneous } from './Miscellaneous';
@@ -17,20 +17,11 @@ import { Source } from './Source';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/identification/}
  */
-export type Identification = ReturnType<typeof Identification>;
-
-export const Identification = xml.element(
-  'identification',
-  {
-    attributes: {},
-    content: [
-      t.label({ label: 'creators', value: t.zeroOrMore(Creator) }),
-      t.label({ label: 'rights', value: t.zeroOrMore(Rights) }),
-      t.optional(Encoding),
-      t.optional(Source),
-      t.label({ label: 'relations', value: t.zeroOrMore(Relation) }),
-      t.optional(Miscellaneous),
-    ] as const,
-  },
-  {}
-);
+export const Identification = schema('identification', {}, [
+  t.label({ label: 'creators', value: t.zeroOrMore(Creator) }),
+  t.label({ label: 'rights', value: t.zeroOrMore(Rights) }),
+  t.optional(Encoding),
+  t.optional(Source),
+  t.label({ label: 'relations', value: t.zeroOrMore(Relation) }),
+  t.optional(Miscellaneous),
+] as const);

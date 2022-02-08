@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The pedal-type distinguishes types of pedal directions.
  *

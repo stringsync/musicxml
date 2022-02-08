@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The hole-closed-location type indicates which portion of the hole is filled in when the corresponding
  * hole-closed-value is half.

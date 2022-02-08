@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Alter } from './Alter';
 import { Octave } from './Octave';
 import { Step } from './Step';
@@ -12,10 +12,4 @@ import { Step } from './Step';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pitch/}
  */
-export type Pitch = ReturnType<typeof Pitch>;
-
-export const Pitch = xml.element(
-  'pitch',
-  { attributes: {}, content: [t.required(Step), t.optional(Alter), t.required(Octave)] as const },
-  {}
-);
+export const Pitch = schema('pitch', {}, [t.required(Step), t.optional(Alter), t.required(Octave)] as const);

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<midi-unpitched>` element
@@ -12,10 +12,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/midi-unpitched/}
  */
-export type MidiUnpitched = ReturnType<typeof MidiUnpitched>;
-
-export const MidiUnpitched = xml.element(
-  'midi-unpitched',
-  { attributes: {}, content: [t.required(dataTypes.midi128())] as const },
-  {}
-);
+export const MidiUnpitched = schema('midi-unpitched', {}, [t.required(dataTypes.midi128())] as const);

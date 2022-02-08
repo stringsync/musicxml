@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<hole-type>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/hole-type/}
  */
-export type HoleType = ReturnType<typeof HoleType>;
-
-export const HoleType = xml.element(
-  'hole-type',
-  { attributes: {}, content: [t.required(dataTypes.string())] as const },
-  {}
-);
+export const HoleType = schema('hole-type', {}, [t.required(dataTypes.string())] as const);

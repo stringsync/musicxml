@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<chromatic>` element
@@ -12,10 +12,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/chromatic/}
  */
-export type Chromatic = ReturnType<typeof Chromatic>;
-
-export const Chromatic = xml.element(
-  'chromatic',
-  { attributes: {}, content: [t.required(dataTypes.semitones())] as const },
-  {}
-);
+export const Chromatic = schema('chromatic', {}, [t.required(dataTypes.semitones())] as const);

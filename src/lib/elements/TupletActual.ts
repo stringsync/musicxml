@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { TupletDot } from './TupletDot';
 import { TupletNumber } from './TupletNumber';
 import { TupletType } from './TupletType';
@@ -14,17 +14,8 @@ import { TupletType } from './TupletType';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet-actual/}
  */
-export type TupletActual = ReturnType<typeof TupletActual>;
-
-export const TupletActual = xml.element(
-  'tuplet-actual',
-  {
-    attributes: {},
-    content: [
-      t.optional(TupletNumber),
-      t.optional(TupletType),
-      t.label({ label: 'tuplet-dots', value: t.zeroOrMore(TupletDot) }),
-    ] as const,
-  },
-  {}
-);
+export const TupletActual = schema('tuplet-actual', {}, [
+  t.optional(TupletNumber),
+  t.optional(TupletType),
+  t.label({ label: 'tuplet-dots', value: t.zeroOrMore(TupletDot) }),
+] as const);

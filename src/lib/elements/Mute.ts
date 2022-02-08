@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<mute>` element
@@ -10,6 +10,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mute/}
  */
-export type Mute = ReturnType<typeof Mute>;
-
-export const Mute = xml.element('mute', { attributes: {}, content: [t.required(dataTypes.mute())] as const }, {});
+export const Mute = schema('mute', {}, [t.required(dataTypes.mute())] as const);

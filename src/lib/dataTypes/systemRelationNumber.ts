@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The system-relation-number type distinguishes measure numbers that are associated with a system rather than the
  * particular part where the element appears.

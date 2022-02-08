@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<bottom-margin>` element
@@ -10,10 +10,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bottom-margin/}
  */
-export type BottomMargin = ReturnType<typeof BottomMargin>;
-
-export const BottomMargin = xml.element(
-  'bottom-margin',
-  { attributes: {}, content: [t.label({ label: 'bottom-margin', value: t.required(dataTypes.tenths()) })] as const },
-  {}
-);
+export const BottomMargin = schema('bottom-margin', {}, [
+  t.label({ label: 'bottom-margin', value: t.required(dataTypes.tenths()) }),
+] as const);

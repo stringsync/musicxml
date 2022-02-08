@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The tied-type type is used as an attribute of the tied element to specify where the visual representation of a tie
  * begins and ends. A `<tied>` element which joins two notes of the same pitch can be specified with tied-type start on

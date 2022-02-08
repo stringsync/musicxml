@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The semi-pitched type represents categories of indefinite pitch for percussion instruments.
  *

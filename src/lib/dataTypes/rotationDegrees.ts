@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The rotation-degrees type specifies rotation, pan, and elevation values in degrees. Values range from -180 to 180.
  *

@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The harmon-closed-value type represents whether the harmon mute is closed, open, half-open.
  *

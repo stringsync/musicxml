@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<multiple-rest>` element
@@ -10,19 +10,14 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/multiple-rest/}
  */
-export type MultipleRest = ReturnType<typeof MultipleRest>;
-
-export const MultipleRest = xml.element(
+export const MultipleRest = schema(
   'multiple-rest',
   {
-    attributes: {
-      /**
-       * Specifies whether the multiple rests uses the 1-bar / 2-bar / 4-bar rest symbols, or a single shape. It is no if
-       * not specified.
-       */
-      ['use-symbols']: t.optional(dataTypes.yesNo()),
-    },
-    content: [t.label({ label: 'multiple-rest', value: t.required(dataTypes.positiveInteger()) })] as const,
+    /**
+     * Specifies whether the multiple rests uses the 1-bar / 2-bar / 4-bar rest symbols, or a single shape. It is no if
+     * not specified.
+     */
+    ['use-symbols']: t.optional(dataTypes.yesNo()),
   },
-  {}
+  [t.label({ label: 'multiple-rest', value: t.required(dataTypes.positiveInteger()) })] as const
 );

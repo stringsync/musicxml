@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<other-appearance>` element
@@ -11,18 +11,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-appearance/}
  */
-export type OtherAppearance = ReturnType<typeof OtherAppearance>;
-
-export const OtherAppearance = xml.element(
+export const OtherAppearance = schema(
   'other-appearance',
   {
-    attributes: {
-      /**
-       * The appearance type being specified.
-       */
-      type: t.required(dataTypes.string()),
-    },
-    content: [t.required(dataTypes.token())] as const,
+    /**
+     * The appearance type being specified.
+     */
+    type: t.required(dataTypes.string()),
   },
-  {}
+  [t.required(dataTypes.token())] as const
 );

@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { SystemDistance } from './SystemDistance';
 import { SystemMargins } from './SystemMargins';
 import { TopSystemDistance } from './TopSystemDistance';
@@ -28,13 +28,8 @@ import { TopSystemDistance } from './TopSystemDistance';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-layout/}
  */
-export type SystemLayout = ReturnType<typeof SystemLayout>;
-
-export const SystemLayout = xml.element(
-  'system-layout',
-  {
-    attributes: {},
-    content: [t.optional(SystemMargins), t.optional(SystemDistance), t.optional(TopSystemDistance)] as const,
-  },
-  {}
-);
+export const SystemLayout = schema('system-layout', {}, [
+  t.optional(SystemMargins),
+  t.optional(SystemDistance),
+  t.optional(TopSystemDistance),
+] as const);

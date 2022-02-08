@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { DirectionType } from './DirectionType';
 import { Footnote } from './Footnote';
 import { Level } from './Level';
@@ -24,22 +24,13 @@ import { Voice } from './Voice';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/direction/}
  */
-export type Direction = ReturnType<typeof Direction>;
-
-export const Direction = xml.element(
-  'direction',
-  {
-    attributes: {},
-    content: [
-      t.label({ label: 'direction-types', value: t.oneOrMore(DirectionType) }),
-      t.optional(Offset),
-      t.optional(Footnote),
-      t.optional(Level),
-      t.optional(Voice),
-      t.optional(Staff),
-      t.optional(Sound),
-      t.optional(Listening),
-    ] as const,
-  },
-  {}
-);
+export const Direction = schema('direction', {}, [
+  t.label({ label: 'direction-types', value: t.oneOrMore(DirectionType) }),
+  t.optional(Offset),
+  t.optional(Footnote),
+  t.optional(Level),
+  t.optional(Voice),
+  t.optional(Staff),
+  t.optional(Sound),
+  t.optional(Listening),
+] as const);

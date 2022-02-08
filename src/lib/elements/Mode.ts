@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<mode>` element
@@ -11,6 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mode/}
  */
-export type Mode = ReturnType<typeof Mode>;
-
-export const Mode = xml.element('mode', { attributes: {}, content: [t.required(dataTypes.mode())] as const }, {});
+export const Mode = schema('mode', {}, [t.required(dataTypes.mode())] as const);

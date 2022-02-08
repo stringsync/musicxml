@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<swing-type>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/swing-type/}
  */
-export type SwingType = ReturnType<typeof SwingType>;
-
-export const SwingType = xml.element(
-  'swing-type',
-  { attributes: {}, content: [t.required(dataTypes.swingTypeValue())] as const },
-  {}
-);
+export const SwingType = schema('swing-type', {}, [t.required(dataTypes.swingTypeValue())] as const);

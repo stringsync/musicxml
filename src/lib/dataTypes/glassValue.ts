@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The glass-value type represents pictograms for glass percussion instruments.
  *

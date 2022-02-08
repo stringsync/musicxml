@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<staff-distance>` element
@@ -11,10 +11,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-distance/}
  */
-export type StaffDistance = ReturnType<typeof StaffDistance>;
-
-export const StaffDistance = xml.element(
-  'staff-distance',
-  { attributes: {}, content: [t.label({ label: 'staff-distance', value: t.required(dataTypes.tenths()) })] as const },
-  {}
-);
+export const StaffDistance = schema('staff-distance', {}, [
+  t.label({ label: 'staff-distance', value: t.required(dataTypes.tenths()) }),
+] as const);

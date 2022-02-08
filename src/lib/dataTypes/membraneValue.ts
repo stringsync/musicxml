@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The membrane-value type represents pictograms for membrane percussion instruments.
  *

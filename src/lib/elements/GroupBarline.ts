@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<group-barline>` element
@@ -10,18 +10,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-barline/}
  */
-export type GroupBarline = ReturnType<typeof GroupBarline>;
-
-export const GroupBarline = xml.element(
+export const GroupBarline = schema(
   'group-barline',
   {
-    attributes: {
-      /**
-       * Indicates the color of an element.
-       */
-      color: t.optional(dataTypes.color()),
-    },
-    content: [t.required(dataTypes.groupBarlineValue())] as const,
+    /**
+     * Indicates the color of an element.
+     */
+    color: t.optional(dataTypes.color()),
   },
-  {}
+  [t.required(dataTypes.groupBarlineValue())] as const
 );

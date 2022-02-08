@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The fermata-shape type represents the shape of the fermata sign.
  *

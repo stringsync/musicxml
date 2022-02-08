@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Millimeters } from './Millimeters';
 import { Tenths } from './Tenths';
 
@@ -14,10 +14,4 @@ import { Tenths } from './Tenths';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/scaling/}
  */
-export type Scaling = ReturnType<typeof Scaling>;
-
-export const Scaling = xml.element(
-  'scaling',
-  { attributes: {}, content: [t.required(Millimeters), t.required(Tenths)] as const },
-  {}
-);
+export const Scaling = schema('scaling', {}, [t.required(Millimeters), t.required(Tenths)] as const);

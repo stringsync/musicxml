@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<line-detail>` element
@@ -18,38 +18,33 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/line-detail/}
  */
-export type LineDetail = ReturnType<typeof LineDetail>;
-
-export const LineDetail = xml.element(
+export const LineDetail = schema(
   'line-detail',
   {
-    attributes: {
-      /**
-       * Indicates the staff line affected, numbered from bottom to top.
-       */
-      line: t.required(dataTypes.staffLine()),
+    /**
+     * Indicates the staff line affected, numbered from bottom to top.
+     */
+    line: t.required(dataTypes.staffLine()),
 
-      /**
-       * Indicates the color of an element.
-       */
-      color: t.optional(dataTypes.color()),
+    /**
+     * Indicates the color of an element.
+     */
+    color: t.optional(dataTypes.color()),
 
-      /**
-       * Specifies if the line is solid, dashed, dotted, or wavy.
-       */
-      ['line-type']: t.optional(dataTypes.lineType()),
+    /**
+     * Specifies if the line is solid, dashed, dotted, or wavy.
+     */
+    ['line-type']: t.optional(dataTypes.lineType()),
 
-      /**
-       * Specifies whether or not to print an object. It is yes if not specified.
-       */
-      ['print-object']: t.optional(dataTypes.yesNo()),
+    /**
+     * Specifies whether or not to print an object. It is yes if not specified.
+     */
+    ['print-object']: t.optional(dataTypes.yesNo()),
 
-      /**
-       * Staff line width in tenths.
-       */
-      width: t.optional(dataTypes.tenths()),
-    },
-    content: [] as const,
+    /**
+     * Staff line width in tenths.
+     */
+    width: t.optional(dataTypes.tenths()),
   },
-  {}
+  [] as const
 );

@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The positive-integer-or-empty values can be either a positive integer or an empty string.
  *

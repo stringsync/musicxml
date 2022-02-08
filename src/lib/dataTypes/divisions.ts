@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The divisions type is used to express values in terms of the musical divisions defined by the divisions element. It
  * is preferred that these be integer values both for MIDI interoperability and to avoid roundoff errors.

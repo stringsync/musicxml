@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<left-margin>` element
@@ -10,10 +10,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/left-margin/}
  */
-export type LeftMargin = ReturnType<typeof LeftMargin>;
-
-export const LeftMargin = xml.element(
-  'left-margin',
-  { attributes: {}, content: [t.label({ label: 'left-margin', value: t.required(dataTypes.tenths()) })] as const },
-  {}
-);
+export const LeftMargin = schema('left-margin', {}, [
+  t.label({ label: 'left-margin', value: t.required(dataTypes.tenths()) }),
+] as const);

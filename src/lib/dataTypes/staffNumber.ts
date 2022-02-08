@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The staff-number type indicates staff numbers within a multi-staff part. Staves are numbered from top to bottom, with
  * 1 being the top staff on a part.

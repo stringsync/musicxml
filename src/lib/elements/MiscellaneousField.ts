@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<miscellaneous-field>` element
@@ -11,18 +11,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/miscellaneous-field/}
  */
-export type MiscellaneousField = ReturnType<typeof MiscellaneousField>;
-
-export const MiscellaneousField = xml.element(
+export const MiscellaneousField = schema(
   'miscellaneous-field',
   {
-    attributes: {
-      /**
-       * Indicates the type of metadata the element content represents.
-       */
-      name: t.required(dataTypes.token()),
-    },
-    content: [t.required(dataTypes.string())] as const,
+    /**
+     * Indicates the type of metadata the element content represents.
+     */
+    name: t.required(dataTypes.token()),
   },
-  {}
+  [t.required(dataTypes.string())] as const
 );

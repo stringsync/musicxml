@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { TuningAlter } from './TuningAlter';
 import { TuningOctave } from './TuningOctave';
 import { TuningStep } from './TuningStep';
@@ -13,18 +13,13 @@ import { TuningStep } from './TuningStep';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-details/}
  */
-export type StaffTuning = ReturnType<typeof StaffTuning>;
-
-export const StaffTuning = xml.element(
+export const StaffTuning = schema(
   'staff-tuning',
   {
-    attributes: {
-      /**
-       * Indicates the staff line for this tuning, numbered from bottom to top.
-       */
-      line: t.required(dataTypes.staffLine()),
-    },
-    content: [t.required(TuningStep), t.optional(TuningAlter), t.required(TuningOctave)] as const,
+    /**
+     * Indicates the staff line for this tuning, numbered from bottom to top.
+     */
+    line: t.required(dataTypes.staffLine()),
   },
-  {}
+  [t.required(TuningStep), t.optional(TuningAlter), t.required(TuningOctave)] as const
 );

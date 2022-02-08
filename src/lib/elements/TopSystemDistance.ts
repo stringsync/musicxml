@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<top-system-distance>` element
@@ -11,13 +11,6 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/top-system-distance/}
  */
-export type TopSystemDistance = ReturnType<typeof TopSystemDistance>;
-
-export const TopSystemDistance = xml.element(
-  'top-system-distance',
-  {
-    attributes: {},
-    content: [t.label({ label: 'top-system-distance', value: t.required(dataTypes.tenths()) })] as const,
-  },
-  {}
-);
+export const TopSystemDistance = schema('top-system-distance', {}, [
+  t.label({ label: 'top-system-distance', value: t.required(dataTypes.tenths()) }),
+] as const);

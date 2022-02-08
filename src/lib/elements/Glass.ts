@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<glass>` element
@@ -10,19 +10,14 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/glass/}
  */
-export type Glass = ReturnType<typeof Glass>;
-
-export const Glass = xml.element(
+export const Glass = schema(
   'glass',
   {
-    attributes: {
-      /**
-       * Distinguishes different SMuFL glyphs for wind chimes in the Chimes pictograms range, including those made of
-       * materials other than glass.
-       */
-      smufl: t.optional(dataTypes.smuflPictogramGlyphName()),
-    },
-    content: [t.required(dataTypes.glassValue())] as const,
+    /**
+     * Distinguishes different SMuFL glyphs for wind chimes in the Chimes pictograms range, including those made of
+     * materials other than glass.
+     */
+    smufl: t.optional(dataTypes.smuflPictogramGlyphName()),
   },
-  {}
+  [t.required(dataTypes.glassValue())] as const
 );

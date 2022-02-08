@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<normal-dot>` element
@@ -9,6 +9,4 @@ import { xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/normal-dot/}
  */
-export type NormalDot = ReturnType<typeof NormalDot>;
-
-export const NormalDot = xml.element('normal-dot', { attributes: {}, content: [] as const }, {});
+export const NormalDot = schema('normal-dot', {}, [] as const);

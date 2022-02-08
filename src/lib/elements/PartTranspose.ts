@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Chromatic } from './Chromatic';
 import { Diatonic } from './Diatonic';
 import { Double } from './Double';
@@ -17,13 +17,9 @@ import { OctaveChange } from './OctaveChange';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-transpose/}
  */
-export type PartTranspose = ReturnType<typeof PartTranspose>;
-
-export const PartTranspose = xml.element(
-  'part-transpose',
-  {
-    attributes: {},
-    content: [t.optional(Diatonic), t.required(Chromatic), t.optional(OctaveChange), t.optional(Double)] as const,
-  },
-  {}
-);
+export const PartTranspose = schema('part-transpose', {}, [
+  t.optional(Diatonic),
+  t.required(Chromatic),
+  t.optional(OctaveChange),
+  t.optional(Double),
+] as const);

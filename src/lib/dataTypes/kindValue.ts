@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * A kind-value indicates the type of chord. Degree elements can then add, subtract, or alter from these starting
  * points. The 11th and 13th values are usually used as a basis for alteration.

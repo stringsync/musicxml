@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The beam-value type represents the type of beam associated with each of 8 beam levels (up to 1024th notes) available
  * for each note.

@@ -1,4 +1,4 @@
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { PedalAlter } from './PedalAlter';
 import { PedalStep } from './PedalStep';
 
@@ -11,10 +11,4 @@ import { PedalStep } from './PedalStep';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pedal-tuning/}
  */
-export type PedalTuning = ReturnType<typeof PedalTuning>;
-
-export const PedalTuning = xml.element(
-  'pedal-tuning',
-  { attributes: {}, content: [t.required(PedalStep), t.required(PedalAlter)] as const },
-  {}
-);
+export const PedalTuning = schema('pedal-tuning', {}, [t.required(PedalStep), t.required(PedalAlter)] as const);

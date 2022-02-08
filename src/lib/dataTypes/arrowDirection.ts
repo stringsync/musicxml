@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The arrow-direction type represents the direction in which an arrow points, using Unicode arrow terminology.
  *

@@ -1,4 +1,4 @@
-import { xml } from '../xml';
+import { schema } from '../schema';
 
 /**
  * The `<part>` element
@@ -10,13 +10,4 @@ import { xml } from '../xml';
  *
  *  {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-partwise/}
  */
-export type Part = ReturnType<typeof Part>;
-
-export const Part = xml.element(
-  'part',
-  {
-    attributes: {},
-    content: [] as const,
-  },
-  {}
-);
+export const Part = schema('part', {}, [] as const);

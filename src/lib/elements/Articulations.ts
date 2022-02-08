@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 import { Accent } from './Accent';
 import { BreathMark } from './BreathMark';
 import { Caesura } from './Caesura';
@@ -27,43 +27,38 @@ import { Unstress } from './Unstress';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/articulations/}
  */
-export type Articulations = ReturnType<typeof Articulations>;
-
-export const Articulations = xml.element(
+export const Articulations = schema(
   'articulations',
   {
-    attributes: {
-      /**
-       * Specifies an ID that is unique to the entire document.
-       */
-      id: t.optional(dataTypes.id()),
-    },
-    content: [
-      t.label({
-        label: 'articulations',
-        value: t.zeroOrMore(
-          t.choices(
-            Accent,
-            StrongAccent,
-            Staccato,
-            Tenuto,
-            DetachedLegato,
-            Staccatissimo,
-            Spiccato,
-            Scoop,
-            Plop,
-            Doit,
-            Falloff,
-            BreathMark,
-            Caesura,
-            Stress,
-            Unstress,
-            SoftAccent,
-            OtherArticulation
-          )
-        ),
-      }),
-    ] as const,
+    /**
+     * Specifies an ID that is unique to the entire document.
+     */
+    id: t.optional(dataTypes.id()),
   },
-  {}
+  [
+    t.label({
+      label: 'articulations',
+      value: t.zeroOrMore(
+        t.choices(
+          Accent,
+          StrongAccent,
+          Staccato,
+          Tenuto,
+          DetachedLegato,
+          Staccatissimo,
+          Spiccato,
+          Scoop,
+          Plop,
+          Doit,
+          Falloff,
+          BreathMark,
+          Caesura,
+          Stress,
+          Unstress,
+          SoftAccent,
+          OtherArticulation
+        )
+      ),
+    }),
+  ] as const
 );

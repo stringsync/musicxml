@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<stick-type>` element
@@ -11,10 +11,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stick-type/}
  */
-export type StickType = ReturnType<typeof StickType>;
-
-export const StickType = xml.element(
-  'stick-type',
-  { attributes: {}, content: [t.required(dataTypes.stickType())] as const },
-  {}
-);
+export const StickType = schema('stick-type', {}, [t.required(dataTypes.stickType())] as const);

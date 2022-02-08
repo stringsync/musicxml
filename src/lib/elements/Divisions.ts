@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<divisions>` element
@@ -17,10 +17,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/divisions/}
  */
-export type Divisions = ReturnType<typeof Divisions>;
-
-export const Divisions = xml.element(
-  'divisions',
-  { attributes: {}, content: [t.required(dataTypes.positiveDivisions())] as const },
-  {}
-);
+export const Divisions = schema('divisions', {}, [t.required(dataTypes.positiveDivisions())] as const);

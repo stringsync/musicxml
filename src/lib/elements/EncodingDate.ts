@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<encoding-date>` element
@@ -8,13 +8,4 @@ import { t, xml } from '../xml';
  *
  * The `<encoding-date>` element specifies the date of the digital encoding.
  */
-export type EncodingDate = ReturnType<typeof EncodingDate>;
-
-export const EncodingDate = xml.element(
-  'encoding-date',
-  {
-    attributes: {},
-    content: [t.required(dataTypes.yyyyMmDd())] as const,
-  },
-  {}
-);
+export const EncodingDate = schema('encoding-date', {}, [t.required(dataTypes.yyyyMmDd())] as const);

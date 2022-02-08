@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The positive-divisions type restricts divisions values to positive numbers.
  *

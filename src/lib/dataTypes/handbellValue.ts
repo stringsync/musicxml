@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The handbell-value type represents the type of handbell technique being notated.
  *

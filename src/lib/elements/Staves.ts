@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<staves>` element
@@ -12,10 +12,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staves/}
  */
-export type Staves = ReturnType<typeof Staves>;
-
-export const Staves = xml.element(
-  'staves',
-  { attributes: {}, content: [t.required(dataTypes.nonNegativeInteger())] as const },
-  {}
-);
+export const Staves = schema('staves', {}, [t.required(dataTypes.nonNegativeInteger())] as const);

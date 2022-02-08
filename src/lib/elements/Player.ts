@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<player>` element
@@ -11,18 +11,13 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/player/}
  */
-export type Player = ReturnType<typeof Player>;
-
-export const Player = xml.element(
+export const Player = schema(
   'player',
   {
-    attributes: {
-      /**
-       * An identifier for this `<player>` that is unique within this document.
-       */
-      id: t.required(dataTypes.id()),
-    },
-    content: [] as const,
+    /**
+     * An identifier for this `<player>` that is unique within this document.
+     */
+    id: t.required(dataTypes.id()),
   },
-  {}
+  [] as const
 );

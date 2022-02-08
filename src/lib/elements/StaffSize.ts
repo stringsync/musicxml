@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<staff-size>` element
@@ -18,19 +18,14 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-size/}
  */
-export type StaffSize = ReturnType<typeof StaffSize>;
-
-export const StaffSize = xml.element(
+export const StaffSize = schema(
   'staff-size',
   {
-    attributes: {
-      /**
-       * Specifies the percentage scaling that applies to the notation. Values less that 100 make the notation smaller
-       * while values over 100 make the notation larger.
-       */
-      scaling: t.optional(dataTypes.nonNegativeDecimal()),
-    },
-    content: [t.label({ label: 'staff-size', value: t.required(dataTypes.nonNegativeDecimal()) })] as const,
+    /**
+     * Specifies the percentage scaling that applies to the notation. Values less that 100 make the notation smaller
+     * while values over 100 make the notation larger.
+     */
+    scaling: t.optional(dataTypes.nonNegativeDecimal()),
   },
-  {}
+  [t.label({ label: 'staff-size', value: t.required(dataTypes.nonNegativeDecimal()) })] as const
 );

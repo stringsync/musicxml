@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The margin-type type specifies whether margins apply to even page, odd pages, or both.
  *

@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<display-step>` element
@@ -13,10 +13,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/display-step/}
  */
-export type DisplayStep = ReturnType<typeof DisplayStep>;
-
-export const DisplayStep = xml.element(
-  'display-step',
-  { attributes: {}, content: [t.required(dataTypes.step())] as const },
-  {}
-);
+export const DisplayStep = schema('display-step', {}, [t.required(dataTypes.step())] as const);

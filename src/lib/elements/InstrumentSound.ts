@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<instrument-sound>` element
@@ -12,10 +12,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instrument-sound/}
  */
-export type InstrumentSound = ReturnType<typeof InstrumentSound>;
-
-export const InstrumentSound = xml.element(
-  'instrument-sound',
-  { attributes: {}, content: [t.required(dataTypes.string())] as const },
-  {}
-);
+export const InstrumentSound = schema('instrument-sound', {}, [t.required(dataTypes.string())] as const);

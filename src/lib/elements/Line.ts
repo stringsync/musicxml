@@ -1,5 +1,5 @@
 import * as dataTypes from '../dataTypes';
-import { t, xml } from '../xml';
+import { schema, t } from '../schema';
 
 /**
  * The `<line>` element
@@ -13,10 +13,4 @@ import { t, xml } from '../xml';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/line/}
  */
-export type Line = ReturnType<typeof Line>;
-
-export const Line = xml.element(
-  'line',
-  { attributes: {}, content: [t.required(dataTypes.staffLinePosition())] as const },
-  {}
-);
+export const Line = schema('line', {}, [t.required(dataTypes.staffLinePosition())] as const);

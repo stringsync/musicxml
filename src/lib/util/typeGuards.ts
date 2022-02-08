@@ -1,6 +1,5 @@
-import { AnyFunction } from '../util';
-import { t } from './t';
-import { Descriptor, XMLElement, XMLElementFactory } from './types';
+import { Descriptor, t, XMLElement, XMLElementCtor, XMLElementSchema } from '../schema';
+import { AnyFunction } from './types';
 
 export const isString = (value: any): value is string => {
   return typeof value === 'string';
@@ -30,17 +29,14 @@ export const isDescriptor = (value: any): value is Descriptor => {
   return isObject(value) && value.type in t;
 };
 
-export const isXMLElementFactory = (value: any): value is XMLElementFactory<any, any, any> => {
-  return isFunction(value) && 'elementName' in value;
+export const isXMLElementSchema = (value: any): value is XMLElementSchema => {
+  return isObject(value) && isString(value.name) && isObject(value.attributes) && isArray(value.contents);
 };
 
-export const isXMLElement = (value: any): value is XMLElement<any, any, Record<string, any>> => {
-  return isObject(value) && value.type === 'element';
+export const isXMLElement = (value: any): value is XMLElement => {
+  return isObject(value) && isXMLElementSchema(value.schema) && isObject(value.attributes) && isArray(value.contents);
 };
 
-export const toCamelCase = (str: string) => {
-  return str
-    .split('-')
-    .map((part) => part[0].toUpperCase() + part.substring(1))
-    .join('');
+export const isXMLElementCtor = (value: any): value is XMLElementCtor => {
+  return 'schema' in value && isXMLElementSchema(value.schema) && isFunction(value);
 };

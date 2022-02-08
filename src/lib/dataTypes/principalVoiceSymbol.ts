@@ -1,5 +1,4 @@
-import { t } from '../xml';
-
+import { t } from '../schema';
 /**
  * The principal-voice-symbol type represents the type of symbol used to indicate a principal or secondary voice.
  *
