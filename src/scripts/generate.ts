@@ -259,7 +259,7 @@ export class ${className} implements XMLElement<'${schema.name}', ${attributesTy
   contents: ${contentsTypeName};
 
   constructor(opts?: { attributes?: Partial<${attributesTypeName}>; content?: ${contentsTypeName} }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ${className}.schema) as ${attributesTypeName};
+    this.attributes = xml.mergeZero(opts?.attributes, ${className}.schema);
     this.contents = opts?.content ?? xml.zero(${className}.schema.contents);
   }
 ${attributesAccessorMethodLiterals}

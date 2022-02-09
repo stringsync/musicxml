@@ -2,13 +2,15 @@ import { XMLElementSchema } from '../schema';
 import { isValid } from './isValid';
 import { zero } from './zero';
 
-export const mergeZero = (attributes: Record<string, any> | undefined, schema: XMLElementSchema) => {
-  const result = Object.assign({}, attributes);
+export const mergeZero = (attributes: Record<string, any> | undefined, schema: XMLElementSchema): any => {
+  attributes = attributes || {};
+  const result: any = {};
   for (const [name, descriptor] of Object.entries(schema.attributes)) {
-    if (name in result && isValid(result[name], descriptor)) {
-      continue;
+    if (name in attributes && isValid(attributes[name], descriptor)) {
+      result[name] = attributes[name];
+    } else {
+      zero(descriptor);
     }
-    result[name] = zero(descriptor);
   }
   return result;
 };
