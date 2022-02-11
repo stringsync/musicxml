@@ -27,6 +27,8 @@ export const zero = <T extends DescriptorChild>(child: T): any => {
         return zero(child.choices[0]);
       case 'optional':
         return null;
+      case 'label':
+        return zero(child.value);
       case 'required':
         return zero(child.value);
       case 'zeroOrMore':

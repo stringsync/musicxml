@@ -20,7 +20,7 @@ import { SenzaMisura } from './SenzaMisura';
  */
 export const Time = schema('time', {}, [
   t.label({
-    label: 'time',
+    label: 'value',
     value: t.choices(
       [t.oneOrMore([t.required(Beats), t.required(BeatType)]), t.optional(Interchangeable)] as const,
       SenzaMisura

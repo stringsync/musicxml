@@ -9,7 +9,7 @@ export const mergeZero = (attributes: Record<string, any> | undefined, schema: X
     if (name in attributes && isValid(attributes[name], descriptor)) {
       result[name] = attributes[name];
     } else {
-      zero(descriptor);
+      result[name] = zero(descriptor);
     }
   }
   return result;

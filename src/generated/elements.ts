@@ -6023,7 +6023,7 @@ export class MidiInstrument implements XMLElement<'midi-instrument', MidiInstrum
   }
 }
 
-export type ScorePartAttributes = Record<string, unknown>;
+export type ScorePartAttributes = { id: string };
 
 export type ScorePartContents = [
   Identification | null,
@@ -6041,7 +6041,7 @@ export type ScorePartContents = [
 export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, ScorePartContents> {
   static readonly schema = {
     name: 'score-part',
-    attributes: {},
+    attributes: { id: { type: 'string' } },
     contents: [
       { type: 'optional', value: Identification },
       { type: 'label', label: 'part-links', value: { type: 'zeroOrMore', value: PartLink } },
@@ -6069,7 +6069,12 @@ export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, 
     this.attributes = xml.mergeZero(opts?.attributes, ScorePart.schema);
     this.contents = opts?.content ?? xml.zero(ScorePart.schema.contents);
   }
-
+  getId(): string {
+    return this.attributes['id'];
+  }
+  setId(id: string): void {
+    this.attributes['id'] = id;
+  }
   getIdentification(): Identification | null {
     return this.contents[0];
   }
@@ -6178,80 +6183,6 @@ export class PartList implements XMLElement<'part-list', PartListAttributes, Par
   }
   setParts(parts: Array<PartGroup | ScorePart>): void {
     this.contents[2] = parts;
-  }
-}
-
-export type PartAttributes = Record<string, unknown>;
-
-export type PartContents = [];
-
-export class Part implements XMLElement<'part', PartAttributes, PartContents> {
-  static readonly schema = { name: 'part', attributes: {}, contents: [] } as const;
-
-  readonly schema = Part.schema;
-
-  attributes: PartAttributes;
-  contents: PartContents;
-
-  constructor(opts?: { attributes?: Partial<PartAttributes>; content?: PartContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Part.schema);
-    this.contents = opts?.content ?? xml.zero(Part.schema.contents);
-  }
-}
-
-export type GraceAttributes = {
-  'make-time': number | null;
-  slash: 'yes' | 'no' | null;
-  'steal-time-following': number | null;
-  'steal-time-previous': number | null;
-};
-
-export type GraceContents = [];
-
-export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents> {
-  static readonly schema = {
-    name: 'grace',
-    attributes: {
-      'make-time': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-      slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      'steal-time-following': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-      'steal-time-previous': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-    },
-    contents: [],
-  } as const;
-
-  readonly schema = Grace.schema;
-
-  attributes: GraceAttributes;
-  contents: GraceContents;
-
-  constructor(opts?: { attributes?: Partial<GraceAttributes>; content?: GraceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Grace.schema);
-    this.contents = opts?.content ?? xml.zero(Grace.schema.contents);
-  }
-  getMakeTime(): number | null {
-    return this.attributes['make-time'];
-  }
-  setMakeTime(makeTime: number | null): void {
-    this.attributes['make-time'] = makeTime;
-  }
-  getSlash(): 'yes' | 'no' | null {
-    return this.attributes['slash'];
-  }
-  setSlash(slash: 'yes' | 'no' | null): void {
-    this.attributes['slash'] = slash;
-  }
-  getStealTimeFollowing(): number | null {
-    return this.attributes['steal-time-following'];
-  }
-  setStealTimeFollowing(stealTimeFollowing: number | null): void {
-    this.attributes['steal-time-following'] = stealTimeFollowing;
-  }
-  getStealTimePrevious(): number | null {
-    return this.attributes['steal-time-previous'];
-  }
-  setStealTimePrevious(stealTimePrevious: number | null): void {
-    this.attributes['steal-time-previous'] = stealTimePrevious;
   }
 }
 
@@ -6567,6 +6498,40 @@ export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
   }
 }
 
+export type DurationAttributes = Record<string, unknown>;
+
+export type DurationContents = [number];
+
+export class Duration implements XMLElement<'duration', DurationAttributes, DurationContents> {
+  static readonly schema = {
+    name: 'duration',
+    attributes: {},
+    contents: [
+      {
+        type: 'required',
+        value: { type: 'label', label: 'positive-divisions', value: { type: 'float', min: 1, max: Infinity } },
+      },
+    ],
+  } as const;
+
+  readonly schema = Duration.schema;
+
+  attributes: DurationAttributes;
+  contents: DurationContents;
+
+  constructor(opts?: { attributes?: Partial<DurationAttributes>; content?: DurationContents }) {
+    this.attributes = xml.mergeZero(opts?.attributes, Duration.schema);
+    this.contents = opts?.content ?? xml.zero(Duration.schema.contents);
+  }
+
+  getPositiveDivisions(): number {
+    return this.contents[0];
+  }
+  setPositiveDivisions(positiveDivisions: number): void {
+    this.contents[0] = positiveDivisions;
+  }
+}
+
 export type TieAttributes = { type: 'start' | 'stop'; 'time-only': string | null };
 
 export type TieContents = [];
@@ -6622,37 +6587,59 @@ export class Cue implements XMLElement<'cue', CueAttributes, CueContents> {
   }
 }
 
-export type DurationAttributes = Record<string, unknown>;
+export type GraceAttributes = {
+  'make-time': number | null;
+  slash: 'yes' | 'no' | null;
+  'steal-time-following': number | null;
+  'steal-time-previous': number | null;
+};
 
-export type DurationContents = [number];
+export type GraceContents = [];
 
-export class Duration implements XMLElement<'duration', DurationAttributes, DurationContents> {
+export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents> {
   static readonly schema = {
-    name: 'duration',
-    attributes: {},
-    contents: [
-      {
-        type: 'required',
-        value: { type: 'label', label: 'positive-divisions', value: { type: 'float', min: 1, max: Infinity } },
-      },
-    ],
+    name: 'grace',
+    attributes: {
+      'make-time': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
+      'steal-time-following': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
+      'steal-time-previous': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
+    },
+    contents: [],
   } as const;
 
-  readonly schema = Duration.schema;
+  readonly schema = Grace.schema;
 
-  attributes: DurationAttributes;
-  contents: DurationContents;
+  attributes: GraceAttributes;
+  contents: GraceContents;
 
-  constructor(opts?: { attributes?: Partial<DurationAttributes>; content?: DurationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Duration.schema);
-    this.contents = opts?.content ?? xml.zero(Duration.schema.contents);
+  constructor(opts?: { attributes?: Partial<GraceAttributes>; content?: GraceContents }) {
+    this.attributes = xml.mergeZero(opts?.attributes, Grace.schema);
+    this.contents = opts?.content ?? xml.zero(Grace.schema.contents);
   }
-
-  getPositiveDivisions(): number {
-    return this.contents[0];
+  getMakeTime(): number | null {
+    return this.attributes['make-time'];
   }
-  setPositiveDivisions(positiveDivisions: number): void {
-    this.contents[0] = positiveDivisions;
+  setMakeTime(makeTime: number | null): void {
+    this.attributes['make-time'] = makeTime;
+  }
+  getSlash(): 'yes' | 'no' | null {
+    return this.attributes['slash'];
+  }
+  setSlash(slash: 'yes' | 'no' | null): void {
+    this.attributes['slash'] = slash;
+  }
+  getStealTimeFollowing(): number | null {
+    return this.attributes['steal-time-following'];
+  }
+  setStealTimeFollowing(stealTimeFollowing: number | null): void {
+    this.attributes['steal-time-following'] = stealTimeFollowing;
+  }
+  getStealTimePrevious(): number | null {
+    return this.attributes['steal-time-previous'];
+  }
+  setStealTimePrevious(stealTimePrevious: number | null): void {
+    this.attributes['steal-time-previous'] = stealTimePrevious;
   }
 }
 
@@ -22786,6 +22773,8 @@ export type NoteAttributes = {
 
 export type NoteContents = [
   (
+    | [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]]
+    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
     | [
         Grace,
         (
@@ -22793,7 +22782,6 @@ export type NoteContents = [
           | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
         )
       ]
-    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
   ),
   Array<Instrument>,
   Footnote | null,
@@ -22878,10 +22866,22 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
     contents: [
       {
         type: 'label',
-        label: 'note',
+        label: 'value',
         value: {
           type: 'choices',
           choices: [
+            [
+              { type: 'optional', value: Chord },
+              { type: 'choices', choices: [Pitch, Unpitched, Rest] },
+              { type: 'required', value: Duration },
+              { type: 'choices', choices: [[], [Tie], [Tie, Tie]] },
+            ],
+            [
+              { type: 'required', value: Cue },
+              { type: 'optional', value: Chord },
+              { type: 'choices', choices: [Pitch, Unpitched, Rest] },
+              { type: 'required', value: Duration },
+            ],
             [
               { type: 'required', value: Grace },
               {
@@ -22900,12 +22900,6 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
                   ],
                 ],
               },
-            ],
-            [
-              { type: 'required', value: Cue },
-              { type: 'optional', value: Chord },
-              { type: 'choices', choices: [Pitch, Unpitched, Rest] },
-              { type: 'required', value: Duration },
             ],
           ],
         },
@@ -23084,19 +23078,22 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
   setTimeOnly(timeOnly: string | null): void {
     this.attributes['time-only'] = timeOnly;
   }
-  getNote():
+  getValue():
+    | [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]]
+    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
     | [
         Grace,
         (
           | [Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]]
           | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
         )
-      ]
-    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration] {
+      ] {
     return this.contents[0];
   }
-  setNote(
-    note:
+  setValue(
+    value:
+      | [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]]
+      | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
       | [
           Grace,
           (
@@ -23104,9 +23101,8 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
             | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
           )
         ]
-      | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
   ): void {
-    this.contents[0] = note;
+    this.contents[0] = value;
   }
   getInstruments(): Array<Instrument> {
     return this.contents[1];
@@ -30108,8 +30104,9 @@ export class Cancel implements XMLElement<'cancel', CancelAttributes, CancelCont
     },
     contents: [
       {
-        type: 'required',
-        value: { type: 'label', label: 'fifths', value: { type: 'int', min: -Infinity, max: Infinity } },
+        type: 'label',
+        label: 'fifths',
+        value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -30147,8 +30144,9 @@ export class Fifths implements XMLElement<'fifths', FifthsAttributes, FifthsCont
     attributes: {},
     contents: [
       {
-        type: 'optional',
-        value: { type: 'label', label: 'fifths', value: { type: 'int', min: -Infinity, max: Infinity } },
+        type: 'label',
+        label: 'value',
+        value: { type: 'optional', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -30163,11 +30161,11 @@ export class Fifths implements XMLElement<'fifths', FifthsAttributes, FifthsCont
     this.contents = opts?.content ?? xml.zero(Fifths.schema.contents);
   }
 
-  getFifths(): number | null {
+  getValue(): number | null {
     return this.contents[0];
   }
-  setFifths(fifths: number | null): void {
-    this.contents[0] = fifths;
+  setValue(value: number | null): void {
+    this.contents[0] = value;
   }
 }
 
@@ -30605,7 +30603,8 @@ export type KeyAttributes = {
 };
 
 export type KeyContents = [
-  [Cancel | null, Fifths, Mode | null] | Array<[KeyStep, KeyAlter, KeyAccidental | null]> | Array<KeyOctave>
+  [Cancel | null, Fifths, Mode | null] | Array<[KeyStep, KeyAlter, KeyAccidental | null]>,
+  Array<KeyOctave>
 ];
 
 export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
@@ -30653,7 +30652,7 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
     contents: [
       {
         type: 'label',
-        label: 'key',
+        label: 'value',
         value: {
           type: 'choices',
           choices: [
@@ -30670,10 +30669,10 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
                 { type: 'optional', value: KeyAccidental },
               ],
             },
-            { type: 'zeroOrMore', value: KeyOctave },
           ],
         },
       },
+      { type: 'label', label: 'key-octaves', value: { type: 'zeroOrMore', value: KeyOctave } },
     ],
   } as const;
 
@@ -30760,13 +30759,17 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
   setRelativeY(relativeY: number | null): void {
     this.attributes['relative-y'] = relativeY;
   }
-  getKey(): [Cancel | null, Fifths, Mode | null] | Array<[KeyStep, KeyAlter, KeyAccidental | null]> | Array<KeyOctave> {
+  getValue(): [Cancel | null, Fifths, Mode | null] | Array<[KeyStep, KeyAlter, KeyAccidental | null]> {
     return this.contents[0];
   }
-  setKey(
-    key: [Cancel | null, Fifths, Mode | null] | Array<[KeyStep, KeyAlter, KeyAccidental | null]> | Array<KeyOctave>
-  ): void {
-    this.contents[0] = key;
+  setValue(value: [Cancel | null, Fifths, Mode | null] | Array<[KeyStep, KeyAlter, KeyAccidental | null]>): void {
+    this.contents[0] = value;
+  }
+  getKeyOctaves(): Array<KeyOctave> {
+    return this.contents[1];
+  }
+  setKeyOctaves(keyOctaves: Array<KeyOctave>): void {
+    this.contents[1] = keyOctaves;
   }
 }
 
@@ -30979,7 +30982,7 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
     contents: [
       {
         type: 'label',
-        label: 'time',
+        label: 'value',
         value: {
           type: 'choices',
           choices: [
@@ -31010,11 +31013,11 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
     this.contents = opts?.content ?? xml.zero(Time.schema.contents);
   }
 
-  getTime(): [Array<[Beats, BeatType]>, Interchangeable | null] | SenzaMisura {
+  getValue(): [Array<[Beats, BeatType]>, Interchangeable | null] | SenzaMisura {
     return this.contents[0];
   }
-  setTime(time: [Array<[Beats, BeatType]>, Interchangeable | null] | SenzaMisura): void {
-    this.contents[0] = time;
+  setValue(value: [Array<[Beats, BeatType]>, Interchangeable | null] | SenzaMisura): void {
+    this.contents[0] = value;
   }
 }
 
@@ -33623,8 +33626,9 @@ export class NumeralFifths implements XMLElement<'numeral-fifths', NumeralFifths
     attributes: {},
     contents: [
       {
-        type: 'required',
-        value: { type: 'label', label: 'fifths', value: { type: 'int', min: -Infinity, max: Infinity } },
+        type: 'label',
+        label: 'value',
+        value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -33639,11 +33643,11 @@ export class NumeralFifths implements XMLElement<'numeral-fifths', NumeralFifths
     this.contents = opts?.content ?? xml.zero(NumeralFifths.schema.contents);
   }
 
-  getFifths(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setFifths(fifths: number): void {
-    this.contents[0] = fifths;
+  setValue(value: number): void {
+    this.contents[0] = value;
   }
 }
 
@@ -37682,7 +37686,14 @@ export class Grouping implements XMLElement<'grouping', GroupingAttributes, Grou
   }
 }
 
-export type MeasureAttributes = Record<string, unknown>;
+export type MeasureAttributes = {
+  number: string;
+  id: string | null;
+  implicit: 'yes' | 'no' | null;
+  'non-controller': 'yes' | 'no' | null;
+  text: Exclude<'yes' | string, ''> | null;
+  width: number | null;
+};
 
 export type MeasureContents = [
   Array<
@@ -37706,11 +37717,25 @@ export type MeasureContents = [
 export class Measure implements XMLElement<'measure', MeasureAttributes, MeasureContents> {
   static readonly schema = {
     name: 'measure',
-    attributes: {},
+    attributes: {
+      number: { type: 'required', value: { type: 'string' } },
+      id: { type: 'optional', value: { type: 'string' } },
+      implicit: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
+      'non-controller': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
+      text: {
+        type: 'optional',
+        value: {
+          type: 'not',
+          include: { type: 'choices', choices: ['yes', { type: 'string' }] },
+          exclude: { type: 'constant', value: '' },
+        },
+      },
+      width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+    },
     contents: [
       {
         type: 'label',
-        label: 'measures',
+        label: 'contents',
         value: {
           type: 'zeroOrMore',
           value: {
@@ -37746,8 +37771,43 @@ export class Measure implements XMLElement<'measure', MeasureAttributes, Measure
     this.attributes = xml.mergeZero(opts?.attributes, Measure.schema);
     this.contents = opts?.content ?? xml.zero(Measure.schema.contents);
   }
-
-  getMeasures(): Array<
+  getNumber(): string {
+    return this.attributes['number'];
+  }
+  setNumber(number: string): void {
+    this.attributes['number'] = number;
+  }
+  getId(): string | null {
+    return this.attributes['id'];
+  }
+  setId(id: string | null): void {
+    this.attributes['id'] = id;
+  }
+  getImplicit(): 'yes' | 'no' | null {
+    return this.attributes['implicit'];
+  }
+  setImplicit(implicit: 'yes' | 'no' | null): void {
+    this.attributes['implicit'] = implicit;
+  }
+  getNonController(): 'yes' | 'no' | null {
+    return this.attributes['non-controller'];
+  }
+  setNonController(nonController: 'yes' | 'no' | null): void {
+    this.attributes['non-controller'] = nonController;
+  }
+  getText(): Exclude<'yes' | string, ''> | null {
+    return this.attributes['text'];
+  }
+  setText(text: Exclude<'yes' | string, ''> | null): void {
+    this.attributes['text'] = text;
+  }
+  getWidth(): number | null {
+    return this.attributes['width'];
+  }
+  setWidth(width: number | null): void {
+    this.attributes['width'] = width;
+  }
+  getContents(): Array<
     | Note
     | Backup
     | Forward
@@ -37765,8 +37825,8 @@ export class Measure implements XMLElement<'measure', MeasureAttributes, Measure
   > {
     return this.contents[0];
   }
-  setMeasures(
-    measures: Array<
+  setContents(
+    contents: Array<
       | Note
       | Backup
       | Forward
@@ -37783,6 +37843,40 @@ export class Measure implements XMLElement<'measure', MeasureAttributes, Measure
       | Bookmark
     >
   ): void {
+    this.contents[0] = contents;
+  }
+}
+
+export type PartAttributes = { id: string };
+
+export type PartContents = [Array<Measure>];
+
+export class Part implements XMLElement<'part', PartAttributes, PartContents> {
+  static readonly schema = {
+    name: 'part',
+    attributes: { id: { type: 'string' } },
+    contents: [{ type: 'label', label: 'measures', value: { type: 'oneOrMore', value: Measure } }],
+  } as const;
+
+  readonly schema = Part.schema;
+
+  attributes: PartAttributes;
+  contents: PartContents;
+
+  constructor(opts?: { attributes?: Partial<PartAttributes>; content?: PartContents }) {
+    this.attributes = xml.mergeZero(opts?.attributes, Part.schema);
+    this.contents = opts?.content ?? xml.zero(Part.schema.contents);
+  }
+  getId(): string {
+    return this.attributes['id'];
+  }
+  setId(id: string): void {
+    this.attributes['id'] = id;
+  }
+  getMeasures(): Array<Measure> {
+    return this.contents[0];
+  }
+  setMeasures(measures: Array<Measure>): void {
     this.contents[0] = measures;
   }
 }

@@ -42,6 +42,8 @@ const resolve = (cursor: Cursor<RawXMLElement>, child: DescriptorChild): Resolut
   }
   if (util.isDescriptor(child)) {
     switch (child.type) {
+      case 'label':
+        return resolve(cursor, child.value);
       case 'optional':
       case 'required':
         return resolveRequirement(cursor, child);
@@ -78,12 +80,15 @@ const resolveRequirement = (
   cursor: Cursor<RawXMLElement>,
   descriptor: OptionalDescriptor<any> | RequiredDescriptor<any>
 ): Resolution => {
-  const resolution = resolve(cursor, descriptor.value);
+  const probeCursor = cursor.dup();
+  const resolution = resolve(probeCursor, descriptor.value);
   switch (resolution.type) {
     case 'none':
       return { type: 'zero', value: zero(descriptor) };
     case 'zero':
+      return resolution;
     case 'resolved':
+      cursor.sync(probeCursor);
       return resolution;
   }
 };
@@ -153,6 +158,9 @@ const resolveMulti = (
     } else {
       shouldResolve = false;
     }
+    if (cursor.done()) {
+      shouldResolve = false;
+    }
   }
 
   if (descriptor.type === 'oneOrMore' && value.length < 1) {
@@ -213,6 +221,9 @@ const resolveArray = (cursor: Cursor<RawXMLElement>, children: any[]): Resolutio
       case 'resolved':
         value.push(resolution.value);
     }
+  }
+  if (cursor.getIndex() === probeCursor.getIndex()) {
+    return { type: 'none', value: undefined };
   }
   cursor.sync(probeCursor);
   return { type: 'resolved', value };

@@ -21,5 +21,5 @@ export const Cancel = schema(
      */
     location: t.optional(dataTypes.cancelLocation()),
   },
-  [t.required(dataTypes.fifths())] as const
+  [t.label({ label: 'fifths', value: t.required(dataTypes.fifths()) })] as const
 );

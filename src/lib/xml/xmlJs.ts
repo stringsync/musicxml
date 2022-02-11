@@ -4,7 +4,9 @@ import { RawXMLElement } from './types';
 
 export const parse = (xml: string): RawXMLElement[] => {
   const xmlJsElements = xmlJs.xml2js(xml).elements || [];
-  return xmlJsElements.map(toRawXMLElement);
+  return xmlJsElements
+    .filter((element: xmlJs.Element) => element.type === 'element' || element === 'text')
+    .map(toRawXMLElement);
 };
 
 export const seralize = (elements: RawXMLElement[]): string => {

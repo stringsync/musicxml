@@ -12,4 +12,6 @@ import { schema, t } from '../schema';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fifths/}
  */
-export const Fifths = schema('fifths', {}, [t.optional(dataTypes.fifths())] as const);
+export const Fifths = schema('fifths', {}, [
+  t.label({ label: 'value', value: t.optional(dataTypes.fifths()) }),
+] as const);

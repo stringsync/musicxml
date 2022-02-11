@@ -6,4 +6,4 @@ import { t } from '../schema';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/fifths/}
  */
-export const fifths = () => t.label({ label: 'fifths', value: t.int() });
+export const fifths = () => t.int();

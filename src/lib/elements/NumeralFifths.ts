@@ -10,4 +10,6 @@ import { schema, t } from '../schema';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral-fifths/}
  */
-export const NumeralFifths = schema('numeral-fifths', {}, [t.required(dataTypes.fifths())] as const);
+export const NumeralFifths = schema('numeral-fifths', {}, [
+  t.label({ label: 'value', value: t.required(dataTypes.fifths()) }),
+] as const);

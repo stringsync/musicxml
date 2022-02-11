@@ -1,4 +1,6 @@
-import { schema } from '../schema';
+import * as dataTypes from '../dataTypes';
+import { schema, t } from '../schema';
+import { Measure } from './Measure';
 
 /**
  * The `<part>` element
@@ -10,4 +12,10 @@ import { schema } from '../schema';
  *
  *  {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-partwise/}
  */
-export const Part = schema('part', {}, [] as const);
+export const Part = schema(
+  'part',
+  {
+    id: dataTypes.idref(),
+  },
+  [t.label({ label: 'measures', value: t.oneOrMore(Measure) })] as const
+);
