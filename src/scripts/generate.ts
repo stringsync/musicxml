@@ -32,6 +32,42 @@ const getClassName = (factory: XMLElementSchema): string => {
   return toPascalCase(factory.name);
 };
 
+const getLabeledChoiceTypeLiterals = (child: DescriptorChild): string[] => {
+  const literals = new Array<string>();
+  if (util.isDescriptor(child)) {
+    switch (child.type) {
+      case 'label':
+      case 'optional':
+      case 'required':
+      case 'zeroOrMore':
+      case 'oneOrMore':
+        literals.push(...getLabeledChoiceTypeLiterals(child.value));
+        break;
+      case 'choices':
+        for (const choice of child.choices) {
+          if (util.isDescriptor(choice) && choice.type === 'label') {
+            const typeName = getChoiceTypeName(choice);
+            const typeLiteral = getTypeLiteral(choice.value);
+            literals.push(`export type ${typeName} = ${typeLiteral};`);
+          }
+          literals.push(...getLabeledChoiceTypeLiterals(choice));
+        }
+        break;
+    }
+  }
+  if (util.isArray(child)) {
+    literals.push(...child.flatMap(getLabeledChoiceTypeLiterals));
+  }
+  return literals;
+};
+
+const getChoiceTypeName = (child: DescriptorChild): string => {
+  if (util.isDescriptor(child) && child.type === 'label') {
+    return toPascalCase(child.label);
+  }
+  return getTypeLiteral(child);
+};
+
 const getTypeLiteral = (child: DescriptorChild): string => {
   if (util.isString(child)) {
     return `'${child}'`;
@@ -52,7 +88,7 @@ const getTypeLiteral = (child: DescriptorChild): string => {
       case 'constant':
         return getTypeLiteral(child.value);
       case 'choices':
-        return child.choices.map(getTypeLiteral).join(' | ');
+        return child.choices.map(getChoiceTypeName).join(' | ');
       case 'optional':
         return `${getTypeLiteral(child.value)} | null`;
       case 'required':
@@ -237,6 +273,8 @@ const toClassLiteral = (schema: XMLElementSchema): string => {
 
   const schemaLiteral = getSchemaLiteral(schema);
 
+  const labeledChoiceTypeLiterals = getLabeledChoiceTypeLiterals(schema.contents).join('\n\n');
+
   const attributesTypeName = `${className}Attributes`;
   const attributesTypeLiteral = getAttributesTypeLiteral(schema);
   const attributesAccessorMethodLiterals = getAttributeAccessorMethodLiterals(schema);
@@ -246,6 +284,8 @@ const toClassLiteral = (schema: XMLElementSchema): string => {
   const contentsAccessorMethodLiterals = getContentsAccessorMethodLiterals(schema);
 
   return `
+${labeledChoiceTypeLiterals}
+
 export type ${attributesTypeName} = ${attributesTypeLiteral};
 
 export type ${contentsTypeName} = ${contentsTypeLiteral};
@@ -273,7 +313,7 @@ const generateFileContents = (roots: XMLElementSchema[]): string => {
 
   literals.push('/* eslint-disable @typescript-eslint/ban-types */');
   literals.push(`import { XMLElement, XMLElementSchema } from '../lib/schema';`);
-  literals.push(`import * as operations from '../lib/operations`);
+  literals.push(`import * as operations from '../lib/operations';`);
 
   // Dependencies must appear first in the file, which is why we're going through the trouble of traversing the
   // tree dfs in-order.

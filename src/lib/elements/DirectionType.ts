@@ -53,7 +53,7 @@ export const DirectionType = schema(
         t.label({ label: 'codas', value: t.oneOrMore(Coda) }),
         t.label({ label: 'tokens', value: t.oneOrMore(t.choices(Words, Symbol)) }),
         Wedge,
-        t.label({ label: 'dynamics', value: t.oneOrMore(Dynamics) }),
+        t.label({ label: 'dynamics-list', value: t.oneOrMore(Dynamics) }),
         Dashes,
         Bracket,
         Pedal,

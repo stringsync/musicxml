@@ -3045,14 +3045,22 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
           choices: [
             CreditImage,
             [
-              { type: 'choices', choices: [CreditWords, CreditSymbol] },
               {
-                type: 'zeroOrMore',
-                value: [
-                  { type: 'zeroOrMore', value: Link },
-                  { type: 'zeroOrMore', value: Bookmark },
-                  { type: 'choices', choices: [CreditWords, CreditSymbol] },
-                ],
+                type: 'label',
+                label: 'simple-credit-detail',
+                value: { type: 'choices', choices: [CreditWords, CreditSymbol] },
+              },
+              {
+                type: 'label',
+                label: 'complex-credit-details',
+                value: {
+                  type: 'zeroOrMore',
+                  value: [
+                    { type: 'zeroOrMore', value: Link },
+                    { type: 'zeroOrMore', value: Bookmark },
+                    { type: 'choices', choices: [CreditWords, CreditSymbol] },
+                  ],
+                },
               },
             ],
           ],
@@ -22136,6 +22144,8 @@ export class EndParagraph implements XMLElement<'end-paragraph', EndParagraphAtt
   }
 }
 
+export type Intelligible = [Syllabic | null, Text, Array<[[Elision, Syllabic | null] | null, Text]>];
+
 export type LyricAttributes = {
   color: string | null;
   'default-x': number | null;
@@ -22152,7 +22162,7 @@ export type LyricAttributes = {
 };
 
 export type LyricContents = [
-  [Syllabic | null, Text, Array<[[Elision, Syllabic | null] | null, Text]>] | Extend | Laughing | Humming,
+  Intelligible | Extend | Laughing | Humming,
   EndLine | null,
   EndParagraph | null,
   Footnote | null,
@@ -22199,23 +22209,27 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
         value: {
           type: 'choices',
           choices: [
-            [
-              { type: 'optional', value: Syllabic },
-              { type: 'required', value: Text },
-              {
-                type: 'zeroOrMore',
-                value: [
-                  {
-                    type: 'optional',
-                    value: [
-                      { type: 'required', value: Elision },
-                      { type: 'optional', value: Syllabic },
-                    ],
-                  },
-                  { type: 'required', value: Text },
-                ],
-              },
-            ],
+            {
+              type: 'label',
+              label: 'intelligible',
+              value: [
+                { type: 'optional', value: Syllabic },
+                { type: 'required', value: Text },
+                {
+                  type: 'zeroOrMore',
+                  value: [
+                    {
+                      type: 'optional',
+                      value: [
+                        { type: 'required', value: Elision },
+                        { type: 'optional', value: Syllabic },
+                      ],
+                    },
+                    { type: 'required', value: Text },
+                  ],
+                },
+              ],
+            },
             Extend,
             Laughing,
             Humming,
@@ -22310,12 +22324,10 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
   setTimeOnly(timeOnly: string | null): void {
     this.attributes['time-only'] = timeOnly;
   }
-  getLyric(): [Syllabic | null, Text, Array<[[Elision, Syllabic | null] | null, Text]>] | Extend | Laughing | Humming {
+  getLyric(): Intelligible | Extend | Laughing | Humming {
     return this.contents[0];
   }
-  setLyric(
-    lyric: [Syllabic | null, Text, Array<[[Elision, Syllabic | null] | null, Text]>] | Extend | Laughing | Humming
-  ): void {
+  setLyric(lyric: Intelligible | Extend | Laughing | Humming): void {
     this.contents[0] = lyric;
   }
   getEndLine(): EndLine | null {
@@ -22750,6 +22762,18 @@ export class Listen implements XMLElement<'listen', ListenAttributes, ListenCont
   }
 }
 
+export type ChordNoteValue = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
+
+export type GraceNoteValue = [
+  Grace,
+  (
+    | [Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]]
+    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
+  )
+];
+
+export type BasicNoteValue = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
+
 export type NoteAttributes = {
   attack: number | null;
   color: string | null;
@@ -22775,17 +22799,7 @@ export type NoteAttributes = {
 };
 
 export type NoteContents = [
-  (
-    | [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]]
-    | [
-        Grace,
-        (
-          | [Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]]
-          | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
-        )
-      ]
-    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
-  ),
+  ChordNoteValue | GraceNoteValue | BasicNoteValue,
   Array<Instrument>,
   Footnote | null,
   Level | null,
@@ -22873,37 +22887,49 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
         value: {
           type: 'choices',
           choices: [
-            [
-              { type: 'optional', value: Chord },
-              { type: 'choices', choices: [Pitch, Unpitched, Rest] },
-              { type: 'required', value: Duration },
-              { type: 'choices', choices: [[], [Tie], [Tie, Tie]] },
-            ],
-            [
-              { type: 'required', value: Grace },
-              {
-                type: 'choices',
-                choices: [
-                  [
-                    { type: 'optional', value: Chord },
-                    { type: 'choices', choices: [Pitch, Unpitched, Rest] },
-                    { type: 'choices', choices: [[], [Tie], [Tie, Tie]] },
+            {
+              type: 'label',
+              label: 'chord-note-value',
+              value: [
+                { type: 'optional', value: Chord },
+                { type: 'choices', choices: [Pitch, Unpitched, Rest] },
+                { type: 'required', value: Duration },
+                { type: 'choices', choices: [[], [Tie], [Tie, Tie]] },
+              ],
+            },
+            {
+              type: 'label',
+              label: 'grace-note-value',
+              value: [
+                { type: 'required', value: Grace },
+                {
+                  type: 'choices',
+                  choices: [
+                    [
+                      { type: 'optional', value: Chord },
+                      { type: 'choices', choices: [Pitch, Unpitched, Rest] },
+                      { type: 'choices', choices: [[], [Tie], [Tie, Tie]] },
+                    ],
+                    [
+                      { type: 'required', value: Cue },
+                      { type: 'optional', value: Chord },
+                      { type: 'choices', choices: [Pitch, Unpitched, Rest] },
+                      { type: 'required', value: Duration },
+                    ],
                   ],
-                  [
-                    { type: 'required', value: Cue },
-                    { type: 'optional', value: Chord },
-                    { type: 'choices', choices: [Pitch, Unpitched, Rest] },
-                    { type: 'required', value: Duration },
-                  ],
-                ],
-              },
-            ],
-            [
-              { type: 'required', value: Cue },
-              { type: 'optional', value: Chord },
-              { type: 'choices', choices: [Pitch, Unpitched, Rest] },
-              { type: 'required', value: Duration },
-            ],
+                },
+              ],
+            },
+            {
+              type: 'label',
+              label: 'basic-note-value',
+              value: [
+                { type: 'required', value: Cue },
+                { type: 'optional', value: Chord },
+                { type: 'choices', choices: [Pitch, Unpitched, Rest] },
+                { type: 'required', value: Duration },
+              ],
+            },
           ],
         },
       },
@@ -23081,30 +23107,10 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
   setTimeOnly(timeOnly: string | null): void {
     this.attributes['time-only'] = timeOnly;
   }
-  getValue():
-    | [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]]
-    | [
-        Grace,
-        (
-          | [Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]]
-          | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
-        )
-      ]
-    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration] {
+  getValue(): ChordNoteValue | GraceNoteValue | BasicNoteValue {
     return this.contents[0];
   }
-  setValue(
-    value:
-      | [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]]
-      | [
-          Grace,
-          (
-            | [Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]]
-            | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
-          )
-        ]
-      | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
-  ): void {
+  setValue(value: ChordNoteValue | GraceNoteValue | BasicNoteValue): void {
     this.contents[0] = value;
   }
   getInstruments(): Array<Instrument> {
@@ -25771,6 +25777,19 @@ export class MetronomeRelation
   }
 }
 
+export type BeatSpec = [
+  BeatUnit,
+  Array<BeatUnitDot>,
+  Array<BeatUnitTied>,
+  PerMinute | [BeatUnit, Array<BeatUnitDot>, Array<BeatUnitTied>]
+];
+
+export type MetronomeSpec = [
+  MetronomeArrows | null,
+  Array<MetronomeNote>,
+  [MetronomeRelation, Array<MetronomeNote>] | null
+];
+
 export type MetronomeAttributes = {
   color: string | null;
   'default-x': number | null;
@@ -25789,10 +25808,7 @@ export type MetronomeAttributes = {
   valign: 'top' | 'middle' | 'bottom' | 'baseline' | null;
 };
 
-export type MetronomeContents = [
-  | [BeatUnit, Array<BeatUnitDot>, Array<BeatUnitTied>, PerMinute | [BeatUnit, Array<BeatUnitDot>, Array<BeatUnitTied>]]
-  | [MetronomeArrows | null, Array<MetronomeNote>, [MetronomeRelation, Array<MetronomeNote>] | null]
-];
+export type MetronomeContents = [BeatSpec | MetronomeSpec];
 
 export class Metronome implements XMLElement<'metronome', MetronomeAttributes, MetronomeContents> {
   static readonly schema = {
@@ -25846,33 +25862,41 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
         value: {
           type: 'choices',
           choices: [
-            [
-              { type: 'required', value: BeatUnit },
-              { type: 'zeroOrMore', value: BeatUnitDot },
-              { type: 'zeroOrMore', value: BeatUnitTied },
-              {
-                type: 'choices',
-                choices: [
-                  PerMinute,
-                  [
-                    { type: 'required', value: BeatUnit },
-                    { type: 'zeroOrMore', value: BeatUnitDot },
-                    { type: 'zeroOrMore', value: BeatUnitTied },
+            {
+              type: 'label',
+              label: 'beat-spec',
+              value: [
+                { type: 'required', value: BeatUnit },
+                { type: 'zeroOrMore', value: BeatUnitDot },
+                { type: 'zeroOrMore', value: BeatUnitTied },
+                {
+                  type: 'choices',
+                  choices: [
+                    PerMinute,
+                    [
+                      { type: 'required', value: BeatUnit },
+                      { type: 'zeroOrMore', value: BeatUnitDot },
+                      { type: 'zeroOrMore', value: BeatUnitTied },
+                    ],
                   ],
-                ],
-              },
-            ],
-            [
-              { type: 'optional', value: MetronomeArrows },
-              { type: 'oneOrMore', value: MetronomeNote },
-              {
-                type: 'optional',
-                value: [
-                  { type: 'required', value: MetronomeRelation },
-                  { type: 'oneOrMore', value: MetronomeNote },
-                ],
-              },
-            ],
+                },
+              ],
+            },
+            {
+              type: 'label',
+              label: 'metronome-spec',
+              value: [
+                { type: 'optional', value: MetronomeArrows },
+                { type: 'oneOrMore', value: MetronomeNote },
+                {
+                  type: 'optional',
+                  value: [
+                    { type: 'required', value: MetronomeRelation },
+                    { type: 'oneOrMore', value: MetronomeNote },
+                  ],
+                },
+              ],
+            },
           ],
         },
       },
@@ -25980,26 +26004,10 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
   setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
     this.attributes['valign'] = valign;
   }
-  getMetronome():
-    | [
-        BeatUnit,
-        Array<BeatUnitDot>,
-        Array<BeatUnitTied>,
-        PerMinute | [BeatUnit, Array<BeatUnitDot>, Array<BeatUnitTied>]
-      ]
-    | [MetronomeArrows | null, Array<MetronomeNote>, [MetronomeRelation, Array<MetronomeNote>] | null] {
+  getMetronome(): BeatSpec | MetronomeSpec {
     return this.contents[0];
   }
-  setMetronome(
-    metronome:
-      | [
-          BeatUnit,
-          Array<BeatUnitDot>,
-          Array<BeatUnitTied>,
-          PerMinute | [BeatUnit, Array<BeatUnitDot>, Array<BeatUnitTied>]
-        ]
-      | [MetronomeArrows | null, Array<MetronomeNote>, [MetronomeRelation, Array<MetronomeNote>] | null]
-  ): void {
+  setMetronome(metronome: BeatSpec | MetronomeSpec): void {
     this.contents[0] = metronome;
   }
 }
@@ -29179,15 +29187,27 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
   }
 }
 
+export type Rehearsals = Array<Rehearsal>;
+
+export type Segnos = Array<Segno>;
+
+export type Codas = Array<Coda>;
+
+export type Tokens = Array<Words | Symbol>;
+
+export type DynamicsList = Array<Dynamics>;
+
+export type Percussions = Array<Percussion>;
+
 export type DirectionTypeAttributes = { id: string | null };
 
 export type DirectionTypeContents = [
-  | Array<Rehearsal>
-  | Array<Segno>
-  | Array<Coda>
-  | Array<Words | Symbol>
+  | Rehearsals
+  | Segnos
+  | Codas
+  | Tokens
   | Wedge
-  | Array<Dynamics>
+  | DynamicsList
   | Dashes
   | Bracket
   | Pedal
@@ -29201,7 +29221,7 @@ export type DirectionTypeContents = [
   | Scordatura
   | Image
   | PrincipalVoice
-  | Array<Percussion>
+  | Percussions
   | AccordionRegistration
   | StaffDivide
   | OtherDirection
@@ -29218,12 +29238,16 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
         value: {
           type: 'choices',
           choices: [
-            { type: 'oneOrMore', value: Rehearsal },
-            { type: 'oneOrMore', value: Segno },
-            { type: 'oneOrMore', value: Coda },
-            { type: 'oneOrMore', value: { type: 'choices', choices: [Words, Symbol] } },
+            { type: 'label', label: 'rehearsals', value: { type: 'oneOrMore', value: Rehearsal } },
+            { type: 'label', label: 'segnos', value: { type: 'oneOrMore', value: Segno } },
+            { type: 'label', label: 'codas', value: { type: 'oneOrMore', value: Coda } },
+            {
+              type: 'label',
+              label: 'tokens',
+              value: { type: 'oneOrMore', value: { type: 'choices', choices: [Words, Symbol] } },
+            },
             Wedge,
-            { type: 'oneOrMore', value: Dynamics },
+            { type: 'label', label: 'dynamics-list', value: { type: 'oneOrMore', value: Dynamics } },
             Dashes,
             Bracket,
             Pedal,
@@ -29237,7 +29261,7 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
             Scordatura,
             Image,
             PrincipalVoice,
-            { type: 'oneOrMore', value: Percussion },
+            { type: 'label', label: 'percussions', value: { type: 'oneOrMore', value: Percussion } },
             AccordionRegistration,
             StaffDivide,
             OtherDirection,
@@ -29263,12 +29287,12 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
     this.attributes['id'] = id;
   }
   getDirectionType():
-    | Array<Rehearsal>
-    | Array<Segno>
-    | Array<Coda>
-    | Array<Words | Symbol>
+    | Rehearsals
+    | Segnos
+    | Codas
+    | Tokens
     | Wedge
-    | Array<Dynamics>
+    | DynamicsList
     | Dashes
     | Bracket
     | Pedal
@@ -29282,7 +29306,7 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
     | Scordatura
     | Image
     | PrincipalVoice
-    | Array<Percussion>
+    | Percussions
     | AccordionRegistration
     | StaffDivide
     | OtherDirection {
@@ -29290,12 +29314,12 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
   }
   setDirectionType(
     directionType:
-      | Array<Rehearsal>
-      | Array<Segno>
-      | Array<Coda>
-      | Array<Words | Symbol>
+      | Rehearsals
+      | Segnos
+      | Codas
+      | Tokens
       | Wedge
-      | Array<Dynamics>
+      | DynamicsList
       | Dashes
       | Bracket
       | Pedal
@@ -29309,7 +29333,7 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
       | Scordatura
       | Image
       | PrincipalVoice
-      | Array<Percussion>
+      | Percussions
       | AccordionRegistration
       | StaffDivide
       | OtherDirection
@@ -29372,7 +29396,7 @@ export class InstrumentChange
       { type: 'optional', value: InstrumentSound },
       {
         type: 'label',
-        label: 'instrument-type',
+        label: 'instrument-types',
         value: { type: 'zeroOrMore', value: { type: 'choices', choices: [Solo, Ensemble] } },
       },
       { type: 'optional', value: VirtualInstrument },
@@ -29400,11 +29424,11 @@ export class InstrumentChange
   setInstrumentSound(instrumentSound: InstrumentSound | null): void {
     this.contents[0] = instrumentSound;
   }
-  getInstrumentType(): Array<Solo | Ensemble> {
+  getInstrumentTypes(): Array<Solo | Ensemble> {
     return this.contents[1];
   }
-  setInstrumentType(instrumentType: Array<Solo | Ensemble>): void {
-    this.contents[1] = instrumentType;
+  setInstrumentTypes(instrumentTypes: Array<Solo | Ensemble>): void {
+    this.contents[1] = instrumentTypes;
   }
   getVirtualInstrument(): VirtualInstrument | null {
     return this.contents[2];
@@ -29561,9 +29585,11 @@ export class SwingStyle implements XMLElement<'swing-style', SwingStyleAttribute
   }
 }
 
+export type AlternateSwing = [First, Second, SwingType | null];
+
 export type SwingAttributes = Record<string, unknown>;
 
-export type SwingContents = [Straight | [First, Second, SwingType | null], SwingStyle | null];
+export type SwingContents = [Straight | AlternateSwing, SwingStyle | null];
 
 export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents> {
   static readonly schema = {
@@ -29577,11 +29603,15 @@ export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents
           type: 'choices',
           choices: [
             Straight,
-            [
-              { type: 'required', value: First },
-              { type: 'required', value: Second },
-              { type: 'optional', value: SwingType },
-            ],
+            {
+              type: 'label',
+              label: 'alternate-swing',
+              value: [
+                { type: 'required', value: First },
+                { type: 'required', value: Second },
+                { type: 'optional', value: SwingType },
+              ],
+            },
           ],
         },
       },
@@ -29599,10 +29629,10 @@ export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents
     this.contents = opts?.contents ?? operations.zero(Swing.schema.contents);
   }
 
-  getSwing(): Straight | [First, Second, SwingType | null] {
+  getSwing(): Straight | AlternateSwing {
     return this.contents[0];
   }
-  setSwing(swing: Straight | [First, Second, SwingType | null]): void {
+  setSwing(swing: Straight | AlternateSwing): void {
     this.contents[0] = swing;
   }
   getSwingStyle(): SwingStyle | null {
@@ -30590,6 +30620,10 @@ export class KeyOctave implements XMLElement<'key-octave', KeyOctaveAttributes, 
   }
 }
 
+export type TraditionalKey = [Cancel | null, Fifths, Mode | null];
+
+export type KeySpecs = Array<[KeyStep, KeyAlter, KeyAccidental | null]>;
+
 export type KeyAttributes = {
   color: string | null;
   'default-x': number | null;
@@ -30605,10 +30639,7 @@ export type KeyAttributes = {
   'relative-y': number | null;
 };
 
-export type KeyContents = [
-  [Cancel | null, Fifths, Mode | null] | Array<[KeyStep, KeyAlter, KeyAccidental | null]>,
-  Array<KeyOctave>
-];
+export type KeyContents = [TraditionalKey | KeySpecs, Array<KeyOctave>];
 
 export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
   static readonly schema = {
@@ -30659,18 +30690,26 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
         value: {
           type: 'choices',
           choices: [
-            [
-              { type: 'optional', value: Cancel },
-              { type: 'required', value: Fifths },
-              { type: 'optional', value: Mode },
-            ],
             {
-              type: 'zeroOrMore',
+              type: 'label',
+              label: 'traditional-key',
               value: [
-                { type: 'required', value: KeyStep },
-                { type: 'required', value: KeyAlter },
-                { type: 'optional', value: KeyAccidental },
+                { type: 'optional', value: Cancel },
+                { type: 'required', value: Fifths },
+                { type: 'optional', value: Mode },
               ],
+            },
+            {
+              type: 'label',
+              label: 'key-specs',
+              value: {
+                type: 'zeroOrMore',
+                value: [
+                  { type: 'required', value: KeyStep },
+                  { type: 'required', value: KeyAlter },
+                  { type: 'optional', value: KeyAccidental },
+                ],
+              },
             },
           ],
         },
@@ -30762,10 +30801,10 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
   setRelativeY(relativeY: number | null): void {
     this.attributes['relative-y'] = relativeY;
   }
-  getValue(): [Cancel | null, Fifths, Mode | null] | Array<[KeyStep, KeyAlter, KeyAccidental | null]> {
+  getValue(): TraditionalKey | KeySpecs {
     return this.contents[0];
   }
-  setValue(value: [Cancel | null, Fifths, Mode | null] | Array<[KeyStep, KeyAlter, KeyAccidental | null]>): void {
+  setValue(value: TraditionalKey | KeySpecs): void {
     this.contents[0] = value;
   }
   getKeyOctaves(): Array<KeyOctave> {
@@ -30974,9 +31013,11 @@ export class SenzaMisura implements XMLElement<'senza-misura', SenzaMisuraAttrib
   }
 }
 
+export type TimeSignature = [Array<[Beats, BeatType]>, Interchangeable | null];
+
 export type TimeAttributes = Record<string, unknown>;
 
-export type TimeContents = [[Array<[Beats, BeatType]>, Interchangeable | null] | SenzaMisura];
+export type TimeContents = [TimeSignature | SenzaMisura];
 
 export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
   static readonly schema = {
@@ -30989,16 +31030,20 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
         value: {
           type: 'choices',
           choices: [
-            [
-              {
-                type: 'oneOrMore',
-                value: [
-                  { type: 'required', value: Beats },
-                  { type: 'required', value: BeatType },
-                ],
-              },
-              { type: 'optional', value: Interchangeable },
-            ],
+            {
+              type: 'label',
+              label: 'time-signature',
+              value: [
+                {
+                  type: 'oneOrMore',
+                  value: [
+                    { type: 'required', value: Beats },
+                    { type: 'required', value: BeatType },
+                  ],
+                },
+                { type: 'optional', value: Interchangeable },
+              ],
+            },
             SenzaMisura,
           ],
         },
@@ -31016,10 +31061,10 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
     this.contents = opts?.contents ?? operations.zero(Time.schema.contents);
   }
 
-  getValue(): [Array<[Beats, BeatType]>, Interchangeable | null] | SenzaMisura {
+  getValue(): TimeSignature | SenzaMisura {
     return this.contents[0];
   }
-  setValue(value: [Array<[Beats, BeatType]>, Interchangeable | null] | SenzaMisura): void {
+  setValue(value: TimeSignature | SenzaMisura): void {
     this.contents[0] = value;
   }
 }
@@ -32864,6 +32909,10 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
   }
 }
 
+export type Transposes = Array<Transpose>;
+
+export type ForParts = Array<ForPart>;
+
 export type AttributesAttributes = Record<string, unknown>;
 
 export type AttributesContents = [
@@ -32877,7 +32926,7 @@ export type AttributesContents = [
   Instruments | null,
   Array<Clef>,
   Array<StaffDetails>,
-  Array<Transpose> | Array<ForPart>,
+  Transposes | ForParts,
   Array<Directive>,
   Array<MeasureStyle>
 ];
@@ -32903,8 +32952,8 @@ export class Attributes implements XMLElement<'attributes', AttributesAttributes
         value: {
           type: 'choices',
           choices: [
-            { type: 'zeroOrMore', value: Transpose },
-            { type: 'zeroOrMore', value: ForPart },
+            { type: 'label', label: 'transposes', value: { type: 'zeroOrMore', value: Transpose } },
+            { type: 'label', label: 'for-parts', value: { type: 'zeroOrMore', value: ForPart } },
           ],
         },
       },
@@ -32983,10 +33032,10 @@ export class Attributes implements XMLElement<'attributes', AttributesAttributes
   setStaffDetails(staffDetails: Array<StaffDetails>): void {
     this.contents[9] = staffDetails;
   }
-  getTranspositions(): Array<Transpose> | Array<ForPart> {
+  getTranspositions(): Transposes | ForParts {
     return this.contents[10];
   }
-  setTranspositions(transpositions: Array<Transpose> | Array<ForPart>): void {
+  setTranspositions(transpositions: Transposes | ForParts): void {
     this.contents[10] = transpositions;
   }
   getDirectives(): Array<Directive> {
