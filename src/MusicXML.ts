@@ -31,7 +31,7 @@ export class MusicXML {
   private root: ScorePartwise | ScoreTimewise;
   private index: number;
   private declaration: raw.Declaration;
-  private elements: raw.RawXMLNode[];
+  private nodes: raw.RawXMLNode[];
 
   private constructor(
     root: ScorePartwise | ScoreTimewise,
@@ -42,7 +42,7 @@ export class MusicXML {
     this.root = root;
     this.index = index;
     this.declaration = declaration;
-    this.elements = elements;
+    this.nodes = elements;
   }
 
   getRoot(): ScorePartwise | ScoreTimewise {
@@ -50,9 +50,9 @@ export class MusicXML {
   }
 
   serialize(): string {
-    const element = xml.serialize(this.root);
-    const elements = [...this.elements];
-    elements[this.index] = element;
-    return raw.seralize(this.declaration, elements);
+    const node = xml.serialize(this.root);
+    const nodes = [...this.nodes];
+    nodes[this.index] = node;
+    return raw.seralize(this.declaration, nodes);
   }
 }

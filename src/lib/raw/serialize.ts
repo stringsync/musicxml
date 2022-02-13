@@ -1,8 +1,8 @@
 import * as xmlJs from 'xml-js';
 import { Declaration, RawXMLNode } from './types';
 
-export const seralize = (declaration: Declaration, elements: RawXMLNode[]): string => {
-  const xmlJsElements = elements.map(toXmlJsElement);
+export const seralize = (declaration: Declaration, nodes: RawXMLNode[]): string => {
+  const xmlJsElements = nodes.map(toXmlJsElement);
   return xmlJs.js2xml({ declaration, elements: xmlJsElements }, { spaces: 2 });
 };
 
