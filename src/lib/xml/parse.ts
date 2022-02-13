@@ -1,33 +1,21 @@
 import { MusicXMLError } from '../errors';
-import {
-  ChoicesDescriptor,
-  Descriptor,
-  DescriptorChild,
-  FloatDescriptor,
-  IntDescriptor,
-  OneOrMoreDescriptor,
-  OptionalDescriptor,
-  RequiredDescriptor,
-  StringDescriptor,
-  XMLElementCtor,
-  ZeroOrMoreDescriptor,
-} from '../schema';
+import * as operations from '../operations';
+import * as primitives from '../primitives';
+import * as raw from '../raw';
+import * as resolutions from '../resolutions';
+import * as schema from '../schema';
 import * as util from '../util';
-import { Cursor } from '../util';
-import { fromString } from './fromString';
-import { RawXMLElement, Resolution } from './types';
-import { zero } from './zero';
 
-export const fromRawXMLElements = <T extends Descriptor | Descriptor[]>(
-  elements: RawXMLElement[],
+export const parse = <T extends schema.Descriptor | schema.Descriptor[]>(
+  nodes: raw.RawXMLNode[],
   child: T
-): Resolution => {
-  return resolve(Cursor.from(elements), child);
+): resolutions.Resolution => {
+  return resolve(util.Cursor.from(nodes), child);
 };
 
-const resolve = (cursor: Cursor<RawXMLElement>, child: DescriptorChild): Resolution => {
+const resolve = (cursor: util.Cursor<raw.RawXMLNode>, child: schema.DescriptorChild): resolutions.Resolution => {
   if (cursor.done()) {
-    return { type: 'zero', value: zero(child) };
+    return resolutions.zero(operations.zero(child));
   }
   if (util.isString(child)) {
     return resolveConstant(cursor, child);
@@ -72,14 +60,14 @@ const resolve = (cursor: Cursor<RawXMLElement>, child: DescriptorChild): Resolut
 };
 
 const resolveRequirement = (
-  cursor: Cursor<RawXMLElement>,
-  descriptor: OptionalDescriptor<any> | RequiredDescriptor<any>
-): Resolution => {
+  cursor: util.Cursor<raw.RawXMLNode>,
+  descriptor: schema.OptionalDescriptor<any> | schema.RequiredDescriptor<any>
+): resolutions.Resolution => {
   const probeCursor = cursor.dup();
   const resolution = resolve(probeCursor, descriptor.value);
   switch (resolution.type) {
     case 'none':
-      return { type: 'zero', value: zero(descriptor) };
+      return resolutions.zero(operations.zero(descriptor));
     case 'zero':
       return resolution;
     case 'resolved':
@@ -89,30 +77,33 @@ const resolveRequirement = (
 };
 
 const resolvePrimitive = (
-  cursor: Cursor<RawXMLElement>,
-  descriptor: IntDescriptor | FloatDescriptor | StringDescriptor
-): Resolution => {
+  cursor: util.Cursor<raw.RawXMLNode>,
+  descriptor: schema.IntDescriptor | schema.FloatDescriptor | schema.StringDescriptor
+): resolutions.Resolution => {
   const element = cursor.get();
   if (element.type === 'text') {
     cursor.next();
-    return { type: 'resolved', value: fromString(element.text, descriptor) };
+    return resolutions.resolved(primitives.parse(element.text, descriptor));
   } else {
-    return { type: 'zero', value: zero(descriptor) };
+    return resolutions.zero(operations.zero(descriptor));
   }
 };
 
-const resolveConstant = (cursor: Cursor<RawXMLElement>, child: string | number): Resolution => {
+const resolveConstant = (cursor: util.Cursor<raw.RawXMLNode>, child: string | number): resolutions.Resolution => {
   const element = cursor.get();
   if (element.type === 'text' && element.text === child.toString()) {
     cursor.next();
-    return { type: 'resolved', value: child };
+    return resolutions.resolved(child);
   } else {
-    return { type: 'zero', value: child };
+    return resolutions.zero(child);
   }
 };
 
-const resolveChoices = (cursor: Cursor<RawXMLElement>, descriptor: ChoicesDescriptor<any>): Resolution => {
-  const results = new Array<{ resolution: Resolution; cursor: Cursor<RawXMLElement> }>();
+const resolveChoices = (
+  cursor: util.Cursor<raw.RawXMLNode>,
+  descriptor: schema.ChoicesDescriptor<any>
+): resolutions.Resolution => {
+  const results = new Array<{ resolution: resolutions.Resolution; cursor: util.Cursor<raw.RawXMLNode> }>();
   for (const choice of descriptor.choices) {
     const probeCursor = cursor.dup();
     const resolution = resolve(probeCursor, choice);
@@ -124,23 +115,23 @@ const resolveChoices = (cursor: Cursor<RawXMLElement>, descriptor: ChoicesDescri
 
   const cursorDidNotMove = cursor.getIndex() === maxResolvedIndex;
   if (cursorDidNotMove) {
-    return { type: 'zero', value: zero(descriptor) };
+    return resolutions.zero(operations.zero(descriptor));
   }
 
   for (const result of resolvedResults) {
     if (maxResolvedIndex === result.cursor.getIndex()) {
       cursor.sync(result.cursor);
-      return { type: 'resolved', value: result.resolution.value };
+      return resolutions.resolved(result.resolution.value);
     }
   }
 
-  return { type: 'zero', value: zero(descriptor) };
+  return resolutions.zero(operations.zero(descriptor));
 };
 
 const resolveMulti = (
-  cursor: Cursor<RawXMLElement>,
-  descriptor: ZeroOrMoreDescriptor<any> | OneOrMoreDescriptor<any>
-): Resolution => {
+  cursor: util.Cursor<raw.RawXMLNode>,
+  descriptor: schema.ZeroOrMoreDescriptor<any> | schema.OneOrMoreDescriptor<any>
+): resolutions.Resolution => {
   const value = new Array<any>();
 
   let shouldResolve = true;
@@ -158,20 +149,23 @@ const resolveMulti = (
     }
   }
 
-  if (descriptor.type === 'oneOrMore' && value.length < 1) {
-    return { type: 'zero', value: zero(descriptor) };
+  if (operations.validate(value, descriptor)) {
+    return resolutions.resolved(value);
   } else {
-    return { type: 'resolved', value };
+    return resolutions.zero(operations.zero(descriptor));
   }
 };
 
-const resolveContent = (cursor: Cursor<RawXMLElement>, descriptors: Descriptor[] | ReadonlyArray<Descriptor>) => {
+const resolveContent = (
+  cursor: util.Cursor<raw.RawXMLNode>,
+  descriptors: schema.Descriptor[] | ReadonlyArray<schema.Descriptor>
+) => {
   const content = new Array<any>();
   for (const descriptor of descriptors) {
     const resolution = resolve(cursor, descriptor);
     switch (resolution.type) {
       case 'none':
-        content.push(zero(descriptor));
+        content.push(operations.zero(descriptor));
         break;
       case 'resolved':
       case 'zero':
@@ -181,45 +175,43 @@ const resolveContent = (cursor: Cursor<RawXMLElement>, descriptors: Descriptor[]
   return content;
 };
 
-const resolveElement = (cursor: Cursor<RawXMLElement>, ctor: XMLElementCtor): Resolution => {
-  const element = cursor.get();
-  if (element.type === 'element' && element.name === ctor.schema.name) {
+const resolveElement = (cursor: util.Cursor<raw.RawXMLNode>, ctor: schema.XMLElementCtor): resolutions.Resolution => {
+  const node = cursor.get();
+  if (node.type === 'element' && node.name === ctor.schema.name) {
     cursor.next();
 
     const attributes: any = {};
-    for (const [name, value] of Object.entries(element.attributes)) {
+    for (const [name, value] of Object.entries(node.attributes)) {
       if (name in ctor.schema.attributes) {
         const descriptor = ctor.schema.attributes[name];
-        attributes[name] = fromString(value, descriptor);
+        attributes[name] = primitives.parse(value, descriptor);
       }
     }
 
-    const content = resolveContent(Cursor.from(element.children), ctor.schema.contents);
-    return {
-      type: 'resolved',
-      value: new ctor({ attributes, content }),
-    };
+    const contents = resolveContent(util.Cursor.from(node.children), ctor.schema.contents);
+
+    return resolutions.resolved(new ctor({ attributes, contents }));
   }
 
-  return { type: 'none', value: undefined };
+  return resolutions.none();
 };
 
-const resolveArray = (cursor: Cursor<RawXMLElement>, children: any[]): Resolution => {
+const resolveArray = (cursor: util.Cursor<raw.RawXMLNode>, children: any[]): resolutions.Resolution => {
   const value = new Array<any>();
   const probeCursor = cursor.dup();
   for (const child of children) {
     const resolution = resolve(probeCursor, child);
     switch (resolution.type) {
       case 'none':
-        return { type: 'none', value: undefined };
+        return resolution;
       case 'zero':
       case 'resolved':
         value.push(resolution.value);
     }
   }
   if (cursor.getIndex() === probeCursor.getIndex()) {
-    return { type: 'none', value: undefined };
+    return resolutions.none();
   }
   cursor.sync(probeCursor);
-  return { type: 'resolved', value };
+  return resolutions.resolved(value);
 };

@@ -7,15 +7,20 @@ const VALIDATE_URL = 'http://xmlvalidator:8080/validate';
 type ValidationResponse =
   | { code: 'OK'; error: null }
   | { code: 'BAD_REQUEST'; error: string }
-  | { code: 'VALIDATION_ERROR'; error: string };
+  | { code: 'VALIDATION_ERROR'; error: string }
+  | { code: 'ERROR'; error: string };
 
 const validate = async (xml: string): Promise<ValidationResponse> => {
-  const res = await fetch(VALIDATE_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: xml,
-  });
-  return await res.json();
+  try {
+    const res = await fetch(VALIDATE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: xml,
+    });
+    return await res.json();
+  } catch (e) {
+    return { code: 'ERROR', error: String(e) };
+  }
 };
 
 export const toBeValidMusicXML: jest.CustomMatcher = async function (xml: string) {

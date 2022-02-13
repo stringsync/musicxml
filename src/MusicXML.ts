@@ -4,22 +4,21 @@ import * as raw from './lib/raw';
 import { t } from './lib/schema';
 import * as xml from './lib/xml';
 
-const ROOT_DESCRIPTOR = t.choices(ScorePartwise, ScoreTimewise);
-
 export class MusicXML {
   static parse(xmlStr: string): MusicXML {
+    const descriptor = t.choices(ScorePartwise, ScoreTimewise);
     const { declaration, nodes } = raw.parse(xmlStr);
-    const resolutions = nodes.map((node) => xml.fromRawXMLElements([node], ROOT_DESCRIPTOR));
+    const resolutions = nodes.map((node) => xml.parse([node], descriptor));
+
     const resolved = resolutions.filter((resolution) => resolution.type === 'resolved');
-
     if (resolved.length !== 1) {
-      const rootElementNames = nodes
-        .filter((rawElement): rawElement is xml.ElementNode => rawElement.type === 'element')
-        .map((rawElement) => rawElement.name);
-
       throw new MusicXMLError({
         symptom: 'invalid music xml document',
-        context: { rootElementNames },
+        context: {
+          rootElementNames: nodes
+            .filter((node): node is raw.ElementNode => node.type === 'element')
+            .map((node) => node.name),
+        },
         remedy: 'use an xml document with exactly one top level <score-partwise> or <score-timewise> element',
       });
     }
@@ -51,7 +50,7 @@ export class MusicXML {
   }
 
   serialize(): string {
-    const element = xml.toRawXMLElement(this.root);
+    const element = xml.serialize(this.root);
     const elements = [...this.elements];
     elements[this.index] = element;
     return raw.seralize(this.declaration, elements);

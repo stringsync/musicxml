@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
+import * as operations from '../lib/operations';
 import { XMLElement } from '../lib/schema';
-import * as xml from '../lib/xml';
 
 export type WorkNumberAttributes = Record<string, unknown>;
 
@@ -14,9 +14,9 @@ export class WorkNumber implements XMLElement<'work-number', WorkNumberAttribute
   attributes: WorkNumberAttributes;
   contents: WorkNumberContents;
 
-  constructor(opts?: { attributes?: Partial<WorkNumberAttributes>; content?: WorkNumberContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, WorkNumber.schema);
-    this.contents = opts?.content ?? xml.zero(WorkNumber.schema.contents);
+  constructor(opts?: { attributes?: Partial<WorkNumberAttributes>; contents?: WorkNumberContents }) {
+    this.attributes = operations.merge(opts?.attributes, WorkNumber.schema);
+    this.contents = opts?.contents ?? operations.zero(WorkNumber.schema.contents);
   }
 
   getText(): string {
@@ -39,9 +39,9 @@ export class WorkTitle implements XMLElement<'work-title', WorkTitleAttributes, 
   attributes: WorkTitleAttributes;
   contents: WorkTitleContents;
 
-  constructor(opts?: { attributes?: Partial<WorkTitleAttributes>; content?: WorkTitleContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, WorkTitle.schema);
-    this.contents = opts?.content ?? xml.zero(WorkTitle.schema.contents);
+  constructor(opts?: { attributes?: Partial<WorkTitleAttributes>; contents?: WorkTitleContents }) {
+    this.attributes = operations.merge(opts?.attributes, WorkTitle.schema);
+    this.contents = opts?.contents ?? operations.zero(WorkTitle.schema.contents);
   }
 
   getText(): string {
@@ -88,9 +88,9 @@ export class Opus implements XMLElement<'opus', OpusAttributes, OpusContents> {
   attributes: OpusAttributes;
   contents: OpusContents;
 
-  constructor(opts?: { attributes?: Partial<OpusAttributes>; content?: OpusContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Opus.schema);
-    this.contents = opts?.content ?? xml.zero(Opus.schema.contents);
+  constructor(opts?: { attributes?: Partial<OpusAttributes>; contents?: OpusContents }) {
+    this.attributes = operations.merge(opts?.attributes, Opus.schema);
+    this.contents = opts?.contents ?? operations.zero(Opus.schema.contents);
   }
   getXlinkHref(): string {
     return this.attributes['xlink:href'];
@@ -150,9 +150,9 @@ export class Work implements XMLElement<'work', WorkAttributes, WorkContents> {
   attributes: WorkAttributes;
   contents: WorkContents;
 
-  constructor(opts?: { attributes?: Partial<WorkAttributes>; content?: WorkContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Work.schema);
-    this.contents = opts?.content ?? xml.zero(Work.schema.contents);
+  constructor(opts?: { attributes?: Partial<WorkAttributes>; contents?: WorkContents }) {
+    this.attributes = operations.merge(opts?.attributes, Work.schema);
+    this.contents = opts?.contents ?? operations.zero(Work.schema.contents);
   }
 
   getWorkNumber(): WorkNumber | null {
@@ -187,9 +187,9 @@ export class MovementNumber implements XMLElement<'movement-number', MovementNum
   attributes: MovementNumberAttributes;
   contents: MovementNumberContents;
 
-  constructor(opts?: { attributes?: Partial<MovementNumberAttributes>; content?: MovementNumberContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MovementNumber.schema);
-    this.contents = opts?.content ?? xml.zero(MovementNumber.schema.contents);
+  constructor(opts?: { attributes?: Partial<MovementNumberAttributes>; contents?: MovementNumberContents }) {
+    this.attributes = operations.merge(opts?.attributes, MovementNumber.schema);
+    this.contents = opts?.contents ?? operations.zero(MovementNumber.schema.contents);
   }
 
   getText(): string {
@@ -212,9 +212,9 @@ export class MovementTitle implements XMLElement<'movement-title', MovementTitle
   attributes: MovementTitleAttributes;
   contents: MovementTitleContents;
 
-  constructor(opts?: { attributes?: Partial<MovementTitleAttributes>; content?: MovementTitleContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MovementTitle.schema);
-    this.contents = opts?.content ?? xml.zero(MovementTitle.schema.contents);
+  constructor(opts?: { attributes?: Partial<MovementTitleAttributes>; contents?: MovementTitleContents }) {
+    this.attributes = operations.merge(opts?.attributes, MovementTitle.schema);
+    this.contents = opts?.contents ?? operations.zero(MovementTitle.schema.contents);
   }
 
   getText(): string {
@@ -241,9 +241,9 @@ export class Creator implements XMLElement<'creator', CreatorAttributes, Creator
   attributes: CreatorAttributes;
   contents: CreatorContents;
 
-  constructor(opts?: { attributes?: Partial<CreatorAttributes>; content?: CreatorContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Creator.schema);
-    this.contents = opts?.content ?? xml.zero(Creator.schema.contents);
+  constructor(opts?: { attributes?: Partial<CreatorAttributes>; contents?: CreatorContents }) {
+    this.attributes = operations.merge(opts?.attributes, Creator.schema);
+    this.contents = opts?.contents ?? operations.zero(Creator.schema.contents);
   }
   getType(): string | null {
     return this.attributes['type'];
@@ -275,9 +275,9 @@ export class Rights implements XMLElement<'rights', RightsAttributes, RightsCont
   attributes: RightsAttributes;
   contents: RightsContents;
 
-  constructor(opts?: { attributes?: Partial<RightsAttributes>; content?: RightsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Rights.schema);
-    this.contents = opts?.content ?? xml.zero(Rights.schema.contents);
+  constructor(opts?: { attributes?: Partial<RightsAttributes>; contents?: RightsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Rights.schema);
+    this.contents = opts?.contents ?? operations.zero(Rights.schema.contents);
   }
   getType(): string | null {
     return this.attributes['type'];
@@ -309,9 +309,9 @@ export class EncodingDate implements XMLElement<'encoding-date', EncodingDateAtt
   attributes: EncodingDateAttributes;
   contents: EncodingDateContents;
 
-  constructor(opts?: { attributes?: Partial<EncodingDateAttributes>; content?: EncodingDateContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, EncodingDate.schema);
-    this.contents = opts?.content ?? xml.zero(EncodingDate.schema.contents);
+  constructor(opts?: { attributes?: Partial<EncodingDateAttributes>; contents?: EncodingDateContents }) {
+    this.attributes = operations.merge(opts?.attributes, EncodingDate.schema);
+    this.contents = opts?.contents ?? operations.zero(EncodingDate.schema.contents);
   }
 
   getYyyyMmDd(): Date {
@@ -338,9 +338,9 @@ export class Encoder implements XMLElement<'encoder', EncoderAttributes, Encoder
   attributes: EncoderAttributes;
   contents: EncoderContents;
 
-  constructor(opts?: { attributes?: Partial<EncoderAttributes>; content?: EncoderContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Encoder.schema);
-    this.contents = opts?.content ?? xml.zero(Encoder.schema.contents);
+  constructor(opts?: { attributes?: Partial<EncoderAttributes>; contents?: EncoderContents }) {
+    this.attributes = operations.merge(opts?.attributes, Encoder.schema);
+    this.contents = opts?.contents ?? operations.zero(Encoder.schema.contents);
   }
   getType(): string | null {
     return this.attributes['type'];
@@ -368,9 +368,9 @@ export class Software implements XMLElement<'software', SoftwareAttributes, Soft
   attributes: SoftwareAttributes;
   contents: SoftwareContents;
 
-  constructor(opts?: { attributes?: Partial<SoftwareAttributes>; content?: SoftwareContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Software.schema);
-    this.contents = opts?.content ?? xml.zero(Software.schema.contents);
+  constructor(opts?: { attributes?: Partial<SoftwareAttributes>; contents?: SoftwareContents }) {
+    this.attributes = operations.merge(opts?.attributes, Software.schema);
+    this.contents = opts?.contents ?? operations.zero(Software.schema.contents);
   }
 
   getText(): string {
@@ -399,9 +399,9 @@ export class EncodingDescription
   attributes: EncodingDescriptionAttributes;
   contents: EncodingDescriptionContents;
 
-  constructor(opts?: { attributes?: Partial<EncodingDescriptionAttributes>; content?: EncodingDescriptionContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, EncodingDescription.schema);
-    this.contents = opts?.content ?? xml.zero(EncodingDescription.schema.contents);
+  constructor(opts?: { attributes?: Partial<EncodingDescriptionAttributes>; contents?: EncodingDescriptionContents }) {
+    this.attributes = operations.merge(opts?.attributes, EncodingDescription.schema);
+    this.contents = opts?.contents ?? operations.zero(EncodingDescription.schema.contents);
   }
 
   getText(): string {
@@ -438,9 +438,9 @@ export class Supports implements XMLElement<'supports', SupportsAttributes, Supp
   attributes: SupportsAttributes;
   contents: SupportsContents;
 
-  constructor(opts?: { attributes?: Partial<SupportsAttributes>; content?: SupportsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Supports.schema);
-    this.contents = opts?.content ?? xml.zero(Supports.schema.contents);
+  constructor(opts?: { attributes?: Partial<SupportsAttributes>; contents?: SupportsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Supports.schema);
+    this.contents = opts?.contents ?? operations.zero(Supports.schema.contents);
   }
   getElement(): string {
     return this.attributes['element'];
@@ -501,9 +501,9 @@ export class Encoding implements XMLElement<'encoding', EncodingAttributes, Enco
   attributes: EncodingAttributes;
   contents: EncodingContents;
 
-  constructor(opts?: { attributes?: Partial<EncodingAttributes>; content?: EncodingContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Encoding.schema);
-    this.contents = opts?.content ?? xml.zero(Encoding.schema.contents);
+  constructor(opts?: { attributes?: Partial<EncodingAttributes>; contents?: EncodingContents }) {
+    this.attributes = operations.merge(opts?.attributes, Encoding.schema);
+    this.contents = opts?.contents ?? operations.zero(Encoding.schema.contents);
   }
 
   getEncodings(): Array<
@@ -536,9 +536,9 @@ export class Source implements XMLElement<'source', SourceAttributes, SourceCont
   attributes: SourceAttributes;
   contents: SourceContents;
 
-  constructor(opts?: { attributes?: Partial<SourceAttributes>; content?: SourceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Source.schema);
-    this.contents = opts?.content ?? xml.zero(Source.schema.contents);
+  constructor(opts?: { attributes?: Partial<SourceAttributes>; contents?: SourceContents }) {
+    this.attributes = operations.merge(opts?.attributes, Source.schema);
+    this.contents = opts?.contents ?? operations.zero(Source.schema.contents);
   }
 
   getText(): string | null {
@@ -565,9 +565,9 @@ export class Relation implements XMLElement<'relation', RelationAttributes, Rela
   attributes: RelationAttributes;
   contents: RelationContents;
 
-  constructor(opts?: { attributes?: Partial<RelationAttributes>; content?: RelationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Relation.schema);
-    this.contents = opts?.content ?? xml.zero(Relation.schema.contents);
+  constructor(opts?: { attributes?: Partial<RelationAttributes>; contents?: RelationContents }) {
+    this.attributes = operations.merge(opts?.attributes, Relation.schema);
+    this.contents = opts?.contents ?? operations.zero(Relation.schema.contents);
   }
   getType(): string | null {
     return this.attributes['type'];
@@ -601,9 +601,9 @@ export class MiscellaneousField
   attributes: MiscellaneousFieldAttributes;
   contents: MiscellaneousFieldContents;
 
-  constructor(opts?: { attributes?: Partial<MiscellaneousFieldAttributes>; content?: MiscellaneousFieldContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MiscellaneousField.schema);
-    this.contents = opts?.content ?? xml.zero(MiscellaneousField.schema.contents);
+  constructor(opts?: { attributes?: Partial<MiscellaneousFieldAttributes>; contents?: MiscellaneousFieldContents }) {
+    this.attributes = operations.merge(opts?.attributes, MiscellaneousField.schema);
+    this.contents = opts?.contents ?? operations.zero(MiscellaneousField.schema.contents);
   }
   getName(): string {
     return this.attributes['name'];
@@ -637,9 +637,9 @@ export class Miscellaneous implements XMLElement<'miscellaneous', MiscellaneousA
   attributes: MiscellaneousAttributes;
   contents: MiscellaneousContents;
 
-  constructor(opts?: { attributes?: Partial<MiscellaneousAttributes>; content?: MiscellaneousContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Miscellaneous.schema);
-    this.contents = opts?.content ?? xml.zero(Miscellaneous.schema.contents);
+  constructor(opts?: { attributes?: Partial<MiscellaneousAttributes>; contents?: MiscellaneousContents }) {
+    this.attributes = operations.merge(opts?.attributes, Miscellaneous.schema);
+    this.contents = opts?.contents ?? operations.zero(Miscellaneous.schema.contents);
   }
 
   getMiscellaneousFields(): Array<MiscellaneousField> {
@@ -680,9 +680,9 @@ export class Identification implements XMLElement<'identification', Identificati
   attributes: IdentificationAttributes;
   contents: IdentificationContents;
 
-  constructor(opts?: { attributes?: Partial<IdentificationAttributes>; content?: IdentificationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Identification.schema);
-    this.contents = opts?.content ?? xml.zero(Identification.schema.contents);
+  constructor(opts?: { attributes?: Partial<IdentificationAttributes>; contents?: IdentificationContents }) {
+    this.attributes = operations.merge(opts?.attributes, Identification.schema);
+    this.contents = opts?.contents ?? operations.zero(Identification.schema.contents);
   }
 
   getCreators(): Array<Creator> {
@@ -744,9 +744,9 @@ export class Millimeters implements XMLElement<'millimeters', MillimetersAttribu
   attributes: MillimetersAttributes;
   contents: MillimetersContents;
 
-  constructor(opts?: { attributes?: Partial<MillimetersAttributes>; content?: MillimetersContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Millimeters.schema);
-    this.contents = opts?.content ?? xml.zero(Millimeters.schema.contents);
+  constructor(opts?: { attributes?: Partial<MillimetersAttributes>; contents?: MillimetersContents }) {
+    this.attributes = operations.merge(opts?.attributes, Millimeters.schema);
+    this.contents = opts?.contents ?? operations.zero(Millimeters.schema.contents);
   }
 
   getMillimeters(): number {
@@ -775,9 +775,9 @@ export class Tenths implements XMLElement<'tenths', TenthsAttributes, TenthsCont
   attributes: TenthsAttributes;
   contents: TenthsContents;
 
-  constructor(opts?: { attributes?: Partial<TenthsAttributes>; content?: TenthsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Tenths.schema);
-    this.contents = opts?.content ?? xml.zero(Tenths.schema.contents);
+  constructor(opts?: { attributes?: Partial<TenthsAttributes>; contents?: TenthsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Tenths.schema);
+    this.contents = opts?.contents ?? operations.zero(Tenths.schema.contents);
   }
 
   getTenths(): number {
@@ -807,9 +807,9 @@ export class Scaling implements XMLElement<'scaling', ScalingAttributes, Scaling
   attributes: ScalingAttributes;
   contents: ScalingContents;
 
-  constructor(opts?: { attributes?: Partial<ScalingAttributes>; content?: ScalingContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Scaling.schema);
-    this.contents = opts?.content ?? xml.zero(Scaling.schema.contents);
+  constructor(opts?: { attributes?: Partial<ScalingAttributes>; contents?: ScalingContents }) {
+    this.attributes = operations.merge(opts?.attributes, Scaling.schema);
+    this.contents = opts?.contents ?? operations.zero(Scaling.schema.contents);
   }
 
   getMillimeters(): Millimeters {
@@ -838,9 +838,9 @@ export class ConcertScore implements XMLElement<'concert-score', ConcertScoreAtt
   attributes: ConcertScoreAttributes;
   contents: ConcertScoreContents;
 
-  constructor(opts?: { attributes?: Partial<ConcertScoreAttributes>; content?: ConcertScoreContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ConcertScore.schema);
-    this.contents = opts?.content ?? xml.zero(ConcertScore.schema.contents);
+  constructor(opts?: { attributes?: Partial<ConcertScoreAttributes>; contents?: ConcertScoreContents }) {
+    this.attributes = operations.merge(opts?.attributes, ConcertScore.schema);
+    this.contents = opts?.contents ?? operations.zero(ConcertScore.schema.contents);
   }
 }
 
@@ -866,9 +866,9 @@ export class PageHeight implements XMLElement<'page-height', PageHeightAttribute
   attributes: PageHeightAttributes;
   contents: PageHeightContents;
 
-  constructor(opts?: { attributes?: Partial<PageHeightAttributes>; content?: PageHeightContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PageHeight.schema);
-    this.contents = opts?.content ?? xml.zero(PageHeight.schema.contents);
+  constructor(opts?: { attributes?: Partial<PageHeightAttributes>; contents?: PageHeightContents }) {
+    this.attributes = operations.merge(opts?.attributes, PageHeight.schema);
+    this.contents = opts?.contents ?? operations.zero(PageHeight.schema.contents);
   }
 
   getPageHeight(): number {
@@ -901,9 +901,9 @@ export class PageWidth implements XMLElement<'page-width', PageWidthAttributes, 
   attributes: PageWidthAttributes;
   contents: PageWidthContents;
 
-  constructor(opts?: { attributes?: Partial<PageWidthAttributes>; content?: PageWidthContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PageWidth.schema);
-    this.contents = opts?.content ?? xml.zero(PageWidth.schema.contents);
+  constructor(opts?: { attributes?: Partial<PageWidthAttributes>; contents?: PageWidthContents }) {
+    this.attributes = operations.merge(opts?.attributes, PageWidth.schema);
+    this.contents = opts?.contents ?? operations.zero(PageWidth.schema.contents);
   }
 
   getPageWidth(): number {
@@ -936,9 +936,9 @@ export class LeftMargin implements XMLElement<'left-margin', LeftMarginAttribute
   attributes: LeftMarginAttributes;
   contents: LeftMarginContents;
 
-  constructor(opts?: { attributes?: Partial<LeftMarginAttributes>; content?: LeftMarginContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, LeftMargin.schema);
-    this.contents = opts?.content ?? xml.zero(LeftMargin.schema.contents);
+  constructor(opts?: { attributes?: Partial<LeftMarginAttributes>; contents?: LeftMarginContents }) {
+    this.attributes = operations.merge(opts?.attributes, LeftMargin.schema);
+    this.contents = opts?.contents ?? operations.zero(LeftMargin.schema.contents);
   }
 
   getLeftMargin(): number {
@@ -961,9 +961,9 @@ export class RightMargin implements XMLElement<'right-margin', RightMarginAttrib
   attributes: RightMarginAttributes;
   contents: RightMarginContents;
 
-  constructor(opts?: { attributes?: Partial<RightMarginAttributes>; content?: RightMarginContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, RightMargin.schema);
-    this.contents = opts?.content ?? xml.zero(RightMargin.schema.contents);
+  constructor(opts?: { attributes?: Partial<RightMarginAttributes>; contents?: RightMarginContents }) {
+    this.attributes = operations.merge(opts?.attributes, RightMargin.schema);
+    this.contents = opts?.contents ?? operations.zero(RightMargin.schema.contents);
   }
 }
 
@@ -989,9 +989,9 @@ export class TopMargin implements XMLElement<'top-margin', TopMarginAttributes, 
   attributes: TopMarginAttributes;
   contents: TopMarginContents;
 
-  constructor(opts?: { attributes?: Partial<TopMarginAttributes>; content?: TopMarginContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TopMargin.schema);
-    this.contents = opts?.content ?? xml.zero(TopMargin.schema.contents);
+  constructor(opts?: { attributes?: Partial<TopMarginAttributes>; contents?: TopMarginContents }) {
+    this.attributes = operations.merge(opts?.attributes, TopMargin.schema);
+    this.contents = opts?.contents ?? operations.zero(TopMargin.schema.contents);
   }
 
   getTopMargin(): number {
@@ -1024,9 +1024,9 @@ export class BottomMargin implements XMLElement<'bottom-margin', BottomMarginAtt
   attributes: BottomMarginAttributes;
   contents: BottomMarginContents;
 
-  constructor(opts?: { attributes?: Partial<BottomMarginAttributes>; content?: BottomMarginContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BottomMargin.schema);
-    this.contents = opts?.content ?? xml.zero(BottomMargin.schema.contents);
+  constructor(opts?: { attributes?: Partial<BottomMarginAttributes>; contents?: BottomMarginContents }) {
+    this.attributes = operations.merge(opts?.attributes, BottomMargin.schema);
+    this.contents = opts?.contents ?? operations.zero(BottomMargin.schema.contents);
   }
 
   getBottomMargin(): number {
@@ -1058,9 +1058,9 @@ export class PageMargins implements XMLElement<'page-margins', PageMarginsAttrib
   attributes: PageMarginsAttributes;
   contents: PageMarginsContents;
 
-  constructor(opts?: { attributes?: Partial<PageMarginsAttributes>; content?: PageMarginsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PageMargins.schema);
-    this.contents = opts?.content ?? xml.zero(PageMargins.schema.contents);
+  constructor(opts?: { attributes?: Partial<PageMarginsAttributes>; contents?: PageMarginsContents }) {
+    this.attributes = operations.merge(opts?.attributes, PageMargins.schema);
+    this.contents = opts?.contents ?? operations.zero(PageMargins.schema.contents);
   }
   getType(): 'both' | 'even' | 'odd' | null {
     return this.attributes['type'];
@@ -1118,9 +1118,9 @@ export class PageLayout implements XMLElement<'page-layout', PageLayoutAttribute
   attributes: PageLayoutAttributes;
   contents: PageLayoutContents;
 
-  constructor(opts?: { attributes?: Partial<PageLayoutAttributes>; content?: PageLayoutContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PageLayout.schema);
-    this.contents = opts?.content ?? xml.zero(PageLayout.schema.contents);
+  constructor(opts?: { attributes?: Partial<PageLayoutAttributes>; contents?: PageLayoutContents }) {
+    this.attributes = operations.merge(opts?.attributes, PageLayout.schema);
+    this.contents = opts?.contents ?? operations.zero(PageLayout.schema.contents);
   }
 
   getPageHeight(): PageHeight | null {
@@ -1162,9 +1162,9 @@ export class SystemMargins implements XMLElement<'system-margins', SystemMargins
   attributes: SystemMarginsAttributes;
   contents: SystemMarginsContents;
 
-  constructor(opts?: { attributes?: Partial<SystemMarginsAttributes>; content?: SystemMarginsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SystemMargins.schema);
-    this.contents = opts?.content ?? xml.zero(SystemMargins.schema.contents);
+  constructor(opts?: { attributes?: Partial<SystemMarginsAttributes>; contents?: SystemMarginsContents }) {
+    this.attributes = operations.merge(opts?.attributes, SystemMargins.schema);
+    this.contents = opts?.contents ?? operations.zero(SystemMargins.schema.contents);
   }
 
   getLeftMargin(): LeftMargin {
@@ -1203,9 +1203,9 @@ export class SystemDistance implements XMLElement<'system-distance', SystemDista
   attributes: SystemDistanceAttributes;
   contents: SystemDistanceContents;
 
-  constructor(opts?: { attributes?: Partial<SystemDistanceAttributes>; content?: SystemDistanceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SystemDistance.schema);
-    this.contents = opts?.content ?? xml.zero(SystemDistance.schema.contents);
+  constructor(opts?: { attributes?: Partial<SystemDistanceAttributes>; contents?: SystemDistanceContents }) {
+    this.attributes = operations.merge(opts?.attributes, SystemDistance.schema);
+    this.contents = opts?.contents ?? operations.zero(SystemDistance.schema.contents);
   }
 
   getSystemDistance(): number {
@@ -1240,9 +1240,9 @@ export class TopSystemDistance
   attributes: TopSystemDistanceAttributes;
   contents: TopSystemDistanceContents;
 
-  constructor(opts?: { attributes?: Partial<TopSystemDistanceAttributes>; content?: TopSystemDistanceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TopSystemDistance.schema);
-    this.contents = opts?.content ?? xml.zero(TopSystemDistance.schema.contents);
+  constructor(opts?: { attributes?: Partial<TopSystemDistanceAttributes>; contents?: TopSystemDistanceContents }) {
+    this.attributes = operations.merge(opts?.attributes, TopSystemDistance.schema);
+    this.contents = opts?.contents ?? operations.zero(TopSystemDistance.schema.contents);
   }
 
   getTopSystemDistance(): number {
@@ -1273,9 +1273,9 @@ export class SystemLayout implements XMLElement<'system-layout', SystemLayoutAtt
   attributes: SystemLayoutAttributes;
   contents: SystemLayoutContents;
 
-  constructor(opts?: { attributes?: Partial<SystemLayoutAttributes>; content?: SystemLayoutContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SystemLayout.schema);
-    this.contents = opts?.content ?? xml.zero(SystemLayout.schema.contents);
+  constructor(opts?: { attributes?: Partial<SystemLayoutAttributes>; contents?: SystemLayoutContents }) {
+    this.attributes = operations.merge(opts?.attributes, SystemLayout.schema);
+    this.contents = opts?.contents ?? operations.zero(SystemLayout.schema.contents);
   }
 
   getSystemMargins(): SystemMargins | null {
@@ -1369,9 +1369,9 @@ export class LineWidth implements XMLElement<'line-width', LineWidthAttributes, 
   attributes: LineWidthAttributes;
   contents: LineWidthContents;
 
-  constructor(opts?: { attributes?: Partial<LineWidthAttributes>; content?: LineWidthContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, LineWidth.schema);
-    this.contents = opts?.content ?? xml.zero(LineWidth.schema.contents);
+  constructor(opts?: { attributes?: Partial<LineWidthAttributes>; contents?: LineWidthContents }) {
+    this.attributes = operations.merge(opts?.attributes, LineWidth.schema);
+    this.contents = opts?.contents ?? operations.zero(LineWidth.schema.contents);
   }
   getType():
     | 'beam'
@@ -1445,9 +1445,9 @@ export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, Not
   attributes: NoteSizeAttributes;
   contents: NoteSizeContents;
 
-  constructor(opts?: { attributes?: Partial<NoteSizeAttributes>; content?: NoteSizeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NoteSize.schema);
-    this.contents = opts?.content ?? xml.zero(NoteSize.schema.contents);
+  constructor(opts?: { attributes?: Partial<NoteSizeAttributes>; contents?: NoteSizeContents }) {
+    this.attributes = operations.merge(opts?.attributes, NoteSize.schema);
+    this.contents = opts?.contents ?? operations.zero(NoteSize.schema.contents);
   }
   getType(): 'cue' | 'grace' | 'grace-cue' | 'large' {
     return this.attributes['type'];
@@ -1479,9 +1479,9 @@ export class Distance implements XMLElement<'distance', DistanceAttributes, Dist
   attributes: DistanceAttributes;
   contents: DistanceContents;
 
-  constructor(opts?: { attributes?: Partial<DistanceAttributes>; content?: DistanceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Distance.schema);
-    this.contents = opts?.content ?? xml.zero(Distance.schema.contents);
+  constructor(opts?: { attributes?: Partial<DistanceAttributes>; contents?: DistanceContents }) {
+    this.attributes = operations.merge(opts?.attributes, Distance.schema);
+    this.contents = opts?.contents ?? operations.zero(Distance.schema.contents);
   }
   getType(): 'beam' | 'hyphen' {
     return this.attributes['type'];
@@ -1548,9 +1548,9 @@ export class Glyph implements XMLElement<'glyph', GlyphAttributes, GlyphContents
   attributes: GlyphAttributes;
   contents: GlyphContents;
 
-  constructor(opts?: { attributes?: Partial<GlyphAttributes>; content?: GlyphContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Glyph.schema);
-    this.contents = opts?.content ?? xml.zero(Glyph.schema.contents);
+  constructor(opts?: { attributes?: Partial<GlyphAttributes>; contents?: GlyphContents }) {
+    this.attributes = operations.merge(opts?.attributes, Glyph.schema);
+    this.contents = opts?.contents ?? operations.zero(Glyph.schema.contents);
   }
   getType():
     | 'quarter-rest'
@@ -1610,9 +1610,9 @@ export class OtherAppearance
   attributes: OtherAppearanceAttributes;
   contents: OtherAppearanceContents;
 
-  constructor(opts?: { attributes?: Partial<OtherAppearanceAttributes>; content?: OtherAppearanceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherAppearance.schema);
-    this.contents = opts?.content ?? xml.zero(OtherAppearance.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherAppearanceAttributes>; contents?: OtherAppearanceContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherAppearance.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherAppearance.schema.contents);
   }
   getType(): string {
     return this.attributes['type'];
@@ -1656,9 +1656,9 @@ export class Appearance implements XMLElement<'appearance', AppearanceAttributes
   attributes: AppearanceAttributes;
   contents: AppearanceContents;
 
-  constructor(opts?: { attributes?: Partial<AppearanceAttributes>; content?: AppearanceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Appearance.schema);
-    this.contents = opts?.content ?? xml.zero(Appearance.schema.contents);
+  constructor(opts?: { attributes?: Partial<AppearanceAttributes>; contents?: AppearanceContents }) {
+    this.attributes = operations.merge(opts?.attributes, Appearance.schema);
+    this.contents = opts?.contents ?? operations.zero(Appearance.schema.contents);
   }
 
   getLineWidths(): Array<LineWidth> {
@@ -1728,9 +1728,9 @@ export class MusicFont implements XMLElement<'music-font', MusicFontAttributes, 
   attributes: MusicFontAttributes;
   contents: MusicFontContents;
 
-  constructor(opts?: { attributes?: Partial<MusicFontAttributes>; content?: MusicFontContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MusicFont.schema);
-    this.contents = opts?.content ?? xml.zero(MusicFont.schema.contents);
+  constructor(opts?: { attributes?: Partial<MusicFontAttributes>; contents?: MusicFontContents }) {
+    this.attributes = operations.merge(opts?.attributes, MusicFont.schema);
+    this.contents = opts?.contents ?? operations.zero(MusicFont.schema.contents);
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
@@ -1795,9 +1795,9 @@ export class WordFont implements XMLElement<'word-font', WordFontAttributes, Wor
   attributes: WordFontAttributes;
   contents: WordFontContents;
 
-  constructor(opts?: { attributes?: Partial<WordFontAttributes>; content?: WordFontContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, WordFont.schema);
-    this.contents = opts?.content ?? xml.zero(WordFont.schema.contents);
+  constructor(opts?: { attributes?: Partial<WordFontAttributes>; contents?: WordFontContents }) {
+    this.attributes = operations.merge(opts?.attributes, WordFont.schema);
+    this.contents = opts?.contents ?? operations.zero(WordFont.schema.contents);
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
@@ -1866,9 +1866,9 @@ export class LyricFont implements XMLElement<'lyric-font', LyricFontAttributes, 
   attributes: LyricFontAttributes;
   contents: LyricFontContents;
 
-  constructor(opts?: { attributes?: Partial<LyricFontAttributes>; content?: LyricFontContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, LyricFont.schema);
-    this.contents = opts?.content ?? xml.zero(LyricFont.schema.contents);
+  constructor(opts?: { attributes?: Partial<LyricFontAttributes>; contents?: LyricFontContents }) {
+    this.attributes = operations.merge(opts?.attributes, LyricFont.schema);
+    this.contents = opts?.contents ?? operations.zero(LyricFont.schema.contents);
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
@@ -1930,9 +1930,9 @@ export class LyricLanguage implements XMLElement<'lyric-language', LyricLanguage
   attributes: LyricLanguageAttributes;
   contents: LyricLanguageContents;
 
-  constructor(opts?: { attributes?: Partial<LyricLanguageAttributes>; content?: LyricLanguageContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, LyricLanguage.schema);
-    this.contents = opts?.content ?? xml.zero(LyricLanguage.schema.contents);
+  constructor(opts?: { attributes?: Partial<LyricLanguageAttributes>; contents?: LyricLanguageContents }) {
+    this.attributes = operations.merge(opts?.attributes, LyricLanguage.schema);
+    this.contents = opts?.contents ?? operations.zero(LyricLanguage.schema.contents);
   }
   getXmlLang(): string {
     return this.attributes['xml:lang'];
@@ -1990,9 +1990,9 @@ export class Defaults implements XMLElement<'defaults', DefaultsAttributes, Defa
   attributes: DefaultsAttributes;
   contents: DefaultsContents;
 
-  constructor(opts?: { attributes?: Partial<DefaultsAttributes>; content?: DefaultsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Defaults.schema);
-    this.contents = opts?.content ?? xml.zero(Defaults.schema.contents);
+  constructor(opts?: { attributes?: Partial<DefaultsAttributes>; contents?: DefaultsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Defaults.schema);
+    this.contents = opts?.contents ?? operations.zero(Defaults.schema.contents);
   }
 
   getScaling(): Scaling | null {
@@ -2067,9 +2067,9 @@ export class CreditType implements XMLElement<'credit-type', CreditTypeAttribute
   attributes: CreditTypeAttributes;
   contents: CreditTypeContents;
 
-  constructor(opts?: { attributes?: Partial<CreditTypeAttributes>; content?: CreditTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, CreditType.schema);
-    this.contents = opts?.content ?? xml.zero(CreditType.schema.contents);
+  constructor(opts?: { attributes?: Partial<CreditTypeAttributes>; contents?: CreditTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, CreditType.schema);
+    this.contents = opts?.contents ?? operations.zero(CreditType.schema.contents);
   }
 
   getText(): string {
@@ -2146,9 +2146,9 @@ export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
   attributes: LinkAttributes;
   contents: LinkContents;
 
-  constructor(opts?: { attributes?: Partial<LinkAttributes>; content?: LinkContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Link.schema);
-    this.contents = opts?.content ?? xml.zero(Link.schema.contents);
+  constructor(opts?: { attributes?: Partial<LinkAttributes>; contents?: LinkContents }) {
+    this.attributes = operations.merge(opts?.attributes, Link.schema);
+    this.contents = opts?.contents ?? operations.zero(Link.schema.contents);
   }
   getXlinkHref(): string {
     return this.attributes['xlink:href'];
@@ -2251,9 +2251,9 @@ export class Bookmark implements XMLElement<'bookmark', BookmarkAttributes, Book
   attributes: BookmarkAttributes;
   contents: BookmarkContents;
 
-  constructor(opts?: { attributes?: Partial<BookmarkAttributes>; content?: BookmarkContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Bookmark.schema);
-    this.contents = opts?.content ?? xml.zero(Bookmark.schema.contents);
+  constructor(opts?: { attributes?: Partial<BookmarkAttributes>; contents?: BookmarkContents }) {
+    this.attributes = operations.merge(opts?.attributes, Bookmark.schema);
+    this.contents = opts?.contents ?? operations.zero(Bookmark.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -2337,9 +2337,9 @@ export class CreditImage implements XMLElement<'credit-image', CreditImageAttrib
   attributes: CreditImageAttributes;
   contents: CreditImageContents;
 
-  constructor(opts?: { attributes?: Partial<CreditImageAttributes>; content?: CreditImageContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, CreditImage.schema);
-    this.contents = opts?.content ?? xml.zero(CreditImage.schema.contents);
+  constructor(opts?: { attributes?: Partial<CreditImageAttributes>; contents?: CreditImageContents }) {
+    this.attributes = operations.merge(opts?.attributes, CreditImage.schema);
+    this.contents = opts?.contents ?? operations.zero(CreditImage.schema.contents);
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
@@ -2540,9 +2540,9 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
   attributes: CreditWordsAttributes;
   contents: CreditWordsContents;
 
-  constructor(opts?: { attributes?: Partial<CreditWordsAttributes>; content?: CreditWordsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, CreditWords.schema);
-    this.contents = opts?.content ?? xml.zero(CreditWords.schema.contents);
+  constructor(opts?: { attributes?: Partial<CreditWordsAttributes>; contents?: CreditWordsContents }) {
+    this.attributes = operations.merge(opts?.attributes, CreditWords.schema);
+    this.contents = opts?.contents ?? operations.zero(CreditWords.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -2845,9 +2845,9 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
   attributes: CreditSymbolAttributes;
   contents: CreditSymbolContents;
 
-  constructor(opts?: { attributes?: Partial<CreditSymbolAttributes>; content?: CreditSymbolContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, CreditSymbol.schema);
-    this.contents = opts?.content ?? xml.zero(CreditSymbol.schema.contents);
+  constructor(opts?: { attributes?: Partial<CreditSymbolAttributes>; contents?: CreditSymbolContents }) {
+    this.attributes = operations.merge(opts?.attributes, CreditSymbol.schema);
+    this.contents = opts?.contents ?? operations.zero(CreditSymbol.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -3066,9 +3066,9 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
   attributes: CreditAttributes;
   contents: CreditContents;
 
-  constructor(opts?: { attributes?: Partial<CreditAttributes>; content?: CreditContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Credit.schema);
-    this.contents = opts?.content ?? xml.zero(Credit.schema.contents);
+  constructor(opts?: { attributes?: Partial<CreditAttributes>; contents?: CreditContents }) {
+    this.attributes = operations.merge(opts?.attributes, Credit.schema);
+    this.contents = opts?.contents ?? operations.zero(Credit.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -3177,9 +3177,9 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
   attributes: GroupNameAttributes;
   contents: GroupNameContents;
 
-  constructor(opts?: { attributes?: Partial<GroupNameAttributes>; content?: GroupNameContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, GroupName.schema);
-    this.contents = opts?.content ?? xml.zero(GroupName.schema.contents);
+  constructor(opts?: { attributes?: Partial<GroupNameAttributes>; contents?: GroupNameContents }) {
+    this.attributes = operations.merge(opts?.attributes, GroupName.schema);
+    this.contents = opts?.contents ?? operations.zero(GroupName.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -3380,9 +3380,9 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
   attributes: DisplayTextAttributes;
   contents: DisplayTextContents;
 
-  constructor(opts?: { attributes?: Partial<DisplayTextAttributes>; content?: DisplayTextContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DisplayText.schema);
-    this.contents = opts?.content ?? xml.zero(DisplayText.schema.contents);
+  constructor(opts?: { attributes?: Partial<DisplayTextAttributes>; contents?: DisplayTextContents }) {
+    this.attributes = operations.merge(opts?.attributes, DisplayText.schema);
+    this.contents = opts?.contents ?? operations.zero(DisplayText.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -3689,9 +3689,9 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
   attributes: AccidentalTextAttributes;
   contents: AccidentalTextContents;
 
-  constructor(opts?: { attributes?: Partial<AccidentalTextAttributes>; content?: AccidentalTextContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, AccidentalText.schema);
-    this.contents = opts?.content ?? xml.zero(AccidentalText.schema.contents);
+  constructor(opts?: { attributes?: Partial<AccidentalTextAttributes>; contents?: AccidentalTextContents }) {
+    this.attributes = operations.merge(opts?.attributes, AccidentalText.schema);
+    this.contents = opts?.contents ?? operations.zero(AccidentalText.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -3891,9 +3891,9 @@ export class GroupNameDisplay
   attributes: GroupNameDisplayAttributes;
   contents: GroupNameDisplayContents;
 
-  constructor(opts?: { attributes?: Partial<GroupNameDisplayAttributes>; content?: GroupNameDisplayContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, GroupNameDisplay.schema);
-    this.contents = opts?.content ?? xml.zero(GroupNameDisplay.schema.contents);
+  constructor(opts?: { attributes?: Partial<GroupNameDisplayAttributes>; contents?: GroupNameDisplayContents }) {
+    this.attributes = operations.merge(opts?.attributes, GroupNameDisplay.schema);
+    this.contents = opts?.contents ?? operations.zero(GroupNameDisplay.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -3974,9 +3974,9 @@ export class GroupAbbreviation
   attributes: GroupAbbreviationAttributes;
   contents: GroupAbbreviationContents;
 
-  constructor(opts?: { attributes?: Partial<GroupAbbreviationAttributes>; content?: GroupAbbreviationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, GroupAbbreviation.schema);
-    this.contents = opts?.content ?? xml.zero(GroupAbbreviation.schema.contents);
+  constructor(opts?: { attributes?: Partial<GroupAbbreviationAttributes>; contents?: GroupAbbreviationContents }) {
+    this.attributes = operations.merge(opts?.attributes, GroupAbbreviation.schema);
+    this.contents = opts?.contents ?? operations.zero(GroupAbbreviation.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -4069,10 +4069,10 @@ export class GroupAbbreviationDisplay
 
   constructor(opts?: {
     attributes?: Partial<GroupAbbreviationDisplayAttributes>;
-    content?: GroupAbbreviationDisplayContents;
+    contents?: GroupAbbreviationDisplayContents;
   }) {
-    this.attributes = xml.mergeZero(opts?.attributes, GroupAbbreviationDisplay.schema);
-    this.contents = opts?.content ?? xml.zero(GroupAbbreviationDisplay.schema.contents);
+    this.attributes = operations.merge(opts?.attributes, GroupAbbreviationDisplay.schema);
+    this.contents = opts?.contents ?? operations.zero(GroupAbbreviationDisplay.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -4141,9 +4141,9 @@ export class GroupSymbol implements XMLElement<'group-symbol', GroupSymbolAttrib
   attributes: GroupSymbolAttributes;
   contents: GroupSymbolContents;
 
-  constructor(opts?: { attributes?: Partial<GroupSymbolAttributes>; content?: GroupSymbolContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, GroupSymbol.schema);
-    this.contents = opts?.content ?? xml.zero(GroupSymbol.schema.contents);
+  constructor(opts?: { attributes?: Partial<GroupSymbolAttributes>; contents?: GroupSymbolContents }) {
+    this.attributes = operations.merge(opts?.attributes, GroupSymbol.schema);
+    this.contents = opts?.contents ?? operations.zero(GroupSymbol.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -4208,9 +4208,9 @@ export class GroupBarline implements XMLElement<'group-barline', GroupBarlineAtt
   attributes: GroupBarlineAttributes;
   contents: GroupBarlineContents;
 
-  constructor(opts?: { attributes?: Partial<GroupBarlineAttributes>; content?: GroupBarlineContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, GroupBarline.schema);
-    this.contents = opts?.content ?? xml.zero(GroupBarline.schema.contents);
+  constructor(opts?: { attributes?: Partial<GroupBarlineAttributes>; contents?: GroupBarlineContents }) {
+    this.attributes = operations.merge(opts?.attributes, GroupBarline.schema);
+    this.contents = opts?.contents ?? operations.zero(GroupBarline.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -4238,9 +4238,9 @@ export class GroupTime implements XMLElement<'group-time', GroupTimeAttributes, 
   attributes: GroupTimeAttributes;
   contents: GroupTimeContents;
 
-  constructor(opts?: { attributes?: Partial<GroupTimeAttributes>; content?: GroupTimeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, GroupTime.schema);
-    this.contents = opts?.content ?? xml.zero(GroupTime.schema.contents);
+  constructor(opts?: { attributes?: Partial<GroupTimeAttributes>; contents?: GroupTimeContents }) {
+    this.attributes = operations.merge(opts?.attributes, GroupTime.schema);
+    this.contents = opts?.contents ?? operations.zero(GroupTime.schema.contents);
   }
 }
 
@@ -4373,9 +4373,9 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
   attributes: FootnoteAttributes;
   contents: FootnoteContents;
 
-  constructor(opts?: { attributes?: Partial<FootnoteAttributes>; content?: FootnoteContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Footnote.schema);
-    this.contents = opts?.content ?? xml.zero(Footnote.schema.contents);
+  constructor(opts?: { attributes?: Partial<FootnoteAttributes>; contents?: FootnoteContents }) {
+    this.attributes = operations.merge(opts?.attributes, Footnote.schema);
+    this.contents = opts?.contents ?? operations.zero(Footnote.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -4579,9 +4579,9 @@ export class Level implements XMLElement<'level', LevelAttributes, LevelContents
   attributes: LevelAttributes;
   contents: LevelContents;
 
-  constructor(opts?: { attributes?: Partial<LevelAttributes>; content?: LevelContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Level.schema);
-    this.contents = opts?.content ?? xml.zero(Level.schema.contents);
+  constructor(opts?: { attributes?: Partial<LevelAttributes>; contents?: LevelContents }) {
+    this.attributes = operations.merge(opts?.attributes, Level.schema);
+    this.contents = opts?.contents ?? operations.zero(Level.schema.contents);
   }
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
@@ -4660,9 +4660,9 @@ export class PartGroup implements XMLElement<'part-group', PartGroupAttributes, 
   attributes: PartGroupAttributes;
   contents: PartGroupContents;
 
-  constructor(opts?: { attributes?: Partial<PartGroupAttributes>; content?: PartGroupContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PartGroup.schema);
-    this.contents = opts?.content ?? xml.zero(PartGroup.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartGroupAttributes>; contents?: PartGroupContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartGroup.schema);
+    this.contents = opts?.contents ?? operations.zero(PartGroup.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -4748,9 +4748,9 @@ export class InstrumentLink implements XMLElement<'instrument-link', InstrumentL
   attributes: InstrumentLinkAttributes;
   contents: InstrumentLinkContents;
 
-  constructor(opts?: { attributes?: Partial<InstrumentLinkAttributes>; content?: InstrumentLinkContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, InstrumentLink.schema);
-    this.contents = opts?.content ?? xml.zero(InstrumentLink.schema.contents);
+  constructor(opts?: { attributes?: Partial<InstrumentLinkAttributes>; contents?: InstrumentLinkContents }) {
+    this.attributes = operations.merge(opts?.attributes, InstrumentLink.schema);
+    this.contents = opts?.contents ?? operations.zero(InstrumentLink.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -4776,9 +4776,9 @@ export class GroupLink implements XMLElement<'group-link', GroupLinkAttributes, 
   attributes: GroupLinkAttributes;
   contents: GroupLinkContents;
 
-  constructor(opts?: { attributes?: Partial<GroupLinkAttributes>; content?: GroupLinkContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, GroupLink.schema);
-    this.contents = opts?.content ?? xml.zero(GroupLink.schema.contents);
+  constructor(opts?: { attributes?: Partial<GroupLinkAttributes>; contents?: GroupLinkContents }) {
+    this.attributes = operations.merge(opts?.attributes, GroupLink.schema);
+    this.contents = opts?.contents ?? operations.zero(GroupLink.schema.contents);
   }
 
   getText(): string {
@@ -4828,9 +4828,9 @@ export class PartLink implements XMLElement<'part-link', PartLinkAttributes, Par
   attributes: PartLinkAttributes;
   contents: PartLinkContents;
 
-  constructor(opts?: { attributes?: Partial<PartLinkAttributes>; content?: PartLinkContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PartLink.schema);
-    this.contents = opts?.content ?? xml.zero(PartLink.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartLinkAttributes>; contents?: PartLinkContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartLink.schema);
+    this.contents = opts?.contents ?? operations.zero(PartLink.schema.contents);
   }
   getXlinkHref(): string {
     return this.attributes['xlink:href'];
@@ -4947,9 +4947,9 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
   attributes: PartNameAttributes;
   contents: PartNameContents;
 
-  constructor(opts?: { attributes?: Partial<PartNameAttributes>; content?: PartNameContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PartName.schema);
-    this.contents = opts?.content ?? xml.zero(PartName.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartNameAttributes>; contents?: PartNameContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartName.schema);
+    this.contents = opts?.contents ?? operations.zero(PartName.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -5051,9 +5051,9 @@ export class PartNameDisplay
   attributes: PartNameDisplayAttributes;
   contents: PartNameDisplayContents;
 
-  constructor(opts?: { attributes?: Partial<PartNameDisplayAttributes>; content?: PartNameDisplayContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PartNameDisplay.schema);
-    this.contents = opts?.content ?? xml.zero(PartNameDisplay.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartNameDisplayAttributes>; contents?: PartNameDisplayContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartNameDisplay.schema);
+    this.contents = opts?.contents ?? operations.zero(PartNameDisplay.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -5136,9 +5136,9 @@ export class PartAbbreviation
   attributes: PartAbbreviationAttributes;
   contents: PartAbbreviationContents;
 
-  constructor(opts?: { attributes?: Partial<PartAbbreviationAttributes>; content?: PartAbbreviationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PartAbbreviation.schema);
-    this.contents = opts?.content ?? xml.zero(PartAbbreviation.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartAbbreviationAttributes>; contents?: PartAbbreviationContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartAbbreviation.schema);
+    this.contents = opts?.contents ?? operations.zero(PartAbbreviation.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -5243,10 +5243,10 @@ export class PartAbbreviationDisplay
 
   constructor(opts?: {
     attributes?: Partial<PartAbbreviationDisplayAttributes>;
-    content?: PartAbbreviationDisplayContents;
+    contents?: PartAbbreviationDisplayContents;
   }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PartAbbreviationDisplay.schema);
-    this.contents = opts?.content ?? xml.zero(PartAbbreviationDisplay.schema.contents);
+    this.attributes = operations.merge(opts?.attributes, PartAbbreviationDisplay.schema);
+    this.contents = opts?.contents ?? operations.zero(PartAbbreviationDisplay.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -5278,9 +5278,9 @@ export class Group implements XMLElement<'group', GroupAttributes, GroupContents
   attributes: GroupAttributes;
   contents: GroupContents;
 
-  constructor(opts?: { attributes?: Partial<GroupAttributes>; content?: GroupContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Group.schema);
-    this.contents = opts?.content ?? xml.zero(Group.schema.contents);
+  constructor(opts?: { attributes?: Partial<GroupAttributes>; contents?: GroupContents }) {
+    this.attributes = operations.merge(opts?.attributes, Group.schema);
+    this.contents = opts?.contents ?? operations.zero(Group.schema.contents);
   }
 
   getText(): string {
@@ -5307,9 +5307,9 @@ export class InstrumentName implements XMLElement<'instrument-name', InstrumentN
   attributes: InstrumentNameAttributes;
   contents: InstrumentNameContents;
 
-  constructor(opts?: { attributes?: Partial<InstrumentNameAttributes>; content?: InstrumentNameContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, InstrumentName.schema);
-    this.contents = opts?.content ?? xml.zero(InstrumentName.schema.contents);
+  constructor(opts?: { attributes?: Partial<InstrumentNameAttributes>; contents?: InstrumentNameContents }) {
+    this.attributes = operations.merge(opts?.attributes, InstrumentName.schema);
+    this.contents = opts?.contents ?? operations.zero(InstrumentName.schema.contents);
   }
 
   getText(): string {
@@ -5340,10 +5340,10 @@ export class InstrumentAbbreviation
 
   constructor(opts?: {
     attributes?: Partial<InstrumentAbbreviationAttributes>;
-    content?: InstrumentAbbreviationContents;
+    contents?: InstrumentAbbreviationContents;
   }) {
-    this.attributes = xml.mergeZero(opts?.attributes, InstrumentAbbreviation.schema);
-    this.contents = opts?.content ?? xml.zero(InstrumentAbbreviation.schema.contents);
+    this.attributes = operations.merge(opts?.attributes, InstrumentAbbreviation.schema);
+    this.contents = opts?.contents ?? operations.zero(InstrumentAbbreviation.schema.contents);
   }
 
   getText(): string {
@@ -5372,9 +5372,9 @@ export class InstrumentSound
   attributes: InstrumentSoundAttributes;
   contents: InstrumentSoundContents;
 
-  constructor(opts?: { attributes?: Partial<InstrumentSoundAttributes>; content?: InstrumentSoundContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, InstrumentSound.schema);
-    this.contents = opts?.content ?? xml.zero(InstrumentSound.schema.contents);
+  constructor(opts?: { attributes?: Partial<InstrumentSoundAttributes>; contents?: InstrumentSoundContents }) {
+    this.attributes = operations.merge(opts?.attributes, InstrumentSound.schema);
+    this.contents = opts?.contents ?? operations.zero(InstrumentSound.schema.contents);
   }
 
   getText(): string {
@@ -5397,9 +5397,9 @@ export class Solo implements XMLElement<'solo', SoloAttributes, SoloContents> {
   attributes: SoloAttributes;
   contents: SoloContents;
 
-  constructor(opts?: { attributes?: Partial<SoloAttributes>; content?: SoloContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Solo.schema);
-    this.contents = opts?.content ?? xml.zero(Solo.schema.contents);
+  constructor(opts?: { attributes?: Partial<SoloAttributes>; contents?: SoloContents }) {
+    this.attributes = operations.merge(opts?.attributes, Solo.schema);
+    this.contents = opts?.contents ?? operations.zero(Solo.schema.contents);
   }
 }
 
@@ -5425,9 +5425,9 @@ export class Ensemble implements XMLElement<'ensemble', EnsembleAttributes, Ense
   attributes: EnsembleAttributes;
   contents: EnsembleContents;
 
-  constructor(opts?: { attributes?: Partial<EnsembleAttributes>; content?: EnsembleContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Ensemble.schema);
-    this.contents = opts?.content ?? xml.zero(Ensemble.schema.contents);
+  constructor(opts?: { attributes?: Partial<EnsembleAttributes>; contents?: EnsembleContents }) {
+    this.attributes = operations.merge(opts?.attributes, Ensemble.schema);
+    this.contents = opts?.contents ?? operations.zero(Ensemble.schema.contents);
   }
 
   getSize(): '' | number {
@@ -5454,9 +5454,9 @@ export class VirtualLibrary implements XMLElement<'virtual-library', VirtualLibr
   attributes: VirtualLibraryAttributes;
   contents: VirtualLibraryContents;
 
-  constructor(opts?: { attributes?: Partial<VirtualLibraryAttributes>; content?: VirtualLibraryContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, VirtualLibrary.schema);
-    this.contents = opts?.content ?? xml.zero(VirtualLibrary.schema.contents);
+  constructor(opts?: { attributes?: Partial<VirtualLibraryAttributes>; contents?: VirtualLibraryContents }) {
+    this.attributes = operations.merge(opts?.attributes, VirtualLibrary.schema);
+    this.contents = opts?.contents ?? operations.zero(VirtualLibrary.schema.contents);
   }
 
   getText(): string {
@@ -5483,9 +5483,9 @@ export class VirtualName implements XMLElement<'virtual-name', VirtualNameAttrib
   attributes: VirtualNameAttributes;
   contents: VirtualNameContents;
 
-  constructor(opts?: { attributes?: Partial<VirtualNameAttributes>; content?: VirtualNameContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, VirtualName.schema);
-    this.contents = opts?.content ?? xml.zero(VirtualName.schema.contents);
+  constructor(opts?: { attributes?: Partial<VirtualNameAttributes>; contents?: VirtualNameContents }) {
+    this.attributes = operations.merge(opts?.attributes, VirtualName.schema);
+    this.contents = opts?.contents ?? operations.zero(VirtualName.schema.contents);
   }
 
   getText(): string {
@@ -5517,9 +5517,9 @@ export class VirtualInstrument
   attributes: VirtualInstrumentAttributes;
   contents: VirtualInstrumentContents;
 
-  constructor(opts?: { attributes?: Partial<VirtualInstrumentAttributes>; content?: VirtualInstrumentContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, VirtualInstrument.schema);
-    this.contents = opts?.content ?? xml.zero(VirtualInstrument.schema.contents);
+  constructor(opts?: { attributes?: Partial<VirtualInstrumentAttributes>; contents?: VirtualInstrumentContents }) {
+    this.attributes = operations.merge(opts?.attributes, VirtualInstrument.schema);
+    this.contents = opts?.contents ?? operations.zero(VirtualInstrument.schema.contents);
   }
 
   getVirtualLibrary(): VirtualLibrary | null {
@@ -5570,9 +5570,9 @@ export class ScoreInstrument
   attributes: ScoreInstrumentAttributes;
   contents: ScoreInstrumentContents;
 
-  constructor(opts?: { attributes?: Partial<ScoreInstrumentAttributes>; content?: ScoreInstrumentContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ScoreInstrument.schema);
-    this.contents = opts?.content ?? xml.zero(ScoreInstrument.schema.contents);
+  constructor(opts?: { attributes?: Partial<ScoreInstrumentAttributes>; contents?: ScoreInstrumentContents }) {
+    this.attributes = operations.merge(opts?.attributes, ScoreInstrument.schema);
+    this.contents = opts?.contents ?? operations.zero(ScoreInstrument.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -5628,9 +5628,9 @@ export class Player implements XMLElement<'player', PlayerAttributes, PlayerCont
   attributes: PlayerAttributes;
   contents: PlayerContents;
 
-  constructor(opts?: { attributes?: Partial<PlayerAttributes>; content?: PlayerContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Player.schema);
-    this.contents = opts?.content ?? xml.zero(Player.schema.contents);
+  constructor(opts?: { attributes?: Partial<PlayerAttributes>; contents?: PlayerContents }) {
+    this.attributes = operations.merge(opts?.attributes, Player.schema);
+    this.contents = opts?.contents ?? operations.zero(Player.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -5659,9 +5659,9 @@ export class MidiDevice implements XMLElement<'midi-device', MidiDeviceAttribute
   attributes: MidiDeviceAttributes;
   contents: MidiDeviceContents;
 
-  constructor(opts?: { attributes?: Partial<MidiDeviceAttributes>; content?: MidiDeviceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MidiDevice.schema);
-    this.contents = opts?.content ?? xml.zero(MidiDevice.schema.contents);
+  constructor(opts?: { attributes?: Partial<MidiDeviceAttributes>; contents?: MidiDeviceContents }) {
+    this.attributes = operations.merge(opts?.attributes, MidiDevice.schema);
+    this.contents = opts?.contents ?? operations.zero(MidiDevice.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -5701,9 +5701,9 @@ export class MidiChannel implements XMLElement<'midi-channel', MidiChannelAttrib
   attributes: MidiChannelAttributes;
   contents: MidiChannelContents;
 
-  constructor(opts?: { attributes?: Partial<MidiChannelAttributes>; content?: MidiChannelContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MidiChannel.schema);
-    this.contents = opts?.content ?? xml.zero(MidiChannel.schema.contents);
+  constructor(opts?: { attributes?: Partial<MidiChannelAttributes>; contents?: MidiChannelContents }) {
+    this.attributes = operations.merge(opts?.attributes, MidiChannel.schema);
+    this.contents = opts?.contents ?? operations.zero(MidiChannel.schema.contents);
   }
 
   getMidi16(): number {
@@ -5730,9 +5730,9 @@ export class MidiName implements XMLElement<'midi-name', MidiNameAttributes, Mid
   attributes: MidiNameAttributes;
   contents: MidiNameContents;
 
-  constructor(opts?: { attributes?: Partial<MidiNameAttributes>; content?: MidiNameContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MidiName.schema);
-    this.contents = opts?.content ?? xml.zero(MidiName.schema.contents);
+  constructor(opts?: { attributes?: Partial<MidiNameAttributes>; contents?: MidiNameContents }) {
+    this.attributes = operations.merge(opts?.attributes, MidiName.schema);
+    this.contents = opts?.contents ?? operations.zero(MidiName.schema.contents);
   }
 
   getText(): string {
@@ -5761,9 +5761,9 @@ export class MidiBank implements XMLElement<'midi-bank', MidiBankAttributes, Mid
   attributes: MidiBankAttributes;
   contents: MidiBankContents;
 
-  constructor(opts?: { attributes?: Partial<MidiBankAttributes>; content?: MidiBankContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MidiBank.schema);
-    this.contents = opts?.content ?? xml.zero(MidiBank.schema.contents);
+  constructor(opts?: { attributes?: Partial<MidiBankAttributes>; contents?: MidiBankContents }) {
+    this.attributes = operations.merge(opts?.attributes, MidiBank.schema);
+    this.contents = opts?.contents ?? operations.zero(MidiBank.schema.contents);
   }
 
   getMidi16384(): number {
@@ -5792,9 +5792,9 @@ export class MidiProgram implements XMLElement<'midi-program', MidiProgramAttrib
   attributes: MidiProgramAttributes;
   contents: MidiProgramContents;
 
-  constructor(opts?: { attributes?: Partial<MidiProgramAttributes>; content?: MidiProgramContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MidiProgram.schema);
-    this.contents = opts?.content ?? xml.zero(MidiProgram.schema.contents);
+  constructor(opts?: { attributes?: Partial<MidiProgramAttributes>; contents?: MidiProgramContents }) {
+    this.attributes = operations.merge(opts?.attributes, MidiProgram.schema);
+    this.contents = opts?.contents ?? operations.zero(MidiProgram.schema.contents);
   }
 
   getMidi128(): number {
@@ -5823,9 +5823,9 @@ export class MidiUnpitched implements XMLElement<'midi-unpitched', MidiUnpitched
   attributes: MidiUnpitchedAttributes;
   contents: MidiUnpitchedContents;
 
-  constructor(opts?: { attributes?: Partial<MidiUnpitchedAttributes>; content?: MidiUnpitchedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MidiUnpitched.schema);
-    this.contents = opts?.content ?? xml.zero(MidiUnpitched.schema.contents);
+  constructor(opts?: { attributes?: Partial<MidiUnpitchedAttributes>; contents?: MidiUnpitchedContents }) {
+    this.attributes = operations.merge(opts?.attributes, MidiUnpitched.schema);
+    this.contents = opts?.contents ?? operations.zero(MidiUnpitched.schema.contents);
   }
 
   getMidi128(): number {
@@ -5854,9 +5854,9 @@ export class Volume implements XMLElement<'volume', VolumeAttributes, VolumeCont
   attributes: VolumeAttributes;
   contents: VolumeContents;
 
-  constructor(opts?: { attributes?: Partial<VolumeAttributes>; content?: VolumeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Volume.schema);
-    this.contents = opts?.content ?? xml.zero(Volume.schema.contents);
+  constructor(opts?: { attributes?: Partial<VolumeAttributes>; contents?: VolumeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Volume.schema);
+    this.contents = opts?.contents ?? operations.zero(Volume.schema.contents);
   }
 
   getVolume(): number {
@@ -5885,9 +5885,9 @@ export class Pan implements XMLElement<'pan', PanAttributes, PanContents> {
   attributes: PanAttributes;
   contents: PanContents;
 
-  constructor(opts?: { attributes?: Partial<PanAttributes>; content?: PanContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Pan.schema);
-    this.contents = opts?.content ?? xml.zero(Pan.schema.contents);
+  constructor(opts?: { attributes?: Partial<PanAttributes>; contents?: PanContents }) {
+    this.attributes = operations.merge(opts?.attributes, Pan.schema);
+    this.contents = opts?.contents ?? operations.zero(Pan.schema.contents);
   }
 
   getPan(): number {
@@ -5916,9 +5916,9 @@ export class Elevation implements XMLElement<'elevation', ElevationAttributes, E
   attributes: ElevationAttributes;
   contents: ElevationContents;
 
-  constructor(opts?: { attributes?: Partial<ElevationAttributes>; content?: ElevationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Elevation.schema);
-    this.contents = opts?.content ?? xml.zero(Elevation.schema.contents);
+  constructor(opts?: { attributes?: Partial<ElevationAttributes>; contents?: ElevationContents }) {
+    this.attributes = operations.merge(opts?.attributes, Elevation.schema);
+    this.contents = opts?.contents ?? operations.zero(Elevation.schema.contents);
   }
 
   getElevation(): number {
@@ -5963,9 +5963,9 @@ export class MidiInstrument implements XMLElement<'midi-instrument', MidiInstrum
   attributes: MidiInstrumentAttributes;
   contents: MidiInstrumentContents;
 
-  constructor(opts?: { attributes?: Partial<MidiInstrumentAttributes>; content?: MidiInstrumentContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MidiInstrument.schema);
-    this.contents = opts?.content ?? xml.zero(MidiInstrument.schema.contents);
+  constructor(opts?: { attributes?: Partial<MidiInstrumentAttributes>; contents?: MidiInstrumentContents }) {
+    this.attributes = operations.merge(opts?.attributes, MidiInstrument.schema);
+    this.contents = opts?.contents ?? operations.zero(MidiInstrument.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -6065,9 +6065,9 @@ export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, 
   attributes: ScorePartAttributes;
   contents: ScorePartContents;
 
-  constructor(opts?: { attributes?: Partial<ScorePartAttributes>; content?: ScorePartContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ScorePart.schema);
-    this.contents = opts?.content ?? xml.zero(ScorePart.schema.contents);
+  constructor(opts?: { attributes?: Partial<ScorePartAttributes>; contents?: ScorePartContents }) {
+    this.attributes = operations.merge(opts?.attributes, ScorePart.schema);
+    this.contents = opts?.contents ?? operations.zero(ScorePart.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -6161,9 +6161,9 @@ export class PartList implements XMLElement<'part-list', PartListAttributes, Par
   attributes: PartListAttributes;
   contents: PartListContents;
 
-  constructor(opts?: { attributes?: Partial<PartListAttributes>; content?: PartListContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PartList.schema);
-    this.contents = opts?.content ?? xml.zero(PartList.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartListAttributes>; contents?: PartListContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartList.schema);
+    this.contents = opts?.contents ?? operations.zero(PartList.schema.contents);
   }
 
   getPartGroups(): Array<PartGroup> {
@@ -6198,9 +6198,9 @@ export class Chord implements XMLElement<'chord', ChordAttributes, ChordContents
   attributes: ChordAttributes;
   contents: ChordContents;
 
-  constructor(opts?: { attributes?: Partial<ChordAttributes>; content?: ChordContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Chord.schema);
-    this.contents = opts?.content ?? xml.zero(Chord.schema.contents);
+  constructor(opts?: { attributes?: Partial<ChordAttributes>; contents?: ChordContents }) {
+    this.attributes = operations.merge(opts?.attributes, Chord.schema);
+    this.contents = opts?.contents ?? operations.zero(Chord.schema.contents);
   }
 }
 
@@ -6229,9 +6229,9 @@ export class Step implements XMLElement<'step', StepAttributes, StepContents> {
   attributes: StepAttributes;
   contents: StepContents;
 
-  constructor(opts?: { attributes?: Partial<StepAttributes>; content?: StepContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Step.schema);
-    this.contents = opts?.content ?? xml.zero(Step.schema.contents);
+  constructor(opts?: { attributes?: Partial<StepAttributes>; contents?: StepContents }) {
+    this.attributes = operations.merge(opts?.attributes, Step.schema);
+    this.contents = opts?.contents ?? operations.zero(Step.schema.contents);
   }
 
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
@@ -6263,9 +6263,9 @@ export class Alter implements XMLElement<'alter', AlterAttributes, AlterContents
   attributes: AlterAttributes;
   contents: AlterContents;
 
-  constructor(opts?: { attributes?: Partial<AlterAttributes>; content?: AlterContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Alter.schema);
-    this.contents = opts?.content ?? xml.zero(Alter.schema.contents);
+  constructor(opts?: { attributes?: Partial<AlterAttributes>; contents?: AlterContents }) {
+    this.attributes = operations.merge(opts?.attributes, Alter.schema);
+    this.contents = opts?.contents ?? operations.zero(Alter.schema.contents);
   }
 
   getSemitones(): number {
@@ -6292,9 +6292,9 @@ export class Octave implements XMLElement<'octave', OctaveAttributes, OctaveCont
   attributes: OctaveAttributes;
   contents: OctaveContents;
 
-  constructor(opts?: { attributes?: Partial<OctaveAttributes>; content?: OctaveContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Octave.schema);
-    this.contents = opts?.content ?? xml.zero(Octave.schema.contents);
+  constructor(opts?: { attributes?: Partial<OctaveAttributes>; contents?: OctaveContents }) {
+    this.attributes = operations.merge(opts?.attributes, Octave.schema);
+    this.contents = opts?.contents ?? operations.zero(Octave.schema.contents);
   }
 
   getOctave(): number {
@@ -6325,9 +6325,9 @@ export class Pitch implements XMLElement<'pitch', PitchAttributes, PitchContents
   attributes: PitchAttributes;
   contents: PitchContents;
 
-  constructor(opts?: { attributes?: Partial<PitchAttributes>; content?: PitchContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Pitch.schema);
-    this.contents = opts?.content ?? xml.zero(Pitch.schema.contents);
+  constructor(opts?: { attributes?: Partial<PitchAttributes>; contents?: PitchContents }) {
+    this.attributes = operations.merge(opts?.attributes, Pitch.schema);
+    this.contents = opts?.contents ?? operations.zero(Pitch.schema.contents);
   }
 
   getStep(): Step {
@@ -6375,9 +6375,9 @@ export class DisplayStep implements XMLElement<'display-step', DisplayStepAttrib
   attributes: DisplayStepAttributes;
   contents: DisplayStepContents;
 
-  constructor(opts?: { attributes?: Partial<DisplayStepAttributes>; content?: DisplayStepContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DisplayStep.schema);
-    this.contents = opts?.content ?? xml.zero(DisplayStep.schema.contents);
+  constructor(opts?: { attributes?: Partial<DisplayStepAttributes>; contents?: DisplayStepContents }) {
+    this.attributes = operations.merge(opts?.attributes, DisplayStep.schema);
+    this.contents = opts?.contents ?? operations.zero(DisplayStep.schema.contents);
   }
 
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
@@ -6404,9 +6404,9 @@ export class DisplayOctave implements XMLElement<'display-octave', DisplayOctave
   attributes: DisplayOctaveAttributes;
   contents: DisplayOctaveContents;
 
-  constructor(opts?: { attributes?: Partial<DisplayOctaveAttributes>; content?: DisplayOctaveContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DisplayOctave.schema);
-    this.contents = opts?.content ?? xml.zero(DisplayOctave.schema.contents);
+  constructor(opts?: { attributes?: Partial<DisplayOctaveAttributes>; contents?: DisplayOctaveContents }) {
+    this.attributes = operations.merge(opts?.attributes, DisplayOctave.schema);
+    this.contents = opts?.contents ?? operations.zero(DisplayOctave.schema.contents);
   }
 
   getOctave(): number {
@@ -6436,9 +6436,9 @@ export class Unpitched implements XMLElement<'unpitched', UnpitchedAttributes, U
   attributes: UnpitchedAttributes;
   contents: UnpitchedContents;
 
-  constructor(opts?: { attributes?: Partial<UnpitchedAttributes>; content?: UnpitchedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Unpitched.schema);
-    this.contents = opts?.content ?? xml.zero(Unpitched.schema.contents);
+  constructor(opts?: { attributes?: Partial<UnpitchedAttributes>; contents?: UnpitchedContents }) {
+    this.attributes = operations.merge(opts?.attributes, Unpitched.schema);
+    this.contents = opts?.contents ?? operations.zero(Unpitched.schema.contents);
   }
 
   getDisplayStep(): DisplayStep {
@@ -6474,9 +6474,9 @@ export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
   attributes: RestAttributes;
   contents: RestContents;
 
-  constructor(opts?: { attributes?: Partial<RestAttributes>; content?: RestContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Rest.schema);
-    this.contents = opts?.content ?? xml.zero(Rest.schema.contents);
+  constructor(opts?: { attributes?: Partial<RestAttributes>; contents?: RestContents }) {
+    this.attributes = operations.merge(opts?.attributes, Rest.schema);
+    this.contents = opts?.contents ?? operations.zero(Rest.schema.contents);
   }
   getMeasure(): 'yes' | 'no' | null {
     return this.attributes['measure'];
@@ -6519,9 +6519,9 @@ export class Duration implements XMLElement<'duration', DurationAttributes, Dura
   attributes: DurationAttributes;
   contents: DurationContents;
 
-  constructor(opts?: { attributes?: Partial<DurationAttributes>; content?: DurationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Duration.schema);
-    this.contents = opts?.content ?? xml.zero(Duration.schema.contents);
+  constructor(opts?: { attributes?: Partial<DurationAttributes>; contents?: DurationContents }) {
+    this.attributes = operations.merge(opts?.attributes, Duration.schema);
+    this.contents = opts?.contents ?? operations.zero(Duration.schema.contents);
   }
 
   getPositiveDivisions(): number {
@@ -6551,9 +6551,9 @@ export class Tie implements XMLElement<'tie', TieAttributes, TieContents> {
   attributes: TieAttributes;
   contents: TieContents;
 
-  constructor(opts?: { attributes?: Partial<TieAttributes>; content?: TieContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Tie.schema);
-    this.contents = opts?.content ?? xml.zero(Tie.schema.contents);
+  constructor(opts?: { attributes?: Partial<TieAttributes>; contents?: TieContents }) {
+    this.attributes = operations.merge(opts?.attributes, Tie.schema);
+    this.contents = opts?.contents ?? operations.zero(Tie.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -6595,9 +6595,9 @@ export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents
   attributes: GraceAttributes;
   contents: GraceContents;
 
-  constructor(opts?: { attributes?: Partial<GraceAttributes>; content?: GraceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Grace.schema);
-    this.contents = opts?.content ?? xml.zero(Grace.schema.contents);
+  constructor(opts?: { attributes?: Partial<GraceAttributes>; contents?: GraceContents }) {
+    this.attributes = operations.merge(opts?.attributes, Grace.schema);
+    this.contents = opts?.contents ?? operations.zero(Grace.schema.contents);
   }
   getMakeTime(): number | null {
     return this.attributes['make-time'];
@@ -6637,9 +6637,9 @@ export class Cue implements XMLElement<'cue', CueAttributes, CueContents> {
   attributes: CueAttributes;
   contents: CueContents;
 
-  constructor(opts?: { attributes?: Partial<CueAttributes>; content?: CueContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Cue.schema);
-    this.contents = opts?.content ?? xml.zero(Cue.schema.contents);
+  constructor(opts?: { attributes?: Partial<CueAttributes>; contents?: CueContents }) {
+    this.attributes = operations.merge(opts?.attributes, Cue.schema);
+    this.contents = opts?.contents ?? operations.zero(Cue.schema.contents);
   }
 }
 
@@ -6659,9 +6659,9 @@ export class Instrument implements XMLElement<'instrument', InstrumentAttributes
   attributes: InstrumentAttributes;
   contents: InstrumentContents;
 
-  constructor(opts?: { attributes?: Partial<InstrumentAttributes>; content?: InstrumentContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Instrument.schema);
-    this.contents = opts?.content ?? xml.zero(Instrument.schema.contents);
+  constructor(opts?: { attributes?: Partial<InstrumentAttributes>; contents?: InstrumentContents }) {
+    this.attributes = operations.merge(opts?.attributes, Instrument.schema);
+    this.contents = opts?.contents ?? operations.zero(Instrument.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -6687,9 +6687,9 @@ export class Voice implements XMLElement<'voice', VoiceAttributes, VoiceContents
   attributes: VoiceAttributes;
   contents: VoiceContents;
 
-  constructor(opts?: { attributes?: Partial<VoiceAttributes>; content?: VoiceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Voice.schema);
-    this.contents = opts?.content ?? xml.zero(Voice.schema.contents);
+  constructor(opts?: { attributes?: Partial<VoiceAttributes>; contents?: VoiceContents }) {
+    this.attributes = operations.merge(opts?.attributes, Voice.schema);
+    this.contents = opts?.contents ?? operations.zero(Voice.schema.contents);
   }
 
   getText(): string {
@@ -6762,9 +6762,9 @@ export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
   attributes: TypeAttributes;
   contents: TypeContents;
 
-  constructor(opts?: { attributes?: Partial<TypeAttributes>; content?: TypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Type.schema);
-    this.contents = opts?.content ?? xml.zero(Type.schema.contents);
+  constructor(opts?: { attributes?: Partial<TypeAttributes>; contents?: TypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Type.schema);
+    this.contents = opts?.contents ?? operations.zero(Type.schema.contents);
   }
   getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
     return this.attributes['size'];
@@ -6875,9 +6875,9 @@ export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
   attributes: DotAttributes;
   contents: DotContents;
 
-  constructor(opts?: { attributes?: Partial<DotAttributes>; content?: DotContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Dot.schema);
-    this.contents = opts?.content ?? xml.zero(Dot.schema.contents);
+  constructor(opts?: { attributes?: Partial<DotAttributes>; contents?: DotContents }) {
+    this.attributes = operations.merge(opts?.attributes, Dot.schema);
+    this.contents = opts?.contents ?? operations.zero(Dot.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -7112,9 +7112,9 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
   attributes: AccidentalAttributes;
   contents: AccidentalContents;
 
-  constructor(opts?: { attributes?: Partial<AccidentalAttributes>; content?: AccidentalContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Accidental.schema);
-    this.contents = opts?.content ?? xml.zero(Accidental.schema.contents);
+  constructor(opts?: { attributes?: Partial<AccidentalAttributes>; contents?: AccidentalContents }) {
+    this.attributes = operations.merge(opts?.attributes, Accidental.schema);
+    this.contents = opts?.contents ?? operations.zero(Accidental.schema.contents);
   }
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
@@ -7316,9 +7316,9 @@ export class ActualNotes implements XMLElement<'actual-notes', ActualNotesAttrib
   attributes: ActualNotesAttributes;
   contents: ActualNotesContents;
 
-  constructor(opts?: { attributes?: Partial<ActualNotesAttributes>; content?: ActualNotesContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ActualNotes.schema);
-    this.contents = opts?.content ?? xml.zero(ActualNotes.schema.contents);
+  constructor(opts?: { attributes?: Partial<ActualNotesAttributes>; contents?: ActualNotesContents }) {
+    this.attributes = operations.merge(opts?.attributes, ActualNotes.schema);
+    this.contents = opts?.contents ?? operations.zero(ActualNotes.schema.contents);
   }
 
   getText(): string {
@@ -7345,9 +7345,9 @@ export class NormalNotes implements XMLElement<'normal-notes', NormalNotesAttrib
   attributes: NormalNotesAttributes;
   contents: NormalNotesContents;
 
-  constructor(opts?: { attributes?: Partial<NormalNotesAttributes>; content?: NormalNotesContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NormalNotes.schema);
-    this.contents = opts?.content ?? xml.zero(NormalNotes.schema.contents);
+  constructor(opts?: { attributes?: Partial<NormalNotesAttributes>; contents?: NormalNotesContents }) {
+    this.attributes = operations.merge(opts?.attributes, NormalNotes.schema);
+    this.contents = opts?.contents ?? operations.zero(NormalNotes.schema.contents);
   }
 
   getText(): string {
@@ -7418,9 +7418,9 @@ export class NormalType implements XMLElement<'normal-type', NormalTypeAttribute
   attributes: NormalTypeAttributes;
   contents: NormalTypeContents;
 
-  constructor(opts?: { attributes?: Partial<NormalTypeAttributes>; content?: NormalTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NormalType.schema);
-    this.contents = opts?.content ?? xml.zero(NormalType.schema.contents);
+  constructor(opts?: { attributes?: Partial<NormalTypeAttributes>; contents?: NormalTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, NormalType.schema);
+    this.contents = opts?.contents ?? operations.zero(NormalType.schema.contents);
   }
 
   getNoteTypeValue():
@@ -7475,9 +7475,9 @@ export class NormalDot implements XMLElement<'normal-dot', NormalDotAttributes, 
   attributes: NormalDotAttributes;
   contents: NormalDotContents;
 
-  constructor(opts?: { attributes?: Partial<NormalDotAttributes>; content?: NormalDotContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NormalDot.schema);
-    this.contents = opts?.content ?? xml.zero(NormalDot.schema.contents);
+  constructor(opts?: { attributes?: Partial<NormalDotAttributes>; contents?: NormalDotContents }) {
+    this.attributes = operations.merge(opts?.attributes, NormalDot.schema);
+    this.contents = opts?.contents ?? operations.zero(NormalDot.schema.contents);
   }
 }
 
@@ -7513,9 +7513,9 @@ export class TimeModification
   attributes: TimeModificationAttributes;
   contents: TimeModificationContents;
 
-  constructor(opts?: { attributes?: Partial<TimeModificationAttributes>; content?: TimeModificationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TimeModification.schema);
-    this.contents = opts?.content ?? xml.zero(TimeModification.schema.contents);
+  constructor(opts?: { attributes?: Partial<TimeModificationAttributes>; contents?: TimeModificationContents }) {
+    this.attributes = operations.merge(opts?.attributes, TimeModification.schema);
+    this.contents = opts?.contents ?? operations.zero(TimeModification.schema.contents);
   }
 
   getActualNotes(): ActualNotes {
@@ -7582,9 +7582,9 @@ export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
   attributes: StemAttributes;
   contents: StemContents;
 
-  constructor(opts?: { attributes?: Partial<StemAttributes>; content?: StemContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Stem.schema);
-    this.contents = opts?.content ?? xml.zero(Stem.schema.contents);
+  constructor(opts?: { attributes?: Partial<StemAttributes>; contents?: StemContents }) {
+    this.attributes = operations.merge(opts?.attributes, Stem.schema);
+    this.contents = opts?.contents ?? operations.zero(Stem.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -7731,9 +7731,9 @@ export class Notehead implements XMLElement<'notehead', NoteheadAttributes, Note
   attributes: NoteheadAttributes;
   contents: NoteheadContents;
 
-  constructor(opts?: { attributes?: Partial<NoteheadAttributes>; content?: NoteheadContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Notehead.schema);
-    this.contents = opts?.content ?? xml.zero(Notehead.schema.contents);
+  constructor(opts?: { attributes?: Partial<NoteheadAttributes>; contents?: NoteheadContents }) {
+    this.attributes = operations.merge(opts?.attributes, Notehead.schema);
+    this.contents = opts?.contents ?? operations.zero(Notehead.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -7867,9 +7867,9 @@ export class NoteheadText implements XMLElement<'notehead-text', NoteheadTextAtt
   attributes: NoteheadTextAttributes;
   contents: NoteheadTextContents;
 
-  constructor(opts?: { attributes?: Partial<NoteheadTextAttributes>; content?: NoteheadTextContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NoteheadText.schema);
-    this.contents = opts?.content ?? xml.zero(NoteheadText.schema.contents);
+  constructor(opts?: { attributes?: Partial<NoteheadTextAttributes>; contents?: NoteheadTextContents }) {
+    this.attributes = operations.merge(opts?.attributes, NoteheadText.schema);
+    this.contents = opts?.contents ?? operations.zero(NoteheadText.schema.contents);
   }
 
   getTexts(): Array<[DisplayText, AccidentalText]> {
@@ -7898,9 +7898,9 @@ export class Staff implements XMLElement<'staff', StaffAttributes, StaffContents
   attributes: StaffAttributes;
   contents: StaffContents;
 
-  constructor(opts?: { attributes?: Partial<StaffAttributes>; content?: StaffContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Staff.schema);
-    this.contents = opts?.content ?? xml.zero(Staff.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaffAttributes>; contents?: StaffContents }) {
+    this.attributes = operations.merge(opts?.attributes, Staff.schema);
+    this.contents = opts?.contents ?? operations.zero(Staff.schema.contents);
   }
 
   getStaff(): number {
@@ -7948,9 +7948,9 @@ export class Beam implements XMLElement<'beam', BeamAttributes, BeamContents> {
   attributes: BeamAttributes;
   contents: BeamContents;
 
-  constructor(opts?: { attributes?: Partial<BeamAttributes>; content?: BeamContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Beam.schema);
-    this.contents = opts?.content ?? xml.zero(Beam.schema.contents);
+  constructor(opts?: { attributes?: Partial<BeamAttributes>; contents?: BeamContents }) {
+    this.attributes = operations.merge(opts?.attributes, Beam.schema);
+    this.contents = opts?.contents ?? operations.zero(Beam.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -8058,9 +8058,9 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
   attributes: TiedAttributes;
   contents: TiedContents;
 
-  constructor(opts?: { attributes?: Partial<TiedAttributes>; content?: TiedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Tied.schema);
-    this.contents = opts?.content ?? xml.zero(Tied.schema.contents);
+  constructor(opts?: { attributes?: Partial<TiedAttributes>; contents?: TiedContents }) {
+    this.attributes = operations.merge(opts?.attributes, Tied.schema);
+    this.contents = opts?.contents ?? operations.zero(Tied.schema.contents);
   }
   getType(): 'start' | 'stop' | 'continue' | 'let-ring' {
     return this.attributes['type'];
@@ -8234,9 +8234,9 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
   attributes: SlurAttributes;
   contents: SlurContents;
 
-  constructor(opts?: { attributes?: Partial<SlurAttributes>; content?: SlurContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Slur.schema);
-    this.contents = opts?.content ?? xml.zero(Slur.schema.contents);
+  constructor(opts?: { attributes?: Partial<SlurAttributes>; contents?: SlurContents }) {
+    this.attributes = operations.merge(opts?.attributes, Slur.schema);
+    this.contents = opts?.contents ?? operations.zero(Slur.schema.contents);
   }
   getType(): 'start' | 'stop' | 'continue' {
     return this.attributes['type'];
@@ -8379,9 +8379,9 @@ export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAtt
   attributes: TupletNumberAttributes;
   contents: TupletNumberContents;
 
-  constructor(opts?: { attributes?: Partial<TupletNumberAttributes>; content?: TupletNumberContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TupletNumber.schema);
-    this.contents = opts?.content ?? xml.zero(TupletNumber.schema.contents);
+  constructor(opts?: { attributes?: Partial<TupletNumberAttributes>; contents?: TupletNumberContents }) {
+    this.attributes = operations.merge(opts?.attributes, TupletNumber.schema);
+    this.contents = opts?.contents ?? operations.zero(TupletNumber.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -8460,9 +8460,9 @@ export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttribute
   attributes: TupletTypeAttributes;
   contents: TupletTypeContents;
 
-  constructor(opts?: { attributes?: Partial<TupletTypeAttributes>; content?: TupletTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TupletType.schema);
-    this.contents = opts?.content ?? xml.zero(TupletType.schema.contents);
+  constructor(opts?: { attributes?: Partial<TupletTypeAttributes>; contents?: TupletTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, TupletType.schema);
+    this.contents = opts?.contents ?? operations.zero(TupletType.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -8535,9 +8535,9 @@ export class TupletDot implements XMLElement<'tuplet-dot', TupletDotAttributes, 
   attributes: TupletDotAttributes;
   contents: TupletDotContents;
 
-  constructor(opts?: { attributes?: Partial<TupletDotAttributes>; content?: TupletDotContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TupletDot.schema);
-    this.contents = opts?.content ?? xml.zero(TupletDot.schema.contents);
+  constructor(opts?: { attributes?: Partial<TupletDotAttributes>; contents?: TupletDotContents }) {
+    this.attributes = operations.merge(opts?.attributes, TupletDot.schema);
+    this.contents = opts?.contents ?? operations.zero(TupletDot.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -8593,9 +8593,9 @@ export class TupletActual implements XMLElement<'tuplet-actual', TupletActualAtt
   attributes: TupletActualAttributes;
   contents: TupletActualContents;
 
-  constructor(opts?: { attributes?: Partial<TupletActualAttributes>; content?: TupletActualContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TupletActual.schema);
-    this.contents = opts?.content ?? xml.zero(TupletActual.schema.contents);
+  constructor(opts?: { attributes?: Partial<TupletActualAttributes>; contents?: TupletActualContents }) {
+    this.attributes = operations.merge(opts?.attributes, TupletActual.schema);
+    this.contents = opts?.contents ?? operations.zero(TupletActual.schema.contents);
   }
 
   getTupletNumber(): TupletNumber | null {
@@ -8638,9 +8638,9 @@ export class TupletNormal implements XMLElement<'tuplet-normal', TupletNormalAtt
   attributes: TupletNormalAttributes;
   contents: TupletNormalContents;
 
-  constructor(opts?: { attributes?: Partial<TupletNormalAttributes>; content?: TupletNormalContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TupletNormal.schema);
-    this.contents = opts?.content ?? xml.zero(TupletNormal.schema.contents);
+  constructor(opts?: { attributes?: Partial<TupletNormalAttributes>; contents?: TupletNormalContents }) {
+    this.attributes = operations.merge(opts?.attributes, TupletNormal.schema);
+    this.contents = opts?.contents ?? operations.zero(TupletNormal.schema.contents);
   }
 
   getTupletNumber(): TupletNumber | null {
@@ -8724,9 +8724,9 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
   attributes: TupletAttributes;
   contents: TupletContents;
 
-  constructor(opts?: { attributes?: Partial<TupletAttributes>; content?: TupletContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Tuplet.schema);
-    this.contents = opts?.content ?? xml.zero(Tuplet.schema.contents);
+  constructor(opts?: { attributes?: Partial<TupletAttributes>; contents?: TupletContents }) {
+    this.attributes = operations.merge(opts?.attributes, Tuplet.schema);
+    this.contents = opts?.contents ?? operations.zero(Tuplet.schema.contents);
   }
   getType(): 'start' | 'stop' | null {
     return this.attributes['type'];
@@ -8887,9 +8887,9 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
   attributes: GlissandoAttributes;
   contents: GlissandoContents;
 
-  constructor(opts?: { attributes?: Partial<GlissandoAttributes>; content?: GlissandoContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Glissando.schema);
-    this.contents = opts?.content ?? xml.zero(Glissando.schema.contents);
+  constructor(opts?: { attributes?: Partial<GlissandoAttributes>; contents?: GlissandoContents }) {
+    this.attributes = operations.merge(opts?.attributes, Glissando.schema);
+    this.contents = opts?.contents ?? operations.zero(Glissando.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -9072,9 +9072,9 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
   attributes: SlideAttributes;
   contents: SlideContents;
 
-  constructor(opts?: { attributes?: Partial<SlideAttributes>; content?: SlideContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Slide.schema);
-    this.contents = opts?.content ?? xml.zero(Slide.schema.contents);
+  constructor(opts?: { attributes?: Partial<SlideAttributes>; contents?: SlideContents }) {
+    this.attributes = operations.merge(opts?.attributes, Slide.schema);
+    this.contents = opts?.contents ?? operations.zero(Slide.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -9277,9 +9277,9 @@ export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, 
   attributes: TrillMarkAttributes;
   contents: TrillMarkContents;
 
-  constructor(opts?: { attributes?: Partial<TrillMarkAttributes>; content?: TrillMarkContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TrillMark.schema);
-    this.contents = opts?.content ?? xml.zero(TrillMark.schema.contents);
+  constructor(opts?: { attributes?: Partial<TrillMarkAttributes>; contents?: TrillMarkContents }) {
+    this.attributes = operations.merge(opts?.attributes, TrillMark.schema);
+    this.contents = opts?.contents ?? operations.zero(TrillMark.schema.contents);
   }
   getAcccelerate(): 'yes' | 'no' | null {
     return this.attributes['acccelerate'];
@@ -9466,9 +9466,9 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
   attributes: TurnAttributes;
   contents: TurnContents;
 
-  constructor(opts?: { attributes?: Partial<TurnAttributes>; content?: TurnContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Turn.schema);
-    this.contents = opts?.content ?? xml.zero(Turn.schema.contents);
+  constructor(opts?: { attributes?: Partial<TurnAttributes>; contents?: TurnContents }) {
+    this.attributes = operations.merge(opts?.attributes, Turn.schema);
+    this.contents = opts?.contents ?? operations.zero(Turn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -9661,9 +9661,9 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
   attributes: DelayedTurnAttributes;
   contents: DelayedTurnContents;
 
-  constructor(opts?: { attributes?: Partial<DelayedTurnAttributes>; content?: DelayedTurnContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DelayedTurn.schema);
-    this.contents = opts?.content ?? xml.zero(DelayedTurn.schema.contents);
+  constructor(opts?: { attributes?: Partial<DelayedTurnAttributes>; contents?: DelayedTurnContents }) {
+    this.attributes = operations.merge(opts?.attributes, DelayedTurn.schema);
+    this.contents = opts?.contents ?? operations.zero(DelayedTurn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -9856,9 +9856,9 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
   attributes: InvertedTurnAttributes;
   contents: InvertedTurnContents;
 
-  constructor(opts?: { attributes?: Partial<InvertedTurnAttributes>; content?: InvertedTurnContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, InvertedTurn.schema);
-    this.contents = opts?.content ?? xml.zero(InvertedTurn.schema.contents);
+  constructor(opts?: { attributes?: Partial<InvertedTurnAttributes>; contents?: InvertedTurnContents }) {
+    this.attributes = operations.merge(opts?.attributes, InvertedTurn.schema);
+    this.contents = opts?.contents ?? operations.zero(InvertedTurn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -10053,9 +10053,9 @@ export class DelayedInvertedTurn
   attributes: DelayedInvertedTurnAttributes;
   contents: DelayedInvertedTurnContents;
 
-  constructor(opts?: { attributes?: Partial<DelayedInvertedTurnAttributes>; content?: DelayedInvertedTurnContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DelayedInvertedTurn.schema);
-    this.contents = opts?.content ?? xml.zero(DelayedInvertedTurn.schema.contents);
+  constructor(opts?: { attributes?: Partial<DelayedInvertedTurnAttributes>; contents?: DelayedInvertedTurnContents }) {
+    this.attributes = operations.merge(opts?.attributes, DelayedInvertedTurn.schema);
+    this.contents = opts?.contents ?? operations.zero(DelayedInvertedTurn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -10246,9 +10246,9 @@ export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAtt
   attributes: VerticalTurnAttributes;
   contents: VerticalTurnContents;
 
-  constructor(opts?: { attributes?: Partial<VerticalTurnAttributes>; content?: VerticalTurnContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, VerticalTurn.schema);
-    this.contents = opts?.content ?? xml.zero(VerticalTurn.schema.contents);
+  constructor(opts?: { attributes?: Partial<VerticalTurnAttributes>; contents?: VerticalTurnContents }) {
+    this.attributes = operations.merge(opts?.attributes, VerticalTurn.schema);
+    this.contents = opts?.contents ?? operations.zero(VerticalTurn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -10435,9 +10435,12 @@ export class InvertedVerticalTurn
   attributes: InvertedVerticalTurnAttributes;
   contents: InvertedVerticalTurnContents;
 
-  constructor(opts?: { attributes?: Partial<InvertedVerticalTurnAttributes>; content?: InvertedVerticalTurnContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, InvertedVerticalTurn.schema);
-    this.contents = opts?.content ?? xml.zero(InvertedVerticalTurn.schema.contents);
+  constructor(opts?: {
+    attributes?: Partial<InvertedVerticalTurnAttributes>;
+    contents?: InvertedVerticalTurnContents;
+  }) {
+    this.attributes = operations.merge(opts?.attributes, InvertedVerticalTurn.schema);
+    this.contents = opts?.contents ?? operations.zero(InvertedVerticalTurn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -10622,9 +10625,9 @@ export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents
   attributes: ShakeAttributes;
   contents: ShakeContents;
 
-  constructor(opts?: { attributes?: Partial<ShakeAttributes>; content?: ShakeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Shake.schema);
-    this.contents = opts?.content ?? xml.zero(Shake.schema.contents);
+  constructor(opts?: { attributes?: Partial<ShakeAttributes>; contents?: ShakeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Shake.schema);
+    this.contents = opts?.contents ?? operations.zero(Shake.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -10798,9 +10801,9 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
   attributes: WavyLineAttributes;
   contents: WavyLineContents;
 
-  constructor(opts?: { attributes?: Partial<WavyLineAttributes>; content?: WavyLineContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, WavyLine.schema);
-    this.contents = opts?.content ?? xml.zero(WavyLine.schema.contents);
+  constructor(opts?: { attributes?: Partial<WavyLineAttributes>; contents?: WavyLineContents }) {
+    this.attributes = operations.merge(opts?.attributes, WavyLine.schema);
+    this.contents = opts?.contents ?? operations.zero(WavyLine.schema.contents);
   }
   getType(): 'start' | 'stop' | 'continue' {
     return this.attributes['type'];
@@ -10983,9 +10986,9 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
   attributes: MordentAttributes;
   contents: MordentContents;
 
-  constructor(opts?: { attributes?: Partial<MordentAttributes>; content?: MordentContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Mordent.schema);
-    this.contents = opts?.content ?? xml.zero(Mordent.schema.contents);
+  constructor(opts?: { attributes?: Partial<MordentAttributes>; contents?: MordentContents }) {
+    this.attributes = operations.merge(opts?.attributes, Mordent.schema);
+    this.contents = opts?.contents ?? operations.zero(Mordent.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -11196,9 +11199,9 @@ export class InvertedMordent
   attributes: InvertedMordentAttributes;
   contents: InvertedMordentContents;
 
-  constructor(opts?: { attributes?: Partial<InvertedMordentAttributes>; content?: InvertedMordentContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, InvertedMordent.schema);
-    this.contents = opts?.content ?? xml.zero(InvertedMordent.schema.contents);
+  constructor(opts?: { attributes?: Partial<InvertedMordentAttributes>; contents?: InvertedMordentContents }) {
+    this.attributes = operations.merge(opts?.attributes, InvertedMordent.schema);
+    this.contents = opts?.contents ?? operations.zero(InvertedMordent.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -11387,9 +11390,9 @@ export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, S
   attributes: SchleiferAttributes;
   contents: SchleiferContents;
 
-  constructor(opts?: { attributes?: Partial<SchleiferAttributes>; content?: SchleiferContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Schleifer.schema);
-    this.contents = opts?.content ?? xml.zero(Schleifer.schema.contents);
+  constructor(opts?: { attributes?: Partial<SchleiferAttributes>; contents?: SchleiferContents }) {
+    this.attributes = operations.merge(opts?.attributes, Schleifer.schema);
+    this.contents = opts?.contents ?? operations.zero(Schleifer.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -11524,9 +11527,9 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
   attributes: TremoloAttributes;
   contents: TremoloContents;
 
-  constructor(opts?: { attributes?: Partial<TremoloAttributes>; content?: TremoloContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Tremolo.schema);
-    this.contents = opts?.content ?? xml.zero(Tremolo.schema.contents);
+  constructor(opts?: { attributes?: Partial<TremoloAttributes>; contents?: TremoloContents }) {
+    this.attributes = operations.merge(opts?.attributes, Tremolo.schema);
+    this.contents = opts?.contents ?? operations.zero(Tremolo.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -11687,9 +11690,9 @@ export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents
   attributes: HaydnAttributes;
   contents: HaydnContents;
 
-  constructor(opts?: { attributes?: Partial<HaydnAttributes>; content?: HaydnContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Haydn.schema);
-    this.contents = opts?.content ?? xml.zero(Haydn.schema.contents);
+  constructor(opts?: { attributes?: Partial<HaydnAttributes>; contents?: HaydnContents }) {
+    this.attributes = operations.merge(opts?.attributes, Haydn.schema);
+    this.contents = opts?.contents ?? operations.zero(Haydn.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -11862,9 +11865,9 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
   attributes: OtherOrnamentAttributes;
   contents: OtherOrnamentContents;
 
-  constructor(opts?: { attributes?: Partial<OtherOrnamentAttributes>; content?: OtherOrnamentContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherOrnament.schema);
-    this.contents = opts?.content ?? xml.zero(OtherOrnament.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherOrnamentAttributes>; contents?: OtherOrnamentContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherOrnament.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherOrnament.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -12111,9 +12114,9 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
   attributes: AccidentalMarkAttributes;
   contents: AccidentalMarkContents;
 
-  constructor(opts?: { attributes?: Partial<AccidentalMarkAttributes>; content?: AccidentalMarkContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, AccidentalMark.schema);
-    this.contents = opts?.content ?? xml.zero(AccidentalMark.schema.contents);
+  constructor(opts?: { attributes?: Partial<AccidentalMarkAttributes>; contents?: AccidentalMarkContents }) {
+    this.attributes = operations.merge(opts?.attributes, AccidentalMark.schema);
+    this.contents = opts?.contents ?? operations.zero(AccidentalMark.schema.contents);
   }
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
@@ -12363,9 +12366,9 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
   attributes: OrnamentsAttributes;
   contents: OrnamentsContents;
 
-  constructor(opts?: { attributes?: Partial<OrnamentsAttributes>; content?: OrnamentsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Ornaments.schema);
-    this.contents = opts?.content ?? xml.zero(Ornaments.schema.contents);
+  constructor(opts?: { attributes?: Partial<OrnamentsAttributes>; contents?: OrnamentsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Ornaments.schema);
+    this.contents = opts?.contents ?? operations.zero(Ornaments.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -12484,9 +12487,9 @@ export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContent
   attributes: UpBowAttributes;
   contents: UpBowContents;
 
-  constructor(opts?: { attributes?: Partial<UpBowAttributes>; content?: UpBowContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, UpBow.schema);
-    this.contents = opts?.content ?? xml.zero(UpBow.schema.contents);
+  constructor(opts?: { attributes?: Partial<UpBowAttributes>; contents?: UpBowContents }) {
+    this.attributes = operations.merge(opts?.attributes, UpBow.schema);
+    this.contents = opts?.contents ?? operations.zero(UpBow.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -12615,9 +12618,9 @@ export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBo
   attributes: DownBowAttributes;
   contents: DownBowContents;
 
-  constructor(opts?: { attributes?: Partial<DownBowAttributes>; content?: DownBowContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DownBow.schema);
-    this.contents = opts?.content ?? xml.zero(DownBow.schema.contents);
+  constructor(opts?: { attributes?: Partial<DownBowAttributes>; contents?: DownBowContents }) {
+    this.attributes = operations.merge(opts?.attributes, DownBow.schema);
+    this.contents = opts?.contents ?? operations.zero(DownBow.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -12695,9 +12698,9 @@ export class Natural implements XMLElement<'natural', NaturalAttributes, Natural
   attributes: NaturalAttributes;
   contents: NaturalContents;
 
-  constructor(opts?: { attributes?: Partial<NaturalAttributes>; content?: NaturalContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Natural.schema);
-    this.contents = opts?.content ?? xml.zero(Natural.schema.contents);
+  constructor(opts?: { attributes?: Partial<NaturalAttributes>; contents?: NaturalContents }) {
+    this.attributes = operations.merge(opts?.attributes, Natural.schema);
+    this.contents = opts?.contents ?? operations.zero(Natural.schema.contents);
   }
 }
 
@@ -12713,9 +12716,9 @@ export class Artificial implements XMLElement<'artificial', ArtificialAttributes
   attributes: ArtificialAttributes;
   contents: ArtificialContents;
 
-  constructor(opts?: { attributes?: Partial<ArtificialAttributes>; content?: ArtificialContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Artificial.schema);
-    this.contents = opts?.content ?? xml.zero(Artificial.schema.contents);
+  constructor(opts?: { attributes?: Partial<ArtificialAttributes>; contents?: ArtificialContents }) {
+    this.attributes = operations.merge(opts?.attributes, Artificial.schema);
+    this.contents = opts?.contents ?? operations.zero(Artificial.schema.contents);
   }
 }
 
@@ -12731,9 +12734,9 @@ export class BasePitch implements XMLElement<'base-pitch', BasePitchAttributes, 
   attributes: BasePitchAttributes;
   contents: BasePitchContents;
 
-  constructor(opts?: { attributes?: Partial<BasePitchAttributes>; content?: BasePitchContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BasePitch.schema);
-    this.contents = opts?.content ?? xml.zero(BasePitch.schema.contents);
+  constructor(opts?: { attributes?: Partial<BasePitchAttributes>; contents?: BasePitchContents }) {
+    this.attributes = operations.merge(opts?.attributes, BasePitch.schema);
+    this.contents = opts?.contents ?? operations.zero(BasePitch.schema.contents);
   }
 }
 
@@ -12749,9 +12752,9 @@ export class TouchingPitch implements XMLElement<'touching-pitch', TouchingPitch
   attributes: TouchingPitchAttributes;
   contents: TouchingPitchContents;
 
-  constructor(opts?: { attributes?: Partial<TouchingPitchAttributes>; content?: TouchingPitchContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TouchingPitch.schema);
-    this.contents = opts?.content ?? xml.zero(TouchingPitch.schema.contents);
+  constructor(opts?: { attributes?: Partial<TouchingPitchAttributes>; contents?: TouchingPitchContents }) {
+    this.attributes = operations.merge(opts?.attributes, TouchingPitch.schema);
+    this.contents = opts?.contents ?? operations.zero(TouchingPitch.schema.contents);
   }
 }
 
@@ -12767,9 +12770,9 @@ export class SoundingPitch implements XMLElement<'sounding-pitch', SoundingPitch
   attributes: SoundingPitchAttributes;
   contents: SoundingPitchContents;
 
-  constructor(opts?: { attributes?: Partial<SoundingPitchAttributes>; content?: SoundingPitchContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SoundingPitch.schema);
-    this.contents = opts?.content ?? xml.zero(SoundingPitch.schema.contents);
+  constructor(opts?: { attributes?: Partial<SoundingPitchAttributes>; contents?: SoundingPitchContents }) {
+    this.attributes = operations.merge(opts?.attributes, SoundingPitch.schema);
+    this.contents = opts?.contents ?? operations.zero(SoundingPitch.schema.contents);
   }
 }
 
@@ -12849,9 +12852,9 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
   attributes: HarmonicAttributes;
   contents: HarmonicContents;
 
-  constructor(opts?: { attributes?: Partial<HarmonicAttributes>; content?: HarmonicContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Harmonic.schema);
-    this.contents = opts?.content ?? xml.zero(Harmonic.schema.contents);
+  constructor(opts?: { attributes?: Partial<HarmonicAttributes>; contents?: HarmonicContents }) {
+    this.attributes = operations.merge(opts?.attributes, Harmonic.schema);
+    this.contents = opts?.contents ?? operations.zero(Harmonic.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -12998,9 +13001,9 @@ export class OpenString implements XMLElement<'open-string', OpenStringAttribute
   attributes: OpenStringAttributes;
   contents: OpenStringContents;
 
-  constructor(opts?: { attributes?: Partial<OpenStringAttributes>; content?: OpenStringContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OpenString.schema);
-    this.contents = opts?.content ?? xml.zero(OpenString.schema.contents);
+  constructor(opts?: { attributes?: Partial<OpenStringAttributes>; contents?: OpenStringContents }) {
+    this.attributes = operations.merge(opts?.attributes, OpenString.schema);
+    this.contents = opts?.contents ?? operations.zero(OpenString.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13129,9 +13132,9 @@ export class ThumbPosition implements XMLElement<'thumb-position', ThumbPosition
   attributes: ThumbPositionAttributes;
   contents: ThumbPositionContents;
 
-  constructor(opts?: { attributes?: Partial<ThumbPositionAttributes>; content?: ThumbPositionContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ThumbPosition.schema);
-    this.contents = opts?.content ?? xml.zero(ThumbPosition.schema.contents);
+  constructor(opts?: { attributes?: Partial<ThumbPositionAttributes>; contents?: ThumbPositionContents }) {
+    this.attributes = operations.merge(opts?.attributes, ThumbPosition.schema);
+    this.contents = opts?.contents ?? operations.zero(ThumbPosition.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13264,9 +13267,9 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
   attributes: FingeringAttributes;
   contents: FingeringContents;
 
-  constructor(opts?: { attributes?: Partial<FingeringAttributes>; content?: FingeringContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Fingering.schema);
-    this.contents = opts?.content ?? xml.zero(Fingering.schema.contents);
+  constructor(opts?: { attributes?: Partial<FingeringAttributes>; contents?: FingeringContents }) {
+    this.attributes = operations.merge(opts?.attributes, Fingering.schema);
+    this.contents = opts?.contents ?? operations.zero(Fingering.schema.contents);
   }
   getAlternate(): 'yes' | 'no' | null {
     return this.attributes['alternate'];
@@ -13407,9 +13410,9 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
   attributes: PluckAttributes;
   contents: PluckContents;
 
-  constructor(opts?: { attributes?: Partial<PluckAttributes>; content?: PluckContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Pluck.schema);
-    this.contents = opts?.content ?? xml.zero(Pluck.schema.contents);
+  constructor(opts?: { attributes?: Partial<PluckAttributes>; contents?: PluckContents }) {
+    this.attributes = operations.merge(opts?.attributes, Pluck.schema);
+    this.contents = opts?.contents ?? operations.zero(Pluck.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13544,9 +13547,9 @@ export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAtt
   attributes: DoubleTongueAttributes;
   contents: DoubleTongueContents;
 
-  constructor(opts?: { attributes?: Partial<DoubleTongueAttributes>; content?: DoubleTongueContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DoubleTongue.schema);
-    this.contents = opts?.content ?? xml.zero(DoubleTongue.schema.contents);
+  constructor(opts?: { attributes?: Partial<DoubleTongueAttributes>; contents?: DoubleTongueContents }) {
+    this.attributes = operations.merge(opts?.attributes, DoubleTongue.schema);
+    this.contents = opts?.contents ?? operations.zero(DoubleTongue.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13675,9 +13678,9 @@ export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAtt
   attributes: TripleTongueAttributes;
   contents: TripleTongueContents;
 
-  constructor(opts?: { attributes?: Partial<TripleTongueAttributes>; content?: TripleTongueContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TripleTongue.schema);
-    this.contents = opts?.content ?? xml.zero(TripleTongue.schema.contents);
+  constructor(opts?: { attributes?: Partial<TripleTongueAttributes>; contents?: TripleTongueContents }) {
+    this.attributes = operations.merge(opts?.attributes, TripleTongue.schema);
+    this.contents = opts?.contents ?? operations.zero(TripleTongue.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13806,9 +13809,9 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
   attributes: StoppedAttributes;
   contents: StoppedContents;
 
-  constructor(opts?: { attributes?: Partial<StoppedAttributes>; content?: StoppedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Stopped.schema);
-    this.contents = opts?.content ?? xml.zero(Stopped.schema.contents);
+  constructor(opts?: { attributes?: Partial<StoppedAttributes>; contents?: StoppedContents }) {
+    this.attributes = operations.merge(opts?.attributes, Stopped.schema);
+    this.contents = opts?.contents ?? operations.zero(Stopped.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -13937,9 +13940,9 @@ export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicato
   attributes: SnapPizzicatoAttributes;
   contents: SnapPizzicatoContents;
 
-  constructor(opts?: { attributes?: Partial<SnapPizzicatoAttributes>; content?: SnapPizzicatoContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SnapPizzicato.schema);
-    this.contents = opts?.content ?? xml.zero(SnapPizzicato.schema.contents);
+  constructor(opts?: { attributes?: Partial<SnapPizzicatoAttributes>; contents?: SnapPizzicatoContents }) {
+    this.attributes = operations.merge(opts?.attributes, SnapPizzicato.schema);
+    this.contents = opts?.contents ?? operations.zero(SnapPizzicato.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -14042,9 +14045,9 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
   attributes: FretAttributes;
   contents: FretContents;
 
-  constructor(opts?: { attributes?: Partial<FretAttributes>; content?: FretContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Fret.schema);
-    this.contents = opts?.content ?? xml.zero(Fret.schema.contents);
+  constructor(opts?: { attributes?: Partial<FretAttributes>; contents?: FretContents }) {
+    this.attributes = operations.merge(opts?.attributes, Fret.schema);
+    this.contents = opts?.contents ?? operations.zero(Fret.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -14149,9 +14152,9 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
   attributes: StringAttributes;
   contents: StringContents;
 
-  constructor(opts?: { attributes?: Partial<StringAttributes>; content?: StringContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, String.schema);
-    this.contents = opts?.content ?? xml.zero(String.schema.contents);
+  constructor(opts?: { attributes?: Partial<StringAttributes>; contents?: StringContents }) {
+    this.attributes = operations.merge(opts?.attributes, String.schema);
+    this.contents = opts?.contents ?? operations.zero(String.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -14282,9 +14285,9 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
   attributes: HammerOnAttributes;
   contents: HammerOnContents;
 
-  constructor(opts?: { attributes?: Partial<HammerOnAttributes>; content?: HammerOnContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, HammerOn.schema);
-    this.contents = opts?.content ?? xml.zero(HammerOn.schema.contents);
+  constructor(opts?: { attributes?: Partial<HammerOnAttributes>; contents?: HammerOnContents }) {
+    this.attributes = operations.merge(opts?.attributes, HammerOn.schema);
+    this.contents = opts?.contents ?? operations.zero(HammerOn.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -14427,9 +14430,9 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
   attributes: PullOffAttributes;
   contents: PullOffContents;
 
-  constructor(opts?: { attributes?: Partial<PullOffAttributes>; content?: PullOffContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PullOff.schema);
-    this.contents = opts?.content ?? xml.zero(PullOff.schema.contents);
+  constructor(opts?: { attributes?: Partial<PullOffAttributes>; contents?: PullOffContents }) {
+    this.attributes = operations.merge(opts?.attributes, PullOff.schema);
+    this.contents = opts?.contents ?? operations.zero(PullOff.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -14522,9 +14525,9 @@ export class BendAlter implements XMLElement<'bend-alter', BendAlterAttributes, 
   attributes: BendAlterAttributes;
   contents: BendAlterContents;
 
-  constructor(opts?: { attributes?: Partial<BendAlterAttributes>; content?: BendAlterContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BendAlter.schema);
-    this.contents = opts?.content ?? xml.zero(BendAlter.schema.contents);
+  constructor(opts?: { attributes?: Partial<BendAlterAttributes>; contents?: BendAlterContents }) {
+    this.attributes = operations.merge(opts?.attributes, BendAlter.schema);
+    this.contents = opts?.contents ?? operations.zero(BendAlter.schema.contents);
   }
 
   getSemitones(): number {
@@ -14547,9 +14550,9 @@ export class PreBend implements XMLElement<'pre-bend', PreBendAttributes, PreBen
   attributes: PreBendAttributes;
   contents: PreBendContents;
 
-  constructor(opts?: { attributes?: Partial<PreBendAttributes>; content?: PreBendContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PreBend.schema);
-    this.contents = opts?.content ?? xml.zero(PreBend.schema.contents);
+  constructor(opts?: { attributes?: Partial<PreBendAttributes>; contents?: PreBendContents }) {
+    this.attributes = operations.merge(opts?.attributes, PreBend.schema);
+    this.contents = opts?.contents ?? operations.zero(PreBend.schema.contents);
   }
 }
 
@@ -14569,9 +14572,9 @@ export class Release implements XMLElement<'release', ReleaseAttributes, Release
   attributes: ReleaseAttributes;
   contents: ReleaseContents;
 
-  constructor(opts?: { attributes?: Partial<ReleaseAttributes>; content?: ReleaseContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Release.schema);
-    this.contents = opts?.content ?? xml.zero(Release.schema.contents);
+  constructor(opts?: { attributes?: Partial<ReleaseAttributes>; contents?: ReleaseContents }) {
+    this.attributes = operations.merge(opts?.attributes, Release.schema);
+    this.contents = opts?.contents ?? operations.zero(Release.schema.contents);
   }
   getOffset(): number | null {
     return this.attributes['offset'];
@@ -14646,9 +14649,9 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
   attributes: WithBarAttributes;
   contents: WithBarContents;
 
-  constructor(opts?: { attributes?: Partial<WithBarAttributes>; content?: WithBarContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, WithBar.schema);
-    this.contents = opts?.content ?? xml.zero(WithBar.schema.contents);
+  constructor(opts?: { attributes?: Partial<WithBarAttributes>; contents?: WithBarContents }) {
+    this.attributes = operations.merge(opts?.attributes, WithBar.schema);
+    this.contents = opts?.contents ?? operations.zero(WithBar.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -14805,9 +14808,9 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
   attributes: BendAttributes;
   contents: BendContents;
 
-  constructor(opts?: { attributes?: Partial<BendAttributes>; content?: BendContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Bend.schema);
-    this.contents = opts?.content ?? xml.zero(Bend.schema.contents);
+  constructor(opts?: { attributes?: Partial<BendAttributes>; contents?: BendContents }) {
+    this.attributes = operations.merge(opts?.attributes, Bend.schema);
+    this.contents = opts?.contents ?? operations.zero(Bend.schema.contents);
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
@@ -14980,9 +14983,9 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
   attributes: TapAttributes;
   contents: TapContents;
 
-  constructor(opts?: { attributes?: Partial<TapAttributes>; content?: TapContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Tap.schema);
-    this.contents = opts?.content ?? xml.zero(Tap.schema.contents);
+  constructor(opts?: { attributes?: Partial<TapAttributes>; contents?: TapContents }) {
+    this.attributes = operations.merge(opts?.attributes, Tap.schema);
+    this.contents = opts?.contents ?? operations.zero(Tap.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -15125,9 +15128,9 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
   attributes: HeelAttributes;
   contents: HeelContents;
 
-  constructor(opts?: { attributes?: Partial<HeelAttributes>; content?: HeelContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Heel.schema);
-    this.contents = opts?.content ?? xml.zero(Heel.schema.contents);
+  constructor(opts?: { attributes?: Partial<HeelAttributes>; contents?: HeelContents }) {
+    this.attributes = operations.merge(opts?.attributes, Heel.schema);
+    this.contents = opts?.contents ?? operations.zero(Heel.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -15264,9 +15267,9 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
   attributes: ToeAttributes;
   contents: ToeContents;
 
-  constructor(opts?: { attributes?: Partial<ToeAttributes>; content?: ToeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Toe.schema);
-    this.contents = opts?.content ?? xml.zero(Toe.schema.contents);
+  constructor(opts?: { attributes?: Partial<ToeAttributes>; contents?: ToeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Toe.schema);
+    this.contents = opts?.contents ?? operations.zero(Toe.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -15401,9 +15404,9 @@ export class Fingernails implements XMLElement<'fingernails', FingernailsAttribu
   attributes: FingernailsAttributes;
   contents: FingernailsContents;
 
-  constructor(opts?: { attributes?: Partial<FingernailsAttributes>; content?: FingernailsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Fingernails.schema);
-    this.contents = opts?.content ?? xml.zero(Fingernails.schema.contents);
+  constructor(opts?: { attributes?: Partial<FingernailsAttributes>; contents?: FingernailsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Fingernails.schema);
+    this.contents = opts?.contents ?? operations.zero(Fingernails.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -15485,9 +15488,9 @@ export class HoleType implements XMLElement<'hole-type', HoleTypeAttributes, Hol
   attributes: HoleTypeAttributes;
   contents: HoleTypeContents;
 
-  constructor(opts?: { attributes?: Partial<HoleTypeAttributes>; content?: HoleTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, HoleType.schema);
-    this.contents = opts?.content ?? xml.zero(HoleType.schema.contents);
+  constructor(opts?: { attributes?: Partial<HoleTypeAttributes>; contents?: HoleTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, HoleType.schema);
+    this.contents = opts?.contents ?? operations.zero(HoleType.schema.contents);
   }
 
   getText(): string {
@@ -15525,9 +15528,9 @@ export class HoleClosed implements XMLElement<'hole-closed', HoleClosedAttribute
   attributes: HoleClosedAttributes;
   contents: HoleClosedContents;
 
-  constructor(opts?: { attributes?: Partial<HoleClosedAttributes>; content?: HoleClosedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, HoleClosed.schema);
-    this.contents = opts?.content ?? xml.zero(HoleClosed.schema.contents);
+  constructor(opts?: { attributes?: Partial<HoleClosedAttributes>; contents?: HoleClosedContents }) {
+    this.attributes = operations.merge(opts?.attributes, HoleClosed.schema);
+    this.contents = opts?.contents ?? operations.zero(HoleClosed.schema.contents);
   }
   getLocation(): 'bottom' | 'left' | 'right' | 'top' | null {
     return this.attributes['location'];
@@ -15559,9 +15562,9 @@ export class HoleShape implements XMLElement<'hole-shape', HoleShapeAttributes, 
   attributes: HoleShapeAttributes;
   contents: HoleShapeContents;
 
-  constructor(opts?: { attributes?: Partial<HoleShapeAttributes>; content?: HoleShapeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, HoleShape.schema);
-    this.contents = opts?.content ?? xml.zero(HoleShape.schema.contents);
+  constructor(opts?: { attributes?: Partial<HoleShapeAttributes>; contents?: HoleShapeContents }) {
+    this.attributes = operations.merge(opts?.attributes, HoleShape.schema);
+    this.contents = opts?.contents ?? operations.zero(HoleShape.schema.contents);
   }
 
   getText(): string {
@@ -15639,9 +15642,9 @@ export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
   attributes: HoleAttributes;
   contents: HoleContents;
 
-  constructor(opts?: { attributes?: Partial<HoleAttributes>; content?: HoleContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Hole.schema);
-    this.contents = opts?.content ?? xml.zero(Hole.schema.contents);
+  constructor(opts?: { attributes?: Partial<HoleAttributes>; contents?: HoleContents }) {
+    this.attributes = operations.merge(opts?.attributes, Hole.schema);
+    this.contents = opts?.contents ?? operations.zero(Hole.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -15781,9 +15784,9 @@ export class ArrowDirection implements XMLElement<'arrow-direction', ArrowDirect
   attributes: ArrowDirectionAttributes;
   contents: ArrowDirectionContents;
 
-  constructor(opts?: { attributes?: Partial<ArrowDirectionAttributes>; content?: ArrowDirectionContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ArrowDirection.schema);
-    this.contents = opts?.content ?? xml.zero(ArrowDirection.schema.contents);
+  constructor(opts?: { attributes?: Partial<ArrowDirectionAttributes>; contents?: ArrowDirectionContents }) {
+    this.attributes = operations.merge(opts?.attributes, ArrowDirection.schema);
+    this.contents = opts?.contents ?? operations.zero(ArrowDirection.schema.contents);
   }
 
   getArrowDirections():
@@ -15847,9 +15850,9 @@ export class ArrowStyle implements XMLElement<'arrow-style', ArrowStyleAttribute
   attributes: ArrowStyleAttributes;
   contents: ArrowStyleContents;
 
-  constructor(opts?: { attributes?: Partial<ArrowStyleAttributes>; content?: ArrowStyleContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ArrowStyle.schema);
-    this.contents = opts?.content ?? xml.zero(ArrowStyle.schema.contents);
+  constructor(opts?: { attributes?: Partial<ArrowStyleAttributes>; contents?: ArrowStyleContents }) {
+    this.attributes = operations.merge(opts?.attributes, ArrowStyle.schema);
+    this.contents = opts?.contents ?? operations.zero(ArrowStyle.schema.contents);
   }
 
   getArrowStyle(): 'combined' | 'double' | 'filled' | 'hollow' | 'other' | 'paired' | 'single' {
@@ -15872,9 +15875,9 @@ export class Arrowhead implements XMLElement<'arrowhead', ArrowheadAttributes, A
   attributes: ArrowheadAttributes;
   contents: ArrowheadContents;
 
-  constructor(opts?: { attributes?: Partial<ArrowheadAttributes>; content?: ArrowheadContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Arrowhead.schema);
-    this.contents = opts?.content ?? xml.zero(Arrowhead.schema.contents);
+  constructor(opts?: { attributes?: Partial<ArrowheadAttributes>; contents?: ArrowheadContents }) {
+    this.attributes = operations.merge(opts?.attributes, Arrowhead.schema);
+    this.contents = opts?.contents ?? operations.zero(Arrowhead.schema.contents);
   }
 }
 
@@ -15903,9 +15906,9 @@ export class CircularArrow implements XMLElement<'circular-arrow', CircularArrow
   attributes: CircularArrowAttributes;
   contents: CircularArrowContents;
 
-  constructor(opts?: { attributes?: Partial<CircularArrowAttributes>; content?: CircularArrowContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, CircularArrow.schema);
-    this.contents = opts?.content ?? xml.zero(CircularArrow.schema.contents);
+  constructor(opts?: { attributes?: Partial<CircularArrowAttributes>; contents?: CircularArrowContents }) {
+    this.attributes = operations.merge(opts?.attributes, CircularArrow.schema);
+    this.contents = opts?.contents ?? operations.zero(CircularArrow.schema.contents);
   }
 
   getCircularArrow(): 'anticlockwise' | 'clockwise' {
@@ -15986,9 +15989,9 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
   attributes: ArrowAttributes;
   contents: ArrowContents;
 
-  constructor(opts?: { attributes?: Partial<ArrowAttributes>; content?: ArrowContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Arrow.schema);
-    this.contents = opts?.content ?? xml.zero(Arrow.schema.contents);
+  constructor(opts?: { attributes?: Partial<ArrowAttributes>; contents?: ArrowContents }) {
+    this.attributes = operations.merge(opts?.attributes, Arrow.schema);
+    this.contents = opts?.contents ?? operations.zero(Arrow.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16185,9 +16188,9 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
   attributes: HandbellAttributes;
   contents: HandbellContents;
 
-  constructor(opts?: { attributes?: Partial<HandbellAttributes>; content?: HandbellContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Handbell.schema);
-    this.contents = opts?.content ?? xml.zero(Handbell.schema.contents);
+  constructor(opts?: { attributes?: Partial<HandbellAttributes>; contents?: HandbellContents }) {
+    this.attributes = operations.merge(opts?.attributes, Handbell.schema);
+    this.contents = opts?.contents ?? operations.zero(Handbell.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16348,9 +16351,9 @@ export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, 
   attributes: BrassBendAttributes;
   contents: BrassBendContents;
 
-  constructor(opts?: { attributes?: Partial<BrassBendAttributes>; content?: BrassBendContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BrassBend.schema);
-    this.contents = opts?.content ?? xml.zero(BrassBend.schema.contents);
+  constructor(opts?: { attributes?: Partial<BrassBendAttributes>; contents?: BrassBendContents }) {
+    this.attributes = operations.merge(opts?.attributes, BrassBend.schema);
+    this.contents = opts?.contents ?? operations.zero(BrassBend.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16479,9 +16482,9 @@ export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
   attributes: FlipAttributes;
   contents: FlipContents;
 
-  constructor(opts?: { attributes?: Partial<FlipAttributes>; content?: FlipContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Flip.schema);
-    this.contents = opts?.content ?? xml.zero(Flip.schema.contents);
+  constructor(opts?: { attributes?: Partial<FlipAttributes>; contents?: FlipContents }) {
+    this.attributes = operations.merge(opts?.attributes, Flip.schema);
+    this.contents = opts?.contents ?? operations.zero(Flip.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16610,9 +16613,9 @@ export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents
   attributes: SmearAttributes;
   contents: SmearContents;
 
-  constructor(opts?: { attributes?: Partial<SmearAttributes>; content?: SmearContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Smear.schema);
-    this.contents = opts?.content ?? xml.zero(Smear.schema.contents);
+  constructor(opts?: { attributes?: Partial<SmearAttributes>; contents?: SmearContents }) {
+    this.attributes = operations.merge(opts?.attributes, Smear.schema);
+    this.contents = opts?.contents ?? operations.zero(Smear.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16743,9 +16746,9 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
   attributes: OpenAttributes;
   contents: OpenContents;
 
-  constructor(opts?: { attributes?: Partial<OpenAttributes>; content?: OpenContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Open.schema);
-    this.contents = opts?.content ?? xml.zero(Open.schema.contents);
+  constructor(opts?: { attributes?: Partial<OpenAttributes>; contents?: OpenContents }) {
+    this.attributes = operations.merge(opts?.attributes, Open.schema);
+    this.contents = opts?.contents ?? operations.zero(Open.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16882,9 +16885,9 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
   attributes: HalfMutedAttributes;
   contents: HalfMutedContents;
 
-  constructor(opts?: { attributes?: Partial<HalfMutedAttributes>; content?: HalfMutedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, HalfMuted.schema);
-    this.contents = opts?.content ?? xml.zero(HalfMuted.schema.contents);
+  constructor(opts?: { attributes?: Partial<HalfMutedAttributes>; contents?: HalfMutedContents }) {
+    this.attributes = operations.merge(opts?.attributes, HalfMuted.schema);
+    this.contents = opts?.contents ?? operations.zero(HalfMuted.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -16983,9 +16986,9 @@ export class HarmonClosed implements XMLElement<'harmon-closed', HarmonClosedAtt
   attributes: HarmonClosedAttributes;
   contents: HarmonClosedContents;
 
-  constructor(opts?: { attributes?: Partial<HarmonClosedAttributes>; content?: HarmonClosedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, HarmonClosed.schema);
-    this.contents = opts?.content ?? xml.zero(HarmonClosed.schema.contents);
+  constructor(opts?: { attributes?: Partial<HarmonClosedAttributes>; contents?: HarmonClosedContents }) {
+    this.attributes = operations.merge(opts?.attributes, HarmonClosed.schema);
+    this.contents = opts?.contents ?? operations.zero(HarmonClosed.schema.contents);
   }
   getLocation(): 'bottom' | 'left' | 'right' | 'top' | null {
     return this.attributes['location'];
@@ -17066,9 +17069,9 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
   attributes: HarmonMuteAttributes;
   contents: HarmonMuteContents;
 
-  constructor(opts?: { attributes?: Partial<HarmonMuteAttributes>; content?: HarmonMuteContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, HarmonMute.schema);
-    this.contents = opts?.content ?? xml.zero(HarmonMute.schema.contents);
+  constructor(opts?: { attributes?: Partial<HarmonMuteAttributes>; contents?: HarmonMuteContents }) {
+    this.attributes = operations.merge(opts?.attributes, HarmonMute.schema);
+    this.contents = opts?.contents ?? operations.zero(HarmonMute.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17209,9 +17212,9 @@ export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents
   attributes: GolpeAttributes;
   contents: GolpeContents;
 
-  constructor(opts?: { attributes?: Partial<GolpeAttributes>; content?: GolpeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Golpe.schema);
-    this.contents = opts?.content ?? xml.zero(Golpe.schema.contents);
+  constructor(opts?: { attributes?: Partial<GolpeAttributes>; contents?: GolpeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Golpe.schema);
+    this.contents = opts?.contents ?? operations.zero(Golpe.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17342,9 +17345,9 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
   attributes: OtherTechnicalAttributes;
   contents: OtherTechnicalContents;
 
-  constructor(opts?: { attributes?: Partial<OtherTechnicalAttributes>; content?: OtherTechnicalContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherTechnical.schema);
-    this.contents = opts?.content ?? xml.zero(OtherTechnical.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherTechnicalAttributes>; contents?: OtherTechnicalContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherTechnical.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherTechnical.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17516,9 +17519,9 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
   attributes: TechnicalAttributes;
   contents: TechnicalContents;
 
-  constructor(opts?: { attributes?: Partial<TechnicalAttributes>; content?: TechnicalContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Technical.schema);
-    this.contents = opts?.content ?? xml.zero(Technical.schema.contents);
+  constructor(opts?: { attributes?: Partial<TechnicalAttributes>; contents?: TechnicalContents }) {
+    this.attributes = operations.merge(opts?.attributes, Technical.schema);
+    this.contents = opts?.contents ?? operations.zero(Technical.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -17663,9 +17666,9 @@ export class Accent implements XMLElement<'accent', AccentAttributes, AccentCont
   attributes: AccentAttributes;
   contents: AccentContents;
 
-  constructor(opts?: { attributes?: Partial<AccentAttributes>; content?: AccentContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Accent.schema);
-    this.contents = opts?.content ?? xml.zero(Accent.schema.contents);
+  constructor(opts?: { attributes?: Partial<AccentAttributes>; contents?: AccentContents }) {
+    this.attributes = operations.merge(opts?.attributes, Accent.schema);
+    this.contents = opts?.contents ?? operations.zero(Accent.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17796,9 +17799,9 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
   attributes: StrongAccentAttributes;
   contents: StrongAccentContents;
 
-  constructor(opts?: { attributes?: Partial<StrongAccentAttributes>; content?: StrongAccentContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StrongAccent.schema);
-    this.contents = opts?.content ?? xml.zero(StrongAccent.schema.contents);
+  constructor(opts?: { attributes?: Partial<StrongAccentAttributes>; contents?: StrongAccentContents }) {
+    this.attributes = operations.merge(opts?.attributes, StrongAccent.schema);
+    this.contents = opts?.contents ?? operations.zero(StrongAccent.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -17933,9 +17936,9 @@ export class Staccato implements XMLElement<'staccato', StaccatoAttributes, Stac
   attributes: StaccatoAttributes;
   contents: StaccatoContents;
 
-  constructor(opts?: { attributes?: Partial<StaccatoAttributes>; content?: StaccatoContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Staccato.schema);
-    this.contents = opts?.content ?? xml.zero(Staccato.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaccatoAttributes>; contents?: StaccatoContents }) {
+    this.attributes = operations.merge(opts?.attributes, Staccato.schema);
+    this.contents = opts?.contents ?? operations.zero(Staccato.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18064,9 +18067,9 @@ export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoCont
   attributes: TenutoAttributes;
   contents: TenutoContents;
 
-  constructor(opts?: { attributes?: Partial<TenutoAttributes>; content?: TenutoContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Tenuto.schema);
-    this.contents = opts?.content ?? xml.zero(Tenuto.schema.contents);
+  constructor(opts?: { attributes?: Partial<TenutoAttributes>; contents?: TenutoContents }) {
+    this.attributes = operations.merge(opts?.attributes, Tenuto.schema);
+    this.contents = opts?.contents ?? operations.zero(Tenuto.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18195,9 +18198,9 @@ export class DetachedLegato implements XMLElement<'detached-legato', DetachedLeg
   attributes: DetachedLegatoAttributes;
   contents: DetachedLegatoContents;
 
-  constructor(opts?: { attributes?: Partial<DetachedLegatoAttributes>; content?: DetachedLegatoContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DetachedLegato.schema);
-    this.contents = opts?.content ?? xml.zero(DetachedLegato.schema.contents);
+  constructor(opts?: { attributes?: Partial<DetachedLegatoAttributes>; contents?: DetachedLegatoContents }) {
+    this.attributes = operations.merge(opts?.attributes, DetachedLegato.schema);
+    this.contents = opts?.contents ?? operations.zero(DetachedLegato.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18326,9 +18329,9 @@ export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoA
   attributes: StaccatissimoAttributes;
   contents: StaccatissimoContents;
 
-  constructor(opts?: { attributes?: Partial<StaccatissimoAttributes>; content?: StaccatissimoContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Staccatissimo.schema);
-    this.contents = opts?.content ?? xml.zero(Staccatissimo.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaccatissimoAttributes>; contents?: StaccatissimoContents }) {
+    this.attributes = operations.merge(opts?.attributes, Staccatissimo.schema);
+    this.contents = opts?.contents ?? operations.zero(Staccatissimo.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18457,9 +18460,9 @@ export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, Spic
   attributes: SpiccatoAttributes;
   contents: SpiccatoContents;
 
-  constructor(opts?: { attributes?: Partial<SpiccatoAttributes>; content?: SpiccatoContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Spiccato.schema);
-    this.contents = opts?.content ?? xml.zero(Spiccato.schema.contents);
+  constructor(opts?: { attributes?: Partial<SpiccatoAttributes>; contents?: SpiccatoContents }) {
+    this.attributes = operations.merge(opts?.attributes, Spiccato.schema);
+    this.contents = opts?.contents ?? operations.zero(Spiccato.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18588,9 +18591,9 @@ export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents
   attributes: ScoopAttributes;
   contents: ScoopContents;
 
-  constructor(opts?: { attributes?: Partial<ScoopAttributes>; content?: ScoopContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Scoop.schema);
-    this.contents = opts?.content ?? xml.zero(Scoop.schema.contents);
+  constructor(opts?: { attributes?: Partial<ScoopAttributes>; contents?: ScoopContents }) {
+    this.attributes = operations.merge(opts?.attributes, Scoop.schema);
+    this.contents = opts?.contents ?? operations.zero(Scoop.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18729,9 +18732,9 @@ export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
   attributes: PlopAttributes;
   contents: PlopContents;
 
-  constructor(opts?: { attributes?: Partial<PlopAttributes>; content?: PlopContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Plop.schema);
-    this.contents = opts?.content ?? xml.zero(Plop.schema.contents);
+  constructor(opts?: { attributes?: Partial<PlopAttributes>; contents?: PlopContents }) {
+    this.attributes = operations.merge(opts?.attributes, Plop.schema);
+    this.contents = opts?.contents ?? operations.zero(Plop.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -18900,9 +18903,9 @@ export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
   attributes: DoitAttributes;
   contents: DoitContents;
 
-  constructor(opts?: { attributes?: Partial<DoitAttributes>; content?: DoitContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Doit.schema);
-    this.contents = opts?.content ?? xml.zero(Doit.schema.contents);
+  constructor(opts?: { attributes?: Partial<DoitAttributes>; contents?: DoitContents }) {
+    this.attributes = operations.merge(opts?.attributes, Doit.schema);
+    this.contents = opts?.contents ?? operations.zero(Doit.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19071,9 +19074,9 @@ export class Falloff implements XMLElement<'falloff', FalloffAttributes, Falloff
   attributes: FalloffAttributes;
   contents: FalloffContents;
 
-  constructor(opts?: { attributes?: Partial<FalloffAttributes>; content?: FalloffContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Falloff.schema);
-    this.contents = opts?.content ?? xml.zero(Falloff.schema.contents);
+  constructor(opts?: { attributes?: Partial<FalloffAttributes>; contents?: FalloffContents }) {
+    this.attributes = operations.merge(opts?.attributes, Falloff.schema);
+    this.contents = opts?.contents ?? operations.zero(Falloff.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19241,9 +19244,9 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
   attributes: BreathMarkAttributes;
   contents: BreathMarkContents;
 
-  constructor(opts?: { attributes?: Partial<BreathMarkAttributes>; content?: BreathMarkContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BreathMark.schema);
-    this.contents = opts?.content ?? xml.zero(BreathMark.schema.contents);
+  constructor(opts?: { attributes?: Partial<BreathMarkAttributes>; contents?: BreathMarkContents }) {
+    this.attributes = operations.merge(opts?.attributes, BreathMark.schema);
+    this.contents = opts?.contents ?? operations.zero(BreathMark.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19387,9 +19390,9 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
   attributes: CaesuraAttributes;
   contents: CaesuraContents;
 
-  constructor(opts?: { attributes?: Partial<CaesuraAttributes>; content?: CaesuraContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Caesura.schema);
-    this.contents = opts?.content ?? xml.zero(Caesura.schema.contents);
+  constructor(opts?: { attributes?: Partial<CaesuraAttributes>; contents?: CaesuraContents }) {
+    this.attributes = operations.merge(opts?.attributes, Caesura.schema);
+    this.contents = opts?.contents ?? operations.zero(Caesura.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19524,9 +19527,9 @@ export class Stress implements XMLElement<'stress', StressAttributes, StressCont
   attributes: StressAttributes;
   contents: StressContents;
 
-  constructor(opts?: { attributes?: Partial<StressAttributes>; content?: StressContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Stress.schema);
-    this.contents = opts?.content ?? xml.zero(Stress.schema.contents);
+  constructor(opts?: { attributes?: Partial<StressAttributes>; contents?: StressContents }) {
+    this.attributes = operations.merge(opts?.attributes, Stress.schema);
+    this.contents = opts?.contents ?? operations.zero(Stress.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19655,9 +19658,9 @@ export class Unstress implements XMLElement<'unstress', UnstressAttributes, Unst
   attributes: UnstressAttributes;
   contents: UnstressContents;
 
-  constructor(opts?: { attributes?: Partial<UnstressAttributes>; content?: UnstressContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Unstress.schema);
-    this.contents = opts?.content ?? xml.zero(Unstress.schema.contents);
+  constructor(opts?: { attributes?: Partial<UnstressAttributes>; contents?: UnstressContents }) {
+    this.attributes = operations.merge(opts?.attributes, Unstress.schema);
+    this.contents = opts?.contents ?? operations.zero(Unstress.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19786,9 +19789,9 @@ export class SoftAccess implements XMLElement<'soft-access', SoftAccessAttribute
   attributes: SoftAccessAttributes;
   contents: SoftAccessContents;
 
-  constructor(opts?: { attributes?: Partial<SoftAccessAttributes>; content?: SoftAccessContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SoftAccess.schema);
-    this.contents = opts?.content ?? xml.zero(SoftAccess.schema.contents);
+  constructor(opts?: { attributes?: Partial<SoftAccessAttributes>; contents?: SoftAccessContents }) {
+    this.attributes = operations.merge(opts?.attributes, SoftAccess.schema);
+    this.contents = opts?.contents ?? operations.zero(SoftAccess.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -19921,9 +19924,9 @@ export class OtherArticulation
   attributes: OtherArticulationAttributes;
   contents: OtherArticulationContents;
 
-  constructor(opts?: { attributes?: Partial<OtherArticulationAttributes>; content?: OtherArticulationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherArticulation.schema);
-    this.contents = opts?.content ?? xml.zero(OtherArticulation.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherArticulationAttributes>; contents?: OtherArticulationContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherArticulation.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherArticulation.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -20061,9 +20064,9 @@ export class Articulations implements XMLElement<'articulations', ArticulationsA
   attributes: ArticulationsAttributes;
   contents: ArticulationsContents;
 
-  constructor(opts?: { attributes?: Partial<ArticulationsAttributes>; content?: ArticulationsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Articulations.schema);
-    this.contents = opts?.content ?? xml.zero(Articulations.schema.contents);
+  constructor(opts?: { attributes?: Partial<ArticulationsAttributes>; contents?: ArticulationsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Articulations.schema);
+    this.contents = opts?.contents ?? operations.zero(Articulations.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -20129,9 +20132,9 @@ export class P implements XMLElement<'p', PAttributes, PContents> {
   attributes: PAttributes;
   contents: PContents;
 
-  constructor(opts?: { attributes?: Partial<PAttributes>; content?: PContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, P.schema);
-    this.contents = opts?.content ?? xml.zero(P.schema.contents);
+  constructor(opts?: { attributes?: Partial<PAttributes>; contents?: PContents }) {
+    this.attributes = operations.merge(opts?.attributes, P.schema);
+    this.contents = opts?.contents ?? operations.zero(P.schema.contents);
   }
 }
 
@@ -20147,9 +20150,9 @@ export class Pp implements XMLElement<'pp', PpAttributes, PpContents> {
   attributes: PpAttributes;
   contents: PpContents;
 
-  constructor(opts?: { attributes?: Partial<PpAttributes>; content?: PpContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Pp.schema);
-    this.contents = opts?.content ?? xml.zero(Pp.schema.contents);
+  constructor(opts?: { attributes?: Partial<PpAttributes>; contents?: PpContents }) {
+    this.attributes = operations.merge(opts?.attributes, Pp.schema);
+    this.contents = opts?.contents ?? operations.zero(Pp.schema.contents);
   }
 }
 
@@ -20165,9 +20168,9 @@ export class Ppp implements XMLElement<'ppp', PppAttributes, PppContents> {
   attributes: PppAttributes;
   contents: PppContents;
 
-  constructor(opts?: { attributes?: Partial<PppAttributes>; content?: PppContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Ppp.schema);
-    this.contents = opts?.content ?? xml.zero(Ppp.schema.contents);
+  constructor(opts?: { attributes?: Partial<PppAttributes>; contents?: PppContents }) {
+    this.attributes = operations.merge(opts?.attributes, Ppp.schema);
+    this.contents = opts?.contents ?? operations.zero(Ppp.schema.contents);
   }
 }
 
@@ -20183,9 +20186,9 @@ export class Pppp implements XMLElement<'pppp', PpppAttributes, PpppContents> {
   attributes: PpppAttributes;
   contents: PpppContents;
 
-  constructor(opts?: { attributes?: Partial<PpppAttributes>; content?: PpppContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Pppp.schema);
-    this.contents = opts?.content ?? xml.zero(Pppp.schema.contents);
+  constructor(opts?: { attributes?: Partial<PpppAttributes>; contents?: PpppContents }) {
+    this.attributes = operations.merge(opts?.attributes, Pppp.schema);
+    this.contents = opts?.contents ?? operations.zero(Pppp.schema.contents);
   }
 }
 
@@ -20201,9 +20204,9 @@ export class Ppppp implements XMLElement<'ppppp', PppppAttributes, PppppContents
   attributes: PppppAttributes;
   contents: PppppContents;
 
-  constructor(opts?: { attributes?: Partial<PppppAttributes>; content?: PppppContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Ppppp.schema);
-    this.contents = opts?.content ?? xml.zero(Ppppp.schema.contents);
+  constructor(opts?: { attributes?: Partial<PppppAttributes>; contents?: PppppContents }) {
+    this.attributes = operations.merge(opts?.attributes, Ppppp.schema);
+    this.contents = opts?.contents ?? operations.zero(Ppppp.schema.contents);
   }
 }
 
@@ -20219,9 +20222,9 @@ export class Pppppp implements XMLElement<'pppppp', PpppppAttributes, PpppppCont
   attributes: PpppppAttributes;
   contents: PpppppContents;
 
-  constructor(opts?: { attributes?: Partial<PpppppAttributes>; content?: PpppppContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Pppppp.schema);
-    this.contents = opts?.content ?? xml.zero(Pppppp.schema.contents);
+  constructor(opts?: { attributes?: Partial<PpppppAttributes>; contents?: PpppppContents }) {
+    this.attributes = operations.merge(opts?.attributes, Pppppp.schema);
+    this.contents = opts?.contents ?? operations.zero(Pppppp.schema.contents);
   }
 }
 
@@ -20237,9 +20240,9 @@ export class F implements XMLElement<'f', FAttributes, FContents> {
   attributes: FAttributes;
   contents: FContents;
 
-  constructor(opts?: { attributes?: Partial<FAttributes>; content?: FContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, F.schema);
-    this.contents = opts?.content ?? xml.zero(F.schema.contents);
+  constructor(opts?: { attributes?: Partial<FAttributes>; contents?: FContents }) {
+    this.attributes = operations.merge(opts?.attributes, F.schema);
+    this.contents = opts?.contents ?? operations.zero(F.schema.contents);
   }
 }
 
@@ -20255,9 +20258,9 @@ export class Ff implements XMLElement<'ff', FfAttributes, FfContents> {
   attributes: FfAttributes;
   contents: FfContents;
 
-  constructor(opts?: { attributes?: Partial<FfAttributes>; content?: FfContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Ff.schema);
-    this.contents = opts?.content ?? xml.zero(Ff.schema.contents);
+  constructor(opts?: { attributes?: Partial<FfAttributes>; contents?: FfContents }) {
+    this.attributes = operations.merge(opts?.attributes, Ff.schema);
+    this.contents = opts?.contents ?? operations.zero(Ff.schema.contents);
   }
 }
 
@@ -20273,9 +20276,9 @@ export class Fff implements XMLElement<'fff', FffAttributes, FffContents> {
   attributes: FffAttributes;
   contents: FffContents;
 
-  constructor(opts?: { attributes?: Partial<FffAttributes>; content?: FffContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Fff.schema);
-    this.contents = opts?.content ?? xml.zero(Fff.schema.contents);
+  constructor(opts?: { attributes?: Partial<FffAttributes>; contents?: FffContents }) {
+    this.attributes = operations.merge(opts?.attributes, Fff.schema);
+    this.contents = opts?.contents ?? operations.zero(Fff.schema.contents);
   }
 }
 
@@ -20291,9 +20294,9 @@ export class Ffff implements XMLElement<'ffff', FfffAttributes, FfffContents> {
   attributes: FfffAttributes;
   contents: FfffContents;
 
-  constructor(opts?: { attributes?: Partial<FfffAttributes>; content?: FfffContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Ffff.schema);
-    this.contents = opts?.content ?? xml.zero(Ffff.schema.contents);
+  constructor(opts?: { attributes?: Partial<FfffAttributes>; contents?: FfffContents }) {
+    this.attributes = operations.merge(opts?.attributes, Ffff.schema);
+    this.contents = opts?.contents ?? operations.zero(Ffff.schema.contents);
   }
 }
 
@@ -20309,9 +20312,9 @@ export class Fffff implements XMLElement<'fffff', FffffAttributes, FffffContents
   attributes: FffffAttributes;
   contents: FffffContents;
 
-  constructor(opts?: { attributes?: Partial<FffffAttributes>; content?: FffffContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Fffff.schema);
-    this.contents = opts?.content ?? xml.zero(Fffff.schema.contents);
+  constructor(opts?: { attributes?: Partial<FffffAttributes>; contents?: FffffContents }) {
+    this.attributes = operations.merge(opts?.attributes, Fffff.schema);
+    this.contents = opts?.contents ?? operations.zero(Fffff.schema.contents);
   }
 }
 
@@ -20327,9 +20330,9 @@ export class Ffffff implements XMLElement<'ffffff', FfffffAttributes, FfffffCont
   attributes: FfffffAttributes;
   contents: FfffffContents;
 
-  constructor(opts?: { attributes?: Partial<FfffffAttributes>; content?: FfffffContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Ffffff.schema);
-    this.contents = opts?.content ?? xml.zero(Ffffff.schema.contents);
+  constructor(opts?: { attributes?: Partial<FfffffAttributes>; contents?: FfffffContents }) {
+    this.attributes = operations.merge(opts?.attributes, Ffffff.schema);
+    this.contents = opts?.contents ?? operations.zero(Ffffff.schema.contents);
   }
 }
 
@@ -20345,9 +20348,9 @@ export class Mp implements XMLElement<'mp', MpAttributes, MpContents> {
   attributes: MpAttributes;
   contents: MpContents;
 
-  constructor(opts?: { attributes?: Partial<MpAttributes>; content?: MpContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Mp.schema);
-    this.contents = opts?.content ?? xml.zero(Mp.schema.contents);
+  constructor(opts?: { attributes?: Partial<MpAttributes>; contents?: MpContents }) {
+    this.attributes = operations.merge(opts?.attributes, Mp.schema);
+    this.contents = opts?.contents ?? operations.zero(Mp.schema.contents);
   }
 }
 
@@ -20363,9 +20366,9 @@ export class Mf implements XMLElement<'mf', MfAttributes, MfContents> {
   attributes: MfAttributes;
   contents: MfContents;
 
-  constructor(opts?: { attributes?: Partial<MfAttributes>; content?: MfContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Mf.schema);
-    this.contents = opts?.content ?? xml.zero(Mf.schema.contents);
+  constructor(opts?: { attributes?: Partial<MfAttributes>; contents?: MfContents }) {
+    this.attributes = operations.merge(opts?.attributes, Mf.schema);
+    this.contents = opts?.contents ?? operations.zero(Mf.schema.contents);
   }
 }
 
@@ -20381,9 +20384,9 @@ export class Sf implements XMLElement<'sf', SfAttributes, SfContents> {
   attributes: SfAttributes;
   contents: SfContents;
 
-  constructor(opts?: { attributes?: Partial<SfAttributes>; content?: SfContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Sf.schema);
-    this.contents = opts?.content ?? xml.zero(Sf.schema.contents);
+  constructor(opts?: { attributes?: Partial<SfAttributes>; contents?: SfContents }) {
+    this.attributes = operations.merge(opts?.attributes, Sf.schema);
+    this.contents = opts?.contents ?? operations.zero(Sf.schema.contents);
   }
 }
 
@@ -20399,9 +20402,9 @@ export class Sfp implements XMLElement<'sfp', SfpAttributes, SfpContents> {
   attributes: SfpAttributes;
   contents: SfpContents;
 
-  constructor(opts?: { attributes?: Partial<SfpAttributes>; content?: SfpContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Sfp.schema);
-    this.contents = opts?.content ?? xml.zero(Sfp.schema.contents);
+  constructor(opts?: { attributes?: Partial<SfpAttributes>; contents?: SfpContents }) {
+    this.attributes = operations.merge(opts?.attributes, Sfp.schema);
+    this.contents = opts?.contents ?? operations.zero(Sfp.schema.contents);
   }
 }
 
@@ -20417,9 +20420,9 @@ export class Sfpp implements XMLElement<'sfpp', SfppAttributes, SfppContents> {
   attributes: SfppAttributes;
   contents: SfppContents;
 
-  constructor(opts?: { attributes?: Partial<SfppAttributes>; content?: SfppContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Sfpp.schema);
-    this.contents = opts?.content ?? xml.zero(Sfpp.schema.contents);
+  constructor(opts?: { attributes?: Partial<SfppAttributes>; contents?: SfppContents }) {
+    this.attributes = operations.merge(opts?.attributes, Sfpp.schema);
+    this.contents = opts?.contents ?? operations.zero(Sfpp.schema.contents);
   }
 }
 
@@ -20435,9 +20438,9 @@ export class Fp implements XMLElement<'fp', FpAttributes, FpContents> {
   attributes: FpAttributes;
   contents: FpContents;
 
-  constructor(opts?: { attributes?: Partial<FpAttributes>; content?: FpContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Fp.schema);
-    this.contents = opts?.content ?? xml.zero(Fp.schema.contents);
+  constructor(opts?: { attributes?: Partial<FpAttributes>; contents?: FpContents }) {
+    this.attributes = operations.merge(opts?.attributes, Fp.schema);
+    this.contents = opts?.contents ?? operations.zero(Fp.schema.contents);
   }
 }
 
@@ -20453,9 +20456,9 @@ export class Rf implements XMLElement<'rf', RfAttributes, RfContents> {
   attributes: RfAttributes;
   contents: RfContents;
 
-  constructor(opts?: { attributes?: Partial<RfAttributes>; content?: RfContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Rf.schema);
-    this.contents = opts?.content ?? xml.zero(Rf.schema.contents);
+  constructor(opts?: { attributes?: Partial<RfAttributes>; contents?: RfContents }) {
+    this.attributes = operations.merge(opts?.attributes, Rf.schema);
+    this.contents = opts?.contents ?? operations.zero(Rf.schema.contents);
   }
 }
 
@@ -20471,9 +20474,9 @@ export class Rfz implements XMLElement<'rfz', RfzAttributes, RfzContents> {
   attributes: RfzAttributes;
   contents: RfzContents;
 
-  constructor(opts?: { attributes?: Partial<RfzAttributes>; content?: RfzContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Rfz.schema);
-    this.contents = opts?.content ?? xml.zero(Rfz.schema.contents);
+  constructor(opts?: { attributes?: Partial<RfzAttributes>; contents?: RfzContents }) {
+    this.attributes = operations.merge(opts?.attributes, Rfz.schema);
+    this.contents = opts?.contents ?? operations.zero(Rfz.schema.contents);
   }
 }
 
@@ -20489,9 +20492,9 @@ export class Sfz implements XMLElement<'sfz', SfzAttributes, SfzContents> {
   attributes: SfzAttributes;
   contents: SfzContents;
 
-  constructor(opts?: { attributes?: Partial<SfzAttributes>; content?: SfzContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Sfz.schema);
-    this.contents = opts?.content ?? xml.zero(Sfz.schema.contents);
+  constructor(opts?: { attributes?: Partial<SfzAttributes>; contents?: SfzContents }) {
+    this.attributes = operations.merge(opts?.attributes, Sfz.schema);
+    this.contents = opts?.contents ?? operations.zero(Sfz.schema.contents);
   }
 }
 
@@ -20507,9 +20510,9 @@ export class Sffz implements XMLElement<'sffz', SffzAttributes, SffzContents> {
   attributes: SffzAttributes;
   contents: SffzContents;
 
-  constructor(opts?: { attributes?: Partial<SffzAttributes>; content?: SffzContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Sffz.schema);
-    this.contents = opts?.content ?? xml.zero(Sffz.schema.contents);
+  constructor(opts?: { attributes?: Partial<SffzAttributes>; contents?: SffzContents }) {
+    this.attributes = operations.merge(opts?.attributes, Sffz.schema);
+    this.contents = opts?.contents ?? operations.zero(Sffz.schema.contents);
   }
 }
 
@@ -20525,9 +20528,9 @@ export class Fz implements XMLElement<'fz', FzAttributes, FzContents> {
   attributes: FzAttributes;
   contents: FzContents;
 
-  constructor(opts?: { attributes?: Partial<FzAttributes>; content?: FzContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Fz.schema);
-    this.contents = opts?.content ?? xml.zero(Fz.schema.contents);
+  constructor(opts?: { attributes?: Partial<FzAttributes>; contents?: FzContents }) {
+    this.attributes = operations.merge(opts?.attributes, Fz.schema);
+    this.contents = opts?.contents ?? operations.zero(Fz.schema.contents);
   }
 }
 
@@ -20543,9 +20546,9 @@ export class N implements XMLElement<'n', NAttributes, NContents> {
   attributes: NAttributes;
   contents: NContents;
 
-  constructor(opts?: { attributes?: Partial<NAttributes>; content?: NContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, N.schema);
-    this.contents = opts?.content ?? xml.zero(N.schema.contents);
+  constructor(opts?: { attributes?: Partial<NAttributes>; contents?: NContents }) {
+    this.attributes = operations.merge(opts?.attributes, N.schema);
+    this.contents = opts?.contents ?? operations.zero(N.schema.contents);
   }
 }
 
@@ -20561,9 +20564,9 @@ export class Pf implements XMLElement<'pf', PfAttributes, PfContents> {
   attributes: PfAttributes;
   contents: PfContents;
 
-  constructor(opts?: { attributes?: Partial<PfAttributes>; content?: PfContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Pf.schema);
-    this.contents = opts?.content ?? xml.zero(Pf.schema.contents);
+  constructor(opts?: { attributes?: Partial<PfAttributes>; contents?: PfContents }) {
+    this.attributes = operations.merge(opts?.attributes, Pf.schema);
+    this.contents = opts?.contents ?? operations.zero(Pf.schema.contents);
   }
 }
 
@@ -20579,9 +20582,9 @@ export class Sfzp implements XMLElement<'sfzp', SfzpAttributes, SfzpContents> {
   attributes: SfzpAttributes;
   contents: SfzpContents;
 
-  constructor(opts?: { attributes?: Partial<SfzpAttributes>; content?: SfzpContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Sfzp.schema);
-    this.contents = opts?.content ?? xml.zero(Sfzp.schema.contents);
+  constructor(opts?: { attributes?: Partial<SfzpAttributes>; contents?: SfzpContents }) {
+    this.attributes = operations.merge(opts?.attributes, Sfzp.schema);
+    this.contents = opts?.contents ?? operations.zero(Sfzp.schema.contents);
   }
 }
 
@@ -20601,9 +20604,9 @@ export class OtherDynamics implements XMLElement<'other-dynamics', OtherDynamics
   attributes: OtherDynamicsAttributes;
   contents: OtherDynamicsContents;
 
-  constructor(opts?: { attributes?: Partial<OtherDynamicsAttributes>; content?: OtherDynamicsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherDynamics.schema);
-    this.contents = opts?.content ?? xml.zero(OtherDynamics.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherDynamicsAttributes>; contents?: OtherDynamicsContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherDynamics.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherDynamics.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -20804,9 +20807,9 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
   attributes: DynamicsAttributes;
   contents: DynamicsContents;
 
-  constructor(opts?: { attributes?: Partial<DynamicsAttributes>; content?: DynamicsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Dynamics.schema);
-    this.contents = opts?.content ?? xml.zero(Dynamics.schema.contents);
+  constructor(opts?: { attributes?: Partial<DynamicsAttributes>; contents?: DynamicsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Dynamics.schema);
+    this.contents = opts?.contents ?? operations.zero(Dynamics.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -21101,9 +21104,9 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
   attributes: FermataAttributes;
   contents: FermataContents;
 
-  constructor(opts?: { attributes?: Partial<FermataAttributes>; content?: FermataContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Fermata.schema);
-    this.contents = opts?.content ?? xml.zero(Fermata.schema.contents);
+  constructor(opts?: { attributes?: Partial<FermataAttributes>; contents?: FermataContents }) {
+    this.attributes = operations.merge(opts?.attributes, Fermata.schema);
+    this.contents = opts?.contents ?? operations.zero(Fermata.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -21255,9 +21258,9 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
   attributes: ArpeggiateAttributes;
   contents: ArpeggiateContents;
 
-  constructor(opts?: { attributes?: Partial<ArpeggiateAttributes>; content?: ArpeggiateContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Arpeggiate.schema);
-    this.contents = opts?.content ?? xml.zero(Arpeggiate.schema.contents);
+  constructor(opts?: { attributes?: Partial<ArpeggiateAttributes>; contents?: ArpeggiateContents }) {
+    this.attributes = operations.merge(opts?.attributes, Arpeggiate.schema);
+    this.contents = opts?.contents ?? operations.zero(Arpeggiate.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -21373,9 +21376,9 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
   attributes: NonArpeggiateAttributes;
   contents: NonArpeggiateContents;
 
-  constructor(opts?: { attributes?: Partial<NonArpeggiateAttributes>; content?: NonArpeggiateContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NonArpeggiate.schema);
-    this.contents = opts?.content ?? xml.zero(NonArpeggiate.schema.contents);
+  constructor(opts?: { attributes?: Partial<NonArpeggiateAttributes>; contents?: NonArpeggiateContents }) {
+    this.attributes = operations.merge(opts?.attributes, NonArpeggiate.schema);
+    this.contents = opts?.contents ?? operations.zero(NonArpeggiate.schema.contents);
   }
   getType(): 'top' | 'bottom' {
     return this.attributes['type'];
@@ -21487,9 +21490,9 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
   attributes: OtherNotationAttributes;
   contents: OtherNotationContents;
 
-  constructor(opts?: { attributes?: Partial<OtherNotationAttributes>; content?: OtherNotationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherNotation.schema);
-    this.contents = opts?.content ?? xml.zero(OtherNotation.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherNotationAttributes>; contents?: OtherNotationContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherNotation.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherNotation.schema.contents);
   }
   getType(): 'start' | 'stop' | 'single' {
     return this.attributes['type'];
@@ -21626,9 +21629,9 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
   attributes: NotationsAttributes;
   contents: NotationsContents;
 
-  constructor(opts?: { attributes?: Partial<NotationsAttributes>; content?: NotationsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Notations.schema);
-    this.contents = opts?.content ?? xml.zero(Notations.schema.contents);
+  constructor(opts?: { attributes?: Partial<NotationsAttributes>; contents?: NotationsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Notations.schema);
+    this.contents = opts?.contents ?? operations.zero(Notations.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -21719,9 +21722,9 @@ export class Syllabic implements XMLElement<'syllabic', SyllabicAttributes, Syll
   attributes: SyllabicAttributes;
   contents: SyllabicContents;
 
-  constructor(opts?: { attributes?: Partial<SyllabicAttributes>; content?: SyllabicContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Syllabic.schema);
-    this.contents = opts?.content ?? xml.zero(Syllabic.schema.contents);
+  constructor(opts?: { attributes?: Partial<SyllabicAttributes>; contents?: SyllabicContents }) {
+    this.attributes = operations.merge(opts?.attributes, Syllabic.schema);
+    this.contents = opts?.contents ?? operations.zero(Syllabic.schema.contents);
   }
 
   getSyllabic(): 'begin' | 'end' | 'middle' | 'single' {
@@ -21798,9 +21801,9 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
   attributes: TextAttributes;
   contents: TextContents;
 
-  constructor(opts?: { attributes?: Partial<TextAttributes>; content?: TextContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Text.schema);
-    this.contents = opts?.content ?? xml.zero(Text.schema.contents);
+  constructor(opts?: { attributes?: Partial<TextAttributes>; contents?: TextContents }) {
+    this.attributes = operations.merge(opts?.attributes, Text.schema);
+    this.contents = opts?.contents ?? operations.zero(Text.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -21929,9 +21932,9 @@ export class Elision implements XMLElement<'elision', ElisionAttributes, Elision
   attributes: ElisionAttributes;
   contents: ElisionContents;
 
-  constructor(opts?: { attributes?: Partial<ElisionAttributes>; content?: ElisionContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Elision.schema);
-    this.contents = opts?.content ?? xml.zero(Elision.schema.contents);
+  constructor(opts?: { attributes?: Partial<ElisionAttributes>; contents?: ElisionContents }) {
+    this.attributes = operations.merge(opts?.attributes, Elision.schema);
+    this.contents = opts?.contents ?? operations.zero(Elision.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -22019,9 +22022,9 @@ export class Extend implements XMLElement<'extend', ExtendAttributes, ExtendCont
   attributes: ExtendAttributes;
   contents: ExtendContents;
 
-  constructor(opts?: { attributes?: Partial<ExtendAttributes>; content?: ExtendContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Extend.schema);
-    this.contents = opts?.content ?? xml.zero(Extend.schema.contents);
+  constructor(opts?: { attributes?: Partial<ExtendAttributes>; contents?: ExtendContents }) {
+    this.attributes = operations.merge(opts?.attributes, Extend.schema);
+    this.contents = opts?.contents ?? operations.zero(Extend.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -22073,9 +22076,9 @@ export class Laughing implements XMLElement<'laughing', LaughingAttributes, Laug
   attributes: LaughingAttributes;
   contents: LaughingContents;
 
-  constructor(opts?: { attributes?: Partial<LaughingAttributes>; content?: LaughingContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Laughing.schema);
-    this.contents = opts?.content ?? xml.zero(Laughing.schema.contents);
+  constructor(opts?: { attributes?: Partial<LaughingAttributes>; contents?: LaughingContents }) {
+    this.attributes = operations.merge(opts?.attributes, Laughing.schema);
+    this.contents = opts?.contents ?? operations.zero(Laughing.schema.contents);
   }
 }
 
@@ -22091,9 +22094,9 @@ export class Humming implements XMLElement<'humming', HummingAttributes, Humming
   attributes: HummingAttributes;
   contents: HummingContents;
 
-  constructor(opts?: { attributes?: Partial<HummingAttributes>; content?: HummingContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Humming.schema);
-    this.contents = opts?.content ?? xml.zero(Humming.schema.contents);
+  constructor(opts?: { attributes?: Partial<HummingAttributes>; contents?: HummingContents }) {
+    this.attributes = operations.merge(opts?.attributes, Humming.schema);
+    this.contents = opts?.contents ?? operations.zero(Humming.schema.contents);
   }
 }
 
@@ -22109,9 +22112,9 @@ export class EndLine implements XMLElement<'end-line', EndLineAttributes, EndLin
   attributes: EndLineAttributes;
   contents: EndLineContents;
 
-  constructor(opts?: { attributes?: Partial<EndLineAttributes>; content?: EndLineContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, EndLine.schema);
-    this.contents = opts?.content ?? xml.zero(EndLine.schema.contents);
+  constructor(opts?: { attributes?: Partial<EndLineAttributes>; contents?: EndLineContents }) {
+    this.attributes = operations.merge(opts?.attributes, EndLine.schema);
+    this.contents = opts?.contents ?? operations.zero(EndLine.schema.contents);
   }
 }
 
@@ -22127,9 +22130,9 @@ export class EndParagraph implements XMLElement<'end-paragraph', EndParagraphAtt
   attributes: EndParagraphAttributes;
   contents: EndParagraphContents;
 
-  constructor(opts?: { attributes?: Partial<EndParagraphAttributes>; content?: EndParagraphContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, EndParagraph.schema);
-    this.contents = opts?.content ?? xml.zero(EndParagraph.schema.contents);
+  constructor(opts?: { attributes?: Partial<EndParagraphAttributes>; contents?: EndParagraphContents }) {
+    this.attributes = operations.merge(opts?.attributes, EndParagraph.schema);
+    this.contents = opts?.contents ?? operations.zero(EndParagraph.schema.contents);
   }
 }
 
@@ -22231,9 +22234,9 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
   attributes: LyricAttributes;
   contents: LyricContents;
 
-  constructor(opts?: { attributes?: Partial<LyricAttributes>; content?: LyricContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Lyric.schema);
-    this.contents = opts?.content ?? xml.zero(Lyric.schema.contents);
+  constructor(opts?: { attributes?: Partial<LyricAttributes>; contents?: LyricContents }) {
+    this.attributes = operations.merge(opts?.attributes, Lyric.schema);
+    this.contents = opts?.contents ?? operations.zero(Lyric.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -22357,9 +22360,9 @@ export class Ipa implements XMLElement<'ipa', IpaAttributes, IpaContents> {
   attributes: IpaAttributes;
   contents: IpaContents;
 
-  constructor(opts?: { attributes?: Partial<IpaAttributes>; content?: IpaContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Ipa.schema);
-    this.contents = opts?.content ?? xml.zero(Ipa.schema.contents);
+  constructor(opts?: { attributes?: Partial<IpaAttributes>; contents?: IpaContents }) {
+    this.attributes = operations.merge(opts?.attributes, Ipa.schema);
+    this.contents = opts?.contents ?? operations.zero(Ipa.schema.contents);
   }
 
   getText(): string {
@@ -22430,9 +22433,9 @@ export class Mute implements XMLElement<'mute', MuteAttributes, MuteContents> {
   attributes: MuteAttributes;
   contents: MuteContents;
 
-  constructor(opts?: { attributes?: Partial<MuteAttributes>; content?: MuteContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Mute.schema);
-    this.contents = opts?.content ?? xml.zero(Mute.schema.contents);
+  constructor(opts?: { attributes?: Partial<MuteAttributes>; contents?: MuteContents }) {
+    this.attributes = operations.merge(opts?.attributes, Mute.schema);
+    this.contents = opts?.contents ?? operations.zero(Mute.schema.contents);
   }
 
   getMute():
@@ -22500,9 +22503,9 @@ export class SemiPitched implements XMLElement<'semi-pitched', SemiPitchedAttrib
   attributes: SemiPitchedAttributes;
   contents: SemiPitchedContents;
 
-  constructor(opts?: { attributes?: Partial<SemiPitchedAttributes>; content?: SemiPitchedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SemiPitched.schema);
-    this.contents = opts?.content ?? xml.zero(SemiPitched.schema.contents);
+  constructor(opts?: { attributes?: Partial<SemiPitchedAttributes>; contents?: SemiPitchedContents }) {
+    this.attributes = operations.merge(opts?.attributes, SemiPitched.schema);
+    this.contents = opts?.contents ?? operations.zero(SemiPitched.schema.contents);
   }
 
   getSemiPitched(): 'high' | 'low' | 'medium' | 'medium-high' | 'medium-low' | 'very-low' {
@@ -22529,9 +22532,9 @@ export class OtherPlay implements XMLElement<'other-play', OtherPlayAttributes, 
   attributes: OtherPlayAttributes;
   contents: OtherPlayContents;
 
-  constructor(opts?: { attributes?: Partial<OtherPlayAttributes>; content?: OtherPlayContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherPlay.schema);
-    this.contents = opts?.content ?? xml.zero(OtherPlay.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherPlayAttributes>; contents?: OtherPlayContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherPlay.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherPlay.schema.contents);
   }
   getType(): string {
     return this.attributes['type'];
@@ -22563,9 +22566,9 @@ export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
   attributes: PlayAttributes;
   contents: PlayContents;
 
-  constructor(opts?: { attributes?: Partial<PlayAttributes>; content?: PlayContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Play.schema);
-    this.contents = opts?.content ?? xml.zero(Play.schema.contents);
+  constructor(opts?: { attributes?: Partial<PlayAttributes>; contents?: PlayContents }) {
+    this.attributes = operations.merge(opts?.attributes, Play.schema);
+    this.contents = opts?.contents ?? operations.zero(Play.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -22601,9 +22604,9 @@ export class Assess implements XMLElement<'assess', AssessAttributes, AssessCont
   attributes: AssessAttributes;
   contents: AssessContents;
 
-  constructor(opts?: { attributes?: Partial<AssessAttributes>; content?: AssessContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Assess.schema);
-    this.contents = opts?.content ?? xml.zero(Assess.schema.contents);
+  constructor(opts?: { attributes?: Partial<AssessAttributes>; contents?: AssessContents }) {
+    this.attributes = operations.merge(opts?.attributes, Assess.schema);
+    this.contents = opts?.contents ?? operations.zero(Assess.schema.contents);
   }
   getType(): 'yes' | 'no' {
     return this.attributes['type'];
@@ -22644,9 +22647,9 @@ export class Wait implements XMLElement<'wait', WaitAttributes, WaitContents> {
   attributes: WaitAttributes;
   contents: WaitContents;
 
-  constructor(opts?: { attributes?: Partial<WaitAttributes>; content?: WaitContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Wait.schema);
-    this.contents = opts?.content ?? xml.zero(Wait.schema.contents);
+  constructor(opts?: { attributes?: Partial<WaitAttributes>; contents?: WaitContents }) {
+    this.attributes = operations.merge(opts?.attributes, Wait.schema);
+    this.contents = opts?.contents ?? operations.zero(Wait.schema.contents);
   }
   getPlayer(): string | null {
     return this.attributes['player'];
@@ -22682,9 +22685,9 @@ export class OtherListen implements XMLElement<'other-listen', OtherListenAttrib
   attributes: OtherListenAttributes;
   contents: OtherListenContents;
 
-  constructor(opts?: { attributes?: Partial<OtherListenAttributes>; content?: OtherListenContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherListen.schema);
-    this.contents = opts?.content ?? xml.zero(OtherListen.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherListenAttributes>; contents?: OtherListenContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherListen.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherListen.schema.contents);
   }
   getType(): string {
     return this.attributes['type'];
@@ -22734,9 +22737,9 @@ export class Listen implements XMLElement<'listen', ListenAttributes, ListenCont
   attributes: ListenAttributes;
   contents: ListenContents;
 
-  constructor(opts?: { attributes?: Partial<ListenAttributes>; content?: ListenContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Listen.schema);
-    this.contents = opts?.content ?? xml.zero(Listen.schema.contents);
+  constructor(opts?: { attributes?: Partial<ListenAttributes>; contents?: ListenContents }) {
+    this.attributes = operations.merge(opts?.attributes, Listen.schema);
+    this.contents = opts?.contents ?? operations.zero(Listen.schema.contents);
   }
 
   getListens(): Array<Assess | Wait | OtherListen> {
@@ -22946,9 +22949,9 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
   attributes: NoteAttributes;
   contents: NoteContents;
 
-  constructor(opts?: { attributes?: Partial<NoteAttributes>; content?: NoteContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Note.schema);
-    this.contents = opts?.content ?? xml.zero(Note.schema.contents);
+  constructor(opts?: { attributes?: Partial<NoteAttributes>; contents?: NoteContents }) {
+    this.attributes = operations.merge(opts?.attributes, Note.schema);
+    this.contents = opts?.contents ?? operations.zero(Note.schema.contents);
   }
   getAttack(): number | null {
     return this.attributes['attack'];
@@ -23248,9 +23251,9 @@ export class Backup implements XMLElement<'backup', BackupAttributes, BackupCont
   attributes: BackupAttributes;
   contents: BackupContents;
 
-  constructor(opts?: { attributes?: Partial<BackupAttributes>; content?: BackupContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Backup.schema);
-    this.contents = opts?.content ?? xml.zero(Backup.schema.contents);
+  constructor(opts?: { attributes?: Partial<BackupAttributes>; contents?: BackupContents }) {
+    this.attributes = operations.merge(opts?.attributes, Backup.schema);
+    this.contents = opts?.contents ?? operations.zero(Backup.schema.contents);
   }
 
   getDuration(): Duration {
@@ -23295,9 +23298,9 @@ export class Forward implements XMLElement<'forward', ForwardAttributes, Forward
   attributes: ForwardAttributes;
   contents: ForwardContents;
 
-  constructor(opts?: { attributes?: Partial<ForwardAttributes>; content?: ForwardContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Forward.schema);
-    this.contents = opts?.content ?? xml.zero(Forward.schema.contents);
+  constructor(opts?: { attributes?: Partial<ForwardAttributes>; contents?: ForwardContents }) {
+    this.attributes = operations.merge(opts?.attributes, Forward.schema);
+    this.contents = opts?.contents ?? operations.zero(Forward.schema.contents);
   }
 
   getDuration(): Duration {
@@ -23461,9 +23464,9 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
   attributes: RehearsalAttributes;
   contents: RehearsalContents;
 
-  constructor(opts?: { attributes?: Partial<RehearsalAttributes>; content?: RehearsalContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Rehearsal.schema);
-    this.contents = opts?.content ?? xml.zero(Rehearsal.schema.contents);
+  constructor(opts?: { attributes?: Partial<RehearsalAttributes>; contents?: RehearsalContents }) {
+    this.attributes = operations.merge(opts?.attributes, Rehearsal.schema);
+    this.contents = opts?.contents ?? operations.zero(Rehearsal.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -23708,9 +23711,9 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
   attributes: SegnoAttributes;
   contents: SegnoContents;
 
-  constructor(opts?: { attributes?: Partial<SegnoAttributes>; content?: SegnoContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Segno.schema);
-    this.contents = opts?.content ?? xml.zero(Segno.schema.contents);
+  constructor(opts?: { attributes?: Partial<SegnoAttributes>; contents?: SegnoContents }) {
+    this.attributes = operations.merge(opts?.attributes, Segno.schema);
+    this.contents = opts?.contents ?? operations.zero(Segno.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -23863,9 +23866,9 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
   attributes: CodaAttributes;
   contents: CodaContents;
 
-  constructor(opts?: { attributes?: Partial<CodaAttributes>; content?: CodaContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Coda.schema);
-    this.contents = opts?.content ?? xml.zero(Coda.schema.contents);
+  constructor(opts?: { attributes?: Partial<CodaAttributes>; contents?: CodaContents }) {
+    this.attributes = operations.merge(opts?.attributes, Coda.schema);
+    this.contents = opts?.contents ?? operations.zero(Coda.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -24080,9 +24083,9 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
   attributes: WordsAttributes;
   contents: WordsContents;
 
-  constructor(opts?: { attributes?: Partial<WordsAttributes>; content?: WordsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Words.schema);
-    this.contents = opts?.content ?? xml.zero(Words.schema.contents);
+  constructor(opts?: { attributes?: Partial<WordsAttributes>; contents?: WordsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Words.schema);
+    this.contents = opts?.contents ?? operations.zero(Words.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -24391,9 +24394,9 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
   attributes: SymbolAttributes;
   contents: SymbolContents;
 
-  constructor(opts?: { attributes?: Partial<SymbolAttributes>; content?: SymbolContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Symbol.schema);
-    this.contents = opts?.content ?? xml.zero(Symbol.schema.contents);
+  constructor(opts?: { attributes?: Partial<SymbolAttributes>; contents?: SymbolContents }) {
+    this.attributes = operations.merge(opts?.attributes, Symbol.schema);
+    this.contents = opts?.contents ?? operations.zero(Symbol.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -24617,9 +24620,9 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
   attributes: WedgeAttributes;
   contents: WedgeContents;
 
-  constructor(opts?: { attributes?: Partial<WedgeAttributes>; content?: WedgeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Wedge.schema);
-    this.contents = opts?.content ?? xml.zero(Wedge.schema.contents);
+  constructor(opts?: { attributes?: Partial<WedgeAttributes>; contents?: WedgeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Wedge.schema);
+    this.contents = opts?.contents ?? operations.zero(Wedge.schema.contents);
   }
   getType(): 'crescendo' | 'diminuendo' | 'stop' | 'continue' {
     return this.attributes['type'];
@@ -24755,9 +24758,9 @@ export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesCont
   attributes: DashesAttributes;
   contents: DashesContents;
 
-  constructor(opts?: { attributes?: Partial<DashesAttributes>; content?: DashesContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Dashes.schema);
-    this.contents = opts?.content ?? xml.zero(Dashes.schema.contents);
+  constructor(opts?: { attributes?: Partial<DashesAttributes>; contents?: DashesContents }) {
+    this.attributes = operations.merge(opts?.attributes, Dashes.schema);
+    this.contents = opts?.contents ?? operations.zero(Dashes.schema.contents);
   }
   getType(): 'start' | 'stop' | 'continue' {
     return this.attributes['type'];
@@ -24881,9 +24884,9 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
   attributes: BracketAttributes;
   contents: BracketContents;
 
-  constructor(opts?: { attributes?: Partial<BracketAttributes>; content?: BracketContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Bracket.schema);
-    this.contents = opts?.content ?? xml.zero(Bracket.schema.contents);
+  constructor(opts?: { attributes?: Partial<BracketAttributes>; contents?: BracketContents }) {
+    this.attributes = operations.merge(opts?.attributes, Bracket.schema);
+    this.contents = opts?.contents ?? operations.zero(Bracket.schema.contents);
   }
   getLineEnd(): 'none' | 'up' | 'down' | 'both' | 'arrow' {
     return this.attributes['line-end'];
@@ -25044,9 +25047,9 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
   attributes: PedalAttributes;
   contents: PedalContents;
 
-  constructor(opts?: { attributes?: Partial<PedalAttributes>; content?: PedalContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Pedal.schema);
-    this.contents = opts?.content ?? xml.zero(Pedal.schema.contents);
+  constructor(opts?: { attributes?: Partial<PedalAttributes>; contents?: PedalContents }) {
+    this.attributes = operations.merge(opts?.attributes, Pedal.schema);
+    this.contents = opts?.contents ?? operations.zero(Pedal.schema.contents);
   }
   getType(): 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discountiue' | 'resume' {
     return this.attributes['type'];
@@ -25202,9 +25205,9 @@ export class BeatUnit implements XMLElement<'beat-unit', BeatUnitAttributes, Bea
   attributes: BeatUnitAttributes;
   contents: BeatUnitContents;
 
-  constructor(opts?: { attributes?: Partial<BeatUnitAttributes>; content?: BeatUnitContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BeatUnit.schema);
-    this.contents = opts?.content ?? xml.zero(BeatUnit.schema.contents);
+  constructor(opts?: { attributes?: Partial<BeatUnitAttributes>; contents?: BeatUnitContents }) {
+    this.attributes = operations.merge(opts?.attributes, BeatUnit.schema);
+    this.contents = opts?.contents ?? operations.zero(BeatUnit.schema.contents);
   }
 
   getNoteTypeValue():
@@ -25259,9 +25262,9 @@ export class BeatUnitDot implements XMLElement<'beat-unit-dot', BeatUnitDotAttri
   attributes: BeatUnitDotAttributes;
   contents: BeatUnitDotContents;
 
-  constructor(opts?: { attributes?: Partial<BeatUnitDotAttributes>; content?: BeatUnitDotContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BeatUnitDot.schema);
-    this.contents = opts?.content ?? xml.zero(BeatUnitDot.schema.contents);
+  constructor(opts?: { attributes?: Partial<BeatUnitDotAttributes>; contents?: BeatUnitDotContents }) {
+    this.attributes = operations.merge(opts?.attributes, BeatUnitDot.schema);
+    this.contents = opts?.contents ?? operations.zero(BeatUnitDot.schema.contents);
   }
 }
 
@@ -25284,9 +25287,9 @@ export class BeatUnitTied implements XMLElement<'beat-unit-tied', BeatUnitTiedAt
   attributes: BeatUnitTiedAttributes;
   contents: BeatUnitTiedContents;
 
-  constructor(opts?: { attributes?: Partial<BeatUnitTiedAttributes>; content?: BeatUnitTiedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BeatUnitTied.schema);
-    this.contents = opts?.content ?? xml.zero(BeatUnitTied.schema.contents);
+  constructor(opts?: { attributes?: Partial<BeatUnitTiedAttributes>; contents?: BeatUnitTiedContents }) {
+    this.attributes = operations.merge(opts?.attributes, BeatUnitTied.schema);
+    this.contents = opts?.contents ?? operations.zero(BeatUnitTied.schema.contents);
   }
 
   getBeatUnit(): BeatUnit {
@@ -25338,9 +25341,9 @@ export class PerMinute implements XMLElement<'per-minute', PerMinuteAttributes, 
   attributes: PerMinuteAttributes;
   contents: PerMinuteContents;
 
-  constructor(opts?: { attributes?: Partial<PerMinuteAttributes>; content?: PerMinuteContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PerMinute.schema);
-    this.contents = opts?.content ?? xml.zero(PerMinute.schema.contents);
+  constructor(opts?: { attributes?: Partial<PerMinuteAttributes>; contents?: PerMinuteContents }) {
+    this.attributes = operations.merge(opts?.attributes, PerMinute.schema);
+    this.contents = opts?.contents ?? operations.zero(PerMinute.schema.contents);
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
@@ -25390,9 +25393,9 @@ export class MetronomeArrows
   attributes: MetronomeArrowsAttributes;
   contents: MetronomeArrowsContents;
 
-  constructor(opts?: { attributes?: Partial<MetronomeArrowsAttributes>; content?: MetronomeArrowsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MetronomeArrows.schema);
-    this.contents = opts?.content ?? xml.zero(MetronomeArrows.schema.contents);
+  constructor(opts?: { attributes?: Partial<MetronomeArrowsAttributes>; contents?: MetronomeArrowsContents }) {
+    this.attributes = operations.merge(opts?.attributes, MetronomeArrows.schema);
+    this.contents = opts?.contents ?? operations.zero(MetronomeArrows.schema.contents);
   }
 }
 
@@ -25456,9 +25459,9 @@ export class MetronomeType implements XMLElement<'metronome-type', MetronomeType
   attributes: MetronomeTypeAttributes;
   contents: MetronomeTypeContents;
 
-  constructor(opts?: { attributes?: Partial<MetronomeTypeAttributes>; content?: MetronomeTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MetronomeType.schema);
-    this.contents = opts?.content ?? xml.zero(MetronomeType.schema.contents);
+  constructor(opts?: { attributes?: Partial<MetronomeTypeAttributes>; contents?: MetronomeTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, MetronomeType.schema);
+    this.contents = opts?.contents ?? operations.zero(MetronomeType.schema.contents);
   }
 
   getNoteTypeValue():
@@ -25513,9 +25516,9 @@ export class MetronomeDot implements XMLElement<'metronome-dot', MetronomeDotAtt
   attributes: MetronomeDotAttributes;
   contents: MetronomeDotContents;
 
-  constructor(opts?: { attributes?: Partial<MetronomeDotAttributes>; content?: MetronomeDotContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MetronomeDot.schema);
-    this.contents = opts?.content ?? xml.zero(MetronomeDot.schema.contents);
+  constructor(opts?: { attributes?: Partial<MetronomeDotAttributes>; contents?: MetronomeDotContents }) {
+    this.attributes = operations.merge(opts?.attributes, MetronomeDot.schema);
+    this.contents = opts?.contents ?? operations.zero(MetronomeDot.schema.contents);
   }
 }
 
@@ -25544,9 +25547,9 @@ export class MetronomeBeam implements XMLElement<'metronome-beam', MetronomeBeam
   attributes: MetronomeBeamAttributes;
   contents: MetronomeBeamContents;
 
-  constructor(opts?: { attributes?: Partial<MetronomeBeamAttributes>; content?: MetronomeBeamContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MetronomeBeam.schema);
-    this.contents = opts?.content ?? xml.zero(MetronomeBeam.schema.contents);
+  constructor(opts?: { attributes?: Partial<MetronomeBeamAttributes>; contents?: MetronomeBeamContents }) {
+    this.attributes = operations.merge(opts?.attributes, MetronomeBeam.schema);
+    this.contents = opts?.contents ?? operations.zero(MetronomeBeam.schema.contents);
   }
   getNumber(): number | null {
     return this.attributes['number'];
@@ -25578,9 +25581,9 @@ export class MetronomeTied implements XMLElement<'metronome-tied', MetronomeTied
   attributes: MetronomeTiedAttributes;
   contents: MetronomeTiedContents;
 
-  constructor(opts?: { attributes?: Partial<MetronomeTiedAttributes>; content?: MetronomeTiedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MetronomeTied.schema);
-    this.contents = opts?.content ?? xml.zero(MetronomeTied.schema.contents);
+  constructor(opts?: { attributes?: Partial<MetronomeTiedAttributes>; contents?: MetronomeTiedContents }) {
+    this.attributes = operations.merge(opts?.attributes, MetronomeTied.schema);
+    this.contents = opts?.contents ?? operations.zero(MetronomeTied.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -25630,9 +25633,9 @@ export class MetronomeTuplet
   attributes: MetronomeTupletAttributes;
   contents: MetronomeTupletContents;
 
-  constructor(opts?: { attributes?: Partial<MetronomeTupletAttributes>; content?: MetronomeTupletContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MetronomeTuplet.schema);
-    this.contents = opts?.content ?? xml.zero(MetronomeTuplet.schema.contents);
+  constructor(opts?: { attributes?: Partial<MetronomeTupletAttributes>; contents?: MetronomeTupletContents }) {
+    this.attributes = operations.merge(opts?.attributes, MetronomeTuplet.schema);
+    this.contents = opts?.contents ?? operations.zero(MetronomeTuplet.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -25700,9 +25703,9 @@ export class MetronomeNote implements XMLElement<'metronome-note', MetronomeNote
   attributes: MetronomeNoteAttributes;
   contents: MetronomeNoteContents;
 
-  constructor(opts?: { attributes?: Partial<MetronomeNoteAttributes>; content?: MetronomeNoteContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MetronomeNote.schema);
-    this.contents = opts?.content ?? xml.zero(MetronomeNote.schema.contents);
+  constructor(opts?: { attributes?: Partial<MetronomeNoteAttributes>; contents?: MetronomeNoteContents }) {
+    this.attributes = operations.merge(opts?.attributes, MetronomeNote.schema);
+    this.contents = opts?.contents ?? operations.zero(MetronomeNote.schema.contents);
   }
 
   getMetronomeType(): MetronomeType {
@@ -25755,9 +25758,9 @@ export class MetronomeRelation
   attributes: MetronomeRelationAttributes;
   contents: MetronomeRelationContents;
 
-  constructor(opts?: { attributes?: Partial<MetronomeRelationAttributes>; content?: MetronomeRelationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MetronomeRelation.schema);
-    this.contents = opts?.content ?? xml.zero(MetronomeRelation.schema.contents);
+  constructor(opts?: { attributes?: Partial<MetronomeRelationAttributes>; contents?: MetronomeRelationContents }) {
+    this.attributes = operations.merge(opts?.attributes, MetronomeRelation.schema);
+    this.contents = opts?.contents ?? operations.zero(MetronomeRelation.schema.contents);
   }
 
   getText(): string | null {
@@ -25881,9 +25884,9 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
   attributes: MetronomeAttributes;
   contents: MetronomeContents;
 
-  constructor(opts?: { attributes?: Partial<MetronomeAttributes>; content?: MetronomeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Metronome.schema);
-    this.contents = opts?.content ?? xml.zero(Metronome.schema.contents);
+  constructor(opts?: { attributes?: Partial<MetronomeAttributes>; contents?: MetronomeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Metronome.schema);
+    this.contents = opts?.contents ?? operations.zero(Metronome.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -26074,9 +26077,9 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
   attributes: OctaveShiftAttributes;
   contents: OctaveShiftContents;
 
-  constructor(opts?: { attributes?: Partial<OctaveShiftAttributes>; content?: OctaveShiftContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OctaveShift.schema);
-    this.contents = opts?.content ?? xml.zero(OctaveShift.schema.contents);
+  constructor(opts?: { attributes?: Partial<OctaveShiftAttributes>; contents?: OctaveShiftContents }) {
+    this.attributes = operations.merge(opts?.attributes, OctaveShift.schema);
+    this.contents = opts?.contents ?? operations.zero(OctaveShift.schema.contents);
   }
   getType(): 'up' | 'down' | 'stop' | 'continue' {
     return this.attributes['type'];
@@ -26239,9 +26242,9 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
   attributes: HarpPedalsAttributes;
   contents: HarpPedalsContents;
 
-  constructor(opts?: { attributes?: Partial<HarpPedalsAttributes>; content?: HarpPedalsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, HarpPedals.schema);
-    this.contents = opts?.content ?? xml.zero(HarpPedals.schema.contents);
+  constructor(opts?: { attributes?: Partial<HarpPedalsAttributes>; contents?: HarpPedalsContents }) {
+    this.attributes = operations.merge(opts?.attributes, HarpPedals.schema);
+    this.contents = opts?.contents ?? operations.zero(HarpPedals.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -26386,9 +26389,9 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
   attributes: DampAttributes;
   contents: DampContents;
 
-  constructor(opts?: { attributes?: Partial<DampAttributes>; content?: DampContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Damp.schema);
-    this.contents = opts?.content ?? xml.zero(Damp.schema.contents);
+  constructor(opts?: { attributes?: Partial<DampAttributes>; contents?: DampContents }) {
+    this.attributes = operations.merge(opts?.attributes, Damp.schema);
+    this.contents = opts?.contents ?? operations.zero(Damp.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -26533,9 +26536,9 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
   attributes: DampAllAttributes;
   contents: DampAllContents;
 
-  constructor(opts?: { attributes?: Partial<DampAllAttributes>; content?: DampAllContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DampAll.schema);
-    this.contents = opts?.content ?? xml.zero(DampAll.schema.contents);
+  constructor(opts?: { attributes?: Partial<DampAllAttributes>; contents?: DampAllContents }) {
+    this.attributes = operations.merge(opts?.attributes, DampAll.schema);
+    this.contents = opts?.contents ?? operations.zero(DampAll.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -26680,9 +26683,9 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
   attributes: EyeglassesAttributes;
   contents: EyeglassesContents;
 
-  constructor(opts?: { attributes?: Partial<EyeglassesAttributes>; content?: EyeglassesContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Eyeglasses.schema);
-    this.contents = opts?.content ?? xml.zero(Eyeglasses.schema.contents);
+  constructor(opts?: { attributes?: Partial<EyeglassesAttributes>; contents?: EyeglassesContents }) {
+    this.attributes = operations.merge(opts?.attributes, Eyeglasses.schema);
+    this.contents = opts?.contents ?? operations.zero(Eyeglasses.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -26827,9 +26830,9 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
   attributes: StringMuteAttributes;
   contents: StringMuteContents;
 
-  constructor(opts?: { attributes?: Partial<StringMuteAttributes>; content?: StringMuteContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StringMute.schema);
-    this.contents = opts?.content ?? xml.zero(StringMute.schema.contents);
+  constructor(opts?: { attributes?: Partial<StringMuteAttributes>; contents?: StringMuteContents }) {
+    this.attributes = operations.merge(opts?.attributes, StringMute.schema);
+    this.contents = opts?.contents ?? operations.zero(StringMute.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -26932,9 +26935,9 @@ export class TuningStep implements XMLElement<'tuning-step', TuningStepAttribute
   attributes: TuningStepAttributes;
   contents: TuningStepContents;
 
-  constructor(opts?: { attributes?: Partial<TuningStepAttributes>; content?: TuningStepContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TuningStep.schema);
-    this.contents = opts?.content ?? xml.zero(TuningStep.schema.contents);
+  constructor(opts?: { attributes?: Partial<TuningStepAttributes>; contents?: TuningStepContents }) {
+    this.attributes = operations.merge(opts?.attributes, TuningStep.schema);
+    this.contents = opts?.contents ?? operations.zero(TuningStep.schema.contents);
   }
 
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
@@ -26966,9 +26969,9 @@ export class TuningAlter implements XMLElement<'tuning-alter', TuningAlterAttrib
   attributes: TuningAlterAttributes;
   contents: TuningAlterContents;
 
-  constructor(opts?: { attributes?: Partial<TuningAlterAttributes>; content?: TuningAlterContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TuningAlter.schema);
-    this.contents = opts?.content ?? xml.zero(TuningAlter.schema.contents);
+  constructor(opts?: { attributes?: Partial<TuningAlterAttributes>; contents?: TuningAlterContents }) {
+    this.attributes = operations.merge(opts?.attributes, TuningAlter.schema);
+    this.contents = opts?.contents ?? operations.zero(TuningAlter.schema.contents);
   }
 
   getSemitones(): number {
@@ -26995,9 +26998,9 @@ export class TuningOctave implements XMLElement<'tuning-octave', TuningOctaveAtt
   attributes: TuningOctaveAttributes;
   contents: TuningOctaveContents;
 
-  constructor(opts?: { attributes?: Partial<TuningOctaveAttributes>; content?: TuningOctaveContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TuningOctave.schema);
-    this.contents = opts?.content ?? xml.zero(TuningOctave.schema.contents);
+  constructor(opts?: { attributes?: Partial<TuningOctaveAttributes>; contents?: TuningOctaveContents }) {
+    this.attributes = operations.merge(opts?.attributes, TuningOctave.schema);
+    this.contents = opts?.contents ?? operations.zero(TuningOctave.schema.contents);
   }
 
   getOctave(): number {
@@ -27028,9 +27031,9 @@ export class Accord implements XMLElement<'accord', AccordAttributes, AccordCont
   attributes: AccordAttributes;
   contents: AccordContents;
 
-  constructor(opts?: { attributes?: Partial<AccordAttributes>; content?: AccordContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Accord.schema);
-    this.contents = opts?.content ?? xml.zero(Accord.schema.contents);
+  constructor(opts?: { attributes?: Partial<AccordAttributes>; contents?: AccordContents }) {
+    this.attributes = operations.merge(opts?.attributes, Accord.schema);
+    this.contents = opts?.contents ?? operations.zero(Accord.schema.contents);
   }
 
   getTuningStep(): TuningStep {
@@ -27069,9 +27072,9 @@ export class Scordatura implements XMLElement<'scordatura', ScordaturaAttributes
   attributes: ScordaturaAttributes;
   contents: ScordaturaContents;
 
-  constructor(opts?: { attributes?: Partial<ScordaturaAttributes>; content?: ScordaturaContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Scordatura.schema);
-    this.contents = opts?.content ?? xml.zero(Scordatura.schema.contents);
+  constructor(opts?: { attributes?: Partial<ScordaturaAttributes>; contents?: ScordaturaContents }) {
+    this.attributes = operations.merge(opts?.attributes, Scordatura.schema);
+    this.contents = opts?.contents ?? operations.zero(Scordatura.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -27141,9 +27144,9 @@ export class Image implements XMLElement<'image', ImageAttributes, ImageContents
   attributes: ImageAttributes;
   contents: ImageContents;
 
-  constructor(opts?: { attributes?: Partial<ImageAttributes>; content?: ImageContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Image.schema);
-    this.contents = opts?.content ?? xml.zero(Image.schema.contents);
+  constructor(opts?: { attributes?: Partial<ImageAttributes>; contents?: ImageContents }) {
+    this.attributes = operations.merge(opts?.attributes, Image.schema);
+    this.contents = opts?.contents ?? operations.zero(Image.schema.contents);
   }
   getSource(): string {
     return this.attributes['source'];
@@ -27281,9 +27284,9 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
   attributes: PrincipalVoiceAttributes;
   contents: PrincipalVoiceContents;
 
-  constructor(opts?: { attributes?: Partial<PrincipalVoiceAttributes>; content?: PrincipalVoiceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PrincipalVoice.schema);
-    this.contents = opts?.content ?? xml.zero(PrincipalVoice.schema.contents);
+  constructor(opts?: { attributes?: Partial<PrincipalVoiceAttributes>; contents?: PrincipalVoiceContents }) {
+    this.attributes = operations.merge(opts?.attributes, PrincipalVoice.schema);
+    this.contents = opts?.contents ?? operations.zero(PrincipalVoice.schema.contents);
   }
   getSymbol(): 'none' | 'Hauptstimme' | 'Nebenstimme' | 'plain' {
     return this.attributes['symbol'];
@@ -27404,9 +27407,9 @@ export class Glass implements XMLElement<'glass', GlassAttributes, GlassContents
   attributes: GlassAttributes;
   contents: GlassContents;
 
-  constructor(opts?: { attributes?: Partial<GlassAttributes>; content?: GlassContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Glass.schema);
-    this.contents = opts?.content ?? xml.zero(Glass.schema.contents);
+  constructor(opts?: { attributes?: Partial<GlassAttributes>; contents?: GlassContents }) {
+    this.attributes = operations.merge(opts?.attributes, Glass.schema);
+    this.contents = opts?.contents ?? operations.zero(Glass.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -27516,9 +27519,9 @@ export class Metal implements XMLElement<'metal', MetalAttributes, MetalContents
   attributes: MetalAttributes;
   contents: MetalContents;
 
-  constructor(opts?: { attributes?: Partial<MetalAttributes>; content?: MetalContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Metal.schema);
-    this.contents = opts?.content ?? xml.zero(Metal.schema.contents);
+  constructor(opts?: { attributes?: Partial<MetalAttributes>; contents?: MetalContents }) {
+    this.attributes = operations.merge(opts?.attributes, Metal.schema);
+    this.contents = opts?.contents ?? operations.zero(Metal.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -27672,9 +27675,9 @@ export class Wood implements XMLElement<'wood', WoodAttributes, WoodContents> {
   attributes: WoodAttributes;
   contents: WoodContents;
 
-  constructor(opts?: { attributes?: Partial<WoodAttributes>; content?: WoodContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Wood.schema);
-    this.contents = opts?.content ?? xml.zero(Wood.schema.contents);
+  constructor(opts?: { attributes?: Partial<WoodAttributes>; contents?: WoodContents }) {
+    this.attributes = operations.merge(opts?.attributes, Wood.schema);
+    this.contents = opts?.contents ?? operations.zero(Wood.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -27750,9 +27753,9 @@ export class Pitched implements XMLElement<'pitched', PitchedAttributes, Pitched
   attributes: PitchedAttributes;
   contents: PitchedContents;
 
-  constructor(opts?: { attributes?: Partial<PitchedAttributes>; content?: PitchedContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Pitched.schema);
-    this.contents = opts?.content ?? xml.zero(Pitched.schema.contents);
+  constructor(opts?: { attributes?: Partial<PitchedAttributes>; contents?: PitchedContents }) {
+    this.attributes = operations.merge(opts?.attributes, Pitched.schema);
+    this.contents = opts?.contents ?? operations.zero(Pitched.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -27826,9 +27829,9 @@ export class Membrane implements XMLElement<'membrane', MembraneAttributes, Memb
   attributes: MembraneAttributes;
   contents: MembraneContents;
 
-  constructor(opts?: { attributes?: Partial<MembraneAttributes>; content?: MembraneContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Membrane.schema);
-    this.contents = opts?.content ?? xml.zero(Membrane.schema.contents);
+  constructor(opts?: { attributes?: Partial<MembraneAttributes>; contents?: MembraneContents }) {
+    this.attributes = operations.merge(opts?.attributes, Membrane.schema);
+    this.contents = opts?.contents ?? operations.zero(Membrane.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -27942,9 +27945,9 @@ export class Effect implements XMLElement<'effect', EffectAttributes, EffectCont
   attributes: EffectAttributes;
   contents: EffectContents;
 
-  constructor(opts?: { attributes?: Partial<EffectAttributes>; content?: EffectContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Effect.schema);
-    this.contents = opts?.content ?? xml.zero(Effect.schema.contents);
+  constructor(opts?: { attributes?: Partial<EffectAttributes>; contents?: EffectContents }) {
+    this.attributes = operations.merge(opts?.attributes, Effect.schema);
+    this.contents = opts?.contents ?? operations.zero(Effect.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -28010,9 +28013,9 @@ export class Timpani implements XMLElement<'timpani', TimpaniAttributes, Timpani
   attributes: TimpaniAttributes;
   contents: TimpaniContents;
 
-  constructor(opts?: { attributes?: Partial<TimpaniAttributes>; content?: TimpaniContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Timpani.schema);
-    this.contents = opts?.content ?? xml.zero(Timpani.schema.contents);
+  constructor(opts?: { attributes?: Partial<TimpaniAttributes>; contents?: TimpaniContents }) {
+    this.attributes = operations.merge(opts?.attributes, Timpani.schema);
+    this.contents = opts?.contents ?? operations.zero(Timpani.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -28102,9 +28105,9 @@ export class Beater implements XMLElement<'beater', BeaterAttributes, BeaterCont
   attributes: BeaterAttributes;
   contents: BeaterContents;
 
-  constructor(opts?: { attributes?: Partial<BeaterAttributes>; content?: BeaterContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Beater.schema);
-    this.contents = opts?.content ?? xml.zero(Beater.schema.contents);
+  constructor(opts?: { attributes?: Partial<BeaterAttributes>; contents?: BeaterContents }) {
+    this.attributes = operations.merge(opts?.attributes, Beater.schema);
+    this.contents = opts?.contents ?? operations.zero(Beater.schema.contents);
   }
   getTip(): 'down' | 'left' | 'northeast' | 'northwest' | 'right' | 'southeast' | 'southwest' | 'up' | null {
     return this.attributes['tip'];
@@ -28212,9 +28215,9 @@ export class StickType implements XMLElement<'stick-type', StickTypeAttributes, 
   attributes: StickTypeAttributes;
   contents: StickTypeContents;
 
-  constructor(opts?: { attributes?: Partial<StickTypeAttributes>; content?: StickTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StickType.schema);
-    this.contents = opts?.content ?? xml.zero(StickType.schema.contents);
+  constructor(opts?: { attributes?: Partial<StickTypeAttributes>; contents?: StickTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, StickType.schema);
+    this.contents = opts?.contents ?? operations.zero(StickType.schema.contents);
   }
 
   getStickType():
@@ -28272,9 +28275,9 @@ export class StickMaterial implements XMLElement<'stick-material', StickMaterial
   attributes: StickMaterialAttributes;
   contents: StickMaterialContents;
 
-  constructor(opts?: { attributes?: Partial<StickMaterialAttributes>; content?: StickMaterialContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StickMaterial.schema);
-    this.contents = opts?.content ?? xml.zero(StickMaterial.schema.contents);
+  constructor(opts?: { attributes?: Partial<StickMaterialAttributes>; contents?: StickMaterialContents }) {
+    this.attributes = operations.merge(opts?.attributes, StickMaterial.schema);
+    this.contents = opts?.contents ?? operations.zero(StickMaterial.schema.contents);
   }
 
   getStickMaterial(): 'x' | 'hard' | 'medium' | 'shaded' | 'soft' {
@@ -28318,9 +28321,9 @@ export class Stick implements XMLElement<'stick', StickAttributes, StickContents
   attributes: StickAttributes;
   contents: StickContents;
 
-  constructor(opts?: { attributes?: Partial<StickAttributes>; content?: StickContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Stick.schema);
-    this.contents = opts?.content ?? xml.zero(Stick.schema.contents);
+  constructor(opts?: { attributes?: Partial<StickAttributes>; contents?: StickContents }) {
+    this.attributes = operations.merge(opts?.attributes, Stick.schema);
+    this.contents = opts?.contents ?? operations.zero(Stick.schema.contents);
   }
   getDashedCircle(): 'yes' | 'no' | null {
     return this.attributes['dashed-circle'];
@@ -28379,9 +28382,9 @@ export class StickLocation implements XMLElement<'stick-location', StickLocation
   attributes: StickLocationAttributes;
   contents: StickLocationContents;
 
-  constructor(opts?: { attributes?: Partial<StickLocationAttributes>; content?: StickLocationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StickLocation.schema);
-    this.contents = opts?.content ?? xml.zero(StickLocation.schema.contents);
+  constructor(opts?: { attributes?: Partial<StickLocationAttributes>; contents?: StickLocationContents }) {
+    this.attributes = operations.merge(opts?.attributes, StickLocation.schema);
+    this.contents = opts?.contents ?? operations.zero(StickLocation.schema.contents);
   }
 
   getStickLocation(): 'center' | 'cymbal bell' | 'cymbal edge' | 'rim' {
@@ -28410,9 +28413,9 @@ export class OtherPercussion
   attributes: OtherPercussionAttributes;
   contents: OtherPercussionContents;
 
-  constructor(opts?: { attributes?: Partial<OtherPercussionAttributes>; content?: OtherPercussionContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherPercussion.schema);
-    this.contents = opts?.content ?? xml.zero(OtherPercussion.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherPercussionAttributes>; contents?: OtherPercussionContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherPercussion.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherPercussion.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -28518,9 +28521,9 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
   attributes: PercussionAttributes;
   contents: PercussionContents;
 
-  constructor(opts?: { attributes?: Partial<PercussionAttributes>; content?: PercussionContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Percussion.schema);
-    this.contents = opts?.content ?? xml.zero(Percussion.schema.contents);
+  constructor(opts?: { attributes?: Partial<PercussionAttributes>; contents?: PercussionContents }) {
+    this.attributes = operations.merge(opts?.attributes, Percussion.schema);
+    this.contents = opts?.contents ?? operations.zero(Percussion.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -28640,9 +28643,9 @@ export class AccordionHigh implements XMLElement<'accordion-high', AccordionHigh
   attributes: AccordionHighAttributes;
   contents: AccordionHighContents;
 
-  constructor(opts?: { attributes?: Partial<AccordionHighAttributes>; content?: AccordionHighContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, AccordionHigh.schema);
-    this.contents = opts?.content ?? xml.zero(AccordionHigh.schema.contents);
+  constructor(opts?: { attributes?: Partial<AccordionHighAttributes>; contents?: AccordionHighContents }) {
+    this.attributes = operations.merge(opts?.attributes, AccordionHigh.schema);
+    this.contents = opts?.contents ?? operations.zero(AccordionHigh.schema.contents);
   }
 }
 
@@ -28660,9 +28663,9 @@ export class AccordionMiddle
   attributes: AccordionMiddleAttributes;
   contents: AccordionMiddleContents;
 
-  constructor(opts?: { attributes?: Partial<AccordionMiddleAttributes>; content?: AccordionMiddleContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, AccordionMiddle.schema);
-    this.contents = opts?.content ?? xml.zero(AccordionMiddle.schema.contents);
+  constructor(opts?: { attributes?: Partial<AccordionMiddleAttributes>; contents?: AccordionMiddleContents }) {
+    this.attributes = operations.merge(opts?.attributes, AccordionMiddle.schema);
+    this.contents = opts?.contents ?? operations.zero(AccordionMiddle.schema.contents);
   }
 }
 
@@ -28678,9 +28681,9 @@ export class AccordionLow implements XMLElement<'accordion-low', AccordionLowAtt
   attributes: AccordionLowAttributes;
   contents: AccordionLowContents;
 
-  constructor(opts?: { attributes?: Partial<AccordionLowAttributes>; content?: AccordionLowContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, AccordionLow.schema);
-    this.contents = opts?.content ?? xml.zero(AccordionLow.schema.contents);
+  constructor(opts?: { attributes?: Partial<AccordionLowAttributes>; contents?: AccordionLowContents }) {
+    this.attributes = operations.merge(opts?.attributes, AccordionLow.schema);
+    this.contents = opts?.contents ?? operations.zero(AccordionLow.schema.contents);
   }
 }
 
@@ -28759,10 +28762,10 @@ export class AccordionRegistration
 
   constructor(opts?: {
     attributes?: Partial<AccordionRegistrationAttributes>;
-    content?: AccordionRegistrationContents;
+    contents?: AccordionRegistrationContents;
   }) {
-    this.attributes = xml.mergeZero(opts?.attributes, AccordionRegistration.schema);
-    this.contents = opts?.content ?? xml.zero(AccordionRegistration.schema.contents);
+    this.attributes = operations.merge(opts?.attributes, AccordionRegistration.schema);
+    this.contents = opts?.contents ?? operations.zero(AccordionRegistration.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -28927,9 +28930,9 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
   attributes: StaffDivideAttributes;
   contents: StaffDivideContents;
 
-  constructor(opts?: { attributes?: Partial<StaffDivideAttributes>; content?: StaffDivideContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StaffDivide.schema);
-    this.contents = opts?.content ?? xml.zero(StaffDivide.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaffDivideAttributes>; contents?: StaffDivideContents }) {
+    this.attributes = operations.merge(opts?.attributes, StaffDivide.schema);
+    this.contents = opts?.contents ?? operations.zero(StaffDivide.schema.contents);
   }
   getType(): 'down' | 'up' | 'up-down' {
     return this.attributes['type'];
@@ -29084,9 +29087,9 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
   attributes: OtherDirectionAttributes;
   contents: OtherDirectionContents;
 
-  constructor(opts?: { attributes?: Partial<OtherDirectionAttributes>; content?: OtherDirectionContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherDirection.schema);
-    this.contents = opts?.content ?? xml.zero(OtherDirection.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherDirectionAttributes>; contents?: OtherDirectionContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherDirection.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherDirection.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -29249,9 +29252,9 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
   attributes: DirectionTypeAttributes;
   contents: DirectionTypeContents;
 
-  constructor(opts?: { attributes?: Partial<DirectionTypeAttributes>; content?: DirectionTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DirectionType.schema);
-    this.contents = opts?.content ?? xml.zero(DirectionType.schema.contents);
+  constructor(opts?: { attributes?: Partial<DirectionTypeAttributes>; contents?: DirectionTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, DirectionType.schema);
+    this.contents = opts?.contents ?? operations.zero(DirectionType.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -29337,9 +29340,9 @@ export class Offset implements XMLElement<'offset', OffsetAttributes, OffsetCont
   attributes: OffsetAttributes;
   contents: OffsetContents;
 
-  constructor(opts?: { attributes?: Partial<OffsetAttributes>; content?: OffsetContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Offset.schema);
-    this.contents = opts?.content ?? xml.zero(Offset.schema.contents);
+  constructor(opts?: { attributes?: Partial<OffsetAttributes>; contents?: OffsetContents }) {
+    this.attributes = operations.merge(opts?.attributes, Offset.schema);
+    this.contents = opts?.contents ?? operations.zero(Offset.schema.contents);
   }
   getSound(): 'yes' | 'no' | null {
     return this.attributes['sound'];
@@ -29381,9 +29384,9 @@ export class InstrumentChange
   attributes: InstrumentChangeAttributes;
   contents: InstrumentChangeContents;
 
-  constructor(opts?: { attributes?: Partial<InstrumentChangeAttributes>; content?: InstrumentChangeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, InstrumentChange.schema);
-    this.contents = opts?.content ?? xml.zero(InstrumentChange.schema.contents);
+  constructor(opts?: { attributes?: Partial<InstrumentChangeAttributes>; contents?: InstrumentChangeContents }) {
+    this.attributes = operations.merge(opts?.attributes, InstrumentChange.schema);
+    this.contents = opts?.contents ?? operations.zero(InstrumentChange.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -29423,9 +29426,9 @@ export class Straight implements XMLElement<'straight', StraightAttributes, Stra
   attributes: StraightAttributes;
   contents: StraightContents;
 
-  constructor(opts?: { attributes?: Partial<StraightAttributes>; content?: StraightContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Straight.schema);
-    this.contents = opts?.content ?? xml.zero(Straight.schema.contents);
+  constructor(opts?: { attributes?: Partial<StraightAttributes>; contents?: StraightContents }) {
+    this.attributes = operations.merge(opts?.attributes, Straight.schema);
+    this.contents = opts?.contents ?? operations.zero(Straight.schema.contents);
   }
 }
 
@@ -29451,9 +29454,9 @@ export class First implements XMLElement<'first', FirstAttributes, FirstContents
   attributes: FirstAttributes;
   contents: FirstContents;
 
-  constructor(opts?: { attributes?: Partial<FirstAttributes>; content?: FirstContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, First.schema);
-    this.contents = opts?.content ?? xml.zero(First.schema.contents);
+  constructor(opts?: { attributes?: Partial<FirstAttributes>; contents?: FirstContents }) {
+    this.attributes = operations.merge(opts?.attributes, First.schema);
+    this.contents = opts?.contents ?? operations.zero(First.schema.contents);
   }
 
   getSwingRatio(): number {
@@ -29482,9 +29485,9 @@ export class Second implements XMLElement<'second', SecondAttributes, SecondCont
   attributes: SecondAttributes;
   contents: SecondContents;
 
-  constructor(opts?: { attributes?: Partial<SecondAttributes>; content?: SecondContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Second.schema);
-    this.contents = opts?.content ?? xml.zero(Second.schema.contents);
+  constructor(opts?: { attributes?: Partial<SecondAttributes>; contents?: SecondContents }) {
+    this.attributes = operations.merge(opts?.attributes, Second.schema);
+    this.contents = opts?.contents ?? operations.zero(Second.schema.contents);
   }
 
   getSecond(): number {
@@ -29516,9 +29519,9 @@ export class SwingType implements XMLElement<'swing-type', SwingTypeAttributes, 
   attributes: SwingTypeAttributes;
   contents: SwingTypeContents;
 
-  constructor(opts?: { attributes?: Partial<SwingTypeAttributes>; content?: SwingTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SwingType.schema);
-    this.contents = opts?.content ?? xml.zero(SwingType.schema.contents);
+  constructor(opts?: { attributes?: Partial<SwingTypeAttributes>; contents?: SwingTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, SwingType.schema);
+    this.contents = opts?.contents ?? operations.zero(SwingType.schema.contents);
   }
 
   getEighth(): 'eighth' | '16th' {
@@ -29545,9 +29548,9 @@ export class SwingStyle implements XMLElement<'swing-style', SwingStyleAttribute
   attributes: SwingStyleAttributes;
   contents: SwingStyleContents;
 
-  constructor(opts?: { attributes?: Partial<SwingStyleAttributes>; content?: SwingStyleContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SwingStyle.schema);
-    this.contents = opts?.content ?? xml.zero(SwingStyle.schema.contents);
+  constructor(opts?: { attributes?: Partial<SwingStyleAttributes>; contents?: SwingStyleContents }) {
+    this.attributes = operations.merge(opts?.attributes, SwingStyle.schema);
+    this.contents = opts?.contents ?? operations.zero(SwingStyle.schema.contents);
   }
 
   getText(): string {
@@ -29591,9 +29594,9 @@ export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents
   attributes: SwingAttributes;
   contents: SwingContents;
 
-  constructor(opts?: { attributes?: Partial<SwingAttributes>; content?: SwingContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Swing.schema);
-    this.contents = opts?.content ?? xml.zero(Swing.schema.contents);
+  constructor(opts?: { attributes?: Partial<SwingAttributes>; contents?: SwingContents }) {
+    this.attributes = operations.merge(opts?.attributes, Swing.schema);
+    this.contents = opts?.contents ?? operations.zero(Swing.schema.contents);
   }
 
   getSwing(): Straight | [First, Second, SwingType | null] {
@@ -29684,9 +29687,9 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
   attributes: SoundAttributes;
   contents: SoundContents;
 
-  constructor(opts?: { attributes?: Partial<SoundAttributes>; content?: SoundContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Sound.schema);
-    this.contents = opts?.content ?? xml.zero(Sound.schema.contents);
+  constructor(opts?: { attributes?: Partial<SoundAttributes>; contents?: SoundContents }) {
+    this.attributes = operations.merge(opts?.attributes, Sound.schema);
+    this.contents = opts?.contents ?? operations.zero(Sound.schema.contents);
   }
   getCoda(): string | null {
     return this.attributes['coda'];
@@ -29847,9 +29850,9 @@ export class Sync implements XMLElement<'sync', SyncAttributes, SyncContents> {
   attributes: SyncAttributes;
   contents: SyncContents;
 
-  constructor(opts?: { attributes?: Partial<SyncAttributes>; content?: SyncContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Sync.schema);
-    this.contents = opts?.content ?? xml.zero(Sync.schema.contents);
+  constructor(opts?: { attributes?: Partial<SyncAttributes>; contents?: SyncContents }) {
+    this.attributes = operations.merge(opts?.attributes, Sync.schema);
+    this.contents = opts?.contents ?? operations.zero(Sync.schema.contents);
   }
   getType(): 'none' | 'tempo' | 'mostly-tempo' | 'mostly-event' | 'event' | 'always-event' {
     return this.attributes['type'];
@@ -29897,9 +29900,9 @@ export class OtherListening implements XMLElement<'other-listening', OtherListen
   attributes: OtherListeningAttributes;
   contents: OtherListeningContents;
 
-  constructor(opts?: { attributes?: Partial<OtherListeningAttributes>; content?: OtherListeningContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OtherListening.schema);
-    this.contents = opts?.content ?? xml.zero(OtherListening.schema.contents);
+  constructor(opts?: { attributes?: Partial<OtherListeningAttributes>; contents?: OtherListeningContents }) {
+    this.attributes = operations.merge(opts?.attributes, OtherListening.schema);
+    this.contents = opts?.contents ?? operations.zero(OtherListening.schema.contents);
   }
   getType(): string {
     return this.attributes['type'];
@@ -29950,9 +29953,9 @@ export class Listening implements XMLElement<'listening', ListeningAttributes, L
   attributes: ListeningAttributes;
   contents: ListeningContents;
 
-  constructor(opts?: { attributes?: Partial<ListeningAttributes>; content?: ListeningContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Listening.schema);
-    this.contents = opts?.content ?? xml.zero(Listening.schema.contents);
+  constructor(opts?: { attributes?: Partial<ListeningAttributes>; contents?: ListeningContents }) {
+    this.attributes = operations.merge(opts?.attributes, Listening.schema);
+    this.contents = opts?.contents ?? operations.zero(Listening.schema.contents);
   }
 
   getListening(): Array<Sync | OtherListening> {
@@ -30003,9 +30006,9 @@ export class Direction implements XMLElement<'direction', DirectionAttributes, D
   attributes: DirectionAttributes;
   contents: DirectionContents;
 
-  constructor(opts?: { attributes?: Partial<DirectionAttributes>; content?: DirectionContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Direction.schema);
-    this.contents = opts?.content ?? xml.zero(Direction.schema.contents);
+  constructor(opts?: { attributes?: Partial<DirectionAttributes>; contents?: DirectionContents }) {
+    this.attributes = operations.merge(opts?.attributes, Direction.schema);
+    this.contents = opts?.contents ?? operations.zero(Direction.schema.contents);
   }
 
   getDirectionTypes(): Array<DirectionType> {
@@ -30079,9 +30082,9 @@ export class Divisions implements XMLElement<'divisions', DivisionsAttributes, D
   attributes: DivisionsAttributes;
   contents: DivisionsContents;
 
-  constructor(opts?: { attributes?: Partial<DivisionsAttributes>; content?: DivisionsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Divisions.schema);
-    this.contents = opts?.content ?? xml.zero(Divisions.schema.contents);
+  constructor(opts?: { attributes?: Partial<DivisionsAttributes>; contents?: DivisionsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Divisions.schema);
+    this.contents = opts?.contents ?? operations.zero(Divisions.schema.contents);
   }
 
   getPositiveDivisions(): number {
@@ -30116,9 +30119,9 @@ export class Cancel implements XMLElement<'cancel', CancelAttributes, CancelCont
   attributes: CancelAttributes;
   contents: CancelContents;
 
-  constructor(opts?: { attributes?: Partial<CancelAttributes>; content?: CancelContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Cancel.schema);
-    this.contents = opts?.content ?? xml.zero(Cancel.schema.contents);
+  constructor(opts?: { attributes?: Partial<CancelAttributes>; contents?: CancelContents }) {
+    this.attributes = operations.merge(opts?.attributes, Cancel.schema);
+    this.contents = opts?.contents ?? operations.zero(Cancel.schema.contents);
   }
   getLocation(): 'left' | 'right' | 'beforeBarline' | null {
     return this.attributes['location'];
@@ -30156,9 +30159,9 @@ export class Fifths implements XMLElement<'fifths', FifthsAttributes, FifthsCont
   attributes: FifthsAttributes;
   contents: FifthsContents;
 
-  constructor(opts?: { attributes?: Partial<FifthsAttributes>; content?: FifthsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Fifths.schema);
-    this.contents = opts?.content ?? xml.zero(Fifths.schema.contents);
+  constructor(opts?: { attributes?: Partial<FifthsAttributes>; contents?: FifthsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Fifths.schema);
+    this.contents = opts?.contents ?? operations.zero(Fifths.schema.contents);
   }
 
   getValue(): number | null {
@@ -30221,9 +30224,9 @@ export class Mode implements XMLElement<'mode', ModeAttributes, ModeContents> {
   attributes: ModeAttributes;
   contents: ModeContents;
 
-  constructor(opts?: { attributes?: Partial<ModeAttributes>; content?: ModeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Mode.schema);
-    this.contents = opts?.content ?? xml.zero(Mode.schema.contents);
+  constructor(opts?: { attributes?: Partial<ModeAttributes>; contents?: ModeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Mode.schema);
+    this.contents = opts?.contents ?? operations.zero(Mode.schema.contents);
   }
 
   getMode():
@@ -30283,9 +30286,9 @@ export class KeyStep implements XMLElement<'key-step', KeyStepAttributes, KeySte
   attributes: KeyStepAttributes;
   contents: KeyStepContents;
 
-  constructor(opts?: { attributes?: Partial<KeyStepAttributes>; content?: KeyStepContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, KeyStep.schema);
-    this.contents = opts?.content ?? xml.zero(KeyStep.schema.contents);
+  constructor(opts?: { attributes?: Partial<KeyStepAttributes>; contents?: KeyStepContents }) {
+    this.attributes = operations.merge(opts?.attributes, KeyStep.schema);
+    this.contents = opts?.contents ?? operations.zero(KeyStep.schema.contents);
   }
 
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
@@ -30317,9 +30320,9 @@ export class KeyAlter implements XMLElement<'key-alter', KeyAlterAttributes, Key
   attributes: KeyAlterAttributes;
   contents: KeyAlterContents;
 
-  constructor(opts?: { attributes?: Partial<KeyAlterAttributes>; content?: KeyAlterContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, KeyAlter.schema);
-    this.contents = opts?.content ?? xml.zero(KeyAlter.schema.contents);
+  constructor(opts?: { attributes?: Partial<KeyAlterAttributes>; contents?: KeyAlterContents }) {
+    this.attributes = operations.merge(opts?.attributes, KeyAlter.schema);
+    this.contents = opts?.contents ?? operations.zero(KeyAlter.schema.contents);
   }
 
   getSemitones(): number {
@@ -30442,9 +30445,9 @@ export class KeyAccidental implements XMLElement<'key-accidental', KeyAccidental
   attributes: KeyAccidentalAttributes;
   contents: KeyAccidentalContents;
 
-  constructor(opts?: { attributes?: Partial<KeyAccidentalAttributes>; content?: KeyAccidentalContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, KeyAccidental.schema);
-    this.contents = opts?.content ?? xml.zero(KeyAccidental.schema.contents);
+  constructor(opts?: { attributes?: Partial<KeyAccidentalAttributes>; contents?: KeyAccidentalContents }) {
+    this.attributes = operations.merge(opts?.attributes, KeyAccidental.schema);
+    this.contents = opts?.contents ?? operations.zero(KeyAccidental.schema.contents);
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
@@ -30563,9 +30566,9 @@ export class KeyOctave implements XMLElement<'key-octave', KeyOctaveAttributes, 
   attributes: KeyOctaveAttributes;
   contents: KeyOctaveContents;
 
-  constructor(opts?: { attributes?: Partial<KeyOctaveAttributes>; content?: KeyOctaveContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, KeyOctave.schema);
-    this.contents = opts?.content ?? xml.zero(KeyOctave.schema.contents);
+  constructor(opts?: { attributes?: Partial<KeyOctaveAttributes>; contents?: KeyOctaveContents }) {
+    this.attributes = operations.merge(opts?.attributes, KeyOctave.schema);
+    this.contents = opts?.contents ?? operations.zero(KeyOctave.schema.contents);
   }
   getNumber(): number {
     return this.attributes['number'];
@@ -30681,9 +30684,9 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
   attributes: KeyAttributes;
   contents: KeyContents;
 
-  constructor(opts?: { attributes?: Partial<KeyAttributes>; content?: KeyContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Key.schema);
-    this.contents = opts?.content ?? xml.zero(Key.schema.contents);
+  constructor(opts?: { attributes?: Partial<KeyAttributes>; contents?: KeyContents }) {
+    this.attributes = operations.merge(opts?.attributes, Key.schema);
+    this.contents = opts?.contents ?? operations.zero(Key.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -30789,9 +30792,9 @@ export class Beats implements XMLElement<'beats', BeatsAttributes, BeatsContents
   attributes: BeatsAttributes;
   contents: BeatsContents;
 
-  constructor(opts?: { attributes?: Partial<BeatsAttributes>; content?: BeatsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Beats.schema);
-    this.contents = opts?.content ?? xml.zero(Beats.schema.contents);
+  constructor(opts?: { attributes?: Partial<BeatsAttributes>; contents?: BeatsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Beats.schema);
+    this.contents = opts?.contents ?? operations.zero(Beats.schema.contents);
   }
 
   getText(): string {
@@ -30818,9 +30821,9 @@ export class BeatType implements XMLElement<'beat-type', BeatTypeAttributes, Bea
   attributes: BeatTypeAttributes;
   contents: BeatTypeContents;
 
-  constructor(opts?: { attributes?: Partial<BeatTypeAttributes>; content?: BeatTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BeatType.schema);
-    this.contents = opts?.content ?? xml.zero(BeatType.schema.contents);
+  constructor(opts?: { attributes?: Partial<BeatTypeAttributes>; contents?: BeatTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, BeatType.schema);
+    this.contents = opts?.contents ?? operations.zero(BeatType.schema.contents);
   }
 
   getText(): string {
@@ -30856,9 +30859,9 @@ export class TimeRelation implements XMLElement<'time-relation', TimeRelationAtt
   attributes: TimeRelationAttributes;
   contents: TimeRelationContents;
 
-  constructor(opts?: { attributes?: Partial<TimeRelationAttributes>; content?: TimeRelationContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, TimeRelation.schema);
-    this.contents = opts?.content ?? xml.zero(TimeRelation.schema.contents);
+  constructor(opts?: { attributes?: Partial<TimeRelationAttributes>; contents?: TimeRelationContents }) {
+    this.attributes = operations.merge(opts?.attributes, TimeRelation.schema);
+    this.contents = opts?.contents ?? operations.zero(TimeRelation.schema.contents);
   }
 
   getTimeRelation(): 'space' | 'bracket' | 'equals' | 'hyphen' | 'parentheses' | 'slash' {
@@ -30912,9 +30915,9 @@ export class Interchangeable
   attributes: InterchangeableAttributes;
   contents: InterchangeableContents;
 
-  constructor(opts?: { attributes?: Partial<InterchangeableAttributes>; content?: InterchangeableContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Interchangeable.schema);
-    this.contents = opts?.content ?? xml.zero(Interchangeable.schema.contents);
+  constructor(opts?: { attributes?: Partial<InterchangeableAttributes>; contents?: InterchangeableContents }) {
+    this.attributes = operations.merge(opts?.attributes, Interchangeable.schema);
+    this.contents = opts?.contents ?? operations.zero(Interchangeable.schema.contents);
   }
   getSeparator(): 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null {
     return this.attributes['separator'];
@@ -30958,9 +30961,9 @@ export class SenzaMisura implements XMLElement<'senza-misura', SenzaMisuraAttrib
   attributes: SenzaMisuraAttributes;
   contents: SenzaMisuraContents;
 
-  constructor(opts?: { attributes?: Partial<SenzaMisuraAttributes>; content?: SenzaMisuraContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SenzaMisura.schema);
-    this.contents = opts?.content ?? xml.zero(SenzaMisura.schema.contents);
+  constructor(opts?: { attributes?: Partial<SenzaMisuraAttributes>; contents?: SenzaMisuraContents }) {
+    this.attributes = operations.merge(opts?.attributes, SenzaMisura.schema);
+    this.contents = opts?.contents ?? operations.zero(SenzaMisura.schema.contents);
   }
 
   getText(): string {
@@ -31008,9 +31011,9 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
   attributes: TimeAttributes;
   contents: TimeContents;
 
-  constructor(opts?: { attributes?: Partial<TimeAttributes>; content?: TimeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Time.schema);
-    this.contents = opts?.content ?? xml.zero(Time.schema.contents);
+  constructor(opts?: { attributes?: Partial<TimeAttributes>; contents?: TimeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Time.schema);
+    this.contents = opts?.contents ?? operations.zero(Time.schema.contents);
   }
 
   getValue(): [Array<[Beats, BeatType]>, Interchangeable | null] | SenzaMisura {
@@ -31037,9 +31040,9 @@ export class Staves implements XMLElement<'staves', StavesAttributes, StavesCont
   attributes: StavesAttributes;
   contents: StavesContents;
 
-  constructor(opts?: { attributes?: Partial<StavesAttributes>; content?: StavesContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Staves.schema);
-    this.contents = opts?.content ?? xml.zero(Staves.schema.contents);
+  constructor(opts?: { attributes?: Partial<StavesAttributes>; contents?: StavesContents }) {
+    this.attributes = operations.merge(opts?.attributes, Staves.schema);
+    this.contents = opts?.contents ?? operations.zero(Staves.schema.contents);
   }
 
   getText(): string {
@@ -31124,9 +31127,9 @@ export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttribute
   attributes: PartSymbolAttributes;
   contents: PartSymbolContents;
 
-  constructor(opts?: { attributes?: Partial<PartSymbolAttributes>; content?: PartSymbolContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PartSymbol.schema);
-    this.contents = opts?.content ?? xml.zero(PartSymbol.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartSymbolAttributes>; contents?: PartSymbolContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartSymbol.schema);
+    this.contents = opts?.contents ?? operations.zero(PartSymbol.schema.contents);
   }
   getBottomStaff(): number | null {
     return this.attributes['bottom-staff'];
@@ -31220,9 +31223,9 @@ export class Instruments implements XMLElement<'instruments', InstrumentsAttribu
   attributes: InstrumentsAttributes;
   contents: InstrumentsContents;
 
-  constructor(opts?: { attributes?: Partial<InstrumentsAttributes>; content?: InstrumentsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Instruments.schema);
-    this.contents = opts?.content ?? xml.zero(Instruments.schema.contents);
+  constructor(opts?: { attributes?: Partial<InstrumentsAttributes>; contents?: InstrumentsContents }) {
+    this.attributes = operations.merge(opts?.attributes, Instruments.schema);
+    this.contents = opts?.contents ?? operations.zero(Instruments.schema.contents);
   }
 
   getText(): string {
@@ -31258,9 +31261,9 @@ export class Sign implements XMLElement<'sign', SignAttributes, SignContents> {
   attributes: SignAttributes;
   contents: SignContents;
 
-  constructor(opts?: { attributes?: Partial<SignAttributes>; content?: SignContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Sign.schema);
-    this.contents = opts?.content ?? xml.zero(Sign.schema.contents);
+  constructor(opts?: { attributes?: Partial<SignAttributes>; contents?: SignContents }) {
+    this.attributes = operations.merge(opts?.attributes, Sign.schema);
+    this.contents = opts?.contents ?? operations.zero(Sign.schema.contents);
   }
 
   getClefSign(): 'G' | 'F' | 'C' | 'percussion' | 'TAB' | 'jianpu' | 'none' {
@@ -31292,9 +31295,9 @@ export class Line implements XMLElement<'line', LineAttributes, LineContents> {
   attributes: LineAttributes;
   contents: LineContents;
 
-  constructor(opts?: { attributes?: Partial<LineAttributes>; content?: LineContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Line.schema);
-    this.contents = opts?.content ?? xml.zero(Line.schema.contents);
+  constructor(opts?: { attributes?: Partial<LineAttributes>; contents?: LineContents }) {
+    this.attributes = operations.merge(opts?.attributes, Line.schema);
+    this.contents = opts?.contents ?? operations.zero(Line.schema.contents);
   }
 
   getStaffLinePosition(): number {
@@ -31329,9 +31332,9 @@ export class ClefOctaveChange
   attributes: ClefOctaveChangeAttributes;
   contents: ClefOctaveChangeContents;
 
-  constructor(opts?: { attributes?: Partial<ClefOctaveChangeAttributes>; content?: ClefOctaveChangeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ClefOctaveChange.schema);
-    this.contents = opts?.content ?? xml.zero(ClefOctaveChange.schema.contents);
+  constructor(opts?: { attributes?: Partial<ClefOctaveChangeAttributes>; contents?: ClefOctaveChangeContents }) {
+    this.attributes = operations.merge(opts?.attributes, ClefOctaveChange.schema);
+    this.contents = opts?.contents ?? operations.zero(ClefOctaveChange.schema.contents);
   }
 
   getClefOctaveChange(): number {
@@ -31419,9 +31422,9 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
   attributes: ClefAttributes;
   contents: ClefContents;
 
-  constructor(opts?: { attributes?: Partial<ClefAttributes>; content?: ClefContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Clef.schema);
-    this.contents = opts?.content ?? xml.zero(Clef.schema.contents);
+  constructor(opts?: { attributes?: Partial<ClefAttributes>; contents?: ClefContents }) {
+    this.attributes = operations.merge(opts?.attributes, Clef.schema);
+    this.contents = opts?.contents ?? operations.zero(Clef.schema.contents);
   }
   getAdditional(): 'yes' | 'no' | null {
     return this.attributes['additional'];
@@ -31560,9 +31563,9 @@ export class StaffType implements XMLElement<'staff-type', StaffTypeAttributes, 
   attributes: StaffTypeAttributes;
   contents: StaffTypeContents;
 
-  constructor(opts?: { attributes?: Partial<StaffTypeAttributes>; content?: StaffTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StaffType.schema);
-    this.contents = opts?.content ?? xml.zero(StaffType.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaffTypeAttributes>; contents?: StaffTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, StaffType.schema);
+    this.contents = opts?.contents ?? operations.zero(StaffType.schema.contents);
   }
 
   getStaffType(): 'regular' | 'alternate' | 'cue' | 'editorial' | 'ossia' {
@@ -31589,9 +31592,9 @@ export class StaffLines implements XMLElement<'staff-lines', StaffLinesAttribute
   attributes: StaffLinesAttributes;
   contents: StaffLinesContents;
 
-  constructor(opts?: { attributes?: Partial<StaffLinesAttributes>; content?: StaffLinesContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StaffLines.schema);
-    this.contents = opts?.content ?? xml.zero(StaffLines.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaffLinesAttributes>; contents?: StaffLinesContents }) {
+    this.attributes = operations.merge(opts?.attributes, StaffLines.schema);
+    this.contents = opts?.contents ?? operations.zero(StaffLines.schema.contents);
   }
 
   getText(): string {
@@ -31630,9 +31633,9 @@ export class LineDetail implements XMLElement<'line-detail', LineDetailAttribute
   attributes: LineDetailAttributes;
   contents: LineDetailContents;
 
-  constructor(opts?: { attributes?: Partial<LineDetailAttributes>; content?: LineDetailContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, LineDetail.schema);
-    this.contents = opts?.content ?? xml.zero(LineDetail.schema.contents);
+  constructor(opts?: { attributes?: Partial<LineDetailAttributes>; contents?: LineDetailContents }) {
+    this.attributes = operations.merge(opts?.attributes, LineDetail.schema);
+    this.contents = opts?.contents ?? operations.zero(LineDetail.schema.contents);
   }
   getLine(): number {
     return this.attributes['line'];
@@ -31686,9 +31689,9 @@ export class StaffTuning implements XMLElement<'staff-tuning', StaffTuningAttrib
   attributes: StaffTuningAttributes;
   contents: StaffTuningContents;
 
-  constructor(opts?: { attributes?: Partial<StaffTuningAttributes>; content?: StaffTuningContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StaffTuning.schema);
-    this.contents = opts?.content ?? xml.zero(StaffTuning.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaffTuningAttributes>; contents?: StaffTuningContents }) {
+    this.attributes = operations.merge(opts?.attributes, StaffTuning.schema);
+    this.contents = opts?.contents ?? operations.zero(StaffTuning.schema.contents);
   }
   getLine(): number {
     return this.attributes['line'];
@@ -31732,9 +31735,9 @@ export class Capo implements XMLElement<'capo', CapoAttributes, CapoContents> {
   attributes: CapoAttributes;
   contents: CapoContents;
 
-  constructor(opts?: { attributes?: Partial<CapoAttributes>; content?: CapoContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Capo.schema);
-    this.contents = opts?.content ?? xml.zero(Capo.schema.contents);
+  constructor(opts?: { attributes?: Partial<CapoAttributes>; contents?: CapoContents }) {
+    this.attributes = operations.merge(opts?.attributes, Capo.schema);
+    this.contents = opts?.contents ?? operations.zero(Capo.schema.contents);
   }
 
   getText(): string {
@@ -31767,9 +31770,9 @@ export class StaffSize implements XMLElement<'staff-size', StaffSizeAttributes, 
   attributes: StaffSizeAttributes;
   contents: StaffSizeContents;
 
-  constructor(opts?: { attributes?: Partial<StaffSizeAttributes>; content?: StaffSizeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StaffSize.schema);
-    this.contents = opts?.content ?? xml.zero(StaffSize.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaffSizeAttributes>; contents?: StaffSizeContents }) {
+    this.attributes = operations.merge(opts?.attributes, StaffSize.schema);
+    this.contents = opts?.contents ?? operations.zero(StaffSize.schema.contents);
   }
   getScaling(): number | null {
     return this.attributes['scaling'];
@@ -31833,9 +31836,9 @@ export class StaffDetails implements XMLElement<'staff-details', StaffDetailsAtt
   attributes: StaffDetailsAttributes;
   contents: StaffDetailsContents;
 
-  constructor(opts?: { attributes?: Partial<StaffDetailsAttributes>; content?: StaffDetailsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StaffDetails.schema);
-    this.contents = opts?.content ?? xml.zero(StaffDetails.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaffDetailsAttributes>; contents?: StaffDetailsContents }) {
+    this.attributes = operations.merge(opts?.attributes, StaffDetails.schema);
+    this.contents = opts?.contents ?? operations.zero(StaffDetails.schema.contents);
   }
   getNumber(): number | null {
     return this.attributes['number'];
@@ -31915,9 +31918,9 @@ export class Diatonic implements XMLElement<'diatonic', DiatonicAttributes, Diat
   attributes: DiatonicAttributes;
   contents: DiatonicContents;
 
-  constructor(opts?: { attributes?: Partial<DiatonicAttributes>; content?: DiatonicContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Diatonic.schema);
-    this.contents = opts?.content ?? xml.zero(Diatonic.schema.contents);
+  constructor(opts?: { attributes?: Partial<DiatonicAttributes>; contents?: DiatonicContents }) {
+    this.attributes = operations.merge(opts?.attributes, Diatonic.schema);
+    this.contents = opts?.contents ?? operations.zero(Diatonic.schema.contents);
   }
 
   getDiatonic(): number {
@@ -31949,9 +31952,9 @@ export class Chromatic implements XMLElement<'chromatic', ChromaticAttributes, C
   attributes: ChromaticAttributes;
   contents: ChromaticContents;
 
-  constructor(opts?: { attributes?: Partial<ChromaticAttributes>; content?: ChromaticContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Chromatic.schema);
-    this.contents = opts?.content ?? xml.zero(Chromatic.schema.contents);
+  constructor(opts?: { attributes?: Partial<ChromaticAttributes>; contents?: ChromaticContents }) {
+    this.attributes = operations.merge(opts?.attributes, Chromatic.schema);
+    this.contents = opts?.contents ?? operations.zero(Chromatic.schema.contents);
   }
 
   getSemitones(): number {
@@ -31984,9 +31987,9 @@ export class OctaveChange implements XMLElement<'octave-change', OctaveChangeAtt
   attributes: OctaveChangeAttributes;
   contents: OctaveChangeContents;
 
-  constructor(opts?: { attributes?: Partial<OctaveChangeAttributes>; content?: OctaveChangeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, OctaveChange.schema);
-    this.contents = opts?.content ?? xml.zero(OctaveChange.schema.contents);
+  constructor(opts?: { attributes?: Partial<OctaveChangeAttributes>; contents?: OctaveChangeContents }) {
+    this.attributes = operations.merge(opts?.attributes, OctaveChange.schema);
+    this.contents = opts?.contents ?? operations.zero(OctaveChange.schema.contents);
   }
 
   getOctaveChange(): number {
@@ -32013,9 +32016,9 @@ export class Double implements XMLElement<'double', DoubleAttributes, DoubleCont
   attributes: DoubleAttributes;
   contents: DoubleContents;
 
-  constructor(opts?: { attributes?: Partial<DoubleAttributes>; content?: DoubleContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Double.schema);
-    this.contents = opts?.content ?? xml.zero(Double.schema.contents);
+  constructor(opts?: { attributes?: Partial<DoubleAttributes>; contents?: DoubleContents }) {
+    this.attributes = operations.merge(opts?.attributes, Double.schema);
+    this.contents = opts?.contents ?? operations.zero(Double.schema.contents);
   }
   getAbove(): 'yes' | 'no' | null {
     return this.attributes['above'];
@@ -32049,9 +32052,9 @@ export class Transpose implements XMLElement<'transpose', TransposeAttributes, T
   attributes: TransposeAttributes;
   contents: TransposeContents;
 
-  constructor(opts?: { attributes?: Partial<TransposeAttributes>; content?: TransposeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Transpose.schema);
-    this.contents = opts?.content ?? xml.zero(Transpose.schema.contents);
+  constructor(opts?: { attributes?: Partial<TransposeAttributes>; contents?: TransposeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Transpose.schema);
+    this.contents = opts?.contents ?? operations.zero(Transpose.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -32111,9 +32114,9 @@ export class PartClef implements XMLElement<'part-clef', PartClefAttributes, Par
   attributes: PartClefAttributes;
   contents: PartClefContents;
 
-  constructor(opts?: { attributes?: Partial<PartClefAttributes>; content?: PartClefContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PartClef.schema);
-    this.contents = opts?.content ?? xml.zero(PartClef.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartClefAttributes>; contents?: PartClefContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartClef.schema);
+    this.contents = opts?.contents ?? operations.zero(PartClef.schema.contents);
   }
 
   getSign(): Sign {
@@ -32157,9 +32160,9 @@ export class PartTranspose implements XMLElement<'part-transpose', PartTranspose
   attributes: PartTransposeAttributes;
   contents: PartTransposeContents;
 
-  constructor(opts?: { attributes?: Partial<PartTransposeAttributes>; content?: PartTransposeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, PartTranspose.schema);
-    this.contents = opts?.content ?? xml.zero(PartTranspose.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartTransposeAttributes>; contents?: PartTransposeContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartTranspose.schema);
+    this.contents = opts?.contents ?? operations.zero(PartTranspose.schema.contents);
   }
 
   getDiatonic(): Diatonic | null {
@@ -32210,9 +32213,9 @@ export class ForPart implements XMLElement<'for-part', ForPartAttributes, ForPar
   attributes: ForPartAttributes;
   contents: ForPartContents;
 
-  constructor(opts?: { attributes?: Partial<ForPartAttributes>; content?: ForPartContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ForPart.schema);
-    this.contents = opts?.content ?? xml.zero(ForPart.schema.contents);
+  constructor(opts?: { attributes?: Partial<ForPartAttributes>; contents?: ForPartContents }) {
+    this.attributes = operations.merge(opts?.attributes, ForPart.schema);
+    this.contents = opts?.contents ?? operations.zero(ForPart.schema.contents);
   }
   getId(): string | null {
     return this.attributes['id'];
@@ -32303,9 +32306,9 @@ export class Directive implements XMLElement<'directive', DirectiveAttributes, D
   attributes: DirectiveAttributes;
   contents: DirectiveContents;
 
-  constructor(opts?: { attributes?: Partial<DirectiveAttributes>; content?: DirectiveContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Directive.schema);
-    this.contents = opts?.content ?? xml.zero(Directive.schema.contents);
+  constructor(opts?: { attributes?: Partial<DirectiveAttributes>; contents?: DirectiveContents }) {
+    this.attributes = operations.merge(opts?.attributes, Directive.schema);
+    this.contents = opts?.contents ?? operations.zero(Directive.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -32399,9 +32402,9 @@ export class MultipleRest implements XMLElement<'multiple-rest', MultipleRestAtt
   attributes: MultipleRestAttributes;
   contents: MultipleRestContents;
 
-  constructor(opts?: { attributes?: Partial<MultipleRestAttributes>; content?: MultipleRestContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MultipleRest.schema);
-    this.contents = opts?.content ?? xml.zero(MultipleRest.schema.contents);
+  constructor(opts?: { attributes?: Partial<MultipleRestAttributes>; contents?: MultipleRestContents }) {
+    this.attributes = operations.merge(opts?.attributes, MultipleRest.schema);
+    this.contents = opts?.contents ?? operations.zero(MultipleRest.schema.contents);
   }
   getUseSymbols(): 'yes' | 'no' | null {
     return this.attributes['use-symbols'];
@@ -32442,9 +32445,9 @@ export class MeasureRepeat implements XMLElement<'measure-repeat', MeasureRepeat
   attributes: MeasureRepeatAttributes;
   contents: MeasureRepeatContents;
 
-  constructor(opts?: { attributes?: Partial<MeasureRepeatAttributes>; content?: MeasureRepeatContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MeasureRepeat.schema);
-    this.contents = opts?.content ?? xml.zero(MeasureRepeat.schema.contents);
+  constructor(opts?: { attributes?: Partial<MeasureRepeatAttributes>; contents?: MeasureRepeatContents }) {
+    this.attributes = operations.merge(opts?.attributes, MeasureRepeat.schema);
+    this.contents = opts?.contents ?? operations.zero(MeasureRepeat.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -32526,9 +32529,9 @@ export class SlashType implements XMLElement<'slash-type', SlashTypeAttributes, 
   attributes: SlashTypeAttributes;
   contents: SlashTypeContents;
 
-  constructor(opts?: { attributes?: Partial<SlashTypeAttributes>; content?: SlashTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SlashType.schema);
-    this.contents = opts?.content ?? xml.zero(SlashType.schema.contents);
+  constructor(opts?: { attributes?: Partial<SlashTypeAttributes>; contents?: SlashTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, SlashType.schema);
+    this.contents = opts?.contents ?? operations.zero(SlashType.schema.contents);
   }
 
   getNoteTypeValue():
@@ -32583,9 +32586,9 @@ export class SlashDot implements XMLElement<'slash-dot', SlashDotAttributes, Sla
   attributes: SlashDotAttributes;
   contents: SlashDotContents;
 
-  constructor(opts?: { attributes?: Partial<SlashDotAttributes>; content?: SlashDotContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, SlashDot.schema);
-    this.contents = opts?.content ?? xml.zero(SlashDot.schema.contents);
+  constructor(opts?: { attributes?: Partial<SlashDotAttributes>; contents?: SlashDotContents }) {
+    this.attributes = operations.merge(opts?.attributes, SlashDot.schema);
+    this.contents = opts?.contents ?? operations.zero(SlashDot.schema.contents);
   }
 }
 
@@ -32605,9 +32608,9 @@ export class ExceptVoice implements XMLElement<'except-voice', ExceptVoiceAttrib
   attributes: ExceptVoiceAttributes;
   contents: ExceptVoiceContents;
 
-  constructor(opts?: { attributes?: Partial<ExceptVoiceAttributes>; content?: ExceptVoiceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ExceptVoice.schema);
-    this.contents = opts?.content ?? xml.zero(ExceptVoice.schema.contents);
+  constructor(opts?: { attributes?: Partial<ExceptVoiceAttributes>; contents?: ExceptVoiceContents }) {
+    this.attributes = operations.merge(opts?.attributes, ExceptVoice.schema);
+    this.contents = opts?.contents ?? operations.zero(ExceptVoice.schema.contents);
   }
 
   getText(): string {
@@ -32656,9 +32659,9 @@ export class BeatRepeat implements XMLElement<'beat-repeat', BeatRepeatAttribute
   attributes: BeatRepeatAttributes;
   contents: BeatRepeatContents;
 
-  constructor(opts?: { attributes?: Partial<BeatRepeatAttributes>; content?: BeatRepeatContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BeatRepeat.schema);
-    this.contents = opts?.content ?? xml.zero(BeatRepeat.schema.contents);
+  constructor(opts?: { attributes?: Partial<BeatRepeatAttributes>; contents?: BeatRepeatContents }) {
+    this.attributes = operations.merge(opts?.attributes, BeatRepeat.schema);
+    this.contents = opts?.contents ?? operations.zero(BeatRepeat.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -32728,9 +32731,9 @@ export class Slash implements XMLElement<'slash', SlashAttributes, SlashContents
   attributes: SlashAttributes;
   contents: SlashContents;
 
-  constructor(opts?: { attributes?: Partial<SlashAttributes>; content?: SlashContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Slash.schema);
-    this.contents = opts?.content ?? xml.zero(Slash.schema.contents);
+  constructor(opts?: { attributes?: Partial<SlashAttributes>; contents?: SlashContents }) {
+    this.attributes = operations.merge(opts?.attributes, Slash.schema);
+    this.contents = opts?.contents ?? operations.zero(Slash.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -32805,9 +32808,9 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
   attributes: MeasureStyleAttributes;
   contents: MeasureStyleContents;
 
-  constructor(opts?: { attributes?: Partial<MeasureStyleAttributes>; content?: MeasureStyleContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MeasureStyle.schema);
-    this.contents = opts?.content ?? xml.zero(MeasureStyle.schema.contents);
+  constructor(opts?: { attributes?: Partial<MeasureStyleAttributes>; contents?: MeasureStyleContents }) {
+    this.attributes = operations.merge(opts?.attributes, MeasureStyle.schema);
+    this.contents = opts?.contents ?? operations.zero(MeasureStyle.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -32915,9 +32918,9 @@ export class Attributes implements XMLElement<'attributes', AttributesAttributes
   attributes: AttributesAttributes;
   contents: AttributesContents;
 
-  constructor(opts?: { attributes?: Partial<AttributesAttributes>; content?: AttributesContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Attributes.schema);
-    this.contents = opts?.content ?? xml.zero(Attributes.schema.contents);
+  constructor(opts?: { attributes?: Partial<AttributesAttributes>; contents?: AttributesContents }) {
+    this.attributes = operations.merge(opts?.attributes, Attributes.schema);
+    this.contents = opts?.contents ?? operations.zero(Attributes.schema.contents);
   }
 
   getFootnote(): Footnote | null {
@@ -33063,9 +33066,9 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
   attributes: RootStepAttributes;
   contents: RootStepContents;
 
-  constructor(opts?: { attributes?: Partial<RootStepAttributes>; content?: RootStepContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, RootStep.schema);
-    this.contents = opts?.content ?? xml.zero(RootStep.schema.contents);
+  constructor(opts?: { attributes?: Partial<RootStepAttributes>; contents?: RootStepContents }) {
+    this.attributes = operations.merge(opts?.attributes, RootStep.schema);
+    this.contents = opts?.contents ?? operations.zero(RootStep.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -33201,9 +33204,9 @@ export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, 
   attributes: RootAlterAttributes;
   contents: RootAlterContents;
 
-  constructor(opts?: { attributes?: Partial<RootAlterAttributes>; content?: RootAlterContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, RootAlter.schema);
-    this.contents = opts?.content ?? xml.zero(RootAlter.schema.contents);
+  constructor(opts?: { attributes?: Partial<RootAlterAttributes>; contents?: RootAlterContents }) {
+    this.attributes = operations.merge(opts?.attributes, RootAlter.schema);
+    this.contents = opts?.contents ?? operations.zero(RootAlter.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -33300,9 +33303,9 @@ export class Root implements XMLElement<'root', RootAttributes, RootContents> {
   attributes: RootAttributes;
   contents: RootContents;
 
-  constructor(opts?: { attributes?: Partial<RootAttributes>; content?: RootContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Root.schema);
-    this.contents = opts?.content ?? xml.zero(Root.schema.contents);
+  constructor(opts?: { attributes?: Partial<RootAttributes>; contents?: RootContents }) {
+    this.attributes = operations.merge(opts?.attributes, Root.schema);
+    this.contents = opts?.contents ?? operations.zero(Root.schema.contents);
   }
 
   getRootStep(): RootStep {
@@ -33384,9 +33387,9 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
   attributes: NumeralRootAttributes;
   contents: NumeralRootContents;
 
-  constructor(opts?: { attributes?: Partial<NumeralRootAttributes>; content?: NumeralRootContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NumeralRoot.schema);
-    this.contents = opts?.content ?? xml.zero(NumeralRoot.schema.contents);
+  constructor(opts?: { attributes?: Partial<NumeralRootAttributes>; contents?: NumeralRootContents }) {
+    this.attributes = operations.merge(opts?.attributes, NumeralRoot.schema);
+    this.contents = opts?.contents ?? operations.zero(NumeralRoot.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -33530,9 +33533,9 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
   attributes: NumeralAlterAttributes;
   contents: NumeralAlterContents;
 
-  constructor(opts?: { attributes?: Partial<NumeralAlterAttributes>; content?: NumeralAlterContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NumeralAlter.schema);
-    this.contents = opts?.content ?? xml.zero(NumeralAlter.schema.contents);
+  constructor(opts?: { attributes?: Partial<NumeralAlterAttributes>; contents?: NumeralAlterContents }) {
+    this.attributes = operations.merge(opts?.attributes, NumeralAlter.schema);
+    this.contents = opts?.contents ?? operations.zero(NumeralAlter.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -33638,9 +33641,9 @@ export class NumeralFifths implements XMLElement<'numeral-fifths', NumeralFifths
   attributes: NumeralFifthsAttributes;
   contents: NumeralFifthsContents;
 
-  constructor(opts?: { attributes?: Partial<NumeralFifthsAttributes>; content?: NumeralFifthsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NumeralFifths.schema);
-    this.contents = opts?.content ?? xml.zero(NumeralFifths.schema.contents);
+  constructor(opts?: { attributes?: Partial<NumeralFifthsAttributes>; contents?: NumeralFifthsContents }) {
+    this.attributes = operations.merge(opts?.attributes, NumeralFifths.schema);
+    this.contents = opts?.contents ?? operations.zero(NumeralFifths.schema.contents);
   }
 
   getValue(): number {
@@ -33676,9 +33679,9 @@ export class NumeralMode implements XMLElement<'numeral-mode', NumeralModeAttrib
   attributes: NumeralModeAttributes;
   contents: NumeralModeContents;
 
-  constructor(opts?: { attributes?: Partial<NumeralModeAttributes>; content?: NumeralModeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NumeralMode.schema);
-    this.contents = opts?.content ?? xml.zero(NumeralMode.schema.contents);
+  constructor(opts?: { attributes?: Partial<NumeralModeAttributes>; contents?: NumeralModeContents }) {
+    this.attributes = operations.merge(opts?.attributes, NumeralMode.schema);
+    this.contents = opts?.contents ?? operations.zero(NumeralMode.schema.contents);
   }
 
   getNumeralMode(): 'major' | 'harmonic minor' | 'melodic minor' | 'minor' | 'natural minor' {
@@ -33708,9 +33711,9 @@ export class NumeralKey implements XMLElement<'numeral-key', NumeralKeyAttribute
   attributes: NumeralKeyAttributes;
   contents: NumeralKeyContents;
 
-  constructor(opts?: { attributes?: Partial<NumeralKeyAttributes>; content?: NumeralKeyContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, NumeralKey.schema);
-    this.contents = opts?.content ?? xml.zero(NumeralKey.schema.contents);
+  constructor(opts?: { attributes?: Partial<NumeralKeyAttributes>; contents?: NumeralKeyContents }) {
+    this.attributes = operations.merge(opts?.attributes, NumeralKey.schema);
+    this.contents = opts?.contents ?? operations.zero(NumeralKey.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -33752,9 +33755,9 @@ export class Numeral implements XMLElement<'numeral', NumeralAttributes, Numeral
   attributes: NumeralAttributes;
   contents: NumeralContents;
 
-  constructor(opts?: { attributes?: Partial<NumeralAttributes>; content?: NumeralContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Numeral.schema);
-    this.contents = opts?.content ?? xml.zero(Numeral.schema.contents);
+  constructor(opts?: { attributes?: Partial<NumeralAttributes>; contents?: NumeralContents }) {
+    this.attributes = operations.merge(opts?.attributes, Numeral.schema);
+    this.contents = opts?.contents ?? operations.zero(Numeral.schema.contents);
   }
 
   getNumeralRoot(): NumeralRoot {
@@ -33838,9 +33841,9 @@ export class Function implements XMLElement<'function', FunctionAttributes, Func
   attributes: FunctionAttributes;
   contents: FunctionContents;
 
-  constructor(opts?: { attributes?: Partial<FunctionAttributes>; content?: FunctionContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Function.schema);
-    this.contents = opts?.content ?? xml.zero(Function.schema.contents);
+  constructor(opts?: { attributes?: Partial<FunctionAttributes>; contents?: FunctionContents }) {
+    this.attributes = operations.merge(opts?.attributes, Function.schema);
+    this.contents = opts?.contents ?? operations.zero(Function.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -34061,9 +34064,9 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
   attributes: KindAttributes;
   contents: KindContents;
 
-  constructor(opts?: { attributes?: Partial<KindAttributes>; content?: KindContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Kind.schema);
-    this.contents = opts?.content ?? xml.zero(Kind.schema.contents);
+  constructor(opts?: { attributes?: Partial<KindAttributes>; contents?: KindContents }) {
+    this.attributes = operations.merge(opts?.attributes, Kind.schema);
+    this.contents = opts?.contents ?? operations.zero(Kind.schema.contents);
   }
   getBracketDegrees(): 'yes' | 'no' | null {
     return this.attributes['bracket-degrees'];
@@ -34302,9 +34305,9 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
   attributes: InversionAttributes;
   contents: InversionContents;
 
-  constructor(opts?: { attributes?: Partial<InversionAttributes>; content?: InversionContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Inversion.schema);
-    this.contents = opts?.content ?? xml.zero(Inversion.schema.contents);
+  constructor(opts?: { attributes?: Partial<InversionAttributes>; contents?: InversionContents }) {
+    this.attributes = operations.merge(opts?.attributes, Inversion.schema);
+    this.contents = opts?.contents ?? operations.zero(Inversion.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -34437,9 +34440,9 @@ export class BassSeparator implements XMLElement<'bass-separator', BassSeparator
   attributes: BassSeparatorAttributes;
   contents: BassSeparatorContents;
 
-  constructor(opts?: { attributes?: Partial<BassSeparatorAttributes>; content?: BassSeparatorContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BassSeparator.schema);
-    this.contents = opts?.content ?? xml.zero(BassSeparator.schema.contents);
+  constructor(opts?: { attributes?: Partial<BassSeparatorAttributes>; contents?: BassSeparatorContents }) {
+    this.attributes = operations.merge(opts?.attributes, BassSeparator.schema);
+    this.contents = opts?.contents ?? operations.zero(BassSeparator.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -34577,9 +34580,9 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
   attributes: BassStepAttributes;
   contents: BassStepContents;
 
-  constructor(opts?: { attributes?: Partial<BassStepAttributes>; content?: BassStepContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BassStep.schema);
-    this.contents = opts?.content ?? xml.zero(BassStep.schema.contents);
+  constructor(opts?: { attributes?: Partial<BassStepAttributes>; contents?: BassStepContents }) {
+    this.attributes = operations.merge(opts?.attributes, BassStep.schema);
+    this.contents = opts?.contents ?? operations.zero(BassStep.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -34721,9 +34724,9 @@ export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, 
   attributes: BassAlterAttributes;
   contents: BassAlterContents;
 
-  constructor(opts?: { attributes?: Partial<BassAlterAttributes>; content?: BassAlterContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BassAlter.schema);
-    this.contents = opts?.content ?? xml.zero(BassAlter.schema.contents);
+  constructor(opts?: { attributes?: Partial<BassAlterAttributes>; contents?: BassAlterContents }) {
+    this.attributes = operations.merge(opts?.attributes, BassAlter.schema);
+    this.contents = opts?.contents ?? operations.zero(BassAlter.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -34823,9 +34826,9 @@ export class Bass implements XMLElement<'bass', BassAttributes, BassContents> {
   attributes: BassAttributes;
   contents: BassContents;
 
-  constructor(opts?: { attributes?: Partial<BassAttributes>; content?: BassContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Bass.schema);
-    this.contents = opts?.content ?? xml.zero(Bass.schema.contents);
+  constructor(opts?: { attributes?: Partial<BassAttributes>; contents?: BassContents }) {
+    this.attributes = operations.merge(opts?.attributes, Bass.schema);
+    this.contents = opts?.contents ?? operations.zero(Bass.schema.contents);
   }
   getArrangement(): 'horizontal' | 'vertical' | 'diagonal' | null {
     return this.attributes['arrangement'];
@@ -34927,9 +34930,9 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
   attributes: DegreeValueAttributes;
   contents: DegreeValueContents;
 
-  constructor(opts?: { attributes?: Partial<DegreeValueAttributes>; content?: DegreeValueContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DegreeValue.schema);
-    this.contents = opts?.content ?? xml.zero(DegreeValue.schema.contents);
+  constructor(opts?: { attributes?: Partial<DegreeValueAttributes>; contents?: DegreeValueContents }) {
+    this.attributes = operations.merge(opts?.attributes, DegreeValue.schema);
+    this.contents = opts?.contents ?? operations.zero(DegreeValue.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -35070,9 +35073,9 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
   attributes: DegreeAlterAttributes;
   contents: DegreeAlterContents;
 
-  constructor(opts?: { attributes?: Partial<DegreeAlterAttributes>; content?: DegreeAlterContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DegreeAlter.schema);
-    this.contents = opts?.content ?? xml.zero(DegreeAlter.schema.contents);
+  constructor(opts?: { attributes?: Partial<DegreeAlterAttributes>; contents?: DegreeAlterContents }) {
+    this.attributes = operations.merge(opts?.attributes, DegreeAlter.schema);
+    this.contents = opts?.contents ?? operations.zero(DegreeAlter.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -35210,9 +35213,9 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
   attributes: DegreeTypeAttributes;
   contents: DegreeTypeContents;
 
-  constructor(opts?: { attributes?: Partial<DegreeTypeAttributes>; content?: DegreeTypeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, DegreeType.schema);
-    this.contents = opts?.content ?? xml.zero(DegreeType.schema.contents);
+  constructor(opts?: { attributes?: Partial<DegreeTypeAttributes>; contents?: DegreeTypeContents }) {
+    this.attributes = operations.merge(opts?.attributes, DegreeType.schema);
+    this.contents = opts?.contents ?? operations.zero(DegreeType.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -35304,9 +35307,9 @@ export class Degree implements XMLElement<'degree', DegreeAttributes, DegreeCont
   attributes: DegreeAttributes;
   contents: DegreeContents;
 
-  constructor(opts?: { attributes?: Partial<DegreeAttributes>; content?: DegreeContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Degree.schema);
-    this.contents = opts?.content ?? xml.zero(Degree.schema.contents);
+  constructor(opts?: { attributes?: Partial<DegreeAttributes>; contents?: DegreeContents }) {
+    this.attributes = operations.merge(opts?.attributes, Degree.schema);
+    this.contents = opts?.contents ?? operations.zero(Degree.schema.contents);
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
@@ -35356,9 +35359,9 @@ export class FrameStrings implements XMLElement<'frame-strings', FrameStringsAtt
   attributes: FrameStringsAttributes;
   contents: FrameStringsContents;
 
-  constructor(opts?: { attributes?: Partial<FrameStringsAttributes>; content?: FrameStringsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, FrameStrings.schema);
-    this.contents = opts?.content ?? xml.zero(FrameStrings.schema.contents);
+  constructor(opts?: { attributes?: Partial<FrameStringsAttributes>; contents?: FrameStringsContents }) {
+    this.attributes = operations.merge(opts?.attributes, FrameStrings.schema);
+    this.contents = opts?.contents ?? operations.zero(FrameStrings.schema.contents);
   }
 
   getLinesSize(): number {
@@ -35391,9 +35394,9 @@ export class FrameFrets implements XMLElement<'frame-frets', FrameFretsAttribute
   attributes: FrameFretsAttributes;
   contents: FrameFretsContents;
 
-  constructor(opts?: { attributes?: Partial<FrameFretsAttributes>; content?: FrameFretsContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, FrameFrets.schema);
-    this.contents = opts?.content ?? xml.zero(FrameFrets.schema.contents);
+  constructor(opts?: { attributes?: Partial<FrameFretsAttributes>; contents?: FrameFretsContents }) {
+    this.attributes = operations.merge(opts?.attributes, FrameFrets.schema);
+    this.contents = opts?.contents ?? operations.zero(FrameFrets.schema.contents);
   }
 
   getSpaceSize(): number {
@@ -35425,9 +35428,9 @@ export class FirstFret implements XMLElement<'first-fret', FirstFretAttributes, 
   attributes: FirstFretAttributes;
   contents: FirstFretContents;
 
-  constructor(opts?: { attributes?: Partial<FirstFretAttributes>; content?: FirstFretContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, FirstFret.schema);
-    this.contents = opts?.content ?? xml.zero(FirstFret.schema.contents);
+  constructor(opts?: { attributes?: Partial<FirstFretAttributes>; contents?: FirstFretContents }) {
+    this.attributes = operations.merge(opts?.attributes, FirstFret.schema);
+    this.contents = opts?.contents ?? operations.zero(FirstFret.schema.contents);
   }
   getLocation(): 'left' | 'right' | null {
     return this.attributes['location'];
@@ -35468,9 +35471,9 @@ export class Barre implements XMLElement<'barre', BarreAttributes, BarreContents
   attributes: BarreAttributes;
   contents: BarreContents;
 
-  constructor(opts?: { attributes?: Partial<BarreAttributes>; content?: BarreContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Barre.schema);
-    this.contents = opts?.content ?? xml.zero(Barre.schema.contents);
+  constructor(opts?: { attributes?: Partial<BarreAttributes>; contents?: BarreContents }) {
+    this.attributes = operations.merge(opts?.attributes, Barre.schema);
+    this.contents = opts?.contents ?? operations.zero(Barre.schema.contents);
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
@@ -35507,9 +35510,9 @@ export class FrameNote implements XMLElement<'frame-note', FrameNoteAttributes, 
   attributes: FrameNoteAttributes;
   contents: FrameNoteContents;
 
-  constructor(opts?: { attributes?: Partial<FrameNoteAttributes>; content?: FrameNoteContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, FrameNote.schema);
-    this.contents = opts?.content ?? xml.zero(FrameNote.schema.contents);
+  constructor(opts?: { attributes?: Partial<FrameNoteAttributes>; contents?: FrameNoteContents }) {
+    this.attributes = operations.merge(opts?.attributes, FrameNote.schema);
+    this.contents = opts?.contents ?? operations.zero(FrameNote.schema.contents);
   }
 
   getString(): String {
@@ -35616,9 +35619,9 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
   attributes: FrameAttributes;
   contents: FrameContents;
 
-  constructor(opts?: { attributes?: Partial<FrameAttributes>; content?: FrameContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Frame.schema);
-    this.contents = opts?.content ?? xml.zero(Frame.schema.contents);
+  constructor(opts?: { attributes?: Partial<FrameAttributes>; contents?: FrameContents }) {
+    this.attributes = operations.merge(opts?.attributes, Frame.schema);
+    this.contents = opts?.contents ?? operations.zero(Frame.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -35840,9 +35843,9 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
   attributes: HarmonyAttributes;
   contents: HarmonyContents;
 
-  constructor(opts?: { attributes?: Partial<HarmonyAttributes>; content?: HarmonyContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Harmony.schema);
-    this.contents = opts?.content ?? xml.zero(Harmony.schema.contents);
+  constructor(opts?: { attributes?: Partial<HarmonyAttributes>; contents?: HarmonyContents }) {
+    this.attributes = operations.merge(opts?.attributes, Harmony.schema);
+    this.contents = opts?.contents ?? operations.zero(Harmony.schema.contents);
   }
   getArrangement(): 'horizontal' | 'vertical' | 'diagonal' | null {
     return this.attributes['arrangement'];
@@ -36041,9 +36044,9 @@ export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixCont
   attributes: PrefixAttributes;
   contents: PrefixContents;
 
-  constructor(opts?: { attributes?: Partial<PrefixAttributes>; content?: PrefixContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Prefix.schema);
-    this.contents = opts?.content ?? xml.zero(Prefix.schema.contents);
+  constructor(opts?: { attributes?: Partial<PrefixAttributes>; contents?: PrefixContents }) {
+    this.attributes = operations.merge(opts?.attributes, Prefix.schema);
+    this.contents = opts?.contents ?? operations.zero(Prefix.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -36170,9 +36173,9 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
   attributes: FigureNumberAttributes;
   contents: FigureNumberContents;
 
-  constructor(opts?: { attributes?: Partial<FigureNumberAttributes>; content?: FigureNumberContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, FigureNumber.schema);
-    this.contents = opts?.content ?? xml.zero(FigureNumber.schema.contents);
+  constructor(opts?: { attributes?: Partial<FigureNumberAttributes>; contents?: FigureNumberContents }) {
+    this.attributes = operations.merge(opts?.attributes, FigureNumber.schema);
+    this.contents = opts?.contents ?? operations.zero(FigureNumber.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -36293,9 +36296,9 @@ export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixCont
   attributes: SuffixAttributes;
   contents: SuffixContents;
 
-  constructor(opts?: { attributes?: Partial<SuffixAttributes>; content?: SuffixContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Suffix.schema);
-    this.contents = opts?.content ?? xml.zero(Suffix.schema.contents);
+  constructor(opts?: { attributes?: Partial<SuffixAttributes>; contents?: SuffixContents }) {
+    this.attributes = operations.merge(opts?.attributes, Suffix.schema);
+    this.contents = opts?.contents ?? operations.zero(Suffix.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -36391,9 +36394,9 @@ export class Figure implements XMLElement<'figure', FigureAttributes, FigureCont
   attributes: FigureAttributes;
   contents: FigureContents;
 
-  constructor(opts?: { attributes?: Partial<FigureAttributes>; content?: FigureContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Figure.schema);
-    this.contents = opts?.content ?? xml.zero(Figure.schema.contents);
+  constructor(opts?: { attributes?: Partial<FigureAttributes>; contents?: FigureContents }) {
+    this.attributes = operations.merge(opts?.attributes, Figure.schema);
+    this.contents = opts?.contents ?? operations.zero(Figure.schema.contents);
   }
 
   getPrefix(): Prefix | null {
@@ -36518,9 +36521,9 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
   attributes: FiguredBassAttributes;
   contents: FiguredBassContents;
 
-  constructor(opts?: { attributes?: Partial<FiguredBassAttributes>; content?: FiguredBassContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, FiguredBass.schema);
-    this.contents = opts?.content ?? xml.zero(FiguredBass.schema.contents);
+  constructor(opts?: { attributes?: Partial<FiguredBassAttributes>; contents?: FiguredBassContents }) {
+    this.attributes = operations.merge(opts?.attributes, FiguredBass.schema);
+    this.contents = opts?.contents ?? operations.zero(FiguredBass.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -36680,9 +36683,9 @@ export class StaffDistance implements XMLElement<'staff-distance', StaffDistance
   attributes: StaffDistanceAttributes;
   contents: StaffDistanceContents;
 
-  constructor(opts?: { attributes?: Partial<StaffDistanceAttributes>; content?: StaffDistanceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StaffDistance.schema);
-    this.contents = opts?.content ?? xml.zero(StaffDistance.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaffDistanceAttributes>; contents?: StaffDistanceContents }) {
+    this.attributes = operations.merge(opts?.attributes, StaffDistance.schema);
+    this.contents = opts?.contents ?? operations.zero(StaffDistance.schema.contents);
   }
 
   getStaffDistance(): number {
@@ -36709,9 +36712,9 @@ export class StaffLayout implements XMLElement<'staff-layout', StaffLayoutAttrib
   attributes: StaffLayoutAttributes;
   contents: StaffLayoutContents;
 
-  constructor(opts?: { attributes?: Partial<StaffLayoutAttributes>; content?: StaffLayoutContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, StaffLayout.schema);
-    this.contents = opts?.content ?? xml.zero(StaffLayout.schema.contents);
+  constructor(opts?: { attributes?: Partial<StaffLayoutAttributes>; contents?: StaffLayoutContents }) {
+    this.attributes = operations.merge(opts?.attributes, StaffLayout.schema);
+    this.contents = opts?.contents ?? operations.zero(StaffLayout.schema.contents);
   }
   getNumber(): number | null {
     return this.attributes['number'];
@@ -36751,9 +36754,9 @@ export class MeasureDistance
   attributes: MeasureDistanceAttributes;
   contents: MeasureDistanceContents;
 
-  constructor(opts?: { attributes?: Partial<MeasureDistanceAttributes>; content?: MeasureDistanceContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MeasureDistance.schema);
-    this.contents = opts?.content ?? xml.zero(MeasureDistance.schema.contents);
+  constructor(opts?: { attributes?: Partial<MeasureDistanceAttributes>; contents?: MeasureDistanceContents }) {
+    this.attributes = operations.merge(opts?.attributes, MeasureDistance.schema);
+    this.contents = opts?.contents ?? operations.zero(MeasureDistance.schema.contents);
   }
 
   getMeasureDistance(): number {
@@ -36780,9 +36783,9 @@ export class MeasureLayout implements XMLElement<'measure-layout', MeasureLayout
   attributes: MeasureLayoutAttributes;
   contents: MeasureLayoutContents;
 
-  constructor(opts?: { attributes?: Partial<MeasureLayoutAttributes>; content?: MeasureLayoutContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MeasureLayout.schema);
-    this.contents = opts?.content ?? xml.zero(MeasureLayout.schema.contents);
+  constructor(opts?: { attributes?: Partial<MeasureLayoutAttributes>; contents?: MeasureLayoutContents }) {
+    this.attributes = operations.merge(opts?.attributes, MeasureLayout.schema);
+    this.contents = opts?.contents ?? operations.zero(MeasureLayout.schema.contents);
   }
 
   getMeasureDistance(): MeasureDistance | null {
@@ -36880,9 +36883,9 @@ export class MeasureNumbering
   attributes: MeasureNumberingAttributes;
   contents: MeasureNumberingContents;
 
-  constructor(opts?: { attributes?: Partial<MeasureNumberingAttributes>; content?: MeasureNumberingContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, MeasureNumbering.schema);
-    this.contents = opts?.content ?? xml.zero(MeasureNumbering.schema.contents);
+  constructor(opts?: { attributes?: Partial<MeasureNumberingAttributes>; contents?: MeasureNumberingContents }) {
+    this.attributes = operations.merge(opts?.attributes, MeasureNumbering.schema);
+    this.contents = opts?.contents ?? operations.zero(MeasureNumbering.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -37030,9 +37033,9 @@ export class Print implements XMLElement<'print', PrintAttributes, PrintContents
   attributes: PrintAttributes;
   contents: PrintContents;
 
-  constructor(opts?: { attributes?: Partial<PrintAttributes>; content?: PrintContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Print.schema);
-    this.contents = opts?.content ?? xml.zero(Print.schema.contents);
+  constructor(opts?: { attributes?: Partial<PrintAttributes>; contents?: PrintContents }) {
+    this.attributes = operations.merge(opts?.attributes, Print.schema);
+    this.contents = opts?.contents ?? operations.zero(Print.schema.contents);
   }
   getBlankPage(): number | null {
     return this.attributes['blank-page'];
@@ -37166,9 +37169,9 @@ export class BarStyle implements XMLElement<'bar-style', BarStyleAttributes, Bar
   attributes: BarStyleAttributes;
   contents: BarStyleContents;
 
-  constructor(opts?: { attributes?: Partial<BarStyleAttributes>; content?: BarStyleContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, BarStyle.schema);
-    this.contents = opts?.content ?? xml.zero(BarStyle.schema.contents);
+  constructor(opts?: { attributes?: Partial<BarStyleAttributes>; contents?: BarStyleContents }) {
+    this.attributes = operations.merge(opts?.attributes, BarStyle.schema);
+    this.contents = opts?.contents ?? operations.zero(BarStyle.schema.contents);
   }
   getColor(): string | null {
     return this.attributes['color'];
@@ -37283,9 +37286,9 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
   attributes: EndingAttributes;
   contents: EndingContents;
 
-  constructor(opts?: { attributes?: Partial<EndingAttributes>; content?: EndingContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Ending.schema);
-    this.contents = opts?.content ?? xml.zero(Ending.schema.contents);
+  constructor(opts?: { attributes?: Partial<EndingAttributes>; contents?: EndingContents }) {
+    this.attributes = operations.merge(opts?.attributes, Ending.schema);
+    this.contents = opts?.contents ?? operations.zero(Ending.schema.contents);
   }
   getNumber(): string {
     return this.attributes['number'];
@@ -37422,9 +37425,9 @@ export class Repeat implements XMLElement<'repeat', RepeatAttributes, RepeatCont
   attributes: RepeatAttributes;
   contents: RepeatContents;
 
-  constructor(opts?: { attributes?: Partial<RepeatAttributes>; content?: RepeatContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Repeat.schema);
-    this.contents = opts?.content ?? xml.zero(Repeat.schema.contents);
+  constructor(opts?: { attributes?: Partial<RepeatAttributes>; contents?: RepeatContents }) {
+    this.attributes = operations.merge(opts?.attributes, Repeat.schema);
+    this.contents = opts?.contents ?? operations.zero(Repeat.schema.contents);
   }
   getDirection(): 'backward' | 'forward' {
     return this.attributes['direction'];
@@ -37500,9 +37503,9 @@ export class Barline implements XMLElement<'barline', BarlineAttributes, Barline
   attributes: BarlineAttributes;
   contents: BarlineContents;
 
-  constructor(opts?: { attributes?: Partial<BarlineAttributes>; content?: BarlineContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Barline.schema);
-    this.contents = opts?.content ?? xml.zero(Barline.schema.contents);
+  constructor(opts?: { attributes?: Partial<BarlineAttributes>; contents?: BarlineContents }) {
+    this.attributes = operations.merge(opts?.attributes, Barline.schema);
+    this.contents = opts?.contents ?? operations.zero(Barline.schema.contents);
   }
   getCodaToken(): string | null {
     return this.attributes['coda'];
@@ -37606,9 +37609,9 @@ export class Feature implements XMLElement<'feature', FeatureAttributes, Feature
   attributes: FeatureAttributes;
   contents: FeatureContents;
 
-  constructor(opts?: { attributes?: Partial<FeatureAttributes>; content?: FeatureContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Feature.schema);
-    this.contents = opts?.content ?? xml.zero(Feature.schema.contents);
+  constructor(opts?: { attributes?: Partial<FeatureAttributes>; contents?: FeatureContents }) {
+    this.attributes = operations.merge(opts?.attributes, Feature.schema);
+    this.contents = opts?.contents ?? operations.zero(Feature.schema.contents);
   }
   getType(): string | null {
     return this.attributes['type'];
@@ -37650,9 +37653,9 @@ export class Grouping implements XMLElement<'grouping', GroupingAttributes, Grou
   attributes: GroupingAttributes;
   contents: GroupingContents;
 
-  constructor(opts?: { attributes?: Partial<GroupingAttributes>; content?: GroupingContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Grouping.schema);
-    this.contents = opts?.content ?? xml.zero(Grouping.schema.contents);
+  constructor(opts?: { attributes?: Partial<GroupingAttributes>; contents?: GroupingContents }) {
+    this.attributes = operations.merge(opts?.attributes, Grouping.schema);
+    this.contents = opts?.contents ?? operations.zero(Grouping.schema.contents);
   }
   getType(): 'start' | 'stop' | 'single' {
     return this.attributes['type'];
@@ -37767,9 +37770,9 @@ export class Measure implements XMLElement<'measure', MeasureAttributes, Measure
   attributes: MeasureAttributes;
   contents: MeasureContents;
 
-  constructor(opts?: { attributes?: Partial<MeasureAttributes>; content?: MeasureContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Measure.schema);
-    this.contents = opts?.content ?? xml.zero(Measure.schema.contents);
+  constructor(opts?: { attributes?: Partial<MeasureAttributes>; contents?: MeasureContents }) {
+    this.attributes = operations.merge(opts?.attributes, Measure.schema);
+    this.contents = opts?.contents ?? operations.zero(Measure.schema.contents);
   }
   getNumber(): string {
     return this.attributes['number'];
@@ -37863,9 +37866,9 @@ export class Part implements XMLElement<'part', PartAttributes, PartContents> {
   attributes: PartAttributes;
   contents: PartContents;
 
-  constructor(opts?: { attributes?: Partial<PartAttributes>; content?: PartContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Part.schema);
-    this.contents = opts?.content ?? xml.zero(Part.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartAttributes>; contents?: PartContents }) {
+    this.attributes = operations.merge(opts?.attributes, Part.schema);
+    this.contents = opts?.contents ?? operations.zero(Part.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -37915,9 +37918,9 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
   attributes: ScorePartwiseAttributes;
   contents: ScorePartwiseContents;
 
-  constructor(opts?: { attributes?: Partial<ScorePartwiseAttributes>; content?: ScorePartwiseContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ScorePartwise.schema);
-    this.contents = opts?.content ?? xml.zero(ScorePartwise.schema.contents);
+  constructor(opts?: { attributes?: Partial<ScorePartwiseAttributes>; contents?: ScorePartwiseContents }) {
+    this.attributes = operations.merge(opts?.attributes, ScorePartwise.schema);
+    this.contents = opts?.contents ?? operations.zero(ScorePartwise.schema.contents);
   }
   getVersion(): '4.0' {
     return this.attributes['version'];
@@ -38009,9 +38012,9 @@ export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewise
   attributes: ScoreTimewiseAttributes;
   contents: ScoreTimewiseContents;
 
-  constructor(opts?: { attributes?: Partial<ScoreTimewiseAttributes>; content?: ScoreTimewiseContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ScoreTimewise.schema);
-    this.contents = opts?.content ?? xml.zero(ScoreTimewise.schema.contents);
+  constructor(opts?: { attributes?: Partial<ScoreTimewiseAttributes>; contents?: ScoreTimewiseContents }) {
+    this.attributes = operations.merge(opts?.attributes, ScoreTimewise.schema);
+    this.contents = opts?.contents ?? operations.zero(ScoreTimewise.schema.contents);
   }
   getVersion(): '4.0' {
     return this.attributes['version'];

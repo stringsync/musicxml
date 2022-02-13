@@ -18,3 +18,5 @@ services:
       - './src:/musicxml/src'
     links:
       - xmlvalidator
+    ports:
+      - 9229:9229

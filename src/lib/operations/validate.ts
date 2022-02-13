@@ -2,7 +2,7 @@ import { MusicXMLError } from '../errors';
 import { DescriptorChild } from '../schema/types';
 import * as util from '../util';
 
-export const isValid = (value: any, child: DescriptorChild): boolean => {
+export const validate = (value: any, child: DescriptorChild): boolean => {
   if (util.isString(child)) {
     return value === child;
   }
@@ -24,19 +24,19 @@ export const isValid = (value: any, child: DescriptorChild): boolean => {
       case 'date':
         return value instanceof Date;
       case 'choices':
-        return child.choices.some((choice) => isValid(value, choice));
+        return child.choices.some((choice) => validate(value, choice));
       case 'label':
-        return isValid(value, child.value);
+        return validate(value, child.value);
       case 'optional':
-        return util.isNull(value) || isValid(value, child.value);
+        return util.isNull(value) || validate(value, child.value);
       case 'required':
-        return isValid(value, child.value);
+        return validate(value, child.value);
       case 'zeroOrMore':
-        return util.isArray(value) && value.every((v) => isValid(v, child.value));
+        return util.isArray(value) && value.every((v) => validate(v, child.value));
       case 'oneOrMore':
-        return util.isArray(value) && value.length >= 1 && value.every((v) => isValid(v, child.value));
+        return util.isArray(value) && value.length >= 1 && value.every((v) => validate(v, child.value));
       case 'not':
-        return isValid(value, child.include) && !isValid(value, child.exclude);
+        return validate(value, child.include) && !validate(value, child.exclude);
     }
   }
   if (util.isXMLElementSchema(child)) {
@@ -46,20 +46,20 @@ export const isValid = (value: any, child: DescriptorChild): boolean => {
     if (value.schema.name !== child.name) {
       return false;
     }
-    return isValid(value.contents, child.contents);
+    return validate(value.contents, child.contents);
   }
   if (util.isXMLElementCtor(child)) {
-    return isValid(value, child.schema);
+    return validate(value, child.schema);
   }
   if (util.isFunction(child)) {
-    return isValid(value, child());
+    return validate(value, child());
   }
   if (util.isArray(child)) {
-    return Array.isArray(value) && value.length === child.length && child.every((c, ndx) => isValid(value[ndx], c));
+    return Array.isArray(value) && value.length === child.length && child.every((c, ndx) => validate(value[ndx], c));
   }
   throw new MusicXMLError({
-    symptom: 'cannot compute validity',
+    symptom: 'cannot validate',
     context: { value, child },
-    remedy: 'use a different child or update isValid',
+    remedy: 'use a different child',
   });
 };

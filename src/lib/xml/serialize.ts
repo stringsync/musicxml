@@ -1,15 +1,14 @@
 import { MusicXMLError } from '../errors';
+import * as operations from '../operations';
+import * as primitives from '../primitives';
+import * as raw from '../raw';
 import { DescriptorChild, XMLElement } from '../schema';
 import * as util from '../util';
-import { isValid } from './isValid';
-import { toString } from './toString';
-import { RawXMLElement } from './types';
-import { zero } from './zero';
 
-export const toRawXMLElement = (element: XMLElement): RawXMLElement => {
+export const serialize = (element: XMLElement): raw.RawXMLNode => {
   const attributes: any = {};
   for (const key of Object.keys(element.attributes)) {
-    const resolution = toString(element.attributes[key], element.schema.attributes[key]);
+    const resolution = primitives.serialize(element.attributes[key], element.schema.attributes[key]);
     if (resolution.type !== 'none') {
       attributes[key] = resolution.value;
     }
@@ -20,13 +19,13 @@ export const toRawXMLElement = (element: XMLElement): RawXMLElement => {
   return { type: 'element', name: element.schema.name, attributes, children };
 };
 
-const resolve = (value: any, child: DescriptorChild): RawXMLElement[] => {
+const resolve = (value: any, child: DescriptorChild): raw.RawXMLNode[] => {
   if (util.isString(child)) {
-    const resolution = toString(value, child);
+    const resolution = primitives.serialize(value, child);
     return resolution.type === 'none' ? [] : [{ type: 'text', text: resolution.value }];
   }
   if (util.isNumber(child)) {
-    const resolution = toString(value, child);
+    const resolution = primitives.serialize(value, child);
     return resolution.type === 'none' ? [] : [{ type: 'text', text: resolution.value }];
   }
   if (util.isDescriptor(child)) {
@@ -37,7 +36,7 @@ const resolve = (value: any, child: DescriptorChild): RawXMLElement[] => {
       case 'constant':
       case 'regex':
       case 'date':
-        const resolution = toString(value, child);
+        const resolution = primitives.serialize(value, child);
         return resolution.type === 'none' ? [] : [{ type: 'text', text: resolution.value }];
       case 'optional':
         return util.isNull(value) ? [] : resolve(value, child.value);
@@ -46,27 +45,27 @@ const resolve = (value: any, child: DescriptorChild): RawXMLElement[] => {
         return resolve(value, child.value);
       case 'zeroOrMore':
       case 'oneOrMore':
-        return isValid(value, child)
+        return operations.validate(value, child)
           ? value.flatMap((v: any) => resolve(v, child.value))
-          : zero(child).flatMap((v: any) => resolve(v, child.value));
+          : operations.zero(child).flatMap((v: any) => resolve(v, child.value));
       case 'choices':
         for (const choice of child.choices) {
-          if (isValid(value, choice)) {
+          if (operations.validate(value, choice)) {
             return resolve(value, choice);
           }
         }
-        return resolve(zero(child), child);
+        return resolve(operations.zero(child), child);
       case 'not':
-        return resolve(isValid(value, child) ? value : zero(child), child.include);
+        return resolve(operations.validate(value, child) ? value : operations.zero(child), child.include);
     }
   }
   if (util.isXMLElementCtor(child)) {
-    return isValid(value, child) ? [toRawXMLElement(value)] : [toRawXMLElement(zero(child))];
+    return operations.validate(value, child) ? [serialize(value)] : [serialize(operations.zero(child))];
   }
   if (util.isArray(child)) {
-    return isValid(value, child)
+    return operations.validate(value, child)
       ? value.flatMap((v: any, ndx: number) => resolve(v, child[ndx]))
-      : zero(child).flatMap((v: any, ndx: number) => resolve(v, child[ndx]));
+      : operations.zero(child).flatMap((v: any, ndx: number) => resolve(v, child[ndx]));
   }
   throw new MusicXMLError({
     symptom: 'cannot convert to raw XML element',

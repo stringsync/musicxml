@@ -46,7 +46,7 @@ export const zero = <T extends DescriptorChild>(child: T): any => {
     return zero(child());
   }
   if (util.isArray(child)) {
-    return child.map(zero);
+    return child.map((c) => zero(c));
   }
   throw new MusicXMLError({
     symptom: 'cannot compute zero value',

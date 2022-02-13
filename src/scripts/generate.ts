@@ -258,9 +258,9 @@ export class ${className} implements XMLElement<'${schema.name}', ${attributesTy
   attributes: ${attributesTypeName};
   contents: ${contentsTypeName};
 
-  constructor(opts?: { attributes?: Partial<${attributesTypeName}>; content?: ${contentsTypeName} }) {
-    this.attributes = xml.mergeZero(opts?.attributes, ${className}.schema);
-    this.contents = opts?.content ?? xml.zero(${className}.schema.contents);
+  constructor(opts?: { attributes?: Partial<${attributesTypeName}>; contents?: ${contentsTypeName} }) {
+    this.attributes = operations.merge(opts?.attributes, ${className}.schema);
+    this.contents = opts?.contents ?? operations.zero(${className}.schema.contents);
   }
 ${attributesAccessorMethodLiterals}
 ${contentsAccessorMethodLiterals}
@@ -273,7 +273,7 @@ const generateFileContents = (roots: XMLElementSchema[]): string => {
 
   literals.push('/* eslint-disable @typescript-eslint/ban-types */');
   literals.push(`import { XMLElement, XMLElementSchema } from '../lib/schema';`);
-  literals.push(`import * as xml from '../lib/xml`);
+  literals.push(`import * as operations from '../lib/operations`);
 
   // Dependencies must appear first in the file, which is why we're going through the trouble of traversing the
   // tree dfs in-order.
