@@ -25,6 +25,8 @@ export const isValid = (value: any, child: DescriptorChild): boolean => {
         return value instanceof Date;
       case 'choices':
         return child.choices.some((choice) => isValid(value, choice));
+      case 'label':
+        return isValid(value, child.value);
       case 'optional':
         return util.isNull(value) || isValid(value, child.value);
       case 'required':
@@ -44,10 +46,10 @@ export const isValid = (value: any, child: DescriptorChild): boolean => {
     if (value.schema.name !== child.name) {
       return false;
     }
-    if (Object.keys(value.attributes).some((key) => !isValid(value.attributes[key], child.attributes[key]))) {
-      return false;
-    }
     return isValid(value.contents, child.contents);
+  }
+  if (util.isXMLElementCtor(child)) {
+    return isValid(value, child.schema);
   }
   if (util.isFunction(child)) {
     return isValid(value, child());
@@ -57,7 +59,7 @@ export const isValid = (value: any, child: DescriptorChild): boolean => {
   }
   throw new MusicXMLError({
     symptom: 'cannot compute validity',
-    context: { child },
+    context: { value, child },
     remedy: 'use a different child or update isValid',
   });
 };

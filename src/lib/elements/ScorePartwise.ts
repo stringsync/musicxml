@@ -2,7 +2,6 @@ import { schema, t } from '../schema';
 import { Credit } from './Credit';
 import { Defaults } from './Defaults';
 import { Identification } from './Identification';
-import { Measure } from './Measure';
 import { MovementNumber } from './MovementNumber';
 import { MovementTitle } from './MovementTitle';
 import { Part } from './Part';
@@ -39,6 +38,5 @@ export const ScorePartwise = schema(
     t.label({ label: 'credits', value: t.zeroOrMore(Credit) }),
     t.required(PartList),
     t.label({ label: 'parts', value: t.oneOrMore(Part) }),
-    t.label({ label: 'measures', value: t.oneOrMore(Measure) }),
   ] as const
 );

@@ -8,6 +8,7 @@ export const ALLOWED_EXAMPLES = { names: new Array<string>() };
 
 expect.extend({
   toBeValidMusicXML: matchers.toBeValidMusicXML,
+  toEqualXML: matchers.toEqualXML,
 });
 
 beforeAll(async () => {

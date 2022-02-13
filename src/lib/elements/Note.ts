@@ -179,6 +179,7 @@ export const Note = schema(
     t.label({
       label: 'value',
       value: t.choices(
+        [t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration), t.choices([], [Tie], [Tie, Tie])],
         [
           t.required(Grace),
           t.choices(
@@ -186,8 +187,7 @@ export const Note = schema(
             [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)]
           ),
         ],
-        [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)],
-        [t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration), t.choices([], [Tie], [Tie, Tie])]
+        [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)]
       ),
     }),
     t.label({ label: 'instruments', value: t.zeroOrMore(Instrument) }),

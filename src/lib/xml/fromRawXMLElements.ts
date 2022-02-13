@@ -9,7 +9,6 @@ import {
   OptionalDescriptor,
   RequiredDescriptor,
   StringDescriptor,
-  XMLElement,
   XMLElementCtor,
   ZeroOrMoreDescriptor,
 } from '../schema';
@@ -19,15 +18,11 @@ import { fromString } from './fromString';
 import { RawXMLElement, Resolution } from './types';
 import { zero } from './zero';
 
-export const fromRawXMLElements = <T extends Descriptor[]>(elements: RawXMLElement[], child: T): XMLElement[] => {
-  const res = resolve(Cursor.from(elements), child);
-  switch (res.type) {
-    case 'resolved':
-    case 'zero':
-      return res.value;
-    default:
-      return zero(child);
-  }
+export const fromRawXMLElements = <T extends Descriptor | Descriptor[]>(
+  elements: RawXMLElement[],
+  child: T
+): Resolution => {
+  return resolve(Cursor.from(elements), child);
 };
 
 const resolve = (cursor: Cursor<RawXMLElement>, child: DescriptorChild): Resolution => {

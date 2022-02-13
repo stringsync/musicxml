@@ -6569,24 +6569,6 @@ export class Tie implements XMLElement<'tie', TieAttributes, TieContents> {
   }
 }
 
-export type CueAttributes = Record<string, unknown>;
-
-export type CueContents = [];
-
-export class Cue implements XMLElement<'cue', CueAttributes, CueContents> {
-  static readonly schema = { name: 'cue', attributes: {}, contents: [] } as const;
-
-  readonly schema = Cue.schema;
-
-  attributes: CueAttributes;
-  contents: CueContents;
-
-  constructor(opts?: { attributes?: Partial<CueAttributes>; content?: CueContents }) {
-    this.attributes = xml.mergeZero(opts?.attributes, Cue.schema);
-    this.contents = opts?.content ?? xml.zero(Cue.schema.contents);
-  }
-}
-
 export type GraceAttributes = {
   'make-time': number | null;
   slash: 'yes' | 'no' | null;
@@ -6640,6 +6622,24 @@ export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents
   }
   setStealTimePrevious(stealTimePrevious: number | null): void {
     this.attributes['steal-time-previous'] = stealTimePrevious;
+  }
+}
+
+export type CueAttributes = Record<string, unknown>;
+
+export type CueContents = [];
+
+export class Cue implements XMLElement<'cue', CueAttributes, CueContents> {
+  static readonly schema = { name: 'cue', attributes: {}, contents: [] } as const;
+
+  readonly schema = Cue.schema;
+
+  attributes: CueAttributes;
+  contents: CueContents;
+
+  constructor(opts?: { attributes?: Partial<CueAttributes>; content?: CueContents }) {
+    this.attributes = xml.mergeZero(opts?.attributes, Cue.schema);
+    this.contents = opts?.content ?? xml.zero(Cue.schema.contents);
   }
 }
 
@@ -22774,7 +22774,6 @@ export type NoteAttributes = {
 export type NoteContents = [
   (
     | [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]]
-    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
     | [
         Grace,
         (
@@ -22782,6 +22781,7 @@ export type NoteContents = [
           | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
         )
       ]
+    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
   ),
   Array<Instrument>,
   Footnote | null,
@@ -22877,12 +22877,6 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
               { type: 'choices', choices: [[], [Tie], [Tie, Tie]] },
             ],
             [
-              { type: 'required', value: Cue },
-              { type: 'optional', value: Chord },
-              { type: 'choices', choices: [Pitch, Unpitched, Rest] },
-              { type: 'required', value: Duration },
-            ],
-            [
               { type: 'required', value: Grace },
               {
                 type: 'choices',
@@ -22900,6 +22894,12 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
                   ],
                 ],
               },
+            ],
+            [
+              { type: 'required', value: Cue },
+              { type: 'optional', value: Chord },
+              { type: 'choices', choices: [Pitch, Unpitched, Rest] },
+              { type: 'required', value: Duration },
             ],
           ],
         },
@@ -23080,20 +23080,19 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
   }
   getValue():
     | [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]]
-    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
     | [
         Grace,
         (
           | [Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]]
           | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
         )
-      ] {
+      ]
+    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration] {
     return this.contents[0];
   }
   setValue(
     value:
       | [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]]
-      | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
       | [
           Grace,
           (
@@ -23101,6 +23100,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
             | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
           )
         ]
+      | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
   ): void {
     this.contents[0] = value;
   }
@@ -37891,8 +37891,7 @@ export type ScorePartwiseContents = [
   Defaults | null,
   Array<Credit>,
   PartList,
-  Array<Part>,
-  Array<Measure>
+  Array<Part>
 ];
 
 export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwiseAttributes, ScorePartwiseContents> {
@@ -37908,7 +37907,6 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
       { type: 'label', label: 'credits', value: { type: 'zeroOrMore', value: Credit } },
       { type: 'required', value: PartList },
       { type: 'label', label: 'parts', value: { type: 'oneOrMore', value: Part } },
-      { type: 'label', label: 'measures', value: { type: 'oneOrMore', value: Measure } },
     ],
   } as const;
 
@@ -37974,12 +37972,6 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
   }
   setParts(parts: Array<Part>): void {
     this.contents[7] = parts;
-  }
-  getMeasures(): Array<Measure> {
-    return this.contents[8];
-  }
-  setMeasures(measures: Array<Measure>): void {
-    this.contents[8] = measures;
   }
 }
 

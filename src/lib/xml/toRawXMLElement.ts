@@ -9,25 +9,25 @@ import { zero } from './zero';
 export const toRawXMLElement = (element: XMLElement): RawXMLElement => {
   const attributes: any = {};
   for (const key of Object.keys(element.attributes)) {
-    attributes[key] = toString(element.attributes[key], element.schema.attributes[key]);
+    const resolution = toString(element.attributes[key], element.schema.attributes[key]);
+    if (resolution.type !== 'none') {
+      attributes[key] = resolution.value;
+    }
   }
 
-  const children = new Array<RawXMLElement>();
-  for (let ndx = 0; ndx < element.schema.contents.length; ndx++) {
-    const value = element.contents[ndx];
-    const child = element.schema.contents[ndx];
-    children.push(...resolve(value, child));
-  }
+  const children = resolve(element.contents, element.schema.contents);
 
   return { type: 'element', name: element.schema.name, attributes, children };
 };
 
 const resolve = (value: any, child: DescriptorChild): RawXMLElement[] => {
   if (util.isString(child)) {
-    return [{ type: 'text', text: toString(value, child) }];
+    const resolution = toString(value, child);
+    return resolution.type === 'none' ? [] : [{ type: 'text', text: resolution.value }];
   }
   if (util.isNumber(child)) {
-    return [{ type: 'text', text: toString(value, child) }];
+    const resolution = toString(value, child);
+    return resolution.type === 'none' ? [] : [{ type: 'text', text: resolution.value }];
   }
   if (util.isDescriptor(child)) {
     switch (child.type) {
@@ -37,13 +37,18 @@ const resolve = (value: any, child: DescriptorChild): RawXMLElement[] => {
       case 'constant':
       case 'regex':
       case 'date':
-        return [{ type: 'text', text: toString(value, child) }];
+        const resolution = toString(value, child);
+        return resolution.type === 'none' ? [] : [{ type: 'text', text: resolution.value }];
       case 'optional':
+        return util.isNull(value) ? [] : resolve(value, child.value);
       case 'required':
+      case 'label':
         return resolve(value, child.value);
       case 'zeroOrMore':
       case 'oneOrMore':
-        return (isValid(value, child) ? value : zero(child)).flatMap((v: any) => resolve(v, child.value));
+        return isValid(value, child)
+          ? value.flatMap((v: any) => resolve(v, child.value))
+          : zero(child).flatMap((v: any) => resolve(v, child.value));
       case 'choices':
         for (const choice of child.choices) {
           if (isValid(value, choice)) {
@@ -55,11 +60,13 @@ const resolve = (value: any, child: DescriptorChild): RawXMLElement[] => {
         return resolve(isValid(value, child) ? value : zero(child), child.include);
     }
   }
-  if (util.isXMLElement(value)) {
-    return [toRawXMLElement(value)];
+  if (util.isXMLElementCtor(child)) {
+    return isValid(value, child) ? [toRawXMLElement(value)] : [toRawXMLElement(zero(child))];
   }
-  if (util.isArray(value)) {
-    return value.flatMap(resolve);
+  if (util.isArray(child)) {
+    return isValid(value, child)
+      ? value.flatMap((v: any, ndx: number) => resolve(v, child[ndx]))
+      : zero(child).flatMap((v: any, ndx: number) => resolve(v, child[ndx]));
   }
   throw new MusicXMLError({
     symptom: 'cannot convert to raw XML element',

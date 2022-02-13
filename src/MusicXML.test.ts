@@ -3,11 +3,14 @@ import { MusicXML } from './MusicXML';
 import { loadExample } from './testing/helpers';
 
 describe('MusicXML', () => {
-  describe('parsePartwise', () => {
-    it('can parse a valid example', async () => {
+  describe('parse', () => {
+    it('parses valid.xml', async () => {
       const xmlStr = await loadExample('valid.xml');
 
-      const scorePartwise = MusicXML.parsePartwise(xmlStr);
+      const musicXml = MusicXML.parse(xmlStr);
+      expect(musicXml.getRoot()).toBeInstanceOf(elements.ScorePartwise);
+
+      const scorePartwise = musicXml.getRoot() as elements.ScorePartwise;
       expect(scorePartwise.getVersion()).toBe('4.0');
 
       const partList = scorePartwise.getPartList();
@@ -34,6 +37,7 @@ describe('MusicXML', () => {
 
       const measure = measures[0];
       expect(measure).toBeInstanceOf(elements.Measure);
+      expect(measure.getNumber()).toBe('1');
 
       const measureContents = measure.getContents();
       expect(measureContents).toBeArray();
@@ -112,6 +116,14 @@ describe('MusicXML', () => {
       const type = (note as elements.Note).getType();
       expect(type).toBeInstanceOf(elements.Type);
       expect(type!.getNoteTypeValue()).toBe('whole');
+    });
+  });
+
+  describe('serialize', () => {
+    it('serializes valid.xml', async () => {
+      const xmlStr = await loadExample('valid.xml');
+      const musicXml = MusicXML.parse(xmlStr);
+      expect(musicXml.serialize()).toEqualXML(xmlStr);
     });
   });
 });
