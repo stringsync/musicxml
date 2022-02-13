@@ -107,11 +107,14 @@ export const Lyric = schema(
     t.label({
       label: 'lyric',
       value: t.choices(
-        [
-          t.optional(Syllabic),
-          t.required(Text),
-          t.zeroOrMore([t.optional([t.required(Elision), t.optional(Syllabic)]), t.required(Text)]),
-        ],
+        t.label({
+          label: 'intelligible',
+          value: [
+            t.optional(Syllabic),
+            t.required(Text),
+            t.zeroOrMore([t.optional([t.required(Elision), t.optional(Syllabic)]), t.required(Text)]),
+          ],
+        }),
         Extend,
         Laughing,
         Humming

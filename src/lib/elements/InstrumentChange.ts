@@ -26,7 +26,7 @@ export const InstrumentChange = schema(
   },
   [
     t.optional(InstrumentSound),
-    t.label({ label: 'instrument-type', value: t.zeroOrMore(t.choices(Solo, Ensemble)) }),
+    t.label({ label: 'instrument-types', value: t.zeroOrMore(t.choices(Solo, Ensemble)) }),
     t.optional(VirtualInstrument),
   ] as const
 );

@@ -22,7 +22,10 @@ export const Time = schema('time', {}, [
   t.label({
     label: 'value',
     value: t.choices(
-      [t.oneOrMore([t.required(Beats), t.required(BeatType)]), t.optional(Interchangeable)] as const,
+      t.label({
+        label: 'time-signature',
+        value: [t.oneOrMore([t.required(Beats), t.required(BeatType)]), t.optional(Interchangeable)] as const,
+      }),
       SenzaMisura
     ),
   }),

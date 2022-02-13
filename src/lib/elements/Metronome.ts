@@ -123,17 +123,23 @@ export const Metronome = schema(
     t.label({
       label: 'metronome',
       value: t.choices(
-        [
-          t.required(BeatUnit),
-          t.zeroOrMore(BeatUnitDot),
-          t.zeroOrMore(BeatUnitTied),
-          t.choices(PerMinute, [t.required(BeatUnit), t.zeroOrMore(BeatUnitDot), t.zeroOrMore(BeatUnitTied)]),
-        ],
-        [
-          t.optional(MetronomeArrows),
-          t.oneOrMore(MetronomeNote),
-          t.optional([t.required(MetronomeRelation), t.oneOrMore(MetronomeNote)]),
-        ]
+        t.label({
+          label: 'beat-spec',
+          value: [
+            t.required(BeatUnit),
+            t.zeroOrMore(BeatUnitDot),
+            t.zeroOrMore(BeatUnitTied),
+            t.choices(PerMinute, [t.required(BeatUnit), t.zeroOrMore(BeatUnitDot), t.zeroOrMore(BeatUnitTied)]),
+          ],
+        }),
+        t.label({
+          label: 'metronome-spec',
+          value: [
+            t.optional(MetronomeArrows),
+            t.oneOrMore(MetronomeNote),
+            t.optional([t.required(MetronomeRelation), t.oneOrMore(MetronomeNote)]),
+          ],
+        })
       ),
     }),
   ] as const

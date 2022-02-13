@@ -100,8 +100,14 @@ export const Key = schema(
     t.label({
       label: 'value',
       value: t.choices(
-        [t.optional(Cancel), t.required(Fifths), t.optional(Mode)] as const,
-        t.zeroOrMore([t.required(KeyStep), t.required(KeyAlter), t.optional(KeyAccidental)] as const)
+        t.label({
+          label: 'traditional-key',
+          value: [t.optional(Cancel), t.required(Fifths), t.optional(Mode)] as const,
+        }),
+        t.label({
+          label: 'key-specs',
+          value: t.zeroOrMore([t.required(KeyStep), t.required(KeyAlter), t.optional(KeyAccidental)] as const),
+        })
       ),
     }),
     t.label({ label: 'key-octaves', value: t.zeroOrMore(KeyOctave) }),

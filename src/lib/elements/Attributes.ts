@@ -36,7 +36,13 @@ export const Attributes = schema('attributes', {}, [
   t.optional(Instruments),
   t.label({ label: 'clefs', value: t.zeroOrMore(Clef) }),
   t.label({ label: 'staff-details', value: t.zeroOrMore(StaffDetails) }),
-  t.label({ label: 'transpositions', value: t.choices(t.zeroOrMore(Transpose), t.zeroOrMore(ForPart)) }),
+  t.label({
+    label: 'transpositions',
+    value: t.choices(
+      t.label({ label: 'transposes', value: t.zeroOrMore(Transpose) }),
+      t.label({ label: 'for-parts', value: t.zeroOrMore(ForPart) })
+    ),
+  }),
   t.label({ label: 'directives', value: t.zeroOrMore(Directive) }),
   t.label({ label: 'measure-styles', value: t.zeroOrMore(MeasureStyle) }),
 ] as const);
