@@ -16,4 +16,18 @@ describe('matchers', () => {
       await expect('').not.toBeValidMusicXML();
     });
   });
+
+  describe('toEqualXML', () => {
+    it('asserts XML documents that match exactly', () => {
+      expect('<foo></foo>').toEqualXML('<foo></foo>');
+    });
+
+    it('asserts XML documents that functionally match', () => {
+      expect('<foo></foo>').toEqualXML('<foo/>');
+    });
+
+    it('refutes XML documents that do not match', () => {
+      expect('<foo>foo</foo>').not.toEqualXML('<bar>bar</bar>');
+    });
+  });
 });
