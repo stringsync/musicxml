@@ -47,7 +47,7 @@ describe('MusicXML', () => {
       expect(measureContents).toHaveLength(2);
 
       const attributes = measureContents[0];
-      if (!(attributes instanceof elements.Attributes)) {
+      if (!elements.Measure.isAttributes(attributes)) {
         fail(`expected Attributes, got: ${attributes}`);
       }
 
@@ -108,7 +108,7 @@ describe('MusicXML', () => {
       expect(line!.getStaffLinePosition()).toBe(2);
 
       const note = measureContents[1];
-      if (!(note instanceof elements.Note)) {
+      if (!elements.Measure.isNote(note)) {
         fail(`expected Note, got: ${note}`);
       }
 
