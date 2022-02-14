@@ -5,6 +5,9 @@ import * as raw from './lib/raw';
 import * as schema from './lib/schema';
 import * as xml from './lib/xml';
 
+/**
+ * The allowed root elements for {@link MusicXML} objects.
+ */
 export type Root = elements.ScorePartwise | elements.ScoreTimewise;
 
 type MusicXMLOpts<T extends Root> = {
@@ -14,7 +17,22 @@ type MusicXMLOpts<T extends Root> = {
   declaration: raw.Declaration;
 };
 
+/**
+ * The MusicXML class manages data in a MusicXML document.
+ *
+ * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/}
+ */
 export class MusicXML<T extends Root> {
+  /**
+   * Parses an XML string into a {@link MusicXML} object.
+   *
+   * This method expects exactly one top level `<score-partwise>` or `<score-timewise>` element in the XML document
+   * string. If you need a blank {@link MusicXML} object, use {@link MusicXML.createPartwise} or
+   * {@link MusicXML.createTimewise} instead.
+   *
+   * @param {string} xmlStr an XML document as a string
+   * @returns {MusicXML} a {@link MusicXML} object
+   */
   static parse(xmlStr: string): MusicXML<Root> {
     const descriptor = schema.t.choices(elements.ScorePartwise, elements.ScoreTimewise);
     const { declaration, nodes } = raw.parse(xmlStr);
@@ -38,6 +56,11 @@ export class MusicXML<T extends Root> {
     return new MusicXML({ root, index, nodes, declaration });
   }
 
+  /**
+   * Creates a {@link MusicXML} object with a {@link elements.ScorePartwise} as the root.
+   *
+   * @returns {MusicXML} a {@link MusicXML} object
+   */
   static createPartwise(): MusicXML<elements.ScorePartwise> {
     const root = new elements.ScorePartwise();
     const index = 0;
@@ -46,6 +69,11 @@ export class MusicXML<T extends Root> {
     return new MusicXML({ root, index, nodes, declaration });
   }
 
+  /**
+   * Creates a {@link MusicXML} object with a {@link elements.ScoreTimewise} as the root.
+   *
+   * @returns {MusicXML} a {@link MusicXML} object
+   */
   static createTimewise(): MusicXML<elements.ScoreTimewise> {
     const root = new elements.ScoreTimewise();
     const index = 0;
@@ -54,10 +82,22 @@ export class MusicXML<T extends Root> {
     return new MusicXML({ root, index, nodes, declaration });
   }
 
+  /**
+   * Asserts if the value is a {@link elements.ScorePartwise} instance.
+   *
+   * @param value a value to test
+   * @returns {boolean} if the value is a {@link elements.ScorePartwise} instance
+   */
   static isScorePartwise(value: any): value is elements.ScorePartwise {
     return operations.validate(value, elements.ScorePartwise);
   }
 
+  /**
+   * Asserts if the value is a {@link elements.ScoreTimewise} instance.
+   *
+   * @param value a value to test
+   * @returns {boolean} if the value is a {@link elements.ScoreTimewise} instance
+   */
   static isScoreTimewise(value: any): value is elements.ScoreTimewise {
     return operations.validate(value, elements.ScoreTimewise);
   }
@@ -74,10 +114,20 @@ export class MusicXML<T extends Root> {
     this.nodes = opts.nodes;
   }
 
+  /**
+   * Gets the root of this {@link MusicXML} object.
+   *
+   * @returns {elements.ScorePartwise|elements.ScoreTimewise} the root of this {@link MusicXML} object
+   */
   getRoot(): T {
     return this.root;
   }
 
+  /**
+   * Serializes this {@link MusicXML} object into a string.
+   *
+   * @returns {string} the string representation of this {@link MusicXML} object
+   */
   serialize(): string {
     const node = xml.serialize(this.root);
     const nodes = [...this.nodes];
