@@ -3017,14 +3017,14 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
   }
 }
 
+export type ExtendedCreditDetails = [
+  CreditWords | CreditSymbol,
+  Array<[Array<Link>, Array<Bookmark>, CreditWords | CreditSymbol]>
+];
+
 export type CreditAttributes = { id: string | null; page: number | null };
 
-export type CreditContents = [
-  Array<CreditType>,
-  Array<Link>,
-  Array<Bookmark>,
-  CreditImage | [CreditWords | CreditSymbol, Array<[Array<Link>, Array<Bookmark>, CreditWords | CreditSymbol]>]
-];
+export type CreditContents = [Array<CreditType>, Array<Link>, Array<Bookmark>, CreditImage | ExtendedCreditDetails];
 
 export class Credit implements XMLElement<'credit', CreditAttributes, CreditContents> {
   static readonly schema = {
@@ -3044,16 +3044,12 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
           type: 'choices',
           choices: [
             CreditImage,
-            [
-              {
-                type: 'label',
-                label: 'simple-credit-detail',
-                value: { type: 'choices', choices: [CreditWords, CreditSymbol] },
-              },
-              {
-                type: 'label',
-                label: 'complex-credit-details',
-                value: {
+            {
+              type: 'label',
+              label: 'extended-credit-details',
+              value: [
+                { type: 'choices', choices: [CreditWords, CreditSymbol] },
+                {
                   type: 'zeroOrMore',
                   value: [
                     { type: 'zeroOrMore', value: Link },
@@ -3061,13 +3057,25 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
                     { type: 'choices', choices: [CreditWords, CreditSymbol] },
                   ],
                 },
-              },
-            ],
+              ],
+            },
           ],
         },
       },
     ],
   } as const;
+  static isCreditImage(value: any): value is CreditImage {
+    return operations.validate(value, CreditImage);
+  }
+  static isExtendedCreditDetails(value: any): value is ExtendedCreditDetails {
+    return operations.validate(value, Credit.schema.contents[3]['value']['choices'][1]);
+  }
+  static isCreditWords(value: any): value is CreditWords {
+    return operations.validate(value, CreditWords);
+  }
+  static isCreditSymbol(value: any): value is CreditSymbol {
+    return operations.validate(value, CreditSymbol);
+  }
 
   readonly schema = Credit.schema;
 
@@ -3108,16 +3116,10 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
   setBookmarks(bookmarks: Array<Bookmark>): void {
     this.contents[2] = bookmarks;
   }
-  getCreditDetail():
-    | CreditImage
-    | [CreditWords | CreditSymbol, Array<[Array<Link>, Array<Bookmark>, CreditWords | CreditSymbol]>] {
+  getCreditDetail(): CreditImage | ExtendedCreditDetails {
     return this.contents[3];
   }
-  setCreditDetail(
-    creditDetail:
-      | CreditImage
-      | [CreditWords | CreditSymbol, Array<[Array<Link>, Array<Bookmark>, CreditWords | CreditSymbol]>]
-  ): void {
+  setCreditDetail(creditDetail: CreditImage | ExtendedCreditDetails): void {
     this.contents[3] = creditDetail;
   }
 }
@@ -3893,6 +3895,12 @@ export class GroupNameDisplay
       },
     ],
   } as const;
+  static isDisplayText(value: any): value is DisplayText {
+    return operations.validate(value, DisplayText);
+  }
+  static isAccidentalText(value: any): value is AccidentalText {
+    return operations.validate(value, AccidentalText);
+  }
 
   readonly schema = GroupNameDisplay.schema;
 
@@ -4069,6 +4077,12 @@ export class GroupAbbreviationDisplay
       },
     ],
   } as const;
+  static isDisplayText(value: any): value is DisplayText {
+    return operations.validate(value, DisplayText);
+  }
+  static isAccidentalText(value: any): value is AccidentalText {
+    return operations.validate(value, AccidentalText);
+  }
 
   readonly schema = GroupAbbreviationDisplay.schema;
 
@@ -5053,6 +5067,12 @@ export class PartNameDisplay
       },
     ],
   } as const;
+  static isDisplayText(value: any): value is DisplayText {
+    return operations.validate(value, DisplayText);
+  }
+  static isAccidentalText(value: any): value is AccidentalText {
+    return operations.validate(value, AccidentalText);
+  }
 
   readonly schema = PartNameDisplay.schema;
 
@@ -5243,6 +5263,12 @@ export class PartAbbreviationDisplay
       },
     ],
   } as const;
+  static isDisplayText(value: any): value is DisplayText {
+    return operations.validate(value, DisplayText);
+  }
+  static isAccidentalText(value: any): value is AccidentalText {
+    return operations.validate(value, AccidentalText);
+  }
 
   readonly schema = PartAbbreviationDisplay.schema;
 
@@ -5572,6 +5598,12 @@ export class ScoreInstrument
       { type: 'optional', value: VirtualInstrument },
     ],
   } as const;
+  static isSolo(value: any): value is Solo {
+    return operations.validate(value, Solo);
+  }
+  static isEnsemble(value: any): value is Ensemble {
+    return operations.validate(value, Ensemble);
+  }
 
   readonly schema = ScoreInstrument.schema;
 
@@ -6067,6 +6099,12 @@ export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, 
       },
     ],
   } as const;
+  static isMidiDevice(value: any): value is MidiDevice {
+    return operations.validate(value, MidiDevice);
+  }
+  static isMidiInstrument(value: any): value is MidiInstrument {
+    return operations.validate(value, MidiInstrument);
+  }
 
   readonly schema = ScorePart.schema;
 
@@ -6163,6 +6201,12 @@ export class PartList implements XMLElement<'part-list', PartListAttributes, Par
       },
     ],
   } as const;
+  static isPartGroup(value: any): value is PartGroup {
+    return operations.validate(value, PartGroup);
+  }
+  static isScorePart(value: any): value is ScorePart {
+    return operations.validate(value, ScorePart);
+  }
 
   readonly schema = PartList.schema;
 
@@ -12368,6 +12412,51 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
       { type: 'label', label: 'accidental-marks', value: { type: 'zeroOrMore', value: AccidentalMark } },
     ],
   } as const;
+  static isTrillMark(value: any): value is TrillMark {
+    return operations.validate(value, TrillMark);
+  }
+  static isTurn(value: any): value is Turn {
+    return operations.validate(value, Turn);
+  }
+  static isDelayedTurn(value: any): value is DelayedTurn {
+    return operations.validate(value, DelayedTurn);
+  }
+  static isInvertedTurn(value: any): value is InvertedTurn {
+    return operations.validate(value, InvertedTurn);
+  }
+  static isDelayedInvertedTurn(value: any): value is DelayedInvertedTurn {
+    return operations.validate(value, DelayedInvertedTurn);
+  }
+  static isVerticalTurn(value: any): value is VerticalTurn {
+    return operations.validate(value, VerticalTurn);
+  }
+  static isInvertedVerticalTurn(value: any): value is InvertedVerticalTurn {
+    return operations.validate(value, InvertedVerticalTurn);
+  }
+  static isShake(value: any): value is Shake {
+    return operations.validate(value, Shake);
+  }
+  static isWavyLine(value: any): value is WavyLine {
+    return operations.validate(value, WavyLine);
+  }
+  static isMordent(value: any): value is Mordent {
+    return operations.validate(value, Mordent);
+  }
+  static isInvertedMordent(value: any): value is InvertedMordent {
+    return operations.validate(value, InvertedMordent);
+  }
+  static isSchleifer(value: any): value is Schleifer {
+    return operations.validate(value, Schleifer);
+  }
+  static isTremolo(value: any): value is Tremolo {
+    return operations.validate(value, Tremolo);
+  }
+  static isHaydn(value: any): value is Haydn {
+    return operations.validate(value, Haydn);
+  }
+  static isOtherOrnament(value: any): value is OtherOrnament {
+    return operations.validate(value, OtherOrnament);
+  }
 
   readonly schema = Ornaments.schema;
 
@@ -12854,6 +12943,21 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
       },
     ],
   } as const;
+  static isNatural(value: any): value is Natural {
+    return operations.validate(value, Natural);
+  }
+  static isArtificial(value: any): value is Artificial {
+    return operations.validate(value, Artificial);
+  }
+  static isBasePitch(value: any): value is BasePitch {
+    return operations.validate(value, BasePitch);
+  }
+  static isTouchingPitch(value: any): value is TouchingPitch {
+    return operations.validate(value, TouchingPitch);
+  }
+  static isSoundingPitch(value: any): value is SoundingPitch {
+    return operations.validate(value, SoundingPitch);
+  }
 
   readonly schema = Harmonic.schema;
 
@@ -14810,6 +14914,12 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
       { type: 'optional', value: WithBar },
     ],
   } as const;
+  static isPreBend(value: any): value is PreBend {
+    return operations.validate(value, PreBend);
+  }
+  static isRelease(value: any): value is Release {
+    return operations.validate(value, Release);
+  }
 
   readonly schema = Bend.schema;
 
@@ -17521,6 +17631,99 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
       },
     ],
   } as const;
+  static isUpBow(value: any): value is UpBow {
+    return operations.validate(value, UpBow);
+  }
+  static isDownBow(value: any): value is DownBow {
+    return operations.validate(value, DownBow);
+  }
+  static isHarmonic(value: any): value is Harmonic {
+    return operations.validate(value, Harmonic);
+  }
+  static isOpenString(value: any): value is OpenString {
+    return operations.validate(value, OpenString);
+  }
+  static isThumbPosition(value: any): value is ThumbPosition {
+    return operations.validate(value, ThumbPosition);
+  }
+  static isFingering(value: any): value is Fingering {
+    return operations.validate(value, Fingering);
+  }
+  static isPluck(value: any): value is Pluck {
+    return operations.validate(value, Pluck);
+  }
+  static isDoubleTongue(value: any): value is DoubleTongue {
+    return operations.validate(value, DoubleTongue);
+  }
+  static isTripleTongue(value: any): value is TripleTongue {
+    return operations.validate(value, TripleTongue);
+  }
+  static isStopped(value: any): value is Stopped {
+    return operations.validate(value, Stopped);
+  }
+  static isSnapPizzicato(value: any): value is SnapPizzicato {
+    return operations.validate(value, SnapPizzicato);
+  }
+  static isFret(value: any): value is Fret {
+    return operations.validate(value, Fret);
+  }
+  static isString(value: any): value is String {
+    return operations.validate(value, String);
+  }
+  static isHammerOn(value: any): value is HammerOn {
+    return operations.validate(value, HammerOn);
+  }
+  static isPullOff(value: any): value is PullOff {
+    return operations.validate(value, PullOff);
+  }
+  static isBend(value: any): value is Bend {
+    return operations.validate(value, Bend);
+  }
+  static isTap(value: any): value is Tap {
+    return operations.validate(value, Tap);
+  }
+  static isHeel(value: any): value is Heel {
+    return operations.validate(value, Heel);
+  }
+  static isToe(value: any): value is Toe {
+    return operations.validate(value, Toe);
+  }
+  static isFingernails(value: any): value is Fingernails {
+    return operations.validate(value, Fingernails);
+  }
+  static isHole(value: any): value is Hole {
+    return operations.validate(value, Hole);
+  }
+  static isArrow(value: any): value is Arrow {
+    return operations.validate(value, Arrow);
+  }
+  static isHandbell(value: any): value is Handbell {
+    return operations.validate(value, Handbell);
+  }
+  static isBrassBend(value: any): value is BrassBend {
+    return operations.validate(value, BrassBend);
+  }
+  static isFlip(value: any): value is Flip {
+    return operations.validate(value, Flip);
+  }
+  static isSmear(value: any): value is Smear {
+    return operations.validate(value, Smear);
+  }
+  static isOpen(value: any): value is Open {
+    return operations.validate(value, Open);
+  }
+  static isHalfMuted(value: any): value is HalfMuted {
+    return operations.validate(value, HalfMuted);
+  }
+  static isHarmonMute(value: any): value is HarmonMute {
+    return operations.validate(value, HarmonMute);
+  }
+  static isGolpe(value: any): value is Golpe {
+    return operations.validate(value, Golpe);
+  }
+  static isOtherTechnical(value: any): value is OtherTechnical {
+    return operations.validate(value, OtherTechnical);
+  }
 
   readonly schema = Technical.schema;
 
@@ -20066,6 +20269,57 @@ export class Articulations implements XMLElement<'articulations', ArticulationsA
       },
     ],
   } as const;
+  static isAccent(value: any): value is Accent {
+    return operations.validate(value, Accent);
+  }
+  static isStrongAccent(value: any): value is StrongAccent {
+    return operations.validate(value, StrongAccent);
+  }
+  static isStaccato(value: any): value is Staccato {
+    return operations.validate(value, Staccato);
+  }
+  static isTenuto(value: any): value is Tenuto {
+    return operations.validate(value, Tenuto);
+  }
+  static isDetachedLegato(value: any): value is DetachedLegato {
+    return operations.validate(value, DetachedLegato);
+  }
+  static isStaccatissimo(value: any): value is Staccatissimo {
+    return operations.validate(value, Staccatissimo);
+  }
+  static isSpiccato(value: any): value is Spiccato {
+    return operations.validate(value, Spiccato);
+  }
+  static isScoop(value: any): value is Scoop {
+    return operations.validate(value, Scoop);
+  }
+  static isPlop(value: any): value is Plop {
+    return operations.validate(value, Plop);
+  }
+  static isDoit(value: any): value is Doit {
+    return operations.validate(value, Doit);
+  }
+  static isFalloff(value: any): value is Falloff {
+    return operations.validate(value, Falloff);
+  }
+  static isBreathMark(value: any): value is BreathMark {
+    return operations.validate(value, BreathMark);
+  }
+  static isCaesura(value: any): value is Caesura {
+    return operations.validate(value, Caesura);
+  }
+  static isStress(value: any): value is Stress {
+    return operations.validate(value, Stress);
+  }
+  static isUnstress(value: any): value is Unstress {
+    return operations.validate(value, Unstress);
+  }
+  static isSoftAccess(value: any): value is SoftAccess {
+    return operations.validate(value, SoftAccess);
+  }
+  static isOtherArticulation(value: any): value is OtherArticulation {
+    return operations.validate(value, OtherArticulation);
+  }
 
   readonly schema = Articulations.schema;
 
@@ -20809,6 +21063,87 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
       },
     ],
   } as const;
+  static isP(value: any): value is P {
+    return operations.validate(value, P);
+  }
+  static isPp(value: any): value is Pp {
+    return operations.validate(value, Pp);
+  }
+  static isPpp(value: any): value is Ppp {
+    return operations.validate(value, Ppp);
+  }
+  static isPppp(value: any): value is Pppp {
+    return operations.validate(value, Pppp);
+  }
+  static isPpppp(value: any): value is Ppppp {
+    return operations.validate(value, Ppppp);
+  }
+  static isPppppp(value: any): value is Pppppp {
+    return operations.validate(value, Pppppp);
+  }
+  static isF(value: any): value is F {
+    return operations.validate(value, F);
+  }
+  static isFf(value: any): value is Ff {
+    return operations.validate(value, Ff);
+  }
+  static isFff(value: any): value is Fff {
+    return operations.validate(value, Fff);
+  }
+  static isFfff(value: any): value is Ffff {
+    return operations.validate(value, Ffff);
+  }
+  static isFffff(value: any): value is Fffff {
+    return operations.validate(value, Fffff);
+  }
+  static isFfffff(value: any): value is Ffffff {
+    return operations.validate(value, Ffffff);
+  }
+  static isMp(value: any): value is Mp {
+    return operations.validate(value, Mp);
+  }
+  static isMf(value: any): value is Mf {
+    return operations.validate(value, Mf);
+  }
+  static isSf(value: any): value is Sf {
+    return operations.validate(value, Sf);
+  }
+  static isSfp(value: any): value is Sfp {
+    return operations.validate(value, Sfp);
+  }
+  static isSfpp(value: any): value is Sfpp {
+    return operations.validate(value, Sfpp);
+  }
+  static isFp(value: any): value is Fp {
+    return operations.validate(value, Fp);
+  }
+  static isRf(value: any): value is Rf {
+    return operations.validate(value, Rf);
+  }
+  static isRfz(value: any): value is Rfz {
+    return operations.validate(value, Rfz);
+  }
+  static isSfz(value: any): value is Sfz {
+    return operations.validate(value, Sfz);
+  }
+  static isSffz(value: any): value is Sffz {
+    return operations.validate(value, Sffz);
+  }
+  static isFz(value: any): value is Fz {
+    return operations.validate(value, Fz);
+  }
+  static isN(value: any): value is N {
+    return operations.validate(value, N);
+  }
+  static isPf(value: any): value is Pf {
+    return operations.validate(value, Pf);
+  }
+  static isSfzp(value: any): value is Sfzp {
+    return operations.validate(value, Sfzp);
+  }
+  static isOtherDynamics(value: any): value is OtherDynamics {
+    return operations.validate(value, OtherDynamics);
+  }
 
   readonly schema = Dynamics.schema;
 
@@ -21631,6 +21966,48 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
       },
     ],
   } as const;
+  static isTied(value: any): value is Tied {
+    return operations.validate(value, Tied);
+  }
+  static isSlur(value: any): value is Slur {
+    return operations.validate(value, Slur);
+  }
+  static isTuplet(value: any): value is Tuplet {
+    return operations.validate(value, Tuplet);
+  }
+  static isGlissando(value: any): value is Glissando {
+    return operations.validate(value, Glissando);
+  }
+  static isSlide(value: any): value is Slide {
+    return operations.validate(value, Slide);
+  }
+  static isOrnaments(value: any): value is Ornaments {
+    return operations.validate(value, Ornaments);
+  }
+  static isTechnical(value: any): value is Technical {
+    return operations.validate(value, Technical);
+  }
+  static isArticulations(value: any): value is Articulations {
+    return operations.validate(value, Articulations);
+  }
+  static isDynamics(value: any): value is Dynamics {
+    return operations.validate(value, Dynamics);
+  }
+  static isFermata(value: any): value is Fermata {
+    return operations.validate(value, Fermata);
+  }
+  static isArpeggiate(value: any): value is Arpeggiate {
+    return operations.validate(value, Arpeggiate);
+  }
+  static isNonArpeggiate(value: any): value is NonArpeggiate {
+    return operations.validate(value, NonArpeggiate);
+  }
+  static isAccidentalMark(value: any): value is AccidentalMark {
+    return operations.validate(value, AccidentalMark);
+  }
+  static isOtherNotation(value: any): value is OtherNotation {
+    return operations.validate(value, OtherNotation);
+  }
 
   readonly schema = Notations.schema;
 
@@ -22245,6 +22622,15 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
   static isIntelligible(value: any): value is Intelligible {
     return operations.validate(value, Lyric.schema.contents[0]['value']['choices'][0]);
   }
+  static isExtend(value: any): value is Extend {
+    return operations.validate(value, Extend);
+  }
+  static isLaughing(value: any): value is Laughing {
+    return operations.validate(value, Laughing);
+  }
+  static isHumming(value: any): value is Humming {
+    return operations.validate(value, Humming);
+  }
 
   readonly schema = Lyric.schema;
 
@@ -22575,6 +22961,18 @@ export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
       },
     ],
   } as const;
+  static isIpa(value: any): value is Ipa {
+    return operations.validate(value, Ipa);
+  }
+  static isMute(value: any): value is Mute {
+    return operations.validate(value, Mute);
+  }
+  static isSemiPitched(value: any): value is SemiPitched {
+    return operations.validate(value, SemiPitched);
+  }
+  static isOtherPlay(value: any): value is OtherPlay {
+    return operations.validate(value, OtherPlay);
+  }
 
   readonly schema = Play.schema;
 
@@ -22746,6 +23144,15 @@ export class Listen implements XMLElement<'listen', ListenAttributes, ListenCont
       },
     ],
   } as const;
+  static isAssess(value: any): value is Assess {
+    return operations.validate(value, Assess);
+  }
+  static isWait(value: any): value is Wait {
+    return operations.validate(value, Wait);
+  }
+  static isOtherListen(value: any): value is OtherListen {
+    return operations.validate(value, OtherListen);
+  }
 
   readonly schema = Listen.schema;
 
@@ -22767,13 +23174,11 @@ export class Listen implements XMLElement<'listen', ListenAttributes, ListenCont
 
 export type BasicNoteValue = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
 
-export type GraceNoteValue = [
-  Grace,
-  (
-    | [Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]]
-    | [Cue, Chord | null, Pitch | Unpitched | Rest, Duration]
-  )
-];
+export type GraceNoteValue = [Grace, TiedGraceNoteValueSpec | CueGraceNoteValueSpec];
+
+export type TiedGraceNoteValueSpec = [Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]];
+
+export type CueGraceNoteValueSpec = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
 
 export type CueNoteValue = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
 
@@ -22908,17 +23313,25 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
                 {
                   type: 'choices',
                   choices: [
-                    [
-                      { type: 'optional', value: Chord },
-                      { type: 'choices', choices: [Pitch, Unpitched, Rest] },
-                      { type: 'choices', choices: [[], [Tie], [Tie, Tie]] },
-                    ],
-                    [
-                      { type: 'required', value: Cue },
-                      { type: 'optional', value: Chord },
-                      { type: 'choices', choices: [Pitch, Unpitched, Rest] },
-                      { type: 'required', value: Duration },
-                    ],
+                    {
+                      type: 'label',
+                      label: 'tied-grace-note-value-spec',
+                      value: [
+                        { type: 'optional', value: Chord },
+                        { type: 'choices', choices: [Pitch, Unpitched, Rest] },
+                        { type: 'choices', choices: [[], [Tie], [Tie, Tie]] },
+                      ],
+                    },
+                    {
+                      type: 'label',
+                      label: 'cue-grace-note-value-spec',
+                      value: [
+                        { type: 'required', value: Cue },
+                        { type: 'optional', value: Chord },
+                        { type: 'choices', choices: [Pitch, Unpitched, Rest] },
+                        { type: 'required', value: Duration },
+                      ],
+                    },
                   ],
                 },
               ],
@@ -22975,8 +23388,23 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
   static isBasicNoteValue(value: any): value is BasicNoteValue {
     return operations.validate(value, Note.schema.contents[0]['value']['choices'][0]);
   }
+  static isPitch(value: any): value is Pitch {
+    return operations.validate(value, Pitch);
+  }
+  static isUnpitched(value: any): value is Unpitched {
+    return operations.validate(value, Unpitched);
+  }
+  static isRest(value: any): value is Rest {
+    return operations.validate(value, Rest);
+  }
   static isGraceNoteValue(value: any): value is GraceNoteValue {
     return operations.validate(value, Note.schema.contents[0]['value']['choices'][1]);
+  }
+  static isTiedGraceNoteValueSpec(value: any): value is TiedGraceNoteValueSpec {
+    return operations.validate(value, Note.schema.contents[0]['value']['choices'][1]['value'][1]['choices'][0]);
+  }
+  static isCueGraceNoteValueSpec(value: any): value is CueGraceNoteValueSpec {
+    return operations.validate(value, Note.schema.contents[0]['value']['choices'][1]['value'][1]['choices'][1]);
   }
   static isCueNoteValue(value: any): value is CueNoteValue {
     return operations.validate(value, Note.schema.contents[0]['value']['choices'][2]);
@@ -25917,6 +26345,9 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
   static isBeatSpec(value: any): value is BeatSpec {
     return operations.validate(value, Metronome.schema.contents[0]['value']['choices'][0]);
   }
+  static isPerMinute(value: any): value is PerMinute {
+    return operations.validate(value, PerMinute);
+  }
   static isMetronomeSpec(value: any): value is MetronomeSpec {
     return operations.validate(value, Metronome.schema.contents[0]['value']['choices'][1]);
   }
@@ -28541,6 +28972,39 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
       },
     ],
   } as const;
+  static isGlass(value: any): value is Glass {
+    return operations.validate(value, Glass);
+  }
+  static isMetal(value: any): value is Metal {
+    return operations.validate(value, Metal);
+  }
+  static isWood(value: any): value is Wood {
+    return operations.validate(value, Wood);
+  }
+  static isPitched(value: any): value is Pitched {
+    return operations.validate(value, Pitched);
+  }
+  static isMembrane(value: any): value is Membrane {
+    return operations.validate(value, Membrane);
+  }
+  static isEffect(value: any): value is Effect {
+    return operations.validate(value, Effect);
+  }
+  static isTimpani(value: any): value is Timpani {
+    return operations.validate(value, Timpani);
+  }
+  static isBeater(value: any): value is Beater {
+    return operations.validate(value, Beater);
+  }
+  static isStick(value: any): value is Stick {
+    return operations.validate(value, Stick);
+  }
+  static isStickLocation(value: any): value is StickLocation {
+    return operations.validate(value, StickLocation);
+  }
+  static isOtherPercussion(value: any): value is OtherPercussion {
+    return operations.validate(value, OtherPercussion);
+  }
 
   readonly schema = Percussion.schema;
 
@@ -29300,11 +29764,68 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
   static isTokens(value: any): value is Tokens {
     return operations.validate(value, DirectionType.schema.contents[0]['value']['choices'][3]);
   }
+  static isWords(value: any): value is Words {
+    return operations.validate(value, Words);
+  }
+  static isSymbol(value: any): value is Symbol {
+    return operations.validate(value, Symbol);
+  }
+  static isWedge(value: any): value is Wedge {
+    return operations.validate(value, Wedge);
+  }
   static isDynamicsList(value: any): value is DynamicsList {
     return operations.validate(value, DirectionType.schema.contents[0]['value']['choices'][5]);
   }
+  static isDashes(value: any): value is Dashes {
+    return operations.validate(value, Dashes);
+  }
+  static isBracket(value: any): value is Bracket {
+    return operations.validate(value, Bracket);
+  }
+  static isPedal(value: any): value is Pedal {
+    return operations.validate(value, Pedal);
+  }
+  static isMetronome(value: any): value is Metronome {
+    return operations.validate(value, Metronome);
+  }
+  static isOctaveShift(value: any): value is OctaveShift {
+    return operations.validate(value, OctaveShift);
+  }
+  static isHarpPedals(value: any): value is HarpPedals {
+    return operations.validate(value, HarpPedals);
+  }
+  static isDamp(value: any): value is Damp {
+    return operations.validate(value, Damp);
+  }
+  static isDampAll(value: any): value is DampAll {
+    return operations.validate(value, DampAll);
+  }
+  static isEyeglasses(value: any): value is Eyeglasses {
+    return operations.validate(value, Eyeglasses);
+  }
+  static isStringMute(value: any): value is StringMute {
+    return operations.validate(value, StringMute);
+  }
+  static isScordatura(value: any): value is Scordatura {
+    return operations.validate(value, Scordatura);
+  }
+  static isImage(value: any): value is Image {
+    return operations.validate(value, Image);
+  }
+  static isPrincipalVoice(value: any): value is PrincipalVoice {
+    return operations.validate(value, PrincipalVoice);
+  }
   static isPercussions(value: any): value is Percussions {
     return operations.validate(value, DirectionType.schema.contents[0]['value']['choices'][19]);
+  }
+  static isAccordionRegistration(value: any): value is AccordionRegistration {
+    return operations.validate(value, AccordionRegistration);
+  }
+  static isStaffDivide(value: any): value is StaffDivide {
+    return operations.validate(value, StaffDivide);
+  }
+  static isOtherDirection(value: any): value is OtherDirection {
+    return operations.validate(value, OtherDirection);
   }
 
   readonly schema = DirectionType.schema;
@@ -29438,6 +29959,12 @@ export class InstrumentChange
       { type: 'optional', value: VirtualInstrument },
     ],
   } as const;
+  static isSolo(value: any): value is Solo {
+    return operations.validate(value, Solo);
+  }
+  static isEnsemble(value: any): value is Ensemble {
+    return operations.validate(value, Ensemble);
+  }
 
   readonly schema = InstrumentChange.schema;
 
@@ -29654,6 +30181,9 @@ export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents
       { type: 'optional', value: SwingStyle },
     ],
   } as const;
+  static isStraight(value: any): value is Straight {
+    return operations.validate(value, Straight);
+  }
   static isAlternateSwing(value: any): value is AlternateSwing {
     return operations.validate(value, Swing.schema.contents[0]['value']['choices'][1]);
   }
@@ -30016,6 +30546,12 @@ export class Listening implements XMLElement<'listening', ListeningAttributes, L
       { type: 'optional', value: Offset },
     ],
   } as const;
+  static isSync(value: any): value is Sync {
+    return operations.validate(value, Sync);
+  }
+  static isOtherListening(value: any): value is OtherListening {
+    return operations.validate(value, OtherListening);
+  }
 
   readonly schema = Listening.schema;
 
@@ -31097,6 +31633,9 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
   } as const;
   static isTimeSignature(value: any): value is TimeSignature {
     return operations.validate(value, Time.schema.contents[0]['value']['choices'][0]);
+  }
+  static isSenzaMisura(value: any): value is SenzaMisura {
+    return operations.validate(value, SenzaMisura);
   }
 
   readonly schema = Time.schema;
@@ -32895,6 +33434,18 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
       },
     ],
   } as const;
+  static isMultipleRest(value: any): value is MultipleRest {
+    return operations.validate(value, MultipleRest);
+  }
+  static isMeasureRepeat(value: any): value is MeasureRepeat {
+    return operations.validate(value, MeasureRepeat);
+  }
+  static isBeatRepeat(value: any): value is BeatRepeat {
+    return operations.validate(value, BeatRepeat);
+  }
+  static isSlash(value: any): value is Slash {
+    return operations.validate(value, Slash);
+  }
 
   readonly schema = MeasureStyle.schema;
 
@@ -35940,6 +36491,15 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
       { type: 'optional', value: Staff },
     ],
   } as const;
+  static isRoot(value: any): value is Root {
+    return operations.validate(value, Root);
+  }
+  static isNumeral(value: any): value is Numeral {
+    return operations.validate(value, Numeral);
+  }
+  static isFunction(value: any): value is Function {
+    return operations.validate(value, Function);
+  }
 
   readonly schema = Harmony.schema;
 
@@ -37867,6 +38427,48 @@ export class Measure implements XMLElement<'measure', MeasureAttributes, Measure
       },
     ],
   } as const;
+  static isNote(value: any): value is Note {
+    return operations.validate(value, Note);
+  }
+  static isBackup(value: any): value is Backup {
+    return operations.validate(value, Backup);
+  }
+  static isForward(value: any): value is Forward {
+    return operations.validate(value, Forward);
+  }
+  static isDirection(value: any): value is Direction {
+    return operations.validate(value, Direction);
+  }
+  static isAttributes(value: any): value is Attributes {
+    return operations.validate(value, Attributes);
+  }
+  static isHarmony(value: any): value is Harmony {
+    return operations.validate(value, Harmony);
+  }
+  static isFiguredBass(value: any): value is FiguredBass {
+    return operations.validate(value, FiguredBass);
+  }
+  static isPrint(value: any): value is Print {
+    return operations.validate(value, Print);
+  }
+  static isSound(value: any): value is Sound {
+    return operations.validate(value, Sound);
+  }
+  static isListening(value: any): value is Listening {
+    return operations.validate(value, Listening);
+  }
+  static isBarline(value: any): value is Barline {
+    return operations.validate(value, Barline);
+  }
+  static isGrouping(value: any): value is Grouping {
+    return operations.validate(value, Grouping);
+  }
+  static isLink(value: any): value is Link {
+    return operations.validate(value, Link);
+  }
+  static isBookmark(value: any): value is Bookmark {
+    return operations.validate(value, Bookmark);
+  }
 
   readonly schema = Measure.schema;
 

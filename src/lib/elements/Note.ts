@@ -193,8 +193,14 @@ export const Note = schema(
           value: [
             t.required(Grace),
             t.choices(
-              [t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.choices([], [Tie], [Tie, Tie])],
-              [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)]
+              t.label({
+                label: 'tied-grace-note-value-spec',
+                value: [t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.choices([], [Tie], [Tie, Tie])],
+              }),
+              t.label({
+                label: 'cue-grace-note-value-spec',
+                value: [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)],
+              })
             ),
           ],
         }),

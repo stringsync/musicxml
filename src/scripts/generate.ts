@@ -32,7 +32,7 @@ const getClassName = (schema: XMLElementSchema): string => {
   return toPascalCase(schema.name);
 };
 
-const getLabeledChoiceTypeLiterals = (schema: XMLElementSchema): string => {
+const getLabeledTypeLiterals = (schema: XMLElementSchema): string => {
   const literals = new Array<string>();
 
   const dfs = (child: DescriptorChild) => {
@@ -210,6 +210,37 @@ const getSchemaLiteral = (schema: XMLElementSchema): string => {
 const getStaticTypeAssertMethodLiterals = (schema: XMLElementSchema): string => {
   const methods = new Set<string>();
 
+  const addMethod = (typeName: string, validateChildLiteral: string) => {
+    methods.add(
+      `  static is${typeName}(value: any): value is ${typeName} { return operations.validate(value, ${validateChildLiteral}); }`
+    );
+  };
+
+  const join = (path: Array<string | number>): string => {
+    return `${getClassName(schema)}.schema.contents${path
+      .map((part) => (util.isString(part) ? `['${part}']` : `[${part}]`))
+      .join('')}`;
+  };
+
+  const onChoice = (choice: DescriptorChild, path: Array<string | number>) => {
+    if (util.isDescriptor(choice)) {
+      switch (choice.type) {
+        case 'label':
+          const typeName = getChoiceTypeName(choice);
+          addMethod(typeName, join(path));
+          break;
+        case 'required':
+        case 'optional':
+          onChoice(choice.value, [...path, 'value']);
+          break;
+      }
+    }
+    if (util.isXMLElementSchema(choice)) {
+      const className = getClassName(choice);
+      addMethod(className, className);
+    }
+  };
+
   const dfs = (child: DescriptorChild, path: Array<string | number> = []) => {
     if (util.isDescriptor(child)) {
       switch (child.type) {
@@ -222,15 +253,7 @@ const getStaticTypeAssertMethodLiterals = (schema: XMLElementSchema): string => 
           break;
         case 'choices':
           child.choices.forEach((choice, ndx) => {
-            if (util.isDescriptor(choice) && choice.type === 'label') {
-              const typeName = getChoiceTypeName(choice);
-              const schemaPath = `${toPascalCase(schema.name)}.schema.contents${[...path, 'choices', ndx]
-                .map((part) => (util.isString(part) ? `['${part}']` : `[${part}]`))
-                .join('')}`;
-              methods.add(
-                `  static is${typeName}(value: any): value is ${typeName} { return operations.validate(value, ${schemaPath}); }`
-              );
-            }
+            onChoice(choice, [...path, 'choices', ndx]);
             dfs(choice, [...path, 'choices', ndx]);
           });
           break;
@@ -322,7 +345,7 @@ const toClassLiteral = (schema: XMLElementSchema): string => {
 
   const staticTypeAssertMethodLiterals = getStaticTypeAssertMethodLiterals(schema);
 
-  const labeledChoiceTypeLiterals = getLabeledChoiceTypeLiterals(schema);
+  const labeledTypeLiterals = getLabeledTypeLiterals(schema);
 
   const attributesTypeName = `${className}Attributes`;
   const attributesTypeLiteral = getAttributesTypeLiteral(schema);
@@ -333,7 +356,7 @@ const toClassLiteral = (schema: XMLElementSchema): string => {
   const contentsAccessorMethodLiterals = getContentsAccessorMethodLiterals(schema);
 
   return `
-${labeledChoiceTypeLiterals}
+${labeledTypeLiterals}
 
 export type ${attributesTypeName} = ${attributesTypeLiteral};
 
