@@ -10,7 +10,10 @@ describe('MusicXML', () => {
       const musicXml = MusicXML.parse(xmlStr);
       expect(musicXml.getRoot()).toBeInstanceOf(elements.ScorePartwise);
 
-      const scorePartwise = musicXml.getRoot() as elements.ScorePartwise;
+      const scorePartwise = musicXml.getRoot();
+      if (!MusicXML.isScorePartwise(scorePartwise)) {
+        fail(`expected ScorePartwise, got: ${scorePartwise}`);
+      }
       expect(scorePartwise.getVersion()).toBe('4.0');
 
       const partList = scorePartwise.getPartList();
@@ -43,10 +46,11 @@ describe('MusicXML', () => {
       expect(measureContents).toBeArray();
       expect(measureContents).toHaveLength(2);
 
-      const measureContent = measureContents[0];
-      expect(measureContent).toBeInstanceOf(elements.Attributes);
+      const attributes = measureContents[0];
+      if (!(attributes instanceof elements.Attributes)) {
+        fail(`expected Attributes, got: ${attributes}`);
+      }
 
-      const attributes = measureContent as elements.Attributes;
       const divisions = attributes.getDivisions();
       expect(divisions).toBeInstanceOf(elements.Divisions);
       expect(divisions!.getPositiveDivisions()).toBe(1);
@@ -59,13 +63,11 @@ describe('MusicXML', () => {
       expect(key).toBeInstanceOf(elements.Key);
 
       const keyValue = key.getValue();
-      expect(keyValue).toBeArray();
-      expect(keyValue).toHaveLength(3);
-      expect(keyValue[0]).toBeNull();
-      expect(keyValue[1]).toBeInstanceOf(elements.Fifths);
-      expect(keyValue[2]).toBeNull();
+      if (!elements.Key.isTraditionalKey(keyValue)) {
+        fail(`expected TraditionalKey, got: ${keyValue}`);
+      }
 
-      const fifths = keyValue[1] as elements.Fifths;
+      const fifths = keyValue[1];
       expect(fifths.getValue()).toBe(0);
 
       const times = attributes.getTimes();
@@ -76,14 +78,17 @@ describe('MusicXML', () => {
       expect(time).toBeInstanceOf(elements.Time);
 
       const timeValue = time.getValue();
+      if (!elements.Time.isTimeSignature(timeValue)) {
+        fail(`expected TimeSignature, got: ${timeValue}`);
+      }
       expect(timeValue).toBeArray();
       expect(timeValue).toHaveLength(2);
 
-      const beats = (timeValue as [any, any])[0][0][0];
+      const beats = timeValue[0][0][0];
       expect(beats).toBeInstanceOf(elements.Beats);
       expect(beats.getText()).toBe('4');
 
-      const beatType = (timeValue as [any, any])[0][0][1];
+      const beatType = timeValue[0][0][1];
       expect(beatType).toBeInstanceOf(elements.BeatType);
       expect(beatType.getText()).toBe('4');
 
@@ -103,9 +108,12 @@ describe('MusicXML', () => {
       expect(line!.getStaffLinePosition()).toBe(2);
 
       const note = measureContents[1];
-      expect(note).toBeInstanceOf(elements.Note);
+      if (!(note instanceof elements.Note)) {
+        fail(`expected Note, got: ${note}`);
+      }
 
-      const noteValue = (note as elements.Note).getValue();
+      const noteValue = note.getValue();
+      expect(elements.Note.isBasicNoteValue(noteValue)).toBeTrue();
       expect(noteValue).toBeArray();
       expect(noteValue).toHaveLength(4);
       expect(noteValue[0]).toBeNull();
@@ -113,7 +121,7 @@ describe('MusicXML', () => {
       expect(noteValue[2]).toBeInstanceOf(elements.Duration);
       expect(noteValue[3]).toStrictEqual([]);
 
-      const type = (note as elements.Note).getType();
+      const type = note.getType();
       expect(type).toBeInstanceOf(elements.Type);
       expect(type!.getNoteTypeValue()).toBe('whole');
     });

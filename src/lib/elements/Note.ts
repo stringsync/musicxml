@@ -180,7 +180,7 @@ export const Note = schema(
       label: 'value',
       value: t.choices(
         t.label({
-          label: 'chord-note-value',
+          label: 'basic-note-value',
           value: [
             t.optional(Chord),
             t.choices(Pitch, Unpitched, Rest),
@@ -199,7 +199,7 @@ export const Note = schema(
           ],
         }),
         t.label({
-          label: 'basic-note-value',
+          label: 'cue-note-value',
           value: [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)],
         })
       ),

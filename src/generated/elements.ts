@@ -22765,7 +22765,7 @@ export class Listen implements XMLElement<'listen', ListenAttributes, ListenCont
   }
 }
 
-export type ChordNoteValue = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
+export type BasicNoteValue = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
 
 export type GraceNoteValue = [
   Grace,
@@ -22775,7 +22775,7 @@ export type GraceNoteValue = [
   )
 ];
 
-export type BasicNoteValue = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
+export type CueNoteValue = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
 
 export type NoteAttributes = {
   attack: number | null;
@@ -22802,7 +22802,7 @@ export type NoteAttributes = {
 };
 
 export type NoteContents = [
-  ChordNoteValue | GraceNoteValue | BasicNoteValue,
+  BasicNoteValue | GraceNoteValue | CueNoteValue,
   Array<Instrument>,
   Footnote | null,
   Level | null,
@@ -22892,7 +22892,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
           choices: [
             {
               type: 'label',
-              label: 'chord-note-value',
+              label: 'basic-note-value',
               value: [
                 { type: 'optional', value: Chord },
                 { type: 'choices', choices: [Pitch, Unpitched, Rest] },
@@ -22925,7 +22925,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
             },
             {
               type: 'label',
-              label: 'basic-note-value',
+              label: 'cue-note-value',
               value: [
                 { type: 'required', value: Cue },
                 { type: 'optional', value: Chord },
@@ -22972,13 +22972,13 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
       { type: 'optional', value: Listen },
     ],
   } as const;
-  static isChordNoteValue(value: any): value is ChordNoteValue {
+  static isBasicNoteValue(value: any): value is BasicNoteValue {
     return operations.validate(value, Note.schema.contents[0]['value']['choices'][0]);
   }
   static isGraceNoteValue(value: any): value is GraceNoteValue {
     return operations.validate(value, Note.schema.contents[0]['value']['choices'][1]);
   }
-  static isBasicNoteValue(value: any): value is BasicNoteValue {
+  static isCueNoteValue(value: any): value is CueNoteValue {
     return operations.validate(value, Note.schema.contents[0]['value']['choices'][2]);
   }
 
@@ -23119,10 +23119,10 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
   setTimeOnly(timeOnly: string | null): void {
     this.attributes['time-only'] = timeOnly;
   }
-  getValue(): ChordNoteValue | GraceNoteValue | BasicNoteValue {
+  getValue(): BasicNoteValue | GraceNoteValue | CueNoteValue {
     return this.contents[0];
   }
-  setValue(value: ChordNoteValue | GraceNoteValue | BasicNoteValue): void {
+  setValue(value: BasicNoteValue | GraceNoteValue | CueNoteValue): void {
     this.contents[0] = value;
   }
   getInstruments(): Array<Instrument> {

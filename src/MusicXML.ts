@@ -2,6 +2,7 @@ import { ScorePartwise, ScoreTimewise } from './generated/elements';
 import { MusicXMLError } from './lib/errors';
 import * as raw from './lib/raw';
 import { t } from './lib/schema';
+import * as util from './lib/util';
 import * as xml from './lib/xml';
 
 export class MusicXML {
@@ -26,6 +27,14 @@ export class MusicXML {
     const root = resolved[0].value;
     const index = resolutions.findIndex((resolution) => resolution.type === 'resolved');
     return new MusicXML(root, index, declaration, nodes);
+  }
+
+  static isScorePartwise(value: any): value is ScorePartwise {
+    return util.isXMLElement(value) && value.schema.name === ScorePartwise.schema.name;
+  }
+
+  static isScoreTimewise(value: any): value is ScoreTimewise {
+    return util.isXMLElement(value) && value.schema.name === ScoreTimewise.schema.name;
   }
 
   private root: ScorePartwise | ScoreTimewise;

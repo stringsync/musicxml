@@ -28,8 +28,8 @@ const toCamelCase = (string: string): string => {
   return uncapitalize(toPascalCase(string));
 };
 
-const getClassName = (factory: XMLElementSchema): string => {
-  return toPascalCase(factory.name);
+const getClassName = (schema: XMLElementSchema): string => {
+  return toPascalCase(schema.name);
 };
 
 const getLabeledChoiceTypeLiterals = (schema: XMLElementSchema): string => {
@@ -208,7 +208,7 @@ const getSchemaLiteral = (schema: XMLElementSchema): string => {
 };
 
 const getStaticTypeAssertMethodLiterals = (schema: XMLElementSchema): string => {
-  const methods = new Array<string>();
+  const methods = new Set<string>();
 
   const dfs = (child: DescriptorChild, path: Array<string | number> = []) => {
     if (util.isDescriptor(child)) {
@@ -227,7 +227,7 @@ const getStaticTypeAssertMethodLiterals = (schema: XMLElementSchema): string => 
               const schemaPath = `${toPascalCase(schema.name)}.schema.contents${[...path, 'choices', ndx]
                 .map((part) => (util.isString(part) ? `['${part}']` : `[${part}]`))
                 .join('')}`;
-              methods.push(
+              methods.add(
                 `  static is${typeName}(value: any): value is ${typeName} { return operations.validate(value, ${schemaPath}); }`
               );
             }
@@ -242,7 +242,7 @@ const getStaticTypeAssertMethodLiterals = (schema: XMLElementSchema): string => 
   };
 
   dfs(schema.contents);
-  return methods.join('\n');
+  return Array.from(methods).join('\n');
 };
 
 const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): string => {
