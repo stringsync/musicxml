@@ -32,33 +32,38 @@ const getClassName = (factory: XMLElementSchema): string => {
   return toPascalCase(factory.name);
 };
 
-const getLabeledChoiceTypeLiterals = (child: DescriptorChild): string[] => {
+const getLabeledChoiceTypeLiterals = (schema: XMLElementSchema): string => {
   const literals = new Array<string>();
-  if (util.isDescriptor(child)) {
-    switch (child.type) {
-      case 'label':
-      case 'optional':
-      case 'required':
-      case 'zeroOrMore':
-      case 'oneOrMore':
-        literals.push(...getLabeledChoiceTypeLiterals(child.value));
-        break;
-      case 'choices':
-        for (const choice of child.choices) {
-          if (util.isDescriptor(choice) && choice.type === 'label') {
-            const typeName = getChoiceTypeName(choice);
-            const typeLiteral = getTypeLiteral(choice.value);
-            literals.push(`export type ${typeName} = ${typeLiteral};`);
+
+  const dfs = (child: DescriptorChild) => {
+    if (util.isDescriptor(child)) {
+      switch (child.type) {
+        case 'label':
+        case 'optional':
+        case 'required':
+        case 'zeroOrMore':
+        case 'oneOrMore':
+          dfs(child.value);
+          break;
+        case 'choices':
+          for (const choice of child.choices) {
+            if (util.isDescriptor(choice) && choice.type === 'label') {
+              const typeName = getChoiceTypeName(choice);
+              const typeLiteral = getTypeLiteral(choice.value);
+              literals.push(`export type ${typeName} = ${typeLiteral};`);
+            }
+            dfs(choice);
           }
-          literals.push(...getLabeledChoiceTypeLiterals(choice));
-        }
-        break;
+          break;
+      }
     }
-  }
-  if (util.isArray(child)) {
-    literals.push(...child.flatMap(getLabeledChoiceTypeLiterals));
-  }
-  return literals;
+    if (util.isArray(child)) {
+      child.forEach(dfs);
+    }
+  };
+
+  dfs(schema.contents);
+  return literals.join('\n\n');
 };
 
 const getChoiceTypeName = (child: DescriptorChild): string => {
@@ -162,40 +167,82 @@ const getAttributeAccessorMethodLiterals = (schema: XMLElementSchema): string =>
   return methods.join('\n');
 };
 
+const getLiteral = (value: any): string => {
+  if (util.isString(value)) {
+    return `'${value}'`;
+  }
+  if (util.isNumber(value)) {
+    return value.toString();
+  }
+  if (util.isNull(value)) {
+    return 'null';
+  }
+  if (util.isArray(value)) {
+    return `[${value.map(getLiteral).join(', ')}]`;
+  }
+  if (util.isXMLElementSchema(value)) {
+    return toPascalCase(value.name);
+  }
+  if (util.isFunction(value)) {
+    return getLiteral(value());
+  }
+  if (util.isObject(value)) {
+    return Object.keys(value).length > 0
+      ? `{ ${Object.entries(value)
+          .map(([k, v]) => `'${k}': ${getLiteral(v)}`)
+          .join(', ')} }`
+      : '{}';
+  }
+  throw new MusicXMLError({
+    symptom: 'cannot compute literal',
+    context: { value },
+    remedy: 'use a different value',
+  });
+};
+
 const getSchemaLiteral = (schema: XMLElementSchema): string => {
-  const dfs = (value: any): string => {
-    if (util.isString(value)) {
-      return `'${value}'`;
+  const name = getLiteral(schema.name);
+  const attributes = getLiteral(schema.attributes);
+  const contents = getLiteral(schema.contents);
+  return `{ name: ${name}, attributes: ${attributes}, contents: ${contents} }`;
+};
+
+const getStaticTypeAssertMethodLiterals = (schema: XMLElementSchema): string => {
+  const methods = new Array<string>();
+
+  const dfs = (child: DescriptorChild, path: Array<string | number> = []) => {
+    if (util.isDescriptor(child)) {
+      switch (child.type) {
+        case 'label':
+        case 'optional':
+        case 'required':
+        case 'zeroOrMore':
+        case 'oneOrMore':
+          dfs(child.value, [...path, 'value']);
+          break;
+        case 'choices':
+          child.choices.forEach((choice, ndx) => {
+            if (util.isDescriptor(choice) && choice.type === 'label') {
+              const typeName = getChoiceTypeName(choice);
+              const schemaPath = `${toPascalCase(schema.name)}.schema.contents${[...path, 'choices', ndx]
+                .map((part) => (util.isString(part) ? `['${part}']` : `[${part}]`))
+                .join('')}`;
+              methods.push(
+                `  static is${typeName}(value: any): value is ${typeName} { return operations.validate(value, ${schemaPath}); }`
+              );
+            }
+            dfs(choice, [...path, 'choices', ndx]);
+          });
+          break;
+      }
     }
-    if (util.isNumber(value)) {
-      return value.toString();
+    if (util.isArray(child)) {
+      child.forEach((c, ndx) => dfs(c, [...path, ndx]));
     }
-    if (util.isNull(value)) {
-      return 'null';
-    }
-    if (util.isArray(value)) {
-      return `[${value.map(dfs).join(', ')}]`;
-    }
-    if (util.isXMLElementSchema(value)) {
-      return toPascalCase(value.name);
-    }
-    if (util.isFunction(value)) {
-      return dfs(value());
-    }
-    if (util.isObject(value)) {
-      return Object.keys(value).length > 0
-        ? `{ ${Object.entries(value)
-            .map(([k, v]) => `'${k}': ${dfs(v)}`)
-            .join(', ')} }`
-        : '{}';
-    }
-    throw new MusicXMLError({
-      symptom: 'cannot compute schema literal',
-      context: { value },
-      remedy: 'use a different value or update getSchemaLiteral',
-    });
   };
-  return `{ name: ${dfs(schema.name)}, attributes: ${dfs(schema.attributes)}, contents: ${dfs(schema.contents)} }`;
+
+  dfs(schema.contents);
+  return methods.join('\n');
 };
 
 const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): string => {
@@ -273,7 +320,9 @@ const toClassLiteral = (schema: XMLElementSchema): string => {
 
   const schemaLiteral = getSchemaLiteral(schema);
 
-  const labeledChoiceTypeLiterals = getLabeledChoiceTypeLiterals(schema.contents).join('\n\n');
+  const staticTypeAssertMethodLiterals = getStaticTypeAssertMethodLiterals(schema);
+
+  const labeledChoiceTypeLiterals = getLabeledChoiceTypeLiterals(schema);
 
   const attributesTypeName = `${className}Attributes`;
   const attributesTypeLiteral = getAttributesTypeLiteral(schema);
@@ -292,6 +341,7 @@ export type ${contentsTypeName} = ${contentsTypeLiteral};
 
 export class ${className} implements XMLElement<'${schema.name}', ${attributesTypeName}, ${contentsTypeName}> {
   static readonly schema = ${schemaLiteral} as const;
+${staticTypeAssertMethodLiterals}
 
   readonly schema = ${className}.schema;
 

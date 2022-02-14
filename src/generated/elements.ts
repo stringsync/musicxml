@@ -22242,6 +22242,9 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
       { type: 'optional', value: Level },
     ],
   } as const;
+  static isIntelligible(value: any): value is Intelligible {
+    return operations.validate(value, Lyric.schema.contents[0]['value']['choices'][0]);
+  }
 
   readonly schema = Lyric.schema;
 
@@ -22969,6 +22972,15 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
       { type: 'optional', value: Listen },
     ],
   } as const;
+  static isChordNoteValue(value: any): value is ChordNoteValue {
+    return operations.validate(value, Note.schema.contents[0]['value']['choices'][0]);
+  }
+  static isGraceNoteValue(value: any): value is GraceNoteValue {
+    return operations.validate(value, Note.schema.contents[0]['value']['choices'][1]);
+  }
+  static isBasicNoteValue(value: any): value is BasicNoteValue {
+    return operations.validate(value, Note.schema.contents[0]['value']['choices'][2]);
+  }
 
   readonly schema = Note.schema;
 
@@ -25902,6 +25914,12 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
       },
     ],
   } as const;
+  static isBeatSpec(value: any): value is BeatSpec {
+    return operations.validate(value, Metronome.schema.contents[0]['value']['choices'][0]);
+  }
+  static isMetronomeSpec(value: any): value is MetronomeSpec {
+    return operations.validate(value, Metronome.schema.contents[0]['value']['choices'][1]);
+  }
 
   readonly schema = Metronome.schema;
 
@@ -29270,6 +29288,24 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
       },
     ],
   } as const;
+  static isRehearsals(value: any): value is Rehearsals {
+    return operations.validate(value, DirectionType.schema.contents[0]['value']['choices'][0]);
+  }
+  static isSegnos(value: any): value is Segnos {
+    return operations.validate(value, DirectionType.schema.contents[0]['value']['choices'][1]);
+  }
+  static isCodas(value: any): value is Codas {
+    return operations.validate(value, DirectionType.schema.contents[0]['value']['choices'][2]);
+  }
+  static isTokens(value: any): value is Tokens {
+    return operations.validate(value, DirectionType.schema.contents[0]['value']['choices'][3]);
+  }
+  static isDynamicsList(value: any): value is DynamicsList {
+    return operations.validate(value, DirectionType.schema.contents[0]['value']['choices'][5]);
+  }
+  static isPercussions(value: any): value is Percussions {
+    return operations.validate(value, DirectionType.schema.contents[0]['value']['choices'][19]);
+  }
 
   readonly schema = DirectionType.schema;
 
@@ -29618,6 +29654,9 @@ export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents
       { type: 'optional', value: SwingStyle },
     ],
   } as const;
+  static isAlternateSwing(value: any): value is AlternateSwing {
+    return operations.validate(value, Swing.schema.contents[0]['value']['choices'][1]);
+  }
 
   readonly schema = Swing.schema;
 
@@ -30717,6 +30756,12 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
       { type: 'label', label: 'key-octaves', value: { type: 'zeroOrMore', value: KeyOctave } },
     ],
   } as const;
+  static isTraditionalKey(value: any): value is TraditionalKey {
+    return operations.validate(value, Key.schema.contents[0]['value']['choices'][0]);
+  }
+  static isKeySpecs(value: any): value is KeySpecs {
+    return operations.validate(value, Key.schema.contents[0]['value']['choices'][1]);
+  }
 
   readonly schema = Key.schema;
 
@@ -31050,6 +31095,9 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
       },
     ],
   } as const;
+  static isTimeSignature(value: any): value is TimeSignature {
+    return operations.validate(value, Time.schema.contents[0]['value']['choices'][0]);
+  }
 
   readonly schema = Time.schema;
 
@@ -32961,6 +33009,12 @@ export class Attributes implements XMLElement<'attributes', AttributesAttributes
       { type: 'label', label: 'measure-styles', value: { type: 'zeroOrMore', value: MeasureStyle } },
     ],
   } as const;
+  static isTransposes(value: any): value is Transposes {
+    return operations.validate(value, Attributes.schema.contents[10]['value']['choices'][0]);
+  }
+  static isForParts(value: any): value is ForParts {
+    return operations.validate(value, Attributes.schema.contents[10]['value']['choices'][1]);
+  }
 
   readonly schema = Attributes.schema;
 
