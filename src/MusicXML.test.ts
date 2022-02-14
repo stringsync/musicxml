@@ -1,4 +1,5 @@
 import * as elements from './generated/elements';
+import * as operations from './lib/operations';
 import { MusicXML } from './MusicXML';
 import * as helpers from './testing/helpers';
 
@@ -124,6 +125,60 @@ describe('MusicXML', () => {
       const type = note.getType();
       expect(type).toBeInstanceOf(elements.Type);
       expect(type!.getNoteTypeValue()).toBe('whole');
+    });
+  });
+
+  describe('createPartwise', () => {
+    it('creates a MusicXML object with a ScorePartwise element as the root', () => {
+      const musicXml = MusicXML.createPartwise();
+      expect(musicXml.getRoot()).toBeInstanceOf(elements.ScorePartwise);
+    });
+
+    it('creates a valid MusicXML object', () => {
+      const musicXml = MusicXML.createPartwise();
+      const scorePartwise = musicXml.getRoot();
+      expect(operations.validate(scorePartwise, elements.ScorePartwise)).toBeTrue();
+    });
+  });
+
+  describe('createTimewise', () => {
+    it('creates a MusicXML object with a ScoreTimewise element as the root', () => {
+      const musicXml = MusicXML.createTimewise();
+      expect(musicXml.getRoot()).toBeInstanceOf(elements.ScoreTimewise);
+    });
+
+    it('creates a valid MusicXML object', async () => {
+      const musicXml = MusicXML.createTimewise();
+      const scoreTimewise = musicXml.getRoot();
+      expect(operations.validate(scoreTimewise, elements.ScoreTimewise)).toBeTrue();
+    });
+  });
+
+  describe('isScorePartwise', () => {
+    it('asserts ScorePartwise elements', () => {
+      expect(MusicXML.isScorePartwise(new elements.ScorePartwise())).toBeTrue();
+    });
+
+    it('refutes the ScorePartwise constructor', () => {
+      expect(MusicXML.isScorePartwise(elements.ScorePartwise)).toBeFalse();
+    });
+
+    it('refutes non-ScorePartwise elements', () => {
+      expect(MusicXML.isScorePartwise(new elements.ScoreTimewise())).toBeFalse();
+    });
+  });
+
+  describe('isScoreTimewise', () => {
+    it('asserts ScoreTimewise elements', () => {
+      expect(MusicXML.isScoreTimewise(new elements.ScoreTimewise())).toBeTrue();
+    });
+
+    it('refutes the ScoreTimewise constructor', () => {
+      expect(MusicXML.isScoreTimewise(elements.ScoreTimewise)).toBeFalse();
+    });
+
+    it('refutes non-ScoreTimewise elements', () => {
+      expect(MusicXML.isScoreTimewise(new elements.ScorePartwise())).toBeFalse();
     });
   });
 
