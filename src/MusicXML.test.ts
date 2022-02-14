@@ -1,11 +1,11 @@
 import * as elements from './generated/elements';
 import { MusicXML } from './MusicXML';
-import { loadExample } from './testing/helpers';
+import * as helpers from './testing/helpers';
 
 describe('MusicXML', () => {
   describe('parse', () => {
     it('parses valid.xml', async () => {
-      const xmlStr = await loadExample('valid.xml');
+      const xmlStr = await helpers.loadExample('valid.xml');
 
       const musicXml = MusicXML.parse(xmlStr);
       expect(musicXml.getRoot()).toBeInstanceOf(elements.ScorePartwise);
@@ -129,7 +129,7 @@ describe('MusicXML', () => {
 
   describe('serialize', () => {
     it('serializes valid.xml', async () => {
-      const xmlStr = await loadExample('valid.xml');
+      const xmlStr = await helpers.loadExample('valid.xml');
       const musicXml = MusicXML.parse(xmlStr);
       expect(musicXml.serialize()).toEqualXML(xmlStr);
     });
