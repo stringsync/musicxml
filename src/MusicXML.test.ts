@@ -1,12 +1,18 @@
 import * as elements from './generated/elements';
 import * as operations from './lib/operations';
 import { MusicXML } from './MusicXML';
+import { EXAMPLES, EXAMPLE_SUITES } from './testing/examples';
 import * as helpers from './testing/helpers';
 
 describe('MusicXML', () => {
   describe('parse', () => {
-    it('parses valid.xml', async () => {
-      const xmlStr = await helpers.loadExample('valid.xml');
+    it.each(EXAMPLE_SUITES.VALID)('parses valid MusicXML documents', (example) => {
+      const xmlStr = helpers.loadExample(example);
+      expect(() => MusicXML.parse(xmlStr)).not.toThrow();
+    });
+
+    it('preserves values of a valid MusicXML document', () => {
+      const xmlStr = helpers.loadExample(EXAMPLES.VALID1);
 
       const musicXml = MusicXML.parse(xmlStr);
       expect(musicXml.getRoot()).toBeInstanceOf(elements.ScorePartwise);
@@ -152,7 +158,7 @@ describe('MusicXML', () => {
       expect(musicXml.getRoot()).toBeInstanceOf(elements.ScoreTimewise);
     });
 
-    it('creates a valid MusicXML object', async () => {
+    it('creates a valid MusicXML object', () => {
       const musicXml = MusicXML.createTimewise();
       const scoreTimewise = musicXml.getRoot();
       expect(operations.validate(scoreTimewise, elements.ScoreTimewise)).toBeTrue();
@@ -193,10 +199,25 @@ describe('MusicXML', () => {
   });
 
   describe('serialize', () => {
-    it('serializes valid.xml', async () => {
-      const xmlStr = await helpers.loadExample('valid.xml');
+    it.each(EXAMPLE_SUITES.VALID)('serializes a valid MusicXML document: %s', (example) => {
+      const xmlStr = helpers.loadExample(example);
+      const musicXml = MusicXML.parse(xmlStr);
+      expect(() => musicXml.serialize()).not.toThrow();
+    });
+
+    it.each(EXAMPLE_SUITES.VALID)('preserves a valid MusicXML document: %s', (example) => {
+      const xmlStr = helpers.loadExample(example);
       const musicXml = MusicXML.parse(xmlStr);
       expect(musicXml.serialize()).toEqualXML(xmlStr);
     });
+
+    it.each(EXAMPLE_SUITES.VALID)(
+      'serializes an invalid MusicXML document into a valid document: %s',
+      async (example) => {
+        const xmlStr = helpers.loadExample(example);
+        const musicXml = MusicXML.parse(xmlStr);
+        await expect(musicXml.serialize()).toBeValidMusicXML();
+      }
+    );
   });
 });

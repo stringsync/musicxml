@@ -1,15 +1,20 @@
+import { EXAMPLE_SUITES } from './examples';
 import * as helpers from './helpers';
 
 describe('matchers', () => {
   describe('toBeValidMusicXML', () => {
-    it('asserts valid musicXML', async () => {
-      const xml = await helpers.loadExample('valid.xml');
+    it.each(EXAMPLE_SUITES.VALID)('asserts valid musicXML', async (example) => {
+      const xml = helpers.loadExample(example);
       await expect(xml).toBeValidMusicXML();
     });
 
-    it('refutes invalid musicXML', async () => {
-      const xml = await helpers.loadExample('invalid.xml');
+    it.each(EXAMPLE_SUITES.INVALID)('refutes invalid musicXML', async (example) => {
+      const xml = helpers.loadExample(example);
       await expect(xml).not.toBeValidMusicXML();
+    });
+
+    it('refutes broken musicXML', async () => {
+      await expect('<not-music-xml></not-music-xml>').not.toBeValidMusicXML();
     });
 
     it('refutes empty musicXML', async () => {

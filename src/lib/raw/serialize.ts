@@ -25,5 +25,10 @@ const toXmlJsElement = (element: RawXMLNode): xmlJs.Element => {
         type: 'doctype',
         doctype: element.doctype,
       };
+    case 'comment':
+      return {
+        type: 'comment',
+        comment: element.comment,
+      };
   }
 };

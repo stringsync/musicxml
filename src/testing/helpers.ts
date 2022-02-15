@@ -1,18 +1,17 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { ALLOWED_EXAMPLES, EXAMPLES_DIR } from './jest.setup';
+import { EXAMPLES } from './examples';
 
-export const loadExample = async (exampleName: string): Promise<string> => {
-  if (!ALLOWED_EXAMPLES.names.includes(exampleName)) {
-    throw new Error(`invalid example name given: given=${exampleName}, allowed=${ALLOWED_EXAMPLES.names}`);
+type Example = typeof EXAMPLES[keyof typeof EXAMPLES];
+
+// This object is reloaded for each jest worker. Synchronization between workers is not needed. The memory overhead per
+// worker is expected to be on the order of MB (worst case is the total size of all the example XMLs).
+const CACHE: Record<string, string> = {};
+
+export const loadExample = (example: Example): string => {
+  const fileName = path.join(__dirname, 'examples', example);
+  if (!(fileName in CACHE)) {
+    CACHE[fileName] = fs.readFileSync(fileName, 'utf-8');
   }
-
-  return new Promise((resolve, reject) => {
-    fs.readFile(path.join(EXAMPLES_DIR, exampleName), 'utf-8', (err, data) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(data);
-    });
-  });
+  return CACHE[fileName];
 };

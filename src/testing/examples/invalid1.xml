@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!-- Modified "Hello World" in MusicXML from https://www.w3.org/2021/06/musicxml40/tutorial/hello-world/ -->
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN"
   "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="4.0">
@@ -10,7 +11,8 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>1</divisions>
+        <!-- Invalid divisions text -->
+        <divisions>A</divisions>
         <key>
           <fifths>0</fifths>
         </key>
@@ -29,7 +31,8 @@
           <octave>4</octave>
         </pitch>
         <duration>4</duration>
-        <type>whole</type>
+        <!-- Invalid type text -->
+        <type>foobar</type>
       </note>
     </measure>
   </part>

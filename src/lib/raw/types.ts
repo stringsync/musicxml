@@ -2,7 +2,7 @@ export type Declaration = {
   attributes: Record<string, string>;
 };
 
-export type RawXMLNode = ElementNode | TextNode | DoctypeNode;
+export type RawXMLNode = ElementNode | TextNode | DoctypeNode | CommentNode;
 
 export type ElementNode = {
   type: 'element';
@@ -19,4 +19,9 @@ export type TextNode = {
 export type DoctypeNode = {
   type: 'doctype';
   doctype: string;
+};
+
+export type CommentNode = {
+  type: 'comment';
+  comment: string;
 };

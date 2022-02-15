@@ -36,6 +36,11 @@ const toRawXMLNode = (node: xmlJs.Element): RawXMLNode => {
         type: 'doctype',
         doctype: node.doctype?.toString() || '',
       };
+    case 'comment':
+      return {
+        type: 'comment',
+        comment: node.comment || '',
+      };
     default:
       throw new MusicXMLError({
         symptom: 'cannot parse element',
