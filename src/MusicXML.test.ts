@@ -134,8 +134,46 @@ describe('MusicXML', () => {
     });
   });
 
-  it('fixes invalid values of a MusicXML document', () => {
+  it('replaces invalid values with zero values', () => {
+    // See musicxml/src/examples/invalid1.xml for invalid value locations.
     const xmlStr = examples.loadExample(EXAMPLES.INVALID1);
+    const musicXml = MusicXML.parse(xmlStr);
+
+    const scorePartwise = musicXml.getRoot();
+    if (!MusicXML.isScorePartwise(scorePartwise)) {
+      fail(`expected ScorePartwise, got: ${scorePartwise}`);
+    }
+
+    const parts = scorePartwise.getPartsPartwise();
+    expect(parts).toHaveLength(1);
+
+    const part = parts[0];
+    const measures = part.getMeasures();
+    expect(measures).toHaveLength(1);
+
+    const measure = measures[0];
+    const contents = measure.getContents();
+    expect(contents).toHaveLength(2);
+
+    const attributes = contents[0];
+    if (!elements.MeasurePartwise.isAttributes(attributes)) {
+      fail(`expected Attributes, got ${attributes}`);
+    }
+
+    const divisions = attributes.getDivisions();
+    expect(divisions).toBeNull();
+
+    const note = contents[1];
+    if (!elements.MeasurePartwise.isNote(note)) {
+      fail(`expected Note, got ${note}`);
+    }
+    const noteValue = note.getValue();
+    if (!elements.Note.isBasicNoteValue(noteValue)) {
+      fail(`expected BasicNoteValue, got ${noteValue}`);
+    }
+
+    const duration = noteValue[2];
+    expect(duration.getPositiveDivisions()).toBe(1);
   });
 
   describe('createPartwise', () => {

@@ -16,9 +16,9 @@ export const zero = <T extends DescriptorChild>(child: T): any => {
       case 'regex':
         return child.zero;
       case 'int':
-        return 0;
+        return Number.isFinite(child.min) ? child.min : 0;
       case 'float':
-        return 0;
+        return Number.isFinite(child.min) ? child.min : 0;
       case 'constant':
         return child.value;
       case 'date':

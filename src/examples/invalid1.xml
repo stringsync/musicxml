@@ -11,7 +11,7 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <!-- Invalid divisions text -->
+        <!-- Invalid divisions content -->
         <divisions>A</divisions>
         <key>
           <fifths>0</fifths>
@@ -30,9 +30,9 @@
           <step>C</step>
           <octave>4</octave>
         </pitch>
-        <duration>4</duration>
-        <!-- Invalid type text -->
-        <type>foobar</type>
+        <!-- Invalid duration content -->
+        <duration>cat</duration>
+        <type>whole</type>
       </note>
     </measure>
   </part>
