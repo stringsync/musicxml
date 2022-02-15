@@ -1,18 +1,18 @@
+import * as examples from './examples';
+import { EXAMPLES, EXAMPLE_SUITES } from './examples';
 import * as elements from './generated/elements';
 import * as operations from './lib/operations';
 import { MusicXML } from './MusicXML';
-import { EXAMPLES, EXAMPLE_SUITES } from './testing/examples';
-import * as helpers from './testing/helpers';
 
 describe('MusicXML', () => {
   describe('parse', () => {
     it.each(EXAMPLE_SUITES.VALID)('parses valid MusicXML documents', (example) => {
-      const xmlStr = helpers.loadExample(example);
+      const xmlStr = examples.loadExample(example);
       expect(() => MusicXML.parse(xmlStr)).not.toThrow();
     });
 
     it('preserves values of a valid MusicXML document', () => {
-      const xmlStr = helpers.loadExample(EXAMPLES.VALID1);
+      const xmlStr = examples.loadExample(EXAMPLES.VALID1);
 
       const musicXml = MusicXML.parse(xmlStr);
       expect(musicXml.getRoot()).toBeInstanceOf(elements.ScorePartwise);
@@ -134,6 +134,10 @@ describe('MusicXML', () => {
     });
   });
 
+  it('fixes invalid values of a MusicXML document', () => {
+    const xmlStr = examples.loadExample(EXAMPLES.INVALID1);
+  });
+
   describe('createPartwise', () => {
     it('creates a MusicXML object with a ScorePartwise element as the root', () => {
       const musicXml = MusicXML.createPartwise();
@@ -200,13 +204,13 @@ describe('MusicXML', () => {
 
   describe('serialize', () => {
     it.each(EXAMPLE_SUITES.VALID)('serializes a valid MusicXML document: %s', (example) => {
-      const xmlStr = helpers.loadExample(example);
+      const xmlStr = examples.loadExample(example);
       const musicXml = MusicXML.parse(xmlStr);
       expect(() => musicXml.serialize()).not.toThrow();
     });
 
     it.each(EXAMPLE_SUITES.VALID)('preserves a valid MusicXML document: %s', (example) => {
-      const xmlStr = helpers.loadExample(example);
+      const xmlStr = examples.loadExample(example);
       const musicXml = MusicXML.parse(xmlStr);
       expect(musicXml.serialize()).toEqualXML(xmlStr);
     });
@@ -214,7 +218,7 @@ describe('MusicXML', () => {
     it.each(EXAMPLE_SUITES.VALID)(
       'serializes an invalid MusicXML document into a valid document: %s',
       async (example) => {
-        const xmlStr = helpers.loadExample(example);
+        const xmlStr = examples.loadExample(example);
         const musicXml = MusicXML.parse(xmlStr);
         await expect(musicXml.serialize()).toBeValidMusicXML();
       }

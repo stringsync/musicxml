@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { EXAMPLES } from './examples';
+import { EXAMPLES } from '../examples';
 
 type Example = typeof EXAMPLES[keyof typeof EXAMPLES];
 
@@ -9,7 +9,7 @@ type Example = typeof EXAMPLES[keyof typeof EXAMPLES];
 const CACHE: Record<string, string> = {};
 
 export const loadExample = (example: Example): string => {
-  const fileName = path.join(__dirname, 'examples', example);
+  const fileName = path.join(__dirname, '..', 'examples', example);
   if (!(fileName in CACHE)) {
     CACHE[fileName] = fs.readFileSync(fileName, 'utf-8');
   }

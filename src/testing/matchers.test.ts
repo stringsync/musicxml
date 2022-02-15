@@ -1,15 +1,15 @@
-import { EXAMPLE_SUITES } from './examples';
-import * as helpers from './helpers';
+import * as examples from '../examples';
+import { EXAMPLE_SUITES } from '../examples';
 
 describe('matchers', () => {
   describe('toBeValidMusicXML', () => {
     it.each(EXAMPLE_SUITES.VALID)('asserts valid musicXML', async (example) => {
-      const xml = helpers.loadExample(example);
+      const xml = examples.loadExample(example);
       await expect(xml).toBeValidMusicXML();
     });
 
     it.each(EXAMPLE_SUITES.INVALID)('refutes invalid musicXML', async (example) => {
-      const xml = helpers.loadExample(example);
+      const xml = examples.loadExample(example);
       await expect(xml).not.toBeValidMusicXML();
     });
 
