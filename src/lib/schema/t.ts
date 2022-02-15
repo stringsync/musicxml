@@ -42,10 +42,15 @@ export type CommentDescriptorOpts<T> = {
   value: T;
 };
 
+export type StringDescriptorOpts = {
+  zero: string;
+};
+
 export class t {
-  static string(): StringDescriptor {
+  static string(opts: StringDescriptorOpts = { zero: '' }): StringDescriptor {
     return {
       type: 'string',
+      zero: opts.zero,
     };
   }
 

@@ -54,6 +54,7 @@ export type Descriptor =
 
 export type StringDescriptor = {
   type: 'string';
+  zero: string;
 };
 
 export type RegexDescriptor = {

@@ -12,7 +12,7 @@ export const zero = <T extends DescriptorChild>(child: T): any => {
   if (util.isDescriptor(child)) {
     switch (child.type) {
       case 'string':
-        return '';
+        return child.zero;
       case 'regex':
         return child.zero;
       case 'int':
