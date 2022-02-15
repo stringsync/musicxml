@@ -168,6 +168,9 @@ const getAttributeAccessorMethodLiterals = (schema: XMLElementSchema): string =>
 };
 
 const getLiteral = (value: any): string => {
+  if (value instanceof RegExp) {
+    return value.toString();
+  }
   if (util.isString(value)) {
     return `'${value}'`;
   }

@@ -7,7 +7,7 @@ export type WorkNumberAttributes = Record<string, unknown>;
 export type WorkNumberContents = [string];
 
 export class WorkNumber implements XMLElement<'work-number', WorkNumberAttributes, WorkNumberContents> {
-  static readonly schema = { name: 'work-number', attributes: {}, contents: [{ type: 'string', zero: '' }] } as const;
+  static readonly schema = { name: 'work-number', attributes: {}, contents: [{ type: 'string' }] } as const;
 
   readonly schema = WorkNumber.schema;
 
@@ -32,7 +32,7 @@ export type WorkTitleAttributes = Record<string, unknown>;
 export type WorkTitleContents = [string];
 
 export class WorkTitle implements XMLElement<'work-title', WorkTitleAttributes, WorkTitleContents> {
-  static readonly schema = { name: 'work-title', attributes: {}, contents: [{ type: 'string', zero: '' }] } as const;
+  static readonly schema = { name: 'work-title', attributes: {}, contents: [{ type: 'string' }] } as const;
 
   readonly schema = WorkTitle.schema;
 
@@ -67,17 +67,17 @@ export class Opus implements XMLElement<'opus', OpusAttributes, OpusContents> {
   static readonly schema = {
     name: 'opus',
     attributes: {
-      'xlink:href': { type: 'required', value: { type: 'string', zero: '' } },
+      'xlink:href': { type: 'required', value: { type: 'string' } },
       'xlink:actuate': {
         type: 'optional',
         value: { type: 'choices', choices: ['none', 'onRequest', 'onLoad', 'other'] },
       },
-      'xlink:role': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xlink:role': { type: 'optional', value: { type: 'string' } },
       'xlink:show': {
         type: 'optional',
         value: { type: 'choices', choices: ['none', 'new', 'replace', 'embed', 'other'] },
       },
-      'xlink:title': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xlink:title': { type: 'optional', value: { type: 'string' } },
       'xlink:type': { type: 'optional', value: { type: 'choices', choices: ['simple'] } },
     },
     contents: [],
@@ -180,11 +180,7 @@ export type MovementNumberAttributes = Record<string, unknown>;
 export type MovementNumberContents = [string];
 
 export class MovementNumber implements XMLElement<'movement-number', MovementNumberAttributes, MovementNumberContents> {
-  static readonly schema = {
-    name: 'movement-number',
-    attributes: {},
-    contents: [{ type: 'string', zero: '' }],
-  } as const;
+  static readonly schema = { name: 'movement-number', attributes: {}, contents: [{ type: 'string' }] } as const;
 
   readonly schema = MovementNumber.schema;
 
@@ -209,11 +205,7 @@ export type MovementTitleAttributes = Record<string, unknown>;
 export type MovementTitleContents = [string];
 
 export class MovementTitle implements XMLElement<'movement-title', MovementTitleAttributes, MovementTitleContents> {
-  static readonly schema = {
-    name: 'movement-title',
-    attributes: {},
-    contents: [{ type: 'string', zero: '' }],
-  } as const;
+  static readonly schema = { name: 'movement-title', attributes: {}, contents: [{ type: 'string' }] } as const;
 
   readonly schema = MovementTitle.schema;
 
@@ -240,8 +232,8 @@ export type CreatorContents = [string];
 export class Creator implements XMLElement<'creator', CreatorAttributes, CreatorContents> {
   static readonly schema = {
     name: 'creator',
-    attributes: { type: { type: 'optional', value: { type: 'string', zero: '' } } },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    attributes: { type: { type: 'optional', value: { type: 'string' } } },
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Creator.schema;
@@ -274,8 +266,8 @@ export type RightsContents = [string];
 export class Rights implements XMLElement<'rights', RightsAttributes, RightsContents> {
   static readonly schema = {
     name: 'rights',
-    attributes: { type: { type: 'optional', value: { type: 'string', zero: '' } } },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    attributes: { type: { type: 'optional', value: { type: 'string' } } },
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Rights.schema;
@@ -337,8 +329,8 @@ export type EncoderContents = [string];
 export class Encoder implements XMLElement<'encoder', EncoderAttributes, EncoderContents> {
   static readonly schema = {
     name: 'encoder',
-    attributes: { type: { type: 'optional', value: { type: 'string', zero: '' } } },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    attributes: { type: { type: 'optional', value: { type: 'string' } } },
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Encoder.schema;
@@ -369,7 +361,7 @@ export type SoftwareAttributes = Record<string, unknown>;
 export type SoftwareContents = [string];
 
 export class Software implements XMLElement<'software', SoftwareAttributes, SoftwareContents> {
-  static readonly schema = { name: 'software', attributes: {}, contents: [{ type: 'string', zero: '' }] } as const;
+  static readonly schema = { name: 'software', attributes: {}, contents: [{ type: 'string' }] } as const;
 
   readonly schema = Software.schema;
 
@@ -399,7 +391,7 @@ export class EncodingDescription
   static readonly schema = {
     name: 'encoding-description',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = EncodingDescription.schema;
@@ -433,10 +425,10 @@ export class Supports implements XMLElement<'supports', SupportsAttributes, Supp
   static readonly schema = {
     name: 'supports',
     attributes: {
-      element: { type: 'required', value: { type: 'string', zero: '' } },
+      element: { type: 'required', value: { type: 'string' } },
       type: { type: 'required', value: { type: 'choices', choices: ['yes', 'no'] } },
-      attribute: { type: 'optional', value: { type: 'string', zero: '' } },
-      value: { type: 'optional', value: { type: 'string', zero: '' } },
+      attribute: { type: 'optional', value: { type: 'string' } },
+      value: { type: 'optional', value: { type: 'string' } },
     },
     contents: [],
   } as const;
@@ -536,7 +528,7 @@ export class Source implements XMLElement<'source', SourceAttributes, SourceCont
   static readonly schema = {
     name: 'source',
     attributes: {},
-    contents: [{ type: 'optional', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'optional', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Source.schema;
@@ -564,8 +556,8 @@ export type RelationContents = [string];
 export class Relation implements XMLElement<'relation', RelationAttributes, RelationContents> {
   static readonly schema = {
     name: 'relation',
-    attributes: { type: { type: 'optional', value: { type: 'string', zero: '' } } },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    attributes: { type: { type: 'optional', value: { type: 'string' } } },
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Relation.schema;
@@ -600,8 +592,8 @@ export class MiscellaneousField
 {
   static readonly schema = {
     name: 'miscellaneous-field',
-    attributes: { name: { type: 'required', value: { type: 'string', zero: '' } } },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    attributes: { name: { type: 'required', value: { type: 'string' } } },
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = MiscellaneousField.schema;
@@ -1548,7 +1540,7 @@ export class Glyph implements XMLElement<'glyph', GlyphAttributes, GlyphContents
         },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Glyph.schema;
@@ -1609,8 +1601,8 @@ export class OtherAppearance
 {
   static readonly schema = {
     name: 'other-appearance',
-    attributes: { type: { type: 'required', value: { type: 'string', zero: '' } } },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    attributes: { type: { type: 'required', value: { type: 'string' } } },
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = OtherAppearance.schema;
@@ -1714,7 +1706,7 @@ export class MusicFont implements XMLElement<'music-font', MusicFontAttributes, 
   static readonly schema = {
     name: 'music-font',
     attributes: {
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -1781,7 +1773,7 @@ export class WordFont implements XMLElement<'word-font', WordFontAttributes, Wor
   static readonly schema = {
     name: 'word-font',
     attributes: {
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -1850,7 +1842,7 @@ export class LyricFont implements XMLElement<'lyric-font', LyricFontAttributes, 
   static readonly schema = {
     name: 'lyric-font',
     attributes: {
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -1863,8 +1855,8 @@ export class LyricFont implements XMLElement<'lyric-font', LyricFontAttributes, 
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      name: { type: 'optional', value: { type: 'string', zero: '' } },
-      number: { type: 'optional', value: { type: 'string', zero: '' } },
+      name: { type: 'optional', value: { type: 'string' } },
+      number: { type: 'optional', value: { type: 'string' } },
     },
     contents: [],
   } as const;
@@ -1926,9 +1918,9 @@ export class LyricLanguage implements XMLElement<'lyric-language', LyricLanguage
   static readonly schema = {
     name: 'lyric-language',
     attributes: {
-      'xml:lang': { type: 'required', value: { type: 'string', zero: '' } },
-      name: { type: 'optional', value: { type: 'string', zero: '' } },
-      number: { type: 'optional', value: { type: 'string', zero: '' } },
+      'xml:lang': { type: 'required', value: { type: 'string' } },
+      name: { type: 'optional', value: { type: 'string' } },
+      number: { type: 'optional', value: { type: 'string' } },
     },
     contents: [],
   } as const;
@@ -2067,7 +2059,7 @@ export class CreditType implements XMLElement<'credit-type', CreditTypeAttribute
   static readonly schema = {
     name: 'credit-type',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = CreditType.schema;
@@ -2110,7 +2102,7 @@ export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
   static readonly schema = {
     name: 'link',
     attributes: {
-      'xlink:href': { type: 'required', value: { type: 'string', zero: '' } },
+      'xlink:href': { type: 'required', value: { type: 'string' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -2121,8 +2113,8 @@ export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      element: { type: 'optional', value: { type: 'string', zero: '' } },
-      name: { type: 'optional', value: { type: 'string', zero: '' } },
+      element: { type: 'optional', value: { type: 'string' } },
+      name: { type: 'optional', value: { type: 'string' } },
       position: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
       'relative-x': {
         type: 'label',
@@ -2138,12 +2130,12 @@ export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
         type: 'optional',
         value: { type: 'choices', choices: ['none', 'onRequest', 'onLoad', 'other'] },
       },
-      'xlink:role': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xlink:role': { type: 'optional', value: { type: 'string' } },
       'xlink:show': {
         type: 'optional',
         value: { type: 'choices', choices: ['none', 'new', 'replace', 'embed', 'other'] },
       },
-      'xlink:title': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xlink:title': { type: 'optional', value: { type: 'string' } },
       'xlink:type': { type: 'optional', value: { type: 'choices', choices: ['simple'] } },
     },
     contents: [],
@@ -2246,9 +2238,9 @@ export class Bookmark implements XMLElement<'bookmark', BookmarkAttributes, Book
   static readonly schema = {
     name: 'bookmark',
     attributes: {
-      id: { type: 'required', value: { type: 'string', zero: '' } },
-      element: { type: 'optional', value: { type: 'string', zero: '' } },
-      name: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      element: { type: 'optional', value: { type: 'string' } },
+      name: { type: 'optional', value: { type: 'string' } },
       position: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
     contents: [],
@@ -2321,7 +2313,7 @@ export class CreditImage implements XMLElement<'credit-image', CreditImageAttrib
       },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
       height: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -2332,8 +2324,8 @@ export class CreditImage implements XMLElement<'credit-image', CreditImageAttrib
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      source: { type: 'optional', value: { type: 'string', zero: '' } },
-      type: { type: 'optional', value: { type: 'string', zero: '' } },
+      source: { type: 'optional', value: { type: 'string' } },
+      type: { type: 'optional', value: { type: 'string' } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom'] } },
       width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
@@ -2464,7 +2456,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
   static readonly schema = {
     name: 'credit-words',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -2498,7 +2490,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
           ],
         },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -2512,7 +2504,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
       'letter-spacing': {
         type: 'optional',
@@ -2537,7 +2529,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-      'xml:lang': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
     contents: [],
@@ -2771,7 +2763,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
   static readonly schema = {
     name: 'credit-symbol',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -2805,7 +2797,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
           ],
         },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -2819,7 +2811,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
       'letter-spacing': {
         type: 'optional',
@@ -2845,7 +2837,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = CreditSymbol.schema;
@@ -3038,7 +3030,7 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
   static readonly schema = {
     name: 'credit',
     attributes: {
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       page: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
     contents: [
@@ -3151,7 +3143,7 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
   static readonly schema = {
     name: 'group-name',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -3162,7 +3154,7 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -3187,7 +3179,7 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = GroupName.schema;
@@ -3315,7 +3307,7 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
   static readonly schema = {
     name: 'display-text',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -3349,7 +3341,7 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
           ],
         },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -3387,10 +3379,10 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-      'xml:lang': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    contents: [{ type: 'optional', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'optional', value: { type: 'string' } }],
   } as const;
 
   readonly schema = DisplayText.schema;
@@ -3623,7 +3615,7 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
   static readonly schema = {
     name: 'accidental-text',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -3657,7 +3649,7 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
           ],
         },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -3693,10 +3685,13 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-      smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } },
+      smufl: {
+        type: 'optional',
+        value: { type: 'regex', pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' },
+      },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-      'xml:lang': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
     contents: [],
@@ -3954,7 +3949,7 @@ export class GroupAbbreviation
   static readonly schema = {
     name: 'group-abbreviation',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -3965,7 +3960,7 @@ export class GroupAbbreviation
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -4132,7 +4127,7 @@ export class GroupSymbol implements XMLElement<'group-symbol', GroupSymbolAttrib
   static readonly schema = {
     name: 'group-symbol',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -4220,7 +4215,9 @@ export type GroupBarlineContents = ['yes' | 'no' | 'Mensurstrich'];
 export class GroupBarline implements XMLElement<'group-barline', GroupBarlineAttributes, GroupBarlineContents> {
   static readonly schema = {
     name: 'group-barline',
-    attributes: { color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } } },
+    attributes: {
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
+    },
     contents: [
       {
         type: 'required',
@@ -4320,7 +4317,7 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
   static readonly schema = {
     name: 'footnote',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -4354,7 +4351,7 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
           ],
         },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -4392,10 +4389,10 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-      'xml:lang': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Footnote.schema;
@@ -4601,7 +4598,7 @@ export class Level implements XMLElement<'level', LevelAttributes, LevelContents
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
       type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop', 'single'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Level.schema;
@@ -4670,7 +4667,7 @@ export class PartGroup implements XMLElement<'part-group', PartGroupAttributes, 
     name: 'part-group',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-      number: { type: 'optional', value: { type: 'string', zero: '' } },
+      number: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
       { type: 'optional', value: GroupName },
@@ -4769,7 +4766,7 @@ export type InstrumentLinkContents = [];
 export class InstrumentLink implements XMLElement<'instrument-link', InstrumentLinkAttributes, InstrumentLinkContents> {
   static readonly schema = {
     name: 'instrument-link',
-    attributes: { id: { type: 'required', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [],
   } as const;
 
@@ -4798,7 +4795,7 @@ export class GroupLink implements XMLElement<'group-link', GroupLinkAttributes, 
   static readonly schema = {
     name: 'group-link',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = GroupLink.schema;
@@ -4834,17 +4831,17 @@ export class PartLink implements XMLElement<'part-link', PartLinkAttributes, Par
   static readonly schema = {
     name: 'part-link',
     attributes: {
-      'xlink:href': { type: 'required', value: { type: 'string', zero: '' } },
+      'xlink:href': { type: 'required', value: { type: 'string' } },
       'xlink:actuate': {
         type: 'optional',
         value: { type: 'choices', choices: ['none', 'onRequest', 'onLoad', 'other'] },
       },
-      'xlink:role': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xlink:role': { type: 'optional', value: { type: 'string' } },
       'xlink:show': {
         type: 'optional',
         value: { type: 'choices', choices: ['none', 'new', 'replace', 'embed', 'other'] },
       },
-      'xlink:title': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xlink:title': { type: 'optional', value: { type: 'string' } },
       'xlink:type': { type: 'optional', value: { type: 'choices', choices: ['simple'] } },
     },
     contents: [
@@ -4932,7 +4929,7 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
   static readonly schema = {
     name: 'part-name',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -4943,7 +4940,7 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -4969,7 +4966,7 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = PartName.schema;
@@ -5127,7 +5124,7 @@ export class PartAbbreviation
   static readonly schema = {
     name: 'part-abbreviation',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -5138,7 +5135,7 @@ export class PartAbbreviation
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -5164,7 +5161,7 @@ export class PartAbbreviation
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = PartAbbreviation.schema;
@@ -5312,7 +5309,7 @@ export class Group implements XMLElement<'group', GroupAttributes, GroupContents
   static readonly schema = {
     name: 'group',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Group.schema;
@@ -5341,7 +5338,7 @@ export class InstrumentName implements XMLElement<'instrument-name', InstrumentN
   static readonly schema = {
     name: 'instrument-name',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = InstrumentName.schema;
@@ -5372,7 +5369,7 @@ export class InstrumentAbbreviation
   static readonly schema = {
     name: 'instrument-abbreviation',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = InstrumentAbbreviation.schema;
@@ -5406,7 +5403,7 @@ export class InstrumentSound
   static readonly schema = {
     name: 'instrument-sound',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = InstrumentSound.schema;
@@ -5488,7 +5485,7 @@ export class VirtualLibrary implements XMLElement<'virtual-library', VirtualLibr
   static readonly schema = {
     name: 'virtual-library',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = VirtualLibrary.schema;
@@ -5517,7 +5514,7 @@ export class VirtualName implements XMLElement<'virtual-name', VirtualNameAttrib
   static readonly schema = {
     name: 'virtual-name',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = VirtualName.schema;
@@ -5593,7 +5590,7 @@ export class ScoreInstrument
 {
   static readonly schema = {
     name: 'score-instrument',
-    attributes: { id: { type: 'required', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [
       { type: 'required', value: InstrumentName },
       { type: 'optional', value: InstrumentAbbreviation },
@@ -5667,7 +5664,7 @@ export type PlayerContents = [];
 export class Player implements XMLElement<'player', PlayerAttributes, PlayerContents> {
   static readonly schema = {
     name: 'player',
-    attributes: { id: { type: 'required', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [],
   } as const;
 
@@ -5696,10 +5693,10 @@ export class MidiDevice implements XMLElement<'midi-device', MidiDeviceAttribute
   static readonly schema = {
     name: 'midi-device',
     attributes: {
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       port: { type: 'optional', value: { type: 'label', label: 'midi16', value: { type: 'int', min: 1, max: 16 } } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = MidiDevice.schema;
@@ -5770,7 +5767,7 @@ export class MidiName implements XMLElement<'midi-name', MidiNameAttributes, Mid
   static readonly schema = {
     name: 'midi-name',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = MidiName.schema;
@@ -5993,7 +5990,7 @@ export type MidiInstrumentContents = [
 export class MidiInstrument implements XMLElement<'midi-instrument', MidiInstrumentAttributes, MidiInstrumentContents> {
   static readonly schema = {
     name: 'midi-instrument',
-    attributes: { id: { type: 'required', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [
       { type: 'optional', value: MidiChannel },
       { type: 'optional', value: MidiName },
@@ -6089,7 +6086,7 @@ export type ScorePartContents = [
 export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, ScorePartContents> {
   static readonly schema = {
     name: 'score-part',
-    attributes: { id: { type: 'string', zero: '' } },
+    attributes: { id: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
     contents: [
       { type: 'optional', value: Identification },
       { type: 'label', label: 'part-links', value: { type: 'zeroOrMore', value: PartLink } },
@@ -6601,7 +6598,7 @@ export class Tie implements XMLElement<'tie', TieAttributes, TieContents> {
     name: 'tie',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-      'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
+      'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
     },
     contents: [],
   } as const;
@@ -6710,7 +6707,7 @@ export type InstrumentContents = [];
 export class Instrument implements XMLElement<'instrument', InstrumentAttributes, InstrumentContents> {
   static readonly schema = {
     name: 'instrument',
-    attributes: { id: { type: 'required', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [],
   } as const;
 
@@ -6739,7 +6736,7 @@ export class Voice implements XMLElement<'voice', VoiceAttributes, VoiceContents
   static readonly schema = {
     name: 'voice',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Voice.schema;
@@ -6891,7 +6888,7 @@ export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
   static readonly schema = {
     name: 'dot',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -6902,7 +6899,7 @@ export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -7071,7 +7068,7 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
     attributes: {
       bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       cautionary: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -7083,7 +7080,7 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       editorial: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -7108,7 +7105,10 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
-      smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } },
+      smufl: {
+        type: 'optional',
+        value: { type: 'regex', pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' },
+      },
     },
     contents: [
       {
@@ -7368,7 +7368,7 @@ export class ActualNotes implements XMLElement<'actual-notes', ActualNotesAttrib
   static readonly schema = {
     name: 'actual-notes',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = ActualNotes.schema;
@@ -7397,7 +7397,7 @@ export class NormalNotes implements XMLElement<'normal-notes', NormalNotesAttrib
   static readonly schema = {
     name: 'normal-notes',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = NormalNotes.schema;
@@ -7612,7 +7612,7 @@ export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
   static readonly schema = {
     name: 'stem',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -7724,9 +7724,9 @@ export class Notehead implements XMLElement<'notehead', NoteheadAttributes, Note
   static readonly schema = {
     name: 'notehead',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       filled: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -7740,7 +7740,7 @@ export class Notehead implements XMLElement<'notehead', NoteheadAttributes, Note
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
       {
@@ -7985,9 +7985,9 @@ export class Beam implements XMLElement<'beam', BeamAttributes, BeamContents> {
   static readonly schema = {
     name: 'beam',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       fan: { type: 'optional', value: { type: 'choices', choices: ['accel', 'none', 'rit'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 8 } },
       repeater: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
@@ -8081,7 +8081,7 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
       'bezier-x2': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'bezier-y': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'bezier-y2': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -8093,7 +8093,7 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       orientation: { type: 'optional', value: { type: 'choices', choices: ['over', 'under'] } },
@@ -8257,7 +8257,7 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
       'bezier-x2': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'bezier-y': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'bezier-y2': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -8269,7 +8269,7 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       orientation: { type: 'optional', value: { type: 'choices', choices: ['over', 'under'] } },
@@ -8416,8 +8416,8 @@ export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAtt
   static readonly schema = {
     name: 'tuplet-number',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -8431,7 +8431,7 @@ export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAtt
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = TupletNumber.schema;
@@ -8497,8 +8497,8 @@ export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttribute
   static readonly schema = {
     name: 'tuplet-type',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -8572,8 +8572,8 @@ export class TupletDot implements XMLElement<'tuplet-dot', TupletDotAttributes, 
   static readonly schema = {
     name: 'tuplet-dot',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -8756,7 +8756,7 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-shape': { type: 'optional', value: { type: 'choices', choices: ['straight', 'curved'] } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
@@ -8899,7 +8899,7 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
     name: 'glissando',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -8911,7 +8911,7 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -8924,7 +8924,7 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       'relative-x': {
@@ -8939,7 +8939,7 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Glissando.schema;
@@ -9082,7 +9082,7 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -9095,7 +9095,7 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       'first-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -9108,7 +9108,7 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
@@ -9124,7 +9124,7 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
       },
       'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Slide.schema;
@@ -9288,7 +9288,7 @@ export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, 
     attributes: {
       acccelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -9299,7 +9299,7 @@ export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, 
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -9476,7 +9476,7 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -9487,7 +9487,7 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -9671,7 +9671,7 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -9682,7 +9682,7 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -9866,7 +9866,7 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -9877,7 +9877,7 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -10063,7 +10063,7 @@ export class DelayedInvertedTurn
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -10074,7 +10074,7 @@ export class DelayedInvertedTurn
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -10257,7 +10257,7 @@ export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAtt
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -10268,7 +10268,7 @@ export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAtt
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -10446,7 +10446,7 @@ export class InvertedVerticalTurn
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -10457,7 +10457,7 @@ export class InvertedVerticalTurn
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -10636,7 +10636,7 @@ export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -10647,7 +10647,7 @@ export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -10823,7 +10823,7 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -10848,7 +10848,10 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-      smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'wiggle' } },
+      smufl: {
+        type: 'optional',
+        value: { type: 'regex', pattern: /(wiggle)|(guitar\c*VibratoStroke)/, zero: 'wiggle' },
+      },
       'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'main', 'upper'] } },
       'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'half', 'whole'] } },
       'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
@@ -10995,7 +10998,7 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       approach: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -11007,7 +11010,7 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       departure: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -11208,7 +11211,7 @@ export class InvertedMordent
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       approach: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -11220,7 +11223,7 @@ export class InvertedMordent
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       departure: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -11406,7 +11409,7 @@ export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, S
   static readonly schema = {
     name: 'schleifer',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -11417,7 +11420,7 @@ export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, S
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -11539,7 +11542,7 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
   static readonly schema = {
     name: 'tremolo',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -11550,7 +11553,7 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -11574,7 +11577,7 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
       type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop', 'single', 'unmeasured'] } },
     },
     contents: [
@@ -11701,7 +11704,7 @@ export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -11712,7 +11715,7 @@ export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -11880,7 +11883,7 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
   static readonly schema = {
     name: 'other-ornament',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -11891,7 +11894,7 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -11915,9 +11918,9 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = OtherOrnament.schema;
@@ -12072,7 +12075,7 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
     name: 'accidental-mark',
     attributes: {
       bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -12083,7 +12086,7 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -12096,7 +12099,7 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'relative-x': {
@@ -12110,7 +12113,10 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
-      smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } },
+      smufl: {
+        type: 'optional',
+        value: { type: 'regex', pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' },
+      },
     },
     contents: [
       {
@@ -12388,7 +12394,7 @@ export type OrnamentsContents = [
 export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, OrnamentsContents> {
   static readonly schema = {
     name: 'ornaments',
-    attributes: { id: { type: 'optional', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [
       {
         type: 'label',
@@ -12548,7 +12554,7 @@ export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContent
   static readonly schema = {
     name: 'up-bow',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -12559,7 +12565,7 @@ export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContent
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -12679,7 +12685,7 @@ export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBo
   static readonly schema = {
     name: 'down-bow',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -12690,7 +12696,7 @@ export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBo
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -12901,7 +12907,7 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
   static readonly schema = {
     name: 'harmonic',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -12912,7 +12918,7 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -13077,7 +13083,7 @@ export class OpenString implements XMLElement<'open-string', OpenStringAttribute
   static readonly schema = {
     name: 'open-string',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -13088,7 +13094,7 @@ export class OpenString implements XMLElement<'open-string', OpenStringAttribute
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -13208,7 +13214,7 @@ export class ThumbPosition implements XMLElement<'thumb-position', ThumbPosition
   static readonly schema = {
     name: 'thumb-position',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -13219,7 +13225,7 @@ export class ThumbPosition implements XMLElement<'thumb-position', ThumbPosition
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -13342,7 +13348,7 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
     name: 'fingering',
     attributes: {
       alternate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -13353,7 +13359,7 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -13486,7 +13492,7 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
   static readonly schema = {
     name: 'pluck',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -13497,7 +13503,7 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -13522,7 +13528,7 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Pluck.schema;
@@ -13623,7 +13629,7 @@ export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAtt
   static readonly schema = {
     name: 'double-tongue',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -13634,7 +13640,7 @@ export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAtt
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -13754,7 +13760,7 @@ export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAtt
   static readonly schema = {
     name: 'triple-tongue',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -13765,7 +13771,7 @@ export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAtt
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -13885,7 +13891,7 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
   static readonly schema = {
     name: 'stopped',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -13896,7 +13902,7 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -14016,7 +14022,7 @@ export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicato
   static readonly schema = {
     name: 'snap-pizzicato',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -14027,7 +14033,7 @@ export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicato
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -14142,8 +14148,8 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
   static readonly schema = {
     name: 'fret',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -14157,7 +14163,7 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Fret.schema;
@@ -14228,7 +14234,7 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
   static readonly schema = {
     name: 'string',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -14239,7 +14245,7 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -14361,7 +14367,7 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
     name: 'hammer-on',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -14372,7 +14378,7 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -14397,7 +14403,7 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = HammerOn.schema;
@@ -14506,7 +14512,7 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
     name: 'pull-off',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -14517,7 +14523,7 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -14724,7 +14730,7 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
   static readonly schema = {
     name: 'with-bar',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -14736,7 +14742,7 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       'first-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -14761,7 +14767,7 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = WithBar.schema;
@@ -14874,7 +14880,7 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
     attributes: {
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -14886,7 +14892,7 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       'first-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -15064,7 +15070,7 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
   static readonly schema = {
     name: 'tap',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -15075,7 +15081,7 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -15101,7 +15107,7 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'optional', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'optional', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Tap.schema;
@@ -15209,7 +15215,7 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
   static readonly schema = {
     name: 'heel',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -15220,7 +15226,7 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -15348,7 +15354,7 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
   static readonly schema = {
     name: 'toe',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -15359,7 +15365,7 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -15486,7 +15492,7 @@ export class Fingernails implements XMLElement<'fingernails', FingernailsAttribu
   static readonly schema = {
     name: 'fingernails',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -15497,7 +15503,7 @@ export class Fingernails implements XMLElement<'fingernails', FingernailsAttribu
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -15606,7 +15612,7 @@ export class HoleType implements XMLElement<'hole-type', HoleTypeAttributes, Hol
   static readonly schema = {
     name: 'hole-type',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = HoleType.schema;
@@ -15680,7 +15686,7 @@ export class HoleShape implements XMLElement<'hole-shape', HoleShapeAttributes, 
   static readonly schema = {
     name: 'hole-shape',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = HoleShape.schema;
@@ -15720,7 +15726,7 @@ export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
   static readonly schema = {
     name: 'hole',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -15731,7 +15737,7 @@ export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -16065,7 +16071,7 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
   static readonly schema = {
     name: 'arrow',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -16076,7 +16082,7 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -16100,7 +16106,7 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
       { type: 'required', value: ArrowDirection },
@@ -16245,7 +16251,7 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
   static readonly schema = {
     name: 'handbell',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -16256,7 +16262,7 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -16433,7 +16439,7 @@ export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, 
   static readonly schema = {
     name: 'brass-bend',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -16444,7 +16450,7 @@ export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, 
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -16564,7 +16570,7 @@ export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
   static readonly schema = {
     name: 'flip',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -16575,7 +16581,7 @@ export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -16695,7 +16701,7 @@ export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents
   static readonly schema = {
     name: 'smear',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -16706,7 +16712,7 @@ export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -16827,7 +16833,7 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
   static readonly schema = {
     name: 'open',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -16838,7 +16844,7 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -16862,7 +16868,7 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
     },
     contents: [],
   } as const;
@@ -16966,7 +16972,7 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
   static readonly schema = {
     name: 'half-muted',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -16977,7 +16983,7 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -17001,7 +17007,7 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
     },
     contents: [],
   } as const;
@@ -17150,7 +17156,7 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
   static readonly schema = {
     name: 'harmon-mute',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -17161,7 +17167,7 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -17185,7 +17191,7 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
     },
     contents: [{ type: 'required', value: HarmonClosed }],
   } as const;
@@ -17294,7 +17300,7 @@ export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents
   static readonly schema = {
     name: 'golpe',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -17305,7 +17311,7 @@ export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -17426,7 +17432,7 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
   static readonly schema = {
     name: 'other-technical',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -17437,7 +17443,7 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -17461,9 +17467,9 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
     },
-    contents: [{ type: 'optional', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'optional', value: { type: 'string' } }],
   } as const;
 
   readonly schema = OtherTechnical.schema;
@@ -17592,7 +17598,7 @@ export type TechnicalContents = [
 export class Technical implements XMLElement<'technical', TechnicalAttributes, TechnicalContents> {
   static readonly schema = {
     name: 'technical',
-    attributes: { id: { type: 'optional', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [
       {
         type: 'label',
@@ -17841,7 +17847,7 @@ export class Accent implements XMLElement<'accent', AccentAttributes, AccentCont
   static readonly schema = {
     name: 'accent',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -17852,7 +17858,7 @@ export class Accent implements XMLElement<'accent', AccentAttributes, AccentCont
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -17973,7 +17979,7 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
   static readonly schema = {
     name: 'strong-accent',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -17984,7 +17990,7 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -18111,7 +18117,7 @@ export class Staccato implements XMLElement<'staccato', StaccatoAttributes, Stac
   static readonly schema = {
     name: 'staccato',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -18122,7 +18128,7 @@ export class Staccato implements XMLElement<'staccato', StaccatoAttributes, Stac
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -18242,7 +18248,7 @@ export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoCont
   static readonly schema = {
     name: 'tenuto',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -18253,7 +18259,7 @@ export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoCont
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -18373,7 +18379,7 @@ export class DetachedLegato implements XMLElement<'detached-legato', DetachedLeg
   static readonly schema = {
     name: 'detached-legato',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -18384,7 +18390,7 @@ export class DetachedLegato implements XMLElement<'detached-legato', DetachedLeg
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -18504,7 +18510,7 @@ export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoA
   static readonly schema = {
     name: 'staccatissimo',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -18515,7 +18521,7 @@ export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoA
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -18635,7 +18641,7 @@ export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, Spic
   static readonly schema = {
     name: 'spiccato',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -18646,7 +18652,7 @@ export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, Spic
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -18766,7 +18772,7 @@ export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents
   static readonly schema = {
     name: 'scoop',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -18777,7 +18783,7 @@ export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -18902,7 +18908,7 @@ export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
   static readonly schema = {
     name: 'plop',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -18914,7 +18920,7 @@ export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -19073,7 +19079,7 @@ export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
   static readonly schema = {
     name: 'doit',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -19085,7 +19091,7 @@ export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -19244,7 +19250,7 @@ export class Falloff implements XMLElement<'falloff', FalloffAttributes, Falloff
   static readonly schema = {
     name: 'falloff',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -19256,7 +19262,7 @@ export class Falloff implements XMLElement<'falloff', FalloffAttributes, Falloff
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -19410,7 +19416,7 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
   static readonly schema = {
     name: 'breath-mark',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -19421,7 +19427,7 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -19556,7 +19562,7 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
   static readonly schema = {
     name: 'caesura',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -19567,7 +19573,7 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -19702,7 +19708,7 @@ export class Stress implements XMLElement<'stress', StressAttributes, StressCont
   static readonly schema = {
     name: 'stress',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -19713,7 +19719,7 @@ export class Stress implements XMLElement<'stress', StressAttributes, StressCont
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -19833,7 +19839,7 @@ export class Unstress implements XMLElement<'unstress', UnstressAttributes, Unst
   static readonly schema = {
     name: 'unstress',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -19844,7 +19850,7 @@ export class Unstress implements XMLElement<'unstress', UnstressAttributes, Unst
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -19964,7 +19970,7 @@ export class SoftAccess implements XMLElement<'soft-access', SoftAccessAttribute
   static readonly schema = {
     name: 'soft-access',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -19975,7 +19981,7 @@ export class SoftAccess implements XMLElement<'soft-access', SoftAccessAttribute
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -20098,7 +20104,7 @@ export class OtherArticulation
   static readonly schema = {
     name: 'other-articulation',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -20109,7 +20115,7 @@ export class OtherArticulation
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -20133,7 +20139,7 @@ export class OtherArticulation
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
     },
     contents: [],
   } as const;
@@ -20244,7 +20250,7 @@ export type ArticulationsContents = [
 export class Articulations implements XMLElement<'articulations', ArticulationsAttributes, ArticulationsContents> {
   static readonly schema = {
     name: 'articulations',
-    attributes: { id: { type: 'optional', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [
       {
         type: 'label',
@@ -20865,8 +20871,8 @@ export type OtherDynamicsContents = [string];
 export class OtherDynamics implements XMLElement<'other-dynamics', OtherDynamicsAttributes, OtherDynamicsContents> {
   static readonly schema = {
     name: 'other-dynamics',
-    attributes: { smufl: { type: 'optional', value: { type: 'string', zero: '' } } },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    attributes: { smufl: { type: 'optional', value: { type: 'string' } } },
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = OtherDynamics.schema;
@@ -20964,7 +20970,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
   static readonly schema = {
     name: 'dynamics',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -20997,7 +21003,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
           ],
         },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -21011,7 +21017,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
@@ -21388,7 +21394,7 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
   static readonly schema = {
     name: 'fermata',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -21399,7 +21405,7 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -21412,7 +21418,7 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -21574,7 +21580,7 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
   static readonly schema = {
     name: 'arpeggiate',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -21586,7 +21592,7 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       direction: { type: 'optional', value: { type: 'choices', choices: ['up', 'down'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'relative-x': {
@@ -21694,7 +21700,7 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
     name: 'non-arpeggiate',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['top', 'bottom'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -21705,7 +21711,7 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'relative-x': {
@@ -21807,7 +21813,7 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
     name: 'other-notation',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'single'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -21818,7 +21824,7 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'relative-x': {
@@ -21831,9 +21837,9 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = OtherNotation.schema;
@@ -21940,7 +21946,7 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
   static readonly schema = {
     name: 'notations',
     attributes: {
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
     contents: [
@@ -22151,7 +22157,7 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
   static readonly schema = {
     name: 'text',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
       'default-x': {
         type: 'label',
@@ -22163,7 +22169,7 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -22184,7 +22190,7 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
       overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-      'xml:lang': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xml:lang': { type: 'optional', value: { type: 'string' } },
     },
     contents: [],
   } as const;
@@ -22301,8 +22307,8 @@ export class Elision implements XMLElement<'elision', ElisionAttributes, Elision
   static readonly schema = {
     name: 'elision',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -22315,7 +22321,7 @@ export class Elision implements XMLElement<'elision', ElisionAttributes, Elision
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'lyrics' } },
+      smufl: { type: 'optional', value: { type: 'regex', pattern: /lyrics/, zero: 'lyrics' } },
     },
     contents: [],
   } as const;
@@ -22384,7 +22390,7 @@ export class Extend implements XMLElement<'extend', ExtendAttributes, ExtendCont
   static readonly schema = {
     name: 'extend',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -22558,7 +22564,7 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
   static readonly schema = {
     name: 'lyric',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -22569,10 +22575,10 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      name: { type: 'optional', value: { type: 'string', zero: '' } },
-      number: { type: 'optional', value: { type: 'string', zero: '' } },
+      name: { type: 'optional', value: { type: 'string' } },
+      number: { type: 'optional', value: { type: 'string' } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'relative-x': {
@@ -22585,7 +22591,7 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
+      'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
     },
     contents: [
       {
@@ -22761,7 +22767,7 @@ export class Ipa implements XMLElement<'ipa', IpaAttributes, IpaContents> {
   static readonly schema = {
     name: 'ipa',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Ipa.schema;
@@ -22932,7 +22938,7 @@ export type OtherPlayContents = [];
 export class OtherPlay implements XMLElement<'other-play', OtherPlayAttributes, OtherPlayContents> {
   static readonly schema = {
     name: 'other-play',
-    attributes: { type: { type: 'required', value: { type: 'string', zero: '' } } },
+    attributes: { type: { type: 'required', value: { type: 'string' } } },
     contents: [],
   } as const;
 
@@ -22960,7 +22966,7 @@ export type PlayContents = [Array<Ipa | Mute | SemiPitched | OtherPlay>];
 export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
   static readonly schema = {
     name: 'play',
-    attributes: { id: { type: 'optional', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [
       {
         type: 'label',
@@ -23014,8 +23020,8 @@ export class Assess implements XMLElement<'assess', AssessAttributes, AssessCont
     name: 'assess',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['yes', 'no'] } },
-      player: { type: 'optional', value: { type: 'string', zero: '' } },
-      'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
+      player: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
     },
     contents: [],
   } as const;
@@ -23057,8 +23063,8 @@ export class Wait implements XMLElement<'wait', WaitAttributes, WaitContents> {
   static readonly schema = {
     name: 'wait',
     attributes: {
-      player: { type: 'optional', value: { type: 'string', zero: '' } },
-      'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
+      player: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
     },
     contents: [],
   } as const;
@@ -23094,11 +23100,11 @@ export class OtherListen implements XMLElement<'other-listen', OtherListenAttrib
   static readonly schema = {
     name: 'other-listen',
     attributes: {
-      type: { type: 'required', value: { type: 'string', zero: '' } },
-      player: { type: 'optional', value: { type: 'string', zero: '' } },
-      'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
+      type: { type: 'required', value: { type: 'string' } },
+      player: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = OtherListen.schema;
@@ -23250,7 +23256,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
     name: 'note',
     attributes: {
       attack: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -23263,7 +23269,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
       },
       dynamics: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
       'end-dynamics': { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -23276,7 +23282,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       pizzicato: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'print-dot': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'print-leger': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -23294,7 +23300,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       release: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-      'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
+      'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
     },
     contents: [
       {
@@ -23835,7 +23841,7 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
   static readonly schema = {
     name: 'rehearsal',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -23869,7 +23875,7 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
           ],
         },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -23883,7 +23889,7 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'letter-spacing': {
         type: 'optional',
         value: { type: 'choices', choices: ['normal', { type: 'float', min: -Infinity, max: Infinity }] },
@@ -23907,10 +23913,10 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-      'xml:lang': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Rehearsal.schema;
@@ -24118,7 +24124,7 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
   static readonly schema = {
     name: 'segno',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -24129,7 +24135,7 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -24143,7 +24149,7 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -24154,7 +24160,10 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } },
+      smufl: {
+        type: 'optional',
+        value: { type: 'regex', pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' },
+      },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
     contents: [],
@@ -24273,7 +24282,7 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
   static readonly schema = {
     name: 'coda',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -24284,7 +24293,7 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -24298,7 +24307,7 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -24309,7 +24318,10 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } },
+      smufl: {
+        type: 'optional',
+        value: { type: 'regex', pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' },
+      },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
     contents: [],
@@ -24453,7 +24465,7 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
   static readonly schema = {
     name: 'words',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -24487,7 +24499,7 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
           ],
         },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -24501,7 +24513,7 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
       'letter-spacing': {
         type: 'optional',
@@ -24526,10 +24538,10 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-      'xml:lang': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Words.schema;
@@ -24766,7 +24778,7 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
   static readonly schema = {
     name: 'symbol',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -24800,7 +24812,7 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
           ],
         },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -24814,7 +24826,7 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
       'letter-spacing': {
         type: 'optional',
@@ -25037,7 +25049,7 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
     name: 'wedge',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['crescendo', 'diminuendo', 'stop', 'continue'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -25049,7 +25061,7 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
       niente: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
@@ -25178,7 +25190,7 @@ export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesCont
     name: 'dashes',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -25190,7 +25202,7 @@ export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesCont
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       'relative-x': {
         type: 'label',
@@ -25302,7 +25314,7 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
     attributes: {
       'line-end': { type: 'required', value: { type: 'choices', choices: ['none', 'up', 'down', 'both', 'arrow'] } },
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -25315,7 +25327,7 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       'end-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       'relative-x': {
@@ -25454,7 +25466,7 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
         },
       },
       abbreviated: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -25465,7 +25477,7 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -25478,7 +25490,7 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       line: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       'relative-x': {
@@ -25773,7 +25785,7 @@ export class PerMinute implements XMLElement<'per-minute', PerMinuteAttributes, 
   static readonly schema = {
     name: 'per-minute',
     attributes: {
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -25787,7 +25799,7 @@ export class PerMinute implements XMLElement<'per-minute', PerMinuteAttributes, 
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = PerMinute.schema;
@@ -26204,7 +26216,7 @@ export class MetronomeRelation
   static readonly schema = {
     name: 'metronome-relation',
     attributes: {},
-    contents: [{ type: 'optional', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'optional', value: { type: 'string' } }],
   } as const;
 
   readonly schema = MetronomeRelation.schema;
@@ -26262,7 +26274,7 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
   static readonly schema = {
     name: 'metronome',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -26273,7 +26285,7 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -26287,7 +26299,7 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
       parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -26494,7 +26506,7 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
     name: 'octave-shift',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['up', 'down', 'stop', 'continue'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'default-x': {
         type: 'label',
@@ -26506,7 +26518,7 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -26519,7 +26531,7 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       'relative-x': {
         type: 'label',
@@ -26661,7 +26673,7 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
   static readonly schema = {
     name: 'harp-pedals',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -26672,7 +26684,7 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -26686,7 +26698,7 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -26808,7 +26820,7 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
   static readonly schema = {
     name: 'damp',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -26819,7 +26831,7 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -26833,7 +26845,7 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -26955,7 +26967,7 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
   static readonly schema = {
     name: 'damp-all',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -26966,7 +26978,7 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -26980,7 +26992,7 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -27102,7 +27114,7 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
   static readonly schema = {
     name: 'eyeglasses',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -27113,7 +27125,7 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -27127,7 +27139,7 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -27249,7 +27261,7 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
   static readonly schema = {
     name: 'string-mute',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -27260,7 +27272,7 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -27274,7 +27286,7 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -27528,7 +27540,7 @@ export type ScordaturaContents = [Array<Accord>];
 export class Scordatura implements XMLElement<'scordatura', ScordaturaAttributes, ScordaturaContents> {
   static readonly schema = {
     name: 'scordatura',
-    attributes: { id: { type: 'optional', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [{ type: 'label', label: 'accords', value: { type: 'oneOrMore', value: Accord } }],
   } as const;
 
@@ -27574,8 +27586,8 @@ export class Image implements XMLElement<'image', ImageAttributes, ImageContents
   static readonly schema = {
     name: 'image',
     attributes: {
-      source: { type: 'required', value: { type: 'string', zero: '' } },
-      type: { type: 'required', value: { type: 'string', zero: '' } },
+      source: { type: 'required', value: { type: 'string' } },
+      type: { type: 'required', value: { type: 'string' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -27587,7 +27599,7 @@ export class Image implements XMLElement<'image', ImageAttributes, ImageContents
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -27703,7 +27715,7 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
         value: { type: 'choices', choices: ['none', 'Hauptstimme', 'Nebenstimme', 'plain'] },
       },
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -27714,7 +27726,7 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -27728,7 +27740,7 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -27741,7 +27753,7 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = PrincipalVoice.schema;
@@ -27854,7 +27866,7 @@ export type GlassContents = ['glass harmonica' | 'glass harp' | 'wind chimes'];
 export class Glass implements XMLElement<'glass', GlassAttributes, GlassContents> {
   static readonly schema = {
     name: 'glass',
-    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
+    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
     contents: [
       {
         type: 'required',
@@ -27930,7 +27942,7 @@ export type MetalContents = [
 export class Metal implements XMLElement<'metal', MetalAttributes, MetalContents> {
   static readonly schema = {
     name: 'metal',
-    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
+    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
     contents: [
       {
         type: 'required',
@@ -28097,7 +28109,7 @@ export type WoodContents = [
 export class Wood implements XMLElement<'wood', WoodAttributes, WoodContents> {
   static readonly schema = {
     name: 'wood',
-    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
+    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
     contents: [
       {
         type: 'required',
@@ -28209,7 +28221,7 @@ export type PitchedContents = [];
 export class Pitched implements XMLElement<'pitched', PitchedAttributes, PitchedContents> {
   static readonly schema = {
     name: 'pitched',
-    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
+    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
     contents: [],
   } as const;
 
@@ -28255,7 +28267,7 @@ export type MembraneContents = [
 export class Membrane implements XMLElement<'membrane', MembraneAttributes, MembraneContents> {
   static readonly schema = {
     name: 'membrane',
-    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
+    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
     contents: [
       {
         type: 'required',
@@ -28372,7 +28384,7 @@ export type EffectContents = [
 export class Effect implements XMLElement<'effect', EffectAttributes, EffectContents> {
   static readonly schema = {
     name: 'effect',
-    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
+    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
     contents: [
       {
         type: 'required',
@@ -28469,7 +28481,7 @@ export type TimpaniContents = [];
 export class Timpani implements XMLElement<'timpani', TimpaniAttributes, TimpaniContents> {
   static readonly schema = {
     name: 'timpani',
-    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'pict' } } },
+    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
     contents: [],
   } as const;
 
@@ -28869,8 +28881,8 @@ export class OtherPercussion
 {
   static readonly schema = {
     name: 'other-percussion',
-    attributes: { smufl: { type: 'optional', value: { type: 'string', zero: '' } } },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    attributes: { smufl: { type: 'optional', value: { type: 'string' } } },
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = OtherPercussion.schema;
@@ -28919,7 +28931,7 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
   static readonly schema = {
     name: 'percussion',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -28930,7 +28942,7 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -28944,7 +28956,7 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -29208,7 +29220,7 @@ export class AccordionRegistration
   static readonly schema = {
     name: 'accordion-registration',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -29219,7 +29231,7 @@ export class AccordionRegistration
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -29233,7 +29245,7 @@ export class AccordionRegistration
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -29382,7 +29394,7 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
     name: 'staff-divide',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['down', 'up', 'up-down'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -29393,7 +29405,7 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -29407,7 +29419,7 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
@@ -29537,7 +29549,7 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
   static readonly schema = {
     name: 'other-direction',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -29548,7 +29560,7 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -29562,7 +29574,7 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'relative-x': {
         type: 'label',
@@ -29574,7 +29586,7 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      smufl: { type: 'optional', value: { type: 'string', zero: '' } },
+      smufl: { type: 'optional', value: { type: 'string' } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
     contents: [],
@@ -29720,7 +29732,7 @@ export type DirectionTypeContents = [
 export class DirectionType implements XMLElement<'direction-type', DirectionTypeAttributes, DirectionTypeContents> {
   static readonly schema = {
     name: 'direction-type',
-    attributes: { id: { type: 'optional', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [
       {
         type: 'label',
@@ -29956,7 +29968,7 @@ export class InstrumentChange
 {
   static readonly schema = {
     name: 'instrument-change',
-    attributes: { id: { type: 'required', value: { type: 'string', zero: '' } } },
+    attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
     contents: [
       { type: 'optional', value: InstrumentSound },
       {
@@ -30135,7 +30147,7 @@ export class SwingStyle implements XMLElement<'swing-style', SwingStyleAttribute
   static readonly schema = {
     name: 'swing-style',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = SwingStyle.schema;
@@ -30251,24 +30263,24 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
   static readonly schema = {
     name: 'sound',
     attributes: {
-      coda: { type: 'optional', value: { type: 'string', zero: '' } },
+      coda: { type: 'optional', value: { type: 'string' } },
       dacapo: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      dalsegno: { type: 'optional', value: { type: 'string', zero: '' } },
+      dalsegno: { type: 'optional', value: { type: 'string' } },
       'damper-pedal': { type: 'optional', value: { type: 'choices', choices: ['no', 'yes', 0, 1] } },
       divisions: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       dynamics: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
       elevation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-      fine: { type: 'optional', value: { type: 'string', zero: '' } },
+      fine: { type: 'optional', value: { type: 'string' } },
       'forward-repeat': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       pan: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       pizzicato: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      segno: { type: 'optional', value: { type: 'string', zero: '' } },
+      segno: { type: 'optional', value: { type: 'string' } },
       'soft-pedal': { type: 'optional', value: { type: 'choices', choices: ['no', 'yes', 0, 1] } },
       'sostenuto-pedal': { type: 'optional', value: { type: 'choices', choices: ['no', 'yes', 0, 1] } },
       tempo: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
-      'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
-      tocoda: { type: 'optional', value: { type: 'string', zero: '' } },
+      'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
+      tocoda: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
       {
@@ -30446,8 +30458,8 @@ export class Sync implements XMLElement<'sync', SyncAttributes, SyncContents> {
         value: { type: 'choices', choices: ['none', 'tempo', 'mostly-tempo', 'mostly-event', 'event', 'always-event'] },
       },
       latency: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
-      player: { type: 'optional', value: { type: 'string', zero: '' } },
-      'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
+      player: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
     },
     contents: [],
   } as const;
@@ -30495,11 +30507,11 @@ export class OtherListening implements XMLElement<'other-listening', OtherListen
   static readonly schema = {
     name: 'other-listening',
     attributes: {
-      type: { type: 'required', value: { type: 'string', zero: '' } },
-      player: { type: 'optional', value: { type: 'string', zero: '' } },
-      'time-only': { type: 'optional', value: { type: 'regex', pattern: {}, zero: '1' } },
+      type: { type: 'required', value: { type: 'string' } },
+      player: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = OtherListening.schema;
@@ -30824,7 +30836,7 @@ export class Mode implements XMLElement<'mode', ModeAttributes, ModeContents> {
               'aeolian',
               'ionian',
               'locrian',
-              { type: 'string', zero: '' },
+              { type: 'string' },
             ],
           },
         },
@@ -30995,7 +31007,12 @@ export type KeyAccidentalContents = [
 export class KeyAccidental implements XMLElement<'key-accidental', KeyAccidentalAttributes, KeyAccidentalContents> {
   static readonly schema = {
     name: 'key-accidental',
-    attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: {}, zero: 'acc' } } },
+    attributes: {
+      smufl: {
+        type: 'optional',
+        value: { type: 'regex', pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' },
+      },
+    },
     contents: [
       {
         type: 'required',
@@ -31228,7 +31245,7 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
   static readonly schema = {
     name: 'key',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -31239,7 +31256,7 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -31252,7 +31269,7 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'relative-x': {
@@ -31412,7 +31429,7 @@ export class Beats implements XMLElement<'beats', BeatsAttributes, BeatsContents
   static readonly schema = {
     name: 'beats',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Beats.schema;
@@ -31441,7 +31458,7 @@ export class BeatType implements XMLElement<'beat-type', BeatTypeAttributes, Bea
   static readonly schema = {
     name: 'beat-type',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = BeatType.schema;
@@ -31581,7 +31598,7 @@ export class SenzaMisura implements XMLElement<'senza-misura', SenzaMisuraAttrib
   static readonly schema = {
     name: 'senza-misura',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = SenzaMisura.schema;
@@ -31672,7 +31689,7 @@ export class Staves implements XMLElement<'staves', StavesAttributes, StavesCont
   static readonly schema = {
     name: 'staves',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Staves.schema;
@@ -31714,7 +31731,7 @@ export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttribute
     name: 'part-symbol',
     attributes: {
       'bottom-staff': { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -31725,7 +31742,7 @@ export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttribute
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -31855,7 +31872,7 @@ export class Instruments implements XMLElement<'instruments', InstrumentsAttribu
   static readonly schema = {
     name: 'instruments',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Instruments.schema;
@@ -32011,7 +32028,7 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
     attributes: {
       additional: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'after-barline': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -32022,7 +32039,7 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -32035,7 +32052,7 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'relative-x': {
@@ -32224,7 +32241,7 @@ export class StaffLines implements XMLElement<'staff-lines', StaffLinesAttribute
   static readonly schema = {
     name: 'staff-lines',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = StaffLines.schema;
@@ -32260,7 +32277,7 @@ export class LineDetail implements XMLElement<'line-detail', LineDetailAttribute
     name: 'line-detail',
     attributes: {
       line: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
@@ -32367,7 +32384,7 @@ export class Capo implements XMLElement<'capo', CapoAttributes, CapoContents> {
   static readonly schema = {
     name: 'capo',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Capo.schema;
@@ -32676,7 +32693,7 @@ export class Transpose implements XMLElement<'transpose', TransposeAttributes, T
   static readonly schema = {
     name: 'transpose',
     attributes: {
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
     contents: [
@@ -32839,7 +32856,7 @@ export class ForPart implements XMLElement<'for-part', ForPartAttributes, ForPar
   static readonly schema = {
     name: 'for-part',
     attributes: {
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
     contents: [
@@ -32902,7 +32919,7 @@ export class Directive implements XMLElement<'directive', DirectiveAttributes, D
   static readonly schema = {
     name: 'directive',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -32913,7 +32930,7 @@ export class Directive implements XMLElement<'directive', DirectiveAttributes, D
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -32936,9 +32953,9 @@ export class Directive implements XMLElement<'directive', DirectiveAttributes, D
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'xml:lang': { type: 'optional', value: { type: 'string', zero: '' } },
+      'xml:lang': { type: 'optional', value: { type: 'string' } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Directive.schema;
@@ -33240,7 +33257,7 @@ export class ExceptVoice implements XMLElement<'except-voice', ExceptVoiceAttrib
   static readonly schema = {
     name: 'except-voice',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = ExceptVoice.schema;
@@ -33417,8 +33434,8 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
   static readonly schema = {
     name: 'measure-style',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -33431,7 +33448,7 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
     contents: [
@@ -33684,7 +33701,7 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
   static readonly schema = {
     name: 'root-step',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -33695,7 +33712,7 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -33718,7 +33735,7 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      text: { type: 'optional', value: { type: 'string', zero: '' } },
+      text: { type: 'optional', value: { type: 'string' } },
     },
     contents: [],
   } as const;
@@ -33816,7 +33833,7 @@ export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, 
   static readonly schema = {
     name: 'root-alter',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -33827,7 +33844,7 @@ export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, 
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -34003,7 +34020,7 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
   static readonly schema = {
     name: 'numeral-root',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -34014,7 +34031,7 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -34037,7 +34054,7 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      text: { type: 'optional', value: { type: 'string', zero: '' } },
+      text: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
       { type: 'required', value: { type: 'label', label: 'numeral-value', value: { type: 'int', min: 1, max: 7 } } },
@@ -34144,7 +34161,7 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
   static readonly schema = {
     name: 'numeral-alter',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -34155,7 +34172,7 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -34180,7 +34197,7 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      text: { type: 'optional', value: { type: 'string', zero: '' } },
+      text: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
       {
@@ -34460,7 +34477,7 @@ export class Function implements XMLElement<'function', FunctionAttributes, Func
   static readonly schema = {
     name: 'function',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -34471,7 +34488,7 @@ export class Function implements XMLElement<'function', FunctionAttributes, Func
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -34495,7 +34512,7 @@ export class Function implements XMLElement<'function', FunctionAttributes, Func
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Function.schema;
@@ -34631,7 +34648,7 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
     name: 'kind',
     attributes: {
       'bracket-degrees': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -34642,7 +34659,7 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -34668,7 +34685,7 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       'stack-degrees': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      text: { type: 'optional', value: { type: 'string', zero: '' } },
+      text: { type: 'optional', value: { type: 'string' } },
       'use-symbols': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -34923,7 +34940,7 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
   static readonly schema = {
     name: 'inversion',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -34934,7 +34951,7 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -34957,9 +34974,9 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      text: { type: 'optional', value: { type: 'string', zero: '' } },
+      text: { type: 'optional', value: { type: 'string' } },
     },
-    contents: [{ type: 'label', label: 'inversion', value: { type: 'required', value: { type: 'string', zero: '' } } }],
+    contents: [{ type: 'label', label: 'inversion', value: { type: 'required', value: { type: 'string' } } }],
   } as const;
 
   readonly schema = Inversion.schema;
@@ -35059,7 +35076,7 @@ export class BassSeparator implements XMLElement<'bass-separator', BassSeparator
   static readonly schema = {
     name: 'bass-separator',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -35070,7 +35087,7 @@ export class BassSeparator implements XMLElement<'bass-separator', BassSeparator
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -35094,7 +35111,7 @@ export class BassSeparator implements XMLElement<'bass-separator', BassSeparator
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = BassSeparator.schema;
@@ -35189,7 +35206,7 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
   static readonly schema = {
     name: 'bass-step',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -35200,7 +35217,7 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -35223,7 +35240,7 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      text: { type: 'optional', value: { type: 'string', zero: '' } },
+      text: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
       {
@@ -35336,7 +35353,7 @@ export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, 
   static readonly schema = {
     name: 'bass-alter',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -35347,7 +35364,7 @@ export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, 
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -35538,7 +35555,7 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
   static readonly schema = {
     name: 'degree-value',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -35549,7 +35566,7 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -35576,7 +35593,7 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
         type: 'optional',
         value: { type: 'choices', choices: ['major', 'minor', 'augmented', 'diminished', 'half-diminished'] },
       },
-      text: { type: 'optional', value: { type: 'string', zero: '' } },
+      text: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
       {
@@ -35691,7 +35708,7 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
   static readonly schema = {
     name: 'degree-alter',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -35702,7 +35719,7 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -35822,7 +35839,7 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
   static readonly schema = {
     name: 'degree-type',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -35833,7 +35850,7 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -35856,7 +35873,7 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      text: { type: 'optional', value: { type: 'string', zero: '' } },
+      text: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
       {
@@ -36078,7 +36095,7 @@ export class FirstFret implements XMLElement<'first-fret', FirstFretAttributes, 
     name: 'first-fret',
     attributes: {
       location: { type: 'optional', value: { type: 'choices', choices: ['left', 'right'] } },
-      text: { type: 'optional', value: { type: 'string', zero: '' } },
+      text: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
       { type: 'label', label: 'fret', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
@@ -36123,7 +36140,7 @@ export class Barre implements XMLElement<'barre', BarreAttributes, BarreContents
     name: 'barre',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
     },
     contents: [],
   } as const;
@@ -36227,7 +36244,7 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
   static readonly schema = {
     name: 'frame',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -36240,8 +36257,8 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
       },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
       height: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -36264,7 +36281,7 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      unplayed: { type: 'optional', value: { type: 'string', zero: '' } },
+      unplayed: { type: 'optional', value: { type: 'string' } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom'] } },
       width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
@@ -36436,7 +36453,7 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
     name: 'harmony',
     attributes: {
       arrangement: { type: 'optional', value: { type: 'choices', choices: ['horizontal', 'vertical', 'diagonal'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -36447,7 +36464,7 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -36460,7 +36477,7 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'print-frame': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -36672,7 +36689,7 @@ export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixCont
   static readonly schema = {
     name: 'prefix',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -36683,7 +36700,7 @@ export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixCont
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -36707,7 +36724,7 @@ export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixCont
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Prefix.schema;
@@ -36801,7 +36818,7 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
   static readonly schema = {
     name: 'figure-number',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -36812,7 +36829,7 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -36924,7 +36941,7 @@ export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixCont
   static readonly schema = {
     name: 'suffix',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -36935,7 +36952,7 @@ export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixCont
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -36959,7 +36976,7 @@ export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixCont
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Suffix.schema;
@@ -37135,7 +37152,7 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
   static readonly schema = {
     name: 'figured-bass',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -37146,7 +37163,7 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -37160,7 +37177,7 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'print-dot': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -37493,7 +37510,7 @@ export class MeasureNumbering
   static readonly schema = {
     name: 'measure-numbering',
     attributes: {
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -37504,7 +37521,7 @@ export class MeasureNumbering
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -37682,10 +37699,10 @@ export class Print implements XMLElement<'print', PrintAttributes, PrintContents
     name: 'print',
     attributes: {
       'blank-page': { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'new-page': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'new-system': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      'page-number': { type: 'optional', value: { type: 'string', zero: '' } },
+      'page-number': { type: 'optional', value: { type: 'string' } },
       'staff-spacing': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
     contents: [
@@ -37807,7 +37824,9 @@ export type BarStyleContents = [
 export class BarStyle implements XMLElement<'bar-style', BarStyleAttributes, BarStyleContents> {
   static readonly schema = {
     name: 'bar-style',
-    attributes: { color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } } },
+    attributes: {
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
+    },
     contents: [
       {
         type: 'required',
@@ -37907,9 +37926,12 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
   static readonly schema = {
     name: 'ending',
     attributes: {
-      number: { type: 'required', value: { type: 'regex', pattern: {}, zero: '' } },
+      number: {
+        type: 'required',
+        value: { type: 'regex', pattern: /([ ]*)|([1-9][0-9]*(, ?[1-9][0-9]*)*)/, zero: '' },
+      },
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'discontinue'] } },
-      color: { type: 'optional', value: { type: 'regex', pattern: {}, zero: '#000000' } },
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'default-x': {
         type: 'label',
         label: 'default-x',
@@ -37921,7 +37943,7 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
         value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       },
       'end-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      'font-family': { type: 'optional', value: { type: 'regex', pattern: {}, zero: ' ' } },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
         value: {
@@ -37949,7 +37971,7 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
       'text-x': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'text-y': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
     },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Ending.schema;
@@ -38082,7 +38104,7 @@ export class Repeat implements XMLElement<'repeat', RepeatAttributes, RepeatCont
     attributes: {
       direction: { type: 'required', value: { type: 'choices', choices: ['backward', 'forward'] } },
       'after-jump': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      times: { type: 'optional', value: { type: 'string', zero: '' } },
+      times: { type: 'optional', value: { type: 'string' } },
       winged: {
         type: 'optional',
         value: { type: 'choices', choices: ['none', 'straight', 'curved', 'double-straight', 'double-curved'] },
@@ -38150,11 +38172,11 @@ export class Barline implements XMLElement<'barline', BarlineAttributes, Barline
   static readonly schema = {
     name: 'barline',
     attributes: {
-      coda: { type: 'label', label: 'coda-token', value: { type: 'optional', value: { type: 'string', zero: '' } } },
+      coda: { type: 'label', label: 'coda-token', value: { type: 'optional', value: { type: 'string' } } },
       divisions: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       location: { type: 'optional', value: { type: 'choices', choices: ['right', 'left', 'middle'] } },
-      segno: { type: 'label', label: 'segno-token', value: { type: 'optional', value: { type: 'string', zero: '' } } },
+      segno: { type: 'label', label: 'segno-token', value: { type: 'optional', value: { type: 'string' } } },
     },
     contents: [
       { type: 'optional', value: BarStyle },
@@ -38271,8 +38293,8 @@ export type FeatureContents = [string];
 export class Feature implements XMLElement<'feature', FeatureAttributes, FeatureContents> {
   static readonly schema = {
     name: 'feature',
-    attributes: { type: { type: 'optional', value: { type: 'string', zero: '' } } },
-    contents: [{ type: 'required', value: { type: 'string', zero: '' } }],
+    attributes: { type: { type: 'optional', value: { type: 'string' } } },
+    contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
 
   readonly schema = Feature.schema;
@@ -38312,9 +38334,9 @@ export class Grouping implements XMLElement<'grouping', GroupingAttributes, Grou
     name: 'grouping',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'single'] } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
-      'member-of': { type: 'optional', value: { type: 'string', zero: '' } },
-      number: { type: 'optional', value: { type: 'string', zero: '' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      'member-of': { type: 'optional', value: { type: 'string' } },
+      number: { type: 'optional', value: { type: 'string' } },
     },
     contents: [{ type: 'label', label: 'features', value: { type: 'zeroOrMore', value: Feature } }],
   } as const;
@@ -38392,15 +38414,15 @@ export class Measure implements XMLElement<'measure', MeasureAttributes, Measure
   static readonly schema = {
     name: 'measure',
     attributes: {
-      number: { type: 'required', value: { type: 'string', zero: '' } },
-      id: { type: 'optional', value: { type: 'string', zero: '' } },
+      number: { type: 'required', value: { type: 'string' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       implicit: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'non-controller': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       text: {
         type: 'optional',
         value: {
           type: 'not',
-          include: { type: 'choices', choices: ['yes', { type: 'string', zero: '' }] },
+          include: { type: 'choices', choices: ['yes', { type: 'string' }] },
           exclude: { type: 'constant', value: '' },
         },
       },
@@ -38570,7 +38592,7 @@ export type PartContents = [Array<Measure>];
 export class Part implements XMLElement<'part', PartAttributes, PartContents> {
   static readonly schema = {
     name: 'part',
-    attributes: { id: { type: 'string', zero: '' } },
+    attributes: { id: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
     contents: [{ type: 'label', label: 'measures', value: { type: 'oneOrMore', value: Measure } }],
   } as const;
 

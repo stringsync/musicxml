@@ -139,6 +139,11 @@ describe('MusicXML', () => {
       const scorePartwise = musicXml.getRoot();
       expect(operations.validate(scorePartwise, elements.ScorePartwise)).toBeTrue();
     });
+
+    it('creates a MusicXML object that serializes to a valid MusicXML document', async () => {
+      const musicXml = MusicXML.createPartwise();
+      await expect(musicXml.serialize()).toBeValidMusicXML();
+    });
   });
 
   describe('createTimewise', () => {
