@@ -1,30 +1,18 @@
 import * as dataTypes from '../dataTypes';
 import { schema, t } from '../schema';
-import { Attributes } from './Attributes';
-import { Backup } from './Backup';
-import { Barline } from './Barline';
-import { Bookmark } from './Bookmark';
-import { Direction } from './Direction';
-import { FiguredBass } from './FiguredBass';
-import { Forward } from './Forward';
-import { Grouping } from './Grouping';
-import { Harmony } from './Harmony';
-import { Link } from './Link';
-import { Listening } from './Listening';
-import { Note } from './Note';
-import { Print } from './Print';
-import { Sound } from './Sound';
+import { PartTimewise } from './PartTimewise';
 
 /**
- * The `<measure>` element (partwise)
+ * The `<measure>` element (timewise)
  *
- * Parent element: `<part>` (partwise)
+ * Parent element: `<score-timewise>`
  *
- * The `<measure>` element includes the basic musical data such as `<note>`s within a `<score-partwise>` document.
+ * The `<measure>` element is the top level of musical organization below the `<score-timewise>` document element. It
+ * contains a sequence of `<part>` elements.
  *
- * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-partwise/}
+ * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-timewise/}
  */
-export const Measure = schema(
+export const MeasureTimewise = schema(
   'measure',
   {
     /**
@@ -70,27 +58,6 @@ export const Measure = schema(
      */
     width: t.optional(dataTypes.tenths()),
   },
-  [
-    t.label({
-      label: 'contents',
-      value: t.zeroOrMore(
-        t.choices(
-          Note,
-          Backup,
-          Forward,
-          Direction,
-          Attributes,
-          Harmony,
-          FiguredBass,
-          Print,
-          Sound,
-          Listening,
-          Barline,
-          Grouping,
-          Link,
-          Bookmark
-        )
-      ),
-    }),
-  ] as const
+  [t.label({ label: 'parts-timewise', value: t.oneOrMore(PartTimewise) })] as const,
+  { className: 'measure-timewise' }
 );

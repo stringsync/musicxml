@@ -28,7 +28,7 @@ describe('MusicXML', () => {
       expect(partName).toBeInstanceOf(elements.PartName);
       expect(partName.getText()).toBe('Music');
 
-      const parts = scorePartwise.getParts();
+      const parts = scorePartwise.getPartsPartwise();
       expect(parts).toBeArray();
       expect(parts).toHaveLength(1);
 
@@ -40,7 +40,7 @@ describe('MusicXML', () => {
       expect(measures).toHaveLength(1);
 
       const measure = measures[0];
-      expect(measure).toBeInstanceOf(elements.Measure);
+      expect(measure).toBeInstanceOf(elements.MeasurePartwise);
       expect(measure.getNumber()).toBe('1');
 
       const measureContents = measure.getContents();
@@ -48,7 +48,7 @@ describe('MusicXML', () => {
       expect(measureContents).toHaveLength(2);
 
       const attributes = measureContents[0];
-      if (!elements.Measure.isAttributes(attributes)) {
+      if (!elements.MeasurePartwise.isAttributes(attributes)) {
         fail(`expected Attributes, got: ${attributes}`);
       }
 
@@ -109,7 +109,7 @@ describe('MusicXML', () => {
       expect(line!.getStaffLinePosition()).toBe(2);
 
       const note = measureContents[1];
-      if (!elements.Measure.isNote(note)) {
+      if (!elements.MeasurePartwise.isNote(note)) {
         fail(`expected Note, got: ${note}`);
       }
 
@@ -156,6 +156,11 @@ describe('MusicXML', () => {
       const musicXml = MusicXML.createTimewise();
       const scoreTimewise = musicXml.getRoot();
       expect(operations.validate(scoreTimewise, elements.ScoreTimewise)).toBeTrue();
+    });
+
+    it('creates a MusicXML object that serializes to a valid MusicXML document', async () => {
+      const musicXml = MusicXML.createTimewise();
+      await expect(musicXml.serialize()).toBeValidMusicXML();
     });
   });
 

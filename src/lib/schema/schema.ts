@@ -1,5 +1,9 @@
 import { Descriptor, XMLElementSchema } from './types';
 
+type SchemaOpts = {
+  className: string;
+};
+
 /**
  * Creates an XMLElementSchema object.
  *
@@ -11,5 +15,6 @@ import { Descriptor, XMLElementSchema } from './types';
 export const schema = <N extends string, A extends Record<string, Descriptor>, C extends ReadonlyArray<Descriptor>>(
   name: N,
   attributes: A,
-  contents: C
-): XMLElementSchema<N, A, C> => ({ name, attributes, contents });
+  contents: C,
+  opts: Partial<SchemaOpts> = {}
+): XMLElementSchema<N, A, C> => ({ name, attributes, contents, ...opts });

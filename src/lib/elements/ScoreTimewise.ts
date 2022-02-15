@@ -2,7 +2,7 @@ import { schema, t } from '../schema';
 import { Credit } from './Credit';
 import { Defaults } from './Defaults';
 import { Identification } from './Identification';
-import { Measure } from './Measure';
+import { MeasureTimewise } from './MeasureTimewise';
 import { MovementNumber } from './MovementNumber';
 import { MovementTitle } from './MovementTitle';
 import { PartList } from './PartList';
@@ -37,6 +37,6 @@ export const ScoreTimewise = schema(
     t.optional(Defaults),
     t.label({ label: 'credits', value: t.zeroOrMore(Credit) }),
     t.required(PartList),
-    t.label({ label: 'measures', value: t.oneOrMore(Measure) }),
+    t.label({ label: 'measures-timewise', value: t.oneOrMore(MeasureTimewise) }),
   ] as const
 );

@@ -8,6 +8,7 @@ export type XMLElementSchema<
   name: N;
   attributes: A;
   contents: C;
+  className?: string;
 };
 
 export interface XMLElement<

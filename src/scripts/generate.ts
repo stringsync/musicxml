@@ -29,7 +29,7 @@ const toCamelCase = (string: string): string => {
 };
 
 const getClassName = (schema: XMLElementSchema): string => {
-  return toPascalCase(schema.name);
+  return schema.className ? toPascalCase(schema.className) : toPascalCase(schema.name);
 };
 
 const getLabeledTypeLiterals = (schema: XMLElementSchema): string => {
@@ -184,7 +184,7 @@ const getLiteral = (value: any): string => {
     return `[${value.map(getLiteral).join(', ')}]`;
   }
   if (util.isXMLElementSchema(value)) {
-    return toPascalCase(value.name);
+    return getClassName(value);
   }
   if (util.isFunction(value)) {
     return getLiteral(value());
@@ -410,8 +410,9 @@ const generateFileContents = (roots: XMLElementSchema[]): string => {
     }
     if (util.isXMLElementSchema(child)) {
       dfs(child.contents);
-      if (!seen.has(child.name)) {
-        seen.add(child.name);
+      const className = getClassName(child);
+      if (!seen.has(className)) {
+        seen.add(className);
         literals.push(toClassLiteral(child));
       }
     }

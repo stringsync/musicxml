@@ -38382,7 +38382,7 @@ export class Grouping implements XMLElement<'grouping', GroupingAttributes, Grou
   }
 }
 
-export type MeasureAttributes = {
+export type MeasurePartwiseAttributes = {
   number: string;
   id: string | null;
   implicit: 'yes' | 'no' | null;
@@ -38391,7 +38391,7 @@ export type MeasureAttributes = {
   width: number | null;
 };
 
-export type MeasureContents = [
+export type MeasurePartwiseContents = [
   Array<
     | Note
     | Backup
@@ -38410,7 +38410,7 @@ export type MeasureContents = [
   >
 ];
 
-export class Measure implements XMLElement<'measure', MeasureAttributes, MeasureContents> {
+export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAttributes, MeasurePartwiseContents> {
   static readonly schema = {
     name: 'measure',
     attributes: {
@@ -38500,14 +38500,14 @@ export class Measure implements XMLElement<'measure', MeasureAttributes, Measure
     return operations.validate(value, Bookmark);
   }
 
-  readonly schema = Measure.schema;
+  readonly schema = MeasurePartwise.schema;
 
-  attributes: MeasureAttributes;
-  contents: MeasureContents;
+  attributes: MeasurePartwiseAttributes;
+  contents: MeasurePartwiseContents;
 
-  constructor(opts?: { attributes?: Partial<MeasureAttributes>; contents?: MeasureContents }) {
-    this.attributes = operations.merge(opts?.attributes, Measure.schema);
-    this.contents = opts?.contents ?? operations.zero(Measure.schema.contents);
+  constructor(opts?: { attributes?: Partial<MeasurePartwiseAttributes>; contents?: MeasurePartwiseContents }) {
+    this.attributes = operations.merge(opts?.attributes, MeasurePartwise.schema);
+    this.contents = opts?.contents ?? operations.zero(MeasurePartwise.schema.contents);
   }
   getNumber(): string {
     return this.attributes['number'];
@@ -38585,25 +38585,25 @@ export class Measure implements XMLElement<'measure', MeasureAttributes, Measure
   }
 }
 
-export type PartAttributes = { id: string };
+export type PartPartwiseAttributes = { id: string };
 
-export type PartContents = [Array<Measure>];
+export type PartPartwiseContents = [Array<MeasurePartwise>];
 
-export class Part implements XMLElement<'part', PartAttributes, PartContents> {
+export class PartPartwise implements XMLElement<'part', PartPartwiseAttributes, PartPartwiseContents> {
   static readonly schema = {
     name: 'part',
     attributes: { id: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-    contents: [{ type: 'label', label: 'measures', value: { type: 'oneOrMore', value: Measure } }],
+    contents: [{ type: 'label', label: 'measures', value: { type: 'oneOrMore', value: MeasurePartwise } }],
   } as const;
 
-  readonly schema = Part.schema;
+  readonly schema = PartPartwise.schema;
 
-  attributes: PartAttributes;
-  contents: PartContents;
+  attributes: PartPartwiseAttributes;
+  contents: PartPartwiseContents;
 
-  constructor(opts?: { attributes?: Partial<PartAttributes>; contents?: PartContents }) {
-    this.attributes = operations.merge(opts?.attributes, Part.schema);
-    this.contents = opts?.contents ?? operations.zero(Part.schema.contents);
+  constructor(opts?: { attributes?: Partial<PartPartwiseAttributes>; contents?: PartPartwiseContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartPartwise.schema);
+    this.contents = opts?.contents ?? operations.zero(PartPartwise.schema.contents);
   }
   getId(): string {
     return this.attributes['id'];
@@ -38611,10 +38611,10 @@ export class Part implements XMLElement<'part', PartAttributes, PartContents> {
   setId(id: string): void {
     this.attributes['id'] = id;
   }
-  getMeasures(): Array<Measure> {
+  getMeasures(): Array<MeasurePartwise> {
     return this.contents[0];
   }
-  setMeasures(measures: Array<Measure>): void {
+  setMeasures(measures: Array<MeasurePartwise>): void {
     this.contents[0] = measures;
   }
 }
@@ -38629,7 +38629,7 @@ export type ScorePartwiseContents = [
   Defaults | null,
   Array<Credit>,
   PartList,
-  Array<Part>
+  Array<PartPartwise>
 ];
 
 export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwiseAttributes, ScorePartwiseContents> {
@@ -38644,7 +38644,7 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
       { type: 'optional', value: Defaults },
       { type: 'label', label: 'credits', value: { type: 'zeroOrMore', value: Credit } },
       { type: 'required', value: PartList },
-      { type: 'label', label: 'parts', value: { type: 'oneOrMore', value: Part } },
+      { type: 'label', label: 'parts-partwise', value: { type: 'oneOrMore', value: PartPartwise } },
     ],
   } as const;
 
@@ -38705,11 +38705,248 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
   setPartList(partList: PartList): void {
     this.contents[6] = partList;
   }
-  getParts(): Array<Part> {
+  getPartsPartwise(): Array<PartPartwise> {
     return this.contents[7];
   }
-  setParts(parts: Array<Part>): void {
-    this.contents[7] = parts;
+  setPartsPartwise(partsPartwise: Array<PartPartwise>): void {
+    this.contents[7] = partsPartwise;
+  }
+}
+
+export type PartTimewiseAttributes = { id: string };
+
+export type PartTimewiseContents = [
+  Array<
+    | Note
+    | Backup
+    | Forward
+    | Direction
+    | Attributes
+    | Harmony
+    | FiguredBass
+    | Print
+    | Sound
+    | Listening
+    | Barline
+    | Grouping
+    | Link
+    | Bookmark
+  >
+];
+
+export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, PartTimewiseContents> {
+  static readonly schema = {
+    name: 'part',
+    attributes: { id: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+    contents: [
+      {
+        type: 'label',
+        label: 'values',
+        value: {
+          type: 'zeroOrMore',
+          value: {
+            type: 'choices',
+            choices: [
+              Note,
+              Backup,
+              Forward,
+              Direction,
+              Attributes,
+              Harmony,
+              FiguredBass,
+              Print,
+              Sound,
+              Listening,
+              Barline,
+              Grouping,
+              Link,
+              Bookmark,
+            ],
+          },
+        },
+      },
+    ],
+  } as const;
+  static isNote(value: any): value is Note {
+    return operations.validate(value, Note);
+  }
+  static isBackup(value: any): value is Backup {
+    return operations.validate(value, Backup);
+  }
+  static isForward(value: any): value is Forward {
+    return operations.validate(value, Forward);
+  }
+  static isDirection(value: any): value is Direction {
+    return operations.validate(value, Direction);
+  }
+  static isAttributes(value: any): value is Attributes {
+    return operations.validate(value, Attributes);
+  }
+  static isHarmony(value: any): value is Harmony {
+    return operations.validate(value, Harmony);
+  }
+  static isFiguredBass(value: any): value is FiguredBass {
+    return operations.validate(value, FiguredBass);
+  }
+  static isPrint(value: any): value is Print {
+    return operations.validate(value, Print);
+  }
+  static isSound(value: any): value is Sound {
+    return operations.validate(value, Sound);
+  }
+  static isListening(value: any): value is Listening {
+    return operations.validate(value, Listening);
+  }
+  static isBarline(value: any): value is Barline {
+    return operations.validate(value, Barline);
+  }
+  static isGrouping(value: any): value is Grouping {
+    return operations.validate(value, Grouping);
+  }
+  static isLink(value: any): value is Link {
+    return operations.validate(value, Link);
+  }
+  static isBookmark(value: any): value is Bookmark {
+    return operations.validate(value, Bookmark);
+  }
+
+  readonly schema = PartTimewise.schema;
+
+  attributes: PartTimewiseAttributes;
+  contents: PartTimewiseContents;
+
+  constructor(opts?: { attributes?: Partial<PartTimewiseAttributes>; contents?: PartTimewiseContents }) {
+    this.attributes = operations.merge(opts?.attributes, PartTimewise.schema);
+    this.contents = opts?.contents ?? operations.zero(PartTimewise.schema.contents);
+  }
+  getId(): string {
+    return this.attributes['id'];
+  }
+  setId(id: string): void {
+    this.attributes['id'] = id;
+  }
+  getValues(): Array<
+    | Note
+    | Backup
+    | Forward
+    | Direction
+    | Attributes
+    | Harmony
+    | FiguredBass
+    | Print
+    | Sound
+    | Listening
+    | Barline
+    | Grouping
+    | Link
+    | Bookmark
+  > {
+    return this.contents[0];
+  }
+  setValues(
+    values: Array<
+      | Note
+      | Backup
+      | Forward
+      | Direction
+      | Attributes
+      | Harmony
+      | FiguredBass
+      | Print
+      | Sound
+      | Listening
+      | Barline
+      | Grouping
+      | Link
+      | Bookmark
+    >
+  ): void {
+    this.contents[0] = values;
+  }
+}
+
+export type MeasureTimewiseAttributes = {
+  number: string;
+  id: string | null;
+  implicit: 'yes' | 'no' | null;
+  'non-controller': 'yes' | 'no' | null;
+  text: Exclude<'yes' | string, ''> | null;
+  width: number | null;
+};
+
+export type MeasureTimewiseContents = [Array<PartTimewise>];
+
+export class MeasureTimewise implements XMLElement<'measure', MeasureTimewiseAttributes, MeasureTimewiseContents> {
+  static readonly schema = {
+    name: 'measure',
+    attributes: {
+      number: { type: 'required', value: { type: 'string' } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      implicit: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
+      'non-controller': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
+      text: {
+        type: 'optional',
+        value: {
+          type: 'not',
+          include: { type: 'choices', choices: ['yes', { type: 'string' }] },
+          exclude: { type: 'constant', value: '' },
+        },
+      },
+      width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+    },
+    contents: [{ type: 'label', label: 'parts-timewise', value: { type: 'oneOrMore', value: PartTimewise } }],
+  } as const;
+
+  readonly schema = MeasureTimewise.schema;
+
+  attributes: MeasureTimewiseAttributes;
+  contents: MeasureTimewiseContents;
+
+  constructor(opts?: { attributes?: Partial<MeasureTimewiseAttributes>; contents?: MeasureTimewiseContents }) {
+    this.attributes = operations.merge(opts?.attributes, MeasureTimewise.schema);
+    this.contents = opts?.contents ?? operations.zero(MeasureTimewise.schema.contents);
+  }
+  getNumber(): string {
+    return this.attributes['number'];
+  }
+  setNumber(number: string): void {
+    this.attributes['number'] = number;
+  }
+  getId(): string | null {
+    return this.attributes['id'];
+  }
+  setId(id: string | null): void {
+    this.attributes['id'] = id;
+  }
+  getImplicit(): 'yes' | 'no' | null {
+    return this.attributes['implicit'];
+  }
+  setImplicit(implicit: 'yes' | 'no' | null): void {
+    this.attributes['implicit'] = implicit;
+  }
+  getNonController(): 'yes' | 'no' | null {
+    return this.attributes['non-controller'];
+  }
+  setNonController(nonController: 'yes' | 'no' | null): void {
+    this.attributes['non-controller'] = nonController;
+  }
+  getText(): Exclude<'yes' | string, ''> | null {
+    return this.attributes['text'];
+  }
+  setText(text: Exclude<'yes' | string, ''> | null): void {
+    this.attributes['text'] = text;
+  }
+  getWidth(): number | null {
+    return this.attributes['width'];
+  }
+  setWidth(width: number | null): void {
+    this.attributes['width'] = width;
+  }
+  getPartsTimewise(): Array<PartTimewise> {
+    return this.contents[0];
+  }
+  setPartsTimewise(partsTimewise: Array<PartTimewise>): void {
+    this.contents[0] = partsTimewise;
   }
 }
 
@@ -38723,7 +38960,7 @@ export type ScoreTimewiseContents = [
   Defaults | null,
   Array<Credit>,
   PartList,
-  Array<Measure>
+  Array<MeasureTimewise>
 ];
 
 export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewiseAttributes, ScoreTimewiseContents> {
@@ -38738,7 +38975,7 @@ export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewise
       { type: 'optional', value: Defaults },
       { type: 'label', label: 'credits', value: { type: 'zeroOrMore', value: Credit } },
       { type: 'required', value: PartList },
-      { type: 'label', label: 'measures', value: { type: 'oneOrMore', value: Measure } },
+      { type: 'label', label: 'measures-timewise', value: { type: 'oneOrMore', value: MeasureTimewise } },
     ],
   } as const;
 
@@ -38799,10 +39036,10 @@ export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewise
   setPartList(partList: PartList): void {
     this.contents[6] = partList;
   }
-  getMeasures(): Array<Measure> {
+  getMeasuresTimewise(): Array<MeasureTimewise> {
     return this.contents[7];
   }
-  setMeasures(measures: Array<Measure>): void {
-    this.contents[7] = measures;
+  setMeasuresTimewise(measuresTimewise: Array<MeasureTimewise>): void {
+    this.contents[7] = measuresTimewise;
   }
 }
