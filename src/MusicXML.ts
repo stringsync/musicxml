@@ -8,9 +8,9 @@ import * as xml from './lib/xml';
 /**
  * The allowed root elements for {@link MusicXML} objects.
  */
-export type Root = elements.ScorePartwise | elements.ScoreTimewise;
+export type MusicXMLRoot = elements.ScorePartwise | elements.ScoreTimewise;
 
-type MusicXMLOpts<T extends Root> = {
+type MusicXMLOpts<T extends MusicXMLRoot> = {
   root: T;
   index: number;
   nodes: raw.RawXMLNode[];
@@ -22,7 +22,7 @@ type MusicXMLOpts<T extends Root> = {
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/}
  */
-export class MusicXML<T extends Root> {
+export class MusicXML<T extends MusicXMLRoot> {
   /**
    * Parses an XML string into a {@link MusicXML} object.
    *
@@ -33,7 +33,7 @@ export class MusicXML<T extends Root> {
    * @param {string} xmlStr an XML document as a string
    * @returns {MusicXML} a {@link MusicXML} object
    */
-  static parse(xmlStr: string): MusicXML<Root> {
+  static parse(xmlStr: string): MusicXML<MusicXMLRoot> {
     const descriptor = schema.t.choices(elements.ScorePartwise, elements.ScoreTimewise);
     const { declaration, nodes } = raw.parse(xmlStr);
     const resolutions = nodes.map((node) => xml.parse([node], descriptor));
