@@ -18,7 +18,7 @@ describe('MusicXML', () => {
     });
 
     it('preserves values of a valid MusicXML document', () => {
-      const xmlStr = examples.loadExample(EXAMPLES.VALID1);
+      const xmlStr = examples.loadExample(EXAMPLES.HELLO_WORLD);
 
       const musicXml = MusicXML.parse(xmlStr);
       expect(musicXml.getRoot()).toBeInstanceOf(elements.ScorePartwise);
@@ -140,8 +140,7 @@ describe('MusicXML', () => {
     });
 
     it('replaces invalid values with zero values', () => {
-      // See musicxml/src/examples/invalid1.xml for invalid value locations.
-      const xmlStr = examples.loadExample(EXAMPLES.INVALID1);
+      const xmlStr = examples.loadExample(EXAMPLES.PARTIALLY_INVALID);
       const musicXml = MusicXML.parse(xmlStr);
 
       const scorePartwise = musicXml.getRoot();
