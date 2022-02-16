@@ -12,7 +12,7 @@ describe('MusicXML', () => {
   });
 
   describe('parse', () => {
-    it.each(EXAMPLE_SUITES.VALID)('parses valid MusicXML documents', (example) => {
+    it.each(EXAMPLE_SUITES.VALID)('parses valid MusicXML documents: %s', (example) => {
       const xmlStr = examples.loadExample(example);
       expect(() => MusicXML.parse(xmlStr)).not.toThrow();
     });

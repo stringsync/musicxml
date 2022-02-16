@@ -18,7 +18,7 @@ export const noteTypeValue = () => {
         '64th',
         '32nd',
         '16th',
-        'eigth',
+        'eighth',
         'half',
         'quarter',
         'whole',

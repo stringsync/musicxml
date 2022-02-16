@@ -43,5 +43,5 @@ export const Stem = schema(
      */
     ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
   },
-  [] as const
+  [t.label({ label: 'stem-value', value: dataTypes.stemValue() })] as const
 );

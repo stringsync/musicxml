@@ -61,6 +61,11 @@ export const PullOff = schema(
     ['font-weight']: t.optional(dataTypes.fontWeight()),
 
     /**
+     * Indicates if this is the start or stop of the pull-off. The default value is 1.
+     */
+    number: t.optional(dataTypes.numberLevel()),
+
+    /**
      * Indicates whether something is above or below another element, such as a note or a notation.
      */
     placement: t.optional(dataTypes.aboveBelow()),
@@ -77,5 +82,5 @@ export const PullOff = schema(
      */
     ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
   },
-  [] as const
+  [t.string()] as const
 );

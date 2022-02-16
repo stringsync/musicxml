@@ -955,10 +955,14 @@ export class LeftMargin implements XMLElement<'left-margin', LeftMarginAttribute
 
 export type RightMarginAttributes = Record<string, unknown>;
 
-export type RightMarginContents = [];
+export type RightMarginContents = [number];
 
 export class RightMargin implements XMLElement<'right-margin', RightMarginAttributes, RightMarginContents> {
-  static readonly schema = { name: 'right-margin', attributes: {}, contents: [] } as const;
+  static readonly schema = {
+    name: 'right-margin',
+    attributes: {},
+    contents: [{ type: 'label', label: 'right-margin-value', value: { type: 'float', min: -Infinity, max: Infinity } }],
+  } as const;
 
   readonly schema = RightMargin.schema;
 
@@ -968,6 +972,13 @@ export class RightMargin implements XMLElement<'right-margin', RightMarginAttrib
   constructor(opts?: { attributes?: Partial<RightMarginAttributes>; contents?: RightMarginContents }) {
     this.attributes = operations.merge(opts?.attributes, RightMargin.schema);
     this.contents = opts?.contents ?? operations.zero(RightMargin.schema.contents);
+  }
+
+  getRightMarginValue(): number {
+    return this.contents[0];
+  }
+  setRightMarginValue(rightMarginValue: number): void {
+    this.contents[0] = rightMarginValue;
   }
 }
 
@@ -1302,6 +1313,75 @@ export class SystemLayout implements XMLElement<'system-layout', SystemLayoutAtt
   }
 }
 
+export type StaffDistanceAttributes = Record<string, unknown>;
+
+export type StaffDistanceContents = [number];
+
+export class StaffDistance implements XMLElement<'staff-distance', StaffDistanceAttributes, StaffDistanceContents> {
+  static readonly schema = {
+    name: 'staff-distance',
+    attributes: {},
+    contents: [
+      {
+        type: 'label',
+        label: 'staff-distance',
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
+      },
+    ],
+  } as const;
+
+  readonly schema = StaffDistance.schema;
+
+  attributes: StaffDistanceAttributes;
+  contents: StaffDistanceContents;
+
+  constructor(opts?: { attributes?: Partial<StaffDistanceAttributes>; contents?: StaffDistanceContents }) {
+    this.attributes = operations.merge(opts?.attributes, StaffDistance.schema);
+    this.contents = opts?.contents ?? operations.zero(StaffDistance.schema.contents);
+  }
+
+  getStaffDistance(): number {
+    return this.contents[0];
+  }
+  setStaffDistance(staffDistance: number): void {
+    this.contents[0] = staffDistance;
+  }
+}
+
+export type StaffLayoutAttributes = { number: number | null };
+
+export type StaffLayoutContents = [StaffDistance | null];
+
+export class StaffLayout implements XMLElement<'staff-layout', StaffLayoutAttributes, StaffLayoutContents> {
+  static readonly schema = {
+    name: 'staff-layout',
+    attributes: { number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } } },
+    contents: [{ type: 'optional', value: StaffDistance }],
+  } as const;
+
+  readonly schema = StaffLayout.schema;
+
+  attributes: StaffLayoutAttributes;
+  contents: StaffLayoutContents;
+
+  constructor(opts?: { attributes?: Partial<StaffLayoutAttributes>; contents?: StaffLayoutContents }) {
+    this.attributes = operations.merge(opts?.attributes, StaffLayout.schema);
+    this.contents = opts?.contents ?? operations.zero(StaffLayout.schema.contents);
+  }
+  getNumber(): number | null {
+    return this.attributes['number'];
+  }
+  setNumber(number: number | null): void {
+    this.attributes['number'] = number;
+  }
+  getStaffDistance(): StaffDistance | null {
+    return this.contents[0];
+  }
+  setStaffDistance(staffDistance: StaffDistance | null): void {
+    this.contents[0] = staffDistance;
+  }
+}
+
 export type LineWidthAttributes = {
   type:
     | 'beam'
@@ -1433,7 +1513,7 @@ export class LineWidth implements XMLElement<'line-width', LineWidthAttributes, 
 
 export type NoteSizeAttributes = { type: 'cue' | 'grace' | 'grace-cue' | 'large' };
 
-export type NoteSizeContents = [];
+export type NoteSizeContents = [number];
 
 export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, NoteSizeContents> {
   static readonly schema = {
@@ -1441,7 +1521,7 @@ export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, Not
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['cue', 'grace', 'grace-cue', 'large'] } },
     },
-    contents: [],
+    contents: [{ type: 'label', label: 'note-size', value: { type: 'int', min: 0, max: Infinity } }],
   } as const;
 
   readonly schema = NoteSize.schema;
@@ -1458,6 +1538,12 @@ export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, Not
   }
   setType(type: 'cue' | 'grace' | 'grace-cue' | 'large'): void {
     this.attributes['type'] = type;
+  }
+  getNoteSize(): number {
+    return this.contents[0];
+  }
+  setNoteSize(noteSize: number): void {
+    this.contents[0] = noteSize;
   }
 }
 
@@ -1965,6 +2051,7 @@ export type DefaultsContents = [
   ConcertScore | null,
   PageLayout | null,
   SystemLayout | null,
+  Array<StaffLayout>,
   Appearance | null,
   MusicFont | null,
   WordFont | null,
@@ -1981,6 +2068,7 @@ export class Defaults implements XMLElement<'defaults', DefaultsAttributes, Defa
       { type: 'optional', value: ConcertScore },
       { type: 'optional', value: PageLayout },
       { type: 'optional', value: SystemLayout },
+      { type: 'label', label: 'staff-layouts', value: { type: 'zeroOrMore', value: StaffLayout } },
       { type: 'optional', value: Appearance },
       { type: 'optional', value: MusicFont },
       { type: 'optional', value: WordFont },
@@ -2023,35 +2111,41 @@ export class Defaults implements XMLElement<'defaults', DefaultsAttributes, Defa
   setSystemLayout(systemLayout: SystemLayout | null): void {
     this.contents[3] = systemLayout;
   }
-  getAppearance(): Appearance | null {
+  getStaffLayouts(): Array<StaffLayout> {
     return this.contents[4];
   }
-  setAppearance(appearance: Appearance | null): void {
-    this.contents[4] = appearance;
+  setStaffLayouts(staffLayouts: Array<StaffLayout>): void {
+    this.contents[4] = staffLayouts;
   }
-  getMusicFont(): MusicFont | null {
+  getAppearance(): Appearance | null {
     return this.contents[5];
   }
-  setMusicFont(musicFont: MusicFont | null): void {
-    this.contents[5] = musicFont;
+  setAppearance(appearance: Appearance | null): void {
+    this.contents[5] = appearance;
   }
-  getWordFont(): WordFont | null {
+  getMusicFont(): MusicFont | null {
     return this.contents[6];
   }
-  setWordFont(wordFont: WordFont | null): void {
-    this.contents[6] = wordFont;
+  setMusicFont(musicFont: MusicFont | null): void {
+    this.contents[6] = musicFont;
   }
-  getLyricFonts(): Array<LyricFont> {
+  getWordFont(): WordFont | null {
     return this.contents[7];
   }
-  setLyricFonts(lyricFonts: Array<LyricFont>): void {
-    this.contents[7] = lyricFonts;
+  setWordFont(wordFont: WordFont | null): void {
+    this.contents[7] = wordFont;
   }
-  getLyricLanguages(): Array<LyricLanguage> {
+  getLyricFonts(): Array<LyricFont> {
     return this.contents[8];
   }
+  setLyricFonts(lyricFonts: Array<LyricFont>): void {
+    this.contents[8] = lyricFonts;
+  }
+  getLyricLanguages(): Array<LyricLanguage> {
+    return this.contents[9];
+  }
   setLyricLanguages(lyricLanguages: Array<LyricLanguage>): void {
-    this.contents[8] = lyricLanguages;
+    this.contents[9] = lyricLanguages;
   }
 }
 
@@ -6781,7 +6875,7 @@ export type TypeContents = [
   | '64th'
   | '32nd'
   | '16th'
-  | 'eigth'
+  | 'eighth'
   | 'half'
   | 'quarter'
   | 'whole'
@@ -6813,7 +6907,7 @@ export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
               '64th',
               '32nd',
               '16th',
-              'eigth',
+              'eighth',
               'half',
               'quarter',
               'whole',
@@ -6851,7 +6945,7 @@ export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
     | '64th'
     | '32nd'
     | '16th'
-    | 'eigth'
+    | 'eighth'
     | 'half'
     | 'quarter'
     | 'whole'
@@ -6870,7 +6964,7 @@ export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
       | '64th'
       | '32nd'
       | '16th'
-      | 'eigth'
+      | 'eighth'
       | 'half'
       | 'quarter'
       | 'whole'
@@ -7442,7 +7536,7 @@ export type NormalTypeContents = [
   | '64th'
   | '32nd'
   | '16th'
-  | 'eigth'
+  | 'eighth'
   | 'half'
   | 'quarter'
   | 'whole'
@@ -7472,7 +7566,7 @@ export class NormalType implements XMLElement<'normal-type', NormalTypeAttribute
               '64th',
               '32nd',
               '16th',
-              'eigth',
+              'eighth',
               'half',
               'quarter',
               'whole',
@@ -7505,7 +7599,7 @@ export class NormalType implements XMLElement<'normal-type', NormalTypeAttribute
     | '64th'
     | '32nd'
     | '16th'
-    | 'eigth'
+    | 'eighth'
     | 'half'
     | 'quarter'
     | 'whole'
@@ -7524,7 +7618,7 @@ export class NormalType implements XMLElement<'normal-type', NormalTypeAttribute
       | '64th'
       | '32nd'
       | '16th'
-      | 'eigth'
+      | 'eighth'
       | 'half'
       | 'quarter'
       | 'whole'
@@ -7619,7 +7713,7 @@ export type StemAttributes = {
   'relative-y': number | null;
 };
 
-export type StemContents = [];
+export type StemContents = ['none' | 'down' | 'up' | 'double'];
 
 export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
   static readonly schema = {
@@ -7647,7 +7741,9 @@ export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
         value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
-    contents: [],
+    contents: [
+      { type: 'label', label: 'stem-value', value: { type: 'choices', choices: ['none', 'down', 'up', 'double'] } },
+    ],
   } as const;
 
   readonly schema = Stem.schema;
@@ -7688,6 +7784,12 @@ export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
   }
   setRelativeY(relativeY: number | null): void {
     this.attributes['relative-y'] = relativeY;
+  }
+  getStemValue(): 'none' | 'down' | 'up' | 'double' {
+    return this.contents[0];
+  }
+  setStemValue(stemValue: 'none' | 'down' | 'up' | 'double'): void {
+    this.contents[0] = stemValue;
   }
 }
 
@@ -14241,7 +14343,7 @@ export type StringAttributes = {
   'relative-y': number | null;
 };
 
-export type StringContents = [];
+export type StringContents = [number];
 
 export class String implements XMLElement<'string', StringAttributes, StringContents> {
   static readonly schema = {
@@ -14283,7 +14385,7 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
         value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
-    contents: [],
+    contents: [{ type: 'label', label: 'string-number', value: { type: 'int', min: 1, max: Infinity } }],
   } as const;
 
   readonly schema = String.schema;
@@ -14357,6 +14459,12 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
   setRelativeY(relativeY: number | null): void {
     this.attributes['relative-y'] = relativeY;
   }
+  getStringNumber(): number {
+    return this.contents[0];
+  }
+  setStringNumber(stringNumber: number): void {
+    this.contents[0] = stringNumber;
+  }
 }
 
 export type HammerOnAttributes = {
@@ -14368,6 +14476,7 @@ export type HammerOnAttributes = {
   'font-size': 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null;
   'font-style': 'normal' | 'italic' | null;
   'font-weight': 'normal' | 'bold' | null;
+  number: number | null;
   placement: 'above' | 'below' | null;
   'relative-x': number | null;
   'relative-y': number | null;
@@ -14404,6 +14513,7 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
+      number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'relative-x': {
         type: 'label',
@@ -14478,6 +14588,12 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
   setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
     this.attributes['font-weight'] = fontWeight;
   }
+  getNumber(): number | null {
+    return this.attributes['number'];
+  }
+  setNumber(number: number | null): void {
+    this.attributes['number'] = number;
+  }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
@@ -14513,12 +14629,13 @@ export type PullOffAttributes = {
   'font-size': 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null;
   'font-style': 'normal' | 'italic' | null;
   'font-weight': 'normal' | 'bold' | null;
+  number: number | null;
   placement: 'above' | 'below' | null;
   'relative-x': number | null;
   'relative-y': number | null;
 };
 
-export type PullOffContents = [];
+export type PullOffContents = [string];
 
 export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOffContents> {
   static readonly schema = {
@@ -14549,6 +14666,7 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
       },
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
+      number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'relative-x': {
         type: 'label',
@@ -14561,7 +14679,7 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
         value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
-    contents: [],
+    contents: [{ type: 'string' }],
   } as const;
 
   readonly schema = PullOff.schema;
@@ -14623,6 +14741,12 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
   setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
     this.attributes['font-weight'] = fontWeight;
   }
+  getNumber(): number | null {
+    return this.attributes['number'];
+  }
+  setNumber(number: number | null): void {
+    this.attributes['number'] = number;
+  }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
@@ -14640,6 +14764,12 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
   }
   setRelativeY(relativeY: number | null): void {
     this.attributes['relative-y'] = relativeY;
+  }
+  getText(): string {
+    return this.contents[0];
+  }
+  setText(text: string): void {
+    this.contents[0] = text;
   }
 }
 
@@ -25635,7 +25765,7 @@ export type BeatUnitContents = [
   | '64th'
   | '32nd'
   | '16th'
-  | 'eigth'
+  | 'eighth'
   | 'half'
   | 'quarter'
   | 'whole'
@@ -25665,7 +25795,7 @@ export class BeatUnit implements XMLElement<'beat-unit', BeatUnitAttributes, Bea
               '64th',
               '32nd',
               '16th',
-              'eigth',
+              'eighth',
               'half',
               'quarter',
               'whole',
@@ -25698,7 +25828,7 @@ export class BeatUnit implements XMLElement<'beat-unit', BeatUnitAttributes, Bea
     | '64th'
     | '32nd'
     | '16th'
-    | 'eigth'
+    | 'eighth'
     | 'half'
     | 'quarter'
     | 'whole'
@@ -25717,7 +25847,7 @@ export class BeatUnit implements XMLElement<'beat-unit', BeatUnitAttributes, Bea
       | '64th'
       | '32nd'
       | '16th'
-      | 'eigth'
+      | 'eighth'
       | 'half'
       | 'quarter'
       | 'whole'
@@ -25889,7 +26019,7 @@ export type MetronomeTypeContents = [
   | '64th'
   | '32nd'
   | '16th'
-  | 'eigth'
+  | 'eighth'
   | 'half'
   | 'quarter'
   | 'whole'
@@ -25919,7 +26049,7 @@ export class MetronomeType implements XMLElement<'metronome-type', MetronomeType
               '64th',
               '32nd',
               '16th',
-              'eigth',
+              'eighth',
               'half',
               'quarter',
               'whole',
@@ -25952,7 +26082,7 @@ export class MetronomeType implements XMLElement<'metronome-type', MetronomeType
     | '64th'
     | '32nd'
     | '16th'
-    | 'eigth'
+    | 'eighth'
     | 'half'
     | 'quarter'
     | 'whole'
@@ -25971,7 +26101,7 @@ export class MetronomeType implements XMLElement<'metronome-type', MetronomeType
       | '64th'
       | '32nd'
       | '16th'
-      | 'eigth'
+      | 'eighth'
       | 'half'
       | 'quarter'
       | 'whole'
@@ -31667,14 +31797,71 @@ export class SenzaMisura implements XMLElement<'senza-misura', SenzaMisuraAttrib
 
 export type TimeSignature = [Array<[Beats, BeatType]>, Interchangeable | null];
 
-export type TimeAttributes = Record<string, unknown>;
+export type TimeAttributes = {
+  color: string | null;
+  'default-x': number | null;
+  'default-y': number | null;
+  'font-family': string | null;
+  'font-size': 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null;
+  'font-style': 'normal' | 'italic' | null;
+  'font-weight': 'normal' | 'bold' | null;
+  halign: 'left' | 'center' | 'right' | null;
+  id: string | null;
+  number: number | null;
+  'print-object': 'yes' | 'no' | null;
+  'relative-x': number | null;
+  'relative-y': number | null;
+  separator: 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null;
+  symbol: 'normal' | 'common' | 'cut' | 'dotted-note' | 'note' | 'single-number' | null;
+  valign: 'top' | 'middle' | 'bottom' | 'baseline' | null;
+};
 
 export type TimeContents = [TimeSignature | SenzaMisura];
 
 export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
   static readonly schema = {
     name: 'time',
-    attributes: {},
+    attributes: {
+      color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
+      'default-x': {
+        type: 'label',
+        label: 'default-x',
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      },
+      'default-y': {
+        type: 'label',
+        label: 'default-y',
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      },
+      'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
+      'font-size': {
+        type: 'optional',
+        value: {
+          type: 'choices',
+          choices: [
+            { type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
+            { type: 'float', min: -Infinity, max: Infinity },
+          ],
+        },
+      },
+      'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
+      'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
+      halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
+      'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
+      'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      separator: {
+        type: 'optional',
+        value: { type: 'choices', choices: ['none', 'adjacent', 'diagonal', 'horizontal', 'vertical'] },
+      },
+      symbol: {
+        type: 'optional',
+        value: { type: 'choices', choices: ['normal', 'common', 'cut', 'dotted-note', 'note', 'single-number'] },
+      },
+      valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
+    },
     contents: [
       {
         type: 'label',
@@ -31718,7 +31905,104 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
     this.attributes = operations.merge(opts?.attributes, Time.schema);
     this.contents = opts?.contents ?? operations.zero(Time.schema.contents);
   }
-
+  getColor(): string | null {
+    return this.attributes['color'];
+  }
+  setColor(color: string | null): void {
+    this.attributes['color'] = color;
+  }
+  getDefaultX(): number | null {
+    return this.attributes['default-x'];
+  }
+  setDefaultX(defaultX: number | null): void {
+    this.attributes['default-x'] = defaultX;
+  }
+  getDefaultY(): number | null {
+    return this.attributes['default-y'];
+  }
+  setDefaultY(defaultY: number | null): void {
+    this.attributes['default-y'] = defaultY;
+  }
+  getFontFamily(): string | null {
+    return this.attributes['font-family'];
+  }
+  setFontFamily(fontFamily: string | null): void {
+    this.attributes['font-family'] = fontFamily;
+  }
+  getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
+    return this.attributes['font-size'];
+  }
+  setFontSize(
+    fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
+  ): void {
+    this.attributes['font-size'] = fontSize;
+  }
+  getFontStyle(): 'normal' | 'italic' | null {
+    return this.attributes['font-style'];
+  }
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+    this.attributes['font-style'] = fontStyle;
+  }
+  getFontWeight(): 'normal' | 'bold' | null {
+    return this.attributes['font-weight'];
+  }
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+    this.attributes['font-weight'] = fontWeight;
+  }
+  getHalign(): 'left' | 'center' | 'right' | null {
+    return this.attributes['halign'];
+  }
+  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+    this.attributes['halign'] = halign;
+  }
+  getId(): string | null {
+    return this.attributes['id'];
+  }
+  setId(id: string | null): void {
+    this.attributes['id'] = id;
+  }
+  getNumber(): number | null {
+    return this.attributes['number'];
+  }
+  setNumber(number: number | null): void {
+    this.attributes['number'] = number;
+  }
+  getPrintObject(): 'yes' | 'no' | null {
+    return this.attributes['print-object'];
+  }
+  setPrintObject(printObject: 'yes' | 'no' | null): void {
+    this.attributes['print-object'] = printObject;
+  }
+  getRelativeX(): number | null {
+    return this.attributes['relative-x'];
+  }
+  setRelativeX(relativeX: number | null): void {
+    this.attributes['relative-x'] = relativeX;
+  }
+  getRelativeY(): number | null {
+    return this.attributes['relative-y'];
+  }
+  setRelativeY(relativeY: number | null): void {
+    this.attributes['relative-y'] = relativeY;
+  }
+  getSeparator(): 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null {
+    return this.attributes['separator'];
+  }
+  setSeparator(separator: 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null): void {
+    this.attributes['separator'] = separator;
+  }
+  getSymbol(): 'normal' | 'common' | 'cut' | 'dotted-note' | 'note' | 'single-number' | null {
+    return this.attributes['symbol'];
+  }
+  setSymbol(symbol: 'normal' | 'common' | 'cut' | 'dotted-note' | 'note' | 'single-number' | null): void {
+    this.attributes['symbol'] = symbol;
+  }
+  getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
+    return this.attributes['valign'];
+  }
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+    this.attributes['valign'] = valign;
+  }
   getValue(): TimeSignature | SenzaMisura {
     return this.contents[0];
   }
@@ -33183,7 +33467,7 @@ export type SlashTypeContents = [
   | '64th'
   | '32nd'
   | '16th'
-  | 'eigth'
+  | 'eighth'
   | 'half'
   | 'quarter'
   | 'whole'
@@ -33213,7 +33497,7 @@ export class SlashType implements XMLElement<'slash-type', SlashTypeAttributes, 
               '64th',
               '32nd',
               '16th',
-              'eigth',
+              'eighth',
               'half',
               'quarter',
               'whole',
@@ -33246,7 +33530,7 @@ export class SlashType implements XMLElement<'slash-type', SlashTypeAttributes, 
     | '64th'
     | '32nd'
     | '16th'
-    | 'eigth'
+    | 'eighth'
     | 'half'
     | 'quarter'
     | 'whole'
@@ -33265,7 +33549,7 @@ export class SlashType implements XMLElement<'slash-type', SlashTypeAttributes, 
       | '64th'
       | '32nd'
       | '16th'
-      | 'eigth'
+      | 'eighth'
       | 'half'
       | 'quarter'
       | 'whole'
@@ -37392,75 +37676,6 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
   }
   setLevel(level: Level | null): void {
     this.contents[3] = level;
-  }
-}
-
-export type StaffDistanceAttributes = Record<string, unknown>;
-
-export type StaffDistanceContents = [number];
-
-export class StaffDistance implements XMLElement<'staff-distance', StaffDistanceAttributes, StaffDistanceContents> {
-  static readonly schema = {
-    name: 'staff-distance',
-    attributes: {},
-    contents: [
-      {
-        type: 'label',
-        label: 'staff-distance',
-        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-      },
-    ],
-  } as const;
-
-  readonly schema = StaffDistance.schema;
-
-  attributes: StaffDistanceAttributes;
-  contents: StaffDistanceContents;
-
-  constructor(opts?: { attributes?: Partial<StaffDistanceAttributes>; contents?: StaffDistanceContents }) {
-    this.attributes = operations.merge(opts?.attributes, StaffDistance.schema);
-    this.contents = opts?.contents ?? operations.zero(StaffDistance.schema.contents);
-  }
-
-  getStaffDistance(): number {
-    return this.contents[0];
-  }
-  setStaffDistance(staffDistance: number): void {
-    this.contents[0] = staffDistance;
-  }
-}
-
-export type StaffLayoutAttributes = { number: number | null };
-
-export type StaffLayoutContents = [StaffDistance | null];
-
-export class StaffLayout implements XMLElement<'staff-layout', StaffLayoutAttributes, StaffLayoutContents> {
-  static readonly schema = {
-    name: 'staff-layout',
-    attributes: { number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } } },
-    contents: [{ type: 'optional', value: StaffDistance }],
-  } as const;
-
-  readonly schema = StaffLayout.schema;
-
-  attributes: StaffLayoutAttributes;
-  contents: StaffLayoutContents;
-
-  constructor(opts?: { attributes?: Partial<StaffLayoutAttributes>; contents?: StaffLayoutContents }) {
-    this.attributes = operations.merge(opts?.attributes, StaffLayout.schema);
-    this.contents = opts?.contents ?? operations.zero(StaffLayout.schema.contents);
-  }
-  getNumber(): number | null {
-    return this.attributes['number'];
-  }
-  setNumber(number: number | null): void {
-    this.attributes['number'] = number;
-  }
-  getStaffDistance(): StaffDistance | null {
-    return this.contents[0];
-  }
-  setStaffDistance(staffDistance: StaffDistance | null): void {
-    this.contents[0] = staffDistance;
   }
 }
 

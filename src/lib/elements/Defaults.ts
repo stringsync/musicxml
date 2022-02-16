@@ -6,6 +6,7 @@ import { LyricLanguage } from './LyricLanguage';
 import { MusicFont } from './MusicFont';
 import { PageLayout } from './PageLayout';
 import { Scaling } from './Scaling';
+import { StaffLayout } from './StaffLayout';
 import { SystemLayout } from './SystemLayout';
 import { WordFont } from './WordFont';
 
@@ -25,6 +26,7 @@ export const Defaults = schema('defaults', {}, [
   t.optional(ConcertScore),
   t.optional(PageLayout),
   t.optional(SystemLayout),
+  t.label({ label: 'staff-layouts', value: t.zeroOrMore(StaffLayout) }),
   t.optional(Appearance),
   t.optional(MusicFont),
   t.optional(WordFont),

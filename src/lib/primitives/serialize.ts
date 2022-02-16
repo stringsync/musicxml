@@ -29,7 +29,9 @@ export const serialize = <T extends Extract<DescriptorChild, string | number | D
       case 'constant':
         return resolutions.resolved(String(value));
       case 'date':
-        return resolutions.resolved(value.toISOString());
+        return resolutions.resolved(
+          `${value.getFullYear()}-${(value.getMonth() + 1).toString().padStart(2, '0')}-${value.getDate()}`
+        );
       case 'choices':
         return resolutions.resolved(String(value));
       case 'label':

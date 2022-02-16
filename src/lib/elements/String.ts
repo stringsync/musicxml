@@ -70,5 +70,5 @@ export const String = schema(
      */
     ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
   },
-  [] as const
+  [t.label({ label: 'string-number', value: dataTypes.stringNumber() })] as const
 );

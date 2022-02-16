@@ -20,5 +20,5 @@ export const NoteSize = schema(
      */
     type: t.required(dataTypes.noteSizeType()),
   },
-  [] as const
+  [t.label({ label: 'note-size', value: dataTypes.nonNegativeDecimal() })] as const
 );

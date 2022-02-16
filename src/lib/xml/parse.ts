@@ -41,6 +41,8 @@ const resolve = (cursor: util.Cursor<raw.RawXMLNode>, child: schema.DescriptorCh
       case 'int':
       case 'float':
         return resolvePrimitive(cursor, child);
+      case 'date':
+        return resolveDate(cursor, child);
     }
   }
   if (util.isXMLElementCtor(child)) {
@@ -214,4 +216,20 @@ const resolveArray = (cursor: util.Cursor<raw.RawXMLNode>, children: any[]): res
   }
   cursor.sync(probeCursor);
   return resolutions.resolved(value);
+};
+
+const isValidDateString = (str: string) => {
+  const timestamp = Date.parse(str);
+  return !isNaN(timestamp);
+};
+
+const resolveDate = (
+  cursor: util.Cursor<raw.RawXMLNode>,
+  descriptor: schema.DateDescriptor
+): resolutions.Resolution => {
+  const node = cursor.get();
+  if (node.type === 'text' && isValidDateString(node.text)) {
+    return resolutions.resolved(new Date(node.text));
+  }
+  return resolutions.zero(operations.zero(descriptor));
 };

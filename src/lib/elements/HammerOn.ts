@@ -58,6 +58,11 @@ export const HammerOn = schema(
     ['font-weight']: t.optional(dataTypes.fontWeight()),
 
     /**
+     * Distinguishes multiple hammer-ons when they overlap in MusicXML document order. The default value is 1.
+     */
+    number: t.optional(dataTypes.numberLevel()),
+
+    /**
      * Indicates whether something is above or below another element, such as a note or a notation.
      */
     placement: t.optional(dataTypes.aboveBelow()),

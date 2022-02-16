@@ -1,4 +1,5 @@
-import { schema } from '../schema';
+import * as dataTypes from '../dataTypes';
+import { schema, t } from '../schema';
 
 /**
  * The `<right-margin>` element
@@ -9,4 +10,6 @@ import { schema } from '../schema';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/right-margin/}
  */
-export const RightMargin = schema('right-margin', {}, [] as const);
+export const RightMargin = schema('right-margin', {}, [
+  t.label({ label: 'right-margin-value', value: dataTypes.tenths() }),
+] as const);
