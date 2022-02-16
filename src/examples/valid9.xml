@@ -53,6 +53,36 @@
             <accidental-mark default-y="22">sharp</accidental-mark>
         </notations>
       </note>
+      <!-- https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/accidental-mark-element-ornament/ -->
+      <note default-x="229">
+        <pitch>
+            <step>E</step>
+            <octave>5</octave>
+        </pitch>
+        <duration>2</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem default-y="-40">down</stem>
+        <notations>
+            <ornaments>
+              <trill-mark />
+              <accidental-mark placement="above">natural</accidental-mark>
+            </ornaments>
+        </notations>
+      </note>
+      <!-- https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/accidental-element/ -->
+      <note default-x="83">
+        <pitch>
+            <step>A</step>
+            <alter>1</alter>
+            <octave>4</octave>
+        </pitch>
+        <duration>2</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <accidental>sharp</accidental>
+        <stem default-y="10">up</stem>
+      </note>
     </measure>
   </part>
 </score-partwise>
