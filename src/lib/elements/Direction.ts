@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { schema, t } from '../schema';
 import { DirectionType } from './DirectionType';
 import { Footnote } from './Footnote';
@@ -24,13 +25,41 @@ import { Voice } from './Voice';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/direction/}
  */
-export const Direction = schema('direction', {}, [
-  t.label({ label: 'direction-types', value: t.oneOrMore(DirectionType) }),
-  t.optional(Offset),
-  t.optional(Footnote),
-  t.optional(Level),
-  t.optional(Voice),
-  t.optional(Staff),
-  t.optional(Sound),
-  t.optional(Listening),
-] as const);
+export const Direction = schema(
+  'direction',
+  {
+    /**
+     * Changes the default-x position of a direction. It indicates that the left-hand side of the direction is aligned
+     * with the left-hand side of the time signature. If no time signature is present, the direction is aligned with the
+     * left-hand side of the first music notational element in the measure. If a default-x, justify, or halign attribute
+     * is present, it overrides this attribute.
+     */
+    directive: t.optional(dataTypes.yesNo()),
+
+    /**
+     * Specifies an ID that is unique to the entire document.
+     */
+    id: t.optional(dataTypes.id()),
+
+    /**
+     * Indicates whether something is above or below another element, such as a note or a notation.
+     */
+    placement: t.optional(dataTypes.aboveBelow()),
+
+    /**
+     * Distinguishes elements that are associated with a system rather than the particular part where the element
+     * appears.
+     */
+    system: t.optional(dataTypes.systemRelation()),
+  },
+  [
+    t.label({ label: 'direction-types', value: t.oneOrMore(DirectionType) }),
+    t.optional(Offset),
+    t.optional(Footnote),
+    t.optional(Level),
+    t.optional(Voice),
+    t.optional(Staff),
+    t.optional(Sound),
+    t.optional(Listening),
+  ] as const
+);

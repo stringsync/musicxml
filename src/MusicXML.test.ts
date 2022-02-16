@@ -2,6 +2,7 @@ import * as examples from './examples';
 import { EXAMPLES, EXAMPLE_SUITES } from './examples';
 import * as elements from './generated/elements';
 import * as operations from './lib/operations';
+import * as raw from './lib/raw';
 import { MusicXML } from './MusicXML';
 
 describe('MusicXML', () => {
@@ -249,8 +250,10 @@ describe('MusicXML', () => {
 
     it.each(EXAMPLE_SUITES.VALID)('preserves a valid MusicXML document: %s', (example) => {
       const xmlStr = examples.loadExample(example);
+      const { declaration, nodes } = raw.parse(xmlStr);
+      const normalizedXmlStr = raw.seralize(declaration, nodes);
       const musicXml = MusicXML.parse(xmlStr);
-      expect(musicXml.serialize()).toEqualXML(xmlStr);
+      expect(musicXml.serialize()).toEqualXML(normalizedXmlStr);
     });
 
     it.each(EXAMPLE_SUITES.VALID)(

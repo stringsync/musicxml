@@ -21,5 +21,12 @@ export const Rest = schema(
      */
     measure: t.optional(dataTypes.yesNo()),
   },
-  [t.required(DisplayStep), t.required(DisplayOctave)] as const
+  [
+    t.optional(
+      t.label({
+        label: 'rest-value',
+        value: [t.required(DisplayStep), t.required(DisplayOctave)],
+      })
+    ),
+  ] as const
 );

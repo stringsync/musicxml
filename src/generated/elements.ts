@@ -6514,15 +6514,24 @@ export class Unpitched implements XMLElement<'unpitched', UnpitchedAttributes, U
 
 export type RestAttributes = { measure: 'yes' | 'no' | null };
 
-export type RestContents = [DisplayStep, DisplayOctave];
+export type RestContents = [[DisplayStep, DisplayOctave] | null];
 
 export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
   static readonly schema = {
     name: 'rest',
     attributes: { measure: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
     contents: [
-      { type: 'required', value: DisplayStep },
-      { type: 'required', value: DisplayOctave },
+      {
+        type: 'optional',
+        value: {
+          type: 'label',
+          label: 'rest-value',
+          value: [
+            { type: 'required', value: DisplayStep },
+            { type: 'required', value: DisplayOctave },
+          ],
+        },
+      },
     ],
   } as const;
 
@@ -6541,17 +6550,11 @@ export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
   setMeasure(measure: 'yes' | 'no' | null): void {
     this.attributes['measure'] = measure;
   }
-  getDisplayStep(): DisplayStep {
+  getRestValue(): [DisplayStep, DisplayOctave] | null {
     return this.contents[0];
   }
-  setDisplayStep(displayStep: DisplayStep): void {
-    this.contents[0] = displayStep;
-  }
-  getDisplayOctave(): DisplayOctave {
-    return this.contents[1];
-  }
-  setDisplayOctave(displayOctave: DisplayOctave): void {
-    this.contents[1] = displayOctave;
+  setRestValue(restValue: [DisplayStep, DisplayOctave] | null): void {
+    this.contents[0] = restValue;
   }
 }
 
@@ -30597,7 +30600,12 @@ export class Listening implements XMLElement<'listening', ListeningAttributes, L
   }
 }
 
-export type DirectionAttributes = Record<string, unknown>;
+export type DirectionAttributes = {
+  directive: 'yes' | 'no' | null;
+  id: string | null;
+  placement: 'above' | 'below' | null;
+  system: 'none' | 'only-top' | 'also-top' | null;
+};
 
 export type DirectionContents = [
   Array<DirectionType>,
@@ -30613,7 +30621,12 @@ export type DirectionContents = [
 export class Direction implements XMLElement<'direction', DirectionAttributes, DirectionContents> {
   static readonly schema = {
     name: 'direction',
-    attributes: {},
+    attributes: {
+      directive: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
+      id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
+      placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
+      system: { type: 'optional', value: { type: 'choices', choices: ['none', 'only-top', 'also-top'] } },
+    },
     contents: [
       { type: 'label', label: 'direction-types', value: { type: 'oneOrMore', value: DirectionType } },
       { type: 'optional', value: Offset },
@@ -30635,7 +30648,30 @@ export class Direction implements XMLElement<'direction', DirectionAttributes, D
     this.attributes = operations.merge(opts?.attributes, Direction.schema);
     this.contents = opts?.contents ?? operations.zero(Direction.schema.contents);
   }
-
+  getDirective(): 'yes' | 'no' | null {
+    return this.attributes['directive'];
+  }
+  setDirective(directive: 'yes' | 'no' | null): void {
+    this.attributes['directive'] = directive;
+  }
+  getId(): string | null {
+    return this.attributes['id'];
+  }
+  setId(id: string | null): void {
+    this.attributes['id'] = id;
+  }
+  getPlacement(): 'above' | 'below' | null {
+    return this.attributes['placement'];
+  }
+  setPlacement(placement: 'above' | 'below' | null): void {
+    this.attributes['placement'] = placement;
+  }
+  getSystem(): 'none' | 'only-top' | 'also-top' | null {
+    return this.attributes['system'];
+  }
+  setSystem(system: 'none' | 'only-top' | 'also-top' | null): void {
+    this.attributes['system'] = system;
+  }
   getDirectionTypes(): Array<DirectionType> {
     return this.contents[0];
   }

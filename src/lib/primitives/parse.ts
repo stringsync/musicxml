@@ -50,6 +50,7 @@ const resolve = (value: string, child: PrimitiveChild): resolutions.Resolution =
         return { type: 'none', value: undefined };
       case 'optional':
       case 'required':
+      case 'label':
         return check(resolve(value, child.value).value, child);
       case 'not':
         return check(resolve(value, child.include).value, child);

@@ -16,9 +16,9 @@ export const validate = (value: any, child: DescriptorChild): boolean => {
       case 'regex':
         return util.isString(value) && !!value.match(child.pattern);
       case 'int':
-        return Number.isInteger(value);
+        return Number.isInteger(value) && !isNaN(value) && child.min <= value && value <= child.max;
       case 'float':
-        return util.isNumber(value) && !isNaN(value);
+        return util.isNumber(value) && !isNaN(value) && child.min <= value && value <= child.max;
       case 'constant':
         return value === child.value;
       case 'date':
