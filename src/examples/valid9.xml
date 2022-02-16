@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Taken from https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/accent-element/ -->
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN"
   "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="4.0">
@@ -24,6 +23,7 @@
           <line>2</line>
         </clef>
       </attributes>
+      <!-- https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/accent-element/ -->
       <note default-x="36">
         <pitch>
             <step>A</step>
@@ -34,9 +34,23 @@
         <type>half</type>
         <stem default-y="10">up</stem>
         <notations>
-            <articulations>
-              <accent default-x="-1" default-y="-55" placement="below" />
-            </articulations>
+          <articulations>
+            <accent default-x="-1" default-y="-55" placement="below" />
+          </articulations>
+        </notations>
+      </note>
+      <!-- https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/accidental-mark-element-notation/ -->
+      <note default-x="84">
+        <pitch>
+            <step>D</step>
+            <octave>5</octave>
+        </pitch>
+        <duration>2</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem default-y="-45">down</stem>
+        <notations>
+            <accidental-mark default-y="22">sharp</accidental-mark>
         </notations>
       </note>
     </measure>

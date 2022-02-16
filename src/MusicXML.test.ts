@@ -166,7 +166,8 @@ describe('MusicXML', () => {
       }
 
       const divisions = attributes.getDivisions();
-      expect(divisions).toBeNull();
+      expect(divisions).not.toBeNull();
+      expect(divisions!.getPositiveDivisions()).toBe(1);
 
       const note = contents[1];
       if (!elements.MeasurePartwise.isNote(note)) {

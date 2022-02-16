@@ -2,9 +2,14 @@ import * as xmlJs from 'xml-js';
 import { MusicXMLError } from '../errors';
 import { Declaration, RawXMLNode } from './types';
 
+const SUPPORTED_ELEMENT_TYPES = ['element', 'text', 'doctype'];
+
 export const parse = (xml: string): { declaration: Declaration; nodes: RawXMLNode[] } => {
   const xmlJsElements = xmlJs.xml2js(xml);
-  return { declaration: xmlJsElements.declaration!, nodes: (xmlJsElements.elements || []).map(toRawXMLNode) };
+  return {
+    declaration: xmlJsElements.declaration!,
+    nodes: toRawXMLNodes(xmlJsElements.elements || []),
+  };
 };
 
 const toPlainAttributes = (attributes: xmlJs.Attributes): Record<string, string> => {
@@ -20,6 +25,10 @@ const toPlainAttributes = (attributes: xmlJs.Attributes): Record<string, string>
     }, {} as Record<keyof typeof attributes, string>);
 };
 
+const toRawXMLNodes = (elements: xmlJs.Element[]): RawXMLNode[] => {
+  return elements.filter((element) => SUPPORTED_ELEMENT_TYPES.includes(element.type || '')).map(toRawXMLNode);
+};
+
 const toRawXMLNode = (node: xmlJs.Element): RawXMLNode => {
   switch (node.type) {
     case 'element':
@@ -27,7 +36,7 @@ const toRawXMLNode = (node: xmlJs.Element): RawXMLNode => {
         type: 'element',
         name: node.name || 'unknown',
         attributes: node.attributes ? toPlainAttributes(node.attributes) : {},
-        children: (node.elements || []).map(toRawXMLNode),
+        children: toRawXMLNodes(node.elements || []),
       };
     case 'text':
       return {
@@ -38,11 +47,6 @@ const toRawXMLNode = (node: xmlJs.Element): RawXMLNode => {
       return {
         type: 'doctype',
         doctype: node.doctype?.toString() || '',
-      };
-    case 'comment':
-      return {
-        type: 'comment',
-        comment: node.comment || '',
       };
     default:
       throw new MusicXMLError({
