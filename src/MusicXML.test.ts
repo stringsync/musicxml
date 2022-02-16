@@ -1,22 +1,11 @@
 import * as examples from './examples';
-import { EXAMPLES, EXAMPLE_SUITES } from './examples';
+import { EXAMPLES } from './examples';
 import * as elements from './generated/elements';
 import * as operations from './lib/operations';
 import { MusicXML } from './MusicXML';
 
 describe('MusicXML', () => {
-  it.each(EXAMPLE_SUITES.VALID)('preserves a valid MusicXML document: %s', (example) => {
-    const xmlStr = examples.loadExample(example);
-    const musicXml = MusicXML.parse(xmlStr);
-    expect(musicXml.serialize()).toEqualXML(xmlStr);
-  });
-
   describe('parse', () => {
-    it.each(EXAMPLE_SUITES.VALID)('parses valid MusicXML documents: %s', (example) => {
-      const xmlStr = examples.loadExample(example);
-      expect(() => MusicXML.parse(xmlStr)).not.toThrow();
-    });
-
     it('preserves values of a valid MusicXML document', () => {
       const xmlStr = examples.loadExample(EXAMPLES.HELLO_WORLD);
 
@@ -247,19 +236,16 @@ describe('MusicXML', () => {
   });
 
   describe('serialize', () => {
-    it.each(EXAMPLE_SUITES.VALID)('serializes a valid MusicXML document: %s', (example) => {
-      const xmlStr = examples.loadExample(example);
+    it('serializes a valid MusicXML document', () => {
+      const xmlStr = examples.loadExample(EXAMPLES.HELLO_WORLD);
       const musicXml = MusicXML.parse(xmlStr);
       expect(() => musicXml.serialize()).not.toThrow();
     });
 
-    it.each(EXAMPLE_SUITES.INVALID)(
-      'serializes an invalid MusicXML document into a valid document: %s',
-      async (example) => {
-        const xmlStr = examples.loadExample(example);
-        const musicXml = MusicXML.parse(xmlStr);
-        await expect(musicXml.serialize()).toBeValidMusicXML();
-      }
-    );
+    it('serializes an invalid MusicXML document into a valid document: %s', async () => {
+      const xmlStr = examples.loadExample(EXAMPLES.MOSTLY_INVALID);
+      const musicXml = MusicXML.parse(xmlStr);
+      await expect(musicXml.serialize()).toBeValidMusicXML();
+    });
   });
 });
