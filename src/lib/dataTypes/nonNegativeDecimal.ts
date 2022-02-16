@@ -4,4 +4,4 @@ import { t } from '../schema';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/non-negative-decimal/}
  */
-export const nonNegativeDecimal = () => t.int({ min: 0 });
+export const nonNegativeDecimal = () => t.float({ min: 0 });

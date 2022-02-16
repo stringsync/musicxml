@@ -1521,7 +1521,7 @@ export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, Not
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['cue', 'grace', 'grace-cue', 'large'] } },
     },
-    contents: [{ type: 'label', label: 'note-size', value: { type: 'int', min: 0, max: Infinity } }],
+    contents: [{ type: 'label', label: 'note-size', value: { type: 'float', min: 0, max: Infinity } }],
   } as const;
 
   readonly schema = NoteSize.schema;
@@ -23612,8 +23612,8 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
         label: 'default-y',
         value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      dynamics: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
-      'end-dynamics': { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
+      dynamics: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'end-dynamics': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
@@ -30619,7 +30619,7 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
       dalsegno: { type: 'optional', value: { type: 'string' } },
       'damper-pedal': { type: 'optional', value: { type: 'choices', choices: ['no', 'yes', 0, 1] } },
       divisions: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-      dynamics: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
+      dynamics: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       elevation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       fine: { type: 'optional', value: { type: 'string' } },
       'forward-repeat': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -30629,7 +30629,7 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
       segno: { type: 'optional', value: { type: 'string' } },
       'soft-pedal': { type: 'optional', value: { type: 'choices', choices: ['no', 'yes', 0, 1] } },
       'sostenuto-pedal': { type: 'optional', value: { type: 'choices', choices: ['no', 'yes', 0, 1] } },
-      tempo: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
+      tempo: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
       tocoda: { type: 'optional', value: { type: 'string' } },
     },
@@ -32950,12 +32950,12 @@ export type StaffSizeContents = [number];
 export class StaffSize implements XMLElement<'staff-size', StaffSizeAttributes, StaffSizeContents> {
   static readonly schema = {
     name: 'staff-size',
-    attributes: { scaling: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } } },
+    attributes: { scaling: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } } },
     contents: [
       {
         type: 'label',
         label: 'staff-size',
-        value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
       },
     ],
   } as const;
