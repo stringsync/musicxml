@@ -6,6 +6,7 @@ export const EXAMPLES = {
   VALID5: 'valid5.xml',
   VALID6: 'valid6.xml',
   VALID7: 'valid7.xml',
+  VALID8: 'valid8.xml',
   INVALID1: 'invalid1.xml',
   INVALID2: 'invalid2.xml',
 } as const;
@@ -19,6 +20,7 @@ export const EXAMPLE_SUITES = {
     EXAMPLES.VALID5,
     EXAMPLES.VALID6,
     EXAMPLES.VALID7,
+    EXAMPLES.VALID8,
   ],
   INVALID: [EXAMPLES.INVALID1, EXAMPLES.INVALID2],
 } as const;
