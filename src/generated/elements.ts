@@ -13456,7 +13456,7 @@ export type FingeringAttributes = {
   substitution: 'yes' | 'no' | null;
 };
 
-export type FingeringContents = [];
+export type FingeringContents = [string];
 
 export class Fingering implements XMLElement<'fingering', FingeringAttributes, FingeringContents> {
   static readonly schema = {
@@ -13500,7 +13500,7 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
       },
       substitution: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
-    contents: [],
+    contents: [{ type: 'string' }],
   } as const;
 
   readonly schema = Fingering.schema;
@@ -13585,6 +13585,12 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
   }
   setSubstitution(substitution: 'yes' | 'no' | null): void {
     this.attributes['substitution'] = substitution;
+  }
+  getText(): string {
+    return this.contents[0];
+  }
+  setText(text: string): void {
+    this.contents[0] = text;
   }
 }
 
@@ -34032,7 +34038,7 @@ export type RootStepAttributes = {
   text: string | null;
 };
 
-export type RootStepContents = [];
+export type RootStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
 
 export class RootStep implements XMLElement<'root-step', RootStepAttributes, RootStepContents> {
   static readonly schema = {
@@ -34074,7 +34080,9 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
-    contents: [],
+    contents: [
+      { type: 'label', label: 'step', value: { type: 'choices', choices: ['A', 'B', 'C', 'D', 'E', 'F', 'G'] } },
+    ],
   } as const;
 
   readonly schema = RootStep.schema;
@@ -34147,6 +34155,12 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
   }
   setText(text: string | null): void {
     this.attributes['text'] = text;
+  }
+  getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
+    return this.contents[0];
+  }
+  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): void {
+    this.contents[0] = step;
   }
 }
 
@@ -36039,7 +36053,7 @@ export type DegreeAlterAttributes = {
   'relative-y': number | null;
 };
 
-export type DegreeAlterContents = [];
+export type DegreeAlterContents = [number];
 
 export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttributes, DegreeAlterContents> {
   static readonly schema = {
@@ -36081,7 +36095,7 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
         value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
-    contents: [],
+    contents: [{ type: 'label', label: 'semitones', value: { type: 'float', min: -Infinity, max: Infinity } }],
   } as const;
 
   readonly schema = DegreeAlter.schema;
@@ -36154,6 +36168,12 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
   }
   setRelativeY(relativeY: number | null): void {
     this.attributes['relative-y'] = relativeY;
+  }
+  getSemitones(): number {
+    return this.contents[0];
+  }
+  setSemitones(semitones: number): void {
+    this.contents[0] = semitones;
   }
 }
 

@@ -77,5 +77,5 @@ export const RootStep = schema(
      */
     text: t.optional(dataTypes.token()),
   },
-  [] as const
+  [dataTypes.step()] as const
 );

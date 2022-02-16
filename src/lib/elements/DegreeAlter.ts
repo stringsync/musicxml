@@ -81,5 +81,5 @@ export const DegreeAlter = schema(
      */
     ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
   },
-  [] as const
+  [dataTypes.semitones()] as const
 );

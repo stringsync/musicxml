@@ -81,5 +81,5 @@ export const Fingering = schema(
      */
     substitution: t.optional(dataTypes.yesNo()),
   },
-  [] as const
+  [t.string()] as const
 );
