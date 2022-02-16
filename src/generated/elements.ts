@@ -3713,7 +3713,49 @@ export type AccidentalTextAttributes = {
   'xml:space': 'default' | 'preserve' | null;
 };
 
-export type AccidentalTextContents = [];
+export type AccidentalTextContents = [
+  | 'other'
+  | 'sharp'
+  | 'natural'
+  | 'flat'
+  | 'double-sharp'
+  | 'sharp-sharp'
+  | 'flat-flat'
+  | 'natural-sharp'
+  | 'natural-flat'
+  | 'quarter-flat'
+  | 'quarter-sharp'
+  | 'three-quarters-flat'
+  | 'three-quarters-sharp'
+  | 'sharp-down'
+  | 'sharp-up'
+  | 'natural-down'
+  | 'natural-up'
+  | 'flat-down'
+  | 'flat-up'
+  | 'double-sharp-down'
+  | 'double-sharp-up'
+  | 'flat-flat-down'
+  | 'flat-flat-up'
+  | 'arrow-down'
+  | 'arrow-up'
+  | 'triple-sharp'
+  | 'triple-flat'
+  | 'slash-quarter-sharp'
+  | 'slash-sharp'
+  | 'slash-flat'
+  | 'double-slash-flat'
+  | 'sharp-1'
+  | 'sharp-2'
+  | 'sharp-3'
+  | 'sharp-5'
+  | 'flat-1'
+  | 'flat-2'
+  | 'flat-3'
+  | 'flat-4'
+  | 'sori'
+  | 'koron'
+];
 
 export class AccidentalText implements XMLElement<'accidental-text', AccidentalTextAttributes, AccidentalTextContents> {
   static readonly schema = {
@@ -3798,7 +3840,58 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
       'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    contents: [],
+    contents: [
+      {
+        type: 'label',
+        label: 'accidental-value',
+        value: {
+          type: 'choices',
+          choices: [
+            'other',
+            'sharp',
+            'natural',
+            'flat',
+            'double-sharp',
+            'sharp-sharp',
+            'flat-flat',
+            'natural-sharp',
+            'natural-flat',
+            'quarter-flat',
+            'quarter-sharp',
+            'three-quarters-flat',
+            'three-quarters-sharp',
+            'sharp-down',
+            'sharp-up',
+            'natural-down',
+            'natural-up',
+            'flat-down',
+            'flat-up',
+            'double-sharp-down',
+            'double-sharp-up',
+            'flat-flat-down',
+            'flat-flat-up',
+            'arrow-down',
+            'arrow-up',
+            'triple-sharp',
+            'triple-flat',
+            'slash-quarter-sharp',
+            'slash-sharp',
+            'slash-flat',
+            'double-slash-flat',
+            'sharp-1',
+            'sharp-2',
+            'sharp-3',
+            'sharp-5',
+            'flat-1',
+            'flat-2',
+            'flat-3',
+            'flat-4',
+            'sori',
+            'koron',
+          ],
+        },
+      },
+    ],
   } as const;
 
   readonly schema = AccidentalText.schema;
@@ -3982,6 +4075,96 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
   setXmlSpace(xmlSpace: 'default' | 'preserve' | null): void {
     this.attributes['xml:space'] = xmlSpace;
   }
+  getAccidentalValue():
+    | 'other'
+    | 'sharp'
+    | 'natural'
+    | 'flat'
+    | 'double-sharp'
+    | 'sharp-sharp'
+    | 'flat-flat'
+    | 'natural-sharp'
+    | 'natural-flat'
+    | 'quarter-flat'
+    | 'quarter-sharp'
+    | 'three-quarters-flat'
+    | 'three-quarters-sharp'
+    | 'sharp-down'
+    | 'sharp-up'
+    | 'natural-down'
+    | 'natural-up'
+    | 'flat-down'
+    | 'flat-up'
+    | 'double-sharp-down'
+    | 'double-sharp-up'
+    | 'flat-flat-down'
+    | 'flat-flat-up'
+    | 'arrow-down'
+    | 'arrow-up'
+    | 'triple-sharp'
+    | 'triple-flat'
+    | 'slash-quarter-sharp'
+    | 'slash-sharp'
+    | 'slash-flat'
+    | 'double-slash-flat'
+    | 'sharp-1'
+    | 'sharp-2'
+    | 'sharp-3'
+    | 'sharp-5'
+    | 'flat-1'
+    | 'flat-2'
+    | 'flat-3'
+    | 'flat-4'
+    | 'sori'
+    | 'koron' {
+    return this.contents[0];
+  }
+  setAccidentalValue(
+    accidentalValue:
+      | 'other'
+      | 'sharp'
+      | 'natural'
+      | 'flat'
+      | 'double-sharp'
+      | 'sharp-sharp'
+      | 'flat-flat'
+      | 'natural-sharp'
+      | 'natural-flat'
+      | 'quarter-flat'
+      | 'quarter-sharp'
+      | 'three-quarters-flat'
+      | 'three-quarters-sharp'
+      | 'sharp-down'
+      | 'sharp-up'
+      | 'natural-down'
+      | 'natural-up'
+      | 'flat-down'
+      | 'flat-up'
+      | 'double-sharp-down'
+      | 'double-sharp-up'
+      | 'flat-flat-down'
+      | 'flat-flat-up'
+      | 'arrow-down'
+      | 'arrow-up'
+      | 'triple-sharp'
+      | 'triple-flat'
+      | 'slash-quarter-sharp'
+      | 'slash-sharp'
+      | 'slash-flat'
+      | 'double-slash-flat'
+      | 'sharp-1'
+      | 'sharp-2'
+      | 'sharp-3'
+      | 'sharp-5'
+      | 'flat-1'
+      | 'flat-2'
+      | 'flat-3'
+      | 'flat-4'
+      | 'sori'
+      | 'koron'
+  ): void {
+    this.contents[0] = accidentalValue;
+  }
 }
 
 export type GroupNameDisplayAttributes = { 'print-object': 'yes' | 'no' | null };
@@ -4045,7 +4228,7 @@ export type GroupAbbreviationAttributes = {
   'relative-y': number | null;
 };
 
-export type GroupAbbreviationContents = [];
+export type GroupAbbreviationContents = [string];
 
 export class GroupAbbreviation
   implements XMLElement<'group-abbreviation', GroupAbbreviationAttributes, GroupAbbreviationContents>
@@ -4089,7 +4272,7 @@ export class GroupAbbreviation
         value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
-    contents: [],
+    contents: [{ type: 'string' }],
   } as const;
 
   readonly schema = GroupAbbreviation.schema;
@@ -4162,6 +4345,12 @@ export class GroupAbbreviation
   }
   setRelativeY(relativeY: number | null): void {
     this.attributes['relative-y'] = relativeY;
+  }
+  getText(): string {
+    return this.contents[0];
+  }
+  setText(text: string): void {
+    this.contents[0] = text;
   }
 }
 
@@ -6733,6 +6922,24 @@ export class Tie implements XMLElement<'tie', TieAttributes, TieContents> {
   }
 }
 
+export type CueAttributes = Record<string, unknown>;
+
+export type CueContents = [];
+
+export class Cue implements XMLElement<'cue', CueAttributes, CueContents> {
+  static readonly schema = { name: 'cue', attributes: {}, contents: [] } as const;
+
+  readonly schema = Cue.schema;
+
+  attributes: CueAttributes;
+  contents: CueContents;
+
+  constructor(opts?: { attributes?: Partial<CueAttributes>; contents?: CueContents }) {
+    this.attributes = operations.merge(opts?.attributes, Cue.schema);
+    this.contents = opts?.contents ?? operations.zero(Cue.schema.contents);
+  }
+}
+
 export type GraceAttributes = {
   'make-time': number | null;
   slash: 'yes' | 'no' | null;
@@ -6786,24 +6993,6 @@ export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents
   }
   setStealTimePrevious(stealTimePrevious: number | null): void {
     this.attributes['steal-time-previous'] = stealTimePrevious;
-  }
-}
-
-export type CueAttributes = Record<string, unknown>;
-
-export type CueContents = [];
-
-export class Cue implements XMLElement<'cue', CueAttributes, CueContents> {
-  static readonly schema = { name: 'cue', attributes: {}, contents: [] } as const;
-
-  readonly schema = Cue.schema;
-
-  attributes: CueAttributes;
-  contents: CueContents;
-
-  constructor(opts?: { attributes?: Partial<CueAttributes>; contents?: CueContents }) {
-    this.attributes = operations.merge(opts?.attributes, Cue.schema);
-    this.contents = opts?.contents ?? operations.zero(Cue.schema.contents);
   }
 }
 
@@ -23344,13 +23533,13 @@ export class Listen implements XMLElement<'listen', ListenAttributes, ListenCont
 
 export type BasicNoteValue = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
 
+export type CueNoteValue = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
+
 export type GraceNoteValue = [Grace, TiedGraceNoteValueSpec | CueGraceNoteValueSpec];
 
 export type TiedGraceNoteValueSpec = [Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]];
 
 export type CueGraceNoteValueSpec = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
-
-export type CueNoteValue = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
 
 export type NoteAttributes = {
   attack: number | null;
@@ -23377,7 +23566,7 @@ export type NoteAttributes = {
 };
 
 export type NoteContents = [
-  BasicNoteValue | GraceNoteValue | CueNoteValue,
+  BasicNoteValue | CueNoteValue | GraceNoteValue,
   Array<Instrument>,
   Footnote | null,
   Level | null,
@@ -23477,6 +23666,16 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
             },
             {
               type: 'label',
+              label: 'cue-note-value',
+              value: [
+                { type: 'required', value: Cue },
+                { type: 'optional', value: Chord },
+                { type: 'choices', choices: [Pitch, Unpitched, Rest] },
+                { type: 'required', value: Duration },
+              ],
+            },
+            {
+              type: 'label',
               label: 'grace-note-value',
               value: [
                 { type: 'required', value: Grace },
@@ -23504,16 +23703,6 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
                     },
                   ],
                 },
-              ],
-            },
-            {
-              type: 'label',
-              label: 'cue-note-value',
-              value: [
-                { type: 'required', value: Cue },
-                { type: 'optional', value: Chord },
-                { type: 'choices', choices: [Pitch, Unpitched, Rest] },
-                { type: 'required', value: Duration },
               ],
             },
           ],
@@ -23567,17 +23756,17 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
   static isRest(value: any): value is Rest {
     return operations.validate(value, Rest);
   }
-  static isGraceNoteValue(value: any): value is GraceNoteValue {
+  static isCueNoteValue(value: any): value is CueNoteValue {
     return operations.validate(value, Note.schema.contents[0]['value']['choices'][1]);
   }
+  static isGraceNoteValue(value: any): value is GraceNoteValue {
+    return operations.validate(value, Note.schema.contents[0]['value']['choices'][2]);
+  }
   static isTiedGraceNoteValueSpec(value: any): value is TiedGraceNoteValueSpec {
-    return operations.validate(value, Note.schema.contents[0]['value']['choices'][1]['value'][1]['choices'][0]);
+    return operations.validate(value, Note.schema.contents[0]['value']['choices'][2]['value'][1]['choices'][0]);
   }
   static isCueGraceNoteValueSpec(value: any): value is CueGraceNoteValueSpec {
-    return operations.validate(value, Note.schema.contents[0]['value']['choices'][1]['value'][1]['choices'][1]);
-  }
-  static isCueNoteValue(value: any): value is CueNoteValue {
-    return operations.validate(value, Note.schema.contents[0]['value']['choices'][2]);
+    return operations.validate(value, Note.schema.contents[0]['value']['choices'][2]['value'][1]['choices'][1]);
   }
 
   readonly schema = Note.schema;
@@ -23717,10 +23906,10 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
   setTimeOnly(timeOnly: string | null): void {
     this.attributes['time-only'] = timeOnly;
   }
-  getValue(): BasicNoteValue | GraceNoteValue | CueNoteValue {
+  getValue(): BasicNoteValue | CueNoteValue | GraceNoteValue {
     return this.contents[0];
   }
-  setValue(value: BasicNoteValue | GraceNoteValue | CueNoteValue): void {
+  setValue(value: BasicNoteValue | CueNoteValue | GraceNoteValue): void {
     this.contents[0] = value;
   }
   getInstruments(): Array<Instrument> {
@@ -29699,7 +29888,7 @@ export type OtherDirectionAttributes = {
   valign: 'top' | 'middle' | 'bottom' | 'baseline' | null;
 };
 
-export type OtherDirectionContents = [];
+export type OtherDirectionContents = [string];
 
 export class OtherDirection implements XMLElement<'other-direction', OtherDirectionAttributes, OtherDirectionContents> {
   static readonly schema = {
@@ -29745,7 +29934,7 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
       smufl: { type: 'optional', value: { type: 'string' } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    contents: [],
+    contents: [{ type: 'string' }],
   } as const;
 
   readonly schema = OtherDirection.schema;
@@ -29842,6 +30031,12 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
   }
   setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
     this.attributes['valign'] = valign;
+  }
+  getText(): string {
+    return this.contents[0];
+  }
+  setText(text: string): void {
+    this.contents[0] = text;
   }
 }
 

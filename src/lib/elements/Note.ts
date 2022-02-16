@@ -189,6 +189,10 @@ export const Note = schema(
           ],
         }),
         t.label({
+          label: 'cue-note-value',
+          value: [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)],
+        }),
+        t.label({
           label: 'grace-note-value',
           value: [
             t.required(Grace),
@@ -203,10 +207,6 @@ export const Note = schema(
               })
             ),
           ],
-        }),
-        t.label({
-          label: 'cue-note-value',
-          value: [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)],
         })
       ),
     }),

@@ -161,5 +161,5 @@ export const AccidentalText = schema(
      */
     ['xml:space']: t.optional(dataTypes.xml.space()),
   },
-  [] as const
+  [dataTypes.accidentalValue()] as const
 );

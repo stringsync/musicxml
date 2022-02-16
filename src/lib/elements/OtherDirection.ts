@@ -113,5 +113,5 @@ export const OtherDirection = schema(
      */
     valign: t.optional(dataTypes.valign()),
   },
-  [] as const
+  [t.string()] as const
 );

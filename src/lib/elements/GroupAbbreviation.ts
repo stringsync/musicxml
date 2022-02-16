@@ -80,5 +80,5 @@ export const GroupAbbreviation = schema(
      */
     ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
   },
-  [] as const
+  [t.string()] as const
 );

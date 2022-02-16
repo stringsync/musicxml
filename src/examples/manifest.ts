@@ -11,6 +11,7 @@ export const EXAMPLES = {
   TUTOTRIAL_CHORD_SYMBOLS: 'tutorial_chord_symbols.xml',
   TUTORIAL_PERCUSSION: 'tutorial_percussion.xml',
   WANNA_SKIP_CLASS: 'wanna_skip_class.xml',
+  ACTOR_PRELUDE_SAMPLE: 'actor_prelude_sample.xml',
 } as const;
 
 export const EXAMPLE_SUITES = {
@@ -25,6 +26,7 @@ export const EXAMPLE_SUITES = {
     EXAMPLES.WANNA_SKIP_CLASS,
     EXAMPLES.SIMPLE_TABLATURE,
     EXAMPLES.TUTOTRIAL_CHORD_SYMBOLS,
+    EXAMPLES.ACTOR_PRELUDE_SAMPLE,
   ],
   INVALID: [EXAMPLES.MOSTLY_INVALID, EXAMPLES.PARTIALLY_INVALID],
   GUITAR_PRO: [],

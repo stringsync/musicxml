@@ -123,7 +123,7 @@ const resolveChoices = (
   for (const result of resolvedResults) {
     if (maxResolvedIndex === result.cursor.getIndex()) {
       cursor.sync(result.cursor);
-      return resolutions.resolved(result.resolution.value);
+      return result.resolution;
     }
   }
 
