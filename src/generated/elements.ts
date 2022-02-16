@@ -766,7 +766,11 @@ export class Tenths implements XMLElement<'tenths', TenthsAttributes, TenthsCont
     name: 'tenths',
     attributes: {},
     contents: [
-      { type: 'label', label: 'tenths', value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } } },
+      {
+        type: 'label',
+        label: 'tenths',
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
+      },
     ],
   } as const;
 
@@ -856,7 +860,7 @@ export class PageHeight implements XMLElement<'page-height', PageHeightAttribute
       {
         type: 'label',
         label: 'page-height',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -891,7 +895,7 @@ export class PageWidth implements XMLElement<'page-width', PageWidthAttributes, 
       {
         type: 'label',
         label: 'page-width',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -926,7 +930,7 @@ export class LeftMargin implements XMLElement<'left-margin', LeftMarginAttribute
       {
         type: 'label',
         label: 'left-margin',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -979,7 +983,7 @@ export class TopMargin implements XMLElement<'top-margin', TopMarginAttributes, 
       {
         type: 'label',
         label: 'top-margin',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -1014,7 +1018,7 @@ export class BottomMargin implements XMLElement<'bottom-margin', BottomMarginAtt
       {
         type: 'label',
         label: 'bottom-margin',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -1193,7 +1197,7 @@ export class SystemDistance implements XMLElement<'system-distance', SystemDista
       {
         type: 'label',
         label: 'system-distance',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -1230,7 +1234,7 @@ export class TopSystemDistance
       {
         type: 'label',
         label: 'top-system-distance',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -1359,7 +1363,7 @@ export class LineWidth implements XMLElement<'line-width', LineWidthAttributes, 
       {
         type: 'label',
         label: 'line-width',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -1469,7 +1473,7 @@ export class Distance implements XMLElement<'distance', DistanceAttributes, Dist
       {
         type: 'label',
         label: 'distance',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -2106,12 +2110,12 @@ export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       element: { type: 'optional', value: { type: 'string' } },
       name: { type: 'optional', value: { type: 'string' } },
@@ -2119,12 +2123,12 @@ export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'xlink:actuate': {
         type: 'optional',
@@ -2304,30 +2308,30 @@ export class CreditImage implements XMLElement<'credit-image', CreditImageAttrib
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      height: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      height: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       source: { type: 'optional', value: { type: 'string' } },
       type: { type: 'optional', value: { type: 'string' } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom'] } },
-      width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -2450,7 +2454,7 @@ export type CreditWordsAttributes = {
   'xml:space': 'default' | 'preserve' | null;
 };
 
-export type CreditWordsContents = [];
+export type CreditWordsContents = [string];
 
 export class CreditWords implements XMLElement<'credit-words', CreditWordsAttributes, CreditWordsContents> {
   static readonly schema = {
@@ -2460,12 +2464,12 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
       enclosure: {
@@ -2519,12 +2523,12 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
@@ -2532,7 +2536,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
       'xml:lang': { type: 'optional', value: { type: 'string' } },
       'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
     },
-    contents: [],
+    contents: [{ type: 'string' }],
   } as const;
 
   readonly schema = CreditWords.schema;
@@ -2716,6 +2720,12 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
   setXmlSpace(xmlSpace: 'default' | 'preserve' | null): void {
     this.attributes['xml:space'] = xmlSpace;
   }
+  getText(): string {
+    return this.contents[0];
+  }
+  setText(text: string): void {
+    this.contents[0] = text;
+  }
 }
 
 export type CreditSymbolAttributes = {
@@ -2767,12 +2777,12 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
       enclosure: {
@@ -2826,12 +2836,12 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
@@ -3147,12 +3157,12 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -3171,12 +3181,12 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
@@ -3311,12 +3321,12 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
       enclosure: {
@@ -3369,12 +3379,12 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
@@ -3619,12 +3629,12 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
       enclosure: {
@@ -3677,12 +3687,12 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       smufl: {
@@ -3953,12 +3963,12 @@ export class GroupAbbreviation
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -3977,12 +3987,12 @@ export class GroupAbbreviation
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -4131,22 +4141,22 @@ export class GroupSymbol implements XMLElement<'group-symbol', GroupSymbolAttrib
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [
@@ -4321,12 +4331,12 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
       enclosure: {
@@ -4379,12 +4389,12 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
@@ -4933,12 +4943,12 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -4958,12 +4968,12 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
@@ -5128,12 +5138,12 @@ export class PartAbbreviation
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -5153,12 +5163,12 @@ export class PartAbbreviation
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
@@ -6895,12 +6905,12 @@ export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -6919,12 +6929,12 @@ export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -7075,12 +7085,12 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       editorial: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
@@ -7100,12 +7110,12 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
       smufl: {
@@ -7619,22 +7629,22 @@ export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -8080,21 +8090,21 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
     name: 'tied',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue', 'let-ring'] } },
-      'bezier-x': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      'bezier-x2': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      'bezier-y': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      'bezier-y2': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'bezier-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      'bezier-x2': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      'bezier-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      'bezier-y2': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
@@ -8104,14 +8114,14 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -8256,21 +8266,21 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
     name: 'slur',
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
-      'bezier-x': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      'bezier-x2': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      'bezier-y': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      'bezier-y2': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'bezier-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      'bezier-x2': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      'bezier-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      'bezier-y2': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
@@ -8280,14 +8290,14 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -8752,12 +8762,12 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-shape': { type: 'optional', value: { type: 'choices', choices: ['straight', 'curved'] } },
@@ -8766,12 +8776,12 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'show-number': { type: 'optional', value: { type: 'choices', choices: ['none', 'actual', 'both'] } },
       'show-type': { type: 'optional', value: { type: 'choices', choices: ['none', 'actual', 'both'] } },
@@ -8903,16 +8913,16 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -8933,14 +8943,14 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
@@ -9086,16 +9096,16 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
       accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'first-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
@@ -9118,14 +9128,14 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
@@ -9295,12 +9305,12 @@ export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, 
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -9320,12 +9330,12 @@ export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, 
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'main', 'upper'] } },
@@ -9483,12 +9493,12 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -9508,12 +9518,12 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -9678,12 +9688,12 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -9703,12 +9713,12 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -9873,12 +9883,12 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -9898,12 +9908,12 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -10070,12 +10080,12 @@ export class DelayedInvertedTurn
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -10095,12 +10105,12 @@ export class DelayedInvertedTurn
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -10264,12 +10274,12 @@ export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAtt
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -10289,12 +10299,12 @@ export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAtt
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'main', 'upper'] } },
@@ -10453,12 +10463,12 @@ export class InvertedVerticalTurn
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -10478,12 +10488,12 @@ export class InvertedVerticalTurn
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'main', 'upper'] } },
@@ -10643,12 +10653,12 @@ export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -10668,12 +10678,12 @@ export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'main', 'upper'] } },
@@ -10830,12 +10840,12 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
@@ -10843,12 +10853,12 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       smufl: {
@@ -11005,12 +11015,12 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       departure: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
@@ -11032,12 +11042,12 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'main', 'upper'] } },
@@ -11218,12 +11228,12 @@ export class InvertedMordent
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       departure: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
@@ -11245,12 +11255,12 @@ export class InvertedMordent
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'main', 'upper'] } },
@@ -11416,12 +11426,12 @@ export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, S
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -11440,12 +11450,12 @@ export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, S
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -11549,12 +11559,12 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -11573,12 +11583,12 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: { type: 'optional', value: { type: 'string' } },
       type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop', 'single', 'unmeasured'] } },
@@ -11711,12 +11721,12 @@ export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -11736,12 +11746,12 @@ export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'main', 'upper'] } },
@@ -11890,12 +11900,12 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -11914,12 +11924,12 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
@@ -12082,12 +12092,12 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -12108,12 +12118,12 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
       smufl: {
@@ -12561,12 +12571,12 @@ export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContent
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -12585,12 +12595,12 @@ export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContent
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -12692,12 +12702,12 @@ export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBo
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -12716,12 +12726,12 @@ export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBo
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -12914,12 +12924,12 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -12939,12 +12949,12 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [
@@ -13090,12 +13100,12 @@ export class OpenString implements XMLElement<'open-string', OpenStringAttribute
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -13114,12 +13124,12 @@ export class OpenString implements XMLElement<'open-string', OpenStringAttribute
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -13221,12 +13231,12 @@ export class ThumbPosition implements XMLElement<'thumb-position', ThumbPosition
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -13245,12 +13255,12 @@ export class ThumbPosition implements XMLElement<'thumb-position', ThumbPosition
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -13355,12 +13365,12 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -13379,12 +13389,12 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       substitution: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
@@ -13499,12 +13509,12 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -13523,12 +13533,12 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
@@ -13636,12 +13646,12 @@ export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAtt
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -13660,12 +13670,12 @@ export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAtt
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -13767,12 +13777,12 @@ export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAtt
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -13791,12 +13801,12 @@ export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAtt
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -13898,12 +13908,12 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -13922,12 +13932,12 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -14029,12 +14039,12 @@ export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicato
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -14053,12 +14063,12 @@ export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicato
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -14241,12 +14251,12 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -14265,12 +14275,12 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -14374,12 +14384,12 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -14398,12 +14408,12 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
@@ -14519,12 +14529,12 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -14543,12 +14553,12 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -14737,12 +14747,12 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'first-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
@@ -14762,12 +14772,12 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
@@ -14887,12 +14897,12 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'first-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
@@ -14912,12 +14922,12 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       shape: { type: 'optional', value: { type: 'choices', choices: ['angled', 'curved'] } },
     },
@@ -15077,12 +15087,12 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -15102,12 +15112,12 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'optional', value: { type: 'string' } }],
@@ -15222,12 +15232,12 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -15246,12 +15256,12 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       substitution: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
@@ -15361,12 +15371,12 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -15385,12 +15395,12 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       substitution: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
@@ -15499,12 +15509,12 @@ export class Fingernails implements XMLElement<'fingernails', FingernailsAttribu
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -15523,12 +15533,12 @@ export class Fingernails implements XMLElement<'fingernails', FingernailsAttribu
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -15733,12 +15743,12 @@ export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -15757,12 +15767,12 @@ export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [
@@ -16078,12 +16088,12 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -16102,12 +16112,12 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
@@ -16258,12 +16268,12 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -16282,12 +16292,12 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [
@@ -16446,12 +16456,12 @@ export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, 
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -16470,12 +16480,12 @@ export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, 
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -16577,12 +16587,12 @@ export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -16601,12 +16611,12 @@ export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -16708,12 +16718,12 @@ export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -16732,12 +16742,12 @@ export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -16840,12 +16850,12 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -16864,12 +16874,12 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
@@ -16979,12 +16989,12 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -17003,12 +17013,12 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
@@ -17163,12 +17173,12 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -17187,12 +17197,12 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
@@ -17307,12 +17317,12 @@ export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -17331,12 +17341,12 @@ export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -17439,12 +17449,12 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -17463,12 +17473,12 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
@@ -17854,12 +17864,12 @@ export class Accent implements XMLElement<'accent', AccentAttributes, AccentCont
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -17878,12 +17888,12 @@ export class Accent implements XMLElement<'accent', AccentAttributes, AccentCont
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -17986,12 +17996,12 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -18010,12 +18020,12 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'up-down': { type: 'optional', value: { type: 'choices', choices: ['up', 'down'] } },
     },
@@ -18124,12 +18134,12 @@ export class Staccato implements XMLElement<'staccato', StaccatoAttributes, Stac
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -18148,12 +18158,12 @@ export class Staccato implements XMLElement<'staccato', StaccatoAttributes, Stac
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -18255,12 +18265,12 @@ export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoCont
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -18279,12 +18289,12 @@ export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoCont
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -18386,12 +18396,12 @@ export class DetachedLegato implements XMLElement<'detached-legato', DetachedLeg
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -18410,12 +18420,12 @@ export class DetachedLegato implements XMLElement<'detached-legato', DetachedLeg
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -18517,12 +18527,12 @@ export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoA
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -18541,12 +18551,12 @@ export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoA
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -18648,12 +18658,12 @@ export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, Spic
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -18672,12 +18682,12 @@ export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, Spic
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -18779,12 +18789,12 @@ export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -18803,12 +18813,12 @@ export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -18912,16 +18922,16 @@ export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
     name: 'plop',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -18943,14 +18953,14 @@ export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -19083,16 +19093,16 @@ export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
     name: 'doit',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -19114,14 +19124,14 @@ export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -19254,16 +19264,16 @@ export class Falloff implements XMLElement<'falloff', FalloffAttributes, Falloff
     name: 'falloff',
     attributes: {
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -19285,14 +19295,14 @@ export class Falloff implements XMLElement<'falloff', FalloffAttributes, Falloff
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -19423,12 +19433,12 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -19447,12 +19457,12 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [
@@ -19569,12 +19579,12 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -19593,12 +19603,12 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [
@@ -19715,12 +19725,12 @@ export class Stress implements XMLElement<'stress', StressAttributes, StressCont
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -19739,12 +19749,12 @@ export class Stress implements XMLElement<'stress', StressAttributes, StressCont
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -19846,12 +19856,12 @@ export class Unstress implements XMLElement<'unstress', UnstressAttributes, Unst
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -19870,12 +19880,12 @@ export class Unstress implements XMLElement<'unstress', UnstressAttributes, Unst
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -19977,12 +19987,12 @@ export class SoftAccess implements XMLElement<'soft-access', SoftAccessAttribute
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -20001,12 +20011,12 @@ export class SoftAccess implements XMLElement<'soft-access', SoftAccessAttribute
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -20111,12 +20121,12 @@ export class OtherArticulation
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -20135,12 +20145,12 @@ export class OtherArticulation
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
@@ -20977,12 +20987,12 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       enclosure: {
         type: 'optional',
@@ -21027,12 +21037,12 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
@@ -21401,12 +21411,12 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -21425,12 +21435,12 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       type: { type: 'optional', value: { type: 'choices', choices: ['upright', 'inverted'] } },
     },
@@ -21587,12 +21597,12 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       direction: { type: 'optional', value: { type: 'choices', choices: ['up', 'down'] } },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
@@ -21601,12 +21611,12 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       unbroken: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
@@ -21707,12 +21717,12 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
@@ -21720,12 +21730,12 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -21820,12 +21830,12 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
@@ -21833,12 +21843,12 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: { type: 'optional', value: { type: 'string' } },
     },
@@ -22165,12 +22175,12 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -22397,22 +22407,22 @@ export class Extend implements XMLElement<'extend', ExtendAttributes, ExtendCont
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
     },
@@ -22571,12 +22581,12 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
@@ -22587,12 +22597,12 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
     },
@@ -23263,12 +23273,12 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       dynamics: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
       'end-dynamics': { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
@@ -23295,12 +23305,12 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       release: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
@@ -23848,12 +23858,12 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
       enclosure: {
@@ -23906,12 +23916,12 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
@@ -24131,12 +24141,12 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -24156,12 +24166,12 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: {
         type: 'optional',
@@ -24289,12 +24299,12 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -24314,12 +24324,12 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: {
         type: 'optional',
@@ -24472,12 +24482,12 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
       enclosure: {
@@ -24531,12 +24541,12 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
@@ -24785,12 +24795,12 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
       enclosure: {
@@ -24844,12 +24854,12 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
@@ -25053,16 +25063,16 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['crescendo', 'diminuendo', 'stop', 'continue'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
@@ -25071,15 +25081,15 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      spread: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      spread: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -25194,30 +25204,30 @@ export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesCont
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -25318,32 +25328,32 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
       'line-end': { type: 'required', value: { type: 'choices', choices: ['none', 'up', 'down', 'both', 'arrow'] } },
       type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'end-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'end-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
       number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -25473,12 +25483,12 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -25499,12 +25509,12 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       sign: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
     },
@@ -26281,12 +26291,12 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -26309,12 +26319,12 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -26510,16 +26520,16 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
     attributes: {
       type: { type: 'required', value: { type: 'choices', choices: ['up', 'down', 'stop', 'continue'] } },
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-      'dash-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -26539,15 +26549,15 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       size: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-      'space-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -26680,12 +26690,12 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -26705,12 +26715,12 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -26827,12 +26837,12 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -26852,12 +26862,12 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -26974,12 +26984,12 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -26999,12 +27009,12 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -27121,12 +27131,12 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -27146,12 +27156,12 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -27268,12 +27278,12 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -27293,12 +27303,12 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -27594,27 +27604,27 @@ export class Image implements XMLElement<'image', ImageAttributes, ImageContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-      width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -27722,12 +27732,12 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -27747,12 +27757,12 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -28938,12 +28948,12 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -28963,12 +28973,12 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -29227,12 +29237,12 @@ export class AccordionRegistration
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -29252,12 +29262,12 @@ export class AccordionRegistration
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -29401,12 +29411,12 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -29426,12 +29436,12 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -29556,12 +29566,12 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -29582,12 +29592,12 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       smufl: { type: 'optional', value: { type: 'string' } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
@@ -31285,12 +31295,12 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -31311,12 +31321,12 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [
@@ -31771,12 +31781,12 @@ export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttribute
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -31794,12 +31804,12 @@ export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttribute
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'top-staff': { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
     },
@@ -32068,12 +32078,12 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -32094,12 +32104,12 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
     },
@@ -32316,7 +32326,7 @@ export class LineDetail implements XMLElement<'line-detail', LineDetailAttribute
       color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
       'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'dotted', 'solid', 'wavy'] } },
       'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [],
   } as const;
@@ -32959,12 +32969,12 @@ export class Directive implements XMLElement<'directive', DirectiveAttributes, D
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -32982,12 +32992,12 @@ export class Directive implements XMLElement<'directive', DirectiveAttributes, D
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'xml:lang': { type: 'optional', value: { type: 'string' } },
     },
@@ -33741,12 +33751,12 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -33764,12 +33774,12 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
@@ -33873,12 +33883,12 @@ export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, 
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -33898,12 +33908,12 @@ export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, 
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [
@@ -34060,12 +34070,12 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -34083,12 +34093,12 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
@@ -34201,12 +34211,12 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -34226,12 +34236,12 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
@@ -34517,12 +34527,12 @@ export class Function implements XMLElement<'function', FunctionAttributes, Func
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -34540,12 +34550,12 @@ export class Function implements XMLElement<'function', FunctionAttributes, Func
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
@@ -34688,12 +34698,12 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -34713,12 +34723,12 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'stack-degrees': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       text: { type: 'optional', value: { type: 'string' } },
@@ -34980,12 +34990,12 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -35003,12 +35013,12 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
@@ -35116,12 +35126,12 @@ export class BassSeparator implements XMLElement<'bass-separator', BassSeparator
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -35139,12 +35149,12 @@ export class BassSeparator implements XMLElement<'bass-separator', BassSeparator
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
@@ -35246,12 +35256,12 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -35269,12 +35279,12 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
@@ -35393,12 +35403,12 @@ export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, 
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -35418,12 +35428,12 @@ export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, 
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [
@@ -35595,12 +35605,12 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -35618,12 +35628,12 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       symbol: {
         type: 'optional',
@@ -35748,12 +35758,12 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -35772,12 +35782,12 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -35879,12 +35889,12 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -35902,12 +35912,12 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
@@ -36284,15 +36294,15 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-      height: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      height: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -36310,16 +36320,16 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       unplayed: { type: 'optional', value: { type: 'string' } },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom'] } },
-      width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [
       { type: 'required', value: FrameStrings },
@@ -36493,12 +36503,12 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -36520,12 +36530,12 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       system: { type: 'optional', value: { type: 'choices', choices: ['none', 'only-top', 'also-top'] } },
       type: { type: 'optional', value: { type: 'choices', choices: ['alternate', 'explicit', 'implied'] } },
@@ -36729,12 +36739,12 @@ export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixCont
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -36752,12 +36762,12 @@ export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixCont
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
@@ -36858,12 +36868,12 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -36881,12 +36891,12 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [],
@@ -36981,12 +36991,12 @@ export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixCont
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -37004,12 +37014,12 @@ export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixCont
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
@@ -37192,12 +37202,12 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -37223,12 +37233,12 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
@@ -37397,7 +37407,7 @@ export class StaffDistance implements XMLElement<'staff-distance', StaffDistance
       {
         type: 'label',
         label: 'staff-distance',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -37468,7 +37478,7 @@ export class MeasureDistance
       {
         type: 'label',
         label: 'measure-distance',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
   } as const;
@@ -37550,12 +37560,12 @@ export class MeasureNumbering
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
@@ -37576,12 +37586,12 @@ export class MeasureNumbering
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       staff: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
       system: {
@@ -37739,7 +37749,7 @@ export class Print implements XMLElement<'print', PrintAttributes, PrintContents
       'new-page': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'new-system': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
       'page-number': { type: 'optional', value: { type: 'string' } },
-      'staff-spacing': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'staff-spacing': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [
       { type: 'optional', value: PageLayout },
@@ -37971,14 +37981,14 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
       'default-x': {
         type: 'label',
         label: 'default-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'default-y': {
         type: 'label',
         label: 'default-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'end-length': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'end-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
       'font-size': {
         type: 'optional',
@@ -37996,16 +38006,16 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
       'relative-x': {
         type: 'label',
         label: 'relative-x',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       'relative-y': {
         type: 'label',
         label: 'relative-y',
-        value: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+        value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
       system: { type: 'optional', value: { type: 'choices', choices: ['none', 'only-top', 'also-top'] } },
-      'text-x': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-      'text-y': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      'text-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
+      'text-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [{ type: 'required', value: { type: 'string' } }],
   } as const;
@@ -38462,7 +38472,7 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
           exclude: { type: 'constant', value: '' },
         },
       },
-      width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [
       {
@@ -38928,7 +38938,7 @@ export class MeasureTimewise implements XMLElement<'measure', MeasureTimewiseAtt
           exclude: { type: 'constant', value: '' },
         },
       },
-      width: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
+      width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
     contents: [{ type: 'label', label: 'parts-timewise', value: { type: 'oneOrMore', value: PartTimewise } }],
   } as const;

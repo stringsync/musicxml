@@ -7,14 +7,17 @@ export const parse = (xml: string): { declaration: Declaration; nodes: RawXMLNod
   return { declaration: xmlJsElements.declaration!, nodes: (xmlJsElements.elements || []).map(toRawXMLNode) };
 };
 
-const toPlainAttributes = (attributes?: xmlJs.Attributes | undefined): Record<string, string> => {
-  if (!attributes) {
-    return {};
-  }
-  return Object.keys(attributes).reduce((plainAttributes, key) => {
-    plainAttributes[key] = attributes[key]!.toString();
-    return plainAttributes;
-  }, {} as Record<keyof typeof attributes, string>);
+const toPlainAttributes = (attributes: xmlJs.Attributes): Record<string, string> => {
+  // The keys are sorted so that it deterministically gets serialzed by xmlJs.js2xml.
+  // See https://github.com/nashwaan/xml-js/blob/f0376f265c4f299100fb4766828ebf066a0edeec/lib/js2xml.js#L62
+  // and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in:
+  // >A for...in loop iterates over the properties of an object in an arbitrary order
+  return Object.keys(attributes)
+    .sort()
+    .reduce((plainAttributes, key) => {
+      plainAttributes[key] = attributes[key]!.toString();
+      return plainAttributes;
+    }, {} as Record<keyof typeof attributes, string>);
 };
 
 const toRawXMLNode = (node: xmlJs.Element): RawXMLNode => {
@@ -23,7 +26,7 @@ const toRawXMLNode = (node: xmlJs.Element): RawXMLNode => {
       return {
         type: 'element',
         name: node.name || 'unknown',
-        attributes: toPlainAttributes(node.attributes),
+        attributes: node.attributes ? toPlainAttributes(node.attributes) : {},
         children: (node.elements || []).map(toRawXMLNode),
       };
     case 'text':

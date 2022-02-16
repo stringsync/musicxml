@@ -2,10 +2,15 @@ import * as examples from './examples';
 import { EXAMPLES, EXAMPLE_SUITES } from './examples';
 import * as elements from './generated/elements';
 import * as operations from './lib/operations';
-import * as raw from './lib/raw';
 import { MusicXML } from './MusicXML';
 
 describe('MusicXML', () => {
+  it.each(EXAMPLE_SUITES.VALID)('preserves a valid MusicXML document: %s', (example) => {
+    const xmlStr = examples.loadExample(example);
+    const musicXml = MusicXML.parse(xmlStr);
+    expect(musicXml.serialize()).toEqualXML(xmlStr);
+  });
+
   describe('parse', () => {
     it.each(EXAMPLE_SUITES.VALID)('parses valid MusicXML documents', (example) => {
       const xmlStr = examples.loadExample(example);
@@ -133,48 +138,48 @@ describe('MusicXML', () => {
       expect(type).toBeInstanceOf(elements.Type);
       expect(type!.getNoteTypeValue()).toBe('whole');
     });
-  });
 
-  it('replaces invalid values with zero values', () => {
-    // See musicxml/src/examples/invalid1.xml for invalid value locations.
-    const xmlStr = examples.loadExample(EXAMPLES.INVALID1);
-    const musicXml = MusicXML.parse(xmlStr);
+    it('replaces invalid values with zero values', () => {
+      // See musicxml/src/examples/invalid1.xml for invalid value locations.
+      const xmlStr = examples.loadExample(EXAMPLES.INVALID1);
+      const musicXml = MusicXML.parse(xmlStr);
 
-    const scorePartwise = musicXml.getRoot();
-    if (!MusicXML.isScorePartwise(scorePartwise)) {
-      fail(`expected ScorePartwise, got: ${scorePartwise}`);
-    }
+      const scorePartwise = musicXml.getRoot();
+      if (!MusicXML.isScorePartwise(scorePartwise)) {
+        fail(`expected ScorePartwise, got: ${scorePartwise}`);
+      }
 
-    const parts = scorePartwise.getPartsPartwise();
-    expect(parts).toHaveLength(1);
+      const parts = scorePartwise.getPartsPartwise();
+      expect(parts).toHaveLength(1);
 
-    const part = parts[0];
-    const measures = part.getMeasures();
-    expect(measures).toHaveLength(1);
+      const part = parts[0];
+      const measures = part.getMeasures();
+      expect(measures).toHaveLength(1);
 
-    const measure = measures[0];
-    const contents = measure.getContents();
-    expect(contents).toHaveLength(2);
+      const measure = measures[0];
+      const contents = measure.getContents();
+      expect(contents).toHaveLength(2);
 
-    const attributes = contents[0];
-    if (!elements.MeasurePartwise.isAttributes(attributes)) {
-      fail(`expected Attributes, got ${attributes}`);
-    }
+      const attributes = contents[0];
+      if (!elements.MeasurePartwise.isAttributes(attributes)) {
+        fail(`expected Attributes, got ${attributes}`);
+      }
 
-    const divisions = attributes.getDivisions();
-    expect(divisions).toBeNull();
+      const divisions = attributes.getDivisions();
+      expect(divisions).toBeNull();
 
-    const note = contents[1];
-    if (!elements.MeasurePartwise.isNote(note)) {
-      fail(`expected Note, got ${note}`);
-    }
-    const noteValue = note.getValue();
-    if (!elements.Note.isBasicNoteValue(noteValue)) {
-      fail(`expected BasicNoteValue, got ${noteValue}`);
-    }
+      const note = contents[1];
+      if (!elements.MeasurePartwise.isNote(note)) {
+        fail(`expected Note, got ${note}`);
+      }
+      const noteValue = note.getValue();
+      if (!elements.Note.isBasicNoteValue(noteValue)) {
+        fail(`expected BasicNoteValue, got ${noteValue}`);
+      }
 
-    const duration = noteValue[2];
-    expect(duration.getPositiveDivisions()).toBe(1);
+      const duration = noteValue[2];
+      expect(duration.getPositiveDivisions()).toBe(1);
+    });
   });
 
   describe('createPartwise', () => {
@@ -248,15 +253,7 @@ describe('MusicXML', () => {
       expect(() => musicXml.serialize()).not.toThrow();
     });
 
-    it.each(EXAMPLE_SUITES.VALID)('preserves a valid MusicXML document: %s', (example) => {
-      const xmlStr = examples.loadExample(example);
-      const { declaration, nodes } = raw.parse(xmlStr);
-      const normalizedXmlStr = raw.seralize(declaration, nodes);
-      const musicXml = MusicXML.parse(xmlStr);
-      expect(musicXml.serialize()).toEqualXML(normalizedXmlStr);
-    });
-
-    it.each(EXAMPLE_SUITES.VALID)(
+    it.each(EXAMPLE_SUITES.INVALID)(
       'serializes an invalid MusicXML document into a valid document: %s',
       async (example) => {
         const xmlStr = examples.loadExample(example);

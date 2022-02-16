@@ -1,6 +1,6 @@
 import { diff } from 'jest-diff';
 import fetch from 'node-fetch';
-import * as xmlJs from 'xml-js';
+import * as raw from '../lib/raw';
 
 const VALIDATE_URL = 'http://xmlvalidator:8080/validate';
 
@@ -34,9 +34,8 @@ export const toBeValidMusicXML: jest.CustomMatcher = async function (xml: string
 };
 
 const prettify = (xml: string): string => {
-  const parsed = xmlJs.xml2js(xml);
-  const serialized = xmlJs.js2xml(parsed, { spaces: 2 });
-  return serialized;
+  const { declaration, nodes } = raw.parse(xml);
+  return raw.seralize(declaration, nodes);
 };
 
 export const toEqualXML: jest.CustomMatcher = function (received: string, expected: string) {
@@ -48,10 +47,10 @@ export const toEqualXML: jest.CustomMatcher = function (received: string, expect
     ? () =>
         this.utils.matcherHint('toEqualXML') +
         '\n\n' +
-        `Expected: not ${this.utils.printExpected(expected)}\n` +
-        `Received: ${this.utils.printReceived(received)}`
+        `Expected: not ${this.utils.printExpected(prettyExpected)}\n` +
+        `Received: ${this.utils.printReceived(prettyReceived)}`
     : () => {
-        const diffString = diff(expected, received, {
+        const diffString = diff(prettyExpected, prettyReceived, {
           expand: this.expand,
         });
         return (
@@ -59,7 +58,8 @@ export const toEqualXML: jest.CustomMatcher = function (received: string, expect
           '\n\n' +
           (diffString && diffString.includes('- Expect')
             ? `Difference:\n\n${diffString}`
-            : `Expected: ${this.utils.printExpected(expected)}\n` + `Received: ${this.utils.printReceived(received)}`)
+            : `Expected: ${this.utils.printExpected(prettyExpected)}\n` +
+              `Received: ${this.utils.printReceived(prettyReceived)}`)
         );
       };
 

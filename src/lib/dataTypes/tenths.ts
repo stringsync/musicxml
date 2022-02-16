@@ -13,4 +13,4 @@ import { t } from '../schema';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/tenths/}
  */
-export const tenths = () => t.float({ min: 0 });
+export const tenths = () => t.float();

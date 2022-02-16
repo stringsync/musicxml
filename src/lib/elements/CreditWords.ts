@@ -162,5 +162,5 @@ export const CreditWords = schema(
      */
     ['xml:space']: t.optional(dataTypes.xml.space()),
   },
-  [] as const
+  [t.string()] as const
 );
