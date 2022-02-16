@@ -2,7 +2,7 @@ import * as xmlJs from 'xml-js';
 import { MusicXMLError } from '../errors';
 import { Declaration, RawXMLNode } from './types';
 
-const SUPPORTED_ELEMENT_TYPES = ['element', 'text', 'doctype'];
+const IGNORE_ELEMENT_TYPES = ['comment'];
 
 export const parse = (xml: string): { declaration: Declaration; nodes: RawXMLNode[] } => {
   const xmlJsElements = xmlJs.xml2js(xml);
@@ -26,7 +26,7 @@ const toPlainAttributes = (attributes: xmlJs.Attributes): Record<string, string>
 };
 
 const toRawXMLNodes = (elements: xmlJs.Element[]): RawXMLNode[] => {
-  return elements.filter((element) => SUPPORTED_ELEMENT_TYPES.includes(element.type || '')).map(toRawXMLNode);
+  return elements.filter((element) => !IGNORE_ELEMENT_TYPES.includes(element.type || '')).map(toRawXMLNode);
 };
 
 const toRawXMLNode = (node: xmlJs.Element): RawXMLNode => {
