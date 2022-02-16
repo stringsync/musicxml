@@ -96,5 +96,5 @@ export const Text = schema(
      */
     ['xml:lang']: t.optional(dataTypes.xml.lang()),
   },
-  [] as const
+  [t.string()] as const
 );

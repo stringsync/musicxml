@@ -113,6 +113,7 @@ export const Lyric = schema(
             t.optional(Syllabic),
             t.required(Text),
             t.zeroOrMore([t.optional([t.required(Elision), t.optional(Syllabic)]), t.required(Text)]),
+            t.optional(Extend),
           ],
         }),
         Extend,

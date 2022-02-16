@@ -22294,7 +22294,7 @@ export type TextAttributes = {
   'xml:lang': string | null;
 };
 
-export type TextContents = [];
+export type TextContents = [string];
 
 export class Text implements XMLElement<'text', TextAttributes, TextContents> {
   static readonly schema = {
@@ -22335,7 +22335,7 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
       underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
       'xml:lang': { type: 'optional', value: { type: 'string' } },
     },
-    contents: [],
+    contents: [{ type: 'string' }],
   } as const;
 
   readonly schema = Text.schema;
@@ -22432,6 +22432,12 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
   }
   setXmlLang(xmlLang: string | null): void {
     this.attributes['xml:lang'] = xmlLang;
+  }
+  getText(): string {
+    return this.contents[0];
+  }
+  setText(text: string): void {
+    this.contents[0] = text;
   }
 }
 
@@ -22678,7 +22684,7 @@ export class EndParagraph implements XMLElement<'end-paragraph', EndParagraphAtt
   }
 }
 
-export type Intelligible = [Syllabic | null, Text, Array<[[Elision, Syllabic | null] | null, Text]>];
+export type Intelligible = [Syllabic | null, Text, Array<[[Elision, Syllabic | null] | null, Text]>, Extend | null];
 
 export type LyricAttributes = {
   color: string | null;
@@ -22762,6 +22768,7 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
                     { type: 'required', value: Text },
                   ],
                 },
+                { type: 'optional', value: Extend },
               ],
             },
             Extend,
