@@ -39,9 +39,6 @@ export class Cursor<T> {
 
   sync(cursor: Cursor<any>) {
     const index = cursor.getIndex();
-    if (!Number.isInteger(index)) {
-      throw new Error('index must be an integer');
-    }
     if (index < 0) {
       throw new Error('index must be > 0');
     }

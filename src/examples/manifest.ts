@@ -20,6 +20,7 @@ export const EXAMPLES = {
   TUTORIAL_PERCUSSION: 'tutorial_percussion.xml',
   TUTOTRIAL_CHORD_SYMBOLS: 'tutorial_chord_symbols.xml',
   WANNA_SKIP_CLASS: 'wanna_skip_class.xml',
+  INVALID_ROOT: 'invalid_root.xml',
 } as const;
 
 export const EXAMPLE_SUITES = {

@@ -169,6 +169,11 @@ describe('MusicXML', () => {
       const duration = noteValue[2];
       expect(duration.getPositiveDivisions()).toBe(1);
     });
+
+    it('throws an error when there are multiple score-partwise elements', () => {
+      const xmlStr = examples.loadExample(EXAMPLES.INVALID_ROOT);
+      expect(() => MusicXML.parse(xmlStr)).toThrowError();
+    });
   });
 
   describe('createPartwise', () => {

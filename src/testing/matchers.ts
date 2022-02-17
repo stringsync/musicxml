@@ -11,16 +11,12 @@ type ValidationResponse =
   | { code: 'ERROR'; error: string };
 
 const validate = async (xml: string): Promise<ValidationResponse> => {
-  try {
-    const res = await fetch(VALIDATE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: xml,
-    });
-    return await res.json();
-  } catch (e) {
-    return { code: 'ERROR', error: String(e) };
-  }
+  const res = await fetch(VALIDATE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: xml,
+  });
+  return await res.json();
 };
 
 export const toBeValidMusicXML: jest.CustomMatcher = async function (xml: string) {
