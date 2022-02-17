@@ -39,9 +39,6 @@ export class Cursor<T> {
 
   sync(cursor: Cursor<any>) {
     const index = cursor.getIndex();
-    if (index < 0) {
-      throw new Error('index must be > 0');
-    }
     if (index > this.array.length) {
       throw new Error(`index must be <= ${this.array.length}`);
     }
