@@ -21,6 +21,9 @@ export const EXAMPLES = {
   TUTOTRIAL_CHORD_SYMBOLS: 'tutorial_chord_symbols.xml',
   WANNA_SKIP_CLASS: 'wanna_skip_class.xml',
   INVALID_ROOT: 'invalid_root.xml',
+  JOHANN_SEBASTIAN_BACH_PRELUDE_IN_C: 'johann_sebastian_bach_prelude_in_c.xml',
+  JOSEPH_HAYDN_CONCERTANTE_CELLO: 'joseph_haydn_concertante_cello.xml',
+  LAND_DER_BERGE: 'land_der_berge.xml',
 } as const;
 
 export const EXAMPLE_SUITES = {
@@ -36,6 +39,9 @@ export const EXAMPLE_SUITES = {
     EXAMPLES.EXPRESSION_TEST,
     EXAMPLES.HELLO_WORLD,
     EXAMPLES.JOHANN_SEBASTIAN_BACH_AIR,
+    EXAMPLES.JOHANN_SEBASTIAN_BACH_PRELUDE_IN_C,
+    EXAMPLES.JOSEPH_HAYDN_CONCERTANTE_CELLO,
+    EXAMPLES.LAND_DER_BERGE,
   ],
   W3: [
     EXAMPLES.APRES_UN_REVE,
