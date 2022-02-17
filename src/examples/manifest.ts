@@ -24,6 +24,13 @@ export const EXAMPLES = {
   JOHANN_SEBASTIAN_BACH_PRELUDE_IN_C: 'johann_sebastian_bach_prelude_in_c.xml',
   JOSEPH_HAYDN_CONCERTANTE_CELLO: 'joseph_haydn_concertante_cello.xml',
   LAND_DER_BERGE: 'land_der_berge.xml',
+  MOZART_AN_CHLOE: 'mozart_an_chloe.xml',
+  MOZART_DAS_VEILCHEN: 'mozart_das_veilchen.xml',
+  MOZART_STRING_QUARTET: 'mozart_string_quartet.xml',
+  CONTAINER_HEIGHT: 'container_height.xml',
+  DRUMS_ONE_LINE_SNARE_PLUS_PIANO: 'drums_one_line_snare_plus_piano.xml',
+  LABELS: 'labels.xml',
+  TABLATURE_ALL_EFFECTS: 'tablature_all_effects.xml',
 } as const;
 
 export const EXAMPLE_SUITES = {
@@ -42,6 +49,13 @@ export const EXAMPLE_SUITES = {
     EXAMPLES.JOHANN_SEBASTIAN_BACH_PRELUDE_IN_C,
     EXAMPLES.JOSEPH_HAYDN_CONCERTANTE_CELLO,
     EXAMPLES.LAND_DER_BERGE,
+    EXAMPLES.MOZART_AN_CHLOE,
+    EXAMPLES.MOZART_DAS_VEILCHEN,
+    EXAMPLES.MOZART_STRING_QUARTET,
+    EXAMPLES.CONTAINER_HEIGHT,
+    EXAMPLES.DRUMS_ONE_LINE_SNARE_PLUS_PIANO,
+    EXAMPLES.LABELS,
+    EXAMPLES.TABLATURE_ALL_EFFECTS,
   ],
   W3: [
     EXAMPLES.APRES_UN_REVE,
