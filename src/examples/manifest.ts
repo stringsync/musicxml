@@ -42,6 +42,11 @@ export const EXAMPLES = {
   GRACE_NOTES: 'grace_notes.xml',
   ORNAMENTS: 'ornaments.xml',
   ACCIDENTALS: 'accidentals.xml',
+  VARIETY: 'variety.xml',
+  AUTO_CUSTOM_COLORING_ENTCHEN: 'auto_custom_coloring_entchen.xml',
+  AUTOBEAM: 'autobeam.xml',
+  BAR_LINES: 'bar_lines.xml',
+  CHORD_SYMBOLS: 'chord_symbols.xml',
 } as const;
 
 export const EXAMPLE_SUITES = {
@@ -78,6 +83,11 @@ export const EXAMPLE_SUITES = {
     EXAMPLES.GRACE_NOTES,
     EXAMPLES.ORNAMENTS,
     EXAMPLES.ACCIDENTALS,
+    EXAMPLES.VARIETY,
+    EXAMPLES.AUTO_CUSTOM_COLORING_ENTCHEN,
+    EXAMPLES.AUTOBEAM,
+    EXAMPLES.BAR_LINES,
+    EXAMPLES.CHORD_SYMBOLS,
   ],
   W3: [
     EXAMPLES.APRES_UN_REVE,
