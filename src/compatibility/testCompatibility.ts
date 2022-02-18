@@ -2,8 +2,8 @@ import * as examples from '../examples';
 import { MusicXML } from '../MusicXML';
 
 /**
- * Adds a jest test that all of the examples in the suite are valid MusicXML and that this library can losslessly parse
- * and serialize the document.
+ * Dynamically adds a jest test that tests all of the examples in the suite are valid MusicXML and that this library can
+ * losslessly parse and serialize the document.
  *
  * @param suite {Array<examples.Example>} the examples to test
  */
