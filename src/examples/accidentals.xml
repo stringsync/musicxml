@@ -279,7 +279,7 @@
       <note default-x="46.68" default-y="-30">
         <pitch>
           <step>G</step>
-          <alter>-0.5</alter>
+          <alter>0.5</alter>
           <octave>4</octave>
           </pitch>
         <duration>2</duration>

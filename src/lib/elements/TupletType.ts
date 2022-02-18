@@ -38,5 +38,5 @@ export const TupletType = schema(
      */
     ['font-weight']: t.optional(dataTypes.fontWeight()),
   },
-  [] as const
+  [dataTypes.noteTypeValue()] as const
 );

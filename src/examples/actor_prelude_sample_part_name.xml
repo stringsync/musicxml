@@ -47,7 +47,7 @@
     </staff-layout>
     <appearance>
       <line-width type="stem">0.957</line-width>
-      <line-width type="beam">5.2083</line-width>
+      <line-width type="beam">5.183</line-width>
       <line-width type="staff">0.957</line-width>
       <line-width type="light barline">1.875</line-width>
       <line-width type="heavy barline">5.0391</line-width>

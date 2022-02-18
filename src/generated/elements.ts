@@ -8795,7 +8795,23 @@ export type TupletTypeAttributes = {
   'font-weight': 'normal' | 'bold' | null;
 };
 
-export type TupletTypeContents = [];
+export type TupletTypeContents = [
+  | 'whole'
+  | '1024th'
+  | '512th'
+  | '256th'
+  | '128th'
+  | '64th'
+  | '32nd'
+  | '16th'
+  | 'eighth'
+  | 'half'
+  | 'quarter'
+  | 'whole'
+  | 'breve'
+  | 'long'
+  | 'maxima'
+];
 
 export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttributes, TupletTypeContents> {
   static readonly schema = {
@@ -8816,7 +8832,32 @@ export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttribute
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    contents: [],
+    contents: [
+      {
+        type: 'label',
+        label: 'note-type-value',
+        value: {
+          type: 'choices',
+          choices: [
+            'whole',
+            '1024th',
+            '512th',
+            '256th',
+            '128th',
+            '64th',
+            '32nd',
+            '16th',
+            'eighth',
+            'half',
+            'quarter',
+            'whole',
+            'breve',
+            'long',
+            'maxima',
+          ],
+        },
+      },
+    ],
   } as const;
 
   readonly schema = TupletType.schema;
@@ -8859,6 +8900,44 @@ export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttribute
   }
   setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
     this.attributes['font-weight'] = fontWeight;
+  }
+  getNoteTypeValue():
+    | 'whole'
+    | '1024th'
+    | '512th'
+    | '256th'
+    | '128th'
+    | '64th'
+    | '32nd'
+    | '16th'
+    | 'eighth'
+    | 'half'
+    | 'quarter'
+    | 'whole'
+    | 'breve'
+    | 'long'
+    | 'maxima' {
+    return this.contents[0];
+  }
+  setNoteTypeValue(
+    noteTypeValue:
+      | 'whole'
+      | '1024th'
+      | '512th'
+      | '256th'
+      | '128th'
+      | '64th'
+      | '32nd'
+      | '16th'
+      | 'eighth'
+      | 'half'
+      | 'quarter'
+      | 'whole'
+      | 'breve'
+      | 'long'
+      | 'maxima'
+  ): void {
+    this.contents[0] = noteTypeValue;
   }
 }
 
