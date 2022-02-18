@@ -4,7 +4,7 @@ import { schema, t } from '../schema';
 /**
  * The `<alter>` element
  *
- * Parent element: `<pitch>
+ * Parent element: `<pitch>`
  *
  * The `<alter> element represents chromatic alteration in number of semitones (e.g., -1 for flat, 1 for sharp). Decimal
  * values like 0.5 (quarter tone sharp) are used for microtones.
