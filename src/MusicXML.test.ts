@@ -41,7 +41,7 @@ describe('MusicXML', () => {
     it('matches the narrowing documented README behavior', () => {
       const note = new elements.Note();
       const value = note.getValue();
-      // In the README, we should that the value must match one of the type predicates.
+      // In the README, we showed that the value must match one of the type predicates.
       expect(
         elements.Note.isBasicNoteValue(value) ||
           elements.Note.isCueNoteValue(value) ||
