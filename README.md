@@ -112,7 +112,7 @@ yarn test --watchAll
 
 A complete list of options are in the [jest docs](https://jestjs.io/docs/cli).
 
-### Design
+## 📝 Design
 
 **What's the difference between [src/lib/elements/\*](src/lib/elements) and [src/generated/elements.ts](src/generated/elements.ts)?**
 
