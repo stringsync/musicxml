@@ -13,4 +13,8 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: test
-        run: yarn test --ci
+        uses: mattallty/jest-github-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          test-command: yarn test --ci
