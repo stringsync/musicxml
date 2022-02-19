@@ -17,7 +17,7 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
     </score-part>
   </part-list>
   <part id="P1">
-    <measure number=""/>
+    <measure number="1"/>
   </part>
 </score-partwise>`;
 
