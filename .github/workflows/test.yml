@@ -12,11 +12,5 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: check docker
-        run: docker-compose --version
-      - name: check yarn
-        run: yarn --version
       - name: test
-        uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: test --ci
+        run: yarn test --ci
