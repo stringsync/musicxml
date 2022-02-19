@@ -180,4 +180,8 @@ describe('validate', () => {
   it('refutes invalid values for arrays', () => {
     expect(validate([42, 'foo'], [t.string(), t.int()])).toBeFalse();
   });
+
+  it('throws an error for an invalid child', () => {
+    expect(() => validate('foo', Symbol() as any)).toThrow();
+  });
 });
