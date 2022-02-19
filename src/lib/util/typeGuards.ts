@@ -13,6 +13,10 @@ export const isNull = (value: any): value is null => {
   return value === null;
 };
 
+export const isUndefined = (value: any): value is undefined => {
+  return typeof value === 'undefined';
+};
+
 export const isFunction = (value: any): value is AnyFunction => {
   return typeof value === 'function';
 };
@@ -38,5 +42,5 @@ export const isXMLElement = (value: any): value is XMLElement => {
 };
 
 export const isXMLElementCtor = (value: any): value is XMLElementCtor => {
-  return 'schema' in value && isXMLElementSchema(value.schema) && isFunction(value);
+  return !isUndefined(value) && 'schema' in value && isXMLElementSchema(value.schema) && isFunction(value);
 };
