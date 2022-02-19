@@ -54,6 +54,15 @@
     "setupFilesAfterEnv": [
       "jest-extended/all",
       "<rootDir>/src/testing/jest.setup.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/lib/errors/**",
+      "!src/lib/schema/**",
+      "!src/lib/elements/**",
+      "!src/lib/dataTypes/**",
+      "!src/scripts/**",
+      "!src/testing/**"
     ]
   },
   "dependencies": {

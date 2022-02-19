@@ -1,5 +1,5 @@
 import * as elements from './generated/elements';
-import * as errors from './lib/errors';
+import { MusicXMLError } from './lib/errors';
 import * as operations from './lib/operations';
 import * as raw from './lib/raw';
 import * as schema from './lib/schema';
@@ -40,7 +40,7 @@ export class MusicXML<T extends MusicXMLRoot> {
 
     const resolved = resolutions.filter((resolution) => resolution.type === 'resolved');
     if (resolved.length !== 1) {
-      throw new errors.MusicXMLError({
+      throw new MusicXMLError({
         symptom: 'invalid music xml document',
         context: {
           rootElementNames: nodes
