@@ -26,6 +26,14 @@ describe('validate', () => {
     expect(validate(42, t.string())).toBeFalse();
   });
 
+  it('asserts valid values for regex descriptors', () => {
+    expect(validate('foobar', t.regex({ pattern: /foo/, zero: 'foo' }))).toBeTrue();
+  });
+
+  it('refutes invalid values for regex descriptors', () => {
+    expect(validate('bar', t.regex({ pattern: /foo/, zero: 'foo' }))).toBeFalse();
+  });
+
   it('asserts valid values for int descriptors', () => {
     expect(validate(42, t.int())).toBeTrue();
   });
