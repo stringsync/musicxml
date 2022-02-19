@@ -43,6 +43,7 @@ export const EXAMPLES = {
   GRACE_NOTE_FINGERINGS_AND_STRINGS: 'grace_note_fingerings_and_strings.xml',
   GRACE_NOTES: 'grace_notes.xml',
   GRACESLASH_SIMPLE: 'graceslash_simple.xml',
+  GREENS_GREENERY: 'greens_greenery.xml',
   HEIGHT_SKYLINE_WITH_CHORD_SYMBOL: 'height_skyline_with_chord_symbol.xml',
   HELLO_WORLD: 'hello_world.xml',
   HELLO_WORLD_MODIFIED: 'hello_world_modified.xml',
@@ -121,7 +122,7 @@ export const EXAMPLES = {
 } as const;
 
 export const EXAMPLE_SUITES = {
-  GUITAR_PRO: [EXAMPLES.WANNA_SKIP_CLASS],
+  GUITAR_PRO: [EXAMPLES.GREENS_GREENERY, EXAMPLES.WANNA_SKIP_CLASS],
   OSMD: [
     EXAMPLES.ACCIDENTALS,
     EXAMPLES.ACTOR_PRELUDE_SAMPLE_PART_NAME,

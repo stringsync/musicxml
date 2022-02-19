@@ -48,6 +48,12 @@ const toRawXMLNode = (node: xmlJs.Element): RawXMLNode => {
         type: 'doctype',
         doctype: node.doctype?.toString() || '',
       };
+    case 'cdata':
+      // We don't need to preserve cdata, see https://stackoverflow.com/a/61626192.
+      return {
+        type: 'text',
+        text: node.cdata?.toString() || '',
+      };
     default:
       throw new MusicXMLError({
         symptom: 'cannot parse element',
