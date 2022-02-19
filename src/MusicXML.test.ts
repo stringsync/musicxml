@@ -5,6 +5,51 @@ import * as operations from './lib/operations';
 import { MusicXML } from './MusicXML';
 
 describe('MusicXML', () => {
+  describe('README', () => {
+    it('matches the parse and serialize documented README behavior', () => {
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<score-partwise version="4.0">
+  <part-list>
+    <score-part id="P1">
+      <part-name></part-name>
+    </score-part>
+  </part-list>
+  <part id="P1">
+    <measure number=""/>
+  </part>
+</score-partwise>`;
+
+      // parse
+      const musicXml = MusicXML.parse(xml);
+
+      // serialize
+      expect(musicXml.serialize()).toBe(xml);
+    });
+
+    it('matches the create MusicXML partwise documented README behavior', () => {
+      const musicXml = MusicXML.createPartwise();
+      const root = musicXml.getRoot();
+      expect(MusicXML.isScorePartwise(root)).toBeTrue();
+    });
+
+    it('matches the create MusicXML timewise documented README behavior', () => {
+      const musicXml = MusicXML.createTimewise();
+      const root = musicXml.getRoot();
+      expect(MusicXML.isScoreTimewise(root)).toBeTrue();
+    });
+
+    it('matches the narrowing documented README behavior', () => {
+      const note = new elements.Note();
+      const value = note.getValue();
+      // In the README, we should that the value must match one of the type predicates.
+      expect(
+        elements.Note.isBasicNoteValue(value) ||
+          elements.Note.isCueNoteValue(value) ||
+          elements.Note.isGraceNoteValue(value)
+      ).toBeTrue();
+    });
+  });
+
   describe('parse', () => {
     it('preserves values of a valid MusicXML document', () => {
       const xmlStr = examples.loadExample(EXAMPLES.HELLO_WORLD);
