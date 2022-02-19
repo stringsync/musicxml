@@ -12,9 +12,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@c2
-        with:
-          path: musicxml
+        uses: actions/checkout@v2
 
       - name: test
         uses: borales/actions-yarn@v2.3.0
