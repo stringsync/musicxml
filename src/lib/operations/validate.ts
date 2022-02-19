@@ -2,6 +2,13 @@ import { MusicXMLError } from '../errors';
 import { DescriptorChild } from '../schema/types';
 import * as util from '../util';
 
+/**
+ * Validates if a value is compatible with a descriptor child.
+ *
+ * @param value any value to test
+ * @param child a descriptor child to validate against
+ * @returns {boolean}
+ */
 export const validate = (value: any, child: DescriptorChild): boolean => {
   if (util.isString(child)) {
     return value === child;

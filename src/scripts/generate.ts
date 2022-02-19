@@ -375,7 +375,7 @@ ${staticTypeAssertMethodLiterals}
   contents: ${contentsTypeName};
 
   constructor(opts?: { attributes?: Partial<${attributesTypeName}>; contents?: ${contentsTypeName} }) {
-    this.attributes = operations.merge(opts?.attributes, ${className}.schema);
+    this.attributes = operations.merge(opts?.attributes || {}, ${className}.schema);
     this.contents = opts?.contents ?? operations.zero(${className}.schema.contents);
   }
 ${attributesAccessorMethodLiterals}
