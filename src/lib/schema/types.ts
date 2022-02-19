@@ -14,7 +14,7 @@ export type XMLElementSchema<
 export interface XMLElement<
   N extends string = string,
   A extends Record<string, any> = Record<string, any>,
-  C extends any[] = any[]
+  C extends any[] | readonly any[] = any[]
 > {
   schema: XMLElementSchema<N>;
   attributes: A;
@@ -37,6 +37,50 @@ export type DescriptorChild =
   | (() => XMLElementCtor)
   | Array<DescriptorChild>
   | ReadonlyArray<DescriptorChild>;
+
+export type DescriptorChildValue<T> = T extends string
+  ? string
+  : T extends number
+  ? number
+  : T extends StringDescriptor
+  ? string
+  : T extends RegexDescriptor
+  ? string
+  : T extends IntDescriptor
+  ? number
+  : T extends FloatDescriptor
+  ? number
+  : T extends DateDescriptor
+  ? Date
+  : T extends ConstantDescriptor<infer V>
+  ? DescriptorChildValue<V>
+  : T extends ChoicesDescriptor<infer V>
+  ? DescriptorChildValue<V[number]>
+  : T extends OptionalDescriptor<infer V>
+  ? DescriptorChildValue<V> | null
+  : T extends RequiredDescriptor<infer V>
+  ? NonNullable<DescriptorChildValue<V>>
+  : T extends LabelDescriptor<infer V>
+  ? DescriptorChildValue<V>
+  : T extends ZeroOrMoreDescriptor<infer V>
+  ? DescriptorChildValue<V>
+  : T extends ZeroOrMoreDescriptor<infer V>
+  ? DescriptorChildValue<V>
+  : T extends NotDescriptor<infer I, infer E>
+  ? Exclude<DescriptorChildValue<I>, DescriptorChildValue<E>>
+  : T extends XMLElementSchema<infer N, infer A, infer C>
+  ? XMLElement<N, A, C>
+  : T extends () => XMLElementSchema<infer N, infer A, infer C>
+  ? XMLElement<N, A, C>
+  : T extends XMLElementCtor<infer N, infer A, infer C>
+  ? XMLElement<N, A, C>
+  : T extends () => XMLElementCtor<infer N, infer A, infer C>
+  ? XMLElement<N, A, C>
+  : T extends any[]
+  ? { [I in keyof T]: DescriptorChildValue<T[I]> }
+  : T extends readonly any[]
+  ? { [I in keyof T]: DescriptorChildValue<T[I]> }
+  : never;
 
 export type Descriptor =
   | StringDescriptor
