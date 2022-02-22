@@ -44,7 +44,7 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "generate": "ts-node src/scripts/generate.ts",
     "prepare": "husky install",
     "pretest": "docker-compose build",
