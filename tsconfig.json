@@ -10,15 +10,5 @@
     "types": ["node", "jest", "jest-extended"],
     "experimentalDecorators": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": [
-    "node_modules",
-    "**/*.test.ts",
-    "src/compatibility",
-    "src/examples",
-    "src/testing",
-    "src/scripts",
-    "src/lib/dataTypes",
-    "src/lib/elements"
-  ]
+  "include": ["src/**/*"]
 }

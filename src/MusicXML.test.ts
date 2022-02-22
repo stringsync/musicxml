@@ -48,6 +48,19 @@ describe('MusicXML', () => {
           elements.Note.isGraceNoteValue(value)
       ).toBeTrue();
     });
+
+    it('allows a measure element to be created and updated', () => {
+      const measure = new elements.MeasurePartwise({ attributes: { number: '1', implicit: 'no' } });
+      expect(measure.getNumber()).toBe('1');
+
+      measure.setNumber('4');
+      expect(measure.getNumber()).toBe('4');
+
+      const note = new elements.Note();
+      measure.setContents([...measure.getContents(), new elements.Note()]);
+      expect(measure.getContents()).toHaveLength(1);
+      expect(measure.getContents()).toStrictEqual([note]);
+    });
   });
 
   describe('parse', () => {

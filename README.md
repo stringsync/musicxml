@@ -2,7 +2,7 @@
 
 ![example workflow](https://github.com/stringsync/musicxml/actions/workflows/test.yml/badge.svg)
 
-`musicxml` is a JavaScript library that makes it easy to parse and edit [musicXML](https://www.w3.org/2021/06/musicxml40/) documents.
+`musicxml` is a JavaScript library that makes it easy to parse and edit [MusicXML](https://www.w3.org/2021/06/musicxml40/) documents.
 
 ## ⚠️ Warning
 
@@ -20,6 +20,12 @@ or
 
 ```shell
 npm install @stringsync/musicxml
+```
+
+### Imports
+
+```ts
+import { elements, MusicXML } from '@stringsync/musicxml';
 ```
 
 ### Parse and serialize a MusicXML document
@@ -60,6 +66,16 @@ console.log(MusicXML.isScorePartwise(root)); // true
 const musicXml = MusicXML.createTimewise();
 const root = musicXml.getRoot();
 console.log(MusicXML.isScoreTimewise(root)); // true
+```
+
+### Create and update elements
+
+```ts
+const measure = new elements.MeasurePartwise({ attributes: { number: '1', implicit: 'no' } });
+measure.getNumber(); // '1'
+measure.setNumber('4');
+measure.getNumber(); // '4'
+measure.setContents([...measure.getContents(), new elements.Note()]);
 ```
 
 ### Narrow types
