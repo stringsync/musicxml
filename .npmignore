@@ -1,8 +1,0 @@
-*.test.ts
-*.xml
-dist/compatibility/*
-dist/examples/*
-dist/testing/*
-dist/scripts/*
-dist/lib/dataTypes/*
-dist/lib/elements/*
