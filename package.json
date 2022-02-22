@@ -1,6 +1,7 @@
 {
   "name": "@stringsync/musicxml",
   "version": "1.0.0",
+  "private": false,
   "description": "a simple musicXML library",
   "main": "src/index.ts",
   "repository": "git@github.com:stringsync/musicxml.git",
