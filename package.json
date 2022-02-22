@@ -44,7 +44,7 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "tsc",
     "generate": "ts-node src/scripts/generate.ts",
     "prepare": "husky install",
     "pretest": "docker-compose build",
@@ -64,18 +64,9 @@
     "setupFilesAfterEnv": [
       "jest-extended/all",
       "<rootDir>/src/testing/jest.setup.ts"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.ts",
-      "!src/lib/errors/**",
-      "!src/lib/schema/**",
-      "!src/lib/elements/**",
-      "!src/lib/dataTypes/**",
-      "!src/scripts/**",
-      "!src/testing/**"
     ]
   },
   "dependencies": {
-    "xml-js": "^1.6.11"
+    "xstate": "^4.30.2"
   }
 }
