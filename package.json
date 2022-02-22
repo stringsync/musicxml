@@ -50,7 +50,7 @@
     "pretest": "docker-compose build",
     "test": "docker-compose run --rm test yarn jest",
     "posttest": "docker-compose down",
-    "package": "yarn build && yarn pack"
+    "prepublishOnly": "yarn build"
   },
   "lint-staged": {
     "src/**/*": [
