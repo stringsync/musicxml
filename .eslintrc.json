@@ -16,7 +16,7 @@
     "ecmaVersion": "latest"
   },
   "plugins": ["@typescript-eslint", "jest"],
-  "ignorePatterns": ["*.xml"],
+  "ignorePatterns": ["*.xml", "*.xsd"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
