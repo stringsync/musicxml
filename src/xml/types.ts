@@ -2,7 +2,7 @@ export type Primitive<T extends string | number | null> = T;
 
 export type XMLNode = AnyXMLElement | XMLText | XMLDoctype | XMLCData;
 
-export type XMLElement<N extends string, A extends Record<string, AnyPrimitive>, C extends Content[]> = {
+export type XMLElement<N extends string, A extends Record<string, AnyPrimitive>, C extends XMLElementContent[]> = {
   type: 'element';
   name: N;
   attributes: A;
@@ -24,9 +24,11 @@ export type XMLCData = {
   cdata: string;
 };
 
-export type Content = XMLNode | AnyPrimitive | Content[];
+export type XMLElementContent = XMLNode | AnyPrimitive | XMLElementContent[];
 
-export type AnyXMLElement = XMLElement<string, Record<string, AnyPrimitive>, Content[]>;
+export type AnyXMLElement = XMLElement<string, AnyAttributes, XMLElementContent[]>;
+
+export type AnyAttributes = Record<string, AnyPrimitive>;
 
 export type AnyPrimitive = Primitive<string | number | null>;
 
