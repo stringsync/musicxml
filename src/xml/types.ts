@@ -70,7 +70,7 @@ export type Schema = XMLElement<
     attributeFormDefault: Scalars['qualification'];
     elementFormDefault: Scalars['qualification'];
   },
-  [(Import | Annotation)[], [[[SimpleType | ComplexType, Group, AttributeGroup] | Element | Attribute], Annotation[]][]]
+  [(Import | Annotation)[], (SimpleType | ComplexType | Group | AttributeGroup | Element | Attribute | Annotation[])[]]
 >;
 
 export type Annotation = XMLElement<'xs:annotation', Record<string, never>, Documentation[]>;
@@ -100,7 +100,7 @@ export type SimpleTypeRestriction = XMLElementVariant<
     { base: Scalars['QName'] },
     [
       Annotation | null,
-      [SimpleType | null, [MinExclusive | MinInclusive | MaxInclusive | MinLength | Enumeration | Pattern][]]
+      [SimpleType | null, (MinExclusive | MinInclusive | MaxInclusive | MinLength | Enumeration | Pattern)[]]
     ]
   >
 >;
@@ -113,7 +113,7 @@ export type SimpleContentRestriction = XMLElementVariant<
     [
       Annotation | null,
       [SimpleType | null, (MinExclusive | MinInclusive | MaxInclusive | MinLength | Enumeration | Pattern)[]] | null,
-      [(Attribute | AttributeGroup)[], null]
+      (Attribute | AttributeGroup)[]
     ]
   >
 >;
