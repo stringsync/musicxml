@@ -1,51 +1,51 @@
 export type Primitive<T extends string | number | null> = T;
 
-export type XMLNode = AnyXMLElement | XMLText | XMLDoctype | XMLCData;
+export type XmlNode = AnyXmlElement | XmlText | XmlDoctype | XmlCData;
 
-export type XMLElement<N extends string, A extends Record<string, AnyPrimitive>, C extends XMLElementContent[]> = {
+export type XmlElement<N extends string, A extends Record<string, AnyPrimitive>, C extends XmlElementContent[]> = {
   type: 'element';
   name: N;
   attributes: A;
   contents: C;
 };
 
-export type XMLText = {
+export type XmlText = {
   type: 'text';
   text: string;
 };
 
-export type XMLDoctype = {
+export type XmlDoctype = {
   type: 'doctype';
   doctype: string;
 };
 
-export type XMLCData = {
+export type XmlCData = {
   type: 'cdata';
   cdata: string;
 };
 
-export type XMLElementContent = XMLNode | AnyPrimitive | XMLElementContent[];
+export type XmlElementContent = XmlNode | null | XmlElementContent[];
 
-export type AnyXMLElement = XMLElement<string, AnyAttributes, XMLElementContent[]>;
+export type AnyXmlElement = XmlElement<string, AnyAttributes, XmlElementContent[]>;
 
 export type AnyAttributes = Record<string, AnyPrimitive>;
 
 export type AnyPrimitive = Primitive<string | number | null>;
 
-export type XMLDeclaration = {
+export type XmlDeclaration = {
   attributes: Record<string, string>;
 };
 
-export type XMLDocument = {
-  declaration: XMLDeclaration;
-  root: XMLNode;
+export type XmlDocument = {
+  declaration: XmlDeclaration;
+  root: XmlNode;
 };
 
 export type EmptyAttributes = Record<string, never>;
 
 export type EmptyContents = never[];
 
-export type XMLElementVariant<V extends string, E extends AnyXMLElement> = { $variant: V } & E;
+export type XmlElementVariant<V extends string, E extends AnyXmlElement> = { $variant: V } & E;
 
 export type Scalars = {
   ID: string;
@@ -64,90 +64,102 @@ export type Scalars = {
 
 // A partial typing of XSD based on:
 // https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms256235(v=vs.100)
-export type Schema = XMLElement<
+export type XsSchema = XmlElement<
   'xs:schema',
   {
     attributeFormDefault: Scalars['qualification'];
     elementFormDefault: Scalars['qualification'];
   },
-  [(Import | Annotation)[], (SimpleType | ComplexType | Group | AttributeGroup | Element | Attribute | Annotation[])[]]
+  [
+    (XsImport | XsAnnotation)[],
+    (XsSimpleType | XsComplexType | XsGroup | XsAttributeGroup | XsElement | XsAttribute | XsAnnotation)[]
+  ]
 >;
 
-export type Annotation = XMLElement<'xs:annotation', Record<string, never>, Documentation[]>;
+export type XsAnnotation = XmlElement<'xs:annotation', Record<string, never>, XsDocumentation[]>;
 
-export type Documentation = XMLElement<'xs:documentation', Record<string, never>, [Scalars['string']]>;
+export type XsDocumentation = XmlElement<'xs:documentation', Record<string, never>, [XmlText | XmlCData]>;
 
-export type Import = XMLElement<
+export type XsImport = XmlElement<
   'xs:import',
   {
     id: Scalars['ID'];
     namespace: Scalars['anyURI'];
     schemaLocation: Scalars['anyURI'];
   },
-  [Annotation | null]
+  [XsAnnotation | null]
 >;
 
-export type SimpleType = XMLElement<
+export type XsSimpleType = XmlElement<
   'xs:simpleType',
   { name: Scalars['NCName'] },
-  [Annotation | null, SimpleTypeRestriction | Union]
+  [XsAnnotation | null, XsSimpleTypeRestriction | XsUnion]
 >;
 
-export type SimpleTypeRestriction = XMLElementVariant<
+export type XsSimpleTypeRestriction = XmlElementVariant<
   'xs:simpleType',
-  XMLElement<
+  XmlElement<
     'xs:restriction',
     { base: Scalars['QName'] },
     [
-      Annotation | null,
-      [SimpleType | null, (MinExclusive | MinInclusive | MaxInclusive | MinLength | Enumeration | Pattern)[]]
+      XsAnnotation | null,
+      [
+        XsSimpleType | null,
+        (XsMinExclusive | XsMinInclusive | XsMaxInclusive | XsMinLength | XsEnumeration | XsPattern)[]
+      ]
     ]
   >
 >;
 
-export type SimpleContentRestriction = XMLElementVariant<
+export type XsSimpleContentRestriction = XmlElementVariant<
   'xs:simpleContent',
-  XMLElement<
+  XmlElement<
     'xs:restriction',
     { base: Scalars['QName'] },
     [
-      Annotation | null,
-      [SimpleType | null, (MinExclusive | MinInclusive | MaxInclusive | MinLength | Enumeration | Pattern)[]] | null,
-      (Attribute | AttributeGroup)[]
+      XsAnnotation | null,
+      (
+        | [
+            XsSimpleType | null,
+            (XsMinExclusive | XsMinInclusive | XsMaxInclusive | XsMinLength | XsEnumeration | XsPattern)[]
+          ]
+        | null
+      ),
+      (XsAttribute | XsAttributeGroup)[]
     ]
   >
 >;
 
-export type ComplexContentRestriction = XMLElementVariant<
+export type XsComplexContentRestriction = XmlElementVariant<
   'xs:complexContent',
-  XMLElement<
+  XmlElement<
     'xs:restriction',
     { base: Scalars['QName'] },
-    [Annotation | null, [Group | Choice | Sequence] | null, [(Attribute | AttributeGroup)[], null]]
+    [XsAnnotation | null, [XsGroup | XsChoice | XsSequence] | null, [(XsAttribute | XsAttributeGroup)[], null]]
   >
 >;
 
-export type Enumeration = XMLElement<'xs:enumeration', { value: Scalars['string'] }, []>;
+export type XsEnumeration = XmlElement<'xs:enumeration', { value: Scalars['string'] }, []>;
 
-export type MinInclusive = XMLElement<'xs:minInclusive', { value: Scalars['number'] }, []>;
+export type XsMinInclusive = XmlElement<'xs:minInclusive', { value: Scalars['number'] }, []>;
 
-export type MaxInclusive = XMLElement<'xs:maxInclusive', { value: Scalars['number'] }, []>;
+export type XsMaxInclusive = XmlElement<'xs:maxInclusive', { value: Scalars['number'] }, []>;
 
-export type Pattern = XMLElement<'xs:pattern', { value: string }, []>;
+export type XsPattern = XmlElement<'xs:pattern', { value: string }, []>;
 
-export type Union = XMLElement<'xs:union', { memberTypes: Scalars['QName'] }, [Annotation | null, SimpleType[]]>;
+export type XsUnion = XmlElement<'xs:union', { memberTypes: Scalars['QName'] }, [XsAnnotation | null, XsSimpleType[]]>;
 
-export type MinExclusive = XMLElement<'xs:minExclusive', { value: Scalars['number'] }, []>;
+export type XsMinExclusive = XmlElement<'xs:minExclusive', { value: Scalars['number'] }, []>;
 
-export type MinLength = XMLElement<'xs:minLength', { value: Scalars['number'] }, []>;
+export type XsMinLength = XmlElement<'xs:minLength', { value: Scalars['number'] }, []>;
 
-export type AttributeGroup = XMLElement<
+export type XsAttributeGroup = XmlElement<
   'xs:attributeGroup',
   { name: Scalars['NCName']; ref: Scalars['QName'] },
-  [Annotation | null, [(Attribute | AttributeGroup)[], null]]
+  [XsAnnotation | null, [(XsAttribute | XsAttributeGroup)[], null]]
 >;
 
-export type Attribute = XMLElement<
+export type XsAttribute = XmlElement<
   'xs:attribute',
   {
     name: Scalars['NCName'];
@@ -160,42 +172,52 @@ export type Attribute = XMLElement<
   []
 >;
 
-export type ComplexType = XMLElement<
+export type XsComplexType = XmlElement<
   'xs:complexType',
   { name: Scalars['NCName'] },
-  [
-    Annotation | null,
-    [SimpleContent | ComplexContent | [Group | Choice | Sequence | null, (Attribute | AttributeGroup)[], null]]
-  ]
+  (
+    | XsAnnotation
+    | XsSimpleContent
+    | XsComplexContent
+    | XsGroup
+    | XsChoice
+    | XsSequence
+    | XsAttribute
+    | XsAttributeGroup
+  )[]
 >;
 
-export type SimpleContent = XMLElement<
+export type XsSimpleContent = XmlElement<
   'xs:simpleContent',
   Record<string, never>,
-  [Annotation | null, SimpleContentRestriction | SimpleContentExtension]
+  [XsAnnotation | null, XsSimpleContentRestriction | XsSimpleContentExtension]
 >;
 
-export type SimpleContentExtension = XMLElementVariant<
+export type XsSimpleContentExtension = XmlElementVariant<
   'xs:simpleContent',
-  XMLElement<'xs:extension', { base: Scalars['QName'] }, [Annotation | null, [(Attribute | AttributeGroup)[], null]]>
->;
-
-export type ComplexContentExtension = XMLElementVariant<
-  'xs:complexContent',
-  XMLElement<
+  XmlElement<
     'xs:extension',
     { base: Scalars['QName'] },
-    [Annotation | null, [Group | Choice | Sequence | null, [(Attribute | AttributeGroup)[], null]]]
+    [XsAnnotation | null, [(XsAttribute | XsAttributeGroup)[], null]]
   >
 >;
 
-export type Choice = XMLElement<
-  'xs:choice',
-  { maxOccurs: Scalars['occurs']; minOccurs: Scalars['occurs'] },
-  [Annotation | null, (Element | Group | Choice | Sequence)[]]
+export type XsComplexContentExtension = XmlElementVariant<
+  'xs:complexContent',
+  XmlElement<
+    'xs:extension',
+    { base: Scalars['QName'] },
+    [XsAnnotation | null, [XsGroup | XsChoice | XsSequence | null, [(XsAttribute | XsAttributeGroup)[], null]]]
+  >
 >;
 
-export type Element = XMLElement<
+export type XsChoice = XmlElement<
+  'xs:choice',
+  { maxOccurs: Scalars['occurs']; minOccurs: Scalars['occurs'] },
+  [XsAnnotation | null, (XsElement | XsGroup | XsChoice | XsSequence)[]]
+>;
+
+export type XsElement = XmlElement<
   'xs:element',
   {
     name: Scalars['NCName'];
@@ -205,23 +227,23 @@ export type Element = XMLElement<
     block: Scalars['block'];
     final: Scalars['final'];
   },
-  [Annotation | null, [[SimpleType | ComplexType] | null, []]]
+  [...XsAnnotation[], XsSimpleType | XsComplexType]
 >;
 
-export type Sequence = XMLElement<'xs:sequence', { minOccurs: Scalars['occurs']; maxOccurs: Scalars['occurs'] }, []>;
+export type XsSequence = XmlElement<'xs:sequence', { minOccurs: Scalars['occurs']; maxOccurs: Scalars['occurs'] }, []>;
 
-export type Group = XMLElement<
+export type XsGroup = XmlElement<
   'xs:group',
   { ref: Scalars['QName']; minOccurs: Scalars['occurs']; maxOccurs: Scalars['occurs']; name: Scalars['NCName'] },
   []
 >;
 
-export type ComplexContent = XMLElement<
+export type XsComplexContent = XmlElement<
   'xs:complexContent',
   { name: Scalars['NCName'] },
   [
-    Annotation | null,
-    SimpleContent | ComplexContent | (Group | Choice | Sequence) | null,
-    [(Attribute | AttributeGroup)[], null]
+    XsAnnotation | null,
+    XsSimpleContent | XsComplexContent | (XsGroup | XsChoice | XsSequence) | null,
+    [(XsAttribute | XsAttributeGroup)[], null]
   ]
 >;

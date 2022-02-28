@@ -15,6 +15,7 @@
   "author": "Jared Johnson <jared@jaredjohnson.dev>",
   "license": "MIT",
   "dependencies": {
+    "global": "^4.4.0",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {

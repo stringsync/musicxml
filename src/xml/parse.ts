@@ -1,9 +1,9 @@
 import * as xmlJs from 'xml-js';
-import { XMLDeclaration, XMLDocument, XMLNode } from './types';
+import { XmlDeclaration, XmlDocument, XmlNode } from './types';
 
 const IGNORE_ELEMENT_TYPES = ['comment'];
 
-export const parse = (xml: string): XMLDocument => {
+export const parse = (xml: string): XmlDocument => {
   const doc = xmlJs.xml2js(xml);
   const nodes = toXMLNodes(doc.elements);
 
@@ -12,22 +12,22 @@ export const parse = (xml: string): XMLDocument => {
   }
   const root = nodes[0];
 
-  const declaration: XMLDeclaration = doc.attributes
+  const declaration: XmlDeclaration = doc.attributes
     ? { attributes: toPlainAttributes(doc.attributes) }
     : getDefaultDeclaration();
 
   return { declaration, root };
 };
 
-const getDefaultDeclaration = (): XMLDeclaration => ({
+const getDefaultDeclaration = (): XmlDeclaration => ({
   attributes: { version: '1.0', encoding: 'UTF-8' },
 });
 
-const toXMLNodes = (elements: xmlJs.Element[]): XMLNode[] => {
+const toXMLNodes = (elements: xmlJs.Element[]): XmlNode[] => {
   return elements.filter((element) => !IGNORE_ELEMENT_TYPES.includes(element.type || '')).map(toXMLNode);
 };
 
-const toXMLNode = (element: xmlJs.Element): XMLNode => {
+const toXMLNode = (element: xmlJs.Element): XmlNode => {
   switch (element.type) {
     case 'element':
       return {

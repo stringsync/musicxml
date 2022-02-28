@@ -1,7 +1,8 @@
 import * as xmlJs from 'xml-js';
-import { AnyAttributes, XMLDocument, XMLElementContent, XMLNode } from './types';
+import { AnyAttributes, XmlDocument, XmlElementContent } from './types';
+import { isXmlNode } from './util';
 
-export const seralize = (document: XMLDocument): string => {
+export const seralize = (document: XmlDocument): string => {
   return xmlJs.js2xml(
     {
       declaration: document.declaration,
@@ -11,10 +12,6 @@ export const seralize = (document: XMLDocument): string => {
   );
 };
 
-const isXmlNode = (value: any): value is XMLNode => {
-  return typeof value === 'object' && ['element', 'text', 'doctype', 'cdata'].includes(value.type);
-};
-
 const toXmlJsElementAttributes = (attributes: AnyAttributes): xmlJs.Attributes => {
   return Object.keys(attributes).reduce<xmlJs.Attributes>((xmlJsAttributes, key) => {
     xmlJsAttributes[key] = xmlJsAttributes[key] === null ? undefined : xmlJsAttributes[key];
@@ -22,23 +19,7 @@ const toXmlJsElementAttributes = (attributes: AnyAttributes): xmlJs.Attributes =
   }, {});
 };
 
-const toXmlJsElement = (content: XMLElementContent): xmlJs.Element[] => {
-  if (typeof content === 'string') {
-    return [
-      {
-        type: 'text',
-        text: content,
-      },
-    ];
-  }
-  if (typeof content === 'number') {
-    return [
-      {
-        type: 'text',
-        text: content.toString(),
-      },
-    ];
-  }
+const toXmlJsElement = (content: XmlElementContent): xmlJs.Element[] => {
   if (Array.isArray(content)) {
     return content.flatMap(toXmlJsElement);
   }
