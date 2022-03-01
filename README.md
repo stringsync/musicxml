@@ -158,7 +158,7 @@ yarn test --watchAll
 
 A complete list of options are in the [jest docs](https://jestjs.io/docs/cli).
 
-## FAQs ❓
+## ❓ FAQs
 
 ### Why didn't you derive the elements directly from [musicxml.xsd](https://www.w3.org/2021/06/musicxml40/listings/musicxml.xsd/)?
 
@@ -222,11 +222,11 @@ approach to be reasonably tested, which is why I ultimately moved away from that
 That was just issues with parsing the xsd. I didn't even get to the point where I could conform an xml document to an xsd file.
 
 For whoever wants to revisit this and make the generated client solely based off of musicxml.xsd, I highly recommend that
-you leverage some library that does the heavy lifting parsing for you. At the time of writing this, I did not find any
-actively maintained candidates. Conformance and coercision of an xml document is a separate problem.
+you leverage some library that does the heavy lifting xsd parsing for you. At the time of writing this, I did not find any
+actively maintained candidates. Conformance of an xml document against an xsd schema is a separate problem.
 
 All in all, rolling my own descriptor/schema library within this package (see [src/lib/schema](src/lib/schema/)) allowed
-me to use a structure that was more readily compatible with TypeScript. I considered transforming musicxml.xsd into these
+me to use a structure that was more compatible with TypeScript. I considered transforming musicxml.xsd into these
 descriptors, but I wrote labeling functionality that made it easy to reference logical groups. For example, the
 [<note> element](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/) has multiple choices for what
 its contents can be. musicxml.xsd does not name these choices. In my descriptor library, I name them making them easier
