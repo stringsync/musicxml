@@ -158,11 +158,13 @@ yarn test --watchAll
 
 A complete list of options are in the [jest docs](https://jestjs.io/docs/cli).
 
-## FAQs
+## FAQs ❓
 
 ### Why didn't you derive the elements directly from [musicxml.xsd](https://www.w3.org/2021/06/musicxml40/listings/musicxml.xsd/)?
 
-This is something I've been frequently asking myself. I've tried multiple times to get this to work, but
+This is something I've been frequently asking myself.
+
+I've tried multiple times to get this to work, but
 [xsd](<https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms256460(v=vs.100)>) has been
 extremely challenging to work with. I tried making a pared down xsd parser that would work with the parts used in musicxml.xsd,
 but it was still incredibly challenging.
@@ -189,8 +191,9 @@ annotation*)*)
 </schema>
 ```
 
-Pay attention to how the `annotation` element could appear multiple times. This means I cannot simply index the contents
-into properties - the order matters. This was a somewhat common occurence in the elements used in musicxml.xsd.
+Pay attention to how the `annotation` element could appear multiple times in the beginning and end of the element's content.
+This means I cannot simply index the contents into properties. This was a somewhat common occurence in the elements used
+in musicxml.xsd. I had to maintain the groupings of elements.
 
 Thanks to `xml-js`, I was able to get some intermediate structure that looked like this:
 
