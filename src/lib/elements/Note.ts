@@ -177,10 +177,10 @@ export const Note = schema(
   },
   [
     t.label({
-      label: 'value',
+      label: 'note-value',
       value: t.choices(
         t.label({
-          label: 'basic-note-value',
+          label: 'tied-note-value',
           value: [
             t.optional(Chord),
             t.choices(Pitch, Unpitched, Rest),
@@ -189,23 +189,26 @@ export const Note = schema(
           ],
         }),
         t.label({
-          label: 'cue-note-value',
+          label: 'cued-note-value',
           value: [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)],
         }),
         t.label({
-          label: 'grace-note-value',
+          label: 'tied-grace-note-value',
           value: [
             t.required(Grace),
-            t.choices(
-              t.label({
-                label: 'tied-grace-note-value-spec',
-                value: [t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.choices([], [Tie], [Tie, Tie])],
-              }),
-              t.label({
-                label: 'cue-grace-note-value-spec',
-                value: [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)],
-              })
-            ),
+            t.optional(Chord),
+            t.choices(Pitch, Unpitched, Rest),
+            t.choices([], [Tie], [Tie, Tie]),
+          ],
+        }),
+        t.label({
+          label: 'cued-grace-note-value',
+          value: [
+            t.required(Grace),
+            t.required(Cue),
+            t.optional(Chord),
+            t.choices(Pitch, Unpitched, Rest),
+            t.required(Duration),
           ],
         })
       ),

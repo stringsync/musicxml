@@ -40,12 +40,13 @@ describe('MusicXML', () => {
 
     it('matches the narrowing documented README behavior', () => {
       const note = new elements.Note();
-      const value = note.getValue();
+      const noteValue = note.getNoteValue();
       // In the README, we showed that the value must match one of the type predicates.
       expect(
-        elements.Note.isBasicNoteValue(value) ||
-          elements.Note.isCueNoteValue(value) ||
-          elements.Note.isGraceNoteValue(value)
+        elements.Note.isTiedNoteValue(noteValue) ||
+          elements.Note.isCuedNoteValue(noteValue) ||
+          elements.Note.isTiedGraceNoteValue(noteValue) ||
+          elements.Note.isCuedGraceNoteValue(noteValue)
       ).toBeTrue();
     });
 
@@ -172,8 +173,8 @@ describe('MusicXML', () => {
         fail(`expected Note, got: ${note}`);
       }
 
-      const noteValue = note.getValue();
-      expect(elements.Note.isBasicNoteValue(noteValue)).toBeTrue();
+      const noteValue = note.getNoteValue();
+      expect(elements.Note.isTiedNoteValue(noteValue)).toBeTrue();
       expect(noteValue).toBeArray();
       expect(noteValue).toHaveLength(4);
       expect(noteValue[0]).toBeNull();
@@ -219,9 +220,9 @@ describe('MusicXML', () => {
       if (!elements.MeasurePartwise.isNote(note)) {
         fail(`expected Note, got ${note}`);
       }
-      const noteValue = note.getValue();
-      if (!elements.Note.isBasicNoteValue(noteValue)) {
-        fail(`expected BasicNoteValue, got ${noteValue}`);
+      const noteValue = note.getNoteValue();
+      if (!elements.Note.isTiedNoteValue(noteValue)) {
+        fail(`expected TiedNoteValue, got ${noteValue}`);
       }
 
       const duration = noteValue[2];

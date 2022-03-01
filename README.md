@@ -6,20 +6,30 @@
 
 ## ⚠️ Warning
 
-This API is unstable - use at your own risk. I highly recommend that you lock into a specific version of this library.
+### API
+
+This API is unstable - use at your own risk. I **highly** recommend that you lock into a specific version of this library.
+
+### Lossy Parsing
+
+When parsing a MusicXML document, `musicxml` will ignore comments and treat CDATA as regular text data.
+When serializing back to xml, comments are completely ommitted and CDATA is rendered as text nodes, since the library
+knows how to escape characters.
 
 ## 🔨 Usage
 
 ### Installation
 
+I **highly** recommend that you lock into a specific version of this library.
+
 ```shell
-yarn add @stringsync/musicxml
+yarn add @stringsync/musicxml@0.1.1
 ```
 
 or
 
 ```shell
-npm install @stringsync/musicxml
+npm install @stringsync/musicxml@0.1.1
 ```
 
 ### Imports
@@ -85,14 +95,16 @@ Some types can be complex unions. For example, take the `elements.Note` class, w
 ```ts
 // truncated elements.Note class
 
-type BasicNoteValue = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
+export type TiedNoteValue = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
 
-type CueNoteValue = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
+export type CuedNoteValue = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
 
-type GraceNoteValue = [Grace, TiedGraceNoteValueSpec | CueGraceNoteValueSpec];
+export type TiedGraceNoteValue = [Grace, Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]];
+
+export type CuedGraceNoteValue = [Grace, Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
 
 class Note {
-  getValue(): BasicNoteValue | CueNoteValue | GraceNoteValue {
+  getNoteValue(): TiedNoteValue | CuedNoteValue | TiedGraceNoteValue | CuedGraceNoteValue {
     return this.contents[0];
   }
 }
@@ -104,16 +116,18 @@ For example, to work with an `elements.Note` value:
 
 ```ts
 const note = new elements.Note();
-const value = note.getValue();
+const noteValue = note.getNoteValue();
 
-if (elements.Note.isBasicNoteValue(value)) {
-  // value: BasicNoteValue
-} else if (elements.Note.isCueNoteValue(value)) {
-  // value: CueNoteValue
-} else if (elements.Note.isGraceNoteValue(value)) {
-  // value: GraceNoteValue
+if (elements.Note.isTiedNoteValue(noteValue)) {
+  // noteValue: TiedNoteValue
+} else if (elements.Note.isCuedNoteValue(noteValue)) {
+  // noteValue: CuedNoteValue
+} else if (elements.Note.isTiedGraceNoteValue(noteValue)) {
+  // noteValue: TiedGraceNoteValue
+} else if (elements.Note.isCuedGraceNoteValue(noteValue)) {
+  // noteValue: CuedGraceNoteValue
 } else {
-  // value: never
+  // noteValue: never
 }
 ```
 
