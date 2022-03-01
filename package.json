@@ -14,6 +14,9 @@
   "repository": "git@github.com:stringsync/musicxml.git",
   "author": "Jared Johnson <jared@jaredjohnson.dev>",
   "license": "MIT",
+  "dependencies": {
+    "xml-js": "^1.6.11"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/plugin-proposal-class-properties": "^7.16.5",
@@ -74,8 +77,5 @@
       "!src/scripts/**",
       "!src/testing/**"
     ]
-  },
-  "dependencies": {
-    "xml-js": "^1.6.11"
   }
 }
