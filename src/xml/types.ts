@@ -4,7 +4,7 @@ export type XmlNode = AnyXmlElement | XmlText | XmlDoctype | XmlCData;
 
 export type XmlElement<N extends string, A extends Record<string, AnyPrimitive>, C extends XmlElementContent[]> = {
   type: 'element';
-  name: N;
+  tagName: N;
   attributes: A;
   contents: C;
 };
@@ -70,10 +70,17 @@ export type XsSchema = XmlElement<
     attributeFormDefault: Scalars['qualification'];
     elementFormDefault: Scalars['qualification'];
   },
-  [
-    (XsImport | XsAnnotation)[],
-    (XsSimpleType | XsComplexType | XsGroup | XsAttributeGroup | XsElement | XsAttribute | XsAnnotation)[]
-  ]
+  (
+    | XsImport
+    | XsAnnotation
+    | XsSimpleType
+    | XsComplexType
+    | XsGroup
+    | XsAttributeGroup
+    | XsElement
+    | XsAttribute
+    | XsAnnotation
+  )[]
 >;
 
 export type XsAnnotation = XmlElement<'xs:annotation', Record<string, never>, XsDocumentation[]>;
@@ -92,8 +99,8 @@ export type XsImport = XmlElement<
 
 export type XsSimpleType = XmlElement<
   'xs:simpleType',
-  { name: Scalars['NCName'] },
-  [XsAnnotation | null, XsSimpleTypeRestriction | XsUnion]
+  { name?: Scalars['NCName'] },
+  [XsAnnotation | XsSimpleTypeRestriction | XsUnion]
 >;
 
 export type XsSimpleTypeRestriction = XmlElementVariant<
@@ -101,13 +108,16 @@ export type XsSimpleTypeRestriction = XmlElementVariant<
   XmlElement<
     'xs:restriction',
     { base: Scalars['QName'] },
-    [
-      XsAnnotation | null,
-      [
-        XsSimpleType | null,
-        (XsMinExclusive | XsMinInclusive | XsMaxInclusive | XsMinLength | XsEnumeration | XsPattern)[]
-      ]
-    ]
+    (
+      | XsAnnotation
+      | XsSimpleType
+      | XsMinExclusive
+      | XsMinInclusive
+      | XsMaxInclusive
+      | XsMinLength
+      | XsEnumeration
+      | XsPattern
+    )[]
   >
 >;
 
@@ -174,7 +184,7 @@ export type XsAttribute = XmlElement<
 
 export type XsComplexType = XmlElement<
   'xs:complexType',
-  { name: Scalars['NCName'] },
+  { name?: Scalars['NCName'] },
   (
     | XsAnnotation
     | XsSimpleContent
@@ -220,21 +230,21 @@ export type XsChoice = XmlElement<
 export type XsElement = XmlElement<
   'xs:element',
   {
-    name: Scalars['NCName'];
-    type: Scalars['QName'];
-    minOccurs: Scalars['occurs'];
-    maxOccurs: Scalars['occurs'];
-    block: Scalars['block'];
-    final: Scalars['final'];
+    name?: Scalars['NCName'];
+    type?: Scalars['QName'];
+    minOccurs?: Scalars['occurs'];
+    maxOccurs?: Scalars['occurs'];
+    block?: Scalars['block'];
+    final?: Scalars['final'];
   },
-  [...XsAnnotation[], XsSimpleType | XsComplexType]
+  (XsAnnotation | XsSimpleType | XsComplexType)[]
 >;
 
 export type XsSequence = XmlElement<'xs:sequence', { minOccurs: Scalars['occurs']; maxOccurs: Scalars['occurs'] }, []>;
 
 export type XsGroup = XmlElement<
   'xs:group',
-  { ref: Scalars['QName']; minOccurs: Scalars['occurs']; maxOccurs: Scalars['occurs']; name: Scalars['NCName'] },
+  { ref?: Scalars['QName']; minOccurs?: Scalars['occurs']; maxOccurs?: Scalars['occurs']; name?: Scalars['NCName'] },
   []
 >;
 

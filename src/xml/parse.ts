@@ -4,7 +4,7 @@ import { XmlDeclaration, XmlDocument, XmlNode } from './types';
 const IGNORE_ELEMENT_TYPES = ['comment'];
 
 export const parse = (xml: string): XmlDocument => {
-  const doc = xmlJs.xml2js(xml);
+  const doc = xmlJs.xml2js(xml, { nativeType: true });
   const nodes = toXMLNodes(doc.elements);
 
   if (nodes.length !== 1) {
@@ -32,7 +32,7 @@ const toXMLNode = (element: xmlJs.Element): XmlNode => {
     case 'element':
       return {
         type: 'element',
-        name: element.name || 'unknown',
+        tagName: element.name || 'unknown',
         attributes: element.attributes ? toPlainAttributes(element.attributes) : {},
         contents: toXMLNodes(element.elements || []),
       };

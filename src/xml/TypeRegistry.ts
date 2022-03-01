@@ -1,6 +1,6 @@
 import { MusicXmlError } from '../MusicXmlError';
 import { XmlDocument, XsComplexType, XsElement, XsGroup, XsSimpleType } from './types';
-import { isXsComplexType, isXsElement, isXsGroup, isXsSimpleType } from './util';
+import { isNamed, isXsComplexType, isXsElement, isXsGroup, isXsSimpleType } from './util';
 
 class MusicXmlMissingEntryError extends MusicXmlError {}
 
@@ -17,7 +17,11 @@ export class TypeRegistry {
     if (xsd.root.type === 'element') {
       for (const content of xsd.root.contents) {
         if (isTypeRegistryEntry(content)) {
-          entries[content.attributes.name] = content;
+          if (isNamed(content)) {
+            entries[content.attributes.name] = content;
+          } else {
+            throw new MusicXmlError(`expected type registry entry to be named: ${JSON.stringify(content, null, 2)}`);
+          }
         }
       }
     }
@@ -27,11 +31,22 @@ export class TypeRegistry {
 
   private constructor(private entries: Record<string, TypeRegistryEntry>) {}
 
-  getEntry(name: string): TypeRegistryEntry {
-    const entry = this.entries[name];
-    if (typeof entry === 'undefined') {
+  get(name: string): TypeRegistryEntry {
+    if (!this.has(name)) {
       throw new MusicXmlMissingEntryError(`could not find entry with name: ${name}`);
     }
-    return entry;
+    return this.entries[name];
+  }
+
+  has(name: string): boolean {
+    return typeof this.entries[name] !== 'undefined';
+  }
+
+  getNames(): string[] {
+    return Object.keys(this.entries);
+  }
+
+  getEntries(): TypeRegistryEntry[] {
+    return Object.values(this.entries);
   }
 }

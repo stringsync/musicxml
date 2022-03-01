@@ -1,4 +1,3 @@
-import { MusicXmlError } from '../MusicXmlError';
 import { AnyXmlElement, XmlNode, XsComplexType, XsElement, XsGroup, XsSimpleType } from './types';
 
 export const isXmlNode = (value: any): value is XmlNode => {
@@ -10,19 +9,23 @@ export const isXmlElement = (value: any): value is AnyXmlElement => {
 };
 
 export const isXsSimpleType = (value: any): value is XsSimpleType => {
-  return isXmlElement(value) && value.name === 'xs:simpleType';
+  return isXmlElement(value) && value.tagName === 'xs:simpleType';
 };
 
 export const isXsComplexType = (value: any): value is XsComplexType => {
-  return isXmlElement(value) && value.name === 'xs:complexType';
+  return isXmlElement(value) && value.tagName === 'xs:complexType';
 };
 
 export const isXsGroup = (value: any): value is XsGroup => {
-  return isXmlElement(value) && value.name === 'xs:group';
+  return isXmlElement(value) && value.tagName === 'xs:group';
 };
 
 export const isXsElement = (value: any): value is XsElement => {
-  return isXmlElement(value) && value.name === 'xs:element';
+  return isXmlElement(value) && value.tagName === 'xs:element';
+};
+
+export const isNamed = (value: any): value is { attributes: { name: string } } => {
+  return isXmlElement(value) && typeof value.attributes.name === 'string';
 };
 
 export const deepCopy = <T>(value: T): T => {
@@ -36,8 +39,4 @@ export const deepCopy = <T>(value: T): T => {
     return copy;
   }
   return value;
-};
-
-export const assertUnreachable = (): never => {
-  throw new MusicXmlError('expected code to not be reachable');
 };

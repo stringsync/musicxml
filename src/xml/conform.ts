@@ -1,7 +1,8 @@
 import { MusicXmlError } from '../MusicXmlError';
+import { assertUnreachable } from '../util';
 import { TypeRegistry, TypeRegistryEntry } from './TypeRegistry';
 import { AnyXmlElement, XmlDocument, XmlNode, XsComplexType, XsElement, XsGroup, XsSimpleType } from './types';
-import { assertUnreachable, deepCopy, isXmlElement } from './util';
+import { deepCopy, isXmlElement } from './util';
 
 class MusicXmlResolveError extends MusicXmlError {}
 
@@ -30,8 +31,8 @@ class Resolver {
       throw new MusicXmlResolveError(`expected node with type 'element', got: '${element.type}'`);
     }
 
-    const entry = this.registry.getEntry(element.name);
-    switch (entry.name) {
+    const entry = this.registry.get(element.tagName);
+    switch (entry.tagName) {
       case 'xs:simpleType':
         return this.resolveXsSimpleType(element, entry);
       case 'xs:complexType':
@@ -64,7 +65,7 @@ class Resolver {
 
 class Validator {
   static validate(node: XmlNode, entry: TypeRegistryEntry): boolean {
-    switch (entry.name) {
+    switch (entry.tagName) {
       case 'xs:element':
       case 'xs:simpleType':
       case 'xs:complexType':

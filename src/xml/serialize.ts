@@ -29,7 +29,7 @@ const toXmlJsElement = (content: XmlElementContent): xmlJs.Element[] => {
         return [
           {
             type: 'element',
-            name: content.name,
+            name: content.tagName,
             attributes: toXmlJsElementAttributes(content.attributes),
             elements: content.contents.flatMap(toXmlJsElement),
           },
