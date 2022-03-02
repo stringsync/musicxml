@@ -182,7 +182,7 @@ but it was still incredibly challenging.
 
 The problem came down to parsing the _contents_ of an xsd element. The main
 two approaches I tried were: (1) making a sax-like state machine and (2) writing imperative routines to parse the xsd.
-Take this `<xs:schema>` definition for example:
+Take this [`<xs:schema>`](<https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms256460(v=vs.100)>) definition for example:
 
 ```
 <schema
@@ -227,8 +227,9 @@ Thanks to `xml-js`, I was able to get some intermediate structure that looked li
 In the state machine approach, it was difficult to simulate stack frames in order to "jump back" to a particular place.
 I tried using object paths, but they were ultimately messy and troublesome.
 
-In the imperative approach, there were too many elements to really cover every use case easily. I would want the imperative
-approach to be reasonably tested, which is why I ultimately moved away from that approach.
+In the imperative approach, there were so many elements and nested groupings and it would take a while to implement correctly.
+I would want the imperative approach to be reasonably tested, making this too expensive for me to pursue, which is why I
+ultimately moved away from that approach.
 
 That was just issues with parsing the xsd. I didn't even get to the point where I could conform an xml document to an xsd file.
 
@@ -240,5 +241,5 @@ All in all, rolling my own descriptor/schema library within this package (see [s
 me to use a structure that was more compatible with TypeScript. I considered transforming musicxml.xsd into these
 descriptors, but I wrote labeling functionality that made it easy to reference logical groups. For example, the
 [<note> element](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/) has multiple choices for what
-its contents can be. musicxml.xsd does not name these choices. In my descriptor library, I name them making them easier
+its main content can be. musicxml.xsd does not name these choices. In my descriptor library, I name them making them easier
 to work with (see [src/lib/elements/Note.ts](src/lib/elements/Note.ts)).
