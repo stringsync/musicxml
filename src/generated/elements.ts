@@ -22,8 +22,9 @@ export class WorkNumber implements XMLElement<'work-number', WorkNumberAttribute
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): WorkNumber {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -47,8 +48,9 @@ export class WorkTitle implements XMLElement<'work-title', WorkTitleAttributes, 
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): WorkTitle {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -95,38 +97,44 @@ export class Opus implements XMLElement<'opus', OpusAttributes, OpusContents> {
   getXlinkHref(): string {
     return this.attributes['xlink:href'];
   }
-  setXlinkHref(xlinkHref: string): void {
+  setXlinkHref(xlinkHref: string): Opus {
     this.attributes['xlink:href'] = xlinkHref;
+    return this;
   }
   getXlinkActuate(): 'none' | 'onRequest' | 'onLoad' | 'other' | null {
     return this.attributes['xlink:actuate'];
   }
-  setXlinkActuate(xlinkActuate: 'none' | 'onRequest' | 'onLoad' | 'other' | null): void {
+  setXlinkActuate(xlinkActuate: 'none' | 'onRequest' | 'onLoad' | 'other' | null): Opus {
     this.attributes['xlink:actuate'] = xlinkActuate;
+    return this;
   }
   getXlinkRole(): string | null {
     return this.attributes['xlink:role'];
   }
-  setXlinkRole(xlinkRole: string | null): void {
+  setXlinkRole(xlinkRole: string | null): Opus {
     this.attributes['xlink:role'] = xlinkRole;
+    return this;
   }
   getXlinkShow(): 'none' | 'new' | 'replace' | 'embed' | 'other' | null {
     return this.attributes['xlink:show'];
   }
-  setXlinkShow(xlinkShow: 'none' | 'new' | 'replace' | 'embed' | 'other' | null): void {
+  setXlinkShow(xlinkShow: 'none' | 'new' | 'replace' | 'embed' | 'other' | null): Opus {
     this.attributes['xlink:show'] = xlinkShow;
+    return this;
   }
   getXlinkTitle(): string | null {
     return this.attributes['xlink:title'];
   }
-  setXlinkTitle(xlinkTitle: string | null): void {
+  setXlinkTitle(xlinkTitle: string | null): Opus {
     this.attributes['xlink:title'] = xlinkTitle;
+    return this;
   }
   getXlinkType(): 'simple' | null {
     return this.attributes['xlink:type'];
   }
-  setXlinkType(xlinkType: 'simple' | null): void {
+  setXlinkType(xlinkType: 'simple' | null): Opus {
     this.attributes['xlink:type'] = xlinkType;
+    return this;
   }
 }
 
@@ -158,20 +166,23 @@ export class Work implements XMLElement<'work', WorkAttributes, WorkContents> {
   getWorkNumber(): WorkNumber | null {
     return this.contents[0];
   }
-  setWorkNumber(workNumber: WorkNumber | null): void {
+  setWorkNumber(workNumber: WorkNumber | null): Work {
     this.contents[0] = workNumber;
+    return this;
   }
   getWorkTitle(): WorkTitle | null {
     return this.contents[1];
   }
-  setWorkTitle(workTitle: WorkTitle | null): void {
+  setWorkTitle(workTitle: WorkTitle | null): Work {
     this.contents[1] = workTitle;
+    return this;
   }
   getOpus(): Opus | null {
     return this.contents[2];
   }
-  setOpus(opus: Opus | null): void {
+  setOpus(opus: Opus | null): Work {
     this.contents[2] = opus;
+    return this;
   }
 }
 
@@ -195,8 +206,9 @@ export class MovementNumber implements XMLElement<'movement-number', MovementNum
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): MovementNumber {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -220,8 +232,9 @@ export class MovementTitle implements XMLElement<'movement-title', MovementTitle
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): MovementTitle {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -248,14 +261,16 @@ export class Creator implements XMLElement<'creator', CreatorAttributes, Creator
   getType(): string | null {
     return this.attributes['type'];
   }
-  setType(type: string | null): void {
+  setType(type: string | null): Creator {
     this.attributes['type'] = type;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Creator {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -282,14 +297,16 @@ export class Rights implements XMLElement<'rights', RightsAttributes, RightsCont
   getType(): string | null {
     return this.attributes['type'];
   }
-  setType(type: string | null): void {
+  setType(type: string | null): Rights {
     this.attributes['type'] = type;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Rights {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -317,8 +334,9 @@ export class EncodingDate implements XMLElement<'encoding-date', EncodingDateAtt
   getYyyyMmDd(): Date {
     return this.contents[0];
   }
-  setYyyyMmDd(yyyyMmDd: Date): void {
+  setYyyyMmDd(yyyyMmDd: Date): EncodingDate {
     this.contents[0] = yyyyMmDd;
+    return this;
   }
 }
 
@@ -345,14 +363,16 @@ export class Encoder implements XMLElement<'encoder', EncoderAttributes, Encoder
   getType(): string | null {
     return this.attributes['type'];
   }
-  setType(type: string | null): void {
+  setType(type: string | null): Encoder {
     this.attributes['type'] = type;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Encoder {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -376,8 +396,9 @@ export class Software implements XMLElement<'software', SoftwareAttributes, Soft
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Software {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -407,8 +428,9 @@ export class EncodingDescription
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): EncodingDescription {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -445,26 +467,30 @@ export class Supports implements XMLElement<'supports', SupportsAttributes, Supp
   getElement(): string {
     return this.attributes['element'];
   }
-  setElement(element: string): void {
+  setElement(element: string): Supports {
     this.attributes['element'] = element;
+    return this;
   }
   getType(): 'yes' | 'no' {
     return this.attributes['type'];
   }
-  setType(type: 'yes' | 'no'): void {
+  setType(type: 'yes' | 'no'): Supports {
     this.attributes['type'] = type;
+    return this;
   }
   getAttribute(): string | null {
     return this.attributes['attribute'];
   }
-  setAttribute(attribute: string | null): void {
+  setAttribute(attribute: string | null): Supports {
     this.attributes['attribute'] = attribute;
+    return this;
   }
   getValue(): string | null {
     return this.attributes['value'];
   }
-  setValue(value: string | null): void {
+  setValue(value: string | null): Supports {
     this.attributes['value'] = value;
+    return this;
   }
 }
 
@@ -515,8 +541,9 @@ export class Encoding implements XMLElement<'encoding', EncodingAttributes, Enco
     encodings: Array<
       [EncodingDate | null, Encoder | null, Software | null, EncodingDescription | null, Supports | null]
     >
-  ): void {
+  ): Encoding {
     this.contents[0] = encodings;
+    return this;
   }
 }
 
@@ -544,8 +571,9 @@ export class Source implements XMLElement<'source', SourceAttributes, SourceCont
   getText(): string | null {
     return this.contents[0];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): Source {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -572,14 +600,16 @@ export class Relation implements XMLElement<'relation', RelationAttributes, Rela
   getType(): string | null {
     return this.attributes['type'];
   }
-  setType(type: string | null): void {
+  setType(type: string | null): Relation {
     this.attributes['type'] = type;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Relation {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -608,14 +638,16 @@ export class MiscellaneousField
   getName(): string {
     return this.attributes['name'];
   }
-  setName(name: string): void {
+  setName(name: string): MiscellaneousField {
     this.attributes['name'] = name;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): MiscellaneousField {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -645,8 +677,9 @@ export class Miscellaneous implements XMLElement<'miscellaneous', MiscellaneousA
   getMiscellaneousFields(): Array<MiscellaneousField> {
     return this.contents[0];
   }
-  setMiscellaneousFields(miscellaneousFields: Array<MiscellaneousField>): void {
+  setMiscellaneousFields(miscellaneousFields: Array<MiscellaneousField>): Miscellaneous {
     this.contents[0] = miscellaneousFields;
+    return this;
   }
 }
 
@@ -688,38 +721,44 @@ export class Identification implements XMLElement<'identification', Identificati
   getCreators(): Array<Creator> {
     return this.contents[0];
   }
-  setCreators(creators: Array<Creator>): void {
+  setCreators(creators: Array<Creator>): Identification {
     this.contents[0] = creators;
+    return this;
   }
   getRights(): Array<Rights> {
     return this.contents[1];
   }
-  setRights(rights: Array<Rights>): void {
+  setRights(rights: Array<Rights>): Identification {
     this.contents[1] = rights;
+    return this;
   }
   getEncoding(): Encoding | null {
     return this.contents[2];
   }
-  setEncoding(encoding: Encoding | null): void {
+  setEncoding(encoding: Encoding | null): Identification {
     this.contents[2] = encoding;
+    return this;
   }
   getSource(): Source | null {
     return this.contents[3];
   }
-  setSource(source: Source | null): void {
+  setSource(source: Source | null): Identification {
     this.contents[3] = source;
+    return this;
   }
   getRelations(): Array<Relation> {
     return this.contents[4];
   }
-  setRelations(relations: Array<Relation>): void {
+  setRelations(relations: Array<Relation>): Identification {
     this.contents[4] = relations;
+    return this;
   }
   getMiscellaneous(): Miscellaneous | null {
     return this.contents[5];
   }
-  setMiscellaneous(miscellaneous: Miscellaneous | null): void {
+  setMiscellaneous(miscellaneous: Miscellaneous | null): Identification {
     this.contents[5] = miscellaneous;
+    return this;
   }
 }
 
@@ -752,8 +791,9 @@ export class Millimeters implements XMLElement<'millimeters', MillimetersAttribu
   getMillimeters(): number {
     return this.contents[0];
   }
-  setMillimeters(millimeters: number): void {
+  setMillimeters(millimeters: number): Millimeters {
     this.contents[0] = millimeters;
+    return this;
   }
 }
 
@@ -787,8 +827,9 @@ export class Tenths implements XMLElement<'tenths', TenthsAttributes, TenthsCont
   getTenthsValue(): number {
     return this.contents[0];
   }
-  setTenthsValue(tenthsValue: number): void {
+  setTenthsValue(tenthsValue: number): Tenths {
     this.contents[0] = tenthsValue;
+    return this;
   }
 }
 
@@ -819,14 +860,16 @@ export class Scaling implements XMLElement<'scaling', ScalingAttributes, Scaling
   getMillimeters(): Millimeters {
     return this.contents[0];
   }
-  setMillimeters(millimeters: Millimeters): void {
+  setMillimeters(millimeters: Millimeters): Scaling {
     this.contents[0] = millimeters;
+    return this;
   }
   getTenths(): Tenths {
     return this.contents[1];
   }
-  setTenths(tenths: Tenths): void {
+  setTenths(tenths: Tenths): Scaling {
     this.contents[1] = tenths;
+    return this;
   }
 }
 
@@ -878,8 +921,9 @@ export class PageHeight implements XMLElement<'page-height', PageHeightAttribute
   getPageHeightValue(): number {
     return this.contents[0];
   }
-  setPageHeightValue(pageHeightValue: number): void {
+  setPageHeightValue(pageHeightValue: number): PageHeight {
     this.contents[0] = pageHeightValue;
+    return this;
   }
 }
 
@@ -913,8 +957,9 @@ export class PageWidth implements XMLElement<'page-width', PageWidthAttributes, 
   getPageWidthValue(): number {
     return this.contents[0];
   }
-  setPageWidthValue(pageWidthValue: number): void {
+  setPageWidthValue(pageWidthValue: number): PageWidth {
     this.contents[0] = pageWidthValue;
+    return this;
   }
 }
 
@@ -948,8 +993,9 @@ export class LeftMargin implements XMLElement<'left-margin', LeftMarginAttribute
   getLeftMargin(): number {
     return this.contents[0];
   }
-  setLeftMargin(leftMargin: number): void {
+  setLeftMargin(leftMargin: number): LeftMargin {
     this.contents[0] = leftMargin;
+    return this;
   }
 }
 
@@ -977,8 +1023,9 @@ export class RightMargin implements XMLElement<'right-margin', RightMarginAttrib
   getRightMarginValue(): number {
     return this.contents[0];
   }
-  setRightMarginValue(rightMarginValue: number): void {
+  setRightMarginValue(rightMarginValue: number): RightMargin {
     this.contents[0] = rightMarginValue;
+    return this;
   }
 }
 
@@ -1012,8 +1059,9 @@ export class TopMargin implements XMLElement<'top-margin', TopMarginAttributes, 
   getTopMarginValue(): number {
     return this.contents[0];
   }
-  setTopMarginValue(topMarginValue: number): void {
+  setTopMarginValue(topMarginValue: number): TopMargin {
     this.contents[0] = topMarginValue;
+    return this;
   }
 }
 
@@ -1047,8 +1095,9 @@ export class BottomMargin implements XMLElement<'bottom-margin', BottomMarginAtt
   getBottomMargin(): number {
     return this.contents[0];
   }
-  setBottomMargin(bottomMargin: number): void {
+  setBottomMargin(bottomMargin: number): BottomMargin {
     this.contents[0] = bottomMargin;
+    return this;
   }
 }
 
@@ -1080,32 +1129,37 @@ export class PageMargins implements XMLElement<'page-margins', PageMarginsAttrib
   getType(): 'both' | 'even' | 'odd' | null {
     return this.attributes['type'];
   }
-  setType(type: 'both' | 'even' | 'odd' | null): void {
+  setType(type: 'both' | 'even' | 'odd' | null): PageMargins {
     this.attributes['type'] = type;
+    return this;
   }
   getLeftMargin(): LeftMargin {
     return this.contents[0];
   }
-  setLeftMargin(leftMargin: LeftMargin): void {
+  setLeftMargin(leftMargin: LeftMargin): PageMargins {
     this.contents[0] = leftMargin;
+    return this;
   }
   getRightMargin(): RightMargin {
     return this.contents[1];
   }
-  setRightMargin(rightMargin: RightMargin): void {
+  setRightMargin(rightMargin: RightMargin): PageMargins {
     this.contents[1] = rightMargin;
+    return this;
   }
   getTopMargin(): TopMargin {
     return this.contents[2];
   }
-  setTopMargin(topMargin: TopMargin): void {
+  setTopMargin(topMargin: TopMargin): PageMargins {
     this.contents[2] = topMargin;
+    return this;
   }
   getBottomMargin(): BottomMargin {
     return this.contents[3];
   }
-  setBottomMargin(bottomMargin: BottomMargin): void {
+  setBottomMargin(bottomMargin: BottomMargin): PageMargins {
     this.contents[3] = bottomMargin;
+    return this;
   }
 }
 
@@ -1141,20 +1195,23 @@ export class PageLayout implements XMLElement<'page-layout', PageLayoutAttribute
   getPageHeight(): PageHeight | null {
     return this.contents[0];
   }
-  setPageHeight(pageHeight: PageHeight | null): void {
+  setPageHeight(pageHeight: PageHeight | null): PageLayout {
     this.contents[0] = pageHeight;
+    return this;
   }
   getPageWidth(): PageWidth | null {
     return this.contents[1];
   }
-  setPageWidth(pageWidth: PageWidth | null): void {
+  setPageWidth(pageWidth: PageWidth | null): PageLayout {
     this.contents[1] = pageWidth;
+    return this;
   }
   getPageMargins(): [] | [PageMargins] | [PageMargins, PageMargins] {
     return this.contents[2];
   }
-  setPageMargins(pageMargins: [] | [PageMargins] | [PageMargins, PageMargins]): void {
+  setPageMargins(pageMargins: [] | [PageMargins] | [PageMargins, PageMargins]): PageLayout {
     this.contents[2] = pageMargins;
+    return this;
   }
 }
 
@@ -1185,14 +1242,16 @@ export class SystemMargins implements XMLElement<'system-margins', SystemMargins
   getLeftMargin(): LeftMargin {
     return this.contents[0];
   }
-  setLeftMargin(leftMargin: LeftMargin): void {
+  setLeftMargin(leftMargin: LeftMargin): SystemMargins {
     this.contents[0] = leftMargin;
+    return this;
   }
   getRightMargin(): RightMargin {
     return this.contents[1];
   }
-  setRightMargin(rightMargin: RightMargin): void {
+  setRightMargin(rightMargin: RightMargin): SystemMargins {
     this.contents[1] = rightMargin;
+    return this;
   }
 }
 
@@ -1226,8 +1285,9 @@ export class SystemDistance implements XMLElement<'system-distance', SystemDista
   getSystemDistanceValue(): number {
     return this.contents[0];
   }
-  setSystemDistanceValue(systemDistanceValue: number): void {
+  setSystemDistanceValue(systemDistanceValue: number): SystemDistance {
     this.contents[0] = systemDistanceValue;
+    return this;
   }
 }
 
@@ -1263,8 +1323,9 @@ export class TopSystemDistance
   getTopSystemDistanceValue(): number {
     return this.contents[0];
   }
-  setTopSystemDistanceValue(topSystemDistanceValue: number): void {
+  setTopSystemDistanceValue(topSystemDistanceValue: number): TopSystemDistance {
     this.contents[0] = topSystemDistanceValue;
+    return this;
   }
 }
 
@@ -1296,20 +1357,23 @@ export class SystemLayout implements XMLElement<'system-layout', SystemLayoutAtt
   getSystemMargins(): SystemMargins | null {
     return this.contents[0];
   }
-  setSystemMargins(systemMargins: SystemMargins | null): void {
+  setSystemMargins(systemMargins: SystemMargins | null): SystemLayout {
     this.contents[0] = systemMargins;
+    return this;
   }
   getSystemDistance(): SystemDistance | null {
     return this.contents[1];
   }
-  setSystemDistance(systemDistance: SystemDistance | null): void {
+  setSystemDistance(systemDistance: SystemDistance | null): SystemLayout {
     this.contents[1] = systemDistance;
+    return this;
   }
   getTopSystemDistance(): TopSystemDistance | null {
     return this.contents[2];
   }
-  setTopSystemDistance(topSystemDistance: TopSystemDistance | null): void {
+  setTopSystemDistance(topSystemDistance: TopSystemDistance | null): SystemLayout {
     this.contents[2] = topSystemDistance;
+    return this;
   }
 }
 
@@ -1343,8 +1407,9 @@ export class StaffDistance implements XMLElement<'staff-distance', StaffDistance
   getStaffDistanceValue(): number {
     return this.contents[0];
   }
-  setStaffDistanceValue(staffDistanceValue: number): void {
+  setStaffDistanceValue(staffDistanceValue: number): StaffDistance {
     this.contents[0] = staffDistanceValue;
+    return this;
   }
 }
 
@@ -1371,14 +1436,16 @@ export class StaffLayout implements XMLElement<'staff-layout', StaffLayoutAttrib
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): StaffLayout {
     this.attributes['number'] = number;
+    return this;
   }
   getStaffDistance(): StaffDistance | null {
     return this.contents[0];
   }
-  setStaffDistance(staffDistance: StaffDistance | null): void {
+  setStaffDistance(staffDistance: StaffDistance | null): StaffLayout {
     this.contents[0] = staffDistance;
+    return this;
   }
 }
 
@@ -1500,14 +1567,16 @@ export class LineWidth implements XMLElement<'line-width', LineWidthAttributes, 
       | 'tie tip'
       | 'tuplet bracket'
       | 'wedge'
-  ): void {
+  ): LineWidth {
     this.attributes['type'] = type;
+    return this;
   }
   getLineWidth(): number {
     return this.contents[0];
   }
-  setLineWidth(lineWidth: number): void {
+  setLineWidth(lineWidth: number): LineWidth {
     this.contents[0] = lineWidth;
+    return this;
   }
 }
 
@@ -1536,14 +1605,16 @@ export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, Not
   getType(): 'cue' | 'grace' | 'grace-cue' | 'large' {
     return this.attributes['type'];
   }
-  setType(type: 'cue' | 'grace' | 'grace-cue' | 'large'): void {
+  setType(type: 'cue' | 'grace' | 'grace-cue' | 'large'): NoteSize {
     this.attributes['type'] = type;
+    return this;
   }
   getNoteSize(): number {
     return this.contents[0];
   }
-  setNoteSize(noteSize: number): void {
+  setNoteSize(noteSize: number): NoteSize {
     this.contents[0] = noteSize;
+    return this;
   }
 }
 
@@ -1576,14 +1647,16 @@ export class Distance implements XMLElement<'distance', DistanceAttributes, Dist
   getType(): 'beam' | 'hyphen' {
     return this.attributes['type'];
   }
-  setType(type: 'beam' | 'hyphen'): void {
+  setType(type: 'beam' | 'hyphen'): Distance {
     this.attributes['type'] = type;
+    return this;
   }
   getDistance(): number {
     return this.contents[0];
   }
-  setDistance(distance: number): void {
+  setDistance(distance: number): Distance {
     this.contents[0] = distance;
+    return this;
   }
 }
 
@@ -1671,14 +1744,16 @@ export class Glyph implements XMLElement<'glyph', GlyphAttributes, GlyphContents
       | 'octave-shift-down-22'
       | 'octave-shift-up-22'
       | 'octave-shift-continue-22'
-  ): void {
+  ): Glyph {
     this.attributes['type'] = type;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Glyph {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -1707,14 +1782,16 @@ export class OtherAppearance
   getType(): string {
     return this.attributes['type'];
   }
-  setType(type: string): void {
+  setType(type: string): OtherAppearance {
     this.attributes['type'] = type;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): OtherAppearance {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -1754,32 +1831,37 @@ export class Appearance implements XMLElement<'appearance', AppearanceAttributes
   getLineWidths(): Array<LineWidth> {
     return this.contents[0];
   }
-  setLineWidths(lineWidths: Array<LineWidth>): void {
+  setLineWidths(lineWidths: Array<LineWidth>): Appearance {
     this.contents[0] = lineWidths;
+    return this;
   }
   getNoteSizes(): Array<NoteSize> {
     return this.contents[1];
   }
-  setNoteSizes(noteSizes: Array<NoteSize>): void {
+  setNoteSizes(noteSizes: Array<NoteSize>): Appearance {
     this.contents[1] = noteSizes;
+    return this;
   }
   getDistances(): Array<Distance> {
     return this.contents[2];
   }
-  setDistances(distances: Array<Distance>): void {
+  setDistances(distances: Array<Distance>): Appearance {
     this.contents[2] = distances;
+    return this;
   }
   getGlyphs(): Array<Glyph> {
     return this.contents[3];
   }
-  setGlyphs(glyphs: Array<Glyph>): void {
+  setGlyphs(glyphs: Array<Glyph>): Appearance {
     this.contents[3] = glyphs;
+    return this;
   }
   getOtherAppearances(): Array<OtherAppearance> {
     return this.contents[4];
   }
-  setOtherAppearances(otherAppearances: Array<OtherAppearance>): void {
+  setOtherAppearances(otherAppearances: Array<OtherAppearance>): Appearance {
     this.contents[4] = otherAppearances;
+    return this;
   }
 }
 
@@ -1825,28 +1907,32 @@ export class MusicFont implements XMLElement<'music-font', MusicFontAttributes, 
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): MusicFont {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): MusicFont {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): MusicFont {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): MusicFont {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
 }
 
@@ -1892,28 +1978,32 @@ export class WordFont implements XMLElement<'word-font', WordFontAttributes, Wor
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): WordFont {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): WordFont {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): WordFont {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): WordFont {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
 }
 
@@ -1963,40 +2053,46 @@ export class LyricFont implements XMLElement<'lyric-font', LyricFontAttributes, 
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): LyricFont {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): LyricFont {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): LyricFont {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): LyricFont {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getName(): string | null {
     return this.attributes['name'];
   }
-  setName(name: string | null): void {
+  setName(name: string | null): LyricFont {
     this.attributes['name'] = name;
+    return this;
   }
   getNumber(): string | null {
     return this.attributes['number'];
   }
-  setNumber(number: string | null): void {
+  setNumber(number: string | null): LyricFont {
     this.attributes['number'] = number;
+    return this;
   }
 }
 
@@ -2027,20 +2123,23 @@ export class LyricLanguage implements XMLElement<'lyric-language', LyricLanguage
   getXmlLang(): string {
     return this.attributes['xml:lang'];
   }
-  setXmlLang(xmlLang: string): void {
+  setXmlLang(xmlLang: string): LyricLanguage {
     this.attributes['xml:lang'] = xmlLang;
+    return this;
   }
   getName(): string | null {
     return this.attributes['name'];
   }
-  setName(name: string | null): void {
+  setName(name: string | null): LyricLanguage {
     this.attributes['name'] = name;
+    return this;
   }
   getNumber(): string | null {
     return this.attributes['number'];
   }
-  setNumber(number: string | null): void {
+  setNumber(number: string | null): LyricLanguage {
     this.attributes['number'] = number;
+    return this;
   }
 }
 
@@ -2090,62 +2189,72 @@ export class Defaults implements XMLElement<'defaults', DefaultsAttributes, Defa
   getScaling(): Scaling | null {
     return this.contents[0];
   }
-  setScaling(scaling: Scaling | null): void {
+  setScaling(scaling: Scaling | null): Defaults {
     this.contents[0] = scaling;
+    return this;
   }
   getConcertScore(): ConcertScore | null {
     return this.contents[1];
   }
-  setConcertScore(concertScore: ConcertScore | null): void {
+  setConcertScore(concertScore: ConcertScore | null): Defaults {
     this.contents[1] = concertScore;
+    return this;
   }
   getPageLayout(): PageLayout | null {
     return this.contents[2];
   }
-  setPageLayout(pageLayout: PageLayout | null): void {
+  setPageLayout(pageLayout: PageLayout | null): Defaults {
     this.contents[2] = pageLayout;
+    return this;
   }
   getSystemLayout(): SystemLayout | null {
     return this.contents[3];
   }
-  setSystemLayout(systemLayout: SystemLayout | null): void {
+  setSystemLayout(systemLayout: SystemLayout | null): Defaults {
     this.contents[3] = systemLayout;
+    return this;
   }
   getStaffLayouts(): Array<StaffLayout> {
     return this.contents[4];
   }
-  setStaffLayouts(staffLayouts: Array<StaffLayout>): void {
+  setStaffLayouts(staffLayouts: Array<StaffLayout>): Defaults {
     this.contents[4] = staffLayouts;
+    return this;
   }
   getAppearance(): Appearance | null {
     return this.contents[5];
   }
-  setAppearance(appearance: Appearance | null): void {
+  setAppearance(appearance: Appearance | null): Defaults {
     this.contents[5] = appearance;
+    return this;
   }
   getMusicFont(): MusicFont | null {
     return this.contents[6];
   }
-  setMusicFont(musicFont: MusicFont | null): void {
+  setMusicFont(musicFont: MusicFont | null): Defaults {
     this.contents[6] = musicFont;
+    return this;
   }
   getWordFont(): WordFont | null {
     return this.contents[7];
   }
-  setWordFont(wordFont: WordFont | null): void {
+  setWordFont(wordFont: WordFont | null): Defaults {
     this.contents[7] = wordFont;
+    return this;
   }
   getLyricFonts(): Array<LyricFont> {
     return this.contents[8];
   }
-  setLyricFonts(lyricFonts: Array<LyricFont>): void {
+  setLyricFonts(lyricFonts: Array<LyricFont>): Defaults {
     this.contents[8] = lyricFonts;
+    return this;
   }
   getLyricLanguages(): Array<LyricLanguage> {
     return this.contents[9];
   }
-  setLyricLanguages(lyricLanguages: Array<LyricLanguage>): void {
+  setLyricLanguages(lyricLanguages: Array<LyricLanguage>): Defaults {
     this.contents[9] = lyricLanguages;
+    return this;
   }
 }
 
@@ -2173,8 +2282,9 @@ export class CreditType implements XMLElement<'credit-type', CreditTypeAttribute
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): CreditType {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -2251,80 +2361,93 @@ export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
   getXlinkHref(): string {
     return this.attributes['xlink:href'];
   }
-  setXlinkHref(xlinkHref: string): void {
+  setXlinkHref(xlinkHref: string): Link {
     this.attributes['xlink:href'] = xlinkHref;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Link {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Link {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getElement(): string | null {
     return this.attributes['element'];
   }
-  setElement(element: string | null): void {
+  setElement(element: string | null): Link {
     this.attributes['element'] = element;
+    return this;
   }
   getName(): string | null {
     return this.attributes['name'];
   }
-  setName(name: string | null): void {
+  setName(name: string | null): Link {
     this.attributes['name'] = name;
+    return this;
   }
   getPosition(): number | null {
     return this.attributes['position'];
   }
-  setPosition(position: number | null): void {
+  setPosition(position: number | null): Link {
     this.attributes['position'] = position;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Link {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Link {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getXlinkActuate(): 'none' | 'onRequest' | 'onLoad' | 'other' | null {
     return this.attributes['xlink:actuate'];
   }
-  setXlinkActuate(xlinkActuate: 'none' | 'onRequest' | 'onLoad' | 'other' | null): void {
+  setXlinkActuate(xlinkActuate: 'none' | 'onRequest' | 'onLoad' | 'other' | null): Link {
     this.attributes['xlink:actuate'] = xlinkActuate;
+    return this;
   }
   getXlinkRole(): string | null {
     return this.attributes['xlink:role'];
   }
-  setXlinkRole(xlinkRole: string | null): void {
+  setXlinkRole(xlinkRole: string | null): Link {
     this.attributes['xlink:role'] = xlinkRole;
+    return this;
   }
   getXlinkShow(): 'none' | 'new' | 'replace' | 'embed' | 'other' | null {
     return this.attributes['xlink:show'];
   }
-  setXlinkShow(xlinkShow: 'none' | 'new' | 'replace' | 'embed' | 'other' | null): void {
+  setXlinkShow(xlinkShow: 'none' | 'new' | 'replace' | 'embed' | 'other' | null): Link {
     this.attributes['xlink:show'] = xlinkShow;
+    return this;
   }
   getXlinkTitle(): string | null {
     return this.attributes['xlink:title'];
   }
-  setXlinkTitle(xlinkTitle: string | null): void {
+  setXlinkTitle(xlinkTitle: string | null): Link {
     this.attributes['xlink:title'] = xlinkTitle;
+    return this;
   }
   getXlinkType(): 'simple' | null {
     return this.attributes['xlink:type'];
   }
-  setXlinkType(xlinkType: 'simple' | null): void {
+  setXlinkType(xlinkType: 'simple' | null): Link {
     this.attributes['xlink:type'] = xlinkType;
+    return this;
   }
 }
 
@@ -2356,26 +2479,30 @@ export class Bookmark implements XMLElement<'bookmark', BookmarkAttributes, Book
   getId(): string {
     return this.attributes['id'];
   }
-  setId(id: string): void {
+  setId(id: string): Bookmark {
     this.attributes['id'] = id;
+    return this;
   }
   getElement(): string | null {
     return this.attributes['element'];
   }
-  setElement(element: string | null): void {
+  setElement(element: string | null): Bookmark {
     this.attributes['element'] = element;
+    return this;
   }
   getName(): string | null {
     return this.attributes['name'];
   }
-  setName(name: string | null): void {
+  setName(name: string | null): Bookmark {
     this.attributes['name'] = name;
+    return this;
   }
   getPosition(): number | null {
     return this.attributes['position'];
   }
-  setPosition(position: number | null): void {
+  setPosition(position: number | null): Bookmark {
     this.attributes['position'] = position;
+    return this;
   }
 }
 
@@ -2442,68 +2569,79 @@ export class CreditImage implements XMLElement<'credit-image', CreditImageAttrib
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): CreditImage {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): CreditImage {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): CreditImage {
     this.attributes['halign'] = halign;
+    return this;
   }
   getHeight(): number | null {
     return this.attributes['height'];
   }
-  setHeight(height: number | null): void {
+  setHeight(height: number | null): CreditImage {
     this.attributes['height'] = height;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): CreditImage {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): CreditImage {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): CreditImage {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSource(): string | null {
     return this.attributes['source'];
   }
-  setSource(source: string | null): void {
+  setSource(source: string | null): CreditImage {
     this.attributes['source'] = source;
+    return this;
   }
   getType(): string | null {
     return this.attributes['type'];
   }
-  setType(type: string | null): void {
+  setType(type: string | null): CreditImage {
     this.attributes['type'] = type;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | null): CreditImage {
     this.attributes['valign'] = valign;
+    return this;
   }
   getWidth(): number | null {
     return this.attributes['width'];
   }
-  setWidth(width: number | null): void {
+  setWidth(width: number | null): CreditImage {
     this.attributes['width'] = width;
+    return this;
   }
 }
 
@@ -2645,26 +2783,30 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): CreditWords {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): CreditWords {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): CreditWords {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
     return this.attributes['dir'];
   }
-  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): void {
+  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): CreditWords {
     this.attributes['dir'] = dir;
+    return this;
   }
   getEnclosure():
     | 'rectangle'
@@ -2701,124 +2843,144 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
       | 'nonagon'
       | 'decagon'
       | null
-  ): void {
+  ): CreditWords {
     this.attributes['enclosure'] = enclosure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): CreditWords {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): CreditWords {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): CreditWords {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): CreditWords {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): CreditWords {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): CreditWords {
     this.attributes['id'] = id;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): CreditWords {
     this.attributes['justify'] = justify;
+    return this;
   }
   getLetterSpacing(): 'normal' | number | null {
     return this.attributes['letter-spacing'];
   }
-  setLetterSpacing(letterSpacing: 'normal' | number | null): void {
+  setLetterSpacing(letterSpacing: 'normal' | number | null): CreditWords {
     this.attributes['letter-spacing'] = letterSpacing;
+    return this;
   }
   getLineHeight(): 'normal' | number | null {
     return this.attributes['line-height'];
   }
-  setLineHeight(lineHeight: 'normal' | number | null): void {
+  setLineHeight(lineHeight: 'normal' | number | null): CreditWords {
     this.attributes['line-height'] = lineHeight;
+    return this;
   }
   getLineThrough(): number | null {
     return this.attributes['line-through'];
   }
-  setLineThrough(lineThrough: number | null): void {
+  setLineThrough(lineThrough: number | null): CreditWords {
     this.attributes['line-through'] = lineThrough;
+    return this;
   }
   getOverline(): number | null {
     return this.attributes['overline'];
   }
-  setOverline(overline: number | null): void {
+  setOverline(overline: number | null): CreditWords {
     this.attributes['overline'] = overline;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): CreditWords {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): CreditWords {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getRotation(): number | null {
     return this.attributes['rotation'];
   }
-  setRotation(rotation: number | null): void {
+  setRotation(rotation: number | null): CreditWords {
     this.attributes['rotation'] = rotation;
+    return this;
   }
   getUnderline(): number | null {
     return this.attributes['underline'];
   }
-  setUnderline(underline: number | null): void {
+  setUnderline(underline: number | null): CreditWords {
     this.attributes['underline'] = underline;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): CreditWords {
     this.attributes['valign'] = valign;
+    return this;
   }
   getXmlLang(): string | null {
     return this.attributes['xml:lang'];
   }
-  setXmlLang(xmlLang: string | null): void {
+  setXmlLang(xmlLang: string | null): CreditWords {
     this.attributes['xml:lang'] = xmlLang;
+    return this;
   }
   getXmlSpace(): 'default' | 'preserve' | null {
     return this.attributes['xml:space'];
   }
-  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): void {
+  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): CreditWords {
     this.attributes['xml:space'] = xmlSpace;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): CreditWords {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -2956,26 +3118,30 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): CreditSymbol {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): CreditSymbol {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): CreditSymbol {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
     return this.attributes['dir'];
   }
-  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): void {
+  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): CreditSymbol {
     this.attributes['dir'] = dir;
+    return this;
   }
   getEnclosure():
     | 'rectangle'
@@ -3012,112 +3178,130 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
       | 'nonagon'
       | 'decagon'
       | null
-  ): void {
+  ): CreditSymbol {
     this.attributes['enclosure'] = enclosure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): CreditSymbol {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): CreditSymbol {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): CreditSymbol {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): CreditSymbol {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): CreditSymbol {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): CreditSymbol {
     this.attributes['id'] = id;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): CreditSymbol {
     this.attributes['justify'] = justify;
+    return this;
   }
   getLetterSpacing(): 'normal' | number | null {
     return this.attributes['letter-spacing'];
   }
-  setLetterSpacing(letterSpacing: 'normal' | number | null): void {
+  setLetterSpacing(letterSpacing: 'normal' | number | null): CreditSymbol {
     this.attributes['letter-spacing'] = letterSpacing;
+    return this;
   }
   getLineHeight(): 'normal' | number | null {
     return this.attributes['line-height'];
   }
-  setLineHeight(lineHeight: 'normal' | number | null): void {
+  setLineHeight(lineHeight: 'normal' | number | null): CreditSymbol {
     this.attributes['line-height'] = lineHeight;
+    return this;
   }
   getLineThrough(): number | null {
     return this.attributes['line-through'];
   }
-  setLineThrough(lineThrough: number | null): void {
+  setLineThrough(lineThrough: number | null): CreditSymbol {
     this.attributes['line-through'] = lineThrough;
+    return this;
   }
   getOverline(): number | null {
     return this.attributes['overline'];
   }
-  setOverline(overline: number | null): void {
+  setOverline(overline: number | null): CreditSymbol {
     this.attributes['overline'] = overline;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): CreditSymbol {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): CreditSymbol {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getRotation(): number | null {
     return this.attributes['rotation'];
   }
-  setRotation(rotation: number | null): void {
+  setRotation(rotation: number | null): CreditSymbol {
     this.attributes['rotation'] = rotation;
+    return this;
   }
   getUnderline(): number | null {
     return this.attributes['underline'];
   }
-  setUnderline(underline: number | null): void {
+  setUnderline(underline: number | null): CreditSymbol {
     this.attributes['underline'] = underline;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): CreditSymbol {
     this.attributes['valign'] = valign;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): CreditSymbol {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -3193,38 +3377,44 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Credit {
     this.attributes['id'] = id;
+    return this;
   }
   getPage(): number | null {
     return this.attributes['page'];
   }
-  setPage(page: number | null): void {
+  setPage(page: number | null): Credit {
     this.attributes['page'] = page;
+    return this;
   }
   getCreditTypes(): Array<CreditType> {
     return this.contents[0];
   }
-  setCreditTypes(creditTypes: Array<CreditType>): void {
+  setCreditTypes(creditTypes: Array<CreditType>): Credit {
     this.contents[0] = creditTypes;
+    return this;
   }
   getLinks(): Array<Link> {
     return this.contents[1];
   }
-  setLinks(links: Array<Link>): void {
+  setLinks(links: Array<Link>): Credit {
     this.contents[1] = links;
+    return this;
   }
   getBookmarks(): Array<Bookmark> {
     return this.contents[2];
   }
-  setBookmarks(bookmarks: Array<Bookmark>): void {
+  setBookmarks(bookmarks: Array<Bookmark>): Credit {
     this.contents[2] = bookmarks;
+    return this;
   }
   getCreditValue(): CreditImage | CreditToken {
     return this.contents[3];
   }
-  setCreditValue(creditValue: CreditImage | CreditToken): void {
+  setCreditValue(creditValue: CreditImage | CreditToken): Credit {
     this.contents[3] = creditValue;
+    return this;
   }
 }
 
@@ -3298,70 +3488,81 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): GroupName {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): GroupName {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): GroupName {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): GroupName {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): GroupName {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): GroupName {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): GroupName {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): GroupName {
     this.attributes['justify'] = justify;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): GroupName {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): GroupName {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): GroupName {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -3501,26 +3702,30 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): DisplayText {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): DisplayText {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): DisplayText {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
     return this.attributes['dir'];
   }
-  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): void {
+  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): DisplayText {
     this.attributes['dir'] = dir;
+    return this;
   }
   getEnclosure():
     | 'rectangle'
@@ -3557,118 +3762,137 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
       | 'nonagon'
       | 'decagon'
       | null
-  ): void {
+  ): DisplayText {
     this.attributes['enclosure'] = enclosure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): DisplayText {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): DisplayText {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): DisplayText {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): DisplayText {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): DisplayText {
     this.attributes['halign'] = halign;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): DisplayText {
     this.attributes['justify'] = justify;
+    return this;
   }
   getLetterSpacing(): 'normal' | number | null {
     return this.attributes['letter-spacing'];
   }
-  setLetterSpacing(letterSpacing: 'normal' | number | null): void {
+  setLetterSpacing(letterSpacing: 'normal' | number | null): DisplayText {
     this.attributes['letter-spacing'] = letterSpacing;
+    return this;
   }
   getLineHeight(): 'normal' | number | null {
     return this.attributes['line-height'];
   }
-  setLineHeight(lineHeight: 'normal' | number | null): void {
+  setLineHeight(lineHeight: 'normal' | number | null): DisplayText {
     this.attributes['line-height'] = lineHeight;
+    return this;
   }
   getLineThrough(): number | null {
     return this.attributes['line-through'];
   }
-  setLineThrough(lineThrough: number | null): void {
+  setLineThrough(lineThrough: number | null): DisplayText {
     this.attributes['line-through'] = lineThrough;
+    return this;
   }
   getOverline(): number | null {
     return this.attributes['overline'];
   }
-  setOverline(overline: number | null): void {
+  setOverline(overline: number | null): DisplayText {
     this.attributes['overline'] = overline;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): DisplayText {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): DisplayText {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getRotation(): number | null {
     return this.attributes['rotation'];
   }
-  setRotation(rotation: number | null): void {
+  setRotation(rotation: number | null): DisplayText {
     this.attributes['rotation'] = rotation;
+    return this;
   }
   getUnderline(): number | null {
     return this.attributes['underline'];
   }
-  setUnderline(underline: number | null): void {
+  setUnderline(underline: number | null): DisplayText {
     this.attributes['underline'] = underline;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): DisplayText {
     this.attributes['valign'] = valign;
+    return this;
   }
   getXmlLang(): string | null {
     return this.attributes['xml:lang'];
   }
-  setXmlLang(xmlLang: string | null): void {
+  setXmlLang(xmlLang: string | null): DisplayText {
     this.attributes['xml:lang'] = xmlLang;
+    return this;
   }
   getXmlSpace(): 'default' | 'preserve' | null {
     return this.attributes['xml:space'];
   }
-  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): void {
+  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): DisplayText {
     this.attributes['xml:space'] = xmlSpace;
+    return this;
   }
   getText(): string | null {
     return this.contents[0];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): DisplayText {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -3906,26 +4130,30 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): AccidentalText {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): AccidentalText {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): AccidentalText {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
     return this.attributes['dir'];
   }
-  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): void {
+  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): AccidentalText {
     this.attributes['dir'] = dir;
+    return this;
   }
   getEnclosure():
     | 'rectangle'
@@ -3962,118 +4190,137 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
       | 'nonagon'
       | 'decagon'
       | null
-  ): void {
+  ): AccidentalText {
     this.attributes['enclosure'] = enclosure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): AccidentalText {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): AccidentalText {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): AccidentalText {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): AccidentalText {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): AccidentalText {
     this.attributes['halign'] = halign;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): AccidentalText {
     this.attributes['justify'] = justify;
+    return this;
   }
   getLetterSpacing(): 'normal' | number | null {
     return this.attributes['letter-spacing'];
   }
-  setLetterSpacing(letterSpacing: 'normal' | number | null): void {
+  setLetterSpacing(letterSpacing: 'normal' | number | null): AccidentalText {
     this.attributes['letter-spacing'] = letterSpacing;
+    return this;
   }
   getLineHeight(): 'normal' | number | null {
     return this.attributes['line-height'];
   }
-  setLineHeight(lineHeight: 'normal' | number | null): void {
+  setLineHeight(lineHeight: 'normal' | number | null): AccidentalText {
     this.attributes['line-height'] = lineHeight;
+    return this;
   }
   getLineThrough(): number | null {
     return this.attributes['line-through'];
   }
-  setLineThrough(lineThrough: number | null): void {
+  setLineThrough(lineThrough: number | null): AccidentalText {
     this.attributes['line-through'] = lineThrough;
+    return this;
   }
   getOverline(): number | null {
     return this.attributes['overline'];
   }
-  setOverline(overline: number | null): void {
+  setOverline(overline: number | null): AccidentalText {
     this.attributes['overline'] = overline;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): AccidentalText {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): AccidentalText {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getRotation(): number | null {
     return this.attributes['rotation'];
   }
-  setRotation(rotation: number | null): void {
+  setRotation(rotation: number | null): AccidentalText {
     this.attributes['rotation'] = rotation;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): AccidentalText {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getUnderline(): number | null {
     return this.attributes['underline'];
   }
-  setUnderline(underline: number | null): void {
+  setUnderline(underline: number | null): AccidentalText {
     this.attributes['underline'] = underline;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): AccidentalText {
     this.attributes['valign'] = valign;
+    return this;
   }
   getXmlLang(): string | null {
     return this.attributes['xml:lang'];
   }
-  setXmlLang(xmlLang: string | null): void {
+  setXmlLang(xmlLang: string | null): AccidentalText {
     this.attributes['xml:lang'] = xmlLang;
+    return this;
   }
   getXmlSpace(): 'default' | 'preserve' | null {
     return this.attributes['xml:space'];
   }
-  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): void {
+  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): AccidentalText {
     this.attributes['xml:space'] = xmlSpace;
+    return this;
   }
   getAccidentalValue():
     | 'other'
@@ -4162,8 +4409,9 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
       | 'flat-4'
       | 'sori'
       | 'koron'
-  ): void {
+  ): AccidentalText {
     this.contents[0] = accidentalValue;
+    return this;
   }
 }
 
@@ -4204,14 +4452,16 @@ export class GroupNameDisplay
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): GroupNameDisplay {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getTexts(): Array<DisplayText | AccidentalText> {
     return this.contents[0];
   }
-  setTexts(texts: Array<DisplayText | AccidentalText>): void {
+  setTexts(texts: Array<DisplayText | AccidentalText>): GroupNameDisplay {
     this.contents[0] = texts;
+    return this;
   }
 }
 
@@ -4287,70 +4537,81 @@ export class GroupAbbreviation
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): GroupAbbreviation {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): GroupAbbreviation {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): GroupAbbreviation {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): GroupAbbreviation {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): GroupAbbreviation {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): GroupAbbreviation {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): GroupAbbreviation {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): GroupAbbreviation {
     this.attributes['justify'] = justify;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): GroupAbbreviation {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): GroupAbbreviation {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): GroupAbbreviation {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -4395,14 +4656,16 @@ export class GroupAbbreviationDisplay
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): GroupAbbreviationDisplay {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getTexts(): Array<DisplayText | AccidentalText> {
     return this.contents[0];
   }
-  setTexts(texts: Array<DisplayText | AccidentalText>): void {
+  setTexts(texts: Array<DisplayText | AccidentalText>): GroupAbbreviationDisplay {
     this.contents[0] = texts;
+    return this;
   }
 }
 
@@ -4466,38 +4729,44 @@ export class GroupSymbol implements XMLElement<'group-symbol', GroupSymbolAttrib
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): GroupSymbol {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): GroupSymbol {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): GroupSymbol {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): GroupSymbol {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): GroupSymbol {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getGroupSymbolValue(): 'none' | 'brace' | 'bracket' | 'line' | 'square' {
     return this.contents[0];
   }
-  setGroupSymbolValue(groupSymbolValue: 'none' | 'brace' | 'bracket' | 'line' | 'square'): void {
+  setGroupSymbolValue(groupSymbolValue: 'none' | 'brace' | 'bracket' | 'line' | 'square'): GroupSymbol {
     this.contents[0] = groupSymbolValue;
+    return this;
   }
 }
 
@@ -4535,14 +4804,16 @@ export class GroupBarline implements XMLElement<'group-barline', GroupBarlineAtt
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): GroupBarline {
     this.attributes['color'] = color;
+    return this;
   }
   getGroupBarlineValue(): 'yes' | 'no' | 'Mensurstrich' {
     return this.contents[0];
   }
-  setGroupBarlineValue(groupBarlineValue: 'yes' | 'no' | 'Mensurstrich'): void {
+  setGroupBarlineValue(groupBarlineValue: 'yes' | 'no' | 'Mensurstrich'): GroupBarline {
     this.contents[0] = groupBarlineValue;
+    return this;
   }
 }
 
@@ -4700,26 +4971,30 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Footnote {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Footnote {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Footnote {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
     return this.attributes['dir'];
   }
-  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): void {
+  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): Footnote {
     this.attributes['dir'] = dir;
+    return this;
   }
   getEnclosure():
     | 'rectangle'
@@ -4756,118 +5031,137 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
       | 'nonagon'
       | 'decagon'
       | null
-  ): void {
+  ): Footnote {
     this.attributes['enclosure'] = enclosure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Footnote {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Footnote {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Footnote {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Footnote {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Footnote {
     this.attributes['halign'] = halign;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): Footnote {
     this.attributes['justify'] = justify;
+    return this;
   }
   getLetterSpacing(): 'normal' | number | null {
     return this.attributes['letter-spacing'];
   }
-  setLetterSpacing(letterSpacing: 'normal' | number | null): void {
+  setLetterSpacing(letterSpacing: 'normal' | number | null): Footnote {
     this.attributes['letter-spacing'] = letterSpacing;
+    return this;
   }
   getLineHeight(): 'normal' | number | null {
     return this.attributes['line-height'];
   }
-  setLineHeight(lineHeight: 'normal' | number | null): void {
+  setLineHeight(lineHeight: 'normal' | number | null): Footnote {
     this.attributes['line-height'] = lineHeight;
+    return this;
   }
   getLineThrough(): number | null {
     return this.attributes['line-through'];
   }
-  setLineThrough(lineThrough: number | null): void {
+  setLineThrough(lineThrough: number | null): Footnote {
     this.attributes['line-through'] = lineThrough;
+    return this;
   }
   getOverline(): number | null {
     return this.attributes['overline'];
   }
-  setOverline(overline: number | null): void {
+  setOverline(overline: number | null): Footnote {
     this.attributes['overline'] = overline;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Footnote {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Footnote {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getRotation(): number | null {
     return this.attributes['rotation'];
   }
-  setRotation(rotation: number | null): void {
+  setRotation(rotation: number | null): Footnote {
     this.attributes['rotation'] = rotation;
+    return this;
   }
   getUnderline(): number | null {
     return this.attributes['underline'];
   }
-  setUnderline(underline: number | null): void {
+  setUnderline(underline: number | null): Footnote {
     this.attributes['underline'] = underline;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Footnote {
     this.attributes['valign'] = valign;
+    return this;
   }
   getXmlLang(): string | null {
     return this.attributes['xml:lang'];
   }
-  setXmlLang(xmlLang: string | null): void {
+  setXmlLang(xmlLang: string | null): Footnote {
     this.attributes['xml:lang'] = xmlLang;
+    return this;
   }
   getXmlSpace(): 'default' | 'preserve' | null {
     return this.attributes['xml:space'];
   }
-  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): void {
+  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): Footnote {
     this.attributes['xml:space'] = xmlSpace;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Footnote {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -4906,38 +5200,44 @@ export class Level implements XMLElement<'level', LevelAttributes, LevelContents
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
   }
-  setBracket(bracket: 'yes' | 'no' | null): void {
+  setBracket(bracket: 'yes' | 'no' | null): Level {
     this.attributes['bracket'] = bracket;
+    return this;
   }
   getParentheses(): 'yes' | 'no' | null {
     return this.attributes['parentheses'];
   }
-  setParentheses(parentheses: 'yes' | 'no' | null): void {
+  setParentheses(parentheses: 'yes' | 'no' | null): Level {
     this.attributes['parentheses'] = parentheses;
+    return this;
   }
   getReference(): 'yes' | 'no' | null {
     return this.attributes['reference'];
   }
-  setReference(reference: 'yes' | 'no' | null): void {
+  setReference(reference: 'yes' | 'no' | null): Level {
     this.attributes['reference'] = reference;
+    return this;
   }
   getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
     return this.attributes['size'];
   }
-  setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): void {
+  setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): Level {
     this.attributes['size'] = size;
+    return this;
   }
   getType(): 'start' | 'stop' | 'single' | null {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'single' | null): void {
+  setType(type: 'start' | 'stop' | 'single' | null): Level {
     this.attributes['type'] = type;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Level {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -4987,68 +5287,79 @@ export class PartGroup implements XMLElement<'part-group', PartGroupAttributes, 
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): PartGroup {
     this.attributes['type'] = type;
+    return this;
   }
   getNumber(): string | null {
     return this.attributes['number'];
   }
-  setNumber(number: string | null): void {
+  setNumber(number: string | null): PartGroup {
     this.attributes['number'] = number;
+    return this;
   }
   getGroupName(): GroupName | null {
     return this.contents[0];
   }
-  setGroupName(groupName: GroupName | null): void {
+  setGroupName(groupName: GroupName | null): PartGroup {
     this.contents[0] = groupName;
+    return this;
   }
   getGroupNameDisplay(): GroupNameDisplay | null {
     return this.contents[1];
   }
-  setGroupNameDisplay(groupNameDisplay: GroupNameDisplay | null): void {
+  setGroupNameDisplay(groupNameDisplay: GroupNameDisplay | null): PartGroup {
     this.contents[1] = groupNameDisplay;
+    return this;
   }
   getGroupAbbreviation(): GroupAbbreviation | null {
     return this.contents[2];
   }
-  setGroupAbbreviation(groupAbbreviation: GroupAbbreviation | null): void {
+  setGroupAbbreviation(groupAbbreviation: GroupAbbreviation | null): PartGroup {
     this.contents[2] = groupAbbreviation;
+    return this;
   }
   getGroupAbbreviationDisplay(): GroupAbbreviationDisplay | null {
     return this.contents[3];
   }
-  setGroupAbbreviationDisplay(groupAbbreviationDisplay: GroupAbbreviationDisplay | null): void {
+  setGroupAbbreviationDisplay(groupAbbreviationDisplay: GroupAbbreviationDisplay | null): PartGroup {
     this.contents[3] = groupAbbreviationDisplay;
+    return this;
   }
   getGroupSymbol(): GroupSymbol | null {
     return this.contents[4];
   }
-  setGroupSymbol(groupSymbol: GroupSymbol | null): void {
+  setGroupSymbol(groupSymbol: GroupSymbol | null): PartGroup {
     this.contents[4] = groupSymbol;
+    return this;
   }
   getGroupBarline(): GroupBarline | null {
     return this.contents[5];
   }
-  setGroupBarline(groupBarline: GroupBarline | null): void {
+  setGroupBarline(groupBarline: GroupBarline | null): PartGroup {
     this.contents[5] = groupBarline;
+    return this;
   }
   getGroupTime(): GroupTime | null {
     return this.contents[6];
   }
-  setGroupTime(groupTime: GroupTime | null): void {
+  setGroupTime(groupTime: GroupTime | null): PartGroup {
     this.contents[6] = groupTime;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[7];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): PartGroup {
     this.contents[7] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[8];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): PartGroup {
     this.contents[8] = level;
+    return this;
   }
 }
 
@@ -5075,8 +5386,9 @@ export class InstrumentLink implements XMLElement<'instrument-link', InstrumentL
   getId(): string {
     return this.attributes['id'];
   }
-  setId(id: string): void {
+  setId(id: string): InstrumentLink {
     this.attributes['id'] = id;
+    return this;
   }
 }
 
@@ -5104,8 +5416,9 @@ export class GroupLink implements XMLElement<'group-link', GroupLinkAttributes, 
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): GroupLink {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -5155,50 +5468,58 @@ export class PartLink implements XMLElement<'part-link', PartLinkAttributes, Par
   getXlinkHref(): string {
     return this.attributes['xlink:href'];
   }
-  setXlinkHref(xlinkHref: string): void {
+  setXlinkHref(xlinkHref: string): PartLink {
     this.attributes['xlink:href'] = xlinkHref;
+    return this;
   }
   getXlinkActuate(): 'none' | 'onRequest' | 'onLoad' | 'other' | null {
     return this.attributes['xlink:actuate'];
   }
-  setXlinkActuate(xlinkActuate: 'none' | 'onRequest' | 'onLoad' | 'other' | null): void {
+  setXlinkActuate(xlinkActuate: 'none' | 'onRequest' | 'onLoad' | 'other' | null): PartLink {
     this.attributes['xlink:actuate'] = xlinkActuate;
+    return this;
   }
   getXlinkRole(): string | null {
     return this.attributes['xlink:role'];
   }
-  setXlinkRole(xlinkRole: string | null): void {
+  setXlinkRole(xlinkRole: string | null): PartLink {
     this.attributes['xlink:role'] = xlinkRole;
+    return this;
   }
   getXlinkShow(): 'none' | 'new' | 'replace' | 'embed' | 'other' | null {
     return this.attributes['xlink:show'];
   }
-  setXlinkShow(xlinkShow: 'none' | 'new' | 'replace' | 'embed' | 'other' | null): void {
+  setXlinkShow(xlinkShow: 'none' | 'new' | 'replace' | 'embed' | 'other' | null): PartLink {
     this.attributes['xlink:show'] = xlinkShow;
+    return this;
   }
   getXlinkTitle(): string | null {
     return this.attributes['xlink:title'];
   }
-  setXlinkTitle(xlinkTitle: string | null): void {
+  setXlinkTitle(xlinkTitle: string | null): PartLink {
     this.attributes['xlink:title'] = xlinkTitle;
+    return this;
   }
   getXlinkType(): 'simple' | null {
     return this.attributes['xlink:type'];
   }
-  setXlinkType(xlinkType: 'simple' | null): void {
+  setXlinkType(xlinkType: 'simple' | null): PartLink {
     this.attributes['xlink:type'] = xlinkType;
+    return this;
   }
   getInstrumentLinks(): Array<InstrumentLink> {
     return this.contents[0];
   }
-  setInstrumentLinks(instrumentLinks: Array<InstrumentLink>): void {
+  setInstrumentLinks(instrumentLinks: Array<InstrumentLink>): PartLink {
     this.contents[0] = instrumentLinks;
+    return this;
   }
   getGroupLinks(): Array<GroupLink> {
     return this.contents[1];
   }
-  setGroupLinks(groupLinks: Array<GroupLink>): void {
+  setGroupLinks(groupLinks: Array<GroupLink>): PartLink {
     this.contents[1] = groupLinks;
+    return this;
   }
 }
 
@@ -5274,76 +5595,88 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): PartName {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): PartName {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): PartName {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): PartName {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): PartName {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): PartName {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): PartName {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): PartName {
     this.attributes['justify'] = justify;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): PartName {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): PartName {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): PartName {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): PartName {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -5384,14 +5717,16 @@ export class PartNameDisplay
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): PartNameDisplay {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getTexts(): Array<DisplayText | AccidentalText> {
     return this.contents[0];
   }
-  setTexts(texts: Array<DisplayText | AccidentalText>): void {
+  setTexts(texts: Array<DisplayText | AccidentalText>): PartNameDisplay {
     this.contents[0] = texts;
+    return this;
   }
 }
 
@@ -5469,76 +5804,88 @@ export class PartAbbreviation
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): PartAbbreviation {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): PartAbbreviation {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): PartAbbreviation {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): PartAbbreviation {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): PartAbbreviation {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): PartAbbreviation {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): PartAbbreviation {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): PartAbbreviation {
     this.attributes['justify'] = justify;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): PartAbbreviation {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): PartAbbreviation {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): PartAbbreviation {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): PartAbbreviation {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -5583,14 +5930,16 @@ export class PartAbbreviationDisplay
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): PartAbbreviationDisplay {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getTexts(): Array<DisplayText | AccidentalText> {
     return this.contents[0];
   }
-  setTexts(texts: Array<DisplayText | AccidentalText>): void {
+  setTexts(texts: Array<DisplayText | AccidentalText>): PartAbbreviationDisplay {
     this.contents[0] = texts;
+    return this;
   }
 }
 
@@ -5618,8 +5967,9 @@ export class Group implements XMLElement<'group', GroupAttributes, GroupContents
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Group {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -5647,8 +5997,9 @@ export class InstrumentName implements XMLElement<'instrument-name', InstrumentN
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): InstrumentName {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -5681,8 +6032,9 @@ export class InstrumentAbbreviation
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): InstrumentAbbreviation {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -5712,8 +6064,9 @@ export class InstrumentSound
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): InstrumentSound {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -5765,8 +6118,9 @@ export class Ensemble implements XMLElement<'ensemble', EnsembleAttributes, Ense
   getSize(): '' | number {
     return this.contents[0];
   }
-  setSize(size: '' | number): void {
+  setSize(size: '' | number): Ensemble {
     this.contents[0] = size;
+    return this;
   }
 }
 
@@ -5794,8 +6148,9 @@ export class VirtualLibrary implements XMLElement<'virtual-library', VirtualLibr
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): VirtualLibrary {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -5823,8 +6178,9 @@ export class VirtualName implements XMLElement<'virtual-name', VirtualNameAttrib
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): VirtualName {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -5857,14 +6213,16 @@ export class VirtualInstrument
   getVirtualLibrary(): VirtualLibrary | null {
     return this.contents[0];
   }
-  setVirtualLibrary(virtualLibrary: VirtualLibrary | null): void {
+  setVirtualLibrary(virtualLibrary: VirtualLibrary | null): VirtualInstrument {
     this.contents[0] = virtualLibrary;
+    return this;
   }
   getVirtualName(): VirtualName | null {
     return this.contents[1];
   }
-  setVirtualName(virtualName: VirtualName | null): void {
+  setVirtualName(virtualName: VirtualName | null): VirtualInstrument {
     this.contents[1] = virtualName;
+    return this;
   }
 }
 
@@ -5915,38 +6273,44 @@ export class ScoreInstrument
   getId(): string {
     return this.attributes['id'];
   }
-  setId(id: string): void {
+  setId(id: string): ScoreInstrument {
     this.attributes['id'] = id;
+    return this;
   }
   getInstrumentName(): InstrumentName {
     return this.contents[0];
   }
-  setInstrumentName(instrumentName: InstrumentName): void {
+  setInstrumentName(instrumentName: InstrumentName): ScoreInstrument {
     this.contents[0] = instrumentName;
+    return this;
   }
   getInstrumentAbbreviation(): InstrumentAbbreviation | null {
     return this.contents[1];
   }
-  setInstrumentAbbreviation(instrumentAbbreviation: InstrumentAbbreviation | null): void {
+  setInstrumentAbbreviation(instrumentAbbreviation: InstrumentAbbreviation | null): ScoreInstrument {
     this.contents[1] = instrumentAbbreviation;
+    return this;
   }
   getInstrumentSound(): InstrumentSound | null {
     return this.contents[2];
   }
-  setInstrumentSound(instrumentSound: InstrumentSound | null): void {
+  setInstrumentSound(instrumentSound: InstrumentSound | null): ScoreInstrument {
     this.contents[2] = instrumentSound;
+    return this;
   }
   getInstrumentTypes(): Array<Solo | Ensemble> {
     return this.contents[3];
   }
-  setInstrumentTypes(instrumentTypes: Array<Solo | Ensemble>): void {
+  setInstrumentTypes(instrumentTypes: Array<Solo | Ensemble>): ScoreInstrument {
     this.contents[3] = instrumentTypes;
+    return this;
   }
   getVirtualInstrument(): VirtualInstrument | null {
     return this.contents[4];
   }
-  setVirtualInstrument(virtualInstrument: VirtualInstrument | null): void {
+  setVirtualInstrument(virtualInstrument: VirtualInstrument | null): ScoreInstrument {
     this.contents[4] = virtualInstrument;
+    return this;
   }
 }
 
@@ -5973,8 +6337,9 @@ export class Player implements XMLElement<'player', PlayerAttributes, PlayerCont
   getId(): string {
     return this.attributes['id'];
   }
-  setId(id: string): void {
+  setId(id: string): Player {
     this.attributes['id'] = id;
+    return this;
   }
 }
 
@@ -6004,20 +6369,23 @@ export class MidiDevice implements XMLElement<'midi-device', MidiDeviceAttribute
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): MidiDevice {
     this.attributes['id'] = id;
+    return this;
   }
   getMidi16(): number | null {
     return this.attributes['port'];
   }
-  setMidi16(midi16: number | null): void {
+  setMidi16(midi16: number | null): MidiDevice {
     this.attributes['port'] = midi16;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): MidiDevice {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -6047,8 +6415,9 @@ export class MidiChannel implements XMLElement<'midi-channel', MidiChannelAttrib
   getMidi16(): number {
     return this.contents[0];
   }
-  setMidi16(midi16: number): void {
+  setMidi16(midi16: number): MidiChannel {
     this.contents[0] = midi16;
+    return this;
   }
 }
 
@@ -6076,8 +6445,9 @@ export class MidiName implements XMLElement<'midi-name', MidiNameAttributes, Mid
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): MidiName {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -6107,8 +6477,9 @@ export class MidiBank implements XMLElement<'midi-bank', MidiBankAttributes, Mid
   getMidi16384(): number {
     return this.contents[0];
   }
-  setMidi16384(midi16384: number): void {
+  setMidi16384(midi16384: number): MidiBank {
     this.contents[0] = midi16384;
+    return this;
   }
 }
 
@@ -6138,8 +6509,9 @@ export class MidiProgram implements XMLElement<'midi-program', MidiProgramAttrib
   getMidi128(): number {
     return this.contents[0];
   }
-  setMidi128(midi128: number): void {
+  setMidi128(midi128: number): MidiProgram {
     this.contents[0] = midi128;
+    return this;
   }
 }
 
@@ -6169,8 +6541,9 @@ export class MidiUnpitched implements XMLElement<'midi-unpitched', MidiUnpitched
   getMidi128(): number {
     return this.contents[0];
   }
-  setMidi128(midi128: number): void {
+  setMidi128(midi128: number): MidiUnpitched {
     this.contents[0] = midi128;
+    return this;
   }
 }
 
@@ -6200,8 +6573,9 @@ export class Volume implements XMLElement<'volume', VolumeAttributes, VolumeCont
   getVolume(): number {
     return this.contents[0];
   }
-  setVolume(volume: number): void {
+  setVolume(volume: number): Volume {
     this.contents[0] = volume;
+    return this;
   }
 }
 
@@ -6231,8 +6605,9 @@ export class Pan implements XMLElement<'pan', PanAttributes, PanContents> {
   getPanValue(): number {
     return this.contents[0];
   }
-  setPanValue(panValue: number): void {
+  setPanValue(panValue: number): Pan {
     this.contents[0] = panValue;
+    return this;
   }
 }
 
@@ -6262,8 +6637,9 @@ export class Elevation implements XMLElement<'elevation', ElevationAttributes, E
   getElevation(): number {
     return this.contents[0];
   }
-  setElevation(elevation: number): void {
+  setElevation(elevation: number): Elevation {
     this.contents[0] = elevation;
+    return this;
   }
 }
 
@@ -6308,56 +6684,65 @@ export class MidiInstrument implements XMLElement<'midi-instrument', MidiInstrum
   getId(): string {
     return this.attributes['id'];
   }
-  setId(id: string): void {
+  setId(id: string): MidiInstrument {
     this.attributes['id'] = id;
+    return this;
   }
   getMidiChannel(): MidiChannel | null {
     return this.contents[0];
   }
-  setMidiChannel(midiChannel: MidiChannel | null): void {
+  setMidiChannel(midiChannel: MidiChannel | null): MidiInstrument {
     this.contents[0] = midiChannel;
+    return this;
   }
   getMidiName(): MidiName | null {
     return this.contents[1];
   }
-  setMidiName(midiName: MidiName | null): void {
+  setMidiName(midiName: MidiName | null): MidiInstrument {
     this.contents[1] = midiName;
+    return this;
   }
   getMidiBank(): MidiBank | null {
     return this.contents[2];
   }
-  setMidiBank(midiBank: MidiBank | null): void {
+  setMidiBank(midiBank: MidiBank | null): MidiInstrument {
     this.contents[2] = midiBank;
+    return this;
   }
   getMidiProgram(): MidiProgram | null {
     return this.contents[3];
   }
-  setMidiProgram(midiProgram: MidiProgram | null): void {
+  setMidiProgram(midiProgram: MidiProgram | null): MidiInstrument {
     this.contents[3] = midiProgram;
+    return this;
   }
   getMidiUnpitched(): MidiUnpitched | null {
     return this.contents[4];
   }
-  setMidiUnpitched(midiUnpitched: MidiUnpitched | null): void {
+  setMidiUnpitched(midiUnpitched: MidiUnpitched | null): MidiInstrument {
     this.contents[4] = midiUnpitched;
+    return this;
   }
   getVolume(): Volume | null {
     return this.contents[5];
   }
-  setVolume(volume: Volume | null): void {
+  setVolume(volume: Volume | null): MidiInstrument {
     this.contents[5] = volume;
+    return this;
   }
   getPan(): Pan | null {
     return this.contents[6];
   }
-  setPan(pan: Pan | null): void {
+  setPan(pan: Pan | null): MidiInstrument {
     this.contents[6] = pan;
+    return this;
   }
   getElevation(): Elevation | null {
     return this.contents[7];
   }
-  setElevation(elevation: Elevation | null): void {
+  setElevation(elevation: Elevation | null): MidiInstrument {
     this.contents[7] = elevation;
+    return this;
   }
 }
 
@@ -6416,68 +6801,79 @@ export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, 
   getId(): string {
     return this.attributes['id'];
   }
-  setId(id: string): void {
+  setId(id: string): ScorePart {
     this.attributes['id'] = id;
+    return this;
   }
   getIdentification(): Identification | null {
     return this.contents[0];
   }
-  setIdentification(identification: Identification | null): void {
+  setIdentification(identification: Identification | null): ScorePart {
     this.contents[0] = identification;
+    return this;
   }
   getPartLinks(): Array<PartLink> {
     return this.contents[1];
   }
-  setPartLinks(partLinks: Array<PartLink>): void {
+  setPartLinks(partLinks: Array<PartLink>): ScorePart {
     this.contents[1] = partLinks;
+    return this;
   }
   getPartName(): PartName {
     return this.contents[2];
   }
-  setPartName(partName: PartName): void {
+  setPartName(partName: PartName): ScorePart {
     this.contents[2] = partName;
+    return this;
   }
   getPartNameDisplay(): PartNameDisplay | null {
     return this.contents[3];
   }
-  setPartNameDisplay(partNameDisplay: PartNameDisplay | null): void {
+  setPartNameDisplay(partNameDisplay: PartNameDisplay | null): ScorePart {
     this.contents[3] = partNameDisplay;
+    return this;
   }
   getPartAbbreviation(): PartAbbreviation | null {
     return this.contents[4];
   }
-  setPartAbbreviation(partAbbreviation: PartAbbreviation | null): void {
+  setPartAbbreviation(partAbbreviation: PartAbbreviation | null): ScorePart {
     this.contents[4] = partAbbreviation;
+    return this;
   }
   getPartAbbreviationDisplay(): PartAbbreviationDisplay | null {
     return this.contents[5];
   }
-  setPartAbbreviationDisplay(partAbbreviationDisplay: PartAbbreviationDisplay | null): void {
+  setPartAbbreviationDisplay(partAbbreviationDisplay: PartAbbreviationDisplay | null): ScorePart {
     this.contents[5] = partAbbreviationDisplay;
+    return this;
   }
   getGroups(): Array<Group> {
     return this.contents[6];
   }
-  setGroups(groups: Array<Group>): void {
+  setGroups(groups: Array<Group>): ScorePart {
     this.contents[6] = groups;
+    return this;
   }
   getScoreInstruments(): Array<ScoreInstrument> {
     return this.contents[7];
   }
-  setScoreInstruments(scoreInstruments: Array<ScoreInstrument>): void {
+  setScoreInstruments(scoreInstruments: Array<ScoreInstrument>): ScorePart {
     this.contents[7] = scoreInstruments;
+    return this;
   }
   getPlayers(): Array<Player> {
     return this.contents[8];
   }
-  setPlayers(players: Array<Player>): void {
+  setPlayers(players: Array<Player>): ScorePart {
     this.contents[8] = players;
+    return this;
   }
   getMidis(): Array<MidiDevice | MidiInstrument> {
     return this.contents[9];
   }
-  setMidis(midis: Array<MidiDevice | MidiInstrument>): void {
+  setMidis(midis: Array<MidiDevice | MidiInstrument>): ScorePart {
     this.contents[9] = midis;
+    return this;
   }
 }
 
@@ -6519,20 +6915,23 @@ export class PartList implements XMLElement<'part-list', PartListAttributes, Par
   getPartGroups(): Array<PartGroup> {
     return this.contents[0];
   }
-  setPartGroups(partGroups: Array<PartGroup>): void {
+  setPartGroups(partGroups: Array<PartGroup>): PartList {
     this.contents[0] = partGroups;
+    return this;
   }
   getScorePart(): ScorePart {
     return this.contents[1];
   }
-  setScorePart(scorePart: ScorePart): void {
+  setScorePart(scorePart: ScorePart): PartList {
     this.contents[1] = scorePart;
+    return this;
   }
   getParts(): Array<PartGroup | ScorePart> {
     return this.contents[2];
   }
-  setParts(parts: Array<PartGroup | ScorePart>): void {
+  setParts(parts: Array<PartGroup | ScorePart>): PartList {
     this.contents[2] = parts;
+    return this;
   }
 }
 
@@ -6587,8 +6986,9 @@ export class Step implements XMLElement<'step', StepAttributes, StepContents> {
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
     return this.contents[0];
   }
-  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): void {
+  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): Step {
     this.contents[0] = step;
+    return this;
   }
 }
 
@@ -6621,8 +7021,9 @@ export class Alter implements XMLElement<'alter', AlterAttributes, AlterContents
   getSemitones(): number {
     return this.contents[0];
   }
-  setSemitones(semitones: number): void {
+  setSemitones(semitones: number): Alter {
     this.contents[0] = semitones;
+    return this;
   }
 }
 
@@ -6650,8 +7051,9 @@ export class Octave implements XMLElement<'octave', OctaveAttributes, OctaveCont
   getOctave(): number {
     return this.contents[0];
   }
-  setOctave(octave: number): void {
+  setOctave(octave: number): Octave {
     this.contents[0] = octave;
+    return this;
   }
 }
 
@@ -6683,20 +7085,23 @@ export class Pitch implements XMLElement<'pitch', PitchAttributes, PitchContents
   getStep(): Step {
     return this.contents[0];
   }
-  setStep(step: Step): void {
+  setStep(step: Step): Pitch {
     this.contents[0] = step;
+    return this;
   }
   getAlter(): Alter | null {
     return this.contents[1];
   }
-  setAlter(alter: Alter | null): void {
+  setAlter(alter: Alter | null): Pitch {
     this.contents[1] = alter;
+    return this;
   }
   getOctave(): Octave {
     return this.contents[2];
   }
-  setOctave(octave: Octave): void {
+  setOctave(octave: Octave): Pitch {
     this.contents[2] = octave;
+    return this;
   }
 }
 
@@ -6733,8 +7138,9 @@ export class DisplayStep implements XMLElement<'display-step', DisplayStepAttrib
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
     return this.contents[0];
   }
-  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): void {
+  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): DisplayStep {
     this.contents[0] = step;
+    return this;
   }
 }
 
@@ -6762,8 +7168,9 @@ export class DisplayOctave implements XMLElement<'display-octave', DisplayOctave
   getOctave(): number {
     return this.contents[0];
   }
-  setOctave(octave: number): void {
+  setOctave(octave: number): DisplayOctave {
     this.contents[0] = octave;
+    return this;
   }
 }
 
@@ -6794,14 +7201,16 @@ export class Unpitched implements XMLElement<'unpitched', UnpitchedAttributes, U
   getDisplayStep(): DisplayStep {
     return this.contents[0];
   }
-  setDisplayStep(displayStep: DisplayStep): void {
+  setDisplayStep(displayStep: DisplayStep): Unpitched {
     this.contents[0] = displayStep;
+    return this;
   }
   getDisplayOctave(): DisplayOctave {
     return this.contents[1];
   }
-  setDisplayOctave(displayOctave: DisplayOctave): void {
+  setDisplayOctave(displayOctave: DisplayOctave): Unpitched {
     this.contents[1] = displayOctave;
+    return this;
   }
 }
 
@@ -6840,14 +7249,16 @@ export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
   getMeasure(): 'yes' | 'no' | null {
     return this.attributes['measure'];
   }
-  setMeasure(measure: 'yes' | 'no' | null): void {
+  setMeasure(measure: 'yes' | 'no' | null): Rest {
     this.attributes['measure'] = measure;
+    return this;
   }
   getRestValue(): [DisplayStep, DisplayOctave] | null {
     return this.contents[0];
   }
-  setRestValue(restValue: [DisplayStep, DisplayOctave] | null): void {
+  setRestValue(restValue: [DisplayStep, DisplayOctave] | null): Rest {
     this.contents[0] = restValue;
+    return this;
   }
 }
 
@@ -6880,8 +7291,9 @@ export class Duration implements XMLElement<'duration', DurationAttributes, Dura
   getPositiveDivisions(): number {
     return this.contents[0];
   }
-  setPositiveDivisions(positiveDivisions: number): void {
+  setPositiveDivisions(positiveDivisions: number): Duration {
     this.contents[0] = positiveDivisions;
+    return this;
   }
 }
 
@@ -6911,14 +7323,16 @@ export class Tie implements XMLElement<'tie', TieAttributes, TieContents> {
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): Tie {
     this.attributes['type'] = type;
+    return this;
   }
   getTimeOnly(): string | null {
     return this.attributes['time-only'];
   }
-  setTimeOnly(timeOnly: string | null): void {
+  setTimeOnly(timeOnly: string | null): Tie {
     this.attributes['time-only'] = timeOnly;
+    return this;
   }
 }
 
@@ -6973,26 +7387,30 @@ export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents
   getMakeTime(): number | null {
     return this.attributes['make-time'];
   }
-  setMakeTime(makeTime: number | null): void {
+  setMakeTime(makeTime: number | null): Grace {
     this.attributes['make-time'] = makeTime;
+    return this;
   }
   getSlash(): 'yes' | 'no' | null {
     return this.attributes['slash'];
   }
-  setSlash(slash: 'yes' | 'no' | null): void {
+  setSlash(slash: 'yes' | 'no' | null): Grace {
     this.attributes['slash'] = slash;
+    return this;
   }
   getStealTimeFollowing(): number | null {
     return this.attributes['steal-time-following'];
   }
-  setStealTimeFollowing(stealTimeFollowing: number | null): void {
+  setStealTimeFollowing(stealTimeFollowing: number | null): Grace {
     this.attributes['steal-time-following'] = stealTimeFollowing;
+    return this;
   }
   getStealTimePrevious(): number | null {
     return this.attributes['steal-time-previous'];
   }
-  setStealTimePrevious(stealTimePrevious: number | null): void {
+  setStealTimePrevious(stealTimePrevious: number | null): Grace {
     this.attributes['steal-time-previous'] = stealTimePrevious;
+    return this;
   }
 }
 
@@ -7019,8 +7437,9 @@ export class Instrument implements XMLElement<'instrument', InstrumentAttributes
   getId(): string {
     return this.attributes['id'];
   }
-  setId(id: string): void {
+  setId(id: string): Instrument {
     this.attributes['id'] = id;
+    return this;
   }
 }
 
@@ -7048,8 +7467,9 @@ export class Voice implements XMLElement<'voice', VoiceAttributes, VoiceContents
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Voice {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -7122,8 +7542,9 @@ export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
   getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
     return this.attributes['size'];
   }
-  setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): void {
+  setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): Type {
     this.attributes['size'] = size;
+    return this;
   }
   getNoteTypeValue():
     | 'whole'
@@ -7160,8 +7581,9 @@ export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
       | 'breve'
       | 'long'
       | 'maxima'
-  ): void {
+  ): Type {
     this.contents[0] = noteTypeValue;
+    return this;
   }
 }
 
@@ -7235,64 +7657,74 @@ export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Dot {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Dot {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Dot {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Dot {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Dot {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Dot {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Dot {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Dot {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Dot {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Dot {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -7475,94 +7907,109 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
   }
-  setBracket(bracket: 'yes' | 'no' | null): void {
+  setBracket(bracket: 'yes' | 'no' | null): Accidental {
     this.attributes['bracket'] = bracket;
+    return this;
   }
   getCautionary(): 'yes' | 'no' | null {
     return this.attributes['cautionary'];
   }
-  setCautionary(cautionary: 'yes' | 'no' | null): void {
+  setCautionary(cautionary: 'yes' | 'no' | null): Accidental {
     this.attributes['cautionary'] = cautionary;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Accidental {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Accidental {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Accidental {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getEditorial(): 'yes' | 'no' | null {
     return this.attributes['editorial'];
   }
-  setEditorial(editorial: 'yes' | 'no' | null): void {
+  setEditorial(editorial: 'yes' | 'no' | null): Accidental {
     this.attributes['editorial'] = editorial;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Accidental {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Accidental {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Accidental {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Accidental {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getParentheses(): 'yes' | 'no' | null {
     return this.attributes['parentheses'];
   }
-  setParentheses(parentheses: 'yes' | 'no' | null): void {
+  setParentheses(parentheses: 'yes' | 'no' | null): Accidental {
     this.attributes['parentheses'] = parentheses;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Accidental {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Accidental {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
     return this.attributes['size'];
   }
-  setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): void {
+  setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): Accidental {
     this.attributes['size'] = size;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Accidental {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getAccidentalValue():
     | 'other'
@@ -7651,8 +8098,9 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
       | 'flat-4'
       | 'sori'
       | 'koron'
-  ): void {
+  ): Accidental {
     this.contents[0] = accidentalValue;
+    return this;
   }
 }
 
@@ -7680,8 +8128,9 @@ export class ActualNotes implements XMLElement<'actual-notes', ActualNotesAttrib
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): ActualNotes {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -7709,8 +8158,9 @@ export class NormalNotes implements XMLElement<'normal-notes', NormalNotesAttrib
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): NormalNotes {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -7814,8 +8264,9 @@ export class NormalType implements XMLElement<'normal-type', NormalTypeAttribute
       | 'breve'
       | 'long'
       | 'maxima'
-  ): void {
+  ): NormalType {
     this.contents[0] = noteTypeValue;
+    return this;
   }
 }
 
@@ -7877,20 +8328,23 @@ export class TimeModification
   getActualNotes(): ActualNotes {
     return this.contents[0];
   }
-  setActualNotes(actualNotes: ActualNotes): void {
+  setActualNotes(actualNotes: ActualNotes): TimeModification {
     this.contents[0] = actualNotes;
+    return this;
   }
   getNormalNotes(): NormalNotes {
     return this.contents[1];
   }
-  setNormalNotes(normalNotes: NormalNotes): void {
+  setNormalNotes(normalNotes: NormalNotes): TimeModification {
     this.contents[1] = normalNotes;
+    return this;
   }
   getNormal(): [NormalType, Array<NormalDot>] | null {
     return this.contents[2];
   }
-  setNormal(normal: [NormalType, Array<NormalDot>] | null): void {
+  setNormal(normal: [NormalType, Array<NormalDot>] | null): TimeModification {
     this.contents[2] = normal;
+    return this;
   }
 }
 
@@ -7947,38 +8401,44 @@ export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Stem {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Stem {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Stem {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Stem {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Stem {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getStemValue(): 'none' | 'down' | 'up' | 'double' {
     return this.contents[0];
   }
-  setStemValue(stemValue: 'none' | 'down' | 'up' | 'double'): void {
+  setStemValue(stemValue: 'none' | 'down' | 'up' | 'double'): Stem {
     this.contents[0] = stemValue;
+    return this;
   }
 }
 
@@ -8102,52 +8562,60 @@ export class Notehead implements XMLElement<'notehead', NoteheadAttributes, Note
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Notehead {
     this.attributes['color'] = color;
+    return this;
   }
   getFilled(): 'yes' | 'no' | null {
     return this.attributes['filled'];
   }
-  setFilled(filled: 'yes' | 'no' | null): void {
+  setFilled(filled: 'yes' | 'no' | null): Notehead {
     this.attributes['filled'] = filled;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Notehead {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Notehead {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Notehead {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Notehead {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getParentheses(): 'yes' | 'no' | null {
     return this.attributes['parentheses'];
   }
-  setParentheses(parentheses: 'yes' | 'no' | null): void {
+  setParentheses(parentheses: 'yes' | 'no' | null): Notehead {
     this.attributes['parentheses'] = parentheses;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Notehead {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getNoteheadValue():
     | 'other'
@@ -8210,8 +8678,9 @@ export class Notehead implements XMLElement<'notehead', NoteheadAttributes, Note
       | 'ti'
       | 'triangle'
       | 'x'
-  ): void {
+  ): Notehead {
     this.contents[0] = noteheadValue;
+    return this;
   }
 }
 
@@ -8239,8 +8708,9 @@ export class NoteheadText implements XMLElement<'notehead-text', NoteheadTextAtt
   getTexts(): Array<[DisplayText, AccidentalText]> {
     return this.contents[0];
   }
-  setTexts(texts: Array<[DisplayText, AccidentalText]>): void {
+  setTexts(texts: Array<[DisplayText, AccidentalText]>): NoteheadText {
     this.contents[0] = texts;
+    return this;
   }
 }
 
@@ -8274,8 +8744,9 @@ export class Staff implements XMLElement<'staff', StaffAttributes, StaffContents
   getStaffValue(): number {
     return this.contents[0];
   }
-  setStaffValue(staffValue: number): void {
+  setStaffValue(staffValue: number): Staff {
     this.contents[0] = staffValue;
+    return this;
   }
 }
 
@@ -8323,38 +8794,44 @@ export class Beam implements XMLElement<'beam', BeamAttributes, BeamContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Beam {
     this.attributes['color'] = color;
+    return this;
   }
   getFan(): 'accel' | 'none' | 'rit' | null {
     return this.attributes['fan'];
   }
-  setFan(fan: 'accel' | 'none' | 'rit' | null): void {
+  setFan(fan: 'accel' | 'none' | 'rit' | null): Beam {
     this.attributes['fan'] = fan;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Beam {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Beam {
     this.attributes['number'] = number;
+    return this;
   }
   getRepeater(): 'yes' | 'no' | null {
     return this.attributes['repeater'];
   }
-  setRepeater(repeater: 'yes' | 'no' | null): void {
+  setRepeater(repeater: 'yes' | 'no' | null): Beam {
     this.attributes['repeater'] = repeater;
+    return this;
   }
   getBeamValue(): 'backward hook' | 'begin' | 'continue' | 'end' | 'forward hook' {
     return this.contents[0];
   }
-  setBeamValue(beamValue: 'backward hook' | 'begin' | 'continue' | 'end' | 'forward hook'): void {
+  setBeamValue(beamValue: 'backward hook' | 'begin' | 'continue' | 'end' | 'forward hook'): Beam {
     this.contents[0] = beamValue;
+    return this;
   }
 }
 
@@ -8433,104 +8910,121 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
   getType(): 'start' | 'stop' | 'continue' | 'let-ring' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'continue' | 'let-ring'): void {
+  setType(type: 'start' | 'stop' | 'continue' | 'let-ring'): Tied {
     this.attributes['type'] = type;
+    return this;
   }
   getBezierX(): number | null {
     return this.attributes['bezier-x'];
   }
-  setBezierX(bezierX: number | null): void {
+  setBezierX(bezierX: number | null): Tied {
     this.attributes['bezier-x'] = bezierX;
+    return this;
   }
   getBezierX2(): number | null {
     return this.attributes['bezier-x2'];
   }
-  setBezierX2(bezierX2: number | null): void {
+  setBezierX2(bezierX2: number | null): Tied {
     this.attributes['bezier-x2'] = bezierX2;
+    return this;
   }
   getBezierY(): number | null {
     return this.attributes['bezier-y'];
   }
-  setBezierY(bezierY: number | null): void {
+  setBezierY(bezierY: number | null): Tied {
     this.attributes['bezier-y'] = bezierY;
+    return this;
   }
   getBezierY2(): number | null {
     return this.attributes['bezier-y2'];
   }
-  setBezierY2(bezierY2: number | null): void {
+  setBezierY2(bezierY2: number | null): Tied {
     this.attributes['bezier-y2'] = bezierY2;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Tied {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): Tied {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Tied {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Tied {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Tied {
     this.attributes['id'] = id;
+    return this;
   }
   getLineType(): 'dashed' | 'dotted' | 'solid' | 'wavy' | null {
     return this.attributes['line-type'];
   }
-  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): void {
+  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): Tied {
     this.attributes['line-type'] = lineType;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Tied {
     this.attributes['number'] = number;
+    return this;
   }
   getOrientation(): 'over' | 'under' | null {
     return this.attributes['orientation'];
   }
-  setOrientation(orientation: 'over' | 'under' | null): void {
+  setOrientation(orientation: 'over' | 'under' | null): Tied {
     this.attributes['orientation'] = orientation;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Tied {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Tied {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Tied {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): Tied {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
 }
 
@@ -8609,104 +9103,121 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
   getType(): 'start' | 'stop' | 'continue' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'continue'): void {
+  setType(type: 'start' | 'stop' | 'continue'): Slur {
     this.attributes['type'] = type;
+    return this;
   }
   getBezierX(): number | null {
     return this.attributes['bezier-x'];
   }
-  setBezierX(bezierX: number | null): void {
+  setBezierX(bezierX: number | null): Slur {
     this.attributes['bezier-x'] = bezierX;
+    return this;
   }
   getBezierX2(): number | null {
     return this.attributes['bezier-x2'];
   }
-  setBezierX2(bezierX2: number | null): void {
+  setBezierX2(bezierX2: number | null): Slur {
     this.attributes['bezier-x2'] = bezierX2;
+    return this;
   }
   getBezierY(): number | null {
     return this.attributes['bezier-y'];
   }
-  setBezierY(bezierY: number | null): void {
+  setBezierY(bezierY: number | null): Slur {
     this.attributes['bezier-y'] = bezierY;
+    return this;
   }
   getBezierY2(): number | null {
     return this.attributes['bezier-y2'];
   }
-  setBezierY2(bezierY2: number | null): void {
+  setBezierY2(bezierY2: number | null): Slur {
     this.attributes['bezier-y2'] = bezierY2;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Slur {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): Slur {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Slur {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Slur {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Slur {
     this.attributes['id'] = id;
+    return this;
   }
   getLineType(): 'dashed' | 'dotted' | 'solid' | 'wavy' | null {
     return this.attributes['line-type'];
   }
-  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): void {
+  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): Slur {
     this.attributes['line-type'] = lineType;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Slur {
     this.attributes['number'] = number;
+    return this;
   }
   getOrientation(): 'over' | 'under' | null {
     return this.attributes['orientation'];
   }
-  setOrientation(orientation: 'over' | 'under' | null): void {
+  setOrientation(orientation: 'over' | 'under' | null): Slur {
     this.attributes['orientation'] = orientation;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Slur {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Slur {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Slur {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): Slur {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
 }
 
@@ -8754,40 +9265,46 @@ export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAtt
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): TupletNumber {
     this.attributes['color'] = color;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): TupletNumber {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): TupletNumber {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): TupletNumber {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): TupletNumber {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): TupletNumber {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -8876,34 +9393,39 @@ export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttribute
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): TupletType {
     this.attributes['color'] = color;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): TupletType {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): TupletType {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): TupletType {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): TupletType {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getNoteTypeValue():
     | 'whole'
@@ -8940,8 +9462,9 @@ export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttribute
       | 'breve'
       | 'long'
       | 'maxima'
-  ): void {
+  ): TupletType {
     this.contents[0] = noteTypeValue;
+    return this;
   }
 }
 
@@ -8989,34 +9512,39 @@ export class TupletDot implements XMLElement<'tuplet-dot', TupletDotAttributes, 
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): TupletDot {
     this.attributes['color'] = color;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): TupletDot {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): TupletDot {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): TupletDot {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): TupletDot {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
 }
 
@@ -9048,20 +9576,23 @@ export class TupletActual implements XMLElement<'tuplet-actual', TupletActualAtt
   getTupletNumber(): TupletNumber | null {
     return this.contents[0];
   }
-  setTupletNumber(tupletNumber: TupletNumber | null): void {
+  setTupletNumber(tupletNumber: TupletNumber | null): TupletActual {
     this.contents[0] = tupletNumber;
+    return this;
   }
   getTupletType(): TupletType | null {
     return this.contents[1];
   }
-  setTupletType(tupletType: TupletType | null): void {
+  setTupletType(tupletType: TupletType | null): TupletActual {
     this.contents[1] = tupletType;
+    return this;
   }
   getTupletDots(): Array<TupletDot> {
     return this.contents[2];
   }
-  setTupletDots(tupletDots: Array<TupletDot>): void {
+  setTupletDots(tupletDots: Array<TupletDot>): TupletActual {
     this.contents[2] = tupletDots;
+    return this;
   }
 }
 
@@ -9093,20 +9624,23 @@ export class TupletNormal implements XMLElement<'tuplet-normal', TupletNormalAtt
   getTupletNumber(): TupletNumber | null {
     return this.contents[0];
   }
-  setTupletNumber(tupletNumber: TupletNumber | null): void {
+  setTupletNumber(tupletNumber: TupletNumber | null): TupletNormal {
     this.contents[0] = tupletNumber;
+    return this;
   }
   getTupletType(): TupletType | null {
     return this.contents[1];
   }
-  setTupletType(tupletType: TupletType | null): void {
+  setTupletType(tupletType: TupletType | null): TupletNormal {
     this.contents[1] = tupletType;
+    return this;
   }
   getTupletDots(): Array<TupletDot> {
     return this.contents[2];
   }
-  setTupletDots(tupletDots: Array<TupletDot>): void {
+  setTupletDots(tupletDots: Array<TupletDot>): TupletNormal {
     this.contents[2] = tupletDots;
+    return this;
   }
 }
 
@@ -9178,86 +9712,100 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
   getType(): 'start' | 'stop' | null {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | null): void {
+  setType(type: 'start' | 'stop' | null): Tuplet {
     this.attributes['type'] = type;
+    return this;
   }
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
   }
-  setBracket(bracket: 'yes' | 'no' | null): void {
+  setBracket(bracket: 'yes' | 'no' | null): Tuplet {
     this.attributes['bracket'] = bracket;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Tuplet {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Tuplet {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Tuplet {
     this.attributes['id'] = id;
+    return this;
   }
   getLineShape(): 'straight' | 'curved' | null {
     return this.attributes['line-shape'];
   }
-  setLineShape(lineShape: 'straight' | 'curved' | null): void {
+  setLineShape(lineShape: 'straight' | 'curved' | null): Tuplet {
     this.attributes['line-shape'] = lineShape;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Tuplet {
     this.attributes['number'] = number;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Tuplet {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Tuplet {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Tuplet {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getShowNumber(): 'none' | 'actual' | 'both' | null {
     return this.attributes['show-number'];
   }
-  setShowNumber(showNumber: 'none' | 'actual' | 'both' | null): void {
+  setShowNumber(showNumber: 'none' | 'actual' | 'both' | null): Tuplet {
     this.attributes['show-number'] = showNumber;
+    return this;
   }
   getShowType(): 'none' | 'actual' | 'both' | null {
     return this.attributes['show-type'];
   }
-  setShowType(showType: 'none' | 'actual' | 'both' | null): void {
+  setShowType(showType: 'none' | 'actual' | 'both' | null): Tuplet {
     this.attributes['show-type'] = showType;
+    return this;
   }
   getTupletActual(): TupletActual | null {
     return this.contents[0];
   }
-  setTupletActual(tupletActual: TupletActual | null): void {
+  setTupletActual(tupletActual: TupletActual | null): Tuplet {
     this.contents[0] = tupletActual;
+    return this;
   }
   getTupletNormal(): TupletNormal | null {
     return this.contents[1];
   }
-  setTupletNormal(tupletNormal: TupletNormal | null): void {
+  setTupletNormal(tupletNormal: TupletNormal | null): Tuplet {
     this.contents[1] = tupletNormal;
+    return this;
   }
 }
 
@@ -9341,100 +9889,116 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): Glissando {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Glissando {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): Glissando {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Glissando {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Glissando {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Glissando {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Glissando {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Glissando {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Glissando {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Glissando {
     this.attributes['id'] = id;
+    return this;
   }
   getLineType(): 'dashed' | 'dotted' | 'solid' | 'wavy' | null {
     return this.attributes['line-type'];
   }
-  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): void {
+  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): Glissando {
     this.attributes['line-type'] = lineType;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Glissando {
     this.attributes['number'] = number;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Glissando {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Glissando {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): Glissando {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Glissando {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -9526,124 +10090,144 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): Slide {
     this.attributes['type'] = type;
+    return this;
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): Slide {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): Slide {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Slide {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): Slide {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Slide {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Slide {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFirstBeat(): number | null {
     return this.attributes['first-beat'];
   }
-  setFirstBeat(firstBeat: number | null): void {
+  setFirstBeat(firstBeat: number | null): Slide {
     this.attributes['first-beat'] = firstBeat;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Slide {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Slide {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Slide {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Slide {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Slide {
     this.attributes['id'] = id;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): Slide {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getLineType(): 'dashed' | 'dotted' | 'solid' | 'wavy' | null {
     return this.attributes['line-type'];
   }
-  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): void {
+  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): Slide {
     this.attributes['line-type'] = lineType;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Slide {
     this.attributes['number'] = number;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Slide {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Slide {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): Slide {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Slide {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -9731,106 +10315,123 @@ export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, 
   getAcccelerate(): 'yes' | 'no' | null {
     return this.attributes['acccelerate'];
   }
-  setAcccelerate(acccelerate: 'yes' | 'no' | null): void {
+  setAcccelerate(acccelerate: 'yes' | 'no' | null): TrillMark {
     this.attributes['acccelerate'] = acccelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): TrillMark {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): TrillMark {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): TrillMark {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): TrillMark {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): TrillMark {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): TrillMark {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): TrillMark {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): TrillMark {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): TrillMark {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): TrillMark {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): TrillMark {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): TrillMark {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): TrillMark {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): TrillMark {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): TrillMark {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): TrillMark {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -9920,112 +10521,130 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): Turn {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): Turn {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Turn {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Turn {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Turn {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Turn {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Turn {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Turn {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Turn {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): Turn {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Turn {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Turn {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Turn {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): Turn {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getSlash(): 'yes' | 'no' | null {
     return this.attributes['slash'];
   }
-  setSlash(slash: 'yes' | 'no' | null): void {
+  setSlash(slash: 'yes' | 'no' | null): Turn {
     this.attributes['slash'] = slash;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): Turn {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): Turn {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): Turn {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -10115,112 +10734,130 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): DelayedTurn {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): DelayedTurn {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): DelayedTurn {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): DelayedTurn {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): DelayedTurn {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): DelayedTurn {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): DelayedTurn {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): DelayedTurn {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): DelayedTurn {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): DelayedTurn {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): DelayedTurn {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): DelayedTurn {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): DelayedTurn {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): DelayedTurn {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getSlash(): 'yes' | 'no' | null {
     return this.attributes['slash'];
   }
-  setSlash(slash: 'yes' | 'no' | null): void {
+  setSlash(slash: 'yes' | 'no' | null): DelayedTurn {
     this.attributes['slash'] = slash;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): DelayedTurn {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): DelayedTurn {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): DelayedTurn {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -10310,112 +10947,130 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): InvertedTurn {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): InvertedTurn {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): InvertedTurn {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): InvertedTurn {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): InvertedTurn {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): InvertedTurn {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): InvertedTurn {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): InvertedTurn {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): InvertedTurn {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): InvertedTurn {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): InvertedTurn {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): InvertedTurn {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): InvertedTurn {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): InvertedTurn {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getSlash(): 'yes' | 'no' | null {
     return this.attributes['slash'];
   }
-  setSlash(slash: 'yes' | 'no' | null): void {
+  setSlash(slash: 'yes' | 'no' | null): InvertedTurn {
     this.attributes['slash'] = slash;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): InvertedTurn {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): InvertedTurn {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): InvertedTurn {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -10507,112 +11162,130 @@ export class DelayedInvertedTurn
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): DelayedInvertedTurn {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): DelayedInvertedTurn {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): DelayedInvertedTurn {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): DelayedInvertedTurn {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): DelayedInvertedTurn {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): DelayedInvertedTurn {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): DelayedInvertedTurn {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): DelayedInvertedTurn {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): DelayedInvertedTurn {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): DelayedInvertedTurn {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): DelayedInvertedTurn {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): DelayedInvertedTurn {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): DelayedInvertedTurn {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): DelayedInvertedTurn {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getSlash(): 'yes' | 'no' | null {
     return this.attributes['slash'];
   }
-  setSlash(slash: 'yes' | 'no' | null): void {
+  setSlash(slash: 'yes' | 'no' | null): DelayedInvertedTurn {
     this.attributes['slash'] = slash;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): DelayedInvertedTurn {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): DelayedInvertedTurn {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): DelayedInvertedTurn {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -10700,106 +11373,123 @@ export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAtt
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): VerticalTurn {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): VerticalTurn {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): VerticalTurn {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): VerticalTurn {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): VerticalTurn {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): VerticalTurn {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): VerticalTurn {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): VerticalTurn {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): VerticalTurn {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): VerticalTurn {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): VerticalTurn {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): VerticalTurn {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): VerticalTurn {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): VerticalTurn {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): VerticalTurn {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): VerticalTurn {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): VerticalTurn {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -10892,106 +11582,123 @@ export class InvertedVerticalTurn
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): InvertedVerticalTurn {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): InvertedVerticalTurn {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): InvertedVerticalTurn {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): InvertedVerticalTurn {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): InvertedVerticalTurn {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): InvertedVerticalTurn {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): InvertedVerticalTurn {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): InvertedVerticalTurn {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): InvertedVerticalTurn {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): InvertedVerticalTurn {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): InvertedVerticalTurn {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): InvertedVerticalTurn {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): InvertedVerticalTurn {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): InvertedVerticalTurn {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): InvertedVerticalTurn {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): InvertedVerticalTurn {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): InvertedVerticalTurn {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -11079,106 +11786,123 @@ export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): Shake {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): Shake {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Shake {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Shake {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Shake {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Shake {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Shake {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Shake {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Shake {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): Shake {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Shake {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Shake {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Shake {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): Shake {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): Shake {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): Shake {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): Shake {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -11258,98 +11982,114 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
   getType(): 'start' | 'stop' | 'continue' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'continue'): void {
+  setType(type: 'start' | 'stop' | 'continue'): WavyLine {
     this.attributes['type'] = type;
+    return this;
   }
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): WavyLine {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): WavyLine {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): WavyLine {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): WavyLine {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): WavyLine {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): WavyLine {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): WavyLine {
     this.attributes['number'] = number;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): WavyLine {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): WavyLine {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): WavyLine {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): WavyLine {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): WavyLine {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): WavyLine {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): WavyLine {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): WavyLine {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -11443,124 +12183,144 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): Mordent {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getApproach(): 'above' | 'below' | null {
     return this.attributes['approach'];
   }
-  setApproach(approach: 'above' | 'below' | null): void {
+  setApproach(approach: 'above' | 'below' | null): Mordent {
     this.attributes['approach'] = approach;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): Mordent {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Mordent {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Mordent {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Mordent {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDeparture(): 'above' | 'below' | null {
     return this.attributes['departure'];
   }
-  setDeparture(departure: 'above' | 'below' | null): void {
+  setDeparture(departure: 'above' | 'below' | null): Mordent {
     this.attributes['departure'] = departure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Mordent {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Mordent {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Mordent {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Mordent {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): Mordent {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getLong(): 'yes' | 'no' | null {
     return this.attributes['long'];
   }
-  setLong(long: 'yes' | 'no' | null): void {
+  setLong(long: 'yes' | 'no' | null): Mordent {
     this.attributes['long'] = long;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Mordent {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Mordent {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Mordent {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): Mordent {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): Mordent {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): Mordent {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): Mordent {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -11656,124 +12416,144 @@ export class InvertedMordent
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): InvertedMordent {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getApproach(): 'above' | 'below' | null {
     return this.attributes['approach'];
   }
-  setApproach(approach: 'above' | 'below' | null): void {
+  setApproach(approach: 'above' | 'below' | null): InvertedMordent {
     this.attributes['approach'] = approach;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): InvertedMordent {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): InvertedMordent {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): InvertedMordent {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): InvertedMordent {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDeparture(): 'above' | 'below' | null {
     return this.attributes['departure'];
   }
-  setDeparture(departure: 'above' | 'below' | null): void {
+  setDeparture(departure: 'above' | 'below' | null): InvertedMordent {
     this.attributes['departure'] = departure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): InvertedMordent {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): InvertedMordent {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): InvertedMordent {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): InvertedMordent {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): InvertedMordent {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getLong(): 'yes' | 'no' | null {
     return this.attributes['long'];
   }
-  setLong(long: 'yes' | 'no' | null): void {
+  setLong(long: 'yes' | 'no' | null): InvertedMordent {
     this.attributes['long'] = long;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): InvertedMordent {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): InvertedMordent {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): InvertedMordent {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): InvertedMordent {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): InvertedMordent {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): InvertedMordent {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): InvertedMordent {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -11847,64 +12627,74 @@ export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, S
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Schleifer {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Schleifer {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Schleifer {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Schleifer {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Schleifer {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Schleifer {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Schleifer {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Schleifer {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Schleifer {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Schleifer {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -11984,82 +12774,95 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Tremolo {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Tremolo {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Tremolo {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Tremolo {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Tremolo {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Tremolo {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Tremolo {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Tremolo {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Tremolo {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Tremolo {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Tremolo {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getType(): 'start' | 'stop' | 'single' | 'unmeasured' | null {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'single' | 'unmeasured' | null): void {
+  setType(type: 'start' | 'stop' | 'single' | 'unmeasured' | null): Tremolo {
     this.attributes['type'] = type;
+    return this;
   }
   getTremoloMarks(): number {
     return this.contents[0];
   }
-  setTremoloMarks(tremoloMarks: number): void {
+  setTremoloMarks(tremoloMarks: number): Tremolo {
     this.contents[0] = tremoloMarks;
+    return this;
   }
 }
 
@@ -12147,106 +12950,123 @@ export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): Haydn {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): Haydn {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Haydn {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Haydn {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Haydn {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Haydn {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Haydn {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Haydn {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Haydn {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): Haydn {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Haydn {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Haydn {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Haydn {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSecondBeat(): number | null {
     return this.attributes['second-beat'];
   }
-  setSecondBeat(secondBeat: number | null): void {
+  setSecondBeat(secondBeat: number | null): Haydn {
     this.attributes['second-beat'] = secondBeat;
+    return this;
   }
   getStartNote(): 'below' | 'main' | 'upper' | null {
     return this.attributes['start-note'];
   }
-  setStartNote(startNote: 'below' | 'main' | 'upper' | null): void {
+  setStartNote(startNote: 'below' | 'main' | 'upper' | null): Haydn {
     this.attributes['start-note'] = startNote;
+    return this;
   }
   getTrillStep(): 'unison' | 'half' | 'whole' | null {
     return this.attributes['trill-step'];
   }
-  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): void {
+  setTrillStep(trillStep: 'unison' | 'half' | 'whole' | null): Haydn {
     this.attributes['trill-step'] = trillStep;
+    return this;
   }
   getTwoNoteTurn(): 'none' | 'whole' | 'half' | null {
     return this.attributes['two-note-turn'];
   }
-  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): void {
+  setTwoNoteTurn(twoNoteTurn: 'none' | 'whole' | 'half' | null): Haydn {
     this.attributes['two-note-turn'] = twoNoteTurn;
+    return this;
   }
 }
 
@@ -12322,76 +13142,88 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): OtherOrnament {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): OtherOrnament {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): OtherOrnament {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): OtherOrnament {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): OtherOrnament {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): OtherOrnament {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): OtherOrnament {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): OtherOrnament {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): OtherOrnament {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): OtherOrnament {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): OtherOrnament {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): OtherOrnament {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -12574,94 +13406,109 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
   }
-  setBracket(bracket: 'yes' | 'no' | null): void {
+  setBracket(bracket: 'yes' | 'no' | null): AccidentalMark {
     this.attributes['bracket'] = bracket;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): AccidentalMark {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): AccidentalMark {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): AccidentalMark {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): AccidentalMark {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): AccidentalMark {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): AccidentalMark {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): AccidentalMark {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): AccidentalMark {
     this.attributes['id'] = id;
+    return this;
   }
   getParentheses(): 'yes' | 'no' | null {
     return this.attributes['parentheses'];
   }
-  setParentheses(parentheses: 'yes' | 'no' | null): void {
+  setParentheses(parentheses: 'yes' | 'no' | null): AccidentalMark {
     this.attributes['parentheses'] = parentheses;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): AccidentalMark {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): AccidentalMark {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): AccidentalMark {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
     return this.attributes['size'];
   }
-  setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): void {
+  setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): AccidentalMark {
     this.attributes['size'] = size;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): AccidentalMark {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getAccidentalValue():
     | 'other'
@@ -12750,8 +13597,9 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
       | 'flat-4'
       | 'sori'
       | 'koron'
-  ): void {
+  ): AccidentalMark {
     this.contents[0] = accidentalValue;
+    return this;
   }
 }
 
@@ -12871,8 +13719,9 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Ornaments {
     this.attributes['id'] = id;
+    return this;
   }
   getOrnamentsValues(): Array<
     | TrillMark
@@ -12911,14 +13760,16 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
       | Haydn
       | OtherOrnament
     >
-  ): void {
+  ): Ornaments {
     this.contents[0] = ornamentsValues;
+    return this;
   }
   getAccidentalMarks(): Array<AccidentalMark> {
     return this.contents[1];
   }
-  setAccidentalMarks(accidentalMarks: Array<AccidentalMark>): void {
+  setAccidentalMarks(accidentalMarks: Array<AccidentalMark>): Ornaments {
     this.contents[1] = accidentalMarks;
+    return this;
   }
 }
 
@@ -12992,64 +13843,74 @@ export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContent
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): UpBow {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): UpBow {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): UpBow {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): UpBow {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): UpBow {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): UpBow {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): UpBow {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): UpBow {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): UpBow {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): UpBow {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -13123,64 +13984,74 @@ export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBo
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): DownBow {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): DownBow {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): DownBow {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): DownBow {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): DownBow {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): DownBow {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): DownBow {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): DownBow {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): DownBow {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): DownBow {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -13372,82 +14243,95 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Harmonic {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Harmonic {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Harmonic {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Harmonic {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Harmonic {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Harmonic {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Harmonic {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Harmonic {
     this.attributes['placement'] = placement;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Harmonic {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Harmonic {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Harmonic {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getTypes(): Array<Natural | Artificial> {
     return this.contents[0];
   }
-  setTypes(types: Array<Natural | Artificial>): void {
+  setTypes(types: Array<Natural | Artificial>): Harmonic {
     this.contents[0] = types;
+    return this;
   }
   getPitches(): Array<BasePitch | TouchingPitch | SoundingPitch> {
     return this.contents[1];
   }
-  setPitches(pitches: Array<BasePitch | TouchingPitch | SoundingPitch>): void {
+  setPitches(pitches: Array<BasePitch | TouchingPitch | SoundingPitch>): Harmonic {
     this.contents[1] = pitches;
+    return this;
   }
 }
 
@@ -13521,64 +14405,74 @@ export class OpenString implements XMLElement<'open-string', OpenStringAttribute
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): OpenString {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): OpenString {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): OpenString {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): OpenString {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): OpenString {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): OpenString {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): OpenString {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): OpenString {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): OpenString {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): OpenString {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -13652,64 +14546,74 @@ export class ThumbPosition implements XMLElement<'thumb-position', ThumbPosition
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): ThumbPosition {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): ThumbPosition {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): ThumbPosition {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): ThumbPosition {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): ThumbPosition {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): ThumbPosition {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): ThumbPosition {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): ThumbPosition {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): ThumbPosition {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): ThumbPosition {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -13787,82 +14691,95 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
   getAlternate(): 'yes' | 'no' | null {
     return this.attributes['alternate'];
   }
-  setAlternate(alternate: 'yes' | 'no' | null): void {
+  setAlternate(alternate: 'yes' | 'no' | null): Fingering {
     this.attributes['alternate'] = alternate;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Fingering {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Fingering {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Fingering {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Fingering {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Fingering {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Fingering {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Fingering {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Fingering {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Fingering {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Fingering {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSubstitution(): 'yes' | 'no' | null {
     return this.attributes['substitution'];
   }
-  setSubstitution(substitution: 'yes' | 'no' | null): void {
+  setSubstitution(substitution: 'yes' | 'no' | null): Fingering {
     this.attributes['substitution'] = substitution;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Fingering {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -13936,70 +14853,81 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Pluck {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Pluck {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Pluck {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Pluck {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Pluck {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Pluck {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Pluck {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Pluck {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Pluck {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Pluck {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Pluck {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -14073,64 +15001,74 @@ export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAtt
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): DoubleTongue {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): DoubleTongue {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): DoubleTongue {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): DoubleTongue {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): DoubleTongue {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): DoubleTongue {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): DoubleTongue {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): DoubleTongue {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): DoubleTongue {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): DoubleTongue {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -14204,64 +15142,74 @@ export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAtt
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): TripleTongue {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): TripleTongue {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): TripleTongue {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): TripleTongue {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): TripleTongue {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): TripleTongue {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): TripleTongue {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): TripleTongue {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): TripleTongue {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): TripleTongue {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -14335,64 +15283,74 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Stopped {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Stopped {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Stopped {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Stopped {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Stopped {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Stopped {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Stopped {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Stopped {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Stopped {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Stopped {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -14466,64 +15424,74 @@ export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicato
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): SnapPizzicato {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): SnapPizzicato {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): SnapPizzicato {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): SnapPizzicato {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): SnapPizzicato {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): SnapPizzicato {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): SnapPizzicato {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): SnapPizzicato {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): SnapPizzicato {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): SnapPizzicato {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -14571,40 +15539,46 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Fret {
     this.attributes['color'] = color;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Fret {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Fret {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Fret {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Fret {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Fret {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -14678,70 +15652,81 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): String {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): String {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): String {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): String {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): String {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): String {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): String {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): String {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): String {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): String {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getStringNumber(): number {
     return this.contents[0];
   }
-  setStringNumber(stringNumber: number): void {
+  setStringNumber(stringNumber: number): String {
     this.contents[0] = stringNumber;
+    return this;
   }
 }
 
@@ -14819,82 +15804,95 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): HammerOn {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): HammerOn {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): HammerOn {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): HammerOn {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): HammerOn {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): HammerOn {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): HammerOn {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): HammerOn {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): HammerOn {
     this.attributes['number'] = number;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): HammerOn {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): HammerOn {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): HammerOn {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): HammerOn {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -14972,82 +15970,95 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): PullOff {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): PullOff {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): PullOff {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): PullOff {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): PullOff {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): PullOff {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): PullOff {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): PullOff {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): PullOff {
     this.attributes['number'] = number;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): PullOff {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): PullOff {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): PullOff {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): PullOff {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -15080,8 +16091,9 @@ export class BendAlter implements XMLElement<'bend-alter', BendAlterAttributes, 
   getSemitones(): number {
     return this.contents[0];
   }
-  setSemitones(semitones: number): void {
+  setSemitones(semitones: number): BendAlter {
     this.contents[0] = semitones;
+    return this;
   }
 }
 
@@ -15126,8 +16138,9 @@ export class Release implements XMLElement<'release', ReleaseAttributes, Release
   getOffset(): number | null {
     return this.attributes['offset'];
   }
-  setOffset(offset: number | null): void {
+  setOffset(offset: number | null): Release {
     this.attributes['offset'] = offset;
+    return this;
   }
 }
 
@@ -15203,76 +16216,88 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): WithBar {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): WithBar {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): WithBar {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFirstBeat(): number | null {
     return this.attributes['first-beat'];
   }
-  setFirstBeat(firstBeat: number | null): void {
+  setFirstBeat(firstBeat: number | null): WithBar {
     this.attributes['first-beat'] = firstBeat;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): WithBar {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): WithBar {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): WithBar {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): WithBar {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): WithBar {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): WithBar {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): WithBar {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): WithBar {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -15368,106 +16393,123 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
   getAccelerate(): 'yes' | 'no' | null {
     return this.attributes['accelerate'];
   }
-  setAccelerate(accelerate: 'yes' | 'no' | null): void {
+  setAccelerate(accelerate: 'yes' | 'no' | null): Bend {
     this.attributes['accelerate'] = accelerate;
+    return this;
   }
   getBeats(): number | null {
     return this.attributes['beats'];
   }
-  setBeats(beats: number | null): void {
+  setBeats(beats: number | null): Bend {
     this.attributes['beats'] = beats;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Bend {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Bend {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Bend {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFirstBeat(): number | null {
     return this.attributes['first-beat'];
   }
-  setFirstBeat(firstBeat: number | null): void {
+  setFirstBeat(firstBeat: number | null): Bend {
     this.attributes['first-beat'] = firstBeat;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Bend {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Bend {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Bend {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Bend {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLastBeat(): number | null {
     return this.attributes['last-beat'];
   }
-  setLastBeat(lastBeat: number | null): void {
+  setLastBeat(lastBeat: number | null): Bend {
     this.attributes['last-beat'] = lastBeat;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Bend {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Bend {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getShape(): 'angled' | 'curved' | null {
     return this.attributes['shape'];
   }
-  setShape(shape: 'angled' | 'curved' | null): void {
+  setShape(shape: 'angled' | 'curved' | null): Bend {
     this.attributes['shape'] = shape;
+    return this;
   }
   getBendAlter(): BendAlter {
     return this.contents[0];
   }
-  setBendAlter(bendAlter: BendAlter): void {
+  setBendAlter(bendAlter: BendAlter): Bend {
     this.contents[0] = bendAlter;
+    return this;
   }
   getBends(): Array<PreBend | Release> {
     return this.contents[1];
   }
-  setBends(bends: Array<PreBend | Release>): void {
+  setBends(bends: Array<PreBend | Release>): Bend {
     this.contents[1] = bends;
+    return this;
   }
   getWithBar(): WithBar | null {
     return this.contents[2];
   }
-  setWithBar(withBar: WithBar | null): void {
+  setWithBar(withBar: WithBar | null): Bend {
     this.contents[2] = withBar;
+    return this;
   }
 }
 
@@ -15543,76 +16585,88 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Tap {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Tap {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Tap {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Tap {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Tap {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Tap {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Tap {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHand(): 'left' | 'right' | null {
     return this.attributes['hand'];
   }
-  setHand(hand: 'left' | 'right' | null): void {
+  setHand(hand: 'left' | 'right' | null): Tap {
     this.attributes['hand'] = hand;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Tap {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Tap {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Tap {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string | null {
     return this.contents[0];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): Tap {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -15688,70 +16742,81 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Heel {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Heel {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Heel {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Heel {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Heel {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Heel {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Heel {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Heel {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Heel {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Heel {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSubstitution(): 'yes' | 'no' | null {
     return this.attributes['substitution'];
   }
-  setSubstitution(substitution: 'yes' | 'no' | null): void {
+  setSubstitution(substitution: 'yes' | 'no' | null): Heel {
     this.attributes['substitution'] = substitution;
+    return this;
   }
 }
 
@@ -15827,70 +16892,81 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Toe {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Toe {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Toe {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Toe {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Toe {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Toe {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Toe {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Toe {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Toe {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Toe {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSubstitution(): 'yes' | 'no' | null {
     return this.attributes['substitution'];
   }
-  setSubstitution(substitution: 'yes' | 'no' | null): void {
+  setSubstitution(substitution: 'yes' | 'no' | null): Toe {
     this.attributes['substitution'] = substitution;
+    return this;
   }
 }
 
@@ -15964,64 +17040,74 @@ export class Fingernails implements XMLElement<'fingernails', FingernailsAttribu
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Fingernails {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Fingernails {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Fingernails {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Fingernails {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Fingernails {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Fingernails {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Fingernails {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Fingernails {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Fingernails {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Fingernails {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -16049,8 +17135,9 @@ export class HoleType implements XMLElement<'hole-type', HoleTypeAttributes, Hol
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): HoleType {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -16088,14 +17175,16 @@ export class HoleClosed implements XMLElement<'hole-closed', HoleClosedAttribute
   getLocation(): 'bottom' | 'left' | 'right' | 'top' | null {
     return this.attributes['location'];
   }
-  setLocation(location: 'bottom' | 'left' | 'right' | 'top' | null): void {
+  setLocation(location: 'bottom' | 'left' | 'right' | 'top' | null): HoleClosed {
     this.attributes['location'] = location;
+    return this;
   }
   getHoleClosedValue(): 'yes' | 'no' | 'half' {
     return this.contents[0];
   }
-  setHoleClosedValue(holeClosedValue: 'yes' | 'no' | 'half'): void {
+  setHoleClosedValue(holeClosedValue: 'yes' | 'no' | 'half'): HoleClosed {
     this.contents[0] = holeClosedValue;
+    return this;
   }
 }
 
@@ -16123,8 +17212,9 @@ export class HoleShape implements XMLElement<'hole-shape', HoleShapeAttributes, 
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): HoleShape {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -16202,82 +17292,95 @@ export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Hole {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Hole {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Hole {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Hole {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Hole {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Hole {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Hole {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Hole {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Hole {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Hole {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getHoleType(): HoleType | null {
     return this.contents[0];
   }
-  setHoleType(holeType: HoleType | null): void {
+  setHoleType(holeType: HoleType | null): Hole {
     this.contents[0] = holeType;
+    return this;
   }
   getHoleClosed(): HoleClosed {
     return this.contents[1];
   }
-  setHoleClosed(holeClosed: HoleClosed): void {
+  setHoleClosed(holeClosed: HoleClosed): Hole {
     this.contents[1] = holeClosed;
+    return this;
   }
   getHoleShape(): HoleShape | null {
     return this.contents[2];
   }
-  setHoleShape(holeShape: HoleShape | null): void {
+  setHoleShape(holeShape: HoleShape | null): Hole {
     this.contents[2] = holeShape;
+    return this;
   }
 }
 
@@ -16373,8 +17476,9 @@ export class ArrowDirection implements XMLElement<'arrow-direction', ArrowDirect
       | 'southwest'
       | 'up'
       | 'up down'
-  ): void {
+  ): ArrowDirection {
     this.contents[0] = arrowDirection;
+    return this;
   }
 }
 
@@ -16411,8 +17515,9 @@ export class ArrowStyle implements XMLElement<'arrow-style', ArrowStyleAttribute
   getArrowStyle(): 'combined' | 'double' | 'filled' | 'hollow' | 'other' | 'paired' | 'single' {
     return this.contents[0];
   }
-  setArrowStyle(arrowStyle: 'combined' | 'double' | 'filled' | 'hollow' | 'other' | 'paired' | 'single'): void {
+  setArrowStyle(arrowStyle: 'combined' | 'double' | 'filled' | 'hollow' | 'other' | 'paired' | 'single'): ArrowStyle {
     this.contents[0] = arrowStyle;
+    return this;
   }
 }
 
@@ -16467,8 +17572,9 @@ export class CircularArrow implements XMLElement<'circular-arrow', CircularArrow
   getCircularArrow(): 'anticlockwise' | 'clockwise' {
     return this.contents[0];
   }
-  setCircularArrow(circularArrow: 'anticlockwise' | 'clockwise'): void {
+  setCircularArrow(circularArrow: 'anticlockwise' | 'clockwise'): CircularArrow {
     this.contents[0] = circularArrow;
+    return this;
   }
 }
 
@@ -16549,94 +17655,109 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Arrow {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Arrow {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Arrow {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Arrow {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Arrow {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Arrow {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Arrow {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Arrow {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Arrow {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Arrow {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Arrow {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getArrowDirection(): ArrowDirection {
     return this.contents[0];
   }
-  setArrowDirection(arrowDirection: ArrowDirection): void {
+  setArrowDirection(arrowDirection: ArrowDirection): Arrow {
     this.contents[0] = arrowDirection;
+    return this;
   }
   getArrowStyle(): ArrowStyle | null {
     return this.contents[1];
   }
-  setArrowStyle(arrowStyle: ArrowStyle | null): void {
+  setArrowStyle(arrowStyle: ArrowStyle | null): Arrow {
     this.contents[1] = arrowStyle;
+    return this;
   }
   getArrowhead(): Arrowhead | null {
     return this.contents[2];
   }
-  setArrowhead(arrowhead: Arrowhead | null): void {
+  setArrowhead(arrowhead: Arrowhead | null): Arrow {
     this.contents[2] = arrowhead;
+    return this;
   }
   getCircularArrow(): CircularArrow | null {
     return this.contents[3];
   }
-  setCircularArrow(circularArrow: CircularArrow | null): void {
+  setCircularArrow(circularArrow: CircularArrow | null): Arrow {
     this.contents[3] = circularArrow;
+    return this;
   }
 }
 
@@ -16748,64 +17869,74 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Handbell {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Handbell {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Handbell {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Handbell {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Handbell {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Handbell {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Handbell {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Handbell {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Handbell {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Handbell {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getHandbellValue():
     | 'belltree'
@@ -16836,8 +17967,9 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
       | 'muted martellato'
       | 'pluck lift'
       | 'swing'
-  ): void {
+  ): Handbell {
     this.contents[0] = handbellValue;
+    return this;
   }
 }
 
@@ -16911,64 +18043,74 @@ export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, 
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): BrassBend {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): BrassBend {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): BrassBend {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): BrassBend {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): BrassBend {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): BrassBend {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): BrassBend {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): BrassBend {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): BrassBend {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): BrassBend {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -17042,64 +18184,74 @@ export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Flip {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Flip {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Flip {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Flip {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Flip {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Flip {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Flip {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Flip {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Flip {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Flip {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -17173,64 +18325,74 @@ export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Smear {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Smear {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Smear {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Smear {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Smear {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Smear {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Smear {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Smear {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Smear {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Smear {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -17306,70 +18468,81 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Open {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Open {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Open {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Open {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Open {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Open {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Open {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Open {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Open {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Open {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Open {
     this.attributes['smufl'] = smufl;
+    return this;
   }
 }
 
@@ -17445,70 +18618,81 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): HalfMuted {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): HalfMuted {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): HalfMuted {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): HalfMuted {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): HalfMuted {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): HalfMuted {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): HalfMuted {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): HalfMuted {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): HalfMuted {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): HalfMuted {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): HalfMuted {
     this.attributes['smufl'] = smufl;
+    return this;
   }
 }
 
@@ -17546,14 +18730,16 @@ export class HarmonClosed implements XMLElement<'harmon-closed', HarmonClosedAtt
   getLocation(): 'bottom' | 'left' | 'right' | 'top' | null {
     return this.attributes['location'];
   }
-  setLocation(location: 'bottom' | 'left' | 'right' | 'top' | null): void {
+  setLocation(location: 'bottom' | 'left' | 'right' | 'top' | null): HarmonClosed {
     this.attributes['location'] = location;
+    return this;
   }
   getHarmonClosedValue(): 'yes' | 'no' | 'half' {
     return this.contents[0];
   }
-  setHarmonClosedValue(harmonClosedValue: 'yes' | 'no' | 'half'): void {
+  setHarmonClosedValue(harmonClosedValue: 'yes' | 'no' | 'half'): HarmonClosed {
     this.contents[0] = harmonClosedValue;
+    return this;
   }
 }
 
@@ -17629,76 +18815,88 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): HarmonMute {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): HarmonMute {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): HarmonMute {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): HarmonMute {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): HarmonMute {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): HarmonMute {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): HarmonMute {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): HarmonMute {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): HarmonMute {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): HarmonMute {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): HarmonMute {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getHarmonClosed(): HarmonClosed {
     return this.contents[0];
   }
-  setHarmonClosed(harmonClosed: HarmonClosed): void {
+  setHarmonClosed(harmonClosed: HarmonClosed): HarmonMute {
     this.contents[0] = harmonClosed;
+    return this;
   }
 }
 
@@ -17772,64 +18970,74 @@ export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Golpe {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Golpe {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Golpe {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Golpe {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Golpe {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Golpe {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Golpe {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Golpe {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Golpe {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Golpe {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -17905,76 +19113,88 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): OtherTechnical {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): OtherTechnical {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): OtherTechnical {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): OtherTechnical {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): OtherTechnical {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): OtherTechnical {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): OtherTechnical {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): OtherTechnical {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): OtherTechnical {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): OtherTechnical {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): OtherTechnical {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getText(): string | null {
     return this.contents[0];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): OtherTechnical {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -18172,8 +19392,9 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Technical {
     this.attributes['id'] = id;
+    return this;
   }
   getTechnicalValues(): Array<
     | UpBow
@@ -18244,8 +19465,9 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
       | Golpe
       | OtherTechnical
     >
-  ): void {
+  ): Technical {
     this.contents[0] = technicalValues;
+    return this;
   }
 }
 
@@ -18319,64 +19541,74 @@ export class Accent implements XMLElement<'accent', AccentAttributes, AccentCont
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Accent {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Accent {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Accent {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Accent {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Accent {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Accent {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Accent {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Accent {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Accent {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Accent {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -18452,70 +19684,81 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): StrongAccent {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): StrongAccent {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): StrongAccent {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): StrongAccent {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): StrongAccent {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): StrongAccent {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): StrongAccent {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): StrongAccent {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): StrongAccent {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): StrongAccent {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getUpDown(): 'up' | 'down' | null {
     return this.attributes['up-down'];
   }
-  setUpDown(upDown: 'up' | 'down' | null): void {
+  setUpDown(upDown: 'up' | 'down' | null): StrongAccent {
     this.attributes['up-down'] = upDown;
+    return this;
   }
 }
 
@@ -18589,64 +19832,74 @@ export class Staccato implements XMLElement<'staccato', StaccatoAttributes, Stac
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Staccato {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Staccato {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Staccato {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Staccato {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Staccato {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Staccato {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Staccato {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Staccato {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Staccato {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Staccato {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -18720,64 +19973,74 @@ export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoCont
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Tenuto {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Tenuto {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Tenuto {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Tenuto {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Tenuto {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Tenuto {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Tenuto {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Tenuto {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Tenuto {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Tenuto {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -18851,64 +20114,74 @@ export class DetachedLegato implements XMLElement<'detached-legato', DetachedLeg
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): DetachedLegato {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): DetachedLegato {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): DetachedLegato {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): DetachedLegato {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): DetachedLegato {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): DetachedLegato {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): DetachedLegato {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): DetachedLegato {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): DetachedLegato {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): DetachedLegato {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -18982,64 +20255,74 @@ export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoA
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Staccatissimo {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Staccatissimo {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Staccatissimo {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Staccatissimo {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Staccatissimo {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Staccatissimo {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Staccatissimo {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Staccatissimo {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Staccatissimo {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Staccatissimo {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -19113,64 +20396,74 @@ export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, Spic
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Spiccato {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Spiccato {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Spiccato {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Spiccato {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Spiccato {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Spiccato {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Spiccato {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Spiccato {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Spiccato {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Spiccato {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -19244,64 +20537,74 @@ export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Scoop {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Scoop {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Scoop {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Scoop {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Scoop {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Scoop {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Scoop {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Scoop {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Scoop {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Scoop {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -19385,94 +20688,109 @@ export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Plop {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): Plop {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Plop {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Plop {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Plop {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Plop {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Plop {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Plop {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLineLength(): 'short' | 'medium' | 'long' | null {
     return this.attributes['line-length'];
   }
-  setLineLength(lineLength: 'short' | 'medium' | 'long' | null): void {
+  setLineLength(lineLength: 'short' | 'medium' | 'long' | null): Plop {
     this.attributes['line-length'] = lineLength;
+    return this;
   }
   getLineShape(): 'straight' | 'curved' | null {
     return this.attributes['line-shape'];
   }
-  setLineShape(lineShape: 'straight' | 'curved' | null): void {
+  setLineShape(lineShape: 'straight' | 'curved' | null): Plop {
     this.attributes['line-shape'] = lineShape;
+    return this;
   }
   getLineType(): 'dashed' | 'dotted' | 'solid' | 'wavy' | null {
     return this.attributes['line-type'];
   }
-  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): void {
+  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): Plop {
     this.attributes['line-type'] = lineType;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Plop {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Plop {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Plop {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): Plop {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
 }
 
@@ -19556,94 +20874,109 @@ export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Doit {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): Doit {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Doit {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Doit {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Doit {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Doit {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Doit {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Doit {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLineLength(): 'short' | 'medium' | 'long' | null {
     return this.attributes['line-length'];
   }
-  setLineLength(lineLength: 'short' | 'medium' | 'long' | null): void {
+  setLineLength(lineLength: 'short' | 'medium' | 'long' | null): Doit {
     this.attributes['line-length'] = lineLength;
+    return this;
   }
   getLineShape(): 'straight' | 'curved' | null {
     return this.attributes['line-shape'];
   }
-  setLineShape(lineShape: 'straight' | 'curved' | null): void {
+  setLineShape(lineShape: 'straight' | 'curved' | null): Doit {
     this.attributes['line-shape'] = lineShape;
+    return this;
   }
   getLineType(): 'dashed' | 'dotted' | 'solid' | 'wavy' | null {
     return this.attributes['line-type'];
   }
-  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): void {
+  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): Doit {
     this.attributes['line-type'] = lineType;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Doit {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Doit {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Doit {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): Doit {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
 }
 
@@ -19727,94 +21060,109 @@ export class Falloff implements XMLElement<'falloff', FalloffAttributes, Falloff
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Falloff {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): Falloff {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Falloff {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Falloff {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Falloff {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Falloff {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Falloff {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Falloff {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLineLength(): 'short' | 'medium' | 'long' | null {
     return this.attributes['line-length'];
   }
-  setLineLength(lineLength: 'short' | 'medium' | 'long' | null): void {
+  setLineLength(lineLength: 'short' | 'medium' | 'long' | null): Falloff {
     this.attributes['line-length'] = lineLength;
+    return this;
   }
   getLineShape(): 'straight' | 'curved' | null {
     return this.attributes['line-shape'];
   }
-  setLineShape(lineShape: 'straight' | 'curved' | null): void {
+  setLineShape(lineShape: 'straight' | 'curved' | null): Falloff {
     this.attributes['line-shape'] = lineShape;
+    return this;
   }
   getLineType(): 'dashed' | 'dotted' | 'solid' | 'wavy' | null {
     return this.attributes['line-type'];
   }
-  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): void {
+  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): Falloff {
     this.attributes['line-type'] = lineType;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Falloff {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Falloff {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Falloff {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): Falloff {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
 }
 
@@ -19897,70 +21245,81 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): BreathMark {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): BreathMark {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): BreathMark {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): BreathMark {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): BreathMark {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): BreathMark {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): BreathMark {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): BreathMark {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): BreathMark {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): BreathMark {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getBreathMarkValue(): 'comma' | 'tick' | 'upbow' | 'salzedo' | '' {
     return this.contents[0];
   }
-  setBreathMarkValue(breathMarkValue: 'comma' | 'tick' | 'upbow' | 'salzedo' | ''): void {
+  setBreathMarkValue(breathMarkValue: 'comma' | 'tick' | 'upbow' | 'salzedo' | ''): BreathMark {
     this.contents[0] = breathMarkValue;
+    return this;
   }
 }
 
@@ -20043,70 +21402,81 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Caesura {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Caesura {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Caesura {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Caesura {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Caesura {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Caesura {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Caesura {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Caesura {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Caesura {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Caesura {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getCaesuraValue(): 'normal' | 'thick' | 'short' | 'curved' | 'single' | '' {
     return this.contents[0];
   }
-  setCaesuraValue(caesuraValue: 'normal' | 'thick' | 'short' | 'curved' | 'single' | ''): void {
+  setCaesuraValue(caesuraValue: 'normal' | 'thick' | 'short' | 'curved' | 'single' | ''): Caesura {
     this.contents[0] = caesuraValue;
+    return this;
   }
 }
 
@@ -20180,64 +21550,74 @@ export class Stress implements XMLElement<'stress', StressAttributes, StressCont
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Stress {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Stress {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Stress {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Stress {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Stress {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Stress {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Stress {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Stress {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Stress {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Stress {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -20311,64 +21691,74 @@ export class Unstress implements XMLElement<'unstress', UnstressAttributes, Unst
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Unstress {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Unstress {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Unstress {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Unstress {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Unstress {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Unstress {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Unstress {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Unstress {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Unstress {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Unstress {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -20442,64 +21832,74 @@ export class SoftAccess implements XMLElement<'soft-access', SoftAccessAttribute
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): SoftAccess {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): SoftAccess {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): SoftAccess {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): SoftAccess {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): SoftAccess {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): SoftAccess {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): SoftAccess {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): SoftAccess {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): SoftAccess {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): SoftAccess {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -20577,70 +21977,81 @@ export class OtherArticulation
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): OtherArticulation {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): OtherArticulation {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): OtherArticulation {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): OtherArticulation {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): OtherArticulation {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): OtherArticulation {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): OtherArticulation {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): OtherArticulation {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): OtherArticulation {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): OtherArticulation {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): OtherArticulation {
     this.attributes['smufl'] = smufl;
+    return this;
   }
 }
 
@@ -20768,8 +22179,9 @@ export class Articulations implements XMLElement<'articulations', ArticulationsA
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Articulations {
     this.attributes['id'] = id;
+    return this;
   }
   getArticulations(): Array<
     | Accent
@@ -20812,8 +22224,9 @@ export class Articulations implements XMLElement<'articulations', ArticulationsA
       | SoftAccess
       | OtherArticulation
     >
-  ): void {
+  ): Articulations {
     this.contents[0] = articulations;
+    return this;
   }
 }
 
@@ -21308,14 +22721,16 @@ export class OtherDynamics implements XMLElement<'other-dynamics', OtherDynamics
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): OtherDynamics {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): OtherDynamics {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -21592,20 +23007,23 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Dynamics {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Dynamics {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Dynamics {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getEnclosure():
     | 'rectangle'
@@ -21642,88 +23060,102 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
       | 'nonagon'
       | 'decagon'
       | null
-  ): void {
+  ): Dynamics {
     this.attributes['enclosure'] = enclosure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Dynamics {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Dynamics {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Dynamics {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Dynamics {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Dynamics {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Dynamics {
     this.attributes['id'] = id;
+    return this;
   }
   getOverline(): number | null {
     return this.attributes['overline'];
   }
-  setOverline(overline: number | null): void {
+  setOverline(overline: number | null): Dynamics {
     this.attributes['overline'] = overline;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Dynamics {
     this.attributes['placement'] = placement;
+    return this;
   }
   getLineThrough(): number | null {
     return this.attributes['line-through'];
   }
-  setLineThrough(lineThrough: number | null): void {
+  setLineThrough(lineThrough: number | null): Dynamics {
     this.attributes['line-through'] = lineThrough;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Dynamics {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Dynamics {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getUnderline(): number | null {
     return this.attributes['underline'];
   }
-  setUnderline(underline: number | null): void {
+  setUnderline(underline: number | null): Dynamics {
     this.attributes['underline'] = underline;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Dynamics {
     this.attributes['valign'] = valign;
+    return this;
   }
   getDynamicsValue(): Array<
     | P
@@ -21788,8 +23220,9 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
       | Sfzp
       | OtherDynamics
     >
-  ): void {
+  ): Dynamics {
     this.contents[0] = dynamicsValue;
+    return this;
   }
 }
 
@@ -21889,70 +23322,81 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Fermata {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Fermata {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Fermata {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Fermata {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Fermata {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Fermata {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Fermata {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Fermata {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Fermata {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Fermata {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getType(): 'upright' | 'inverted' | null {
     return this.attributes['type'];
   }
-  setType(type: 'upright' | 'inverted' | null): void {
+  setType(type: 'upright' | 'inverted' | null): Fermata {
     this.attributes['type'] = type;
+    return this;
   }
   getFermataShape():
     | ''
@@ -21977,8 +23421,9 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
       | 'double-dot'
       | 'half-curve'
       | 'curlew'
-  ): void {
+  ): Fermata {
     this.contents[0] = fermataShape;
+    return this;
   }
 }
 
@@ -22043,62 +23488,72 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Arpeggiate {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Arpeggiate {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Arpeggiate {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDirection(): 'up' | 'down' | null {
     return this.attributes['direction'];
   }
-  setDirection(direction: 'up' | 'down' | null): void {
+  setDirection(direction: 'up' | 'down' | null): Arpeggiate {
     this.attributes['direction'] = direction;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Arpeggiate {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Arpeggiate {
     this.attributes['number'] = number;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Arpeggiate {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Arpeggiate {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Arpeggiate {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getUnbroken(): 'yes' | 'no' | null {
     return this.attributes['unbroken'];
   }
-  setUnbroken(unbroken: 'yes' | 'no' | null): void {
+  setUnbroken(unbroken: 'yes' | 'no' | null): Arpeggiate {
     this.attributes['unbroken'] = unbroken;
+    return this;
   }
 }
 
@@ -22161,56 +23616,65 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
   getType(): 'top' | 'bottom' {
     return this.attributes['type'];
   }
-  setType(type: 'top' | 'bottom'): void {
+  setType(type: 'top' | 'bottom'): NonArpeggiate {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): NonArpeggiate {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): NonArpeggiate {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): NonArpeggiate {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): NonArpeggiate {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): NonArpeggiate {
     this.attributes['number'] = number;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): NonArpeggiate {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): NonArpeggiate {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): NonArpeggiate {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -22275,68 +23739,79 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
   getType(): 'start' | 'stop' | 'single' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'single'): void {
+  setType(type: 'start' | 'stop' | 'single'): OtherNotation {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): OtherNotation {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): OtherNotation {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): OtherNotation {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): OtherNotation {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): OtherNotation {
     this.attributes['number'] = number;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): OtherNotation {
     this.attributes['placement'] = placement;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): OtherNotation {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): OtherNotation {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): OtherNotation {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): OtherNotation {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -22456,26 +23931,30 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Notations {
     this.attributes['id'] = id;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Notations {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[0];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): Notations {
     this.contents[0] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[1];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): Notations {
     this.contents[1] = level;
+    return this;
   }
   getNotations(): Array<
     | Tied
@@ -22512,8 +23991,9 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
       | AccidentalMark
       | OtherNotation
     >
-  ): void {
+  ): Notations {
     this.contents[2] = notations;
+    return this;
   }
 }
 
@@ -22550,8 +24030,9 @@ export class Syllabic implements XMLElement<'syllabic', SyllabicAttributes, Syll
   getSyllabic(): 'begin' | 'end' | 'middle' | 'single' {
     return this.contents[0];
   }
-  setSyllabic(syllabic: 'begin' | 'end' | 'middle' | 'single'): void {
+  setSyllabic(syllabic: 'begin' | 'end' | 'middle' | 'single'): Syllabic {
     this.contents[0] = syllabic;
+    return this;
   }
 }
 
@@ -22628,94 +24109,109 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Text {
     this.attributes['color'] = color;
+    return this;
   }
   getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
     return this.attributes['dir'];
   }
-  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): void {
+  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): Text {
     this.attributes['dir'] = dir;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Text {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Text {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Text {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Text {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Text {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Text {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLetterSpacing(): 'normal' | number | null {
     return this.attributes['letter-spacing'];
   }
-  setLetterSpacing(letterSpacing: 'normal' | number | null): void {
+  setLetterSpacing(letterSpacing: 'normal' | number | null): Text {
     this.attributes['letter-spacing'] = letterSpacing;
+    return this;
   }
   getLineThrough(): number | null {
     return this.attributes['line-through'];
   }
-  setLineThrough(lineThrough: number | null): void {
+  setLineThrough(lineThrough: number | null): Text {
     this.attributes['line-through'] = lineThrough;
+    return this;
   }
   getOverline(): number | null {
     return this.attributes['overline'];
   }
-  setOverline(overline: number | null): void {
+  setOverline(overline: number | null): Text {
     this.attributes['overline'] = overline;
+    return this;
   }
   getRotation(): number | null {
     return this.attributes['rotation'];
   }
-  setRotation(rotation: number | null): void {
+  setRotation(rotation: number | null): Text {
     this.attributes['rotation'] = rotation;
+    return this;
   }
   getUnderline(): number | null {
     return this.attributes['underline'];
   }
-  setUnderline(underline: number | null): void {
+  setUnderline(underline: number | null): Text {
     this.attributes['underline'] = underline;
+    return this;
   }
   getXmlLang(): string | null {
     return this.attributes['xml:lang'];
   }
-  setXmlLang(xmlLang: string | null): void {
+  setXmlLang(xmlLang: string | null): Text {
     this.attributes['xml:lang'] = xmlLang;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Text {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -22765,40 +24261,46 @@ export class Elision implements XMLElement<'elision', ElisionAttributes, Elision
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Elision {
     this.attributes['color'] = color;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Elision {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Elision {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Elision {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Elision {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Elision {
     this.attributes['smufl'] = smufl;
+    return this;
   }
 }
 
@@ -22855,38 +24357,44 @@ export class Extend implements XMLElement<'extend', ExtendAttributes, ExtendCont
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Extend {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Extend {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Extend {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Extend {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Extend {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getType(): 'start' | 'stop' | 'continue' | null {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'continue' | null): void {
+  setType(type: 'start' | 'stop' | 'continue' | null): Extend {
     this.attributes['type'] = type;
+    return this;
   }
 }
 
@@ -23086,104 +24594,121 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Lyric {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Lyric {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Lyric {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Lyric {
     this.attributes['id'] = id;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): Lyric {
     this.attributes['justify'] = justify;
+    return this;
   }
   getName(): string | null {
     return this.attributes['name'];
   }
-  setName(name: string | null): void {
+  setName(name: string | null): Lyric {
     this.attributes['name'] = name;
+    return this;
   }
   getNumber(): string | null {
     return this.attributes['number'];
   }
-  setNumber(number: string | null): void {
+  setNumber(number: string | null): Lyric {
     this.attributes['number'] = number;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Lyric {
     this.attributes['placement'] = placement;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Lyric {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Lyric {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Lyric {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getTimeOnly(): string | null {
     return this.attributes['time-only'];
   }
-  setTimeOnly(timeOnly: string | null): void {
+  setTimeOnly(timeOnly: string | null): Lyric {
     this.attributes['time-only'] = timeOnly;
+    return this;
   }
   getLyricValue(): Intelligible | Extend | Laughing | Humming {
     return this.contents[0];
   }
-  setLyricValue(lyricValue: Intelligible | Extend | Laughing | Humming): void {
+  setLyricValue(lyricValue: Intelligible | Extend | Laughing | Humming): Lyric {
     this.contents[0] = lyricValue;
+    return this;
   }
   getEndLine(): EndLine | null {
     return this.contents[1];
   }
-  setEndLine(endLine: EndLine | null): void {
+  setEndLine(endLine: EndLine | null): Lyric {
     this.contents[1] = endLine;
+    return this;
   }
   getEndParagraph(): EndParagraph | null {
     return this.contents[2];
   }
-  setEndParagraph(endParagraph: EndParagraph | null): void {
+  setEndParagraph(endParagraph: EndParagraph | null): Lyric {
     this.contents[2] = endParagraph;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[3];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): Lyric {
     this.contents[3] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[4];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): Lyric {
     this.contents[4] = level;
+    return this;
   }
 }
 
@@ -23211,8 +24736,9 @@ export class Ipa implements XMLElement<'ipa', IpaAttributes, IpaContents> {
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Ipa {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -23316,8 +24842,9 @@ export class Mute implements XMLElement<'mute', MuteAttributes, MuteContents> {
       | 'stop-hand'
       | 'stop-mute'
       | 'straight'
-  ): void {
+  ): Mute {
     this.contents[0] = mute;
+    return this;
   }
 }
 
@@ -23354,8 +24881,9 @@ export class SemiPitched implements XMLElement<'semi-pitched', SemiPitchedAttrib
   getSemiPitched(): 'high' | 'low' | 'medium' | 'medium-high' | 'medium-low' | 'very-low' {
     return this.contents[0];
   }
-  setSemiPitched(semiPitched: 'high' | 'low' | 'medium' | 'medium-high' | 'medium-low' | 'very-low'): void {
+  setSemiPitched(semiPitched: 'high' | 'low' | 'medium' | 'medium-high' | 'medium-low' | 'very-low'): SemiPitched {
     this.contents[0] = semiPitched;
+    return this;
   }
 }
 
@@ -23382,8 +24910,9 @@ export class OtherPlay implements XMLElement<'other-play', OtherPlayAttributes, 
   getType(): string {
     return this.attributes['type'];
   }
-  setType(type: string): void {
+  setType(type: string): OtherPlay {
     this.attributes['type'] = type;
+    return this;
   }
 }
 
@@ -23428,14 +24957,16 @@ export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Play {
     this.attributes['id'] = id;
+    return this;
   }
   getPlayValue(): Array<Ipa | Mute | SemiPitched | OtherPlay> {
     return this.contents[0];
   }
-  setPlayValue(playValue: Array<Ipa | Mute | SemiPitched | OtherPlay>): void {
+  setPlayValue(playValue: Array<Ipa | Mute | SemiPitched | OtherPlay>): Play {
     this.contents[0] = playValue;
+    return this;
   }
 }
 
@@ -23466,20 +24997,23 @@ export class Assess implements XMLElement<'assess', AssessAttributes, AssessCont
   getType(): 'yes' | 'no' {
     return this.attributes['type'];
   }
-  setType(type: 'yes' | 'no'): void {
+  setType(type: 'yes' | 'no'): Assess {
     this.attributes['type'] = type;
+    return this;
   }
   getPlayer(): string | null {
     return this.attributes['player'];
   }
-  setPlayer(player: string | null): void {
+  setPlayer(player: string | null): Assess {
     this.attributes['player'] = player;
+    return this;
   }
   getTimeOnly(): string | null {
     return this.attributes['time-only'];
   }
-  setTimeOnly(timeOnly: string | null): void {
+  setTimeOnly(timeOnly: string | null): Assess {
     this.attributes['time-only'] = timeOnly;
+    return this;
   }
 }
 
@@ -23509,14 +25043,16 @@ export class Wait implements XMLElement<'wait', WaitAttributes, WaitContents> {
   getPlayer(): string | null {
     return this.attributes['player'];
   }
-  setPlayer(player: string | null): void {
+  setPlayer(player: string | null): Wait {
     this.attributes['player'] = player;
+    return this;
   }
   getTimeOnly(): string | null {
     return this.attributes['time-only'];
   }
-  setTimeOnly(timeOnly: string | null): void {
+  setTimeOnly(timeOnly: string | null): Wait {
     this.attributes['time-only'] = timeOnly;
+    return this;
   }
 }
 
@@ -23547,26 +25083,30 @@ export class OtherListen implements XMLElement<'other-listen', OtherListenAttrib
   getType(): string {
     return this.attributes['type'];
   }
-  setType(type: string): void {
+  setType(type: string): OtherListen {
     this.attributes['type'] = type;
+    return this;
   }
   getPlayer(): string | null {
     return this.attributes['player'];
   }
-  setPlayer(player: string | null): void {
+  setPlayer(player: string | null): OtherListen {
     this.attributes['player'] = player;
+    return this;
   }
   getTimeOnly(): string | null {
     return this.attributes['time-only'];
   }
-  setTimeOnly(timeOnly: string | null): void {
+  setTimeOnly(timeOnly: string | null): OtherListen {
     this.attributes['time-only'] = timeOnly;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): OtherListen {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -23609,8 +25149,9 @@ export class Listen implements XMLElement<'listen', ListenAttributes, ListenCont
   getListens(): Array<Assess | Wait | OtherListen> {
     return this.contents[0];
   }
-  setListens(listens: Array<Assess | Wait | OtherListen>): void {
+  setListens(listens: Array<Assess | Wait | OtherListen>): Listen {
     this.contents[0] = listens;
+    return this;
   }
 }
 
@@ -23849,208 +25390,242 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
   getAttack(): number | null {
     return this.attributes['attack'];
   }
-  setAttack(attack: number | null): void {
+  setAttack(attack: number | null): Note {
     this.attributes['attack'] = attack;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Note {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Note {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Note {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDynamics(): number | null {
     return this.attributes['dynamics'];
   }
-  setDynamics(dynamics: number | null): void {
+  setDynamics(dynamics: number | null): Note {
     this.attributes['dynamics'] = dynamics;
+    return this;
   }
   getEndDynamics(): number | null {
     return this.attributes['end-dynamics'];
   }
-  setEndDynamics(endDynamics: number | null): void {
+  setEndDynamics(endDynamics: number | null): Note {
     this.attributes['end-dynamics'] = endDynamics;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Note {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Note {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Note {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Note {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Note {
     this.attributes['id'] = id;
+    return this;
   }
   getPizzicato(): 'yes' | 'no' | null {
     return this.attributes['pizzicato'];
   }
-  setPizzicato(pizzicato: 'yes' | 'no' | null): void {
+  setPizzicato(pizzicato: 'yes' | 'no' | null): Note {
     this.attributes['pizzicato'] = pizzicato;
+    return this;
   }
   getPrintDot(): 'yes' | 'no' | null {
     return this.attributes['print-dot'];
   }
-  setPrintDot(printDot: 'yes' | 'no' | null): void {
+  setPrintDot(printDot: 'yes' | 'no' | null): Note {
     this.attributes['print-dot'] = printDot;
+    return this;
   }
   getPrintLeger(): 'yes' | 'no' | null {
     return this.attributes['print-leger'];
   }
-  setPrintLeger(printLeger: 'yes' | 'no' | null): void {
+  setPrintLeger(printLeger: 'yes' | 'no' | null): Note {
     this.attributes['print-leger'] = printLeger;
+    return this;
   }
   getPrintLyric(): 'yes' | 'no' | null {
     return this.attributes['print-lyric'];
   }
-  setPrintLyric(printLyric: 'yes' | 'no' | null): void {
+  setPrintLyric(printLyric: 'yes' | 'no' | null): Note {
     this.attributes['print-lyric'] = printLyric;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Note {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getPrintSpacing(): 'yes' | 'no' | null {
     return this.attributes['print-spacing'];
   }
-  setPrintSpacing(printSpacing: 'yes' | 'no' | null): void {
+  setPrintSpacing(printSpacing: 'yes' | 'no' | null): Note {
     this.attributes['print-spacing'] = printSpacing;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Note {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Note {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getRelease(): number | null {
     return this.attributes['release'];
   }
-  setRelease(release: number | null): void {
+  setRelease(release: number | null): Note {
     this.attributes['release'] = release;
+    return this;
   }
   getTimeOnly(): string | null {
     return this.attributes['time-only'];
   }
-  setTimeOnly(timeOnly: string | null): void {
+  setTimeOnly(timeOnly: string | null): Note {
     this.attributes['time-only'] = timeOnly;
+    return this;
   }
   getNoteValue(): TiedNoteValue | CuedNoteValue | TiedGraceNoteValue | CuedGraceNoteValue {
     return this.contents[0];
   }
-  setNoteValue(noteValue: TiedNoteValue | CuedNoteValue | TiedGraceNoteValue | CuedGraceNoteValue): void {
+  setNoteValue(noteValue: TiedNoteValue | CuedNoteValue | TiedGraceNoteValue | CuedGraceNoteValue): Note {
     this.contents[0] = noteValue;
+    return this;
   }
   getInstruments(): Array<Instrument> {
     return this.contents[1];
   }
-  setInstruments(instruments: Array<Instrument>): void {
+  setInstruments(instruments: Array<Instrument>): Note {
     this.contents[1] = instruments;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[2];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): Note {
     this.contents[2] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[3];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): Note {
     this.contents[3] = level;
+    return this;
   }
   getVoice(): Voice | null {
     return this.contents[4];
   }
-  setVoice(voice: Voice | null): void {
+  setVoice(voice: Voice | null): Note {
     this.contents[4] = voice;
+    return this;
   }
   getType(): Type | null {
     return this.contents[5];
   }
-  setType(type: Type | null): void {
+  setType(type: Type | null): Note {
     this.contents[5] = type;
+    return this;
   }
   getDots(): Array<Dot> {
     return this.contents[6];
   }
-  setDots(dots: Array<Dot>): void {
+  setDots(dots: Array<Dot>): Note {
     this.contents[6] = dots;
+    return this;
   }
   getAccidental(): Accidental | null {
     return this.contents[7];
   }
-  setAccidental(accidental: Accidental | null): void {
+  setAccidental(accidental: Accidental | null): Note {
     this.contents[7] = accidental;
+    return this;
   }
   getTimeModification(): TimeModification | null {
     return this.contents[8];
   }
-  setTimeModification(timeModification: TimeModification | null): void {
+  setTimeModification(timeModification: TimeModification | null): Note {
     this.contents[8] = timeModification;
+    return this;
   }
   getStem(): Stem | null {
     return this.contents[9];
   }
-  setStem(stem: Stem | null): void {
+  setStem(stem: Stem | null): Note {
     this.contents[9] = stem;
+    return this;
   }
   getNotehead(): Notehead | null {
     return this.contents[10];
   }
-  setNotehead(notehead: Notehead | null): void {
+  setNotehead(notehead: Notehead | null): Note {
     this.contents[10] = notehead;
+    return this;
   }
   getNoteheadText(): NoteheadText | null {
     return this.contents[11];
   }
-  setNoteheadText(noteheadText: NoteheadText | null): void {
+  setNoteheadText(noteheadText: NoteheadText | null): Note {
     this.contents[11] = noteheadText;
+    return this;
   }
   getStaff(): Staff | null {
     return this.contents[12];
   }
-  setStaff(staff: Staff | null): void {
+  setStaff(staff: Staff | null): Note {
     this.contents[12] = staff;
+    return this;
   }
   getBeams():
     | []
@@ -24075,32 +25650,37 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
       | [Beam, Beam, Beam, Beam, Beam, Beam]
       | [Beam, Beam, Beam, Beam, Beam, Beam, Beam]
       | [Beam, Beam, Beam, Beam, Beam, Beam, Beam, Beam]
-  ): void {
+  ): Note {
     this.contents[13] = beams;
+    return this;
   }
   getNotations(): Array<Notations> {
     return this.contents[14];
   }
-  setNotations(notations: Array<Notations>): void {
+  setNotations(notations: Array<Notations>): Note {
     this.contents[14] = notations;
+    return this;
   }
   getLyrics(): Array<Lyric> {
     return this.contents[15];
   }
-  setLyrics(lyrics: Array<Lyric>): void {
+  setLyrics(lyrics: Array<Lyric>): Note {
     this.contents[15] = lyrics;
+    return this;
   }
   getPlay(): Play | null {
     return this.contents[16];
   }
-  setPlay(play: Play | null): void {
+  setPlay(play: Play | null): Note {
     this.contents[16] = play;
+    return this;
   }
   getListen(): Listen | null {
     return this.contents[17];
   }
-  setListen(listen: Listen | null): void {
+  setListen(listen: Listen | null): Note {
     this.contents[17] = listen;
+    return this;
   }
 }
 
@@ -24132,20 +25712,23 @@ export class Backup implements XMLElement<'backup', BackupAttributes, BackupCont
   getDuration(): Duration {
     return this.contents[0];
   }
-  setDuration(duration: Duration): void {
+  setDuration(duration: Duration): Backup {
     this.contents[0] = duration;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[1];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): Backup {
     this.contents[1] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[2];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): Backup {
     this.contents[2] = level;
+    return this;
   }
 }
 
@@ -24179,32 +25762,37 @@ export class Forward implements XMLElement<'forward', ForwardAttributes, Forward
   getDuration(): Duration {
     return this.contents[0];
   }
-  setDuration(duration: Duration): void {
+  setDuration(duration: Duration): Forward {
     this.contents[0] = duration;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[1];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): Forward {
     this.contents[1] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[2];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): Forward {
     this.contents[2] = level;
+    return this;
   }
   getVoice(): Voice | null {
     return this.contents[3];
   }
-  setVoice(voice: Voice | null): void {
+  setVoice(voice: Voice | null): Forward {
     this.contents[3] = voice;
+    return this;
   }
   getStaff(): Staff | null {
     return this.contents[4];
   }
-  setStaff(staff: Staff | null): void {
+  setStaff(staff: Staff | null): Forward {
     this.contents[4] = staff;
+    return this;
   }
 }
 
@@ -24344,26 +25932,30 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Rehearsal {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Rehearsal {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Rehearsal {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
     return this.attributes['dir'];
   }
-  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): void {
+  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): Rehearsal {
     this.attributes['dir'] = dir;
+    return this;
   }
   getEnclosure():
     | 'rectangle'
@@ -24400,118 +25992,137 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
       | 'nonagon'
       | 'decagon'
       | null
-  ): void {
+  ): Rehearsal {
     this.attributes['enclosure'] = enclosure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Rehearsal {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Rehearsal {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Rehearsal {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Rehearsal {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Rehearsal {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Rehearsal {
     this.attributes['id'] = id;
+    return this;
   }
   getLetterSpacing(): 'normal' | number | null {
     return this.attributes['letter-spacing'];
   }
-  setLetterSpacing(letterSpacing: 'normal' | number | null): void {
+  setLetterSpacing(letterSpacing: 'normal' | number | null): Rehearsal {
     this.attributes['letter-spacing'] = letterSpacing;
+    return this;
   }
   getLineHeight(): 'normal' | number | null {
     return this.attributes['line-height'];
   }
-  setLineHeight(lineHeight: 'normal' | number | null): void {
+  setLineHeight(lineHeight: 'normal' | number | null): Rehearsal {
     this.attributes['line-height'] = lineHeight;
+    return this;
   }
   getLineThrough(): number | null {
     return this.attributes['line-through'];
   }
-  setLineThrough(lineThrough: number | null): void {
+  setLineThrough(lineThrough: number | null): Rehearsal {
     this.attributes['line-through'] = lineThrough;
+    return this;
   }
   getOverline(): number | null {
     return this.attributes['overline'];
   }
-  setOverline(overline: number | null): void {
+  setOverline(overline: number | null): Rehearsal {
     this.attributes['overline'] = overline;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Rehearsal {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Rehearsal {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getRotation(): number | null {
     return this.attributes['rotation'];
   }
-  setRotation(rotation: number | null): void {
+  setRotation(rotation: number | null): Rehearsal {
     this.attributes['rotation'] = rotation;
+    return this;
   }
   getUnderline(): number | null {
     return this.attributes['underline'];
   }
-  setUnderline(underline: number | null): void {
+  setUnderline(underline: number | null): Rehearsal {
     this.attributes['underline'] = underline;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Rehearsal {
     this.attributes['valign'] = valign;
+    return this;
   }
   getXmlLang(): string | null {
     return this.attributes['xml:lang'];
   }
-  setXmlLang(xmlLang: string | null): void {
+  setXmlLang(xmlLang: string | null): Rehearsal {
     this.attributes['xml:lang'] = xmlLang;
+    return this;
   }
   getXmlSpace(): 'default' | 'preserve' | null {
     return this.attributes['xml:space'];
   }
-  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): void {
+  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): Rehearsal {
     this.attributes['xml:space'] = xmlSpace;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Rehearsal {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -24594,82 +26205,95 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Segno {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Segno {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Segno {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Segno {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Segno {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Segno {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Segno {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Segno {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Segno {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Segno {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Segno {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Segno {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Segno {
     this.attributes['valign'] = valign;
+    return this;
   }
 }
 
@@ -24752,82 +26376,95 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Coda {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Coda {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Coda {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Coda {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Coda {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Coda {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Coda {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Coda {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Coda {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Coda {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Coda {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Coda {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Coda {
     this.attributes['valign'] = valign;
+    return this;
   }
 }
 
@@ -24969,26 +26606,30 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Words {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Words {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Words {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
     return this.attributes['dir'];
   }
-  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): void {
+  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): Words {
     this.attributes['dir'] = dir;
+    return this;
   }
   getEnclosure():
     | 'rectangle'
@@ -25025,124 +26666,144 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
       | 'nonagon'
       | 'decagon'
       | null
-  ): void {
+  ): Words {
     this.attributes['enclosure'] = enclosure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Words {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Words {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Words {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Words {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Words {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Words {
     this.attributes['id'] = id;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): Words {
     this.attributes['justify'] = justify;
+    return this;
   }
   getLetterSpacing(): 'normal' | number | null {
     return this.attributes['letter-spacing'];
   }
-  setLetterSpacing(letterSpacing: 'normal' | number | null): void {
+  setLetterSpacing(letterSpacing: 'normal' | number | null): Words {
     this.attributes['letter-spacing'] = letterSpacing;
+    return this;
   }
   getLineHeight(): 'normal' | number | null {
     return this.attributes['line-height'];
   }
-  setLineHeight(lineHeight: 'normal' | number | null): void {
+  setLineHeight(lineHeight: 'normal' | number | null): Words {
     this.attributes['line-height'] = lineHeight;
+    return this;
   }
   getLineThrough(): number | null {
     return this.attributes['line-through'];
   }
-  setLineThrough(lineThrough: number | null): void {
+  setLineThrough(lineThrough: number | null): Words {
     this.attributes['line-through'] = lineThrough;
+    return this;
   }
   getOverline(): number | null {
     return this.attributes['overline'];
   }
-  setOverline(overline: number | null): void {
+  setOverline(overline: number | null): Words {
     this.attributes['overline'] = overline;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Words {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Words {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getRotation(): number | null {
     return this.attributes['rotation'];
   }
-  setRotation(rotation: number | null): void {
+  setRotation(rotation: number | null): Words {
     this.attributes['rotation'] = rotation;
+    return this;
   }
   getUnderline(): number | null {
     return this.attributes['underline'];
   }
-  setUnderline(underline: number | null): void {
+  setUnderline(underline: number | null): Words {
     this.attributes['underline'] = underline;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Words {
     this.attributes['valign'] = valign;
+    return this;
   }
   getXmlLang(): string | null {
     return this.attributes['xml:lang'];
   }
-  setXmlLang(xmlLang: string | null): void {
+  setXmlLang(xmlLang: string | null): Words {
     this.attributes['xml:lang'] = xmlLang;
+    return this;
   }
   getXmlSpace(): 'default' | 'preserve' | null {
     return this.attributes['xml:space'];
   }
-  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): void {
+  setXmlSpace(xmlSpace: 'default' | 'preserve' | null): Words {
     this.attributes['xml:space'] = xmlSpace;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Words {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -25280,26 +26941,30 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Symbol {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Symbol {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Symbol {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
     return this.attributes['dir'];
   }
-  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): void {
+  setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): Symbol {
     this.attributes['dir'] = dir;
+    return this;
   }
   getEnclosure():
     | 'rectangle'
@@ -25336,106 +27001,123 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
       | 'nonagon'
       | 'decagon'
       | null
-  ): void {
+  ): Symbol {
     this.attributes['enclosure'] = enclosure;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Symbol {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Symbol {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Symbol {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Symbol {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Symbol {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Symbol {
     this.attributes['id'] = id;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): Symbol {
     this.attributes['justify'] = justify;
+    return this;
   }
   getLetterSpacing(): 'normal' | number | null {
     return this.attributes['letter-spacing'];
   }
-  setLetterSpacing(letterSpacing: 'normal' | number | null): void {
+  setLetterSpacing(letterSpacing: 'normal' | number | null): Symbol {
     this.attributes['letter-spacing'] = letterSpacing;
+    return this;
   }
   getLineHeight(): 'normal' | number | null {
     return this.attributes['line-height'];
   }
-  setLineHeight(lineHeight: 'normal' | number | null): void {
+  setLineHeight(lineHeight: 'normal' | number | null): Symbol {
     this.attributes['line-height'] = lineHeight;
+    return this;
   }
   getLineThrough(): number | null {
     return this.attributes['line-through'];
   }
-  setLineThrough(lineThrough: number | null): void {
+  setLineThrough(lineThrough: number | null): Symbol {
     this.attributes['line-through'] = lineThrough;
+    return this;
   }
   getOverline(): number | null {
     return this.attributes['overline'];
   }
-  setOverline(overline: number | null): void {
+  setOverline(overline: number | null): Symbol {
     this.attributes['overline'] = overline;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Symbol {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Symbol {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getRotation(): number | null {
     return this.attributes['rotation'];
   }
-  setRotation(rotation: number | null): void {
+  setRotation(rotation: number | null): Symbol {
     this.attributes['rotation'] = rotation;
+    return this;
   }
   getUnderline(): number | null {
     return this.attributes['underline'];
   }
-  setUnderline(underline: number | null): void {
+  setUnderline(underline: number | null): Symbol {
     this.attributes['underline'] = underline;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Symbol {
     this.attributes['valign'] = valign;
+    return this;
   }
 }
 
@@ -25506,80 +27188,93 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
   getType(): 'crescendo' | 'diminuendo' | 'stop' | 'continue' {
     return this.attributes['type'];
   }
-  setType(type: 'crescendo' | 'diminuendo' | 'stop' | 'continue'): void {
+  setType(type: 'crescendo' | 'diminuendo' | 'stop' | 'continue'): Wedge {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Wedge {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): Wedge {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Wedge {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Wedge {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Wedge {
     this.attributes['id'] = id;
+    return this;
   }
   getLineType(): 'dashed' | 'dotted' | 'solid' | 'wavy' | null {
     return this.attributes['line-type'];
   }
-  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): void {
+  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): Wedge {
     this.attributes['line-type'] = lineType;
+    return this;
   }
   getNiente(): 'yes' | 'no' | null {
     return this.attributes['niente'];
   }
-  setNiente(niente: 'yes' | 'no' | null): void {
+  setNiente(niente: 'yes' | 'no' | null): Wedge {
     this.attributes['niente'] = niente;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Wedge {
     this.attributes['number'] = number;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Wedge {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Wedge {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): Wedge {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
   getSpread(): number | null {
     return this.attributes['spread'];
   }
-  setSpread(spread: number | null): void {
+  setSpread(spread: number | null): Wedge {
     this.attributes['spread'] = spread;
+    return this;
   }
 }
 
@@ -25644,62 +27339,72 @@ export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesCont
   getType(): 'start' | 'stop' | 'continue' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'continue'): void {
+  setType(type: 'start' | 'stop' | 'continue'): Dashes {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Dashes {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): Dashes {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Dashes {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Dashes {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Dashes {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Dashes {
     this.attributes['number'] = number;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Dashes {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Dashes {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): Dashes {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
 }
 
@@ -25770,80 +27475,93 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
   getLineEnd(): 'none' | 'up' | 'down' | 'both' | 'arrow' {
     return this.attributes['line-end'];
   }
-  setLineEnd(lineEnd: 'none' | 'up' | 'down' | 'both' | 'arrow'): void {
+  setLineEnd(lineEnd: 'none' | 'up' | 'down' | 'both' | 'arrow'): Bracket {
     this.attributes['line-end'] = lineEnd;
+    return this;
   }
   getType(): 'start' | 'stop' | 'continue' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'continue'): void {
+  setType(type: 'start' | 'stop' | 'continue'): Bracket {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Bracket {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): Bracket {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Bracket {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Bracket {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getEndLength(): number | null {
     return this.attributes['end-length'];
   }
-  setEndLength(endLength: number | null): void {
+  setEndLength(endLength: number | null): Bracket {
     this.attributes['end-length'] = endLength;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Bracket {
     this.attributes['id'] = id;
+    return this;
   }
   getLineType(): 'dashed' | 'dotted' | 'solid' | 'wavy' | null {
     return this.attributes['line-type'];
   }
-  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): void {
+  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): Bracket {
     this.attributes['line-type'] = lineType;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Bracket {
     this.attributes['number'] = number;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Bracket {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Bracket {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): Bracket {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
 }
 
@@ -25933,94 +27651,109 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
   getType(): 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discountiue' | 'resume' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discountiue' | 'resume'): void {
+  setType(type: 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discountiue' | 'resume'): Pedal {
     this.attributes['type'] = type;
+    return this;
   }
   getAbbreviated(): 'yes' | 'no' | null {
     return this.attributes['abbreviated'];
   }
-  setAbbreviated(abbreviated: 'yes' | 'no' | null): void {
+  setAbbreviated(abbreviated: 'yes' | 'no' | null): Pedal {
     this.attributes['abbreviated'] = abbreviated;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Pedal {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Pedal {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Pedal {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Pedal {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Pedal {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Pedal {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Pedal {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Pedal {
     this.attributes['id'] = id;
+    return this;
   }
   getLine(): 'yes' | 'no' | null {
     return this.attributes['line'];
   }
-  setLine(line: 'yes' | 'no' | null): void {
+  setLine(line: 'yes' | 'no' | null): Pedal {
     this.attributes['line'] = line;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Pedal {
     this.attributes['number'] = number;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Pedal {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Pedal {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSign(): 'yes' | 'no' | null {
     return this.attributes['sign'];
   }
-  setSign(sign: 'yes' | 'no' | null): void {
+  setSign(sign: 'yes' | 'no' | null): Pedal {
     this.attributes['sign'] = sign;
+    return this;
   }
 }
 
@@ -26124,8 +27857,9 @@ export class BeatUnit implements XMLElement<'beat-unit', BeatUnitAttributes, Bea
       | 'breve'
       | 'long'
       | 'maxima'
-  ): void {
+  ): BeatUnit {
     this.contents[0] = noteTypeValue;
+    return this;
   }
 }
 
@@ -26174,14 +27908,16 @@ export class BeatUnitTied implements XMLElement<'beat-unit-tied', BeatUnitTiedAt
   getBeatUnit(): BeatUnit {
     return this.contents[0];
   }
-  setBeatUnit(beatUnit: BeatUnit): void {
+  setBeatUnit(beatUnit: BeatUnit): BeatUnitTied {
     this.contents[0] = beatUnit;
+    return this;
   }
   getBeatUnitDots(): Array<BeatUnitDot> {
     return this.contents[1];
   }
-  setBeatUnitDots(beatUnitDots: Array<BeatUnitDot>): void {
+  setBeatUnitDots(beatUnitDots: Array<BeatUnitDot>): BeatUnitTied {
     this.contents[1] = beatUnitDots;
+    return this;
   }
 }
 
@@ -26227,34 +27963,39 @@ export class PerMinute implements XMLElement<'per-minute', PerMinuteAttributes, 
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): PerMinute {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): PerMinute {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): PerMinute {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): PerMinute {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): PerMinute {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -26378,8 +28119,9 @@ export class MetronomeType implements XMLElement<'metronome-type', MetronomeType
       | 'breve'
       | 'long'
       | 'maxima'
-  ): void {
+  ): MetronomeType {
     this.contents[0] = noteTypeValue;
+    return this;
   }
 }
 
@@ -26433,14 +28175,16 @@ export class MetronomeBeam implements XMLElement<'metronome-beam', MetronomeBeam
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): MetronomeBeam {
     this.attributes['number'] = number;
+    return this;
   }
   getBeamValue(): 'backward hook' | 'begin' | 'continue' | 'end' | 'forward hook' {
     return this.contents[0];
   }
-  setBeamValue(beamValue: 'backward hook' | 'begin' | 'continue' | 'end' | 'forward hook'): void {
+  setBeamValue(beamValue: 'backward hook' | 'begin' | 'continue' | 'end' | 'forward hook'): MetronomeBeam {
     this.contents[0] = beamValue;
+    return this;
   }
 }
 
@@ -26467,8 +28211,9 @@ export class MetronomeTied implements XMLElement<'metronome-tied', MetronomeTied
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): MetronomeTied {
     this.attributes['type'] = type;
+    return this;
   }
 }
 
@@ -26519,38 +28264,44 @@ export class MetronomeTuplet
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): MetronomeTuplet {
     this.attributes['type'] = type;
+    return this;
   }
   getBracket(): 'yes' | 'no' | null {
     return this.attributes['bracket'];
   }
-  setBracket(bracket: 'yes' | 'no' | null): void {
+  setBracket(bracket: 'yes' | 'no' | null): MetronomeTuplet {
     this.attributes['bracket'] = bracket;
+    return this;
   }
   getShowNumber(): 'none' | 'actual' | 'both' | null {
     return this.attributes['show-number'];
   }
-  setShowNumber(showNumber: 'none' | 'actual' | 'both' | null): void {
+  setShowNumber(showNumber: 'none' | 'actual' | 'both' | null): MetronomeTuplet {
     this.attributes['show-number'] = showNumber;
+    return this;
   }
   getActualNotes(): ActualNotes {
     return this.contents[0];
   }
-  setActualNotes(actualNotes: ActualNotes): void {
+  setActualNotes(actualNotes: ActualNotes): MetronomeTuplet {
     this.contents[0] = actualNotes;
+    return this;
   }
   getNormalNotes(): NormalNotes {
     return this.contents[1];
   }
-  setNormalNotes(normalNotes: NormalNotes): void {
+  setNormalNotes(normalNotes: NormalNotes): MetronomeTuplet {
     this.contents[1] = normalNotes;
+    return this;
   }
   getNormal(): [NormalType, Array<NormalDot>] | null {
     return this.contents[2];
   }
-  setNormal(normal: [NormalType, Array<NormalDot>] | null): void {
+  setNormal(normal: [NormalType, Array<NormalDot>] | null): MetronomeTuplet {
     this.contents[2] = normal;
+    return this;
   }
 }
 
@@ -26590,32 +28341,37 @@ export class MetronomeNote implements XMLElement<'metronome-note', MetronomeNote
   getMetronomeType(): MetronomeType {
     return this.contents[0];
   }
-  setMetronomeType(metronomeType: MetronomeType): void {
+  setMetronomeType(metronomeType: MetronomeType): MetronomeNote {
     this.contents[0] = metronomeType;
+    return this;
   }
   getMetronomeDots(): Array<MetronomeDot> {
     return this.contents[1];
   }
-  setMetronomeDots(metronomeDots: Array<MetronomeDot>): void {
+  setMetronomeDots(metronomeDots: Array<MetronomeDot>): MetronomeNote {
     this.contents[1] = metronomeDots;
+    return this;
   }
   getMetronomeBeams(): Array<MetronomeBeam> {
     return this.contents[2];
   }
-  setMetronomeBeams(metronomeBeams: Array<MetronomeBeam>): void {
+  setMetronomeBeams(metronomeBeams: Array<MetronomeBeam>): MetronomeNote {
     this.contents[2] = metronomeBeams;
+    return this;
   }
   getMetronomeTied(): MetronomeTied | null {
     return this.contents[3];
   }
-  setMetronomeTied(metronomeTied: MetronomeTied | null): void {
+  setMetronomeTied(metronomeTied: MetronomeTied | null): MetronomeNote {
     this.contents[3] = metronomeTied;
+    return this;
   }
   getMetronomeTuplet(): MetronomeTuplet | null {
     return this.contents[4];
   }
-  setMetronomeTuplet(metronomeTuplet: MetronomeTuplet | null): void {
+  setMetronomeTuplet(metronomeTuplet: MetronomeTuplet | null): MetronomeNote {
     this.contents[4] = metronomeTuplet;
+    return this;
   }
 }
 
@@ -26645,8 +28401,9 @@ export class MetronomeRelation
   getText(): string | null {
     return this.contents[0];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): MetronomeRelation {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -26797,100 +28554,116 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Metronome {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Metronome {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Metronome {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Metronome {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Metronome {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Metronome {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Metronome {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Metronome {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Metronome {
     this.attributes['id'] = id;
+    return this;
   }
   getJustify(): 'left' | 'center' | 'right' | null {
     return this.attributes['justify'];
   }
-  setJustify(justify: 'left' | 'center' | 'right' | null): void {
+  setJustify(justify: 'left' | 'center' | 'right' | null): Metronome {
     this.attributes['justify'] = justify;
+    return this;
   }
   getParentheses(): 'yes' | 'no' | null {
     return this.attributes['parentheses'];
   }
-  setParentheses(parentheses: 'yes' | 'no' | null): void {
+  setParentheses(parentheses: 'yes' | 'no' | null): Metronome {
     this.attributes['parentheses'] = parentheses;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Metronome {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Metronome {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Metronome {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Metronome {
     this.attributes['valign'] = valign;
+    return this;
   }
   getMetronome(): BeatSpec | MetronomeSpec {
     return this.contents[0];
   }
-  setMetronome(metronome: BeatSpec | MetronomeSpec): void {
+  setMetronome(metronome: BeatSpec | MetronomeSpec): Metronome {
     this.contents[0] = metronome;
+    return this;
   }
 }
 
@@ -26974,94 +28747,109 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
   getType(): 'up' | 'down' | 'stop' | 'continue' {
     return this.attributes['type'];
   }
-  setType(type: 'up' | 'down' | 'stop' | 'continue'): void {
+  setType(type: 'up' | 'down' | 'stop' | 'continue'): OctaveShift {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): OctaveShift {
     this.attributes['color'] = color;
+    return this;
   }
   getDashLength(): number | null {
     return this.attributes['dash-length'];
   }
-  setDashLength(dashLength: number | null): void {
+  setDashLength(dashLength: number | null): OctaveShift {
     this.attributes['dash-length'] = dashLength;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): OctaveShift {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): OctaveShift {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): OctaveShift {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): OctaveShift {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): OctaveShift {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): OctaveShift {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): OctaveShift {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): OctaveShift {
     this.attributes['number'] = number;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): OctaveShift {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): OctaveShift {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSize(): number | null {
     return this.attributes['size'];
   }
-  setSize(size: number | null): void {
+  setSize(size: number | null): OctaveShift {
     this.attributes['size'] = size;
+    return this;
   }
   getSpaceLength(): number | null {
     return this.attributes['space-length'];
   }
-  setSpaceLength(spaceLength: number | null): void {
+  setSpaceLength(spaceLength: number | null): OctaveShift {
     this.attributes['space-length'] = spaceLength;
+    return this;
   }
 }
 
@@ -27139,76 +28927,88 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): HarpPedals {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): HarpPedals {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): HarpPedals {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): HarpPedals {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): HarpPedals {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): HarpPedals {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): HarpPedals {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): HarpPedals {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): HarpPedals {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): HarpPedals {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): HarpPedals {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): HarpPedals {
     this.attributes['valign'] = valign;
+    return this;
   }
 }
 
@@ -27286,76 +29086,88 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Damp {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Damp {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Damp {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Damp {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Damp {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Damp {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Damp {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Damp {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Damp {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Damp {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Damp {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Damp {
     this.attributes['valign'] = valign;
+    return this;
   }
 }
 
@@ -27433,76 +29245,88 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): DampAll {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): DampAll {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): DampAll {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): DampAll {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): DampAll {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): DampAll {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): DampAll {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): DampAll {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): DampAll {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): DampAll {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): DampAll {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): DampAll {
     this.attributes['valign'] = valign;
+    return this;
   }
 }
 
@@ -27580,76 +29404,88 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Eyeglasses {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Eyeglasses {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Eyeglasses {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Eyeglasses {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Eyeglasses {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Eyeglasses {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Eyeglasses {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Eyeglasses {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Eyeglasses {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Eyeglasses {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Eyeglasses {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Eyeglasses {
     this.attributes['valign'] = valign;
+    return this;
   }
 }
 
@@ -27727,76 +29563,88 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): StringMute {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): StringMute {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): StringMute {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): StringMute {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): StringMute {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): StringMute {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): StringMute {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): StringMute {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): StringMute {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): StringMute {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): StringMute {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): StringMute {
     this.attributes['valign'] = valign;
+    return this;
   }
 }
 
@@ -27833,8 +29681,9 @@ export class TuningStep implements XMLElement<'tuning-step', TuningStepAttribute
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
     return this.contents[0];
   }
-  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): void {
+  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): TuningStep {
     this.contents[0] = step;
+    return this;
   }
 }
 
@@ -27867,8 +29716,9 @@ export class TuningAlter implements XMLElement<'tuning-alter', TuningAlterAttrib
   getSemitones(): number {
     return this.contents[0];
   }
-  setSemitones(semitones: number): void {
+  setSemitones(semitones: number): TuningAlter {
     this.contents[0] = semitones;
+    return this;
   }
 }
 
@@ -27896,8 +29746,9 @@ export class TuningOctave implements XMLElement<'tuning-octave', TuningOctaveAtt
   getOctave(): number {
     return this.contents[0];
   }
-  setOctave(octave: number): void {
+  setOctave(octave: number): TuningOctave {
     this.contents[0] = octave;
+    return this;
   }
 }
 
@@ -27929,20 +29780,23 @@ export class Accord implements XMLElement<'accord', AccordAttributes, AccordCont
   getTuningStep(): TuningStep {
     return this.contents[0];
   }
-  setTuningStep(tuningStep: TuningStep): void {
+  setTuningStep(tuningStep: TuningStep): Accord {
     this.contents[0] = tuningStep;
+    return this;
   }
   getTuningAlter(): TuningAlter | null {
     return this.contents[1];
   }
-  setTuningAlter(tuningAlter: TuningAlter | null): void {
+  setTuningAlter(tuningAlter: TuningAlter | null): Accord {
     this.contents[1] = tuningAlter;
+    return this;
   }
   getTuningOctave(): TuningOctave {
     return this.contents[2];
   }
-  setTuningOctave(tuningOctave: TuningOctave): void {
+  setTuningOctave(tuningOctave: TuningOctave): Accord {
     this.contents[2] = tuningOctave;
+    return this;
   }
 }
 
@@ -27969,14 +29823,16 @@ export class Scordatura implements XMLElement<'scordatura', ScordaturaAttributes
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Scordatura {
     this.attributes['id'] = id;
+    return this;
   }
   getAccords(): Array<Accord> {
     return this.contents[0];
   }
-  setAccords(accords: Array<Accord>): void {
+  setAccords(accords: Array<Accord>): Scordatura {
     this.contents[0] = accords;
+    return this;
   }
 }
 
@@ -28041,62 +29897,72 @@ export class Image implements XMLElement<'image', ImageAttributes, ImageContents
   getSource(): string {
     return this.attributes['source'];
   }
-  setSource(source: string): void {
+  setSource(source: string): Image {
     this.attributes['source'] = source;
+    return this;
   }
   getType(): string {
     return this.attributes['type'];
   }
-  setType(type: string): void {
+  setType(type: string): Image {
     this.attributes['type'] = type;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Image {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Image {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Image {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Image {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Image {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Image {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Image {
     this.attributes['valign'] = valign;
+    return this;
   }
   getWidth(): number | null {
     return this.attributes['width'];
   }
-  setWidth(width: number | null): void {
+  setWidth(width: number | null): Image {
     this.attributes['width'] = width;
+    return this;
   }
 }
 
@@ -28181,94 +30047,109 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
   getSymbol(): 'none' | 'Hauptstimme' | 'Nebenstimme' | 'plain' {
     return this.attributes['symbol'];
   }
-  setSymbol(symbol: 'none' | 'Hauptstimme' | 'Nebenstimme' | 'plain'): void {
+  setSymbol(symbol: 'none' | 'Hauptstimme' | 'Nebenstimme' | 'plain'): PrincipalVoice {
     this.attributes['symbol'] = symbol;
+    return this;
   }
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): PrincipalVoice {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): PrincipalVoice {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): PrincipalVoice {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): PrincipalVoice {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): PrincipalVoice {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): PrincipalVoice {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): PrincipalVoice {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): PrincipalVoice {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): PrincipalVoice {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): PrincipalVoice {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): PrincipalVoice {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): PrincipalVoice {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): PrincipalVoice {
     this.attributes['valign'] = valign;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): PrincipalVoice {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -28304,14 +30185,16 @@ export class Glass implements XMLElement<'glass', GlassAttributes, GlassContents
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Glass {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getGlassValue(): 'glass harmonica' | 'glass harp' | 'wind chimes' {
     return this.contents[0];
   }
-  setGlassValue(glassValue: 'glass harmonica' | 'glass harp' | 'wind chimes'): void {
+  setGlassValue(glassValue: 'glass harmonica' | 'glass harp' | 'wind chimes'): Glass {
     this.contents[0] = glassValue;
+    return this;
   }
 }
 
@@ -28416,8 +30299,9 @@ export class Metal implements XMLElement<'metal', MetalAttributes, MetalContents
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Metal {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getMetalValue():
     | 'agogo'
@@ -28488,8 +30372,9 @@ export class Metal implements XMLElement<'metal', MetalAttributes, MetalContents
       | 'tam tam with beater'
       | 'triangle'
       | 'Vietnamese hat'
-  ): void {
+  ): Metal {
     this.contents[0] = metalValue;
+    return this;
   }
 }
 
@@ -28572,8 +30457,9 @@ export class Wood implements XMLElement<'wood', WoodAttributes, WoodContents> {
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Wood {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getWoodValue():
     | 'bamboo scraper'
@@ -28622,8 +30508,9 @@ export class Wood implements XMLElement<'wood', WoodAttributes, WoodContents> {
       | 'vibraslap'
       | 'whip'
       | 'wood block'
-  ): void {
+  ): Wood {
     this.contents[0] = woodValue;
+    return this;
   }
 }
 
@@ -28650,8 +30537,9 @@ export class Pitched implements XMLElement<'pitched', PitchedAttributes, Pitched
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Pitched {
     this.attributes['smufl'] = smufl;
+    return this;
   }
 }
 
@@ -28726,8 +30614,9 @@ export class Membrane implements XMLElement<'membrane', MembraneAttributes, Memb
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Membrane {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getMembraneValue():
     | 'bass drum'
@@ -28768,8 +30657,9 @@ export class Membrane implements XMLElement<'membrane', MembraneAttributes, Memb
       | 'tenor drum'
       | 'timbales'
       | 'tomtom'
-  ): void {
+  ): Membrane {
     this.contents[0] = membraneValue;
+    return this;
   }
 }
 
@@ -28842,8 +30732,9 @@ export class Effect implements XMLElement<'effect', EffectAttributes, EffectCont
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Effect {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getEffectValue():
     | 'anvil'
@@ -28882,8 +30773,9 @@ export class Effect implements XMLElement<'effect', EffectAttributes, EffectCont
       | 'thunder sheet'
       | 'wind machine'
       | 'wind whistle'
-  ): void {
+  ): Effect {
     this.contents[0] = effectValue;
+    return this;
   }
 }
 
@@ -28910,8 +30802,9 @@ export class Timpani implements XMLElement<'timpani', TimpaniAttributes, Timpani
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): Timpani {
     this.attributes['smufl'] = smufl;
+    return this;
   }
 }
 
@@ -29002,8 +30895,9 @@ export class Beater implements XMLElement<'beater', BeaterAttributes, BeaterCont
   getTip(): 'down' | 'left' | 'northeast' | 'northwest' | 'right' | 'southeast' | 'southwest' | 'up' | null {
     return this.attributes['tip'];
   }
-  setTip(tip: 'down' | 'left' | 'northeast' | 'northwest' | 'right' | 'southeast' | 'southwest' | 'up' | null): void {
+  setTip(tip: 'down' | 'left' | 'northeast' | 'northwest' | 'right' | 'southeast' | 'southwest' | 'up' | null): Beater {
     this.attributes['tip'] = tip;
+    return this;
   }
   getBeaterValue():
     | 'bow'
@@ -29050,8 +30944,9 @@ export class Beater implements XMLElement<'beater', BeaterAttributes, BeaterCont
       | 'triangle beater'
       | 'triangle beater plain'
       | 'wire brush'
-  ): void {
+  ): Beater {
     this.contents[0] = beaterValue;
+    return this;
   }
 }
 
@@ -29135,8 +31030,9 @@ export class StickType implements XMLElement<'stick-type', StickTypeAttributes, 
       | 'wound'
       | 'xylophone'
       | 'yarn'
-  ): void {
+  ): StickType {
     this.contents[0] = stickType;
+    return this;
   }
 }
 
@@ -29173,8 +31069,9 @@ export class StickMaterial implements XMLElement<'stick-material', StickMaterial
   getStickMaterial(): 'x' | 'hard' | 'medium' | 'shaded' | 'soft' {
     return this.contents[0];
   }
-  setStickMaterial(stickMaterial: 'x' | 'hard' | 'medium' | 'shaded' | 'soft'): void {
+  setStickMaterial(stickMaterial: 'x' | 'hard' | 'medium' | 'shaded' | 'soft'): StickMaterial {
     this.contents[0] = stickMaterial;
+    return this;
   }
 }
 
@@ -29218,32 +31115,37 @@ export class Stick implements XMLElement<'stick', StickAttributes, StickContents
   getDashedCircle(): 'yes' | 'no' | null {
     return this.attributes['dashed-circle'];
   }
-  setDashedCircle(dashedCircle: 'yes' | 'no' | null): void {
+  setDashedCircle(dashedCircle: 'yes' | 'no' | null): Stick {
     this.attributes['dashed-circle'] = dashedCircle;
+    return this;
   }
   getParentheses(): 'yes' | 'no' | null {
     return this.attributes['parentheses'];
   }
-  setParentheses(parentheses: 'yes' | 'no' | null): void {
+  setParentheses(parentheses: 'yes' | 'no' | null): Stick {
     this.attributes['parentheses'] = parentheses;
+    return this;
   }
   getTip(): 'down' | 'left' | 'northeast' | 'northwest' | 'right' | 'southeast' | 'southwest' | 'up' | null {
     return this.attributes['tip'];
   }
-  setTip(tip: 'down' | 'left' | 'northeast' | 'northwest' | 'right' | 'southeast' | 'southwest' | 'up' | null): void {
+  setTip(tip: 'down' | 'left' | 'northeast' | 'northwest' | 'right' | 'southeast' | 'southwest' | 'up' | null): Stick {
     this.attributes['tip'] = tip;
+    return this;
   }
   getStickType(): StickType {
     return this.contents[0];
   }
-  setStickType(stickType: StickType): void {
+  setStickType(stickType: StickType): Stick {
     this.contents[0] = stickType;
+    return this;
   }
   getStickMaterial(): StickMaterial {
     return this.contents[1];
   }
-  setStickMaterial(stickMaterial: StickMaterial): void {
+  setStickMaterial(stickMaterial: StickMaterial): Stick {
     this.contents[1] = stickMaterial;
+    return this;
   }
 }
 
@@ -29280,8 +31182,9 @@ export class StickLocation implements XMLElement<'stick-location', StickLocation
   getStickLocation(): 'center' | 'cymbal bell' | 'cymbal edge' | 'rim' {
     return this.contents[0];
   }
-  setStickLocation(stickLocation: 'center' | 'cymbal bell' | 'cymbal edge' | 'rim'): void {
+  setStickLocation(stickLocation: 'center' | 'cymbal bell' | 'cymbal edge' | 'rim'): StickLocation {
     this.contents[0] = stickLocation;
+    return this;
   }
 }
 
@@ -29310,14 +31213,16 @@ export class OtherPercussion
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): OtherPercussion {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): OtherPercussion {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -29451,76 +31356,88 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Percussion {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Percussion {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Percussion {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Percussion {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Percussion {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Percussion {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Percussion {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Percussion {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Percussion {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Percussion {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Percussion {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Percussion {
     this.attributes['valign'] = valign;
+    return this;
   }
   getPercussionValue():
     | Glass
@@ -29549,8 +31466,9 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
       | Stick
       | StickLocation
       | OtherPercussion
-  ): void {
+  ): Percussion {
     this.contents[0] = percussionValue;
+    return this;
   }
 }
 
@@ -29693,94 +31611,109 @@ export class AccordionRegistration
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): AccordionRegistration {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): AccordionRegistration {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): AccordionRegistration {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): AccordionRegistration {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): AccordionRegistration {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): AccordionRegistration {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): AccordionRegistration {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): AccordionRegistration {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): AccordionRegistration {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): AccordionRegistration {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): AccordionRegistration {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): AccordionRegistration {
     this.attributes['valign'] = valign;
+    return this;
   }
   getAccordionHigh(): AccordionHigh | null {
     return this.contents[0];
   }
-  setAccordionHigh(accordionHigh: AccordionHigh | null): void {
+  setAccordionHigh(accordionHigh: AccordionHigh | null): AccordionRegistration {
     this.contents[0] = accordionHigh;
+    return this;
   }
   getAccordionMiddle(): AccordionMiddle | null {
     return this.contents[1];
   }
-  setAccordionMiddle(accordionMiddle: AccordionMiddle | null): void {
+  setAccordionMiddle(accordionMiddle: AccordionMiddle | null): AccordionRegistration {
     this.contents[1] = accordionMiddle;
+    return this;
   }
   getAccordionLow(): AccordionLow | null {
     return this.contents[2];
   }
-  setAccordionLow(accordionLow: AccordionLow | null): void {
+  setAccordionLow(accordionLow: AccordionLow | null): AccordionRegistration {
     this.contents[2] = accordionLow;
+    return this;
   }
 }
 
@@ -29860,82 +31793,95 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
   getType(): 'down' | 'up' | 'up-down' {
     return this.attributes['type'];
   }
-  setType(type: 'down' | 'up' | 'up-down'): void {
+  setType(type: 'down' | 'up' | 'up-down'): StaffDivide {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): StaffDivide {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): StaffDivide {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): StaffDivide {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): StaffDivide {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): StaffDivide {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): StaffDivide {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): StaffDivide {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): StaffDivide {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): StaffDivide {
     this.attributes['id'] = id;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): StaffDivide {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): StaffDivide {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): StaffDivide {
     this.attributes['valign'] = valign;
+    return this;
   }
 }
 
@@ -30017,94 +31963,109 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): OtherDirection {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): OtherDirection {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): OtherDirection {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): OtherDirection {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): OtherDirection {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): OtherDirection {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): OtherDirection {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): OtherDirection {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): OtherDirection {
     this.attributes['id'] = id;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): OtherDirection {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): OtherDirection {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): OtherDirection {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): OtherDirection {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): OtherDirection {
     this.attributes['valign'] = valign;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): OtherDirection {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -30279,8 +32240,9 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): DirectionType {
     this.attributes['id'] = id;
+    return this;
   }
   getDirectionType():
     | Rehearsals
@@ -30333,8 +32295,9 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
       | AccordionRegistration
       | StaffDivide
       | OtherDirection
-  ): void {
+  ): DirectionType {
     this.contents[0] = directionType;
+    return this;
   }
 }
 
@@ -30367,14 +32330,16 @@ export class Offset implements XMLElement<'offset', OffsetAttributes, OffsetCont
   getSound(): 'yes' | 'no' | null {
     return this.attributes['sound'];
   }
-  setSound(sound: 'yes' | 'no' | null): void {
+  setSound(sound: 'yes' | 'no' | null): Offset {
     this.attributes['sound'] = sound;
+    return this;
   }
   getOffsetValue(): number {
     return this.contents[0];
   }
-  setOffsetValue(offsetValue: number): void {
+  setOffsetValue(offsetValue: number): Offset {
     this.contents[0] = offsetValue;
+    return this;
   }
 }
 
@@ -30417,26 +32382,30 @@ export class InstrumentChange
   getId(): string {
     return this.attributes['id'];
   }
-  setId(id: string): void {
+  setId(id: string): InstrumentChange {
     this.attributes['id'] = id;
+    return this;
   }
   getInstrumentSound(): InstrumentSound | null {
     return this.contents[0];
   }
-  setInstrumentSound(instrumentSound: InstrumentSound | null): void {
+  setInstrumentSound(instrumentSound: InstrumentSound | null): InstrumentChange {
     this.contents[0] = instrumentSound;
+    return this;
   }
   getInstrumentTypes(): Array<Solo | Ensemble> {
     return this.contents[1];
   }
-  setInstrumentTypes(instrumentTypes: Array<Solo | Ensemble>): void {
+  setInstrumentTypes(instrumentTypes: Array<Solo | Ensemble>): InstrumentChange {
     this.contents[1] = instrumentTypes;
+    return this;
   }
   getVirtualInstrument(): VirtualInstrument | null {
     return this.contents[2];
   }
-  setVirtualInstrument(virtualInstrument: VirtualInstrument | null): void {
+  setVirtualInstrument(virtualInstrument: VirtualInstrument | null): InstrumentChange {
     this.contents[2] = virtualInstrument;
+    return this;
   }
 }
 
@@ -30488,8 +32457,9 @@ export class First implements XMLElement<'first', FirstAttributes, FirstContents
   getSwingRatio(): number {
     return this.contents[0];
   }
-  setSwingRatio(swingRatio: number): void {
+  setSwingRatio(swingRatio: number): First {
     this.contents[0] = swingRatio;
+    return this;
   }
 }
 
@@ -30523,8 +32493,9 @@ export class Second implements XMLElement<'second', SecondAttributes, SecondCont
   getSecondValue(): number {
     return this.contents[0];
   }
-  setSecondValue(secondValue: number): void {
+  setSecondValue(secondValue: number): Second {
     this.contents[0] = secondValue;
+    return this;
   }
 }
 
@@ -30557,8 +32528,9 @@ export class SwingType implements XMLElement<'swing-type', SwingTypeAttributes, 
   getEighth(): 'eighth' | '16th' {
     return this.contents[0];
   }
-  setEighth(eighth: 'eighth' | '16th'): void {
+  setEighth(eighth: 'eighth' | '16th'): SwingType {
     this.contents[0] = eighth;
+    return this;
   }
 }
 
@@ -30586,8 +32558,9 @@ export class SwingStyle implements XMLElement<'swing-style', SwingStyleAttribute
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): SwingStyle {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -30644,14 +32617,16 @@ export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents
   getSwingValue(): Straight | AlternateSwing {
     return this.contents[0];
   }
-  setSwingValue(swingValue: Straight | AlternateSwing): void {
+  setSwingValue(swingValue: Straight | AlternateSwing): Swing {
     this.contents[0] = swingValue;
+    return this;
   }
   getSwingStyle(): SwingStyle | null {
     return this.contents[1];
   }
-  setSwingStyle(swingStyle: SwingStyle | null): void {
+  setSwingStyle(swingStyle: SwingStyle | null): Swing {
     this.contents[1] = swingStyle;
+    return this;
   }
 }
 
@@ -30736,130 +32711,151 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
   getCoda(): string | null {
     return this.attributes['coda'];
   }
-  setCoda(coda: string | null): void {
+  setCoda(coda: string | null): Sound {
     this.attributes['coda'] = coda;
+    return this;
   }
   getDacapo(): 'yes' | 'no' | null {
     return this.attributes['dacapo'];
   }
-  setDacapo(dacapo: 'yes' | 'no' | null): void {
+  setDacapo(dacapo: 'yes' | 'no' | null): Sound {
     this.attributes['dacapo'] = dacapo;
+    return this;
   }
   getDalsegno(): string | null {
     return this.attributes['dalsegno'];
   }
-  setDalsegno(dalsegno: string | null): void {
+  setDalsegno(dalsegno: string | null): Sound {
     this.attributes['dalsegno'] = dalsegno;
+    return this;
   }
   getDamperPedal(): 'no' | 'yes' | 0 | 1 | null {
     return this.attributes['damper-pedal'];
   }
-  setDamperPedal(damperPedal: 'no' | 'yes' | 0 | 1 | null): void {
+  setDamperPedal(damperPedal: 'no' | 'yes' | 0 | 1 | null): Sound {
     this.attributes['damper-pedal'] = damperPedal;
+    return this;
   }
   getDivisions(): number | null {
     return this.attributes['divisions'];
   }
-  setDivisions(divisions: number | null): void {
+  setDivisions(divisions: number | null): Sound {
     this.attributes['divisions'] = divisions;
+    return this;
   }
   getDynamics(): number | null {
     return this.attributes['dynamics'];
   }
-  setDynamics(dynamics: number | null): void {
+  setDynamics(dynamics: number | null): Sound {
     this.attributes['dynamics'] = dynamics;
+    return this;
   }
   getElevation(): number | null {
     return this.attributes['elevation'];
   }
-  setElevation(elevation: number | null): void {
+  setElevation(elevation: number | null): Sound {
     this.attributes['elevation'] = elevation;
+    return this;
   }
   getFine(): string | null {
     return this.attributes['fine'];
   }
-  setFine(fine: string | null): void {
+  setFine(fine: string | null): Sound {
     this.attributes['fine'] = fine;
+    return this;
   }
   getForwardRepeat(): 'yes' | 'no' | null {
     return this.attributes['forward-repeat'];
   }
-  setForwardRepeat(forwardRepeat: 'yes' | 'no' | null): void {
+  setForwardRepeat(forwardRepeat: 'yes' | 'no' | null): Sound {
     this.attributes['forward-repeat'] = forwardRepeat;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Sound {
     this.attributes['id'] = id;
+    return this;
   }
   getPan(): number | null {
     return this.attributes['pan'];
   }
-  setPan(pan: number | null): void {
+  setPan(pan: number | null): Sound {
     this.attributes['pan'] = pan;
+    return this;
   }
   getPizzicato(): 'yes' | 'no' | null {
     return this.attributes['pizzicato'];
   }
-  setPizzicato(pizzicato: 'yes' | 'no' | null): void {
+  setPizzicato(pizzicato: 'yes' | 'no' | null): Sound {
     this.attributes['pizzicato'] = pizzicato;
+    return this;
   }
   getSegno(): string | null {
     return this.attributes['segno'];
   }
-  setSegno(segno: string | null): void {
+  setSegno(segno: string | null): Sound {
     this.attributes['segno'] = segno;
+    return this;
   }
   getSoftPedal(): 'no' | 'yes' | 0 | 1 | null {
     return this.attributes['soft-pedal'];
   }
-  setSoftPedal(softPedal: 'no' | 'yes' | 0 | 1 | null): void {
+  setSoftPedal(softPedal: 'no' | 'yes' | 0 | 1 | null): Sound {
     this.attributes['soft-pedal'] = softPedal;
+    return this;
   }
   getSostenutoPedal(): 'no' | 'yes' | 0 | 1 | null {
     return this.attributes['sostenuto-pedal'];
   }
-  setSostenutoPedal(sostenutoPedal: 'no' | 'yes' | 0 | 1 | null): void {
+  setSostenutoPedal(sostenutoPedal: 'no' | 'yes' | 0 | 1 | null): Sound {
     this.attributes['sostenuto-pedal'] = sostenutoPedal;
+    return this;
   }
   getTempo(): number | null {
     return this.attributes['tempo'];
   }
-  setTempo(tempo: number | null): void {
+  setTempo(tempo: number | null): Sound {
     this.attributes['tempo'] = tempo;
+    return this;
   }
   getTimeOnly(): string | null {
     return this.attributes['time-only'];
   }
-  setTimeOnly(timeOnly: string | null): void {
+  setTimeOnly(timeOnly: string | null): Sound {
     this.attributes['time-only'] = timeOnly;
+    return this;
   }
   getTocoda(): string | null {
     return this.attributes['tocoda'];
   }
-  setTocoda(tocoda: string | null): void {
+  setTocoda(tocoda: string | null): Sound {
     this.attributes['tocoda'] = tocoda;
+    return this;
   }
   getPlaybacks(): Array<[InstrumentChange | null, MidiDevice | null, MidiInstrument | null, Play | null]> {
     return this.contents[0];
   }
   setPlaybacks(
     playbacks: Array<[InstrumentChange | null, MidiDevice | null, MidiInstrument | null, Play | null]>
-  ): void {
+  ): Sound {
     this.contents[0] = playbacks;
+    return this;
   }
   getSwing(): Swing | null {
     return this.contents[1];
   }
-  setSwing(swing: Swing | null): void {
+  setSwing(swing: Swing | null): Sound {
     this.contents[1] = swing;
+    return this;
   }
   getOffset(): Offset | null {
     return this.contents[2];
   }
-  setOffset(offset: Offset | null): void {
+  setOffset(offset: Offset | null): Sound {
     this.contents[2] = offset;
+    return this;
   }
 }
 
@@ -30899,26 +32895,30 @@ export class Sync implements XMLElement<'sync', SyncAttributes, SyncContents> {
   getType(): 'none' | 'tempo' | 'mostly-tempo' | 'mostly-event' | 'event' | 'always-event' {
     return this.attributes['type'];
   }
-  setType(type: 'none' | 'tempo' | 'mostly-tempo' | 'mostly-event' | 'event' | 'always-event'): void {
+  setType(type: 'none' | 'tempo' | 'mostly-tempo' | 'mostly-event' | 'event' | 'always-event'): Sync {
     this.attributes['type'] = type;
+    return this;
   }
   getLatency(): number | null {
     return this.attributes['latency'];
   }
-  setLatency(latency: number | null): void {
+  setLatency(latency: number | null): Sync {
     this.attributes['latency'] = latency;
+    return this;
   }
   getPlayer(): string | null {
     return this.attributes['player'];
   }
-  setPlayer(player: string | null): void {
+  setPlayer(player: string | null): Sync {
     this.attributes['player'] = player;
+    return this;
   }
   getTimeOnly(): string | null {
     return this.attributes['time-only'];
   }
-  setTimeOnly(timeOnly: string | null): void {
+  setTimeOnly(timeOnly: string | null): Sync {
     this.attributes['time-only'] = timeOnly;
+    return this;
   }
 }
 
@@ -30949,26 +32949,30 @@ export class OtherListening implements XMLElement<'other-listening', OtherListen
   getType(): string {
     return this.attributes['type'];
   }
-  setType(type: string): void {
+  setType(type: string): OtherListening {
     this.attributes['type'] = type;
+    return this;
   }
   getPlayer(): string | null {
     return this.attributes['player'];
   }
-  setPlayer(player: string | null): void {
+  setPlayer(player: string | null): OtherListening {
     this.attributes['player'] = player;
+    return this;
   }
   getTimeOnly(): string | null {
     return this.attributes['time-only'];
   }
-  setTimeOnly(timeOnly: string | null): void {
+  setTimeOnly(timeOnly: string | null): OtherListening {
     this.attributes['time-only'] = timeOnly;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): OtherListening {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -31009,14 +33013,16 @@ export class Listening implements XMLElement<'listening', ListeningAttributes, L
   getListening(): Array<Sync | OtherListening> {
     return this.contents[0];
   }
-  setListening(listening: Array<Sync | OtherListening>): void {
+  setListening(listening: Array<Sync | OtherListening>): Listening {
     this.contents[0] = listening;
+    return this;
   }
   getOffset(): Offset | null {
     return this.contents[1];
   }
-  setOffset(offset: Offset | null): void {
+  setOffset(offset: Offset | null): Listening {
     this.contents[1] = offset;
+    return this;
   }
 }
 
@@ -31071,74 +33077,86 @@ export class Direction implements XMLElement<'direction', DirectionAttributes, D
   getDirective(): 'yes' | 'no' | null {
     return this.attributes['directive'];
   }
-  setDirective(directive: 'yes' | 'no' | null): void {
+  setDirective(directive: 'yes' | 'no' | null): Direction {
     this.attributes['directive'] = directive;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Direction {
     this.attributes['id'] = id;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Direction {
     this.attributes['placement'] = placement;
+    return this;
   }
   getSystem(): 'none' | 'only-top' | 'also-top' | null {
     return this.attributes['system'];
   }
-  setSystem(system: 'none' | 'only-top' | 'also-top' | null): void {
+  setSystem(system: 'none' | 'only-top' | 'also-top' | null): Direction {
     this.attributes['system'] = system;
+    return this;
   }
   getDirectionTypes(): Array<DirectionType> {
     return this.contents[0];
   }
-  setDirectionTypes(directionTypes: Array<DirectionType>): void {
+  setDirectionTypes(directionTypes: Array<DirectionType>): Direction {
     this.contents[0] = directionTypes;
+    return this;
   }
   getOffset(): Offset | null {
     return this.contents[1];
   }
-  setOffset(offset: Offset | null): void {
+  setOffset(offset: Offset | null): Direction {
     this.contents[1] = offset;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[2];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): Direction {
     this.contents[2] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[3];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): Direction {
     this.contents[3] = level;
+    return this;
   }
   getVoice(): Voice | null {
     return this.contents[4];
   }
-  setVoice(voice: Voice | null): void {
+  setVoice(voice: Voice | null): Direction {
     this.contents[4] = voice;
+    return this;
   }
   getStaff(): Staff | null {
     return this.contents[5];
   }
-  setStaff(staff: Staff | null): void {
+  setStaff(staff: Staff | null): Direction {
     this.contents[5] = staff;
+    return this;
   }
   getSound(): Sound | null {
     return this.contents[6];
   }
-  setSound(sound: Sound | null): void {
+  setSound(sound: Sound | null): Direction {
     this.contents[6] = sound;
+    return this;
   }
   getListening(): Listening | null {
     return this.contents[7];
   }
-  setListening(listening: Listening | null): void {
+  setListening(listening: Listening | null): Direction {
     this.contents[7] = listening;
+    return this;
   }
 }
 
@@ -31171,8 +33189,9 @@ export class Divisions implements XMLElement<'divisions', DivisionsAttributes, D
   getPositiveDivisions(): number {
     return this.contents[0];
   }
-  setPositiveDivisions(positiveDivisions: number): void {
+  setPositiveDivisions(positiveDivisions: number): Divisions {
     this.contents[0] = positiveDivisions;
+    return this;
   }
 }
 
@@ -31207,14 +33226,16 @@ export class Cancel implements XMLElement<'cancel', CancelAttributes, CancelCont
   getLocation(): 'left' | 'right' | 'beforeBarline' | null {
     return this.attributes['location'];
   }
-  setLocation(location: 'left' | 'right' | 'beforeBarline' | null): void {
+  setLocation(location: 'left' | 'right' | 'beforeBarline' | null): Cancel {
     this.attributes['location'] = location;
+    return this;
   }
   getFifths(): number {
     return this.contents[0];
   }
-  setFifths(fifths: number): void {
+  setFifths(fifths: number): Cancel {
     this.contents[0] = fifths;
+    return this;
   }
 }
 
@@ -31248,8 +33269,9 @@ export class Fifths implements XMLElement<'fifths', FifthsAttributes, FifthsCont
   getValue(): number | null {
     return this.contents[0];
   }
-  setValue(value: number | null): void {
+  setValue(value: number | null): Fifths {
     this.contents[0] = value;
+    return this;
   }
 }
 
@@ -31337,8 +33359,9 @@ export class Mode implements XMLElement<'mode', ModeAttributes, ModeContents> {
       | 'ionian'
       | 'locrian'
       | string
-  ): void {
+  ): Mode {
     this.contents[0] = mode;
+    return this;
   }
 }
 
@@ -31375,8 +33398,9 @@ export class KeyStep implements XMLElement<'key-step', KeyStepAttributes, KeySte
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
     return this.contents[0];
   }
-  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): void {
+  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): KeyStep {
     this.contents[0] = step;
+    return this;
   }
 }
 
@@ -31409,8 +33433,9 @@ export class KeyAlter implements XMLElement<'key-alter', KeyAlterAttributes, Key
   getSemitones(): number {
     return this.contents[0];
   }
-  setSemitones(semitones: number): void {
+  setSemitones(semitones: number): KeyAlter {
     this.contents[0] = semitones;
+    return this;
   }
 }
 
@@ -31538,8 +33563,9 @@ export class KeyAccidental implements XMLElement<'key-accidental', KeyAccidental
   getSmufl(): string | null {
     return this.attributes['smufl'];
   }
-  setSmufl(smufl: string | null): void {
+  setSmufl(smufl: string | null): KeyAccidental {
     this.attributes['smufl'] = smufl;
+    return this;
   }
   getAccidentalValue():
     | 'other'
@@ -31628,8 +33654,9 @@ export class KeyAccidental implements XMLElement<'key-accidental', KeyAccidental
       | 'flat-4'
       | 'sori'
       | 'koron'
-  ): void {
+  ): KeyAccidental {
     this.contents[0] = accidentalValue;
+    return this;
   }
 }
 
@@ -31659,20 +33686,23 @@ export class KeyOctave implements XMLElement<'key-octave', KeyOctaveAttributes, 
   getNumber(): number {
     return this.attributes['number'];
   }
-  setNumber(number: number): void {
+  setNumber(number: number): KeyOctave {
     this.attributes['number'] = number;
+    return this;
   }
   getCancel(): 'yes' | 'no' | null {
     return this.attributes['cancel'];
   }
-  setCancel(cancel: 'yes' | 'no' | null): void {
+  setCancel(cancel: 'yes' | 'no' | null): KeyOctave {
     this.attributes['cancel'] = cancel;
+    return this;
   }
   getOctave(): number {
     return this.contents[0];
   }
-  setOctave(octave: number): void {
+  setOctave(octave: number): KeyOctave {
     this.contents[0] = octave;
+    return this;
   }
 }
 
@@ -31792,88 +33822,102 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Key {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Key {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Key {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Key {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Key {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Key {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Key {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Key {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Key {
     this.attributes['number'] = number;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Key {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Key {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Key {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getKeyValue(): TranditionalKey | AlternateKey {
     return this.contents[0];
   }
-  setKeyValue(keyValue: TranditionalKey | AlternateKey): void {
+  setKeyValue(keyValue: TranditionalKey | AlternateKey): Key {
     this.contents[0] = keyValue;
+    return this;
   }
   getKeyOctaves(): Array<KeyOctave> {
     return this.contents[1];
   }
-  setKeyOctaves(keyOctaves: Array<KeyOctave>): void {
+  setKeyOctaves(keyOctaves: Array<KeyOctave>): Key {
     this.contents[1] = keyOctaves;
+    return this;
   }
 }
 
@@ -31901,8 +33945,9 @@ export class Beats implements XMLElement<'beats', BeatsAttributes, BeatsContents
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Beats {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -31930,8 +33975,9 @@ export class BeatType implements XMLElement<'beat-type', BeatTypeAttributes, Bea
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): BeatType {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -31968,8 +34014,9 @@ export class TimeRelation implements XMLElement<'time-relation', TimeRelationAtt
   getTimeRelation(): 'space' | 'bracket' | 'equals' | 'hyphen' | 'parentheses' | 'slash' {
     return this.contents[0];
   }
-  setTimeRelation(timeRelation: 'space' | 'bracket' | 'equals' | 'hyphen' | 'parentheses' | 'slash'): void {
+  setTimeRelation(timeRelation: 'space' | 'bracket' | 'equals' | 'hyphen' | 'parentheses' | 'slash'): TimeRelation {
     this.contents[0] = timeRelation;
+    return this;
   }
 }
 
@@ -32023,26 +34070,30 @@ export class Interchangeable
   getSeparator(): 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null {
     return this.attributes['separator'];
   }
-  setSeparator(separator: 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null): void {
+  setSeparator(separator: 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null): Interchangeable {
     this.attributes['separator'] = separator;
+    return this;
   }
   getSymbol(): 'normal' | 'common' | 'cut' | 'dotted-note' | 'note' | 'single-number' | null {
     return this.attributes['symbol'];
   }
-  setSymbol(symbol: 'normal' | 'common' | 'cut' | 'dotted-note' | 'note' | 'single-number' | null): void {
+  setSymbol(symbol: 'normal' | 'common' | 'cut' | 'dotted-note' | 'note' | 'single-number' | null): Interchangeable {
     this.attributes['symbol'] = symbol;
+    return this;
   }
   getTimeRelation(): TimeRelation | null {
     return this.contents[0];
   }
-  setTimeRelation(timeRelation: TimeRelation | null): void {
+  setTimeRelation(timeRelation: TimeRelation | null): Interchangeable {
     this.contents[0] = timeRelation;
+    return this;
   }
   getBeats(): Array<[Beats, BeatType]> {
     return this.contents[1];
   }
-  setBeats(beats: Array<[Beats, BeatType]>): void {
+  setBeats(beats: Array<[Beats, BeatType]>): Interchangeable {
     this.contents[1] = beats;
+    return this;
   }
 }
 
@@ -32070,8 +34121,9 @@ export class SenzaMisura implements XMLElement<'senza-misura', SenzaMisuraAttrib
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): SenzaMisura {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -32188,106 +34240,123 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Time {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Time {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Time {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Time {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Time {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Time {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Time {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Time {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Time {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Time {
     this.attributes['number'] = number;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Time {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Time {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Time {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSeparator(): 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null {
     return this.attributes['separator'];
   }
-  setSeparator(separator: 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null): void {
+  setSeparator(separator: 'none' | 'adjacent' | 'diagonal' | 'horizontal' | 'vertical' | null): Time {
     this.attributes['separator'] = separator;
+    return this;
   }
   getSymbol(): 'normal' | 'common' | 'cut' | 'dotted-note' | 'note' | 'single-number' | null {
     return this.attributes['symbol'];
   }
-  setSymbol(symbol: 'normal' | 'common' | 'cut' | 'dotted-note' | 'note' | 'single-number' | null): void {
+  setSymbol(symbol: 'normal' | 'common' | 'cut' | 'dotted-note' | 'note' | 'single-number' | null): Time {
     this.attributes['symbol'] = symbol;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Time {
     this.attributes['valign'] = valign;
+    return this;
   }
   getTimeValue(): TimeSignature | SenzaMisura {
     return this.contents[0];
   }
-  setTimeValue(timeValue: TimeSignature | SenzaMisura): void {
+  setTimeValue(timeValue: TimeSignature | SenzaMisura): Time {
     this.contents[0] = timeValue;
+    return this;
   }
 }
 
@@ -32315,8 +34384,9 @@ export class Staves implements XMLElement<'staves', StavesAttributes, StavesCont
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Staves {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -32401,76 +34471,88 @@ export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttribute
   getBottomStaff(): number | null {
     return this.attributes['bottom-staff'];
   }
-  setBottomStaff(bottomStaff: number | null): void {
+  setBottomStaff(bottomStaff: number | null): PartSymbol {
     this.attributes['bottom-staff'] = bottomStaff;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): PartSymbol {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): PartSymbol {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): PartSymbol {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): PartSymbol {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): PartSymbol {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): PartSymbol {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): PartSymbol {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): PartSymbol {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): PartSymbol {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getTopStaff(): number | null {
     return this.attributes['top-staff'];
   }
-  setTopStaff(topStaff: number | null): void {
+  setTopStaff(topStaff: number | null): PartSymbol {
     this.attributes['top-staff'] = topStaff;
+    return this;
   }
   getGroupSymbolValue(): 'none' | 'brace' | 'bracket' | 'line' | 'square' {
     return this.contents[0];
   }
-  setGroupSymbolValue(groupSymbolValue: 'none' | 'brace' | 'bracket' | 'line' | 'square'): void {
+  setGroupSymbolValue(groupSymbolValue: 'none' | 'brace' | 'bracket' | 'line' | 'square'): PartSymbol {
     this.contents[0] = groupSymbolValue;
+    return this;
   }
 }
 
@@ -32498,8 +34580,9 @@ export class Instruments implements XMLElement<'instruments', InstrumentsAttribu
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Instruments {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -32536,8 +34619,9 @@ export class Sign implements XMLElement<'sign', SignAttributes, SignContents> {
   getClefSign(): 'G' | 'F' | 'C' | 'percussion' | 'TAB' | 'jianpu' | 'none' {
     return this.contents[0];
   }
-  setClefSign(clefSign: 'G' | 'F' | 'C' | 'percussion' | 'TAB' | 'jianpu' | 'none'): void {
+  setClefSign(clefSign: 'G' | 'F' | 'C' | 'percussion' | 'TAB' | 'jianpu' | 'none'): Sign {
     this.contents[0] = clefSign;
+    return this;
   }
 }
 
@@ -32570,8 +34654,9 @@ export class Line implements XMLElement<'line', LineAttributes, LineContents> {
   getStaffLinePosition(): number {
     return this.contents[0];
   }
-  setStaffLinePosition(staffLinePosition: number): void {
+  setStaffLinePosition(staffLinePosition: number): Line {
     this.contents[0] = staffLinePosition;
+    return this;
   }
 }
 
@@ -32607,8 +34692,9 @@ export class ClefOctaveChange
   getClefOctaveChange(): number {
     return this.contents[0];
   }
-  setClefOctaveChange(clefOctaveChange: number): void {
+  setClefOctaveChange(clefOctaveChange: number): ClefOctaveChange {
     this.contents[0] = clefOctaveChange;
+    return this;
   }
 }
 
@@ -32696,112 +34782,130 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
   getAdditional(): 'yes' | 'no' | null {
     return this.attributes['additional'];
   }
-  setAdditional(additional: 'yes' | 'no' | null): void {
+  setAdditional(additional: 'yes' | 'no' | null): Clef {
     this.attributes['additional'] = additional;
+    return this;
   }
   getAfterBarline(): 'yes' | 'no' | null {
     return this.attributes['after-barline'];
   }
-  setAfterBarline(afterBarline: 'yes' | 'no' | null): void {
+  setAfterBarline(afterBarline: 'yes' | 'no' | null): Clef {
     this.attributes['after-barline'] = afterBarline;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Clef {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Clef {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Clef {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Clef {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Clef {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Clef {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Clef {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Clef {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Clef {
     this.attributes['number'] = number;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Clef {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Clef {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Clef {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
     return this.attributes['size'];
   }
-  setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): void {
+  setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): Clef {
     this.attributes['size'] = size;
+    return this;
   }
   getSign(): Sign {
     return this.contents[0];
   }
-  setSign(sign: Sign): void {
+  setSign(sign: Sign): Clef {
     this.contents[0] = sign;
+    return this;
   }
   getLine(): Line | null {
     return this.contents[1];
   }
-  setLine(line: Line | null): void {
+  setLine(line: Line | null): Clef {
     this.contents[1] = line;
+    return this;
   }
   getClefOctaveChange(): ClefOctaveChange | null {
     return this.contents[2];
   }
-  setClefOctaveChange(clefOctaveChange: ClefOctaveChange | null): void {
+  setClefOctaveChange(clefOctaveChange: ClefOctaveChange | null): Clef {
     this.contents[2] = clefOctaveChange;
+    return this;
   }
 }
 
@@ -32838,8 +34942,9 @@ export class StaffType implements XMLElement<'staff-type', StaffTypeAttributes, 
   getStaffType(): 'regular' | 'alternate' | 'cue' | 'editorial' | 'ossia' {
     return this.contents[0];
   }
-  setStaffType(staffType: 'regular' | 'alternate' | 'cue' | 'editorial' | 'ossia'): void {
+  setStaffType(staffType: 'regular' | 'alternate' | 'cue' | 'editorial' | 'ossia'): StaffType {
     this.contents[0] = staffType;
+    return this;
   }
 }
 
@@ -32867,8 +34972,9 @@ export class StaffLines implements XMLElement<'staff-lines', StaffLinesAttribute
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): StaffLines {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -32907,32 +35013,37 @@ export class LineDetail implements XMLElement<'line-detail', LineDetailAttribute
   getLine(): number {
     return this.attributes['line'];
   }
-  setLine(line: number): void {
+  setLine(line: number): LineDetail {
     this.attributes['line'] = line;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): LineDetail {
     this.attributes['color'] = color;
+    return this;
   }
   getLineType(): 'dashed' | 'dotted' | 'solid' | 'wavy' | null {
     return this.attributes['line-type'];
   }
-  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): void {
+  setLineType(lineType: 'dashed' | 'dotted' | 'solid' | 'wavy' | null): LineDetail {
     this.attributes['line-type'] = lineType;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): LineDetail {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getWidth(): number | null {
     return this.attributes['width'];
   }
-  setWidth(width: number | null): void {
+  setWidth(width: number | null): LineDetail {
     this.attributes['width'] = width;
+    return this;
   }
 }
 
@@ -32963,26 +35074,30 @@ export class StaffTuning implements XMLElement<'staff-tuning', StaffTuningAttrib
   getLine(): number {
     return this.attributes['line'];
   }
-  setLine(line: number): void {
+  setLine(line: number): StaffTuning {
     this.attributes['line'] = line;
+    return this;
   }
   getTuningStep(): TuningStep {
     return this.contents[0];
   }
-  setTuningStep(tuningStep: TuningStep): void {
+  setTuningStep(tuningStep: TuningStep): StaffTuning {
     this.contents[0] = tuningStep;
+    return this;
   }
   getTuningAlter(): TuningAlter | null {
     return this.contents[1];
   }
-  setTuningAlter(tuningAlter: TuningAlter | null): void {
+  setTuningAlter(tuningAlter: TuningAlter | null): StaffTuning {
     this.contents[1] = tuningAlter;
+    return this;
   }
   getTuningOctave(): TuningOctave {
     return this.contents[2];
   }
-  setTuningOctave(tuningOctave: TuningOctave): void {
+  setTuningOctave(tuningOctave: TuningOctave): StaffTuning {
     this.contents[2] = tuningOctave;
+    return this;
   }
 }
 
@@ -33010,8 +35125,9 @@ export class Capo implements XMLElement<'capo', CapoAttributes, CapoContents> {
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Capo {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -33044,14 +35160,16 @@ export class StaffSize implements XMLElement<'staff-size', StaffSizeAttributes, 
   getScaling(): number | null {
     return this.attributes['scaling'];
   }
-  setScaling(scaling: number | null): void {
+  setScaling(scaling: number | null): StaffSize {
     this.attributes['scaling'] = scaling;
+    return this;
   }
   getStaffSizeValue(): number {
     return this.contents[0];
   }
-  setStaffSizeValue(staffSizeValue: number): void {
+  setStaffSizeValue(staffSizeValue: number): StaffSize {
     this.contents[0] = staffSizeValue;
+    return this;
   }
 }
 
@@ -33110,56 +35228,65 @@ export class StaffDetails implements XMLElement<'staff-details', StaffDetailsAtt
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): StaffDetails {
     this.attributes['number'] = number;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): StaffDetails {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getPrintSpacing(): 'yes' | 'no' | null {
     return this.attributes['print-spacing'];
   }
-  setPrintSpacing(printSpacing: 'yes' | 'no' | null): void {
+  setPrintSpacing(printSpacing: 'yes' | 'no' | null): StaffDetails {
     this.attributes['print-spacing'] = printSpacing;
+    return this;
   }
   getShowFrets(): 'letters' | 'numbers' | null {
     return this.attributes['show-frets'];
   }
-  setShowFrets(showFrets: 'letters' | 'numbers' | null): void {
+  setShowFrets(showFrets: 'letters' | 'numbers' | null): StaffDetails {
     this.attributes['show-frets'] = showFrets;
+    return this;
   }
   getStaffType(): StaffType | null {
     return this.contents[0];
   }
-  setStaffType(staffType: StaffType | null): void {
+  setStaffType(staffType: StaffType | null): StaffDetails {
     this.contents[0] = staffType;
+    return this;
   }
   getLines(): [StaffLines, Array<LineDetail>] | null {
     return this.contents[1];
   }
-  setLines(lines: [StaffLines, Array<LineDetail>] | null): void {
+  setLines(lines: [StaffLines, Array<LineDetail>] | null): StaffDetails {
     this.contents[1] = lines;
+    return this;
   }
   getStaffTunings(): Array<StaffTuning> {
     return this.contents[2];
   }
-  setStaffTunings(staffTunings: Array<StaffTuning>): void {
+  setStaffTunings(staffTunings: Array<StaffTuning>): StaffDetails {
     this.contents[2] = staffTunings;
+    return this;
   }
   getCapo(): Capo | null {
     return this.contents[3];
   }
-  setCapo(capo: Capo | null): void {
+  setCapo(capo: Capo | null): StaffDetails {
     this.contents[3] = capo;
+    return this;
   }
   getStaffSize(): StaffSize | null {
     return this.contents[4];
   }
-  setStaffSize(staffSize: StaffSize | null): void {
+  setStaffSize(staffSize: StaffSize | null): StaffDetails {
     this.contents[4] = staffSize;
+    return this;
   }
 }
 
@@ -33193,8 +35320,9 @@ export class Diatonic implements XMLElement<'diatonic', DiatonicAttributes, Diat
   getDiatonic(): number {
     return this.contents[0];
   }
-  setDiatonic(diatonic: number): void {
+  setDiatonic(diatonic: number): Diatonic {
     this.contents[0] = diatonic;
+    return this;
   }
 }
 
@@ -33227,8 +35355,9 @@ export class Chromatic implements XMLElement<'chromatic', ChromaticAttributes, C
   getSemitones(): number {
     return this.contents[0];
   }
-  setSemitones(semitones: number): void {
+  setSemitones(semitones: number): Chromatic {
     this.contents[0] = semitones;
+    return this;
   }
 }
 
@@ -33262,8 +35391,9 @@ export class OctaveChange implements XMLElement<'octave-change', OctaveChangeAtt
   getOctaveChangeValue(): number {
     return this.contents[0];
   }
-  setOctaveChangeValue(octaveChangeValue: number): void {
+  setOctaveChangeValue(octaveChangeValue: number): OctaveChange {
     this.contents[0] = octaveChangeValue;
+    return this;
   }
 }
 
@@ -33290,8 +35420,9 @@ export class Double implements XMLElement<'double', DoubleAttributes, DoubleCont
   getAbove(): 'yes' | 'no' | null {
     return this.attributes['above'];
   }
-  setAbove(above: 'yes' | 'no' | null): void {
+  setAbove(above: 'yes' | 'no' | null): Double {
     this.attributes['above'] = above;
+    return this;
   }
 }
 
@@ -33326,38 +35457,44 @@ export class Transpose implements XMLElement<'transpose', TransposeAttributes, T
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Transpose {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): Transpose {
     this.attributes['number'] = number;
+    return this;
   }
   getDiatonic(): Diatonic | null {
     return this.contents[0];
   }
-  setDiatonic(diatonic: Diatonic | null): void {
+  setDiatonic(diatonic: Diatonic | null): Transpose {
     this.contents[0] = diatonic;
+    return this;
   }
   getChromatic(): Chromatic {
     return this.contents[1];
   }
-  setChromatic(chromatic: Chromatic): void {
+  setChromatic(chromatic: Chromatic): Transpose {
     this.contents[1] = chromatic;
+    return this;
   }
   getOctaveChange(): OctaveChange | null {
     return this.contents[2];
   }
-  setOctaveChange(octaveChange: OctaveChange | null): void {
+  setOctaveChange(octaveChange: OctaveChange | null): Transpose {
     this.contents[2] = octaveChange;
+    return this;
   }
   getDouble(): Double | null {
     return this.contents[3];
   }
-  setDouble(double: Double | null): void {
+  setDouble(double: Double | null): Transpose {
     this.contents[3] = double;
+    return this;
   }
 }
 
@@ -33389,20 +35526,23 @@ export class PartClef implements XMLElement<'part-clef', PartClefAttributes, Par
   getSign(): Sign {
     return this.contents[0];
   }
-  setSign(sign: Sign): void {
+  setSign(sign: Sign): PartClef {
     this.contents[0] = sign;
+    return this;
   }
   getLine(): Line | null {
     return this.contents[1];
   }
-  setLine(line: Line | null): void {
+  setLine(line: Line | null): PartClef {
     this.contents[1] = line;
+    return this;
   }
   getClefOctaveChange(): ClefOctaveChange | null {
     return this.contents[2];
   }
-  setClefOctaveChange(clefOctaveChange: ClefOctaveChange | null): void {
+  setClefOctaveChange(clefOctaveChange: ClefOctaveChange | null): PartClef {
     this.contents[2] = clefOctaveChange;
+    return this;
   }
 }
 
@@ -33435,26 +35575,30 @@ export class PartTranspose implements XMLElement<'part-transpose', PartTranspose
   getDiatonic(): Diatonic | null {
     return this.contents[0];
   }
-  setDiatonic(diatonic: Diatonic | null): void {
+  setDiatonic(diatonic: Diatonic | null): PartTranspose {
     this.contents[0] = diatonic;
+    return this;
   }
   getChromatic(): Chromatic {
     return this.contents[1];
   }
-  setChromatic(chromatic: Chromatic): void {
+  setChromatic(chromatic: Chromatic): PartTranspose {
     this.contents[1] = chromatic;
+    return this;
   }
   getOctaveChange(): OctaveChange | null {
     return this.contents[2];
   }
-  setOctaveChange(octaveChange: OctaveChange | null): void {
+  setOctaveChange(octaveChange: OctaveChange | null): PartTranspose {
     this.contents[2] = octaveChange;
+    return this;
   }
   getDouble(): Double | null {
     return this.contents[3];
   }
-  setDouble(double: Double | null): void {
+  setDouble(double: Double | null): PartTranspose {
     this.contents[3] = double;
+    return this;
   }
 }
 
@@ -33487,26 +35631,30 @@ export class ForPart implements XMLElement<'for-part', ForPartAttributes, ForPar
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): ForPart {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): ForPart {
     this.attributes['number'] = number;
+    return this;
   }
   getPartClef(): PartClef | null {
     return this.contents[0];
   }
-  setPartClef(partClef: PartClef | null): void {
+  setPartClef(partClef: PartClef | null): ForPart {
     this.contents[0] = partClef;
+    return this;
   }
   getPartTranspose(): PartTranspose {
     return this.contents[1];
   }
-  setPartTranspose(partTranspose: PartTranspose): void {
+  setPartTranspose(partTranspose: PartTranspose): ForPart {
     this.contents[1] = partTranspose;
+    return this;
   }
 }
 
@@ -33580,70 +35728,81 @@ export class Directive implements XMLElement<'directive', DirectiveAttributes, D
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Directive {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Directive {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Directive {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Directive {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Directive {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Directive {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Directive {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Directive {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Directive {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getXmlLang(): string | null {
     return this.attributes['xml:lang'];
   }
-  setXmlLang(xmlLang: string | null): void {
+  setXmlLang(xmlLang: string | null): Directive {
     this.attributes['xml:lang'] = xmlLang;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Directive {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -33676,14 +35835,16 @@ export class MultipleRest implements XMLElement<'multiple-rest', MultipleRestAtt
   getUseSymbols(): 'yes' | 'no' | null {
     return this.attributes['use-symbols'];
   }
-  setUseSymbols(useSymbols: 'yes' | 'no' | null): void {
+  setUseSymbols(useSymbols: 'yes' | 'no' | null): MultipleRest {
     this.attributes['use-symbols'] = useSymbols;
+    return this;
   }
   getMultipleRest(): number {
     return this.contents[0];
   }
-  setMultipleRest(multipleRest: number): void {
+  setMultipleRest(multipleRest: number): MultipleRest {
     this.contents[0] = multipleRest;
+    return this;
   }
 }
 
@@ -33719,20 +35880,23 @@ export class MeasureRepeat implements XMLElement<'measure-repeat', MeasureRepeat
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): MeasureRepeat {
     this.attributes['type'] = type;
+    return this;
   }
   getSlashes(): number | null {
     return this.attributes['slashes'];
   }
-  setSlashes(slashes: number | null): void {
+  setSlashes(slashes: number | null): MeasureRepeat {
     this.attributes['slashes'] = slashes;
+    return this;
   }
   getMeasureRepeatValue(): '' | number {
     return this.contents[0];
   }
-  setMeasureRepeatValue(measureRepeatValue: '' | number): void {
+  setMeasureRepeatValue(measureRepeatValue: '' | number): MeasureRepeat {
     this.contents[0] = measureRepeatValue;
+    return this;
   }
 }
 
@@ -33836,8 +36000,9 @@ export class SlashType implements XMLElement<'slash-type', SlashTypeAttributes, 
       | 'breve'
       | 'long'
       | 'maxima'
-  ): void {
+  ): SlashType {
     this.contents[0] = noteTypeValue;
+    return this;
   }
 }
 
@@ -33883,8 +36048,9 @@ export class ExceptVoice implements XMLElement<'except-voice', ExceptVoiceAttrib
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): ExceptVoice {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -33933,26 +36099,30 @@ export class BeatRepeat implements XMLElement<'beat-repeat', BeatRepeatAttribute
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): BeatRepeat {
     this.attributes['type'] = type;
+    return this;
   }
   getSlashes(): number | null {
     return this.attributes['slashes'];
   }
-  setSlashes(slashes: number | null): void {
+  setSlashes(slashes: number | null): BeatRepeat {
     this.attributes['slashes'] = slashes;
+    return this;
   }
   getUseDots(): 'yes' | 'no' | null {
     return this.attributes['use-dots'];
   }
-  setUseDots(useDots: 'yes' | 'no' | null): void {
+  setUseDots(useDots: 'yes' | 'no' | null): BeatRepeat {
     this.attributes['use-dots'] = useDots;
+    return this;
   }
   getBeatRepeat(): [[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null {
     return this.contents[0];
   }
-  setBeatRepeat(beatRepeat: [[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null): void {
+  setBeatRepeat(beatRepeat: [[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null): BeatRepeat {
     this.contents[0] = beatRepeat;
+    return this;
   }
 }
 
@@ -34005,26 +36175,30 @@ export class Slash implements XMLElement<'slash', SlashAttributes, SlashContents
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): Slash {
     this.attributes['type'] = type;
+    return this;
   }
   getUseDots(): 'yes' | 'no' | null {
     return this.attributes['use-dots'];
   }
-  setUseDots(useDots: 'yes' | 'no' | null): void {
+  setUseDots(useDots: 'yes' | 'no' | null): Slash {
     this.attributes['use-dots'] = useDots;
+    return this;
   }
   getUseStems(): 'yes' | 'no' | null {
     return this.attributes['use-stems'];
   }
-  setUseStems(useStems: 'yes' | 'no' | null): void {
+  setUseStems(useStems: 'yes' | 'no' | null): Slash {
     this.attributes['use-stems'] = useStems;
+    return this;
   }
   getSlashValue(): [[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null {
     return this.contents[0];
   }
-  setSlashValue(slashValue: [[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null): void {
+  setSlashValue(slashValue: [[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null): Slash {
     this.contents[0] = slashValue;
+    return this;
   }
 }
 
@@ -34094,52 +36268,60 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): MeasureStyle {
     this.attributes['color'] = color;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): MeasureStyle {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): MeasureStyle {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): MeasureStyle {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): MeasureStyle {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): MeasureStyle {
     this.attributes['id'] = id;
+    return this;
   }
   getNumber(): number | null {
     return this.attributes['number'];
   }
-  setNumber(number: number | null): void {
+  setNumber(number: number | null): MeasureStyle {
     this.attributes['number'] = number;
+    return this;
   }
   getMeasureStyleValue(): MultipleRest | MeasureRepeat | BeatRepeat | Slash {
     return this.contents[0];
   }
-  setMeasureStyleValue(measureStyleValue: MultipleRest | MeasureRepeat | BeatRepeat | Slash): void {
+  setMeasureStyleValue(measureStyleValue: MultipleRest | MeasureRepeat | BeatRepeat | Slash): MeasureStyle {
     this.contents[0] = measureStyleValue;
+    return this;
   }
 }
 
@@ -34215,80 +36397,93 @@ export class Attributes implements XMLElement<'attributes', AttributesAttributes
   getFootnote(): Footnote | null {
     return this.contents[0];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): Attributes {
     this.contents[0] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[1];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): Attributes {
     this.contents[1] = level;
+    return this;
   }
   getDivisions(): Divisions | null {
     return this.contents[2];
   }
-  setDivisions(divisions: Divisions | null): void {
+  setDivisions(divisions: Divisions | null): Attributes {
     this.contents[2] = divisions;
+    return this;
   }
   getKeys(): Array<Key> {
     return this.contents[3];
   }
-  setKeys(keys: Array<Key>): void {
+  setKeys(keys: Array<Key>): Attributes {
     this.contents[3] = keys;
+    return this;
   }
   getTimes(): Array<Time> {
     return this.contents[4];
   }
-  setTimes(times: Array<Time>): void {
+  setTimes(times: Array<Time>): Attributes {
     this.contents[4] = times;
+    return this;
   }
   getStaves(): Staves | null {
     return this.contents[5];
   }
-  setStaves(staves: Staves | null): void {
+  setStaves(staves: Staves | null): Attributes {
     this.contents[5] = staves;
+    return this;
   }
   getPartSymbol(): PartSymbol | null {
     return this.contents[6];
   }
-  setPartSymbol(partSymbol: PartSymbol | null): void {
+  setPartSymbol(partSymbol: PartSymbol | null): Attributes {
     this.contents[6] = partSymbol;
+    return this;
   }
   getInstruments(): Instruments | null {
     return this.contents[7];
   }
-  setInstruments(instruments: Instruments | null): void {
+  setInstruments(instruments: Instruments | null): Attributes {
     this.contents[7] = instruments;
+    return this;
   }
   getClefs(): Array<Clef> {
     return this.contents[8];
   }
-  setClefs(clefs: Array<Clef>): void {
+  setClefs(clefs: Array<Clef>): Attributes {
     this.contents[8] = clefs;
+    return this;
   }
   getStaffDetails(): Array<StaffDetails> {
     return this.contents[9];
   }
-  setStaffDetails(staffDetails: Array<StaffDetails>): void {
+  setStaffDetails(staffDetails: Array<StaffDetails>): Attributes {
     this.contents[9] = staffDetails;
+    return this;
   }
   getTranspositions(): Transposes | ForParts {
     return this.contents[10];
   }
-  setTranspositions(transpositions: Transposes | ForParts): void {
+  setTranspositions(transpositions: Transposes | ForParts): Attributes {
     this.contents[10] = transpositions;
+    return this;
   }
   getDirectives(): Array<Directive> {
     return this.contents[11];
   }
-  setDirectives(directives: Array<Directive>): void {
+  setDirectives(directives: Array<Directive>): Attributes {
     this.contents[11] = directives;
+    return this;
   }
   getMeasureStyles(): Array<MeasureStyle> {
     return this.contents[12];
   }
-  setMeasureStyles(measureStyles: Array<MeasureStyle>): void {
+  setMeasureStyles(measureStyles: Array<MeasureStyle>): Attributes {
     this.contents[12] = measureStyles;
+    return this;
   }
 }
 
@@ -34364,70 +36559,81 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): RootStep {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): RootStep {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): RootStep {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): RootStep {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): RootStep {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): RootStep {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): RootStep {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): RootStep {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): RootStep {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string | null {
     return this.attributes['text'];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): RootStep {
     this.attributes['text'] = text;
+    return this;
   }
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
     return this.contents[0];
   }
-  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): void {
+  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): RootStep {
     this.contents[0] = step;
+    return this;
   }
 }
 
@@ -34508,76 +36714,88 @@ export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, 
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): RootAlter {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): RootAlter {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): RootAlter {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): RootAlter {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): RootAlter {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): RootAlter {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): RootAlter {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLocation(): 'left' | 'right' | null {
     return this.attributes['location'];
   }
-  setLocation(location: 'left' | 'right' | null): void {
+  setLocation(location: 'left' | 'right' | null): RootAlter {
     this.attributes['location'] = location;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): RootAlter {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): RootAlter {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): RootAlter {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSemitones(): number {
     return this.contents[0];
   }
-  setSemitones(semitones: number): void {
+  setSemitones(semitones: number): RootAlter {
     this.contents[0] = semitones;
+    return this;
   }
 }
 
@@ -34608,14 +36826,16 @@ export class Root implements XMLElement<'root', RootAttributes, RootContents> {
   getRootStep(): RootStep {
     return this.contents[0];
   }
-  setRootStep(rootStep: RootStep): void {
+  setRootStep(rootStep: RootStep): Root {
     this.contents[0] = rootStep;
+    return this;
   }
   getRootAlter(): RootAlter | null {
     return this.contents[1];
   }
-  setRootAlter(rootAlter: RootAlter | null): void {
+  setRootAlter(rootAlter: RootAlter | null): Root {
     this.contents[1] = rootAlter;
+    return this;
   }
 }
 
@@ -34691,70 +36911,81 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): NumeralRoot {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): NumeralRoot {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): NumeralRoot {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): NumeralRoot {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): NumeralRoot {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): NumeralRoot {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): NumeralRoot {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): NumeralRoot {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): NumeralRoot {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string | null {
     return this.attributes['text'];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): NumeralRoot {
     this.attributes['text'] = text;
+    return this;
   }
   getNumeralValue(): number {
     return this.contents[0];
   }
-  setNumeralValue(numeralValue: number): void {
+  setNumeralValue(numeralValue: number): NumeralRoot {
     this.contents[0] = numeralValue;
+    return this;
   }
 }
 
@@ -34837,82 +37068,95 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): NumeralAlter {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): NumeralAlter {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): NumeralAlter {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): NumeralAlter {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): NumeralAlter {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): NumeralAlter {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): NumeralAlter {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLocation(): 'left' | 'right' | null {
     return this.attributes['location'];
   }
-  setLocation(location: 'left' | 'right' | null): void {
+  setLocation(location: 'left' | 'right' | null): NumeralAlter {
     this.attributes['location'] = location;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): NumeralAlter {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): NumeralAlter {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): NumeralAlter {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string | null {
     return this.attributes['text'];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): NumeralAlter {
     this.attributes['text'] = text;
+    return this;
   }
   getSemitones(): number {
     return this.contents[0];
   }
-  setSemitones(semitones: number): void {
+  setSemitones(semitones: number): NumeralAlter {
     this.contents[0] = semitones;
+    return this;
   }
 }
 
@@ -34946,8 +37190,9 @@ export class NumeralFifths implements XMLElement<'numeral-fifths', NumeralFifths
   getNumeralFifthsValue(): number {
     return this.contents[0];
   }
-  setNumeralFifthsValue(numeralFifthsValue: number): void {
+  setNumeralFifthsValue(numeralFifthsValue: number): NumeralFifths {
     this.contents[0] = numeralFifthsValue;
+    return this;
   }
 }
 
@@ -34984,8 +37229,9 @@ export class NumeralMode implements XMLElement<'numeral-mode', NumeralModeAttrib
   getNumeralMode(): 'major' | 'harmonic minor' | 'melodic minor' | 'minor' | 'natural minor' {
     return this.contents[0];
   }
-  setNumeralMode(numeralMode: 'major' | 'harmonic minor' | 'melodic minor' | 'minor' | 'natural minor'): void {
+  setNumeralMode(numeralMode: 'major' | 'harmonic minor' | 'melodic minor' | 'minor' | 'natural minor'): NumeralMode {
     this.contents[0] = numeralMode;
+    return this;
   }
 }
 
@@ -35015,20 +37261,23 @@ export class NumeralKey implements XMLElement<'numeral-key', NumeralKeyAttribute
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): NumeralKey {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getNumeralFifths(): NumeralFifths {
     return this.contents[0];
   }
-  setNumeralFifths(numeralFifths: NumeralFifths): void {
+  setNumeralFifths(numeralFifths: NumeralFifths): NumeralKey {
     this.contents[0] = numeralFifths;
+    return this;
   }
   getNumeralMode(): NumeralMode {
     return this.contents[1];
   }
-  setNumeralMode(numeralMode: NumeralMode): void {
+  setNumeralMode(numeralMode: NumeralMode): NumeralKey {
     this.contents[1] = numeralMode;
+    return this;
   }
 }
 
@@ -35060,20 +37309,23 @@ export class Numeral implements XMLElement<'numeral', NumeralAttributes, Numeral
   getNumeralRoot(): NumeralRoot {
     return this.contents[0];
   }
-  setNumeralRoot(numeralRoot: NumeralRoot): void {
+  setNumeralRoot(numeralRoot: NumeralRoot): Numeral {
     this.contents[0] = numeralRoot;
+    return this;
   }
   getNumeralAlter(): NumeralAlter | null {
     return this.contents[1];
   }
-  setNumeralAlter(numeralAlter: NumeralAlter | null): void {
+  setNumeralAlter(numeralAlter: NumeralAlter | null): Numeral {
     this.contents[1] = numeralAlter;
+    return this;
   }
   getNumeralKey(): NumeralKey | null {
     return this.contents[2];
   }
-  setNumeralKey(numeralKey: NumeralKey | null): void {
+  setNumeralKey(numeralKey: NumeralKey | null): Numeral {
     this.contents[2] = numeralKey;
+    return this;
   }
 }
 
@@ -35145,64 +37397,74 @@ export class Function implements XMLElement<'function', FunctionAttributes, Func
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Function {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Function {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Function {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Function {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Function {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Function {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Function {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Function {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Function {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Function {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -35368,100 +37630,116 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
   getBracketDegrees(): 'yes' | 'no' | null {
     return this.attributes['bracket-degrees'];
   }
-  setBracketDegrees(bracketDegrees: 'yes' | 'no' | null): void {
+  setBracketDegrees(bracketDegrees: 'yes' | 'no' | null): Kind {
     this.attributes['bracket-degrees'] = bracketDegrees;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Kind {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Kind {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Kind {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Kind {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Kind {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Kind {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Kind {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Kind {
     this.attributes['halign'] = halign;
+    return this;
   }
   getParenthesesDegrees(): 'yes' | 'no' | null {
     return this.attributes['parentheses-degrees'];
   }
-  setParenthesesDegrees(parenthesesDegrees: 'yes' | 'no' | null): void {
+  setParenthesesDegrees(parenthesesDegrees: 'yes' | 'no' | null): Kind {
     this.attributes['parentheses-degrees'] = parenthesesDegrees;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Kind {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Kind {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getStackDegrees(): 'yes' | 'no' | null {
     return this.attributes['stack-degrees'];
   }
-  setStackDegrees(stackDegrees: 'yes' | 'no' | null): void {
+  setStackDegrees(stackDegrees: 'yes' | 'no' | null): Kind {
     this.attributes['stack-degrees'] = stackDegrees;
+    return this;
   }
   getText(): string | null {
     return this.attributes['text'];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): Kind {
     this.attributes['text'] = text;
+    return this;
   }
   getUseSymbols(): 'yes' | 'no' | null {
     return this.attributes['use-symbols'];
   }
-  setUseSymbols(useSymbols: 'yes' | 'no' | null): void {
+  setUseSymbols(useSymbols: 'yes' | 'no' | null): Kind {
     this.attributes['use-symbols'] = useSymbols;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Kind {
     this.attributes['valign'] = valign;
+    return this;
   }
   getKindValue():
     | 'none'
@@ -35534,8 +37812,9 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
       | 'suspended-fourth'
       | 'suspended-second'
       | 'Tristan'
-  ): void {
+  ): Kind {
     this.contents[0] = kindValue;
+    return this;
   }
 }
 
@@ -35609,70 +37888,81 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Inversion {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Inversion {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Inversion {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Inversion {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Inversion {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Inversion {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Inversion {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Inversion {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Inversion {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string | null {
     return this.attributes['text'];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): Inversion {
     this.attributes['text'] = text;
+    return this;
   }
   getInversion(): string {
     return this.contents[0];
   }
-  setInversion(inversion: string): void {
+  setInversion(inversion: string): Inversion {
     this.contents[0] = inversion;
+    return this;
   }
 }
 
@@ -35744,64 +38034,74 @@ export class BassSeparator implements XMLElement<'bass-separator', BassSeparator
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): BassSeparator {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): BassSeparator {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): BassSeparator {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): BassSeparator {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): BassSeparator {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): BassSeparator {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): BassSeparator {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): BassSeparator {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): BassSeparator {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): BassSeparator {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -35884,70 +38184,81 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): BassStep {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): BassStep {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): BassStep {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): BassStep {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): BassStep {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): BassStep {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): BassStep {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): BassStep {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): BassStep {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string | null {
     return this.attributes['text'];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): BassStep {
     this.attributes['text'] = text;
+    return this;
   }
   getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
     return this.contents[0];
   }
-  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): void {
+  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): BassStep {
     this.contents[0] = step;
+    return this;
   }
 }
 
@@ -36028,76 +38339,88 @@ export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, 
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): BassAlter {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): BassAlter {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): BassAlter {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): BassAlter {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): BassAlter {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): BassAlter {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): BassAlter {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getLocation(): 'left' | 'right' | null {
     return this.attributes['location'];
   }
-  setLocation(location: 'left' | 'right' | null): void {
+  setLocation(location: 'left' | 'right' | null): BassAlter {
     this.attributes['location'] = location;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): BassAlter {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): BassAlter {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): BassAlter {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSemitones(): number {
     return this.contents[0];
   }
-  setSemitones(semitones: number): void {
+  setSemitones(semitones: number): BassAlter {
     this.contents[0] = semitones;
+    return this;
   }
 }
 
@@ -36130,26 +38453,30 @@ export class Bass implements XMLElement<'bass', BassAttributes, BassContents> {
   getArrangement(): 'horizontal' | 'vertical' | 'diagonal' | null {
     return this.attributes['arrangement'];
   }
-  setArrangement(arrangement: 'horizontal' | 'vertical' | 'diagonal' | null): void {
+  setArrangement(arrangement: 'horizontal' | 'vertical' | 'diagonal' | null): Bass {
     this.attributes['arrangement'] = arrangement;
+    return this;
   }
   getBassSeparator(): BassSeparator | null {
     return this.contents[0];
   }
-  setBassSeparator(bassSeparator: BassSeparator | null): void {
+  setBassSeparator(bassSeparator: BassSeparator | null): Bass {
     this.contents[0] = bassSeparator;
+    return this;
   }
   getBassStep(): BassStep {
     return this.contents[1];
   }
-  setBassStep(bassStep: BassStep): void {
+  setBassStep(bassStep: BassStep): Bass {
     this.contents[1] = bassStep;
+    return this;
   }
   getBassAlter(): BassAlter | null {
     return this.contents[2];
   }
-  setBassAlter(bassAlter: BassAlter | null): void {
+  setBassAlter(bassAlter: BassAlter | null): Bass {
     this.contents[2] = bassAlter;
+    return this;
   }
 }
 
@@ -36234,76 +38561,88 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): DegreeValue {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): DegreeValue {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): DegreeValue {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): DegreeValue {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): DegreeValue {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): DegreeValue {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): DegreeValue {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): DegreeValue {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): DegreeValue {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSymbol(): 'major' | 'minor' | 'augmented' | 'diminished' | 'half-diminished' | null {
     return this.attributes['symbol'];
   }
-  setSymbol(symbol: 'major' | 'minor' | 'augmented' | 'diminished' | 'half-diminished' | null): void {
+  setSymbol(symbol: 'major' | 'minor' | 'augmented' | 'diminished' | 'half-diminished' | null): DegreeValue {
     this.attributes['symbol'] = symbol;
+    return this;
   }
   getText(): string | null {
     return this.attributes['text'];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): DegreeValue {
     this.attributes['text'] = text;
+    return this;
   }
   getDegreeValue(): number {
     return this.contents[0];
   }
-  setDegreeValue(degreeValue: number): void {
+  setDegreeValue(degreeValue: number): DegreeValue {
     this.contents[0] = degreeValue;
+    return this;
   }
 }
 
@@ -36377,70 +38716,81 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): DegreeAlter {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): DegreeAlter {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): DegreeAlter {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): DegreeAlter {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): DegreeAlter {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): DegreeAlter {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): DegreeAlter {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPlusMinus(): 'yes' | 'no' | null {
     return this.attributes['plus-minus'];
   }
-  setPlusMinus(plusMinus: 'yes' | 'no' | null): void {
+  setPlusMinus(plusMinus: 'yes' | 'no' | null): DegreeAlter {
     this.attributes['plus-minus'] = plusMinus;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): DegreeAlter {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): DegreeAlter {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSemitones(): number {
     return this.contents[0];
   }
-  setSemitones(semitones: number): void {
+  setSemitones(semitones: number): DegreeAlter {
     this.contents[0] = semitones;
+    return this;
   }
 }
 
@@ -36523,70 +38873,81 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): DegreeType {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): DegreeType {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): DegreeType {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): DegreeType {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): DegreeType {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): DegreeType {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): DegreeType {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): DegreeType {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): DegreeType {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string | null {
     return this.attributes['text'];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): DegreeType {
     this.attributes['text'] = text;
+    return this;
   }
   getDegreeTypeValue(): 'add' | 'alter' | 'subtract' {
     return this.contents[0];
   }
-  setDegreeTypeValue(degreeTypeValue: 'add' | 'alter' | 'subtract'): void {
+  setDegreeTypeValue(degreeTypeValue: 'add' | 'alter' | 'subtract'): DegreeType {
     this.contents[0] = degreeTypeValue;
+    return this;
   }
 }
 
@@ -36617,26 +38978,30 @@ export class Degree implements XMLElement<'degree', DegreeAttributes, DegreeCont
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Degree {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getDegreeValue(): DegreeValue {
     return this.contents[0];
   }
-  setDegreeValue(degreeValue: DegreeValue): void {
+  setDegreeValue(degreeValue: DegreeValue): Degree {
     this.contents[0] = degreeValue;
+    return this;
   }
   getDegreeAlter(): DegreeAlter {
     return this.contents[1];
   }
-  setDegreeAlter(degreeAlter: DegreeAlter): void {
+  setDegreeAlter(degreeAlter: DegreeAlter): Degree {
     this.contents[1] = degreeAlter;
+    return this;
   }
   getDegreeType(): DegreeType {
     return this.contents[2];
   }
-  setDegreeType(degreeType: DegreeType): void {
+  setDegreeType(degreeType: DegreeType): Degree {
     this.contents[2] = degreeType;
+    return this;
   }
 }
 
@@ -36670,8 +39035,9 @@ export class FrameStrings implements XMLElement<'frame-strings', FrameStringsAtt
   getLinesSize(): number {
     return this.contents[0];
   }
-  setLinesSize(linesSize: number): void {
+  setLinesSize(linesSize: number): FrameStrings {
     this.contents[0] = linesSize;
+    return this;
   }
 }
 
@@ -36705,8 +39071,9 @@ export class FrameFrets implements XMLElement<'frame-frets', FrameFretsAttribute
   getSpaceSize(): number {
     return this.contents[0];
   }
-  setSpaceSize(spaceSize: number): void {
+  setSpaceSize(spaceSize: number): FrameFrets {
     this.contents[0] = spaceSize;
+    return this;
   }
 }
 
@@ -36738,20 +39105,23 @@ export class FirstFret implements XMLElement<'first-fret', FirstFretAttributes, 
   getLocation(): 'left' | 'right' | null {
     return this.attributes['location'];
   }
-  setLocation(location: 'left' | 'right' | null): void {
+  setLocation(location: 'left' | 'right' | null): FirstFret {
     this.attributes['location'] = location;
+    return this;
   }
   getText(): string | null {
     return this.attributes['text'];
   }
-  setText(text: string | null): void {
+  setText(text: string | null): FirstFret {
     this.attributes['text'] = text;
+    return this;
   }
   getFret(): number {
     return this.contents[0];
   }
-  setFret(fret: number): void {
+  setFret(fret: number): FirstFret {
     this.contents[0] = fret;
+    return this;
   }
 }
 
@@ -36781,14 +39151,16 @@ export class Barre implements XMLElement<'barre', BarreAttributes, BarreContents
   getType(): 'start' | 'stop' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop'): void {
+  setType(type: 'start' | 'stop'): Barre {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Barre {
     this.attributes['color'] = color;
+    return this;
   }
 }
 
@@ -36821,26 +39193,30 @@ export class FrameNote implements XMLElement<'frame-note', FrameNoteAttributes, 
   getString(): String {
     return this.contents[0];
   }
-  setString(string: String): void {
+  setString(string: String): FrameNote {
     this.contents[0] = string;
+    return this;
   }
   getFret(): Fret {
     return this.contents[1];
   }
-  setFret(fret: Fret): void {
+  setFret(fret: Fret): FrameNote {
     this.contents[1] = fret;
+    return this;
   }
   getFingering(): Fingering | null {
     return this.contents[2];
   }
-  setFingering(fingering: Fingering | null): void {
+  setFingering(fingering: Fingering | null): FrameNote {
     this.contents[2] = fingering;
+    return this;
   }
   getBarre(): Barre | null {
     return this.contents[3];
   }
-  setBarre(barre: Barre | null): void {
+  setBarre(barre: Barre | null): FrameNote {
     this.contents[3] = barre;
+    return this;
   }
 }
 
@@ -36929,118 +39305,137 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Frame {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Frame {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Frame {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): Frame {
     this.attributes['halign'] = halign;
+    return this;
   }
   getHeight(): number | null {
     return this.attributes['height'];
   }
-  setHeight(height: number | null): void {
+  setHeight(height: number | null): Frame {
     this.attributes['height'] = height;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Frame {
     this.attributes['id'] = id;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Frame {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Frame {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Frame {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Frame {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Frame {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Frame {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getUnplayed(): string | null {
     return this.attributes['unplayed'];
   }
-  setUnplayed(unplayed: string | null): void {
+  setUnplayed(unplayed: string | null): Frame {
     this.attributes['unplayed'] = unplayed;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | null): Frame {
     this.attributes['valign'] = valign;
+    return this;
   }
   getWidth(): number | null {
     return this.attributes['width'];
   }
-  setWidth(width: number | null): void {
+  setWidth(width: number | null): Frame {
     this.attributes['width'] = width;
+    return this;
   }
   getFrameStrings(): FrameStrings {
     return this.contents[0];
   }
-  setFrameStrings(frameStrings: FrameStrings): void {
+  setFrameStrings(frameStrings: FrameStrings): Frame {
     this.contents[0] = frameStrings;
+    return this;
   }
   getFrameFrets(): FrameFrets {
     return this.contents[1];
   }
-  setFrameFrets(frameFrets: FrameFrets): void {
+  setFrameFrets(frameFrets: FrameFrets): Frame {
     this.contents[1] = frameFrets;
+    return this;
   }
   getFirstFret(): FirstFret | null {
     return this.contents[2];
   }
-  setFirstFret(firstFret: FirstFret | null): void {
+  setFirstFret(firstFret: FirstFret | null): Frame {
     this.contents[2] = firstFret;
+    return this;
   }
   getFrameNotes(): Array<FrameNote> {
     return this.contents[3];
   }
-  setFrameNotes(frameNotes: Array<FrameNote>): void {
+  setFrameNotes(frameNotes: Array<FrameNote>): Frame {
     this.contents[3] = frameNotes;
+    return this;
   }
 }
 
@@ -37162,138 +39557,160 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
   getArrangement(): 'horizontal' | 'vertical' | 'diagonal' | null {
     return this.attributes['arrangement'];
   }
-  setArrangement(arrangement: 'horizontal' | 'vertical' | 'diagonal' | null): void {
+  setArrangement(arrangement: 'horizontal' | 'vertical' | 'diagonal' | null): Harmony {
     this.attributes['arrangement'] = arrangement;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Harmony {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Harmony {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Harmony {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Harmony {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Harmony {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Harmony {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Harmony {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Harmony {
     this.attributes['id'] = id;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): Harmony {
     this.attributes['placement'] = placement;
+    return this;
   }
   getPrintFrame(): 'yes' | 'no' | null {
     return this.attributes['print-frame'];
   }
-  setPrintFrame(printFrame: 'yes' | 'no' | null): void {
+  setPrintFrame(printFrame: 'yes' | 'no' | null): Harmony {
     this.attributes['print-frame'] = printFrame;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Harmony {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Harmony {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Harmony {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSystem(): 'none' | 'only-top' | 'also-top' | null {
     return this.attributes['system'];
   }
-  setSystem(system: 'none' | 'only-top' | 'also-top' | null): void {
+  setSystem(system: 'none' | 'only-top' | 'also-top' | null): Harmony {
     this.attributes['system'] = system;
+    return this;
   }
   getType(): 'alternate' | 'explicit' | 'implied' | null {
     return this.attributes['type'];
   }
-  setType(type: 'alternate' | 'explicit' | 'implied' | null): void {
+  setType(type: 'alternate' | 'explicit' | 'implied' | null): Harmony {
     this.attributes['type'] = type;
+    return this;
   }
   getHarmonyValues(): Array<[Root | Numeral | Function, Kind, Inversion | null, Bass | null, Array<Degree>]> {
     return this.contents[0];
   }
   setHarmonyValues(
     harmonyValues: Array<[Root | Numeral | Function, Kind, Inversion | null, Bass | null, Array<Degree>]>
-  ): void {
+  ): Harmony {
     this.contents[0] = harmonyValues;
+    return this;
   }
   getFrame(): Frame | null {
     return this.contents[1];
   }
-  setFrame(frame: Frame | null): void {
+  setFrame(frame: Frame | null): Harmony {
     this.contents[1] = frame;
+    return this;
   }
   getOffset(): Offset | null {
     return this.contents[2];
   }
-  setOffset(offset: Offset | null): void {
+  setOffset(offset: Offset | null): Harmony {
     this.contents[2] = offset;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[3];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): Harmony {
     this.contents[3] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[4];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): Harmony {
     this.contents[4] = level;
+    return this;
   }
   getStaff(): Staff | null {
     return this.contents[5];
   }
-  setStaff(staff: Staff | null): void {
+  setStaff(staff: Staff | null): Harmony {
     this.contents[5] = staff;
+    return this;
   }
 }
 
@@ -37365,64 +39782,74 @@ export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixCont
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Prefix {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Prefix {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Prefix {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Prefix {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Prefix {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Prefix {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Prefix {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Prefix {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Prefix {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Prefix {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -37494,58 +39921,67 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): FigureNumber {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): FigureNumber {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): FigureNumber {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): FigureNumber {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): FigureNumber {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): FigureNumber {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): FigureNumber {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): FigureNumber {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): FigureNumber {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
 }
 
@@ -37617,64 +40053,74 @@ export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixCont
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Suffix {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Suffix {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Suffix {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Suffix {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Suffix {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Suffix {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Suffix {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Suffix {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Suffix {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Suffix {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -37716,38 +40162,44 @@ export class Figure implements XMLElement<'figure', FigureAttributes, FigureCont
   getPrefix(): Prefix | null {
     return this.contents[0];
   }
-  setPrefix(prefix: Prefix | null): void {
+  setPrefix(prefix: Prefix | null): Figure {
     this.contents[0] = prefix;
+    return this;
   }
   getFigureNumber(): FigureNumber | null {
     return this.contents[1];
   }
-  setFigureNumber(figureNumber: FigureNumber | null): void {
+  setFigureNumber(figureNumber: FigureNumber | null): Figure {
     this.contents[1] = figureNumber;
+    return this;
   }
   getSuffix(): Suffix | null {
     return this.contents[2];
   }
-  setSuffix(suffix: Suffix | null): void {
+  setSuffix(suffix: Suffix | null): Figure {
     this.contents[2] = suffix;
+    return this;
   }
   getExtend(): Extend | null {
     return this.contents[3];
   }
-  setExtend(extend: Extend | null): void {
+  setExtend(extend: Extend | null): Figure {
     this.contents[3] = extend;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[4];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): Figure {
     this.contents[4] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[5];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): Figure {
     this.contents[5] = level;
+    return this;
   }
 }
 
@@ -37842,136 +40294,158 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): FiguredBass {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): FiguredBass {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): FiguredBass {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): FiguredBass {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): FiguredBass {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): FiguredBass {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): FiguredBass {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): FiguredBass {
     this.attributes['halign'] = halign;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): FiguredBass {
     this.attributes['id'] = id;
+    return this;
   }
   getParentheses(): 'yes' | 'no' | null {
     return this.attributes['parentheses'];
   }
-  setParentheses(parentheses: 'yes' | 'no' | null): void {
+  setParentheses(parentheses: 'yes' | 'no' | null): FiguredBass {
     this.attributes['parentheses'] = parentheses;
+    return this;
   }
   getPlacement(): 'above' | 'below' | null {
     return this.attributes['placement'];
   }
-  setPlacement(placement: 'above' | 'below' | null): void {
+  setPlacement(placement: 'above' | 'below' | null): FiguredBass {
     this.attributes['placement'] = placement;
+    return this;
   }
   getPrintDot(): 'yes' | 'no' | null {
     return this.attributes['print-dot'];
   }
-  setPrintDot(printDot: 'yes' | 'no' | null): void {
+  setPrintDot(printDot: 'yes' | 'no' | null): FiguredBass {
     this.attributes['print-dot'] = printDot;
+    return this;
   }
   getPrintLyric(): 'yes' | 'no' | null {
     return this.attributes['print-lyric'];
   }
-  setPrintLyric(printLyric: 'yes' | 'no' | null): void {
+  setPrintLyric(printLyric: 'yes' | 'no' | null): FiguredBass {
     this.attributes['print-lyric'] = printLyric;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): FiguredBass {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getPrintSpacing(): 'yes' | 'no' | null {
     return this.attributes['print-spacing'];
   }
-  setPrintSpacing(printSpacing: 'yes' | 'no' | null): void {
+  setPrintSpacing(printSpacing: 'yes' | 'no' | null): FiguredBass {
     this.attributes['print-spacing'] = printSpacing;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): FiguredBass {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): FiguredBass {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): FiguredBass {
     this.attributes['valign'] = valign;
+    return this;
   }
   getFigures(): Array<Figure> {
     return this.contents[0];
   }
-  setFigures(figures: Array<Figure>): void {
+  setFigures(figures: Array<Figure>): FiguredBass {
     this.contents[0] = figures;
+    return this;
   }
   getDuration(): Duration | null {
     return this.contents[1];
   }
-  setDuration(duration: Duration | null): void {
+  setDuration(duration: Duration | null): FiguredBass {
     this.contents[1] = duration;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[2];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): FiguredBass {
     this.contents[2] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[3];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): FiguredBass {
     this.contents[3] = level;
+    return this;
   }
 }
 
@@ -38007,8 +40481,9 @@ export class MeasureDistance
   getMeasureDistanceValue(): number {
     return this.contents[0];
   }
-  setMeasureDistanceValue(measureDistanceValue: number): void {
+  setMeasureDistanceValue(measureDistanceValue: number): MeasureDistance {
     this.contents[0] = measureDistanceValue;
+    return this;
   }
 }
 
@@ -38036,8 +40511,9 @@ export class MeasureLayout implements XMLElement<'measure-layout', MeasureLayout
   getMeasureDistance(): MeasureDistance | null {
     return this.contents[0];
   }
-  setMeasureDistance(measureDistance: MeasureDistance | null): void {
+  setMeasureDistance(measureDistance: MeasureDistance | null): MeasureLayout {
     this.contents[0] = measureDistance;
+    return this;
   }
 }
 
@@ -38135,100 +40611,116 @@ export class MeasureNumbering
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): MeasureNumbering {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): MeasureNumbering {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): MeasureNumbering {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): MeasureNumbering {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): MeasureNumbering {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): MeasureNumbering {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): MeasureNumbering {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getHalign(): 'left' | 'center' | 'right' | null {
     return this.attributes['halign'];
   }
-  setHalign(halign: 'left' | 'center' | 'right' | null): void {
+  setHalign(halign: 'left' | 'center' | 'right' | null): MeasureNumbering {
     this.attributes['halign'] = halign;
+    return this;
   }
   getMultipleRestAlways(): 'yes' | 'no' | null {
     return this.attributes['multiple-rest-always'];
   }
-  setMultipleRestAlways(multipleRestAlways: 'yes' | 'no' | null): void {
+  setMultipleRestAlways(multipleRestAlways: 'yes' | 'no' | null): MeasureNumbering {
     this.attributes['multiple-rest-always'] = multipleRestAlways;
+    return this;
   }
   getMultipleRestRange(): 'yes' | 'no' | null {
     return this.attributes['multiple-rest-range'];
   }
-  setMultipleRestRange(multipleRestRange: 'yes' | 'no' | null): void {
+  setMultipleRestRange(multipleRestRange: 'yes' | 'no' | null): MeasureNumbering {
     this.attributes['multiple-rest-range'] = multipleRestRange;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): MeasureNumbering {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): MeasureNumbering {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getStaff(): number | null {
     return this.attributes['staff'];
   }
-  setStaff(staff: number | null): void {
+  setStaff(staff: number | null): MeasureNumbering {
     this.attributes['staff'] = staff;
+    return this;
   }
   getSystem(): 'none' | 'only-top' | 'only-bottom' | 'also-top' | 'also-bottom' | null {
     return this.attributes['system'];
   }
-  setSystem(system: 'none' | 'only-top' | 'only-bottom' | 'also-top' | 'also-bottom' | null): void {
+  setSystem(system: 'none' | 'only-top' | 'only-bottom' | 'also-top' | 'also-bottom' | null): MeasureNumbering {
     this.attributes['system'] = system;
+    return this;
   }
   getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
     return this.attributes['valign'];
   }
-  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): void {
+  setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): MeasureNumbering {
     this.attributes['valign'] = valign;
+    return this;
   }
   getMeasureNumberValue(): 'none' | 'measure' | 'system' {
     return this.contents[0];
   }
-  setMeasureNumberValue(measureNumberValue: 'none' | 'measure' | 'system'): void {
+  setMeasureNumberValue(measureNumberValue: 'none' | 'measure' | 'system'): MeasureNumbering {
     this.contents[0] = measureNumberValue;
+    return this;
   }
 }
 
@@ -38285,80 +40777,93 @@ export class Print implements XMLElement<'print', PrintAttributes, PrintContents
   getBlankPage(): number | null {
     return this.attributes['blank-page'];
   }
-  setBlankPage(blankPage: number | null): void {
+  setBlankPage(blankPage: number | null): Print {
     this.attributes['blank-page'] = blankPage;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Print {
     this.attributes['id'] = id;
+    return this;
   }
   getNewPage(): 'yes' | 'no' | null {
     return this.attributes['new-page'];
   }
-  setNewPage(newPage: 'yes' | 'no' | null): void {
+  setNewPage(newPage: 'yes' | 'no' | null): Print {
     this.attributes['new-page'] = newPage;
+    return this;
   }
   getNewSystem(): 'yes' | 'no' | null {
     return this.attributes['new-system'];
   }
-  setNewSystem(newSystem: 'yes' | 'no' | null): void {
+  setNewSystem(newSystem: 'yes' | 'no' | null): Print {
     this.attributes['new-system'] = newSystem;
+    return this;
   }
   getPageNumber(): string | null {
     return this.attributes['page-number'];
   }
-  setPageNumber(pageNumber: string | null): void {
+  setPageNumber(pageNumber: string | null): Print {
     this.attributes['page-number'] = pageNumber;
+    return this;
   }
   getStaffSpacing(): number | null {
     return this.attributes['staff-spacing'];
   }
-  setStaffSpacing(staffSpacing: number | null): void {
+  setStaffSpacing(staffSpacing: number | null): Print {
     this.attributes['staff-spacing'] = staffSpacing;
+    return this;
   }
   getPageLayout(): PageLayout | null {
     return this.contents[0];
   }
-  setPageLayout(pageLayout: PageLayout | null): void {
+  setPageLayout(pageLayout: PageLayout | null): Print {
     this.contents[0] = pageLayout;
+    return this;
   }
   getSystemLayout(): SystemLayout | null {
     return this.contents[1];
   }
-  setSystemLayout(systemLayout: SystemLayout | null): void {
+  setSystemLayout(systemLayout: SystemLayout | null): Print {
     this.contents[1] = systemLayout;
+    return this;
   }
   getStaffLayouts(): Array<StaffLayout> {
     return this.contents[2];
   }
-  setStaffLayouts(staffLayouts: Array<StaffLayout>): void {
+  setStaffLayouts(staffLayouts: Array<StaffLayout>): Print {
     this.contents[2] = staffLayouts;
+    return this;
   }
   getMeasureLayout(): MeasureLayout | null {
     return this.contents[3];
   }
-  setMeasureLayout(measureLayout: MeasureLayout | null): void {
+  setMeasureLayout(measureLayout: MeasureLayout | null): Print {
     this.contents[3] = measureLayout;
+    return this;
   }
   getMeasureNumbering(): MeasureNumbering | null {
     return this.contents[4];
   }
-  setMeasureNumbering(measureNumbering: MeasureNumbering | null): void {
+  setMeasureNumbering(measureNumbering: MeasureNumbering | null): Print {
     this.contents[4] = measureNumbering;
+    return this;
   }
   getPartNameDisplay(): PartNameDisplay | null {
     return this.contents[5];
   }
-  setPartNameDisplay(partNameDisplay: PartNameDisplay | null): void {
+  setPartNameDisplay(partNameDisplay: PartNameDisplay | null): Print {
     this.contents[5] = partNameDisplay;
+    return this;
   }
   getPartAbbreviationDisplay(): PartAbbreviationDisplay | null {
     return this.contents[6];
   }
-  setPartAbbreviationDisplay(partAbbreviationDisplay: PartAbbreviationDisplay | null): void {
+  setPartAbbreviationDisplay(partAbbreviationDisplay: PartAbbreviationDisplay | null): Print {
     this.contents[6] = partAbbreviationDisplay;
+    return this;
   }
 }
 
@@ -38423,8 +40928,9 @@ export class BarStyle implements XMLElement<'bar-style', BarStyleAttributes, Bar
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): BarStyle {
     this.attributes['color'] = color;
+    return this;
   }
   getBarStyle():
     | 'none'
@@ -38453,8 +40959,9 @@ export class BarStyle implements XMLElement<'bar-style', BarStyleAttributes, Bar
       | 'regular'
       | 'short'
       | 'tick'
-  ): void {
+  ): BarStyle {
     this.contents[0] = barStyle;
+    return this;
   }
 }
 
@@ -38543,106 +41050,123 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
   getNumber(): string {
     return this.attributes['number'];
   }
-  setNumber(number: string): void {
+  setNumber(number: string): Ending {
     this.attributes['number'] = number;
+    return this;
   }
   getType(): 'start' | 'stop' | 'discontinue' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'discontinue'): void {
+  setType(type: 'start' | 'stop' | 'discontinue'): Ending {
     this.attributes['type'] = type;
+    return this;
   }
   getColor(): string | null {
     return this.attributes['color'];
   }
-  setColor(color: string | null): void {
+  setColor(color: string | null): Ending {
     this.attributes['color'] = color;
+    return this;
   }
   getDefaultX(): number | null {
     return this.attributes['default-x'];
   }
-  setDefaultX(defaultX: number | null): void {
+  setDefaultX(defaultX: number | null): Ending {
     this.attributes['default-x'] = defaultX;
+    return this;
   }
   getDefaultY(): number | null {
     return this.attributes['default-y'];
   }
-  setDefaultY(defaultY: number | null): void {
+  setDefaultY(defaultY: number | null): Ending {
     this.attributes['default-y'] = defaultY;
+    return this;
   }
   getEndLength(): number | null {
     return this.attributes['end-length'];
   }
-  setEndLength(endLength: number | null): void {
+  setEndLength(endLength: number | null): Ending {
     this.attributes['end-length'] = endLength;
+    return this;
   }
   getFontFamily(): string | null {
     return this.attributes['font-family'];
   }
-  setFontFamily(fontFamily: string | null): void {
+  setFontFamily(fontFamily: string | null): Ending {
     this.attributes['font-family'] = fontFamily;
+    return this;
   }
   getFontSize(): 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null {
     return this.attributes['font-size'];
   }
   setFontSize(
     fontSize: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | number | null
-  ): void {
+  ): Ending {
     this.attributes['font-size'] = fontSize;
+    return this;
   }
   getFontStyle(): 'normal' | 'italic' | null {
     return this.attributes['font-style'];
   }
-  setFontStyle(fontStyle: 'normal' | 'italic' | null): void {
+  setFontStyle(fontStyle: 'normal' | 'italic' | null): Ending {
     this.attributes['font-style'] = fontStyle;
+    return this;
   }
   getFontWeight(): 'normal' | 'bold' | null {
     return this.attributes['font-weight'];
   }
-  setFontWeight(fontWeight: 'normal' | 'bold' | null): void {
+  setFontWeight(fontWeight: 'normal' | 'bold' | null): Ending {
     this.attributes['font-weight'] = fontWeight;
+    return this;
   }
   getPrintObject(): 'yes' | 'no' | null {
     return this.attributes['print-object'];
   }
-  setPrintObject(printObject: 'yes' | 'no' | null): void {
+  setPrintObject(printObject: 'yes' | 'no' | null): Ending {
     this.attributes['print-object'] = printObject;
+    return this;
   }
   getRelativeX(): number | null {
     return this.attributes['relative-x'];
   }
-  setRelativeX(relativeX: number | null): void {
+  setRelativeX(relativeX: number | null): Ending {
     this.attributes['relative-x'] = relativeX;
+    return this;
   }
   getRelativeY(): number | null {
     return this.attributes['relative-y'];
   }
-  setRelativeY(relativeY: number | null): void {
+  setRelativeY(relativeY: number | null): Ending {
     this.attributes['relative-y'] = relativeY;
+    return this;
   }
   getSystem(): 'none' | 'only-top' | 'also-top' | null {
     return this.attributes['system'];
   }
-  setSystem(system: 'none' | 'only-top' | 'also-top' | null): void {
+  setSystem(system: 'none' | 'only-top' | 'also-top' | null): Ending {
     this.attributes['system'] = system;
+    return this;
   }
   getTextX(): number | null {
     return this.attributes['text-x'];
   }
-  setTextX(textX: number | null): void {
+  setTextX(textX: number | null): Ending {
     this.attributes['text-x'] = textX;
+    return this;
   }
   getTextY(): number | null {
     return this.attributes['text-y'];
   }
-  setTextY(textY: number | null): void {
+  setTextY(textY: number | null): Ending {
     this.attributes['text-y'] = textY;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Ending {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -38682,26 +41206,30 @@ export class Repeat implements XMLElement<'repeat', RepeatAttributes, RepeatCont
   getDirection(): 'backward' | 'forward' {
     return this.attributes['direction'];
   }
-  setDirection(direction: 'backward' | 'forward'): void {
+  setDirection(direction: 'backward' | 'forward'): Repeat {
     this.attributes['direction'] = direction;
+    return this;
   }
   getAfterJump(): 'yes' | 'no' | null {
     return this.attributes['after-jump'];
   }
-  setAfterJump(afterJump: 'yes' | 'no' | null): void {
+  setAfterJump(afterJump: 'yes' | 'no' | null): Repeat {
     this.attributes['after-jump'] = afterJump;
+    return this;
   }
   getTimes(): string | null {
     return this.attributes['times'];
   }
-  setTimes(times: string | null): void {
+  setTimes(times: string | null): Repeat {
     this.attributes['times'] = times;
+    return this;
   }
   getWinged(): 'none' | 'straight' | 'curved' | 'double-straight' | 'double-curved' | null {
     return this.attributes['winged'];
   }
-  setWinged(winged: 'none' | 'straight' | 'curved' | 'double-straight' | 'double-curved' | null): void {
+  setWinged(winged: 'none' | 'straight' | 'curved' | 'double-straight' | 'double-curved' | null): Repeat {
     this.attributes['winged'] = winged;
+    return this;
   }
 }
 
@@ -38760,86 +41288,100 @@ export class Barline implements XMLElement<'barline', BarlineAttributes, Barline
   getCodaToken(): string | null {
     return this.attributes['coda'];
   }
-  setCodaToken(codaToken: string | null): void {
+  setCodaToken(codaToken: string | null): Barline {
     this.attributes['coda'] = codaToken;
+    return this;
   }
   getDivisions(): number | null {
     return this.attributes['divisions'];
   }
-  setDivisions(divisions: number | null): void {
+  setDivisions(divisions: number | null): Barline {
     this.attributes['divisions'] = divisions;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Barline {
     this.attributes['id'] = id;
+    return this;
   }
   getLocation(): 'right' | 'left' | 'middle' | null {
     return this.attributes['location'];
   }
-  setLocation(location: 'right' | 'left' | 'middle' | null): void {
+  setLocation(location: 'right' | 'left' | 'middle' | null): Barline {
     this.attributes['location'] = location;
+    return this;
   }
   getSegnoToken(): string | null {
     return this.attributes['segno'];
   }
-  setSegnoToken(segnoToken: string | null): void {
+  setSegnoToken(segnoToken: string | null): Barline {
     this.attributes['segno'] = segnoToken;
+    return this;
   }
   getBarStyle(): BarStyle | null {
     return this.contents[0];
   }
-  setBarStyle(barStyle: BarStyle | null): void {
+  setBarStyle(barStyle: BarStyle | null): Barline {
     this.contents[0] = barStyle;
+    return this;
   }
   getFootnote(): Footnote | null {
     return this.contents[1];
   }
-  setFootnote(footnote: Footnote | null): void {
+  setFootnote(footnote: Footnote | null): Barline {
     this.contents[1] = footnote;
+    return this;
   }
   getLevel(): Level | null {
     return this.contents[2];
   }
-  setLevel(level: Level | null): void {
+  setLevel(level: Level | null): Barline {
     this.contents[2] = level;
+    return this;
   }
   getWavyLine(): WavyLine | null {
     return this.contents[3];
   }
-  setWavyLine(wavyLine: WavyLine | null): void {
+  setWavyLine(wavyLine: WavyLine | null): Barline {
     this.contents[3] = wavyLine;
+    return this;
   }
   getSegno(): Segno | null {
     return this.contents[4];
   }
-  setSegno(segno: Segno | null): void {
+  setSegno(segno: Segno | null): Barline {
     this.contents[4] = segno;
+    return this;
   }
   getCoda(): Coda | null {
     return this.contents[5];
   }
-  setCoda(coda: Coda | null): void {
+  setCoda(coda: Coda | null): Barline {
     this.contents[5] = coda;
+    return this;
   }
   getFermatas(): [] | [Fermata] | [Fermata, Fermata] {
     return this.contents[6];
   }
-  setFermatas(fermatas: [] | [Fermata] | [Fermata, Fermata]): void {
+  setFermatas(fermatas: [] | [Fermata] | [Fermata, Fermata]): Barline {
     this.contents[6] = fermatas;
+    return this;
   }
   getEnding(): Ending | null {
     return this.contents[7];
   }
-  setEnding(ending: Ending | null): void {
+  setEnding(ending: Ending | null): Barline {
     this.contents[7] = ending;
+    return this;
   }
   getRepeat(): Repeat | null {
     return this.contents[8];
   }
-  setRepeat(repeat: Repeat | null): void {
+  setRepeat(repeat: Repeat | null): Barline {
     this.contents[8] = repeat;
+    return this;
   }
 }
 
@@ -38866,14 +41408,16 @@ export class Feature implements XMLElement<'feature', FeatureAttributes, Feature
   getType(): string | null {
     return this.attributes['type'];
   }
-  setType(type: string | null): void {
+  setType(type: string | null): Feature {
     this.attributes['type'] = type;
+    return this;
   }
   getText(): string {
     return this.contents[0];
   }
-  setText(text: string): void {
+  setText(text: string): Feature {
     this.contents[0] = text;
+    return this;
   }
 }
 
@@ -38910,32 +41454,37 @@ export class Grouping implements XMLElement<'grouping', GroupingAttributes, Grou
   getType(): 'start' | 'stop' | 'single' {
     return this.attributes['type'];
   }
-  setType(type: 'start' | 'stop' | 'single'): void {
+  setType(type: 'start' | 'stop' | 'single'): Grouping {
     this.attributes['type'] = type;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): Grouping {
     this.attributes['id'] = id;
+    return this;
   }
   getMemberOf(): string | null {
     return this.attributes['member-of'];
   }
-  setMemberOf(memberOf: string | null): void {
+  setMemberOf(memberOf: string | null): Grouping {
     this.attributes['member-of'] = memberOf;
+    return this;
   }
   getNumber(): string | null {
     return this.attributes['number'];
   }
-  setNumber(number: string | null): void {
+  setNumber(number: string | null): Grouping {
     this.attributes['number'] = number;
+    return this;
   }
   getFeatures(): Array<Feature> {
     return this.contents[0];
   }
-  setFeatures(features: Array<Feature>): void {
+  setFeatures(features: Array<Feature>): Grouping {
     this.contents[0] = features;
+    return this;
   }
 }
 
@@ -39069,38 +41618,44 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
   getNumber(): string {
     return this.attributes['number'];
   }
-  setNumber(number: string): void {
+  setNumber(number: string): MeasurePartwise {
     this.attributes['number'] = number;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): MeasurePartwise {
     this.attributes['id'] = id;
+    return this;
   }
   getImplicit(): 'yes' | 'no' | null {
     return this.attributes['implicit'];
   }
-  setImplicit(implicit: 'yes' | 'no' | null): void {
+  setImplicit(implicit: 'yes' | 'no' | null): MeasurePartwise {
     this.attributes['implicit'] = implicit;
+    return this;
   }
   getNonController(): 'yes' | 'no' | null {
     return this.attributes['non-controller'];
   }
-  setNonController(nonController: 'yes' | 'no' | null): void {
+  setNonController(nonController: 'yes' | 'no' | null): MeasurePartwise {
     this.attributes['non-controller'] = nonController;
+    return this;
   }
   getText(): Exclude<'yes' | string, ''> | null {
     return this.attributes['text'];
   }
-  setText(text: Exclude<'yes' | string, ''> | null): void {
+  setText(text: Exclude<'yes' | string, ''> | null): MeasurePartwise {
     this.attributes['text'] = text;
+    return this;
   }
   getWidth(): number | null {
     return this.attributes['width'];
   }
-  setWidth(width: number | null): void {
+  setWidth(width: number | null): MeasurePartwise {
     this.attributes['width'] = width;
+    return this;
   }
   getMeasureValues(): Array<
     | Note
@@ -39137,8 +41692,9 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
       | Link
       | Bookmark
     >
-  ): void {
+  ): MeasurePartwise {
     this.contents[0] = measureValues;
+    return this;
   }
 }
 
@@ -39165,14 +41721,16 @@ export class PartPartwise implements XMLElement<'part', PartPartwiseAttributes, 
   getId(): string {
     return this.attributes['id'];
   }
-  setId(id: string): void {
+  setId(id: string): PartPartwise {
     this.attributes['id'] = id;
+    return this;
   }
   getMeasures(): Array<MeasurePartwise> {
     return this.contents[0];
   }
-  setMeasures(measures: Array<MeasurePartwise>): void {
+  setMeasures(measures: Array<MeasurePartwise>): PartPartwise {
     this.contents[0] = measures;
+    return this;
   }
 }
 
@@ -39217,56 +41775,65 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
   getVersion(): '4.0' {
     return this.attributes['version'];
   }
-  setVersion(version: '4.0'): void {
+  setVersion(version: '4.0'): ScorePartwise {
     this.attributes['version'] = version;
+    return this;
   }
   getWork(): Work | null {
     return this.contents[0];
   }
-  setWork(work: Work | null): void {
+  setWork(work: Work | null): ScorePartwise {
     this.contents[0] = work;
+    return this;
   }
   getMovementNumber(): MovementNumber | null {
     return this.contents[1];
   }
-  setMovementNumber(movementNumber: MovementNumber | null): void {
+  setMovementNumber(movementNumber: MovementNumber | null): ScorePartwise {
     this.contents[1] = movementNumber;
+    return this;
   }
   getMovementTitle(): MovementTitle | null {
     return this.contents[2];
   }
-  setMovementTitle(movementTitle: MovementTitle | null): void {
+  setMovementTitle(movementTitle: MovementTitle | null): ScorePartwise {
     this.contents[2] = movementTitle;
+    return this;
   }
   getIdentification(): Identification | null {
     return this.contents[3];
   }
-  setIdentification(identification: Identification | null): void {
+  setIdentification(identification: Identification | null): ScorePartwise {
     this.contents[3] = identification;
+    return this;
   }
   getDefaults(): Defaults | null {
     return this.contents[4];
   }
-  setDefaults(defaults: Defaults | null): void {
+  setDefaults(defaults: Defaults | null): ScorePartwise {
     this.contents[4] = defaults;
+    return this;
   }
   getCredits(): Array<Credit> {
     return this.contents[5];
   }
-  setCredits(credits: Array<Credit>): void {
+  setCredits(credits: Array<Credit>): ScorePartwise {
     this.contents[5] = credits;
+    return this;
   }
   getPartList(): PartList {
     return this.contents[6];
   }
-  setPartList(partList: PartList): void {
+  setPartList(partList: PartList): ScorePartwise {
     this.contents[6] = partList;
+    return this;
   }
   getPartsPartwise(): Array<PartPartwise> {
     return this.contents[7];
   }
-  setPartsPartwise(partsPartwise: Array<PartPartwise>): void {
+  setPartsPartwise(partsPartwise: Array<PartPartwise>): ScorePartwise {
     this.contents[7] = partsPartwise;
+    return this;
   }
 }
 
@@ -39379,8 +41946,9 @@ export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, 
   getId(): string {
     return this.attributes['id'];
   }
-  setId(id: string): void {
+  setId(id: string): PartTimewise {
     this.attributes['id'] = id;
+    return this;
   }
   getPartTimewiseValues(): Array<
     | Note
@@ -39417,8 +41985,9 @@ export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, 
       | Link
       | Bookmark
     >
-  ): void {
+  ): PartTimewise {
     this.contents[0] = partTimewiseValues;
+    return this;
   }
 }
 
@@ -39466,44 +42035,51 @@ export class MeasureTimewise implements XMLElement<'measure', MeasureTimewiseAtt
   getNumber(): string {
     return this.attributes['number'];
   }
-  setNumber(number: string): void {
+  setNumber(number: string): MeasureTimewise {
     this.attributes['number'] = number;
+    return this;
   }
   getId(): string | null {
     return this.attributes['id'];
   }
-  setId(id: string | null): void {
+  setId(id: string | null): MeasureTimewise {
     this.attributes['id'] = id;
+    return this;
   }
   getImplicit(): 'yes' | 'no' | null {
     return this.attributes['implicit'];
   }
-  setImplicit(implicit: 'yes' | 'no' | null): void {
+  setImplicit(implicit: 'yes' | 'no' | null): MeasureTimewise {
     this.attributes['implicit'] = implicit;
+    return this;
   }
   getNonController(): 'yes' | 'no' | null {
     return this.attributes['non-controller'];
   }
-  setNonController(nonController: 'yes' | 'no' | null): void {
+  setNonController(nonController: 'yes' | 'no' | null): MeasureTimewise {
     this.attributes['non-controller'] = nonController;
+    return this;
   }
   getText(): Exclude<'yes' | string, ''> | null {
     return this.attributes['text'];
   }
-  setText(text: Exclude<'yes' | string, ''> | null): void {
+  setText(text: Exclude<'yes' | string, ''> | null): MeasureTimewise {
     this.attributes['text'] = text;
+    return this;
   }
   getWidth(): number | null {
     return this.attributes['width'];
   }
-  setWidth(width: number | null): void {
+  setWidth(width: number | null): MeasureTimewise {
     this.attributes['width'] = width;
+    return this;
   }
   getPartsTimewise(): Array<PartTimewise> {
     return this.contents[0];
   }
-  setPartsTimewise(partsTimewise: Array<PartTimewise>): void {
+  setPartsTimewise(partsTimewise: Array<PartTimewise>): MeasureTimewise {
     this.contents[0] = partsTimewise;
+    return this;
   }
 }
 
@@ -39548,55 +42124,64 @@ export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewise
   getVersion(): '4.0' {
     return this.attributes['version'];
   }
-  setVersion(version: '4.0'): void {
+  setVersion(version: '4.0'): ScoreTimewise {
     this.attributes['version'] = version;
+    return this;
   }
   getWork(): Work | null {
     return this.contents[0];
   }
-  setWork(work: Work | null): void {
+  setWork(work: Work | null): ScoreTimewise {
     this.contents[0] = work;
+    return this;
   }
   getMovementNumber(): MovementNumber | null {
     return this.contents[1];
   }
-  setMovementNumber(movementNumber: MovementNumber | null): void {
+  setMovementNumber(movementNumber: MovementNumber | null): ScoreTimewise {
     this.contents[1] = movementNumber;
+    return this;
   }
   getMovementTitle(): MovementTitle | null {
     return this.contents[2];
   }
-  setMovementTitle(movementTitle: MovementTitle | null): void {
+  setMovementTitle(movementTitle: MovementTitle | null): ScoreTimewise {
     this.contents[2] = movementTitle;
+    return this;
   }
   getIdentification(): Identification | null {
     return this.contents[3];
   }
-  setIdentification(identification: Identification | null): void {
+  setIdentification(identification: Identification | null): ScoreTimewise {
     this.contents[3] = identification;
+    return this;
   }
   getDefaults(): Defaults | null {
     return this.contents[4];
   }
-  setDefaults(defaults: Defaults | null): void {
+  setDefaults(defaults: Defaults | null): ScoreTimewise {
     this.contents[4] = defaults;
+    return this;
   }
   getCredits(): Array<Credit> {
     return this.contents[5];
   }
-  setCredits(credits: Array<Credit>): void {
+  setCredits(credits: Array<Credit>): ScoreTimewise {
     this.contents[5] = credits;
+    return this;
   }
   getPartList(): PartList {
     return this.contents[6];
   }
-  setPartList(partList: PartList): void {
+  setPartList(partList: PartList): ScoreTimewise {
     this.contents[6] = partList;
+    return this;
   }
   getMeasuresTimewise(): Array<MeasureTimewise> {
     return this.contents[7];
   }
-  setMeasuresTimewise(measuresTimewise: Array<MeasureTimewise>): void {
+  setMeasuresTimewise(measuresTimewise: Array<MeasureTimewise>): ScoreTimewise {
     this.contents[7] = measuresTimewise;
+    return this;
   }
 }

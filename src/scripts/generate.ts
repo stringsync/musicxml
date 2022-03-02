@@ -154,6 +154,7 @@ const getAttributeLabel = (child: DescriptorChild): string => {
 
 const getAttributeAccessorMethodLiterals = (schema: XMLElementSchema): string => {
   const methods = new Array<string>();
+  const className = getClassName(schema);
   for (const [key, value] of Object.entries(schema.attributes)) {
     const name = getAttributeLabel(value) || key;
     const typeLiteral = getTypeLiteral(value);
@@ -161,7 +162,7 @@ const getAttributeAccessorMethodLiterals = (schema: XMLElementSchema): string =>
     methods.push(
       `  set${toPascalCase(decolonize(name))}(${toCamelCase(
         decolonize(name)
-      )}: ${typeLiteral}): void { this.attributes['${key}'] = ${toCamelCase(decolonize(name))}; }`
+      )}: ${typeLiteral}): ${className} { this.attributes['${key}'] = ${toCamelCase(decolonize(name))}; return this; }`
     );
   }
   return methods.join('\n');
@@ -326,6 +327,7 @@ const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): string => 
     });
   }
 
+  const className = getClassName(schema);
   const methods = new Array<string>();
   for (let ndx = 0; ndx < contents.length; ndx++) {
     const accessorName = getAccessorName(contents[ndx]);
@@ -335,7 +337,7 @@ const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): string => 
     methods.push(
       `  set${toPascalCase(accessorName)}(${toCamelCase(accessorName)}: ${getTypeLiteral(
         contents[ndx]
-      )}): void { this.contents[${ndx}] = ${toCamelCase(accessorName)}; }`
+      )}): ${className} { this.contents[${ndx}] = ${toCamelCase(accessorName)}; return this; }`
     );
   }
   return methods.join('\n');

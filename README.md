@@ -85,7 +85,18 @@ const measure = new elements.MeasurePartwise({ attributes: { number: '1', implic
 measure.getNumber(); // '1'
 measure.setNumber('4');
 measure.getNumber(); // '4'
-measure.setContents([...measure.getContents(), new elements.Note()]);
+measure.setMeasureValues([...measure.setMeasureValues(), new elements.Note()]);
+```
+
+### Chain setters methods
+
+```ts
+const note = new elements.Note();
+note
+  .setColor('#800080') // chain attributes
+  .setStaff(new elements.Staff()) // chain contents
+  .getStaff()!
+  .setStaffValue(4);
 ```
 
 ### Narrow types

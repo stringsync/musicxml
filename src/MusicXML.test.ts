@@ -63,6 +63,15 @@ describe('MusicXML', () => {
       expect(measureValues).toHaveLength(1);
       expect(measureValues).toStrictEqual([note]);
     });
+
+    it('allows setters to be chained', () => {
+      const note = new elements.Note();
+      note.setColor('#800080').setStaff(new elements.Staff()).getStaff()!.setStaffValue(4);
+
+      expect(note.getColor()).toBe('#800080');
+      expect(note.getStaff()).not.toBeNull();
+      expect(note.getStaff()!.getStaffValue()).toBe(4);
+    });
   });
 
   describe('parse', () => {
