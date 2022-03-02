@@ -4,6 +4,10 @@
 
 `musicxml` is a JavaScript library that makes it easy to parse and edit [MusicXML](https://www.w3.org/2021/06/musicxml40/) documents.
 
+One of the common problems working with MusicXML is that different softwares may export invalid MusicXML documents due
+to the complex nature of the MusicXML specification. This library guarantees that parsed and serialized MusicXML documents
+are valid by conforming the document to the specification.
+
 ## ⚠️ Warning
 
 ### API
@@ -13,8 +17,12 @@ This API is unstable - use at your own risk. I **highly** recommend that you loc
 ### Lossy Parsing
 
 When parsing a MusicXML document, `musicxml` will ignore comments and treat CDATA as regular text data.
-When serializing back to xml, comments are completely ommitted and CDATA is rendered as text nodes, since the library
-knows how to escape characters.
+When serializing back to xml, comments are completely ommitted and CDATA is rendered as text nodes, since `xml-js`
+will escape special characters.
+
+In order to guarantee that parsed and serialized documents are valid, this library will replace invalid element or text
+nodes with a default value. See [src/lib/operations/zero.ts](src/lib/operations/zero.ts) for how the default values are
+determined.
 
 ## 🔨 Usage
 
@@ -60,24 +68,6 @@ const musicXml = MusicXML.parse(xml);
 console.log(musicXml.serialize() === xml); // true
 ```
 
-### Create a MusicXML object
-
-[`<score-partwise>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/) root
-
-```ts
-const musicXml = MusicXML.createPartwise();
-const root = musicXml.getRoot();
-console.log(MusicXML.isScorePartwise(root)); // true
-```
-
-[`<score-timewise>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-timewise/) root
-
-```ts
-const musicXml = MusicXML.createTimewise();
-const root = musicXml.getRoot();
-console.log(MusicXML.isScoreTimewise(root)); // true
-```
-
 ### Create and update elements
 
 ```ts
@@ -97,6 +87,24 @@ note
   .setStaff(new elements.Staff()) // chain contents
   .getStaff()!
   .setStaffValue(4);
+```
+
+### Create a MusicXML object
+
+[`<score-partwise>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/) root
+
+```ts
+const musicXml = MusicXML.createPartwise();
+const root = musicXml.getRoot();
+console.log(MusicXML.isScorePartwise(root)); // true
+```
+
+[`<score-timewise>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-timewise/) root
+
+```ts
+const musicXml = MusicXML.createTimewise();
+const root = musicXml.getRoot();
+console.log(MusicXML.isScoreTimewise(root)); // true
 ```
 
 ### Narrow types
