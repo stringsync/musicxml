@@ -98,7 +98,7 @@ describe('MusicXML', () => {
       expect(partName).toBeInstanceOf(elements.PartName);
       expect(partName.getText()).toBe('Music');
 
-      const parts = scorePartwise.getPartsPartwise();
+      const parts = scorePartwise.getParts();
       expect(parts).toBeArray();
       expect(parts).toHaveLength(1);
 
@@ -206,7 +206,7 @@ describe('MusicXML', () => {
         fail(`expected ScorePartwise, got: ${scorePartwise}`);
       }
 
-      const parts = scorePartwise.getPartsPartwise();
+      const parts = scorePartwise.getParts();
       expect(parts).toHaveLength(1);
 
       const part = parts[0];

@@ -37,6 +37,6 @@ export const ScoreTimewise = schema(
     t.optional(Defaults),
     t.label({ label: 'credits', value: t.zeroOrMore(Credit) }),
     t.required(PartList),
-    t.label({ label: 'measures-timewise', value: t.oneOrMore(MeasureTimewise) }),
+    t.label({ label: 'measures', value: t.oneOrMore(MeasureTimewise) }),
   ] as const
 );

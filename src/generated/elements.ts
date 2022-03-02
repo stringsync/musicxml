@@ -41759,7 +41759,7 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
       { type: 'optional', value: Defaults },
       { type: 'label', label: 'credits', value: { type: 'zeroOrMore', value: Credit } },
       { type: 'required', value: PartList },
-      { type: 'label', label: 'parts-partwise', value: { type: 'oneOrMore', value: PartPartwise } },
+      { type: 'label', label: 'parts', value: { type: 'oneOrMore', value: PartPartwise } },
     ],
   } as const;
 
@@ -41828,11 +41828,11 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
     this.contents[6] = partList;
     return this;
   }
-  getPartsPartwise(): Array<PartPartwise> {
+  getParts(): Array<PartPartwise> {
     return this.contents[7];
   }
-  setPartsPartwise(partsPartwise: Array<PartPartwise>): ScorePartwise {
-    this.contents[7] = partsPartwise;
+  setParts(parts: Array<PartPartwise>): ScorePartwise {
+    this.contents[7] = parts;
     return this;
   }
 }
@@ -42020,7 +42020,7 @@ export class MeasureTimewise implements XMLElement<'measure', MeasureTimewiseAtt
       },
       width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
     },
-    contents: [{ type: 'label', label: 'parts-timewise', value: { type: 'oneOrMore', value: PartTimewise } }],
+    contents: [{ type: 'label', label: 'parts', value: { type: 'oneOrMore', value: PartTimewise } }],
   } as const;
 
   readonly schema = MeasureTimewise.schema;
@@ -42074,11 +42074,11 @@ export class MeasureTimewise implements XMLElement<'measure', MeasureTimewiseAtt
     this.attributes['width'] = width;
     return this;
   }
-  getPartsTimewise(): Array<PartTimewise> {
+  getParts(): Array<PartTimewise> {
     return this.contents[0];
   }
-  setPartsTimewise(partsTimewise: Array<PartTimewise>): MeasureTimewise {
-    this.contents[0] = partsTimewise;
+  setParts(parts: Array<PartTimewise>): MeasureTimewise {
+    this.contents[0] = parts;
     return this;
   }
 }
@@ -42108,7 +42108,7 @@ export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewise
       { type: 'optional', value: Defaults },
       { type: 'label', label: 'credits', value: { type: 'zeroOrMore', value: Credit } },
       { type: 'required', value: PartList },
-      { type: 'label', label: 'measures-timewise', value: { type: 'oneOrMore', value: MeasureTimewise } },
+      { type: 'label', label: 'measures', value: { type: 'oneOrMore', value: MeasureTimewise } },
     ],
   } as const;
 
@@ -42177,11 +42177,11 @@ export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewise
     this.contents[6] = partList;
     return this;
   }
-  getMeasuresTimewise(): Array<MeasureTimewise> {
+  getMeasures(): Array<MeasureTimewise> {
     return this.contents[7];
   }
-  setMeasuresTimewise(measuresTimewise: Array<MeasureTimewise>): ScoreTimewise {
-    this.contents[7] = measuresTimewise;
+  setMeasures(measures: Array<MeasureTimewise>): ScoreTimewise {
+    this.contents[7] = measures;
     return this;
   }
 }

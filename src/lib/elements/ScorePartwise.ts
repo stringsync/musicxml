@@ -37,6 +37,6 @@ export const ScorePartwise = schema(
     t.optional(Defaults),
     t.label({ label: 'credits', value: t.zeroOrMore(Credit) }),
     t.required(PartList),
-    t.label({ label: 'parts-partwise', value: t.oneOrMore(PartPartwise) }),
+    t.label({ label: 'parts', value: t.oneOrMore(PartPartwise) }),
   ] as const
 );

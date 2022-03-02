@@ -58,6 +58,6 @@ export const MeasureTimewise = schema(
      */
     width: t.optional(dataTypes.tenths()),
   },
-  [t.label({ label: 'parts-timewise', value: t.oneOrMore(PartTimewise) })] as const,
+  [t.label({ label: 'parts', value: t.oneOrMore(PartTimewise) })] as const,
   { className: 'measure-timewise' }
 );
