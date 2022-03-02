@@ -19,7 +19,7 @@ import { OtherAppearance } from './OtherAppearance';
  */
 export const Appearance = schema('appearance', {}, [
   t.label({ label: 'line-widths', value: t.zeroOrMore(LineWidth) }),
-  t.label({ label: 'notes', value: t.zeroOrMore(NoteSize) }),
+  t.label({ label: 'note-sizes', value: t.zeroOrMore(NoteSize) }),
   t.label({ label: 'distances', value: t.zeroOrMore(Distance) }),
   t.label({ label: 'glyphs', value: t.zeroOrMore(Glyph) }),
   t.label({ label: 'other-appearances', value: t.zeroOrMore(OtherAppearance) }),

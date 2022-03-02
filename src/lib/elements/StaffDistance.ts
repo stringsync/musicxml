@@ -12,5 +12,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-distance/}
  */
 export const StaffDistance = schema('staff-distance', {}, [
-  t.label({ label: 'staff-distance', value: t.required(dataTypes.tenths()) }),
+  t.label({ label: 'staff-distance-value', value: t.required(dataTypes.tenths()) }),
 ] as const);

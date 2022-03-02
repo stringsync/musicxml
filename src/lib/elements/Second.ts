@@ -11,5 +11,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/second/}
  */
 export const Second = schema('second', {}, [
-  t.label({ label: 'second', value: t.required(dataTypes.positiveInteger()) }),
+  t.label({ label: 'second-value', value: t.required(dataTypes.positiveInteger()) }),
 ] as const);

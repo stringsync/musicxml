@@ -12,5 +12,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff/}
  */
 export const Staff = schema('staff', {}, [
-  t.label({ label: 'staff', value: t.required(dataTypes.positiveInteger()) }),
+  t.label({ label: 'staff-value', value: t.required(dataTypes.positiveInteger()) }),
 ] as const);

@@ -58,9 +58,10 @@ describe('MusicXML', () => {
       expect(measure.getNumber()).toBe('4');
 
       const note = new elements.Note();
-      measure.setContents([...measure.getContents(), new elements.Note()]);
-      expect(measure.getContents()).toHaveLength(1);
-      expect(measure.getContents()).toStrictEqual([note]);
+      measure.setMeasureValues([...measure.getMeasureValues(), new elements.Note()]);
+      const measureValues = measure.getMeasureValues();
+      expect(measureValues).toHaveLength(1);
+      expect(measureValues).toStrictEqual([note]);
     });
   });
 
@@ -103,11 +104,11 @@ describe('MusicXML', () => {
       expect(measure).toBeInstanceOf(elements.MeasurePartwise);
       expect(measure.getNumber()).toBe('1');
 
-      const measureContents = measure.getContents();
-      expect(measureContents).toBeArray();
-      expect(measureContents).toHaveLength(2);
+      const measureValues = measure.getMeasureValues();
+      expect(measureValues).toBeArray();
+      expect(measureValues).toHaveLength(2);
 
-      const attributes = measureContents[0];
+      const attributes = measureValues[0];
       if (!elements.MeasurePartwise.isAttributes(attributes)) {
         fail(`expected Attributes, got: ${attributes}`);
       }
@@ -123,8 +124,8 @@ describe('MusicXML', () => {
       const key = keys[0];
       expect(key).toBeInstanceOf(elements.Key);
 
-      const keyValue = key.getValue();
-      if (!elements.Key.isTraditionalKey(keyValue)) {
+      const keyValue = key.getKeyValue();
+      if (!elements.Key.isTranditionalKey(keyValue)) {
         fail(`expected TraditionalKey, got: ${keyValue}`);
       }
 
@@ -138,7 +139,7 @@ describe('MusicXML', () => {
       const time = times[0];
       expect(time).toBeInstanceOf(elements.Time);
 
-      const timeValue = time.getValue();
+      const timeValue = time.getTimeValue();
       if (!elements.Time.isTimeSignature(timeValue)) {
         fail(`expected TimeSignature, got: ${timeValue}`);
       }
@@ -168,7 +169,7 @@ describe('MusicXML', () => {
       expect(line).toBeInstanceOf(elements.Line);
       expect(line!.getStaffLinePosition()).toBe(2);
 
-      const note = measureContents[1];
+      const note = measureValues[1];
       if (!elements.MeasurePartwise.isNote(note)) {
         fail(`expected Note, got: ${note}`);
       }
@@ -204,7 +205,7 @@ describe('MusicXML', () => {
       expect(measures).toHaveLength(1);
 
       const measure = measures[0];
-      const contents = measure.getContents();
+      const contents = measure.getMeasureValues();
       expect(contents).toHaveLength(2);
 
       const attributes = contents[0];

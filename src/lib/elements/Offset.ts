@@ -24,5 +24,5 @@ export const Offset = schema(
      */
     sound: t.optional(dataTypes.yesNo()),
   },
-  [t.label({ label: 'offset', value: t.required(dataTypes.divisions()) })] as const
+  [t.label({ label: 'offset-value', value: t.required(dataTypes.divisions()) })] as const
 );

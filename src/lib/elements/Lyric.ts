@@ -105,7 +105,7 @@ export const Lyric = schema(
   },
   [
     t.label({
-      label: 'lyric',
+      label: 'lyric-value',
       value: t.choices(
         t.label({
           label: 'intelligible',

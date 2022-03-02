@@ -132,7 +132,7 @@ export const Time = schema(
   },
   [
     t.label({
-      label: 'value',
+      label: 'time-value',
       value: t.choices(
         t.label({
           label: 'time-signature',

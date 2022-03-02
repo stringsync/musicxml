@@ -55,5 +55,5 @@ export const MeasureStyle = schema(
      */
     number: t.optional(dataTypes.staffNumber()),
   },
-  [t.label({ label: 'measure-style', value: t.choices(MultipleRest, MeasureRepeat, BeatRepeat, Slash) })] as const
+  [t.label({ label: 'measure-style-value', value: t.choices(MultipleRest, MeasureRepeat, BeatRepeat, Slash) })] as const
 );

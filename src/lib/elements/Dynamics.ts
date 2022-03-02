@@ -154,7 +154,7 @@ export const Dynamics = schema(
   },
   [
     t.label({
-      label: 'dynamics',
+      label: 'dynamics-value',
       value: t.zeroOrMore(
         t.choices(
           P,

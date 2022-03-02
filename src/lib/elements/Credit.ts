@@ -45,11 +45,11 @@ export const Credit = schema(
     t.label({ label: 'links', value: t.zeroOrMore(Link) }),
     t.label({ label: 'bookmarks', value: t.zeroOrMore(Bookmark) }),
     t.label({
-      label: 'credit-detail',
+      label: 'credit-value',
       value: t.choices(
         CreditImage,
         t.label({
-          label: 'extended-credit-details',
+          label: 'credit-token',
           value: [
             t.choices(CreditWords, CreditSymbol),
             t.zeroOrMore([t.zeroOrMore(Link), t.zeroOrMore(Bookmark), t.choices(CreditWords, CreditSymbol)] as const),

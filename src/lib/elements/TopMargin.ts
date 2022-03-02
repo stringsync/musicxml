@@ -11,5 +11,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/top-margin/}
  */
 export const TopMargin = schema('top-margin', {}, [
-  t.label({ label: 'top-margin', value: t.required(dataTypes.tenths()) }),
+  t.label({ label: 'top-margin-value', value: t.required(dataTypes.tenths()) }),
 ] as const);

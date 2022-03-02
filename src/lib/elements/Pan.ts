@@ -13,5 +13,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pan/}
  */
 export const Pan = schema('pan', {}, [
-  t.label({ label: 'pan', value: t.required(dataTypes.rotationDegrees()) }),
+  t.label({ label: 'pan-value', value: t.required(dataTypes.rotationDegrees()) }),
 ] as const);

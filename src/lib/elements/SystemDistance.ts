@@ -12,5 +12,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-distance/}
  */
 export const SystemDistance = schema('system-distance', {}, [
-  t.label({ label: 'system-distance', value: t.required(dataTypes.tenths()) }),
+  t.label({ label: 'system-distance-value', value: t.required(dataTypes.tenths()) }),
 ] as const);

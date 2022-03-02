@@ -13,5 +13,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tenths/}
  */
 export const Tenths = schema('tenths', {}, [
-  t.label({ label: 'tenths', value: t.required(dataTypes.tenths()) }),
+  t.label({ label: 'tenths-value', value: t.required(dataTypes.tenths()) }),
 ] as const);

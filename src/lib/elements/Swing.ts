@@ -27,7 +27,7 @@ import { SwingType } from './SwingType';
  */
 export const Swing = schema('swing', {}, [
   t.label({
-    label: 'swing',
+    label: 'swing-value',
     value: t.choices(
       Straight,
       t.label({

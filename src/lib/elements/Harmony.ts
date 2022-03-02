@@ -141,7 +141,7 @@ export const Harmony = schema(
   },
   [
     t.label({
-      label: 'harmony',
+      label: 'harmony-values',
       value: t.oneOrMore([
         t.choices(Root, Numeral, Function),
         t.required(Kind),

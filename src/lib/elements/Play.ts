@@ -25,5 +25,5 @@ export const Play = schema(
      */
     id: t.optional(dataTypes.id()),
   },
-  [t.label({ label: 'play', value: t.zeroOrMore(t.choices(Ipa, Mute, SemiPitched, OtherPlay)) })] as const
+  [t.label({ label: 'play-value', value: t.zeroOrMore(t.choices(Ipa, Mute, SemiPitched, OtherPlay)) })] as const
 );

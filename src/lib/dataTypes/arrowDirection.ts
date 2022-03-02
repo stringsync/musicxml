@@ -6,7 +6,7 @@ import { t } from '../schema';
  */
 export const arrowDirection = () => {
   return t.label({
-    label: 'arrow-directions',
+    label: 'arrow-direction',
     value: t.choices(
       ...([
         'down',
