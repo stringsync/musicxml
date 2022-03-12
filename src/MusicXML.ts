@@ -34,7 +34,7 @@ export class MusicXML<T extends MusicXMLRoot> {
   static parse(xmlStr: string): MusicXML<MusicXMLRoot> {
     const descriptor = schema.t.choices(elements.ScorePartwise, elements.ScoreTimewise);
     const xmlDocument = raw.parse(xmlStr);
-    const resolutions = xmlDocument.nodes.map((node) => xml.parse([node], descriptor));
+    const resolutions = xmlDocument.nodes.map((node) => xml.conform([node], descriptor));
 
     const resolved = resolutions.filter((resolution) => resolution.type === 'resolved');
     if (resolved.length !== 1) {

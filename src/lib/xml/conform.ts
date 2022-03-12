@@ -6,7 +6,7 @@ import * as resolutions from '../resolutions';
 import * as schema from '../schema';
 import * as util from '../util';
 
-export const parse = <T extends schema.Descriptor | schema.Descriptor[]>(
+export const conform = <T extends schema.Descriptor | schema.Descriptor[]>(
   nodes: raw.XmlNode[],
   child: T
 ): resolutions.Resolution => {
