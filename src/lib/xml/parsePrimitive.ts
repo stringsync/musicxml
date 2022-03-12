@@ -4,7 +4,7 @@ import * as resolutions from '../resolutions';
 import * as util from '../util';
 import { PrimitiveChild } from './types';
 
-export const parse = (value: string, child: PrimitiveChild) => {
+export const parsePrimitive = (value: string, child: PrimitiveChild) => {
   const resolution = resolve(value, child);
   switch (resolution.type) {
     case 'resolved':

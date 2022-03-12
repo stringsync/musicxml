@@ -1,19 +1,19 @@
 import { MusicXMLError } from '../errors';
 import * as operations from '../operations';
-import * as primitives from '../primitives';
-import * as raw from '../raw';
 import * as resolutions from '../resolutions';
 import * as schema from '../schema';
 import * as util from '../util';
+import { parsePrimitive } from './parsePrimitive';
+import { XmlNode } from './types';
 
 export const conform = <T extends schema.Descriptor | schema.Descriptor[]>(
-  nodes: raw.XmlNode[],
+  nodes: XmlNode[],
   child: T
 ): resolutions.Resolution => {
   return resolve(util.Cursor.from(nodes), child);
 };
 
-const resolve = (cursor: util.Cursor<raw.XmlNode>, child: schema.DescriptorChild): resolutions.Resolution => {
+const resolve = (cursor: util.Cursor<XmlNode>, child: schema.DescriptorChild): resolutions.Resolution => {
   if (cursor.done()) {
     return resolutions.zero(operations.zero(child));
   }
@@ -62,7 +62,7 @@ const resolve = (cursor: util.Cursor<raw.XmlNode>, child: schema.DescriptorChild
 };
 
 const resolveRequirement = (
-  cursor: util.Cursor<raw.XmlNode>,
+  cursor: util.Cursor<XmlNode>,
   descriptor: schema.OptionalDescriptor<any> | schema.RequiredDescriptor<any>
 ): resolutions.Resolution => {
   const probeCursor = cursor.dup();
@@ -79,19 +79,19 @@ const resolveRequirement = (
 };
 
 const resolvePrimitive = (
-  cursor: util.Cursor<raw.XmlNode>,
+  cursor: util.Cursor<XmlNode>,
   descriptor: schema.IntDescriptor | schema.FloatDescriptor | schema.StringDescriptor
 ): resolutions.Resolution => {
   const element = cursor.get();
   if (element.type === 'text') {
     cursor.next();
-    return resolutions.resolved(primitives.parse(element.text, descriptor));
+    return resolutions.resolved(parsePrimitive(element.text, descriptor));
   } else {
     return resolutions.zero(operations.zero(descriptor));
   }
 };
 
-const resolveConstant = (cursor: util.Cursor<raw.XmlNode>, child: string | number): resolutions.Resolution => {
+const resolveConstant = (cursor: util.Cursor<XmlNode>, child: string | number): resolutions.Resolution => {
   const element = cursor.get();
   if (element.type === 'text' && element.text === child.toString()) {
     cursor.next();
@@ -102,10 +102,10 @@ const resolveConstant = (cursor: util.Cursor<raw.XmlNode>, child: string | numbe
 };
 
 const resolveChoices = (
-  cursor: util.Cursor<raw.XmlNode>,
+  cursor: util.Cursor<XmlNode>,
   descriptor: schema.ChoicesDescriptor<any>
 ): resolutions.Resolution => {
-  const results = new Array<{ resolution: resolutions.Resolution; cursor: util.Cursor<raw.XmlNode> }>();
+  const results = new Array<{ resolution: resolutions.Resolution; cursor: util.Cursor<XmlNode> }>();
   for (const choice of descriptor.choices) {
     const probeCursor = cursor.dup();
     const resolution = resolve(probeCursor, choice);
@@ -131,7 +131,7 @@ const resolveChoices = (
 };
 
 const resolveMulti = (
-  cursor: util.Cursor<raw.XmlNode>,
+  cursor: util.Cursor<XmlNode>,
   descriptor: schema.ZeroOrMoreDescriptor<any> | schema.OneOrMoreDescriptor<any>
 ): resolutions.Resolution => {
   const value = new Array<any>();
@@ -159,7 +159,7 @@ const resolveMulti = (
 };
 
 const resolveContent = (
-  cursor: util.Cursor<raw.XmlNode>,
+  cursor: util.Cursor<XmlNode>,
   descriptors: schema.Descriptor[] | ReadonlyArray<schema.Descriptor>
 ) => {
   const content = new Array<any>();
@@ -177,7 +177,7 @@ const resolveContent = (
   return content;
 };
 
-const resolveElement = (cursor: util.Cursor<raw.XmlNode>, ctor: schema.XMLElementCtor): resolutions.Resolution => {
+const resolveElement = (cursor: util.Cursor<XmlNode>, ctor: schema.XMLElementCtor): resolutions.Resolution => {
   const node = cursor.get();
   if (node.type === 'element' && node.name === ctor.schema.name) {
     cursor.next();
@@ -186,7 +186,7 @@ const resolveElement = (cursor: util.Cursor<raw.XmlNode>, ctor: schema.XMLElemen
     for (const [name, value] of Object.entries(node.attributes)) {
       if (name in ctor.schema.attributes) {
         const descriptor = ctor.schema.attributes[name];
-        attributes[name] = primitives.parse(value, descriptor);
+        attributes[name] = parsePrimitive(value, descriptor);
       }
     }
 
@@ -198,7 +198,7 @@ const resolveElement = (cursor: util.Cursor<raw.XmlNode>, ctor: schema.XMLElemen
   return resolutions.none();
 };
 
-const resolveArray = (cursor: util.Cursor<raw.XmlNode>, children: any[]): resolutions.Resolution => {
+const resolveArray = (cursor: util.Cursor<XmlNode>, children: any[]): resolutions.Resolution => {
   const value = new Array<any>();
   const probeCursor = cursor.dup();
   for (const child of children) {
@@ -223,7 +223,7 @@ const isValidDateString = (str: string) => {
   return !isNaN(timestamp);
 };
 
-const resolveDate = (cursor: util.Cursor<raw.XmlNode>, descriptor: schema.DateDescriptor): resolutions.Resolution => {
+const resolveDate = (cursor: util.Cursor<XmlNode>, descriptor: schema.DateDescriptor): resolutions.Resolution => {
   const node = cursor.get();
   if (node.type === 'text' && isValidDateString(node.text)) {
     return resolutions.resolved(new Date(node.text));

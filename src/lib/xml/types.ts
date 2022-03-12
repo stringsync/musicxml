@@ -1,3 +1,5 @@
+import * as schema from '../schema';
+
 export type XmlDocument = {
   declaration: Declaration;
   nodes: XmlNode[];
@@ -25,3 +27,5 @@ export type DoctypeNode = {
   type: 'doctype';
   doctype: string;
 };
+
+export type PrimitiveChild = Extract<schema.DescriptorChild, string | number | schema.Descriptor>;

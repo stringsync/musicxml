@@ -1,14 +1,14 @@
 import { MusicXMLError } from '../errors';
 import * as operations from '../operations';
-import * as primitives from '../primitives';
-import * as raw from '../raw';
 import { DescriptorChild, XMLElement } from '../schema';
 import * as util from '../util';
+import { serializePrimitive } from './serializePrimitive';
+import { XmlNode } from './types';
 
-export const serialize = (element: XMLElement): raw.XmlNode => {
+export const serialize = (element: XMLElement): XmlNode => {
   const attributes: any = {};
   for (const key of Object.keys(element.attributes)) {
-    const resolution = primitives.serialize(element.attributes[key], element.schema.attributes[key]);
+    const resolution = serializePrimitive(element.attributes[key], element.schema.attributes[key]);
     if (resolution.type !== 'none') {
       attributes[key] = resolution.value;
     }
@@ -19,13 +19,13 @@ export const serialize = (element: XMLElement): raw.XmlNode => {
   return { type: 'element', name: element.schema.name, attributes, children };
 };
 
-const resolve = (value: any, child: DescriptorChild): raw.XmlNode[] => {
+const resolve = (value: any, child: DescriptorChild): XmlNode[] => {
   if (util.isString(child)) {
-    const resolution = primitives.serialize(value, child);
+    const resolution = serializePrimitive(value, child);
     return resolution.type === 'none' ? [] : [{ type: 'text', text: resolution.value }];
   }
   if (util.isNumber(child)) {
-    const resolution = primitives.serialize(value, child);
+    const resolution = serializePrimitive(value, child);
     return resolution.type === 'none' ? [] : [{ type: 'text', text: resolution.value }];
   }
   if (util.isDescriptor(child)) {
@@ -36,7 +36,7 @@ const resolve = (value: any, child: DescriptorChild): raw.XmlNode[] => {
       case 'constant':
       case 'regex':
       case 'date':
-        const resolution = primitives.serialize(value, child);
+        const resolution = serializePrimitive(value, child);
         return resolution.type === 'none' ? [] : [{ type: 'text', text: resolution.value }];
       case 'optional':
         return util.isNull(value) ? [] : resolve(value, child.value);

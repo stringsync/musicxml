@@ -1,6 +1,6 @@
 import { diff } from 'jest-diff';
 import fetch from 'node-fetch';
-import * as raw from '../lib/raw';
+import * as xml from '../lib/xml';
 
 const VALIDATE_URL = 'http://xmlvalidator:8080/validate';
 
@@ -29,9 +29,9 @@ export const toBeValidMusicXML: jest.CustomMatcher = async function (xml: string
   }
 };
 
-const prettify = (xml: string): string => {
-  const { declaration, nodes } = raw.parse(xml);
-  return raw.toString({ declaration, nodes });
+const prettify = (xmlStr: string): string => {
+  const xmlDocument = xml.parse(xmlStr);
+  return xml.toString(xmlDocument);
 };
 
 export const toEqualXML: jest.CustomMatcher = function (received: string, expected: string) {

@@ -4,7 +4,7 @@ import * as resolutions from '../resolutions';
 import { Descriptor, DescriptorChild } from '../schema';
 import * as util from '../util';
 
-export const serialize = <T extends Extract<DescriptorChild, string | number | Descriptor>>(
+export const serializePrimitive = <T extends Extract<DescriptorChild, string | number | Descriptor>>(
   value: any,
   child: T
 ): resolutions.Resolution<string> => {
@@ -36,7 +36,7 @@ export const serialize = <T extends Extract<DescriptorChild, string | number | D
       case 'choices':
         return resolutions.resolved(String(value));
       case 'label':
-        return serialize(value, child.value);
+        return serializePrimitive(value, child.value);
       case 'optional':
         return util.isNull(value) ? { type: 'none', value: undefined } : resolutions.resolved(String(value));
       case 'required':
