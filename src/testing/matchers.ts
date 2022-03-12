@@ -31,7 +31,7 @@ export const toBeValidMusicXML: jest.CustomMatcher = async function (xml: string
 
 const prettify = (xml: string): string => {
   const { declaration, nodes } = raw.parse(xml);
-  return raw.serialize({ declaration, nodes });
+  return raw.toString({ declaration, nodes });
 };
 
 export const toEqualXML: jest.CustomMatcher = function (received: string, expected: string) {

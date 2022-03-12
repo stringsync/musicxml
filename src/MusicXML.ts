@@ -112,6 +112,6 @@ export class MusicXML<T extends MusicXMLRoot> {
     nodes[this.index] = node;
     const declaration = this.xmlDocument.declaration;
     const xmlDocument = { declaration, nodes };
-    return raw.serialize(xmlDocument);
+    return raw.toString(xmlDocument);
   }
 }

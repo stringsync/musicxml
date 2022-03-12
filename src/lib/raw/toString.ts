@@ -1,7 +1,7 @@
 import * as xmlJs from 'xml-js';
 import { XmlDocument, XmlNode } from './types';
 
-export const serialize = (xmlDocument: XmlDocument): string => {
+export const toString = (xmlDocument: XmlDocument): string => {
   const xmlJsElements = xmlDocument.nodes.map(toXmlJsElement);
   return xmlJs.js2xml({ declaration: xmlDocument.declaration, elements: xmlJsElements }, { spaces: 2 });
 };
