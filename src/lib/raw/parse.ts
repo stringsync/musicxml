@@ -1,10 +1,10 @@
 import * as xmlJs from 'xml-js';
 import { MusicXMLError } from '../errors';
-import { Declaration, RawXMLNode } from './types';
+import { XmlDocument, XmlNode } from './types';
 
 const IGNORE_ELEMENT_TYPES = ['comment'];
 
-export const parse = (xml: string): { declaration: Declaration; nodes: RawXMLNode[] } => {
+export const parse = (xml: string): XmlDocument => {
   const xmlJsElements = xmlJs.xml2js(xml);
   return {
     declaration: xmlJsElements.declaration!,
@@ -25,11 +25,11 @@ const toPlainAttributes = (attributes: xmlJs.Attributes): Record<string, string>
     }, {} as Record<keyof typeof attributes, string>);
 };
 
-const toRawXMLNodes = (elements: xmlJs.Element[]): RawXMLNode[] => {
+const toRawXMLNodes = (elements: xmlJs.Element[]): XmlNode[] => {
   return elements.filter((element) => !IGNORE_ELEMENT_TYPES.includes(element.type || '')).map(toRawXMLNode);
 };
 
-const toRawXMLNode = (node: xmlJs.Element): RawXMLNode => {
+const toRawXMLNode = (node: xmlJs.Element): XmlNode => {
   switch (node.type) {
     case 'element':
       return {

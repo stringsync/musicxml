@@ -1,12 +1,12 @@
 import * as xmlJs from 'xml-js';
-import { Declaration, RawXMLNode } from './types';
+import { XmlDocument, XmlNode } from './types';
 
-export const seralize = (declaration: Declaration, nodes: RawXMLNode[]): string => {
-  const xmlJsElements = nodes.map(toXmlJsElement);
-  return xmlJs.js2xml({ declaration, elements: xmlJsElements }, { spaces: 2 });
+export const serialize = (xmlDocument: XmlDocument): string => {
+  const xmlJsElements = xmlDocument.nodes.map(toXmlJsElement);
+  return xmlJs.js2xml({ declaration: xmlDocument.declaration, elements: xmlJsElements }, { spaces: 2 });
 };
 
-const toXmlJsElement = (element: RawXMLNode): xmlJs.Element => {
+const toXmlJsElement = (element: XmlNode): xmlJs.Element => {
   switch (element.type) {
     case 'element':
       return {

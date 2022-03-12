@@ -12,8 +12,7 @@ export type MusicXMLRoot = elements.ScorePartwise | elements.ScoreTimewise;
 type MusicXMLOpts<T extends MusicXMLRoot> = {
   root: T;
   index: number;
-  nodes: raw.RawXMLNode[];
-  declaration: raw.Declaration;
+  xmlDocument: raw.XmlDocument;
 };
 
 /**
@@ -34,15 +33,15 @@ export class MusicXML<T extends MusicXMLRoot> {
    */
   static parse(xmlStr: string): MusicXML<MusicXMLRoot> {
     const descriptor = schema.t.choices(elements.ScorePartwise, elements.ScoreTimewise);
-    const { declaration, nodes } = raw.parse(xmlStr);
-    const resolutions = nodes.map((node) => xml.parse([node], descriptor));
+    const xmlDocument = raw.parse(xmlStr);
+    const resolutions = xmlDocument.nodes.map((node) => xml.parse([node], descriptor));
 
     const resolved = resolutions.filter((resolution) => resolution.type === 'resolved');
     if (resolved.length !== 1) {
       throw new MusicXMLError({
         symptom: 'invalid music xml document',
         context: {
-          rootElementNames: nodes
+          rootElementNames: xmlDocument.nodes
             .filter((node): node is raw.ElementNode => node.type === 'element')
             .map((node) => node.name),
         },
@@ -52,7 +51,7 @@ export class MusicXML<T extends MusicXMLRoot> {
 
     const root = resolved[0].value;
     const index = resolutions.findIndex((resolution) => resolution.type === 'resolved');
-    return new MusicXML({ root, index, nodes, declaration });
+    return new MusicXML({ root, index, xmlDocument });
   }
 
   /**
@@ -65,7 +64,8 @@ export class MusicXML<T extends MusicXMLRoot> {
     const index = 0;
     const nodes = [xml.serialize(root)];
     const declaration = raw.getDefaultDeclaration();
-    return new MusicXML({ root, index, nodes, declaration });
+    const xmlDocument = { declaration, nodes };
+    return new MusicXML({ root, index, xmlDocument });
   }
 
   /**
@@ -78,19 +78,18 @@ export class MusicXML<T extends MusicXMLRoot> {
     const index = 0;
     const nodes = [xml.serialize(root)];
     const declaration = raw.getDefaultDeclaration();
-    return new MusicXML({ root, index, nodes, declaration });
+    const xmlDocument = { declaration, nodes };
+    return new MusicXML({ root, index, xmlDocument });
   }
 
   private root: T;
   private index: number;
-  private declaration: raw.Declaration;
-  private nodes: raw.RawXMLNode[];
+  private xmlDocument: raw.XmlDocument;
 
   private constructor(opts: MusicXMLOpts<T>) {
     this.root = opts.root;
     this.index = opts.index;
-    this.declaration = opts.declaration;
-    this.nodes = opts.nodes;
+    this.xmlDocument = opts.xmlDocument;
   }
 
   /**
@@ -109,8 +108,10 @@ export class MusicXML<T extends MusicXMLRoot> {
    */
   serialize(): string {
     const node = xml.serialize(this.root);
-    const nodes = [...this.nodes];
+    const nodes = [...this.xmlDocument.nodes];
     nodes[this.index] = node;
-    return raw.seralize(this.declaration, nodes);
+    const declaration = this.xmlDocument.declaration;
+    const xmlDocument = { declaration, nodes };
+    return raw.serialize(xmlDocument);
   }
 }

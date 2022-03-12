@@ -7,13 +7,13 @@ import * as schema from '../schema';
 import * as util from '../util';
 
 export const parse = <T extends schema.Descriptor | schema.Descriptor[]>(
-  nodes: raw.RawXMLNode[],
+  nodes: raw.XmlNode[],
   child: T
 ): resolutions.Resolution => {
   return resolve(util.Cursor.from(nodes), child);
 };
 
-const resolve = (cursor: util.Cursor<raw.RawXMLNode>, child: schema.DescriptorChild): resolutions.Resolution => {
+const resolve = (cursor: util.Cursor<raw.XmlNode>, child: schema.DescriptorChild): resolutions.Resolution => {
   if (cursor.done()) {
     return resolutions.zero(operations.zero(child));
   }
@@ -62,7 +62,7 @@ const resolve = (cursor: util.Cursor<raw.RawXMLNode>, child: schema.DescriptorCh
 };
 
 const resolveRequirement = (
-  cursor: util.Cursor<raw.RawXMLNode>,
+  cursor: util.Cursor<raw.XmlNode>,
   descriptor: schema.OptionalDescriptor<any> | schema.RequiredDescriptor<any>
 ): resolutions.Resolution => {
   const probeCursor = cursor.dup();
@@ -79,7 +79,7 @@ const resolveRequirement = (
 };
 
 const resolvePrimitive = (
-  cursor: util.Cursor<raw.RawXMLNode>,
+  cursor: util.Cursor<raw.XmlNode>,
   descriptor: schema.IntDescriptor | schema.FloatDescriptor | schema.StringDescriptor
 ): resolutions.Resolution => {
   const element = cursor.get();
@@ -91,7 +91,7 @@ const resolvePrimitive = (
   }
 };
 
-const resolveConstant = (cursor: util.Cursor<raw.RawXMLNode>, child: string | number): resolutions.Resolution => {
+const resolveConstant = (cursor: util.Cursor<raw.XmlNode>, child: string | number): resolutions.Resolution => {
   const element = cursor.get();
   if (element.type === 'text' && element.text === child.toString()) {
     cursor.next();
@@ -102,10 +102,10 @@ const resolveConstant = (cursor: util.Cursor<raw.RawXMLNode>, child: string | nu
 };
 
 const resolveChoices = (
-  cursor: util.Cursor<raw.RawXMLNode>,
+  cursor: util.Cursor<raw.XmlNode>,
   descriptor: schema.ChoicesDescriptor<any>
 ): resolutions.Resolution => {
-  const results = new Array<{ resolution: resolutions.Resolution; cursor: util.Cursor<raw.RawXMLNode> }>();
+  const results = new Array<{ resolution: resolutions.Resolution; cursor: util.Cursor<raw.XmlNode> }>();
   for (const choice of descriptor.choices) {
     const probeCursor = cursor.dup();
     const resolution = resolve(probeCursor, choice);
@@ -131,7 +131,7 @@ const resolveChoices = (
 };
 
 const resolveMulti = (
-  cursor: util.Cursor<raw.RawXMLNode>,
+  cursor: util.Cursor<raw.XmlNode>,
   descriptor: schema.ZeroOrMoreDescriptor<any> | schema.OneOrMoreDescriptor<any>
 ): resolutions.Resolution => {
   const value = new Array<any>();
@@ -159,7 +159,7 @@ const resolveMulti = (
 };
 
 const resolveContent = (
-  cursor: util.Cursor<raw.RawXMLNode>,
+  cursor: util.Cursor<raw.XmlNode>,
   descriptors: schema.Descriptor[] | ReadonlyArray<schema.Descriptor>
 ) => {
   const content = new Array<any>();
@@ -177,7 +177,7 @@ const resolveContent = (
   return content;
 };
 
-const resolveElement = (cursor: util.Cursor<raw.RawXMLNode>, ctor: schema.XMLElementCtor): resolutions.Resolution => {
+const resolveElement = (cursor: util.Cursor<raw.XmlNode>, ctor: schema.XMLElementCtor): resolutions.Resolution => {
   const node = cursor.get();
   if (node.type === 'element' && node.name === ctor.schema.name) {
     cursor.next();
@@ -198,7 +198,7 @@ const resolveElement = (cursor: util.Cursor<raw.RawXMLNode>, ctor: schema.XMLEle
   return resolutions.none();
 };
 
-const resolveArray = (cursor: util.Cursor<raw.RawXMLNode>, children: any[]): resolutions.Resolution => {
+const resolveArray = (cursor: util.Cursor<raw.XmlNode>, children: any[]): resolutions.Resolution => {
   const value = new Array<any>();
   const probeCursor = cursor.dup();
   for (const child of children) {
@@ -223,10 +223,7 @@ const isValidDateString = (str: string) => {
   return !isNaN(timestamp);
 };
 
-const resolveDate = (
-  cursor: util.Cursor<raw.RawXMLNode>,
-  descriptor: schema.DateDescriptor
-): resolutions.Resolution => {
+const resolveDate = (cursor: util.Cursor<raw.XmlNode>, descriptor: schema.DateDescriptor): resolutions.Resolution => {
   const node = cursor.get();
   if (node.type === 'text' && isValidDateString(node.text)) {
     return resolutions.resolved(new Date(node.text));

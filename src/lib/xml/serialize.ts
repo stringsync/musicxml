@@ -5,7 +5,7 @@ import * as raw from '../raw';
 import { DescriptorChild, XMLElement } from '../schema';
 import * as util from '../util';
 
-export const serialize = (element: XMLElement): raw.RawXMLNode => {
+export const serialize = (element: XMLElement): raw.XmlNode => {
   const attributes: any = {};
   for (const key of Object.keys(element.attributes)) {
     const resolution = primitives.serialize(element.attributes[key], element.schema.attributes[key]);
@@ -19,7 +19,7 @@ export const serialize = (element: XMLElement): raw.RawXMLNode => {
   return { type: 'element', name: element.schema.name, attributes, children };
 };
 
-const resolve = (value: any, child: DescriptorChild): raw.RawXMLNode[] => {
+const resolve = (value: any, child: DescriptorChild): raw.XmlNode[] => {
   if (util.isString(child)) {
     const resolution = primitives.serialize(value, child);
     return resolution.type === 'none' ? [] : [{ type: 'text', text: resolution.value }];
