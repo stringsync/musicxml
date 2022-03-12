@@ -31,13 +31,13 @@ determined.
 I **highly** recommend that you lock into a specific version of this library.
 
 ```shell
-yarn add @stringsync/musicxml@0.1.1
+yarn add @stringsync/musicxml@0.2.1
 ```
 
 or
 
 ```shell
-npm install @stringsync/musicxml@0.1.1
+npm install @stringsync/musicxml@0.2.1
 ```
 
 ### Exports
