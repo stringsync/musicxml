@@ -1,5 +1,6 @@
 import * as examples from './examples';
 import { EXAMPLES } from './examples';
+import * as asserts from './generated/asserts';
 import * as elements from './generated/elements';
 import * as operations from './lib/operations';
 import { MusicXML } from './MusicXML';
@@ -29,13 +30,13 @@ describe('MusicXML', () => {
     it('matches the create MusicXML partwise documented README behavior', () => {
       const musicXml = MusicXML.createPartwise();
       const root = musicXml.getRoot();
-      expect(MusicXML.isScorePartwise(root)).toBeTrue();
+      expect(asserts.isScorePartwise(root)).toBeTrue();
     });
 
     it('matches the create MusicXML timewise documented README behavior', () => {
       const musicXml = MusicXML.createTimewise();
       const root = musicXml.getRoot();
-      expect(MusicXML.isScoreTimewise(root)).toBeTrue();
+      expect(asserts.isScoreTimewise(root)).toBeTrue();
     });
 
     it('matches the narrowing documented README behavior', () => {
@@ -43,10 +44,10 @@ describe('MusicXML', () => {
       const noteValue = note.getNoteValue();
       // In the README, we showed that the value must match one of the type predicates.
       expect(
-        elements.Note.isTiedNoteValue(noteValue) ||
-          elements.Note.isCuedNoteValue(noteValue) ||
-          elements.Note.isTiedGraceNoteValue(noteValue) ||
-          elements.Note.isCuedGraceNoteValue(noteValue)
+        asserts.isTiedNoteValue(noteValue) ||
+          asserts.isCuedNoteValue(noteValue) ||
+          asserts.isTiedGraceNoteValue(noteValue) ||
+          asserts.isCuedGraceNoteValue(noteValue)
       ).toBeTrue();
     });
 
@@ -82,7 +83,7 @@ describe('MusicXML', () => {
       expect(musicXml.getRoot()).toBeInstanceOf(elements.ScorePartwise);
 
       const scorePartwise = musicXml.getRoot();
-      if (!MusicXML.isScorePartwise(scorePartwise)) {
+      if (!asserts.isScorePartwise(scorePartwise)) {
         fail(`expected ScorePartwise, got: ${scorePartwise}`);
       }
       expect(scorePartwise.getVersion()).toBe('4.0');
@@ -118,7 +119,7 @@ describe('MusicXML', () => {
       expect(measureValues).toHaveLength(2);
 
       const attributes = measureValues[0];
-      if (!elements.MeasurePartwise.isAttributes(attributes)) {
+      if (!asserts.isAttributes(attributes)) {
         fail(`expected Attributes, got: ${attributes}`);
       }
 
@@ -134,7 +135,7 @@ describe('MusicXML', () => {
       expect(key).toBeInstanceOf(elements.Key);
 
       const keyValue = key.getKeyValue();
-      if (!elements.Key.isTranditionalKey(keyValue)) {
+      if (!asserts.isTranditionalKey(keyValue)) {
         fail(`expected TraditionalKey, got: ${keyValue}`);
       }
 
@@ -149,7 +150,7 @@ describe('MusicXML', () => {
       expect(time).toBeInstanceOf(elements.Time);
 
       const timeValue = time.getTimeValue();
-      if (!elements.Time.isTimeSignature(timeValue)) {
+      if (!asserts.isTimeSignature(timeValue)) {
         fail(`expected TimeSignature, got: ${timeValue}`);
       }
       expect(timeValue).toBeArray();
@@ -179,12 +180,12 @@ describe('MusicXML', () => {
       expect(line!.getStaffLinePosition()).toBe(2);
 
       const note = measureValues[1];
-      if (!elements.MeasurePartwise.isNote(note)) {
+      if (!asserts.isNote(note)) {
         fail(`expected Note, got: ${note}`);
       }
 
       const noteValue = note.getNoteValue();
-      expect(elements.Note.isTiedNoteValue(noteValue)).toBeTrue();
+      expect(asserts.isTiedNoteValue(noteValue)).toBeTrue();
       expect(noteValue).toBeArray();
       expect(noteValue).toHaveLength(4);
       expect(noteValue[0]).toBeNull();
@@ -202,7 +203,7 @@ describe('MusicXML', () => {
       const musicXml = MusicXML.parse(xmlStr);
 
       const scorePartwise = musicXml.getRoot();
-      if (!MusicXML.isScorePartwise(scorePartwise)) {
+      if (!asserts.isScorePartwise(scorePartwise)) {
         fail(`expected ScorePartwise, got: ${scorePartwise}`);
       }
 
@@ -218,7 +219,7 @@ describe('MusicXML', () => {
       expect(contents).toHaveLength(2);
 
       const attributes = contents[0];
-      if (!elements.MeasurePartwise.isAttributes(attributes)) {
+      if (!asserts.isAttributes(attributes)) {
         fail(`expected Attributes, got ${attributes}`);
       }
 
@@ -227,11 +228,11 @@ describe('MusicXML', () => {
       expect(divisions!.getPositiveDivisions()).toBe(1);
 
       const note = contents[1];
-      if (!elements.MeasurePartwise.isNote(note)) {
+      if (!asserts.isNote(note)) {
         fail(`expected Note, got ${note}`);
       }
       const noteValue = note.getNoteValue();
-      if (!elements.Note.isTiedNoteValue(noteValue)) {
+      if (!asserts.isTiedNoteValue(noteValue)) {
         fail(`expected TiedNoteValue, got ${noteValue}`);
       }
 
@@ -283,29 +284,29 @@ describe('MusicXML', () => {
 
   describe('isScorePartwise', () => {
     it('asserts ScorePartwise elements', () => {
-      expect(MusicXML.isScorePartwise(new elements.ScorePartwise())).toBeTrue();
+      expect(asserts.isScorePartwise(new elements.ScorePartwise())).toBeTrue();
     });
 
     it('refutes the ScorePartwise constructor', () => {
-      expect(MusicXML.isScorePartwise(elements.ScorePartwise)).toBeFalse();
+      expect(asserts.isScorePartwise(elements.ScorePartwise)).toBeFalse();
     });
 
     it('refutes non-ScorePartwise elements', () => {
-      expect(MusicXML.isScorePartwise(new elements.ScoreTimewise())).toBeFalse();
+      expect(asserts.isScorePartwise(new elements.ScoreTimewise())).toBeFalse();
     });
   });
 
   describe('isScoreTimewise', () => {
     it('asserts ScoreTimewise elements', () => {
-      expect(MusicXML.isScoreTimewise(new elements.ScoreTimewise())).toBeTrue();
+      expect(asserts.isScoreTimewise(new elements.ScoreTimewise())).toBeTrue();
     });
 
     it('refutes the ScoreTimewise constructor', () => {
-      expect(MusicXML.isScoreTimewise(elements.ScoreTimewise)).toBeFalse();
+      expect(asserts.isScoreTimewise(elements.ScoreTimewise)).toBeFalse();
     });
 
     it('refutes non-ScoreTimewise elements', () => {
-      expect(MusicXML.isScoreTimewise(new elements.ScorePartwise())).toBeFalse();
+      expect(asserts.isScoreTimewise(new elements.ScorePartwise())).toBeFalse();
     });
   });
 

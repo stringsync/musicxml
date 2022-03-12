@@ -6,7 +6,9 @@ import { MusicXMLError } from '../lib/errors';
 import { DescriptorChild, XMLElementSchema } from '../lib/schema';
 import * as util from '../lib/util';
 
-const OUTPUT_PATH = path.join(__dirname, '..', 'generated', 'elements.ts');
+const OUTPUT_DIRECTORY = path.join(__dirname, '..', 'generated');
+const ELEMENTS_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'elements.ts');
+const ASSERTS_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'asserts.ts');
 
 const capitalize = (string: string): string => {
   return string.length > 0 ? string[0].toUpperCase() + string.substring(1) : string;
@@ -211,67 +213,6 @@ const getSchemaLiteral = (schema: XMLElementSchema): string => {
   return `{ name: ${name}, attributes: ${attributes}, contents: ${contents} }`;
 };
 
-const getStaticTypeAssertMethodLiterals = (schema: XMLElementSchema): string => {
-  const methods = new Set<string>();
-
-  const addMethod = (typeName: string, validateChildLiteral: string) => {
-    methods.add(
-      `  static is${typeName}(value: any): value is ${typeName} { return operations.validate(value, ${validateChildLiteral}); }`
-    );
-  };
-
-  const join = (path: Array<string | number>): string => {
-    return `${getClassName(schema)}.schema.contents${path
-      .map((part) => (util.isString(part) ? `['${part}']` : `[${part}]`))
-      .join('')}`;
-  };
-
-  const onChoice = (choice: DescriptorChild, path: Array<string | number>) => {
-    if (util.isDescriptor(choice)) {
-      switch (choice.type) {
-        case 'label':
-          const typeName = getChoiceTypeName(choice);
-          addMethod(typeName, join(path));
-          break;
-        case 'required':
-        case 'optional':
-          onChoice(choice.value, [...path, 'value']);
-          break;
-      }
-    }
-    if (util.isXMLElementSchema(choice)) {
-      const className = getClassName(choice);
-      addMethod(className, className);
-    }
-  };
-
-  const dfs = (child: DescriptorChild, path: Array<string | number> = []) => {
-    if (util.isDescriptor(child)) {
-      switch (child.type) {
-        case 'label':
-        case 'optional':
-        case 'required':
-        case 'zeroOrMore':
-        case 'oneOrMore':
-          dfs(child.value, [...path, 'value']);
-          break;
-        case 'choices':
-          child.choices.forEach((choice, ndx) => {
-            onChoice(choice, [...path, 'choices', ndx]);
-            dfs(choice, [...path, 'choices', ndx]);
-          });
-          break;
-      }
-    }
-    if (util.isArray(child)) {
-      child.forEach((c, ndx) => dfs(c, [...path, ndx]));
-    }
-  };
-
-  dfs(schema.contents);
-  return Array.from(methods).join('\n');
-};
-
 const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): string => {
   const contents = schema.contents;
 
@@ -348,8 +289,6 @@ const toClassLiteral = (schema: XMLElementSchema): string => {
 
   const schemaLiteral = getSchemaLiteral(schema);
 
-  const staticTypeAssertMethodLiterals = getStaticTypeAssertMethodLiterals(schema);
-
   const labeledTypeLiterals = getLabeledTypeLiterals(schema);
 
   const attributesTypeName = `${className}Attributes`;
@@ -369,7 +308,6 @@ export type ${contentsTypeName} = ${contentsTypeLiteral};
 
 export class ${className} implements XMLElement<'${schema.name}', ${attributesTypeName}, ${contentsTypeName}> {
   static readonly schema = ${schemaLiteral} as const;
-${staticTypeAssertMethodLiterals}
 
   readonly schema = ${className}.schema;
 
@@ -385,13 +323,84 @@ ${contentsAccessorMethodLiterals}
 }`;
 };
 
-const generateFileContents = (roots: XMLElementSchema[]): string => {
-  const literals = new Array<string>();
-  const seen = new Set<string>();
+const getTypeAssertMethodLiterals = (schema: XMLElementSchema): string[] => {
+  const methods = new Set<string>();
 
-  literals.push('/* eslint-disable @typescript-eslint/ban-types */');
-  literals.push(`import { XMLElement, XMLElementSchema } from '../lib/schema';`);
-  literals.push(`import * as operations from '../lib/operations';`);
+  const addMethod = (typeName: string, validateChildLiteral: string) => {
+    methods.add(
+      `export const is${typeName} = (value: any): value is elements.${typeName} => { return operations.validate(value, elements.${validateChildLiteral}); }`
+    );
+  };
+
+  const join = (path: Array<string | number>): string => {
+    const base = `${getClassName(schema)}`;
+    return path.length === 0
+      ? base
+      : base + `.schema.contents${path.map((part) => (util.isString(part) ? `['${part}']` : `[${part}]`)).join('')}`;
+  };
+
+  const onChoice = (choice: DescriptorChild, path: Array<string | number>) => {
+    if (util.isDescriptor(choice)) {
+      switch (choice.type) {
+        case 'label':
+          const typeName = getChoiceTypeName(choice);
+          addMethod(typeName, join(path));
+          break;
+        case 'required':
+        case 'optional':
+          onChoice(choice.value, [...path, 'value']);
+          break;
+      }
+    }
+    if (util.isXMLElementSchema(choice) && path.length === 0) {
+      const className = getClassName(choice);
+      addMethod(className, join(path));
+    }
+  };
+
+  const dfs = (child: DescriptorChild, path: Array<string | number> = []) => {
+    if (util.isDescriptor(child)) {
+      switch (child.type) {
+        case 'label':
+        case 'optional':
+        case 'required':
+        case 'zeroOrMore':
+        case 'oneOrMore':
+          dfs(child.value, [...path, 'value']);
+          break;
+        case 'choices':
+          child.choices.forEach((choice, ndx) => {
+            onChoice(choice, [...path, 'choices', ndx]);
+            dfs(choice, [...path, 'choices', ndx]);
+          });
+          break;
+      }
+    }
+    if (util.isXMLElementSchema(child)) {
+      const className = getClassName(child);
+      addMethod(className, className);
+    }
+    if (util.isArray(child)) {
+      child.forEach((c, ndx) => dfs(c, [...path, ndx]));
+    }
+  };
+
+  dfs(schema);
+  dfs(schema.contents);
+  return Array.from(methods);
+};
+
+const generateFiles = (roots: XMLElementSchema[]): { elements: string; asserts: string } => {
+  const elements = new Array<string>();
+  const seenElements = new Set<string>();
+  elements.push('/* eslint-disable @typescript-eslint/ban-types */');
+  elements.push(`import { XMLElement, XMLElementSchema } from '../lib/schema';`);
+  elements.push(`import * as operations from '../lib/operations';`);
+
+  const asserts = new Array<string>();
+  const assertLiterals = new Set<string>();
+  asserts.push(`import * as elements from './elements';`);
+  asserts.push(`import * as operations from '../lib/operations';`);
 
   // Dependencies must appear first in the file, which is why we're going through the trouble of traversing the
   // tree dfs in-order.
@@ -412,10 +421,15 @@ const generateFileContents = (roots: XMLElementSchema[]): string => {
     }
     if (util.isXMLElementSchema(child)) {
       dfs(child.contents);
+
+      for (const assertLiteral of getTypeAssertMethodLiterals(child)) {
+        assertLiterals.add(assertLiteral);
+      }
+
       const className = getClassName(child);
-      if (!seen.has(className)) {
-        seen.add(className);
-        literals.push(toClassLiteral(child));
+      if (!seenElements.has(className)) {
+        seenElements.add(className);
+        elements.push(toClassLiteral(child));
       }
     }
     if (util.isArray(child)) {
@@ -424,24 +438,27 @@ const generateFileContents = (roots: XMLElementSchema[]): string => {
   };
 
   roots.forEach(dfs);
-
-  return literals.join('\n');
+  return { elements: elements.join('\n'), asserts: [...asserts, ...Array.from(assertLiterals).sort()].join('\n\n') };
 };
 
 (async () => {
-  process.stdout.write('generating elements');
-  const generatedFileContents = generateFileContents([elements.ScorePartwise, elements.ScoreTimewise]);
+  process.stdout.write('generating files');
+  const files = generateFiles([elements.ScorePartwise, elements.ScoreTimewise]);
   process.stdout.write(' ✅\n');
 
-  process.stdout.write(`writing ${OUTPUT_PATH}`);
-  fs.writeFileSync(OUTPUT_PATH, generatedFileContents);
+  process.stdout.write(`writing ${ELEMENTS_OUTPUT_PATH}`);
+  fs.writeFileSync(ELEMENTS_OUTPUT_PATH, files.elements);
+  process.stdout.write(' ✅\n');
+
+  process.stdout.write(`writing ${ASSERTS_OUTPUT_PATH}`);
+  fs.writeFileSync(ASSERTS_OUTPUT_PATH, files.asserts);
   process.stdout.write(' ✅\n');
 
   process.stdout.write('running eslint');
-  await new Promise((resolve) => exec(`yarn eslint --fix ${OUTPUT_PATH}`, resolve));
+  await new Promise((resolve) => exec(`yarn eslint --fix ${OUTPUT_DIRECTORY}`, resolve));
   process.stdout.write(' ✅\n');
 
   process.stdout.write('running prettier');
-  await new Promise((resolve) => exec(`yarn prettier --write ${OUTPUT_PATH}`, resolve));
+  await new Promise((resolve) => exec(`yarn prettier --write ${OUTPUT_DIRECTORY}`, resolve));
   process.stdout.write(' ✅\n');
 })();

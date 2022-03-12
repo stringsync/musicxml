@@ -1,6 +1,5 @@
 import * as elements from './generated/elements';
 import { MusicXMLError } from './lib/errors';
-import * as operations from './lib/operations';
 import * as raw from './lib/raw';
 import * as schema from './lib/schema';
 import * as xml from './lib/xml';
@@ -80,26 +79,6 @@ export class MusicXML<T extends MusicXMLRoot> {
     const nodes = [xml.serialize(root)];
     const declaration = raw.getDefaultDeclaration();
     return new MusicXML({ root, index, nodes, declaration });
-  }
-
-  /**
-   * Asserts if the value is a {@link elements.ScorePartwise} instance.
-   *
-   * @param value a value to test
-   * @returns {boolean} if the value is a {@link elements.ScorePartwise} instance
-   */
-  static isScorePartwise(value: any): value is elements.ScorePartwise {
-    return operations.validate(value, elements.ScorePartwise);
-  }
-
-  /**
-   * Asserts if the value is a {@link elements.ScoreTimewise} instance.
-   *
-   * @param value a value to test
-   * @returns {boolean} if the value is a {@link elements.ScoreTimewise} instance
-   */
-  static isScoreTimewise(value: any): value is elements.ScoreTimewise {
-    return operations.validate(value, elements.ScoreTimewise);
   }
 
   private root: T;

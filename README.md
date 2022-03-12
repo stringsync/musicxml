@@ -40,10 +40,10 @@ or
 npm install @stringsync/musicxml@0.1.1
 ```
 
-### Imports
+### Exports
 
 ```ts
-import { elements, MusicXML } from '@stringsync/musicxml';
+import { asserts, elements, MusicXML } from '@stringsync/musicxml';
 ```
 
 ### Parse and serialize a MusicXML document
@@ -129,7 +129,7 @@ class Note {
 }
 ```
 
-It is very cumbersome to manually validate which choice is being used. Also, the lack of overlap of some choices can make it difficult to use with TypeScript. **Classes that contain choices nested in its <ins>contents</ins> will have static [type predicates](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) corresponding to those choices.**
+It is very cumbersome to manually validate which choice is being used. Also, the lack of overlap of some choices can make it difficult to use with TypeScript. The `asserts` export will have [type predicates](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) corresponding to those choices.
 
 For example, to work with an `elements.Note` value:
 
@@ -137,13 +137,13 @@ For example, to work with an `elements.Note` value:
 const note = new elements.Note();
 const noteValue = note.getNoteValue();
 
-if (elements.Note.isTiedNoteValue(noteValue)) {
+if (asserts.isTiedNoteValue(noteValue)) {
   // noteValue: TiedNoteValue
-} else if (elements.Note.isCuedNoteValue(noteValue)) {
+} else if (asserts.isCuedNoteValue(noteValue)) {
   // noteValue: CuedNoteValue
-} else if (elements.Note.isTiedGraceNoteValue(noteValue)) {
+} else if (asserts.isTiedGraceNoteValue(noteValue)) {
   // noteValue: TiedGraceNoteValue
-} else if (elements.Note.isCuedGraceNoteValue(noteValue)) {
+} else if (asserts.isCuedGraceNoteValue(noteValue)) {
   // noteValue: CuedGraceNoteValue
 } else {
   // noteValue: never
