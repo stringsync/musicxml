@@ -9,13 +9,6 @@ const getAccessors = (Element: Ctor<XMLElement>): Array<{ suffix: string; getter
     .map((suffix) => ({ suffix, getter: `get${suffix}`, setter: `set${suffix}` }));
 };
 
-const getTypeGuards = (Element: Ctor<XMLElement>): Array<{ suffix: string; method: string }> => {
-  return Object.getOwnPropertyNames(Element)
-    .filter((name) => name.startsWith('is'))
-    .map((name) => name.slice(2))
-    .map((suffix) => ({ suffix, method: `is${suffix}` }));
-};
-
 describe('elements', () => {
   for (const Element of Object.values(elements)) {
     describe(Element.name, () => {
@@ -33,15 +26,6 @@ describe('elements', () => {
           const value = (element as any)[accessor.getter]();
 
           expect(value).toBe(symbol);
-        });
-      }
-
-      const typeGuards = getTypeGuards(Element);
-      if (typeGuards.length > 0) {
-        it.each(typeGuards)('refutes non $suffix', (typeGuard) => {
-          const symbol = Symbol(typeGuard.suffix);
-          const result = (Element as any)[typeGuard.method](symbol);
-          expect(result).toBeFalse();
         });
       }
     });
