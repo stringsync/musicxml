@@ -19,7 +19,7 @@ type MusicXMLOpts<T extends MusicXMLRoot> = {
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/}
  */
-export class MusicXML<T extends MusicXMLRoot> {
+export class MusicXML<T extends MusicXMLRoot = MusicXMLRoot> {
   /**
    * Parses an XML string into a {@link MusicXML} object.
    *
@@ -30,7 +30,7 @@ export class MusicXML<T extends MusicXMLRoot> {
    * @param {string} xmlStr an XML document as a string
    * @returns {MusicXML} a {@link MusicXML} object
    */
-  static parse(xmlStr: string): MusicXML<MusicXMLRoot> {
+  static parse(xmlStr: string): MusicXML {
     const descriptor = schema.t.choices(elements.ScorePartwise, elements.ScoreTimewise);
     const xmlDocument = xml.parse(xmlStr);
     const resolutions = xmlDocument.nodes.map((node) => xml.conform([node], descriptor));
