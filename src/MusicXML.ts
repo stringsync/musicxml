@@ -1,7 +1,7 @@
 import * as elements from './generated/elements';
-import { MusicXMLError } from './lib/errors';
 import * as schema from './lib/schema';
 import * as xml from './lib/xml';
+import { MusicXMLError } from './MusicXMLError';
 
 /**
  * The allowed root elements for {@link MusicXML} objects.

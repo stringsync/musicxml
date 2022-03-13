@@ -2,9 +2,9 @@ import { exec } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as elements from '../lib/elements';
-import { MusicXMLError } from '../lib/errors';
 import { DescriptorChild, XMLElementSchema } from '../lib/schema';
 import * as util from '../lib/util';
+import { MusicXMLError } from '../MusicXMLError';
 
 const OUTPUT_DIRECTORY = path.join(__dirname, '..', 'generated');
 const ELEMENTS_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'elements.ts');

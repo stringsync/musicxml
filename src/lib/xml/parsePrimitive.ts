@@ -1,4 +1,4 @@
-import { MusicXMLError } from '../errors';
+import { MusicXMLError } from '../../MusicXMLError';
 import * as operations from '../operations';
 import * as resolutions from '../resolutions';
 import * as util from '../util';

@@ -1,5 +1,5 @@
 import * as xmlJs from 'xml-js';
-import { MusicXMLError } from '../errors';
+import { MusicXMLError } from '../../MusicXMLError';
 import { XmlDocument, XmlNode } from './types';
 
 const IGNORE_ELEMENT_TYPES = ['comment', 'instruction'];

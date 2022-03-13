@@ -1,4 +1,4 @@
-import { MusicXMLError } from '../errors';
+import { MusicXMLError } from '../../MusicXMLError';
 import * as operations from '../operations';
 import { DescriptorChild, XMLElement } from '../schema';
 import * as util from '../util';

@@ -1,5 +1,5 @@
 import { LabelDescriptor } from '.';
-import { MusicXMLError } from '../errors';
+import { MusicXMLError } from '../../MusicXMLError';
 import {
   ChoicesDescriptor,
   CommentDescriptor,
