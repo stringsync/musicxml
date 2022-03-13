@@ -2,6 +2,7 @@ export const EXAMPLES = {
   ACCIDENTALS: 'accidentals.xml',
   ACTOR_PRELUDE_SAMPLE: 'actor_prelude_sample.xml',
   ACTOR_PRELUDE_SAMPLE_PART_NAME: 'actor_prelude_sample_part_name.xml',
+  AMAZING_GRACE: 'amazing_grace.xml',
   APRES_UN_REVE: 'apres_un_reve.xml',
   ARTICULATION_STACCATO_PLACEMENT_ABOVE: 'articulation_staccato_placement_above.xml',
   ARTICULATION_STACCATO_PLACEMENT_BELOW: 'articulation_staccato_placement_below.xml',
@@ -122,7 +123,7 @@ export const EXAMPLES = {
 } as const;
 
 export const EXAMPLE_SUITES = {
-  GUITAR_PRO: [EXAMPLES.GREENS_GREENERY, EXAMPLES.WANNA_SKIP_CLASS],
+  GUITAR_PRO: [EXAMPLES.AMAZING_GRACE, EXAMPLES.GREENS_GREENERY, EXAMPLES.WANNA_SKIP_CLASS],
   OSMD: [
     EXAMPLES.ACCIDENTALS,
     EXAMPLES.ACTOR_PRELUDE_SAMPLE_PART_NAME,

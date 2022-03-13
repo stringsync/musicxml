@@ -2,7 +2,7 @@ import * as xmlJs from 'xml-js';
 import { MusicXMLError } from '../errors';
 import { XmlDocument, XmlNode } from './types';
 
-const IGNORE_ELEMENT_TYPES = ['comment'];
+const IGNORE_ELEMENT_TYPES = ['comment', 'instruction'];
 
 export const parse = (xml: string): XmlDocument => {
   const xmlJsElements = xmlJs.xml2js(xml);
