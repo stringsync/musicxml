@@ -37,15 +37,14 @@ export class MusicXML<T extends MusicXMLRoot = MusicXMLRoot> {
 
     const resolved = resolutions.filter((resolution) => resolution.type === 'resolved');
     if (resolved.length !== 1) {
-      throw new MusicXMLError({
-        symptom: 'invalid music xml document',
-        context: {
+      throw new MusicXMLError(
+        'invalid music xml document, expected an xml document with exactly one top level <score-partwise> or <score-timewise> element',
+        {
           rootElementNames: xmlDocument.nodes
             .filter((node): node is xml.ElementNode => node.type === 'element')
             .map((node) => node.name),
-        },
-        remedy: 'use an xml document with exactly one top level <score-partwise> or <score-timewise> element',
-      });
+        }
+      );
     }
 
     const root = resolved[0].value;

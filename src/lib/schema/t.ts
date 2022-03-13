@@ -53,11 +53,7 @@ export class t {
     const { zero, pattern } = opts;
 
     if (!zero.match(pattern)) {
-      throw new MusicXMLError({
-        symptom: 'invalid zero value',
-        context: { zero, pattern },
-        remedy: 'use a different zero value or pattern',
-      });
+      throw new MusicXMLError('invalid zero value', { zero, pattern });
     }
 
     return {
@@ -72,27 +68,15 @@ export class t {
     const max = opts?.max ?? Number.POSITIVE_INFINITY;
 
     if (Number.isFinite(min) && (!Number.isInteger(min) || isNaN(min))) {
-      throw new MusicXMLError({
-        symptom: 'invalid min value',
-        context: { min },
-        remedy: 'min must be an integer',
-      });
+      throw new MusicXMLError('invalid min value', { min });
     }
 
     if (Number.isFinite(max) && (!Number.isInteger(max) || isNaN(max))) {
-      throw new MusicXMLError({
-        symptom: 'invalid max value',
-        context: { max },
-        remedy: 'max must be an integer',
-      });
+      throw new MusicXMLError('invalid max value', { max });
     }
 
     if (min >= max) {
-      throw new MusicXMLError({
-        symptom: 'invalid min and max values',
-        context: { min, max },
-        remedy: 'min must be strictly less than max',
-      });
+      throw new MusicXMLError('invalid min and max values', { min, max });
     }
 
     return {
@@ -107,27 +91,15 @@ export class t {
     const max = opts?.max ?? Number.POSITIVE_INFINITY;
 
     if (isNaN(min)) {
-      throw new MusicXMLError({
-        symptom: 'invalid min value',
-        context: { min },
-        remedy: 'min must be a number',
-      });
+      throw new MusicXMLError('invalid min value', { min });
     }
 
     if (isNaN(max)) {
-      throw new MusicXMLError({
-        symptom: 'invalid max value',
-        context: { max },
-        remedy: 'max must be a number',
-      });
+      throw new MusicXMLError('invalid max value', { max });
     }
 
     if (min >= max) {
-      throw new MusicXMLError({
-        symptom: 'invalid min and max values',
-        context: { min, max },
-        remedy: 'min must be strictly less than max',
-      });
+      throw new MusicXMLError('invalid min and max values', { min, max });
     }
 
     return {
@@ -210,10 +182,6 @@ export class t {
   }
 
   private constructor() {
-    throw new MusicXMLError({
-      symptom: 't is not instantiable',
-      context: {},
-      remedy: 'do not instantiate t',
-    });
+    throw new MusicXMLError('t is not instantiable');
   }
 }

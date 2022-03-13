@@ -45,9 +45,5 @@ export const serializePrimitive = <T extends Extract<DescriptorChild, string | n
         return resolutions.resolved(String(value));
     }
   }
-  throw new MusicXMLError({
-    symptom: 'cannot encode string',
-    context: { value, child },
-    remedy: 'use a different child or value',
-  });
+  throw new MusicXMLError('cannot encode string', { value, child });
 };

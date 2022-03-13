@@ -67,9 +67,5 @@ const resolve = (value: any, child: DescriptorChild): XmlNode[] => {
       ? value.flatMap((v: any, ndx: number) => resolve(v, child[ndx]))
       : operations.zero(child).flatMap((v: any, ndx: number) => resolve(v, child[ndx]));
   }
-  throw new MusicXMLError({
-    symptom: 'cannot convert to raw XML element',
-    context: { value, child },
-    remedy: 'use a different value or child',
-  });
+  throw new MusicXMLError('cannot convert to raw XML element', { value, child });
 };

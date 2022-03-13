@@ -56,9 +56,5 @@ const resolve = (value: string, child: PrimitiveChild): resolutions.Resolution =
         return check(resolve(value, child.include).value, child);
     }
   }
-  throw new MusicXMLError({
-    symptom: 'cannot decode string',
-    context: { value, child },
-    remedy: 'use a different child or value',
-  });
+  throw new MusicXMLError('cannot decode string', { value, child });
 };

@@ -55,10 +55,6 @@ const toRawXMLNode = (node: xmlJs.Element): XmlNode => {
         text: node.cdata?.toString() || '',
       };
     default:
-      throw new MusicXMLError({
-        symptom: 'cannot parse element',
-        context: { element: node },
-        remedy: 'update the implementation of toRawXMLElement to handle element',
-      });
+      throw new MusicXMLError('cannot parse element', { element: node });
   }
 };

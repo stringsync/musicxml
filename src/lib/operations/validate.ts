@@ -64,9 +64,5 @@ export const validate = (value: any, child: DescriptorChild): boolean => {
   if (util.isArray(child)) {
     return Array.isArray(value) && value.length === child.length && child.every((c, ndx) => validate(value[ndx], c));
   }
-  throw new MusicXMLError({
-    symptom: 'cannot validate',
-    context: { value, child },
-    remedy: 'use a different child',
-  });
+  throw new MusicXMLError('cannot validate', { value, child });
 };

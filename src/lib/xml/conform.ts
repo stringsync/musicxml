@@ -54,11 +54,7 @@ const resolve = (cursor: util.Cursor<XmlNode>, child: schema.DescriptorChild): r
   if (util.isArray(child)) {
     return resolveArray(cursor, child);
   }
-  throw new MusicXMLError({
-    symptom: 'cannot handle child',
-    context: { child },
-    remedy: 'use a valid child',
-  });
+  throw new MusicXMLError('cannot handle child', { child });
 };
 
 const resolveRequirement = (

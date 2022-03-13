@@ -118,11 +118,7 @@ const getTypeLiteral = (child: DescriptorChild): string => {
   if (util.isArray(child)) {
     return `[${child.map(getTypeLiteral).join(', ')}]`;
   }
-  throw new MusicXMLError({
-    symptom: 'cannot compute type for value',
-    context: { child },
-    remedy: 'update getType or use a different child',
-  });
+  throw new MusicXMLError('cannot compute type for value', { child });
 };
 
 const getAttributesTypeLiteral = (schema: XMLElementSchema): string => {
@@ -199,11 +195,7 @@ const getLiteral = (value: any): string => {
           .join(', ')} }`
       : '{}';
   }
-  throw new MusicXMLError({
-    symptom: 'cannot compute literal',
-    context: { value },
-    remedy: 'use a different value',
-  });
+  throw new MusicXMLError('cannot compute literal', { value });
 };
 
 const getSchemaLiteral = (schema: XMLElementSchema): string => {
@@ -247,11 +239,7 @@ const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): string => 
     if (util.isXMLElementSchema(child)) {
       return child.name;
     }
-    throw new MusicXMLError({
-      symptom: 'cannot compute content accessor name',
-      context: { child, elementName: schema.name },
-      remedy: 'add a label, or make sure the leaf child is a factory',
-    });
+    throw new MusicXMLError('cannot compute content accessor name', { child, elementName: schema.name });
   };
 
   let numTextNodes = 0;
@@ -261,11 +249,7 @@ const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): string => 
     }
   }
   if (numTextNodes > 1) {
-    throw new MusicXMLError({
-      symptom: 'too many text nodes',
-      context: { numTextNodes, factory: schema },
-      remedy: 'use labels for all text nodes',
-    });
+    throw new MusicXMLError('too many text nodes', { numTextNodes, factory: schema });
   }
 
   const className = getClassName(schema);
