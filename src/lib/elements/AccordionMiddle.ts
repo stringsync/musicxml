@@ -1,4 +1,5 @@
-import { schema } from '../schema';
+import * as dataTypes from '../dataTypes';
+import { schema, t } from '../schema';
 
 /**
  * The `<accordion-middle>` element
@@ -10,4 +11,6 @@ import { schema } from '../schema';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accordion-middle/}
  */
-export const AccordionMiddle = schema('accordion-middle', {}, [] as const);
+export const AccordionMiddle = schema('accordion-middle', {}, [
+  t.label({ label: 'value', value: dataTypes.accordionMiddle() }),
+] as const);

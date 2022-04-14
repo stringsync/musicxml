@@ -69,5 +69,5 @@ export const BreathMark = schema(
      */
     ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
   },
-  [t.required(dataTypes.breathMarkValue())] as const
+  [t.optional(dataTypes.breathMarkValue())] as const
 );

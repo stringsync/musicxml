@@ -6,7 +6,7 @@ import { WorkTitle } from './WorkTitle';
 /**
  * The `<work>` element
  *
- * Parent elements: `<score-partwise>`, `<score-timewise>`
+ * Parent elements: `<score-partwise version="4.0">`, `<score-timewise>`
  *
  * Works are optionally identified by number and title. The `<work>` element also may indicate a link to the `<opus>`
  * document that composes multiple scores into a collection.

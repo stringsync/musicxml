@@ -20,7 +20,7 @@ import { Sound } from './Sound';
  *
  * Parent element: `<part>` (partwise)
  *
- * The `<measure>` element includes the basic musical data such as `<note>`s within a `<score-partwise>` document.
+ * The `<measure>` element includes the basic musical data such as `<note>`s within a `<score-partwise version="4.0">` document.
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-partwise/}
  */

@@ -5,7 +5,7 @@ import { StaffDistance } from './StaffDistance';
 /**
  * The `<defaults>` element
  *
- * Parent elements: `<score-partwise>`, `<score-timewise>`
+ * Parent elements: `<score-partwise version="4.0">`, `<score-timewise>`
  *
  * The `<defaults>` element specifies score-wide defaults for scaling; whether or not the file is a concert score;
  * layout; and default values for the music font, word font, lyric font, and lyric language. Except for the

@@ -91,7 +91,7 @@ note
 
 ### Create a MusicXML object
 
-[`<score-partwise>`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/) root
+[`<score-partwise version="4.0">`](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/) root
 
 ```ts
 const musicXml = MusicXML.createPartwise();

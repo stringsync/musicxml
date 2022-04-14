@@ -1193,6 +1193,18 @@ export const isPedal = (value: any): value is elements.Pedal => {
   return operations.validate(value, elements.Pedal);
 };
 
+export const isPedalAlter = (value: any): value is elements.PedalAlter => {
+  return operations.validate(value, elements.PedalAlter);
+};
+
+export const isPedalStep = (value: any): value is elements.PedalStep => {
+  return operations.validate(value, elements.PedalStep);
+};
+
+export const isPedalTuning = (value: any): value is elements.PedalTuning => {
+  return operations.validate(value, elements.PedalTuning);
+};
+
 export const isPerMinute = (value: any): value is elements.PerMinute => {
   return operations.validate(value, elements.PerMinute);
 };

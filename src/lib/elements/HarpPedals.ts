@@ -1,5 +1,6 @@
 import * as dataTypes from '../dataTypes';
 import { schema, t } from '../schema';
+import { PedalTuning } from './PedalTuning';
 
 /**
  * The `<harp-pedals>` element
@@ -101,5 +102,5 @@ export const HarpPedals = schema(
      */
     valign: t.optional(dataTypes.valign()),
   },
-  [] as const
+  [t.label({ label: 'pedal-tunings', value: t.oneOrMore(PedalTuning) })] as const
 );

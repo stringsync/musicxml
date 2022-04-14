@@ -4,7 +4,7 @@ import { schema } from '../schema';
 /**
  * The `<movement-title>` element
  *
- * Parent elements: `<score-partwise>`, `<score-timewise>`
+ * Parent elements: `<score-partwise version="4.0">`, `<score-timewise>`
  *
  * The `<movement-title>` element specifies the title of a movement, not including its number.
  *

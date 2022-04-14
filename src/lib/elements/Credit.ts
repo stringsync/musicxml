@@ -10,7 +10,7 @@ import { Link } from './Link';
 /**
  * The `<credit>` element
  *
- * Parent elements: `<score-partwise>`, `<score-timewise>`
+ * Parent elements: `<score-partwise version="4.0">`, `<score-timewise>`
  *
  * The `<credit>` element represents the appearance of the title, composer, arranger, lyricist, copyright, dedication,
  * and other text, symbols, and graphics that commonly appear on the first page of a score. The `<credit-words>`,

@@ -23,7 +23,7 @@ export class MusicXML<T extends MusicXMLRoot = MusicXMLRoot> {
   /**
    * Parses an XML string into a {@link MusicXML} object.
    *
-   * This method expects exactly one top level `<score-partwise>` or `<score-timewise>` element in the XML document
+   * This method expects exactly one top level `<score-partwise version="4.0">` or `<score-timewise>` element in the XML document
    * string. If you need a blank {@link MusicXML} object, use {@link MusicXML.createPartwise} or
    * {@link MusicXML.createTimewise} instead.
    *
@@ -38,7 +38,7 @@ export class MusicXML<T extends MusicXMLRoot = MusicXMLRoot> {
     const resolved = resolutions.filter((resolution) => resolution.type === 'resolved');
     if (resolved.length !== 1) {
       throw new MusicXMLError(
-        'invalid music xml document, expected an xml document with exactly one top level <score-partwise> or <score-timewise> element',
+        'invalid music xml document, expected an xml document with exactly one top level <score-partwise version="4.0"> or <score-timewise> element',
         {
           rootElementNames: xmlDocument.nodes
             .filter((node): node is xml.ElementNode => node.type === 'element')

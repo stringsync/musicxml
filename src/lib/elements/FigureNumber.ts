@@ -8,7 +8,7 @@ import { schema, t } from '../schema';
  *
  * The `<figure>` element represents a single figure within a `<figured-bass>` element.
  *
- * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/figure/}
+ * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/figure-number/}
  */
 export const FigureNumber = schema(
   'figure-number',
@@ -72,5 +72,5 @@ export const FigureNumber = schema(
      */
     ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
   },
-  [] as const
+  [t.string()] as const
 );

@@ -1,3 +1,4 @@
+import * as dataTypes from '../dataTypes';
 import { schema, t } from '../schema';
 import { TuningAlter } from './TuningAlter';
 import { TuningOctave } from './TuningOctave';
@@ -13,4 +14,10 @@ import { TuningStep } from './TuningStep';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accord/}
  */
-export const Accord = schema('accord', {}, [t.required(TuningStep), t.optional(TuningAlter), t.required(TuningOctave)]);
+export const Accord = schema(
+  'accord',
+  {
+    string: t.optional(dataTypes.stringNumber()),
+  },
+  [t.required(TuningStep), t.optional(TuningAlter), t.required(TuningOctave)]
+);

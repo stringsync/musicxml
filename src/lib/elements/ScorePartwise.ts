@@ -9,11 +9,11 @@ import { PartPartwise } from './PartPartwise';
 import { Work } from './Work';
 
 /**
- * The `<score-partwise>` element
+ * The `<score-partwise version="4.0">` element
  *
  * Parent elements: None
  *
- * The `<score-partwise>` element is the root element for a partwise MusicXML score. It includes score header
+ * The `<score-partwise version="4.0">` element is the root element for a partwise MusicXML score. It includes score header
  * information followed by a series of `<part>` elements with `<measure>` elements inside.
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/}

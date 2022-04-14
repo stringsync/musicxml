@@ -70,5 +70,5 @@ export const Caesura = schema(
      */
     ['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
   },
-  [t.required(dataTypes.caesuraValue())] as const
+  [t.optional(dataTypes.caesuraValue())] as const
 );

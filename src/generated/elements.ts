@@ -2651,6 +2651,7 @@ export type CreditWordsAttributes = {
   'default-y': number | null;
   dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null;
   enclosure:
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -2709,6 +2710,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
         value: {
           type: 'choices',
           choices: [
+            'none',
             'rectangle',
             'square',
             'oval',
@@ -2809,6 +2811,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
     return this;
   }
   getEnclosure():
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -2828,6 +2831,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
   }
   setEnclosure(
     enclosure:
+      | 'none'
       | 'rectangle'
       | 'square'
       | 'oval'
@@ -2990,6 +2994,7 @@ export type CreditSymbolAttributes = {
   'default-y': number | null;
   dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null;
   enclosure:
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -3046,6 +3051,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
         value: {
           type: 'choices',
           choices: [
+            'none',
             'rectangle',
             'square',
             'oval',
@@ -3144,6 +3150,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
     return this;
   }
   getEnclosure():
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -3163,6 +3170,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
   }
   setEnclosure(
     enclosure:
+      | 'none'
       | 'rectangle'
       | 'square'
       | 'oval'
@@ -3560,6 +3568,7 @@ export type DisplayTextAttributes = {
   'default-y': number | null;
   dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null;
   enclosure:
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -3617,6 +3626,7 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
         value: {
           type: 'choices',
           choices: [
+            'none',
             'rectangle',
             'square',
             'oval',
@@ -3716,6 +3726,7 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
     return this;
   }
   getEnclosure():
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -3735,6 +3746,7 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
   }
   setEnclosure(
     enclosure:
+      | 'none'
       | 'rectangle'
       | 'square'
       | 'oval'
@@ -3890,6 +3902,7 @@ export type AccidentalTextAttributes = {
   'default-y': number | null;
   dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null;
   enclosure:
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -3990,6 +4003,7 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
         value: {
           type: 'choices',
           choices: [
+            'none',
             'rectangle',
             'square',
             'oval',
@@ -4144,6 +4158,7 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
     return this;
   }
   getEnclosure():
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -4163,6 +4178,7 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
   }
   setEnclosure(
     enclosure:
+      | 'none'
       | 'rectangle'
       | 'square'
       | 'oval'
@@ -4817,6 +4833,7 @@ export type FootnoteAttributes = {
   'default-y': number | null;
   dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null;
   enclosure:
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -4874,6 +4891,7 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
         value: {
           type: 'choices',
           choices: [
+            'none',
             'rectangle',
             'square',
             'oval',
@@ -4973,6 +4991,7 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
     return this;
   }
   getEnclosure():
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -4992,6 +5011,7 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
   }
   setEnclosure(
     enclosure:
+      | 'none'
       | 'rectangle'
       | 'square'
       | 'oval'
@@ -19410,7 +19430,7 @@ export type StrongAccentAttributes = {
   placement: 'above' | 'below' | null;
   'relative-x': number | null;
   'relative-y': number | null;
-  'up-down': 'up' | 'down' | null;
+  type: 'up' | 'down' | null;
 };
 
 export type StrongAccentContents = [];
@@ -19454,7 +19474,7 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
         label: 'relative-y',
         value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
-      'up-down': { type: 'optional', value: { type: 'choices', choices: ['up', 'down'] } },
+      type: { type: 'optional', value: { type: 'choices', choices: ['up', 'down'] } },
     },
     contents: [],
   } as const;
@@ -19540,11 +19560,11 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
     this.attributes['relative-y'] = relativeY;
     return this;
   }
-  getUpDown(): 'up' | 'down' | null {
-    return this.attributes['up-down'];
+  getType(): 'up' | 'down' | null {
+    return this.attributes['type'];
   }
-  setUpDown(upDown: 'up' | 'down' | null): StrongAccent {
-    this.attributes['up-down'] = upDown;
+  setType(type: 'up' | 'down' | null): StrongAccent {
+    this.attributes['type'] = type;
     return this;
   }
 }
@@ -20966,7 +20986,7 @@ export type BreathMarkAttributes = {
   'relative-y': number | null;
 };
 
-export type BreathMarkContents = ['comma' | 'tick' | 'upbow' | 'salzedo' | ''];
+export type BreathMarkContents = ['comma' | 'tick' | 'upbow' | 'salzedo' | '' | null];
 
 export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttributes, BreathMarkContents> {
   static readonly schema = {
@@ -21010,7 +21030,7 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
     },
     contents: [
       {
-        type: 'required',
+        type: 'optional',
         value: {
           type: 'label',
           label: 'breath-mark-value',
@@ -21101,10 +21121,10 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
     this.attributes['relative-y'] = relativeY;
     return this;
   }
-  getBreathMarkValue(): 'comma' | 'tick' | 'upbow' | 'salzedo' | '' {
+  getBreathMarkValue(): 'comma' | 'tick' | 'upbow' | 'salzedo' | '' | null {
     return this.contents[0];
   }
-  setBreathMarkValue(breathMarkValue: 'comma' | 'tick' | 'upbow' | 'salzedo' | ''): BreathMark {
+  setBreathMarkValue(breathMarkValue: 'comma' | 'tick' | 'upbow' | 'salzedo' | '' | null): BreathMark {
     this.contents[0] = breathMarkValue;
     return this;
   }
@@ -21123,7 +21143,7 @@ export type CaesuraAttributes = {
   'relative-y': number | null;
 };
 
-export type CaesuraContents = ['normal' | 'thick' | 'short' | 'curved' | 'single' | ''];
+export type CaesuraContents = ['normal' | 'thick' | 'short' | 'curved' | 'single' | '' | null];
 
 export class Caesura implements XMLElement<'caesura', CaesuraAttributes, CaesuraContents> {
   static readonly schema = {
@@ -21167,7 +21187,7 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
     },
     contents: [
       {
-        type: 'required',
+        type: 'optional',
         value: {
           type: 'label',
           label: 'caesura-value',
@@ -21258,10 +21278,10 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
     this.attributes['relative-y'] = relativeY;
     return this;
   }
-  getCaesuraValue(): 'normal' | 'thick' | 'short' | 'curved' | 'single' | '' {
+  getCaesuraValue(): 'normal' | 'thick' | 'short' | 'curved' | 'single' | '' | null {
     return this.contents[0];
   }
-  setCaesuraValue(caesuraValue: 'normal' | 'thick' | 'short' | 'curved' | 'single' | ''): Caesura {
+  setCaesuraValue(caesuraValue: 'normal' | 'thick' | 'short' | 'curved' | 'single' | '' | null): Caesura {
     this.contents[0] = caesuraValue;
     return this;
   }
@@ -22475,6 +22495,7 @@ export type DynamicsAttributes = {
   'default-x': number | null;
   'default-y': number | null;
   enclosure:
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -22558,6 +22579,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
         value: {
           type: 'choices',
           choices: [
+            'none',
             'rectangle',
             'square',
             'oval',
@@ -22681,6 +22703,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
     return this;
   }
   getEnclosure():
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -22700,6 +22723,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
   }
   setEnclosure(
     enclosure:
+      | 'none'
       | 'rectangle'
       | 'square'
       | 'oval'
@@ -25361,6 +25385,7 @@ export type RehearsalAttributes = {
   'default-y': number | null;
   dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null;
   enclosure:
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -25418,6 +25443,7 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
         value: {
           type: 'choices',
           choices: [
+            'none',
             'rectangle',
             'square',
             'oval',
@@ -25517,6 +25543,7 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
     return this;
   }
   getEnclosure():
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -25536,6 +25563,7 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
   }
   setEnclosure(
     enclosure:
+      | 'none'
       | 'rectangle'
       | 'square'
       | 'oval'
@@ -26033,6 +26061,7 @@ export type WordsAttributes = {
   'default-y': number | null;
   dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null;
   enclosure:
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -26091,6 +26120,7 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
         value: {
           type: 'choices',
           choices: [
+            'none',
             'rectangle',
             'square',
             'oval',
@@ -26191,6 +26221,7 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
     return this;
   }
   getEnclosure():
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -26210,6 +26241,7 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
   }
   setEnclosure(
     enclosure:
+      | 'none'
       | 'rectangle'
       | 'square'
       | 'oval'
@@ -26372,6 +26404,7 @@ export type SymbolAttributes = {
   'default-y': number | null;
   dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null;
   enclosure:
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -26428,6 +26461,7 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
         value: {
           type: 'choices',
           choices: [
+            'none',
             'rectangle',
             'square',
             'oval',
@@ -26526,6 +26560,7 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
     return this;
   }
   getEnclosure():
+    | 'none'
     | 'rectangle'
     | 'square'
     | 'oval'
@@ -26545,6 +26580,7 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
   }
   setEnclosure(
     enclosure:
+      | 'none'
       | 'rectangle'
       | 'square'
       | 'oval'
@@ -28403,6 +28439,120 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
   }
 }
 
+export type PedalStepAttributes = Record<string, unknown>;
+
+export type PedalStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
+
+export class PedalStep implements XMLElement<'pedal-step', PedalStepAttributes, PedalStepContents> {
+  static readonly schema = {
+    name: 'pedal-step',
+    attributes: {},
+    contents: [
+      {
+        type: 'required',
+        value: {
+          type: 'label',
+          label: 'step',
+          value: { type: 'choices', choices: ['A', 'B', 'C', 'D', 'E', 'F', 'G'] },
+        },
+      },
+    ],
+  } as const;
+
+  readonly schema = PedalStep.schema;
+
+  attributes: PedalStepAttributes;
+  contents: PedalStepContents;
+
+  constructor(opts?: { attributes?: Partial<PedalStepAttributes>; contents?: PedalStepContents }) {
+    this.attributes = operations.merge(opts?.attributes || {}, PedalStep.schema);
+    this.contents = opts?.contents ?? operations.zero(PedalStep.schema.contents);
+  }
+
+  getStep(): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' {
+    return this.contents[0];
+  }
+  setStep(step: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'): PedalStep {
+    this.contents[0] = step;
+    return this;
+  }
+}
+
+export type PedalAlterAttributes = Record<string, unknown>;
+
+export type PedalAlterContents = [number];
+
+export class PedalAlter implements XMLElement<'pedal-alter', PedalAlterAttributes, PedalAlterContents> {
+  static readonly schema = {
+    name: 'pedal-alter',
+    attributes: {},
+    contents: [
+      {
+        type: 'required',
+        value: { type: 'label', label: 'semitones', value: { type: 'float', min: -Infinity, max: Infinity } },
+      },
+    ],
+  } as const;
+
+  readonly schema = PedalAlter.schema;
+
+  attributes: PedalAlterAttributes;
+  contents: PedalAlterContents;
+
+  constructor(opts?: { attributes?: Partial<PedalAlterAttributes>; contents?: PedalAlterContents }) {
+    this.attributes = operations.merge(opts?.attributes || {}, PedalAlter.schema);
+    this.contents = opts?.contents ?? operations.zero(PedalAlter.schema.contents);
+  }
+
+  getSemitones(): number {
+    return this.contents[0];
+  }
+  setSemitones(semitones: number): PedalAlter {
+    this.contents[0] = semitones;
+    return this;
+  }
+}
+
+export type PedalTuningAttributes = Record<string, unknown>;
+
+export type PedalTuningContents = [PedalStep, PedalAlter];
+
+export class PedalTuning implements XMLElement<'pedal-tuning', PedalTuningAttributes, PedalTuningContents> {
+  static readonly schema = {
+    name: 'pedal-tuning',
+    attributes: {},
+    contents: [
+      { type: 'required', value: PedalStep },
+      { type: 'required', value: PedalAlter },
+    ],
+  } as const;
+
+  readonly schema = PedalTuning.schema;
+
+  attributes: PedalTuningAttributes;
+  contents: PedalTuningContents;
+
+  constructor(opts?: { attributes?: Partial<PedalTuningAttributes>; contents?: PedalTuningContents }) {
+    this.attributes = operations.merge(opts?.attributes || {}, PedalTuning.schema);
+    this.contents = opts?.contents ?? operations.zero(PedalTuning.schema.contents);
+  }
+
+  getPedalStep(): PedalStep {
+    return this.contents[0];
+  }
+  setPedalStep(pedalStep: PedalStep): PedalTuning {
+    this.contents[0] = pedalStep;
+    return this;
+  }
+  getPedalAlter(): PedalAlter {
+    return this.contents[1];
+  }
+  setPedalAlter(pedalAlter: PedalAlter): PedalTuning {
+    this.contents[1] = pedalAlter;
+    return this;
+  }
+}
+
 export type HarpPedalsAttributes = {
   color: string | null;
   'default-x': number | null;
@@ -28418,7 +28568,7 @@ export type HarpPedalsAttributes = {
   valign: 'top' | 'middle' | 'bottom' | 'baseline' | null;
 };
 
-export type HarpPedalsContents = [];
+export type HarpPedalsContents = [Array<PedalTuning>];
 
 export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttributes, HarpPedalsContents> {
   static readonly schema = {
@@ -28462,7 +28612,7 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
       },
       valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
     },
-    contents: [],
+    contents: [{ type: 'label', label: 'pedal-tunings', value: { type: 'oneOrMore', value: PedalTuning } }],
   } as const;
 
   readonly schema = HarpPedals.schema;
@@ -28558,6 +28708,13 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
   }
   setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): HarpPedals {
     this.attributes['valign'] = valign;
+    return this;
+  }
+  getPedalTunings(): Array<PedalTuning> {
+    return this.contents[0];
+  }
+  setPedalTunings(pedalTunings: Array<PedalTuning>): HarpPedals {
+    this.contents[0] = pedalTunings;
     return this;
   }
 }
@@ -29302,14 +29459,14 @@ export class TuningOctave implements XMLElement<'tuning-octave', TuningOctaveAtt
   }
 }
 
-export type AccordAttributes = Record<string, unknown>;
+export type AccordAttributes = { string: number | null };
 
 export type AccordContents = [TuningStep, TuningAlter | null, TuningOctave];
 
 export class Accord implements XMLElement<'accord', AccordAttributes, AccordContents> {
   static readonly schema = {
     name: 'accord',
-    attributes: {},
+    attributes: { string: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } } },
     contents: [
       { type: 'required', value: TuningStep },
       { type: 'optional', value: TuningAlter },
@@ -29326,7 +29483,13 @@ export class Accord implements XMLElement<'accord', AccordAttributes, AccordCont
     this.attributes = operations.merge(opts?.attributes || {}, Accord.schema);
     this.contents = opts?.contents ?? operations.zero(Accord.schema.contents);
   }
-
+  getString(): number | null {
+    return this.attributes['string'];
+  }
+  setString(string: number | null): Accord {
+    this.attributes['string'] = string;
+    return this;
+  }
   getTuningStep(): TuningStep {
     return this.contents[0];
   }
@@ -31009,12 +31172,16 @@ export class AccordionHigh implements XMLElement<'accordion-high', AccordionHigh
 
 export type AccordionMiddleAttributes = Record<string, unknown>;
 
-export type AccordionMiddleContents = [];
+export type AccordionMiddleContents = [number];
 
 export class AccordionMiddle
   implements XMLElement<'accordion-middle', AccordionMiddleAttributes, AccordionMiddleContents>
 {
-  static readonly schema = { name: 'accordion-middle', attributes: {}, contents: [] } as const;
+  static readonly schema = {
+    name: 'accordion-middle',
+    attributes: {},
+    contents: [{ type: 'label', label: 'value', value: { type: 'int', min: 1, max: 3 } }],
+  } as const;
 
   readonly schema = AccordionMiddle.schema;
 
@@ -31024,6 +31191,14 @@ export class AccordionMiddle
   constructor(opts?: { attributes?: Partial<AccordionMiddleAttributes>; contents?: AccordionMiddleContents }) {
     this.attributes = operations.merge(opts?.attributes || {}, AccordionMiddle.schema);
     this.contents = opts?.contents ?? operations.zero(AccordionMiddle.schema.contents);
+  }
+
+  getValue(): number {
+    return this.contents[0];
+  }
+  setValue(value: number): AccordionMiddle {
+    this.contents[0] = value;
+    return this;
   }
 }
 
@@ -39250,7 +39425,7 @@ export type FigureNumberAttributes = {
   'relative-y': number | null;
 };
 
-export type FigureNumberContents = [];
+export type FigureNumberContents = [string];
 
 export class FigureNumber implements XMLElement<'figure-number', FigureNumberAttributes, FigureNumberContents> {
   static readonly schema = {
@@ -39291,7 +39466,7 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
         value: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     },
-    contents: [],
+    contents: [{ type: 'string' }],
   } as const;
 
   readonly schema = FigureNumber.schema;
@@ -39366,6 +39541,13 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
   }
   setRelativeY(relativeY: number | null): FigureNumber {
     this.attributes['relative-y'] = relativeY;
+    return this;
+  }
+  getText(): string {
+    return this.contents[0];
+  }
+  setText(text: string): FigureNumber {
+    this.contents[0] = text;
     return this;
   }
 }

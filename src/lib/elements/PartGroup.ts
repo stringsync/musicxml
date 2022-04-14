@@ -13,7 +13,7 @@ import { Level } from './Level';
 /**
  * The `<part-list>` element
  *
- * Parent elements: `<score-partwise>`, `<score-timewise>`
+ * Parent elements: `<score-partwise version="4.0">`, `<score-timewise>`
  *
  * The `<part-list>` element identifies the different musical parts in this document. Each part has an ID that is used
  * later within the musical data. Since parts may be encoded separately and combined later, identification elements are

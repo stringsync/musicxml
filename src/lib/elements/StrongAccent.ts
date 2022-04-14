@@ -72,7 +72,7 @@ export const StrongAccent = schema(
     /**
      * Indicates if the point of the accent is down or up. The default value is up.
      */
-    ['up-down']: t.optional(dataTypes.upDown()),
+    type: t.optional(dataTypes.upDown()),
   },
   [] as const
 );
