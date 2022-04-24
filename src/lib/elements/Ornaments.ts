@@ -38,7 +38,7 @@ export const Ornaments = schema(
   },
   [
     t.label({
-      label: 'ornaments-values',
+      label: 'values',
       value: t.zeroOrMore(
         t.choices(
           TrillMark,

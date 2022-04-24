@@ -114,7 +114,7 @@ export const Percussion = schema(
   },
   [
     t.label({
-      label: 'percussion-value',
+      label: 'value',
       value: t.choices(
         Glass,
         Metal,

@@ -84,5 +84,5 @@ export const DegreeValue = schema(
      */
     text: t.optional(dataTypes.token()),
   },
-  [t.label({ label: 'degree-value', value: t.required(dataTypes.positiveInteger()) })] as const
+  [t.label({ label: 'value', value: t.required(dataTypes.positiveInteger()) })] as const
 );

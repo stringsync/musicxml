@@ -24,7 +24,7 @@ export const Rest = schema(
   [
     t.optional(
       t.label({
-        label: 'rest-value',
+        label: 'value',
         value: [t.required(DisplayStep), t.required(DisplayOctave)],
       })
     ),

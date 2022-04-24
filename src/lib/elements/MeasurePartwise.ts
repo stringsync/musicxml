@@ -72,7 +72,7 @@ export const MeasurePartwise = schema(
   },
   [
     t.label({
-      label: 'measure-values',
+      label: 'values',
       value: t.zeroOrMore(
         t.choices(
           Note,

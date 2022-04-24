@@ -75,7 +75,7 @@ const measure = new elements.MeasurePartwise({ attributes: { number: '1', implic
 measure.getNumber(); // '1'
 measure.setNumber('4');
 measure.getNumber(); // '4'
-measure.setMeasureValues([...measure.setMeasureValues(), new elements.Note()]);
+measure.setValues([...measure.setValues(), new elements.Note()]);
 ```
 
 ### Chain setters methods
@@ -86,7 +86,7 @@ note
   .setColor('#800080') // chain attributes
   .setStaff(new elements.Staff()) // chain contents
   .getStaff()!
-  .setStaffValue(4);
+  .setValue(4);
 ```
 
 ### Create a MusicXML object
@@ -114,16 +114,16 @@ Some types can be complex unions. For example, take the `elements.Note` class, w
 ```ts
 // truncated elements.Note class
 
-export type TiedNoteValue = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
+export type TiedNote = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
 
-export type CuedNoteValue = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
+export type CuedNote = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
 
-export type TiedGraceNoteValue = [Grace, Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]];
+export type TiedGraceNote = [Grace, Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]];
 
-export type CuedGraceNoteValue = [Grace, Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
+export type CuedGraceNote = [Grace, Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
 
 class Note {
-  getNoteValue(): TiedNoteValue | CuedNoteValue | TiedGraceNoteValue | CuedGraceNoteValue {
+  getVariation(): TiedNote | CuedNote | TiedGraceNote | CuedGraceNote {
     return this.contents[0];
   }
 }
@@ -135,18 +135,18 @@ For example, to work with an `elements.Note` value:
 
 ```ts
 const note = new elements.Note();
-const noteValue = note.getNoteValue();
+const noteVariation = note.getVariation();
 
-if (asserts.isTiedNoteValue(noteValue)) {
-  // noteValue: TiedNoteValue
-} else if (asserts.isCuedNoteValue(noteValue)) {
-  // noteValue: CuedNoteValue
-} else if (asserts.isTiedGraceNoteValue(noteValue)) {
-  // noteValue: TiedGraceNoteValue
-} else if (asserts.isCuedGraceNoteValue(noteValue)) {
-  // noteValue: CuedGraceNoteValue
+if (asserts.isTiedNote(noteVariation)) {
+  // noteVariation: TiedNote
+} else if (asserts.isCuedNote(noteVariation)) {
+  // noteVariation: CuedNote
+} else if (asserts.isTiedGraceNote(noteVariation)) {
+  // noteVariation: TiedGraceNote
+} else if (asserts.isCuedGraceNote(noteVariation)) {
+  // noteVariation: CuedGraceNote
 } else {
-  // noteValue: never
+  // noteVariation: never
 }
 ```
 

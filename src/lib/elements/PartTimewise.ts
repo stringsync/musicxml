@@ -34,7 +34,7 @@ export const PartTimewise = schema(
   },
   [
     t.label({
-      label: 'part-timewise-values',
+      label: 'values',
       value: t.zeroOrMore(
         t.choices(
           Note,

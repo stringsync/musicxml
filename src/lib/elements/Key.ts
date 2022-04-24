@@ -98,7 +98,7 @@ export const Key = schema(
   },
   [
     t.label({
-      label: 'key-value',
+      label: 'value',
       value: t.choices(
         t.label({
           label: 'tranditional-key',

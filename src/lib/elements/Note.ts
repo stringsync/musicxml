@@ -177,10 +177,10 @@ export const Note = schema(
   },
   [
     t.label({
-      label: 'note-value',
+      label: 'variation',
       value: t.choices(
         t.label({
-          label: 'tied-note-value',
+          label: 'tied-note',
           value: [
             t.optional(Chord),
             t.choices(Pitch, Unpitched, Rest),
@@ -189,11 +189,11 @@ export const Note = schema(
           ],
         }),
         t.label({
-          label: 'cued-note-value',
+          label: 'cued-note',
           value: [t.required(Cue), t.optional(Chord), t.choices(Pitch, Unpitched, Rest), t.required(Duration)],
         }),
         t.label({
-          label: 'tied-grace-note-value',
+          label: 'tied-grace-note',
           value: [
             t.required(Grace),
             t.optional(Chord),
@@ -202,7 +202,7 @@ export const Note = schema(
           ],
         }),
         t.label({
-          label: 'cued-grace-note-value',
+          label: 'cued-grace-note',
           value: [
             t.required(Grace),
             t.required(Cue),

@@ -38,7 +38,7 @@ export const Slash = schema(
   },
   [
     t.label({
-      label: 'slash-value',
+      label: 'value',
       value: t.optional([t.optional([t.required(SlashType), t.zeroOrMore(SlashDot)]), t.zeroOrMore(ExceptVoice)]),
     }),
   ] as const

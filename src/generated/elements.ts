@@ -902,7 +902,7 @@ export class PageHeight implements XMLElement<'page-height', PageHeightAttribute
     contents: [
       {
         type: 'label',
-        label: 'page-height-value',
+        label: 'value',
         value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
@@ -918,11 +918,11 @@ export class PageHeight implements XMLElement<'page-height', PageHeightAttribute
     this.contents = opts?.contents ?? operations.zero(PageHeight.schema.contents);
   }
 
-  getPageHeightValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setPageHeightValue(pageHeightValue: number): PageHeight {
-    this.contents[0] = pageHeightValue;
+  setValue(value: number): PageHeight {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -938,7 +938,7 @@ export class PageWidth implements XMLElement<'page-width', PageWidthAttributes, 
     contents: [
       {
         type: 'label',
-        label: 'page-width-value',
+        label: 'value',
         value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
@@ -954,11 +954,11 @@ export class PageWidth implements XMLElement<'page-width', PageWidthAttributes, 
     this.contents = opts?.contents ?? operations.zero(PageWidth.schema.contents);
   }
 
-  getPageWidthValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setPageWidthValue(pageWidthValue: number): PageWidth {
-    this.contents[0] = pageWidthValue;
+  setValue(value: number): PageWidth {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -1007,7 +1007,7 @@ export class RightMargin implements XMLElement<'right-margin', RightMarginAttrib
   static readonly schema = {
     name: 'right-margin',
     attributes: {},
-    contents: [{ type: 'label', label: 'right-margin-value', value: { type: 'float', min: -Infinity, max: Infinity } }],
+    contents: [{ type: 'label', label: 'value', value: { type: 'float', min: -Infinity, max: Infinity } }],
   } as const;
 
   readonly schema = RightMargin.schema;
@@ -1020,11 +1020,11 @@ export class RightMargin implements XMLElement<'right-margin', RightMarginAttrib
     this.contents = opts?.contents ?? operations.zero(RightMargin.schema.contents);
   }
 
-  getRightMarginValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setRightMarginValue(rightMarginValue: number): RightMargin {
-    this.contents[0] = rightMarginValue;
+  setValue(value: number): RightMargin {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -1304,7 +1304,7 @@ export class TopSystemDistance
     contents: [
       {
         type: 'label',
-        label: 'top-system-distance-value',
+        label: 'value',
         value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
@@ -1320,11 +1320,11 @@ export class TopSystemDistance
     this.contents = opts?.contents ?? operations.zero(TopSystemDistance.schema.contents);
   }
 
-  getTopSystemDistanceValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setTopSystemDistanceValue(topSystemDistanceValue: number): TopSystemDistance {
-    this.contents[0] = topSystemDistanceValue;
+  setValue(value: number): TopSystemDistance {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -1388,7 +1388,7 @@ export class StaffDistance implements XMLElement<'staff-distance', StaffDistance
     contents: [
       {
         type: 'label',
-        label: 'staff-distance-value',
+        label: 'value',
         value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
@@ -1404,11 +1404,11 @@ export class StaffDistance implements XMLElement<'staff-distance', StaffDistance
     this.contents = opts?.contents ?? operations.zero(StaffDistance.schema.contents);
   }
 
-  getStaffDistanceValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setStaffDistanceValue(staffDistanceValue: number): StaffDistance {
-    this.contents[0] = staffDistanceValue;
+  setValue(value: number): StaffDistance {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -3335,7 +3335,7 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
       { type: 'label', label: 'bookmarks', value: { type: 'zeroOrMore', value: Bookmark } },
       {
         type: 'label',
-        label: 'credit-value',
+        label: 'value',
         value: {
           type: 'choices',
           choices: [
@@ -3405,11 +3405,11 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
     this.contents[2] = bookmarks;
     return this;
   }
-  getCreditValue(): CreditImage | CreditToken {
+  getValue(): CreditImage | CreditToken {
     return this.contents[3];
   }
-  setCreditValue(creditValue: CreditImage | CreditToken): Credit {
-    this.contents[3] = creditValue;
+  setValue(value: CreditImage | CreditToken): Credit {
+    this.contents[3] = value;
     return this;
   }
 }
@@ -6566,7 +6566,7 @@ export class Pan implements XMLElement<'pan', PanAttributes, PanContents> {
     name: 'pan',
     attributes: {},
     contents: [
-      { type: 'label', label: 'pan-value', value: { type: 'required', value: { type: 'float', min: -180, max: 180 } } },
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'float', min: -180, max: 180 } } },
     ],
   } as const;
 
@@ -6580,11 +6580,11 @@ export class Pan implements XMLElement<'pan', PanAttributes, PanContents> {
     this.contents = opts?.contents ?? operations.zero(Pan.schema.contents);
   }
 
-  getPanValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setPanValue(panValue: number): Pan {
-    this.contents[0] = panValue;
+  setValue(value: number): Pan {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -7193,7 +7193,7 @@ export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
         type: 'optional',
         value: {
           type: 'label',
-          label: 'rest-value',
+          label: 'value',
           value: [
             { type: 'required', value: DisplayStep },
             { type: 'required', value: DisplayOctave },
@@ -7219,11 +7219,11 @@ export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
     this.attributes['measure'] = measure;
     return this;
   }
-  getRestValue(): [DisplayStep, DisplayOctave] | null {
+  getValue(): [DisplayStep, DisplayOctave] | null {
     return this.contents[0];
   }
-  setRestValue(restValue: [DisplayStep, DisplayOctave] | null): Rest {
-    this.contents[0] = restValue;
+  setValue(value: [DisplayStep, DisplayOctave] | null): Rest {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -8693,11 +8693,7 @@ export class Staff implements XMLElement<'staff', StaffAttributes, StaffContents
     name: 'staff',
     attributes: {},
     contents: [
-      {
-        type: 'label',
-        label: 'staff-value',
-        value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-      },
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
     ],
   } as const;
 
@@ -8711,11 +8707,11 @@ export class Staff implements XMLElement<'staff', StaffAttributes, StaffContents
     this.contents = opts?.contents ?? operations.zero(Staff.schema.contents);
   }
 
-  getStaffValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setStaffValue(staffValue: number): Staff {
-    this.contents[0] = staffValue;
+  setValue(value: number): Staff {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -13605,7 +13601,7 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
     contents: [
       {
         type: 'label',
-        label: 'ornaments-values',
+        label: 'values',
         value: {
           type: 'zeroOrMore',
           value: {
@@ -13650,7 +13646,7 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
     this.attributes['id'] = id;
     return this;
   }
-  getOrnamentsValues(): Array<
+  getValues(): Array<
     | TrillMark
     | Turn
     | DelayedTurn
@@ -13669,8 +13665,8 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
   > {
     return this.contents[0];
   }
-  setOrnamentsValues(
-    ornamentsValues: Array<
+  setValues(
+    values: Array<
       | TrillMark
       | Turn
       | DelayedTurn
@@ -13688,7 +13684,7 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
       | OtherOrnament
     >
   ): Ornaments {
-    this.contents[0] = ornamentsValues;
+    this.contents[0] = values;
     return this;
   }
   getAccidentalMarks(): Array<AccidentalMark> {
@@ -15437,11 +15433,7 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
     contents: [
-      {
-        type: 'label',
-        label: 'fret-value',
-        value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } },
-      },
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
     ],
   } as const;
 
@@ -15491,11 +15483,11 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
     this.attributes['font-weight'] = fontWeight;
     return this;
   }
-  getFretValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setFretValue(fretValue: number): Fret {
-    this.contents[0] = fretValue;
+  setValue(value: number): Fret {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -19155,7 +19147,7 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
     contents: [
       {
         type: 'label',
-        label: 'technical-values',
+        label: 'values',
         value: {
           type: 'zeroOrMore',
           value: {
@@ -19215,7 +19207,7 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
     this.attributes['id'] = id;
     return this;
   }
-  getTechnicalValues(): Array<
+  getValues(): Array<
     | UpBow
     | DownBow
     | Harmonic
@@ -19250,8 +19242,8 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
   > {
     return this.contents[0];
   }
-  setTechnicalValues(
-    technicalValues: Array<
+  setValues(
+    values: Array<
       | UpBow
       | DownBow
       | Harmonic
@@ -19285,7 +19277,7 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
       | OtherTechnical
     >
   ): Technical {
-    this.contents[0] = technicalValues;
+    this.contents[0] = values;
     return this;
   }
 }
@@ -22643,7 +22635,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
     contents: [
       {
         type: 'label',
-        label: 'dynamics-value',
+        label: 'value',
         value: {
           type: 'zeroOrMore',
           value: {
@@ -22848,7 +22840,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
     this.attributes['valign'] = valign;
     return this;
   }
-  getDynamicsValue(): Array<
+  getValue(): Array<
     | P
     | Pp
     | Ppp
@@ -22880,8 +22872,8 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
   > {
     return this.contents[0];
   }
-  setDynamicsValue(
-    dynamicsValue: Array<
+  setValue(
+    value: Array<
       | P
       | Pp
       | Ppp
@@ -22912,7 +22904,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
       | OtherDynamics
     >
   ): Dynamics {
-    this.contents[0] = dynamicsValue;
+    this.contents[0] = value;
     return this;
   }
 }
@@ -24180,7 +24172,7 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
     contents: [
       {
         type: 'label',
-        label: 'lyric-value',
+        label: 'value',
         value: {
           type: 'choices',
           choices: [
@@ -24312,11 +24304,11 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
     this.attributes['time-only'] = timeOnly;
     return this;
   }
-  getLyricValue(): Intelligible | Extend | Laughing | Humming {
+  getValue(): Intelligible | Extend | Laughing | Humming {
     return this.contents[0];
   }
-  setLyricValue(lyricValue: Intelligible | Extend | Laughing | Humming): Lyric {
-    this.contents[0] = lyricValue;
+  setValue(value: Intelligible | Extend | Laughing | Humming): Lyric {
+    this.contents[0] = value;
     return this;
   }
   getEndLine(): EndLine | null {
@@ -24564,7 +24556,7 @@ export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
     contents: [
       {
         type: 'label',
-        label: 'play-value',
+        label: 'value',
         value: { type: 'zeroOrMore', value: { type: 'choices', choices: [Ipa, Mute, SemiPitched, OtherPlay] } },
       },
     ],
@@ -24586,11 +24578,11 @@ export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
     this.attributes['id'] = id;
     return this;
   }
-  getPlayValue(): Array<Ipa | Mute | SemiPitched | OtherPlay> {
+  getValue(): Array<Ipa | Mute | SemiPitched | OtherPlay> {
     return this.contents[0];
   }
-  setPlayValue(playValue: Array<Ipa | Mute | SemiPitched | OtherPlay>): Play {
-    this.contents[0] = playValue;
+  setValue(value: Array<Ipa | Mute | SemiPitched | OtherPlay>): Play {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -24771,13 +24763,13 @@ export class Listen implements XMLElement<'listen', ListenAttributes, ListenCont
   }
 }
 
-export type TiedNoteValue = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
+export type TiedNote = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
 
-export type CuedNoteValue = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
+export type CuedNote = [Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
 
-export type TiedGraceNoteValue = [Grace, Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]];
+export type TiedGraceNote = [Grace, Chord | null, Pitch | Unpitched | Rest, [] | [Tie] | [Tie, Tie]];
 
-export type CuedGraceNoteValue = [Grace, Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
+export type CuedGraceNote = [Grace, Cue, Chord | null, Pitch | Unpitched | Rest, Duration];
 
 export type NoteAttributes = {
   attack: number | null;
@@ -24804,7 +24796,7 @@ export type NoteAttributes = {
 };
 
 export type NoteContents = [
-  TiedNoteValue | CuedNoteValue | TiedGraceNoteValue | CuedGraceNoteValue,
+  TiedNote | CuedNote | TiedGraceNote | CuedGraceNote,
   Array<Instrument>,
   Footnote | null,
   Level | null,
@@ -24888,13 +24880,13 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
     contents: [
       {
         type: 'label',
-        label: 'note-value',
+        label: 'variation',
         value: {
           type: 'choices',
           choices: [
             {
               type: 'label',
-              label: 'tied-note-value',
+              label: 'tied-note',
               value: [
                 { type: 'optional', value: Chord },
                 { type: 'choices', choices: [Pitch, Unpitched, Rest] },
@@ -24904,7 +24896,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
             },
             {
               type: 'label',
-              label: 'cued-note-value',
+              label: 'cued-note',
               value: [
                 { type: 'required', value: Cue },
                 { type: 'optional', value: Chord },
@@ -24914,7 +24906,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
             },
             {
               type: 'label',
-              label: 'tied-grace-note-value',
+              label: 'tied-grace-note',
               value: [
                 { type: 'required', value: Grace },
                 { type: 'optional', value: Chord },
@@ -24924,7 +24916,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
             },
             {
               type: 'label',
-              label: 'cued-grace-note-value',
+              label: 'cued-grace-note',
               value: [
                 { type: 'required', value: Grace },
                 { type: 'required', value: Cue },
@@ -25131,11 +25123,11 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
     this.attributes['time-only'] = timeOnly;
     return this;
   }
-  getNoteValue(): TiedNoteValue | CuedNoteValue | TiedGraceNoteValue | CuedGraceNoteValue {
+  getVariation(): TiedNote | CuedNote | TiedGraceNote | CuedGraceNote {
     return this.contents[0];
   }
-  setNoteValue(noteValue: TiedNoteValue | CuedNoteValue | TiedGraceNoteValue | CuedGraceNoteValue): Note {
-    this.contents[0] = noteValue;
+  setVariation(variation: TiedNote | CuedNote | TiedGraceNote | CuedGraceNote): Note {
+    this.contents[0] = variation;
     return this;
   }
   getInstruments(): Array<Instrument> {
@@ -31015,7 +31007,7 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
     contents: [
       {
         type: 'label',
-        label: 'percussion-value',
+        label: 'value',
         value: {
           type: 'choices',
           choices: [
@@ -31131,7 +31123,7 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
     this.attributes['valign'] = valign;
     return this;
   }
-  getPercussionValue():
+  getValue():
     | Glass
     | Metal
     | Wood
@@ -31145,8 +31137,8 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
     | OtherPercussion {
     return this.contents[0];
   }
-  setPercussionValue(
-    percussionValue:
+  setValue(
+    value:
       | Glass
       | Metal
       | Wood
@@ -31159,7 +31151,7 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
       | StickLocation
       | OtherPercussion
   ): Percussion {
-    this.contents[0] = percussionValue;
+    this.contents[0] = value;
     return this;
   }
 }
@@ -31941,7 +31933,7 @@ export class Offset implements XMLElement<'offset', OffsetAttributes, OffsetCont
     contents: [
       {
         type: 'label',
-        label: 'offset-value',
+        label: 'value',
         value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
@@ -31963,11 +31955,11 @@ export class Offset implements XMLElement<'offset', OffsetAttributes, OffsetCont
     this.attributes['sound'] = sound;
     return this;
   }
-  getOffsetValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setOffsetValue(offsetValue: number): Offset {
-    this.contents[0] = offsetValue;
+  setValue(value: number): Offset {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -32095,11 +32087,7 @@ export class Second implements XMLElement<'second', SecondAttributes, SecondCont
     name: 'second',
     attributes: {},
     contents: [
-      {
-        type: 'label',
-        label: 'second-value',
-        value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-      },
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
     ],
   } as const;
 
@@ -32113,11 +32101,11 @@ export class Second implements XMLElement<'second', SecondAttributes, SecondCont
     this.contents = opts?.contents ?? operations.zero(Second.schema.contents);
   }
 
-  getSecondValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setSecondValue(secondValue: number): Second {
-    this.contents[0] = secondValue;
+  setValue(value: number): Second {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -32200,7 +32188,7 @@ export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents
     contents: [
       {
         type: 'label',
-        label: 'swing-value',
+        label: 'value',
         value: {
           type: 'choices',
           choices: [
@@ -32231,11 +32219,11 @@ export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents
     this.contents = opts?.contents ?? operations.zero(Swing.schema.contents);
   }
 
-  getSwingValue(): Straight | AlternateSwing {
+  getValue(): Straight | AlternateSwing {
     return this.contents[0];
   }
-  setSwingValue(swingValue: Straight | AlternateSwing): Swing {
-    this.contents[0] = swingValue;
+  setValue(value: Straight | AlternateSwing): Swing {
+    this.contents[0] = value;
     return this;
   }
   getSwingStyle(): SwingStyle | null {
@@ -33383,7 +33371,7 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
     contents: [
       {
         type: 'label',
-        label: 'key-value',
+        label: 'value',
         value: {
           type: 'choices',
           choices: [
@@ -33510,11 +33498,11 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
     this.attributes['relative-y'] = relativeY;
     return this;
   }
-  getKeyValue(): TranditionalKey | AlternateKey {
+  getValue(): TranditionalKey | AlternateKey {
     return this.contents[0];
   }
-  setKeyValue(keyValue: TranditionalKey | AlternateKey): Key {
-    this.contents[0] = keyValue;
+  setValue(value: TranditionalKey | AlternateKey): Key {
+    this.contents[0] = value;
     return this;
   }
   getKeyOctaves(): Array<KeyOctave> {
@@ -33802,7 +33790,7 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
     contents: [
       {
         type: 'label',
-        label: 'time-value',
+        label: 'value',
         value: {
           type: 'choices',
           choices: [
@@ -33950,11 +33938,11 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
     this.attributes['valign'] = valign;
     return this;
   }
-  getTimeValue(): TimeSignature | SenzaMisura {
+  getValue(): TimeSignature | SenzaMisura {
     return this.contents[0];
   }
-  setTimeValue(timeValue: TimeSignature | SenzaMisura): Time {
-    this.contents[0] = timeValue;
+  setValue(value: TimeSignature | SenzaMisura): Time {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -34747,11 +34735,7 @@ export class StaffSize implements XMLElement<'staff-size', StaffSizeAttributes, 
     name: 'staff-size',
     attributes: { scaling: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } } },
     contents: [
-      {
-        type: 'label',
-        label: 'staff-size-value',
-        value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
-      },
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } } },
     ],
   } as const;
 
@@ -34771,11 +34755,11 @@ export class StaffSize implements XMLElement<'staff-size', StaffSizeAttributes, 
     this.attributes['scaling'] = scaling;
     return this;
   }
-  getStaffSizeValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setStaffSizeValue(staffSizeValue: number): StaffSize {
-    this.contents[0] = staffSizeValue;
+  setValue(value: number): StaffSize {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -34979,7 +34963,7 @@ export class OctaveChange implements XMLElement<'octave-change', OctaveChangeAtt
     contents: [
       {
         type: 'label',
-        label: 'octave-change-value',
+        label: 'value',
         value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
@@ -34995,11 +34979,11 @@ export class OctaveChange implements XMLElement<'octave-change', OctaveChangeAtt
     this.contents = opts?.contents ?? operations.zero(OctaveChange.schema.contents);
   }
 
-  getOctaveChangeValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setOctaveChangeValue(octaveChangeValue: number): OctaveChange {
-    this.contents[0] = octaveChangeValue;
+  setValue(value: number): OctaveChange {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -35469,7 +35453,7 @@ export class MeasureRepeat implements XMLElement<'measure-repeat', MeasureRepeat
     contents: [
       {
         type: 'label',
-        label: 'measure-repeat-value',
+        label: 'value',
         value: { type: 'required', value: { type: 'choices', choices: ['', { type: 'int', min: 1, max: Infinity }] } },
       },
     ],
@@ -35498,11 +35482,11 @@ export class MeasureRepeat implements XMLElement<'measure-repeat', MeasureRepeat
     this.attributes['slashes'] = slashes;
     return this;
   }
-  getMeasureRepeatValue(): '' | number {
+  getValue(): '' | number {
     return this.contents[0];
   }
-  setMeasureRepeatValue(measureRepeatValue: '' | number): MeasureRepeat {
-    this.contents[0] = measureRepeatValue;
+  setValue(value: '' | number): MeasureRepeat {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -35752,7 +35736,7 @@ export class Slash implements XMLElement<'slash', SlashAttributes, SlashContents
     contents: [
       {
         type: 'label',
-        label: 'slash-value',
+        label: 'value',
         value: {
           type: 'optional',
           value: [
@@ -35800,11 +35784,11 @@ export class Slash implements XMLElement<'slash', SlashAttributes, SlashContents
     this.attributes['use-stems'] = useStems;
     return this;
   }
-  getSlashValue(): [[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null {
+  getValue(): [[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null {
     return this.contents[0];
   }
-  setSlashValue(slashValue: [[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null): Slash {
-    this.contents[0] = slashValue;
+  setValue(value: [[SlashType, Array<SlashDot>] | null, Array<ExceptVoice>] | null): Slash {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -35845,7 +35829,7 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
     contents: [
       {
         type: 'label',
-        label: 'measure-style-value',
+        label: 'value',
         value: { type: 'choices', choices: [MultipleRest, MeasureRepeat, BeatRepeat, Slash] },
       },
     ],
@@ -35911,11 +35895,11 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
     this.attributes['number'] = number;
     return this;
   }
-  getMeasureStyleValue(): MultipleRest | MeasureRepeat | BeatRepeat | Slash {
+  getValue(): MultipleRest | MeasureRepeat | BeatRepeat | Slash {
     return this.contents[0];
   }
-  setMeasureStyleValue(measureStyleValue: MultipleRest | MeasureRepeat | BeatRepeat | Slash): MeasureStyle {
-    this.contents[0] = measureStyleValue;
+  setValue(value: MultipleRest | MeasureRepeat | BeatRepeat | Slash): MeasureStyle {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -36760,7 +36744,7 @@ export class NumeralFifths implements XMLElement<'numeral-fifths', NumeralFifths
     contents: [
       {
         type: 'label',
-        label: 'numeral-fifths-value',
+        label: 'value',
         value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
       },
     ],
@@ -36776,11 +36760,11 @@ export class NumeralFifths implements XMLElement<'numeral-fifths', NumeralFifths
     this.contents = opts?.contents ?? operations.zero(NumeralFifths.schema.contents);
   }
 
-  getNumeralFifthsValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setNumeralFifthsValue(numeralFifthsValue: number): NumeralFifths {
-    this.contents[0] = numeralFifthsValue;
+  setValue(value: number): NumeralFifths {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -38132,11 +38116,7 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
       text: { type: 'optional', value: { type: 'string' } },
     },
     contents: [
-      {
-        type: 'label',
-        label: 'degree-value',
-        value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-      },
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
     ],
   } as const;
 
@@ -38228,11 +38208,11 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
     this.attributes['text'] = text;
     return this;
   }
-  getDegreeValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setDegreeValue(degreeValue: number): DegreeValue {
-    this.contents[0] = degreeValue;
+  setValue(value: number): DegreeValue {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -39107,7 +39087,7 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
     contents: [
       {
         type: 'label',
-        label: 'harmony-values',
+        label: 'values',
         value: {
           type: 'oneOrMore',
           value: [
@@ -39250,13 +39230,11 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
     this.attributes['type'] = type;
     return this;
   }
-  getHarmonyValues(): Array<[Root | Numeral | Function, Kind, Inversion | null, Bass | null, Array<Degree>]> {
+  getValues(): Array<[Root | Numeral | Function, Kind, Inversion | null, Bass | null, Array<Degree>]> {
     return this.contents[0];
   }
-  setHarmonyValues(
-    harmonyValues: Array<[Root | Numeral | Function, Kind, Inversion | null, Bass | null, Array<Degree>]>
-  ): Harmony {
-    this.contents[0] = harmonyValues;
+  setValues(values: Array<[Root | Numeral | Function, Kind, Inversion | null, Bass | null, Array<Degree>]>): Harmony {
+    this.contents[0] = values;
     return this;
   }
   getFrame(): Frame | null {
@@ -40051,7 +40029,7 @@ export class MeasureDistance
     contents: [
       {
         type: 'label',
-        label: 'measure-distance-value',
+        label: 'value',
         value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
       },
     ],
@@ -40067,11 +40045,11 @@ export class MeasureDistance
     this.contents = opts?.contents ?? operations.zero(MeasureDistance.schema.contents);
   }
 
-  getMeasureDistanceValue(): number {
+  getValue(): number {
     return this.contents[0];
   }
-  setMeasureDistanceValue(measureDistanceValue: number): MeasureDistance {
-    this.contents[0] = measureDistanceValue;
+  setValue(value: number): MeasureDistance {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -41126,7 +41104,7 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
     contents: [
       {
         type: 'label',
-        label: 'measure-values',
+        label: 'values',
         value: {
           type: 'zeroOrMore',
           value: {
@@ -41204,7 +41182,7 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
     this.attributes['width'] = width;
     return this;
   }
-  getMeasureValues(): Array<
+  getValues(): Array<
     | Note
     | Backup
     | Forward
@@ -41222,8 +41200,8 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
   > {
     return this.contents[0];
   }
-  setMeasureValues(
-    measureValues: Array<
+  setValues(
+    values: Array<
       | Note
       | Backup
       | Forward
@@ -41240,7 +41218,7 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
       | Bookmark
     >
   ): MeasurePartwise {
-    this.contents[0] = measureValues;
+    this.contents[0] = values;
     return this;
   }
 }
@@ -41412,7 +41390,7 @@ export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, 
     contents: [
       {
         type: 'label',
-        label: 'part-timewise-values',
+        label: 'values',
         value: {
           type: 'zeroOrMore',
           value: {
@@ -41455,7 +41433,7 @@ export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, 
     this.attributes['id'] = id;
     return this;
   }
-  getPartTimewiseValues(): Array<
+  getValues(): Array<
     | Note
     | Backup
     | Forward
@@ -41473,8 +41451,8 @@ export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, 
   > {
     return this.contents[0];
   }
-  setPartTimewiseValues(
-    partTimewiseValues: Array<
+  setValues(
+    values: Array<
       | Note
       | Backup
       | Forward
@@ -41491,7 +41469,7 @@ export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, 
       | Bookmark
     >
   ): PartTimewise {
-    this.contents[0] = partTimewiseValues;
+    this.contents[0] = values;
     return this;
   }
 }

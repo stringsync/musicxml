@@ -11,5 +11,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-height/}
  */
 export const PageHeight = schema('page-height', {}, [
-  t.label({ label: 'page-height-value', value: t.required(dataTypes.tenths()) }),
+  t.label({ label: 'value', value: t.required(dataTypes.tenths()) }),
 ] as const);

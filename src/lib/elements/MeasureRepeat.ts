@@ -31,5 +31,5 @@ export const MeasureRepeat = schema(
      */
     slashes: t.optional(dataTypes.positiveInteger()),
   },
-  [t.label({ label: 'measure-repeat-value', value: t.required(dataTypes.positiveIntegerOrEmpty()) })] as const
+  [t.label({ label: 'value', value: t.required(dataTypes.positiveIntegerOrEmpty()) })] as const
 );

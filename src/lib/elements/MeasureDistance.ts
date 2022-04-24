@@ -13,5 +13,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-distance/}
  */
 export const MeasureDistance = schema('measure-distance', {}, [
-  t.label({ label: 'measure-distance-value', value: t.required(dataTypes.tenths()) }),
+  t.label({ label: 'value', value: t.required(dataTypes.tenths()) }),
 ] as const);

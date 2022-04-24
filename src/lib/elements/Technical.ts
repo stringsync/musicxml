@@ -52,7 +52,7 @@ export const Technical = schema(
   },
   [
     t.label({
-      label: 'technical-values',
+      label: 'values',
       value: t.zeroOrMore(
         t.choices(
           UpBow,

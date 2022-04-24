@@ -269,11 +269,11 @@ export const isCue = (value: any): value is elements.Cue => {
   return operations.validate(value, elements.Cue);
 };
 
-export const isCuedGraceNoteValue = (value: any): value is elements.CuedGraceNoteValue => {
+export const isCuedGraceNote = (value: any): value is elements.CuedGraceNote => {
   return operations.validate(value, elements.Note.schema.contents[0]['value']['choices'][3]);
 };
 
-export const isCuedNoteValue = (value: any): value is elements.CuedNoteValue => {
+export const isCuedNote = (value: any): value is elements.CuedNote => {
   return operations.validate(value, elements.Note.schema.contents[0]['value']['choices'][1]);
 };
 
@@ -1649,11 +1649,11 @@ export const isTied = (value: any): value is elements.Tied => {
   return operations.validate(value, elements.Tied);
 };
 
-export const isTiedGraceNoteValue = (value: any): value is elements.TiedGraceNoteValue => {
+export const isTiedGraceNote = (value: any): value is elements.TiedGraceNote => {
   return operations.validate(value, elements.Note.schema.contents[0]['value']['choices'][2]);
 };
 
-export const isTiedNoteValue = (value: any): value is elements.TiedNoteValue => {
+export const isTiedNote = (value: any): value is elements.TiedNote => {
   return operations.validate(value, elements.Note.schema.contents[0]['value']['choices'][0]);
 };
 

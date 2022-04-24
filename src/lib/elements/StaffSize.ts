@@ -27,5 +27,5 @@ export const StaffSize = schema(
      */
     scaling: t.optional(dataTypes.nonNegativeDecimal()),
   },
-  [t.label({ label: 'staff-size-value', value: t.required(dataTypes.nonNegativeDecimal()) })] as const
+  [t.label({ label: 'value', value: t.required(dataTypes.nonNegativeDecimal()) })] as const
 );

@@ -41,13 +41,13 @@ describe('MusicXML', () => {
 
     it('matches the narrowing documented README behavior', () => {
       const note = new elements.Note();
-      const noteValue = note.getNoteValue();
+      const noteVariation = note.getVariation();
       // In the README, we showed that the value must match one of the type predicates.
       expect(
-        asserts.isTiedNoteValue(noteValue) ||
-          asserts.isCuedNoteValue(noteValue) ||
-          asserts.isTiedGraceNoteValue(noteValue) ||
-          asserts.isCuedGraceNoteValue(noteValue)
+        asserts.isTiedNote(noteVariation) ||
+          asserts.isCuedNote(noteVariation) ||
+          asserts.isTiedGraceNote(noteVariation) ||
+          asserts.isCuedGraceNote(noteVariation)
       ).toBeTrue();
     });
 
@@ -59,19 +59,19 @@ describe('MusicXML', () => {
       expect(measure.getNumber()).toBe('4');
 
       const note = new elements.Note();
-      measure.setMeasureValues([...measure.getMeasureValues(), new elements.Note()]);
-      const measureValues = measure.getMeasureValues();
+      measure.setValues([...measure.getValues(), new elements.Note()]);
+      const measureValues = measure.getValues();
       expect(measureValues).toHaveLength(1);
       expect(measureValues).toStrictEqual([note]);
     });
 
     it('allows setters to be chained', () => {
       const note = new elements.Note();
-      note.setColor('#800080').setStaff(new elements.Staff()).getStaff()!.setStaffValue(4);
+      note.setColor('#800080').setStaff(new elements.Staff()).getStaff()!.setValue(4);
 
       expect(note.getColor()).toBe('#800080');
       expect(note.getStaff()).not.toBeNull();
-      expect(note.getStaff()!.getStaffValue()).toBe(4);
+      expect(note.getStaff()!.getValue()).toBe(4);
     });
   });
 
@@ -114,7 +114,7 @@ describe('MusicXML', () => {
       expect(measure).toBeInstanceOf(elements.MeasurePartwise);
       expect(measure.getNumber()).toBe('1');
 
-      const measureValues = measure.getMeasureValues();
+      const measureValues = measure.getValues();
       expect(measureValues).toBeArray();
       expect(measureValues).toHaveLength(2);
 
@@ -134,7 +134,7 @@ describe('MusicXML', () => {
       const key = keys[0];
       expect(key).toBeInstanceOf(elements.Key);
 
-      const keyValue = key.getKeyValue();
+      const keyValue = key.getValue();
       if (!asserts.isTranditionalKey(keyValue)) {
         fail(`expected TraditionalKey, got: ${keyValue}`);
       }
@@ -149,7 +149,7 @@ describe('MusicXML', () => {
       const time = times[0];
       expect(time).toBeInstanceOf(elements.Time);
 
-      const timeValue = time.getTimeValue();
+      const timeValue = time.getValue();
       if (!asserts.isTimeSignature(timeValue)) {
         fail(`expected TimeSignature, got: ${timeValue}`);
       }
@@ -184,14 +184,14 @@ describe('MusicXML', () => {
         fail(`expected Note, got: ${note}`);
       }
 
-      const noteValue = note.getNoteValue();
-      expect(asserts.isTiedNoteValue(noteValue)).toBeTrue();
-      expect(noteValue).toBeArray();
-      expect(noteValue).toHaveLength(4);
-      expect(noteValue[0]).toBeNull();
-      expect(noteValue[1]).toBeInstanceOf(elements.Pitch);
-      expect(noteValue[2]).toBeInstanceOf(elements.Duration);
-      expect(noteValue[3]).toStrictEqual([]);
+      const noteVariation = note.getVariation();
+      expect(asserts.isTiedNote(noteVariation)).toBeTrue();
+      expect(noteVariation).toBeArray();
+      expect(noteVariation).toHaveLength(4);
+      expect(noteVariation[0]).toBeNull();
+      expect(noteVariation[1]).toBeInstanceOf(elements.Pitch);
+      expect(noteVariation[2]).toBeInstanceOf(elements.Duration);
+      expect(noteVariation[3]).toStrictEqual([]);
 
       const type = note.getType();
       expect(type).toBeInstanceOf(elements.Type);
@@ -215,7 +215,7 @@ describe('MusicXML', () => {
       expect(measures).toHaveLength(1);
 
       const measure = measures[0];
-      const contents = measure.getMeasureValues();
+      const contents = measure.getValues();
       expect(contents).toHaveLength(2);
 
       const attributes = contents[0];
@@ -231,12 +231,12 @@ describe('MusicXML', () => {
       if (!asserts.isNote(note)) {
         fail(`expected Note, got ${note}`);
       }
-      const noteValue = note.getNoteValue();
-      if (!asserts.isTiedNoteValue(noteValue)) {
-        fail(`expected TiedNoteValue, got ${noteValue}`);
+      const noteVariation = note.getVariation();
+      if (!asserts.isTiedNote(noteVariation)) {
+        fail(`expected TiedNoteValue, got ${noteVariation}`);
       }
 
-      const duration = noteValue[2];
+      const duration = noteVariation[2];
       expect(duration.getPositiveDivisions()).toBe(1);
     });
 
