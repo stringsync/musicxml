@@ -8072,13 +8072,15 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
 
 export type ActualNotesAttributes = Record<string, unknown>;
 
-export type ActualNotesContents = [string];
+export type ActualNotesContents = [number];
 
 export class ActualNotes implements XMLElement<'actual-notes', ActualNotesAttributes, ActualNotesContents> {
   static readonly schema = {
     name: 'actual-notes',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string' } }],
+    contents: [
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
+    ],
   } as const;
 
   readonly schema = ActualNotes.schema;
@@ -8091,24 +8093,26 @@ export class ActualNotes implements XMLElement<'actual-notes', ActualNotesAttrib
     this.contents = opts?.contents ?? operations.zero(ActualNotes.schema.contents);
   }
 
-  getText(): string {
+  getValue(): number {
     return this.contents[0];
   }
-  setText(text: string): ActualNotes {
-    this.contents[0] = text;
+  setValue(value: number): ActualNotes {
+    this.contents[0] = value;
     return this;
   }
 }
 
 export type NormalNotesAttributes = Record<string, unknown>;
 
-export type NormalNotesContents = [string];
+export type NormalNotesContents = [number];
 
 export class NormalNotes implements XMLElement<'normal-notes', NormalNotesAttributes, NormalNotesContents> {
   static readonly schema = {
     name: 'normal-notes',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string' } }],
+    contents: [
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
+    ],
   } as const;
 
   readonly schema = NormalNotes.schema;
@@ -8121,11 +8125,11 @@ export class NormalNotes implements XMLElement<'normal-notes', NormalNotesAttrib
     this.contents = opts?.contents ?? operations.zero(NormalNotes.schema.contents);
   }
 
-  getText(): string {
+  getValue(): number {
     return this.contents[0];
   }
-  setText(text: string): NormalNotes {
-    this.contents[0] = text;
+  setValue(value: number): NormalNotes {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -9195,7 +9199,7 @@ export type TupletNumberAttributes = {
   'font-weight': 'normal' | 'bold' | null;
 };
 
-export type TupletNumberContents = [string];
+export type TupletNumberContents = [number];
 
 export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAttributes, TupletNumberContents> {
   static readonly schema = {
@@ -9216,7 +9220,9 @@ export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAtt
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string' } }],
+    contents: [
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
+    ],
   } as const;
 
   readonly schema = TupletNumber.schema;
@@ -9265,11 +9271,11 @@ export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAtt
     this.attributes['font-weight'] = fontWeight;
     return this;
   }
-  getText(): string {
+  getValue(): number {
     return this.contents[0];
   }
-  setText(text: string): TupletNumber {
-    this.contents[0] = text;
+  setValue(value: number): TupletNumber {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -15409,7 +15415,7 @@ export type FretAttributes = {
   'font-weight': 'normal' | 'bold' | null;
 };
 
-export type FretContents = [string];
+export type FretContents = [number];
 
 export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
   static readonly schema = {
@@ -15430,7 +15436,13 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
       'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
       'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
     },
-    contents: [{ type: 'required', value: { type: 'string' } }],
+    contents: [
+      {
+        type: 'label',
+        label: 'fret-value',
+        value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } },
+      },
+    ],
   } as const;
 
   readonly schema = Fret.schema;
@@ -15479,11 +15491,11 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
     this.attributes['font-weight'] = fontWeight;
     return this;
   }
-  getText(): string {
+  getFretValue(): number {
     return this.contents[0];
   }
-  setText(text: string): Fret {
-    this.contents[0] = text;
+  setFretValue(fretValue: number): Fret {
+    this.contents[0] = fretValue;
     return this;
   }
 }
@@ -33949,13 +33961,15 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
 
 export type StavesAttributes = Record<string, unknown>;
 
-export type StavesContents = [string];
+export type StavesContents = [number];
 
 export class Staves implements XMLElement<'staves', StavesAttributes, StavesContents> {
   static readonly schema = {
     name: 'staves',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string' } }],
+    contents: [
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
+    ],
   } as const;
 
   readonly schema = Staves.schema;
@@ -33968,11 +33982,11 @@ export class Staves implements XMLElement<'staves', StavesAttributes, StavesCont
     this.contents = opts?.contents ?? operations.zero(Staves.schema.contents);
   }
 
-  getText(): string {
+  getValue(): number {
     return this.contents[0];
   }
-  setText(text: string): Staves {
-    this.contents[0] = text;
+  setValue(value: number): Staves {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -34145,13 +34159,15 @@ export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttribute
 
 export type InstrumentsAttributes = Record<string, unknown>;
 
-export type InstrumentsContents = [string];
+export type InstrumentsContents = [number];
 
 export class Instruments implements XMLElement<'instruments', InstrumentsAttributes, InstrumentsContents> {
   static readonly schema = {
     name: 'instruments',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string' } }],
+    contents: [
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
+    ],
   } as const;
 
   readonly schema = Instruments.schema;
@@ -34164,11 +34180,11 @@ export class Instruments implements XMLElement<'instruments', InstrumentsAttribu
     this.contents = opts?.contents ?? operations.zero(Instruments.schema.contents);
   }
 
-  getText(): string {
+  getValue(): number {
     return this.contents[0];
   }
-  setText(text: string): Instruments {
-    this.contents[0] = text;
+  setValue(value: number): Instruments {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -34537,13 +34553,15 @@ export class StaffType implements XMLElement<'staff-type', StaffTypeAttributes, 
 
 export type StaffLinesAttributes = Record<string, unknown>;
 
-export type StaffLinesContents = [string];
+export type StaffLinesContents = [number];
 
 export class StaffLines implements XMLElement<'staff-lines', StaffLinesAttributes, StaffLinesContents> {
   static readonly schema = {
     name: 'staff-lines',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string' } }],
+    contents: [
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
+    ],
   } as const;
 
   readonly schema = StaffLines.schema;
@@ -34556,11 +34574,11 @@ export class StaffLines implements XMLElement<'staff-lines', StaffLinesAttribute
     this.contents = opts?.contents ?? operations.zero(StaffLines.schema.contents);
   }
 
-  getText(): string {
+  getValue(): number {
     return this.contents[0];
   }
-  setText(text: string): StaffLines {
-    this.contents[0] = text;
+  setValue(value: number): StaffLines {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -34690,13 +34708,15 @@ export class StaffTuning implements XMLElement<'staff-tuning', StaffTuningAttrib
 
 export type CapoAttributes = Record<string, unknown>;
 
-export type CapoContents = [string];
+export type CapoContents = [number];
 
 export class Capo implements XMLElement<'capo', CapoAttributes, CapoContents> {
   static readonly schema = {
     name: 'capo',
     attributes: {},
-    contents: [{ type: 'required', value: { type: 'string' } }],
+    contents: [
+      { type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
+    ],
   } as const;
 
   readonly schema = Capo.schema;
@@ -34709,11 +34729,11 @@ export class Capo implements XMLElement<'capo', CapoAttributes, CapoContents> {
     this.contents = opts?.contents ?? operations.zero(Capo.schema.contents);
   }
 
-  getText(): string {
+  getValue(): number {
     return this.contents[0];
   }
-  setText(text: string): Capo {
-    this.contents[0] = text;
+  setValue(value: number): Capo {
+    this.contents[0] = value;
     return this;
   }
 }
@@ -37400,7 +37420,7 @@ export type InversionAttributes = {
   text: string | null;
 };
 
-export type InversionContents = [string];
+export type InversionContents = [number];
 
 export class Inversion implements XMLElement<'inversion', InversionAttributes, InversionContents> {
   static readonly schema = {
@@ -37442,7 +37462,9 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
       },
       text: { type: 'optional', value: { type: 'string' } },
     },
-    contents: [{ type: 'label', label: 'inversion', value: { type: 'required', value: { type: 'string' } } }],
+    contents: [
+      { type: 'label', label: 'inversion', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
+    ],
   } as const;
 
   readonly schema = Inversion.schema;
@@ -37526,10 +37548,10 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
     this.attributes['text'] = text;
     return this;
   }
-  getInversion(): string {
+  getInversion(): number {
     return this.contents[0];
   }
-  setInversion(inversion: string): Inversion {
+  setInversion(inversion: number): Inversion {
     this.contents[0] = inversion;
     return this;
   }
@@ -40740,7 +40762,7 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
 export type RepeatAttributes = {
   direction: 'backward' | 'forward';
   'after-jump': 'yes' | 'no' | null;
-  times: string | null;
+  times: number | null;
   winged: 'none' | 'straight' | 'curved' | 'double-straight' | 'double-curved' | null;
 };
 
@@ -40752,7 +40774,7 @@ export class Repeat implements XMLElement<'repeat', RepeatAttributes, RepeatCont
     attributes: {
       direction: { type: 'required', value: { type: 'choices', choices: ['backward', 'forward'] } },
       'after-jump': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-      times: { type: 'optional', value: { type: 'string' } },
+      times: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
       winged: {
         type: 'optional',
         value: { type: 'choices', choices: ['none', 'straight', 'curved', 'double-straight', 'double-curved'] },
@@ -40784,10 +40806,10 @@ export class Repeat implements XMLElement<'repeat', RepeatAttributes, RepeatCont
     this.attributes['after-jump'] = afterJump;
     return this;
   }
-  getTimes(): string | null {
+  getTimes(): number | null {
     return this.attributes['times'];
   }
-  setTimes(times: string | null): Repeat {
+  setTimes(times: number | null): Repeat {
     this.attributes['times'] = times;
     return this;
   }

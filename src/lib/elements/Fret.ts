@@ -39,5 +39,5 @@ export const Fret = schema(
      */
     ['font-weight']: t.optional(dataTypes.fontWeight()),
   },
-  [t.required(dataTypes.nonNegativeInteger())] as const
+  [t.label({ label: 'fret-value', value: t.required(dataTypes.nonNegativeInteger()) })] as const
 );

@@ -12,4 +12,6 @@ import { schema, t } from '../schema';
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-lines/}
  */
-export const StaffLines = schema('staff-lines', {}, [t.required(dataTypes.nonNegativeInteger())] as const);
+export const StaffLines = schema('staff-lines', {}, [
+  t.label({ label: 'value', value: t.required(dataTypes.nonNegativeInteger()) }),
+] as const);
