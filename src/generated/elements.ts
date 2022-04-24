@@ -23533,7 +23533,7 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
       { type: 'optional', value: Level },
       {
         type: 'label',
-        label: 'notations',
+        label: 'values',
         value: {
           type: 'zeroOrMore',
           value: {
@@ -23597,7 +23597,7 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
     this.contents[1] = level;
     return this;
   }
-  getNotations(): Array<
+  getValues(): Array<
     | Tied
     | Slur
     | Tuplet
@@ -23615,8 +23615,8 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
   > {
     return this.contents[2];
   }
-  setNotations(
-    notations: Array<
+  setValues(
+    values: Array<
       | Tied
       | Slur
       | Tuplet
@@ -23633,7 +23633,7 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
       | OtherNotation
     >
   ): Notations {
-    this.contents[2] = notations;
+    this.contents[2] = values;
     return this;
   }
 }

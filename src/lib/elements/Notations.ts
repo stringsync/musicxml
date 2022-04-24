@@ -46,7 +46,7 @@ export const Notations = schema(
     t.optional(Footnote),
     t.optional(Level),
     t.label({
-      label: 'notations',
+      label: 'values',
       value: t.zeroOrMore(
         t.choices(
           Tied,
