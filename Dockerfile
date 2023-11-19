@@ -1,4 +1,4 @@
-FROM node:16.0.0
+FROM node:18.0.0
 
 WORKDIR /musicxml
 
