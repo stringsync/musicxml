@@ -1,0 +1,13 @@
+{
+  "entryPoints": [
+    "src/index.ts"
+  ],
+  "out": "./docs",
+  "entryPointStrategy": "expand",
+  "exclude": [
+    "src/test/**/*.ts",
+  ],
+  "readme": "none",
+  "plugin": [],
+  "visibilityFilters": {}
+}

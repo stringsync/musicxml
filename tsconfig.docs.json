@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2017"],
+    "types": []
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "**/*.test.ts",
+    "src/compatibility",
+    "src/examples",
+    "src/testing",
+    "src/scripts",
+    "src/lib/dataTypes",
+    "src/lib/elements"
+  ]
+}
