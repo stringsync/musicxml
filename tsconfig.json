@@ -8,7 +8,8 @@
     "sourceMap": false,
     "allowJs": true,
     "types": ["node", "jest", "jest-extended"],
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
