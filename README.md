@@ -2,6 +2,8 @@
 
 ![test workflow](https://github.com/stringsync/musicxml/actions/workflows/test.yml/badge.svg)
 
+[See the docs](https://stringsync.github.io/musicxml/).
+
 `musicxml` is a JavaScript library that makes it easy to parse and edit [MusicXML](https://www.w3.org/2021/06/musicxml40/) documents.
 
 One of the common problems working with MusicXML is that different softwares may export invalid MusicXML documents due
