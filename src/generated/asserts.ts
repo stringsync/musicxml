@@ -1449,8 +1449,8 @@ export const isSnapPizzicato = (value: any): value is elements.SnapPizzicato => 
   return operations.validate(value, elements.SnapPizzicato);
 };
 
-export const isSoftAccess = (value: any): value is elements.SoftAccess => {
-  return operations.validate(value, elements.SoftAccess);
+export const isSoftAccent = (value: any): value is elements.SoftAccent => {
+  return operations.validate(value, elements.SoftAccent);
 };
 
 export const isSoftware = (value: any): value is elements.Software => {

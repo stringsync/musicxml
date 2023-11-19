@@ -1,6 +1,7 @@
 import { exec } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as ts from 'typescript';
 import * as elements from '../lib/elements';
 import { DescriptorChild, XMLElementSchema } from '../lib/schema';
 import * as util from '../lib/util';
@@ -9,6 +10,8 @@ import { MusicXMLError } from '../MusicXMLError';
 const OUTPUT_DIRECTORY = path.join(__dirname, '..', 'generated');
 const ELEMENTS_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'elements.ts');
 const ASSERTS_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'asserts.ts');
+
+const ELEMENTS_INPUT_DIRECTORY = path.join(__dirname, '..', 'lib', 'elements');
 
 const capitalize = (string: string): string => {
   return string.length > 0 ? string[0].toUpperCase() + string.substring(1) : string;
@@ -121,12 +124,18 @@ const getTypeLiteral = (child: DescriptorChild): string => {
   throw new MusicXMLError('cannot compute type for value', { child });
 };
 
-const getAttributesTypeLiteral = (schema: XMLElementSchema): string => {
+const getAttributesTypeLiteral = (schema: XMLElementSchema, comments: Record<string, string>): string => {
   const attributes = new Array<string>();
   for (const [key, value] of Object.entries(schema.attributes)) {
-    attributes.push(`'${key}': ${getTypeLiteral(value as DescriptorChild)}`);
+    const declaration = `'${key}': ${getTypeLiteral(value as DescriptorChild)}`;
+
+    if (key in comments) {
+      attributes.push([toMultiLineComment(comments[key]), declaration].join('\n'));
+    } else {
+      attributes.push(declaration);
+    }
   }
-  return attributes.length > 0 ? `{ ${attributes.join(', ')} }` : 'Record<string, unknown>';
+  return attributes.length > 0 ? `{ ${attributes.join(';\n')} }` : 'Record<string, unknown>';
 };
 
 const getContentsTypeLiteral = (schema: XMLElementSchema): string => {
@@ -156,9 +165,11 @@ const getAttributeAccessorMethodLiterals = (schema: XMLElementSchema): string =>
   for (const [key, value] of Object.entries(schema.attributes)) {
     const name = getAttributeLabel(value) || key;
     const typeLiteral = getTypeLiteral(value);
-    methods.push(`  get${toPascalCase(decolonize(name))}(): ${typeLiteral} { return this.attributes['${key}']; }`);
+    methods.push(`/** Gets @type {${className}Attributes['${name}']}. */`);
+    methods.push(`get${toPascalCase(decolonize(name))}(): ${typeLiteral} { return this.attributes['${key}']; }`);
+    methods.push(`/** Sets @type {${className}Attributes['${name}']}. */`);
     methods.push(
-      `  set${toPascalCase(decolonize(name))}(${toCamelCase(
+      `set${toPascalCase(decolonize(name))}(${toCamelCase(
         decolonize(name)
       )}: ${typeLiteral}): ${className} { this.attributes['${key}'] = ${toCamelCase(decolonize(name))}; return this; }`
     );
@@ -252,17 +263,18 @@ const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): string => 
     throw new MusicXMLError('too many text nodes', { numTextNodes, factory: schema });
   }
 
-  const className = getClassName(schema);
   const methods = new Array<string>();
   for (let ndx = 0; ndx < contents.length; ndx++) {
     const accessorName = getAccessorName(contents[ndx]);
+    methods.push(`/** Gets @type {${getTypeLiteral(contents[ndx])}}. */`);
     methods.push(
-      `  get${toPascalCase(accessorName)}(): ${getTypeLiteral(contents[ndx])} { return this.contents[${ndx}]; }`
+      `get${toPascalCase(accessorName)}(): ${getTypeLiteral(contents[ndx])} { return this.contents[${ndx}]; }`
     );
+    methods.push(`/** Sets @type {${getTypeLiteral(contents[ndx])}}. */`);
     methods.push(
-      `  set${toPascalCase(accessorName)}(${toCamelCase(accessorName)}: ${getTypeLiteral(
+      `set${toPascalCase(accessorName)}(${toCamelCase(accessorName)}: ${getTypeLiteral(
         contents[ndx]
-      )}): ${className} { this.contents[${ndx}] = ${toCamelCase(accessorName)}; return this; }`
+      )}): this { this.contents[${ndx}] = ${toCamelCase(accessorName)}; return this; }`
     );
   }
   return methods.join('\n');
@@ -270,13 +282,15 @@ const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): string => 
 
 const toClassLiteral = (schema: XMLElementSchema): string => {
   const className = getClassName(schema);
+  const comments = getElementComments(className);
+  const classComment = toMultiLineComment(comments.leading);
 
   const schemaLiteral = getSchemaLiteral(schema);
 
   const labeledTypeLiterals = getLabeledTypeLiterals(schema);
 
   const attributesTypeName = `${className}Attributes`;
-  const attributesTypeLiteral = getAttributesTypeLiteral(schema);
+  const attributesTypeLiteral = getAttributesTypeLiteral(schema, comments.attributes);
   const attributesAccessorMethodLiterals = getAttributeAccessorMethodLiterals(schema);
 
   const contentsTypeName = `${className}Contents`;
@@ -290,6 +304,7 @@ export type ${attributesTypeName} = ${attributesTypeLiteral};
 
 export type ${contentsTypeName} = ${contentsTypeLiteral};
 
+${classComment}
 export class ${className} implements XMLElement<'${schema.name}', ${attributesTypeName}, ${contentsTypeName}> {
   static readonly schema = ${schemaLiteral} as const;
 
@@ -306,6 +321,78 @@ ${attributesAccessorMethodLiterals}
 ${contentsAccessorMethodLiterals}
 }`;
 };
+
+const getElementComments = (className: string): { leading: string; attributes: Record<string, string> } => {
+  const comments: { leading: string; attributes: Record<string, string> } = { leading: '', attributes: {} };
+
+  const sourceFilePath = path.join(ELEMENTS_INPUT_DIRECTORY, `${className}.ts`);
+  const sourceFile = ts.createSourceFile(
+    sourceFilePath,
+    fs.readFileSync(sourceFilePath).toString(),
+    ts.ScriptTarget.Latest,
+    true
+  );
+
+  function extract(node: ts.Node, sourceFile: ts.SourceFile): string {
+    const comments = new Array<string>();
+
+    // Collect leading comments
+    const leadingComments = ts.getLeadingCommentRanges(sourceFile.text, node.getFullStart());
+    if (leadingComments) {
+      leadingComments.forEach((commentRange) => {
+        comments.push(sourceFile.text.substring(commentRange.pos, commentRange.end));
+      });
+    }
+
+    return comments
+      .join('\n')
+      .replace(/\/\*\*|\*\/|\*/g, '')
+      .trim();
+  }
+
+  ts.forEachChild(sourceFile, (node) => {
+    if (!ts.isVariableStatement(node)) {
+      return;
+    }
+    // Extract the leading comment.
+    comments.leading = extract(node, sourceFile);
+
+    // When a schema is being defined, extract the comments from the attributes argument (should be second).
+    const declaration = node.declarationList.declarations[0];
+    if (!ts.isVariableDeclaration(declaration)) {
+      return;
+    }
+
+    declaration.forEachChild((child) => {
+      if (!ts.isCallExpression(child)) {
+        return;
+      }
+      if (!ts.isIdentifier(child.expression)) {
+        return;
+      }
+      if (child.expression.text !== 'schema') {
+        return;
+      }
+      const args = child.arguments;
+      // Ensure there is a second argument and it's an object literal
+      if (args.length > 1 && ts.isObjectLiteralExpression(args[1])) {
+        const properties = args[1] as ts.ObjectLiteralExpression;
+        properties.properties.forEach((property) => {
+          if (ts.isPropertyAssignment(property)) {
+            // remove brackets and apostrophes
+            const propertyName = property.name.getText(sourceFile).replace(/[[\]']/g, '');
+            comments.attributes[propertyName] = extract(property, sourceFile);
+          }
+        });
+      }
+    });
+  });
+
+  return comments;
+};
+
+const toMultiLineComment = (comment: string): string =>
+  ['/**', ...comment.split('\n').map((line) => `* ${line.trim()}`), '*/'].join('\n');
 
 const getTypeAssertMethodLiterals = (schema: XMLElementSchema): string[] => {
   const methods = new Set<string>();

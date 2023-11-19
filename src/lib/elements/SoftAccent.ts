@@ -2,11 +2,11 @@ import * as dataTypes from '../dataTypes';
 import { schema, t } from '../schema';
 
 /**
- * The `<soft-accent> element
+ * The `<soft-accent>` element
  *
- * Parent element: `<articulations>
+ * Parent element: `<articulations>`
  *
- * The `<soft-accent> element indicates a soft accent that is not as heavy as a normal accent. It is often notated as
+ * The `<soft-accent>` element indicates a soft accent that is not as heavy as a normal accent. It is often notated as
  * <>. It can be combined with other articulations to implement the first eight symbols in the Standard Music Font
  * Layout (SMuFL) [Articulation supplement](https://www.w3.org/2021/03/smufl14/tables/articulation-supplement.html)
  * range.
@@ -14,7 +14,7 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/soft-accent/}
  */
 export const SoftAccent = schema(
-  'soft-access',
+  'soft-accent',
   {
     /**
      * Indicates the color of an element.
