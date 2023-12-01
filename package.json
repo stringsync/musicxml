@@ -1,6 +1,6 @@
 {
   "name": "@stringsync/musicxml",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "private": false,
   "description": "a simple musicXML library",
   "main": "dist/index.js",
