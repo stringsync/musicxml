@@ -6,9 +6,9 @@ import { DisplayStep } from './DisplayStep';
 /**
  * The `<rest>` element
  *
- * Parent element: `<note>
+ * Parent element: `<note>`
  *
- * The `<rest> element indicates notated rests or silences. A `<rest> element is usually empty, but placement on the
+ * The `<rest>` element indicates notated rests or silences. A `<rest>` element is usually empty, but placement on the
  * staff can be specified using `<display-step>` and `<display-octave>` elements.
  *
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rest/}
