@@ -53,11 +53,11 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "generate": "ts-node src/scripts/generate.ts",
-    "posttest": "docker-compose down",
+    "posttest": "docker compose down",
     "prepare": "husky install",
     "prepublishOnly": "yarn build",
-    "pretest": "docker-compose build",
-    "test": "docker-compose run --rm test yarn jest",
+    "pretest": "docker compose build",
+    "test": "docker compose run --rm test yarn jest",
     "docs": "typedoc --tsconfig tsconfig.docs.json",
     "docs:dev": "concurrently 'typedoc --tsconfig tsconfig.docs.json --watch --preserveWatchOutput' 'serve ./docs'"
   },
