@@ -1,6 +1,7 @@
 import { cli, type Deps } from 'webappwiz/cmd';
 import { z } from 'zod';
 import { build } from './build';
+import { check } from './check';
 import { docs, docsDev } from './docs';
 import { fix } from './fix';
 import { generate } from './generate';
@@ -28,6 +29,14 @@ mxl
 	.action((opts, { ps, log }) => test({ ...opts, ps, log }));
 
 mxl
+	.command('check')
+	.description('check formatting, lint, types and tests; forward arguments to bun test')
+	.allowUnknownOption()
+	.passThroughOptions()
+	.rest('args', z.string(), { description: 'arguments forwarded to bun test' })
+	.action((opts, { ps, log }) => check({ ...opts, ps, log }));
+
+mxl
 	.command('docs')
 	.description('generate the API docs')
 	.action((_, { ps, log }) => docs({ ps, log }));
@@ -46,6 +55,6 @@ mxl
 
 mxl
 	.command('ship')
-	.description('bump the version, regenerate docs, commit, tag, and publish')
+	.description('run all checks, bump the version, regenerate docs, commit, tag, and publish')
 	.arg('bump', z.enum(BUMPS))
 	.action((opts, { ps, log }) => ship({ bump: opts.bump, ps, log }));

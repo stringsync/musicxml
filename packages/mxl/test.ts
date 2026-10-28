@@ -11,7 +11,16 @@ export async function test(opts: { args: string[]; ps: Ps; log: Logger }): Promi
 	const { ps, log } = opts;
 	try {
 		await run(ps, log, ['docker', 'compose', 'build']);
-		await run(ps, log, ['docker', 'compose', 'run', '--rm', 'test', 'bun', 'test', ...opts.args]);
+		await run(ps, log, [
+			'docker',
+			'compose',
+			'run',
+			'--rm',
+			'test',
+			'bun',
+			'test',
+			...(opts.args.length > 0 ? opts.args : ['.', '../mxl']),
+		]);
 	} finally {
 		await run(ps, log, ['docker', 'compose', 'down']);
 	}

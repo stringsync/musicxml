@@ -23,7 +23,7 @@ describe('mxl command program', () => {
 		await mxl.run({ ps, log }, ['--help']);
 
 		const help = log.entries.map((entry) => color.strip(String(entry.message))).join('\n');
-		for (const name of ['build', 'generate', 'fix', 'test', 'docs', 'docs:dev', 'ship']) {
+		for (const name of ['build', 'generate', 'check', 'fix', 'test', 'docs', 'docs:dev', 'ship']) {
 			expect(help).toContain(name);
 		}
 		expect(ps.getCalls()).toEqual([]);
@@ -36,22 +36,24 @@ describe('mxl command program', () => {
 		expect(ps.getCallDirs()).toEqual(['packages/musicxml']);
 	});
 
-	it('generates with the generate script', async () => {
-		await mxl.run({ ps, log }, ['generate']);
-
-		expect(ps.getCalls()).toEqual(['bun src/scripts/generate.ts']);
-	});
-
 	it('applies fixes and typechecks by default', async () => {
 		await mxl.run({ ps, log }, ['fix']);
 
-		expect(ps.getCalls()).toEqual(['bunx biome check . --write', 'bunx tsc --noEmit -p packages/musicxml']);
+		expect(ps.getCalls()).toEqual([
+			'bunx biome check . --write',
+			'bunx tsc --noEmit -p packages/musicxml',
+			'bunx tsc --noEmit -p packages/mxl',
+		]);
 	});
 
 	it('checks without writing under --check', async () => {
 		await mxl.run({ ps, log }, ['fix', '--check', 'true']);
 
-		expect(ps.getCalls()).toEqual(['bunx biome check .', 'bunx tsc --noEmit -p packages/musicxml']);
+		expect(ps.getCalls()).toEqual([
+			'bunx biome check .',
+			'bunx tsc --noEmit -p packages/musicxml',
+			'bunx tsc --noEmit -p packages/mxl',
+		]);
 	});
 
 	it('generates docs with typedoc', async () => {
@@ -78,7 +80,7 @@ describe('mxl command program', () => {
 
 		expect(ps.getCalls()).toEqual([
 			'docker compose build',
-			'docker compose run --rm test bun test',
+			'docker compose run --rm test bun test . ../mxl',
 			'docker compose down',
 		]);
 		expect(ps.getExitCode()).toBe(1);

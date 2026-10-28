@@ -13,6 +13,7 @@ export async function fix(opts: { check: boolean; ps: Ps; log: Logger }): Promis
 	const steps: Array<{ name: string; argv: string[] }> = [
 		{ name: 'check', argv: checkArgs },
 		{ name: 'typecheck', argv: ['bunx', 'tsc', '--noEmit', '-p', 'packages/musicxml'] },
+		{ name: 'CLI typecheck', argv: ['bunx', 'tsc', '--noEmit', '-p', 'packages/mxl'] },
 	];
 	for (const { name, argv } of steps) {
 		log.info(`$ ${argv.join(' ')}`);

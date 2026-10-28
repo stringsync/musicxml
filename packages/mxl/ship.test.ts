@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'bun:test';
 import { MemoryLogger } from 'webappwiz/log';
 import { Cut } from 'webappwiz/ship';
 import { FakeFs, FakePs } from 'webappwiz/system/testing';
-import { commonJsBundle, docsStep, ship } from './ship';
+import { commonJsBundle, docsStep, release, ship } from './ship';
 
 describe('ship', () => {
 	let log: MemoryLogger;
@@ -27,7 +27,17 @@ describe('ship', () => {
 
 		await expect(ship({ bump: 'patch', log, ps, fs })).rejects.toThrow('fix failed');
 
-		expect(ps.getCalls()).toEqual(['bunx biome check .', 'bunx tsc --noEmit -p packages/musicxml']);
+		expect(ps.getCalls()).toEqual([
+			'bunx biome check .',
+			'bunx tsc --noEmit -p packages/musicxml',
+			'bunx tsc --noEmit -p packages/mxl',
+		]);
+	});
+
+	it('composes a release with docs stamped before publication', () => {
+		const declared = release({ ps, log, fs });
+		expect(declared.packages).toContain('@stringsync/musicxml');
+		expect(declared.artifacts.some((artifact) => artifact.stage === 'stamp')).toBe(true);
 	});
 
 	describe('docs step', () => {
@@ -36,7 +46,7 @@ describe('ship', () => {
 		});
 
 		it('regenerates typedoc and stages docs so new pages enter the release commit', async () => {
-			await docsStep({ ps, log }).run(new Cut('1.2.3', []));
+			await docsStep({ ps, log }).publish(new Cut('1.2.3', []));
 
 			expect(ps.getCalls()).toEqual(['bunx typedoc --tsconfig tsconfig.docs.json', 'git add --all docs']);
 			expect(ps.getCallDirs()[0]).toBe('packages/musicxml');
@@ -45,7 +55,7 @@ describe('ship', () => {
 		it('does not stage docs when generation fails', async () => {
 			ps.simulate(async () => 1);
 
-			await expect(docsStep({ ps, log }).run(new Cut('1.2.3', []))).rejects.toThrow('typedoc');
+			await expect(docsStep({ ps, log }).publish(new Cut('1.2.3', []))).rejects.toThrow('typedoc');
 
 			expect(ps.getCalls()).toEqual(['bunx typedoc --tsconfig tsconfig.docs.json']);
 		});
