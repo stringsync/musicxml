@@ -23,9 +23,8 @@ describe('mxl command program', () => {
 		await mxl.run({ ps, log }, ['--help']);
 
 		const help = log.entries.map((entry) => color.strip(String(entry.message))).join('\n');
-		for (const name of ['build', 'generate', 'check', 'fix', 'test', 'docs', 'docs:dev', 'ship']) {
-			expect(help).toContain(name);
-		}
+		const commands = [...help.matchAll(/^ {2}(\S+)\s+/gm)].map((match) => match[1]);
+		expect(commands).toEqual(['build', 'generate', 'test', 'fix', 'ship']);
 		expect(ps.getCalls()).toEqual([]);
 	});
 
@@ -54,12 +53,6 @@ describe('mxl command program', () => {
 			'bunx tsc --noEmit -p packages/musicxml',
 			'bunx tsc --noEmit -p packages/mxl',
 		]);
-	});
-
-	it('generates docs with typedoc', async () => {
-		await mxl.run({ ps, log }, ['docs']);
-
-		expect(ps.getCalls()).toEqual(['bunx typedoc --tsconfig tsconfig.docs.json']);
 	});
 
 	it('builds, runs and tears down the Docker tests, forwarding arguments', async () => {

@@ -73,7 +73,7 @@ against the XSD through the [xmlvalidator](xmlvalidator) service.
 ```shell
 bin/mxl test    # run the tests (any bun test options work, like --watch)
 bin/mxl fix     # format, lint and typecheck
-bin/mxl check   # check formatting, lint, types and tests (also runs before shipping)
+bin/mxl fix --check # check without writing fixes
 bin/mxl --help  # everything else
 ```
 
