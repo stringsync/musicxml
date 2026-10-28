@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "skills": {
+    "splates": {
+      "source": "stringsync/splates",
+      "ref": "v0.0.59",
+      "sourceType": "github",
+      "skillPath": "skills/splates/SKILL.md",
+      "computedHash": "3811b74cd7e3a5451593088ea069fa3aeb53684a7d0b2255a20e9f5fb47f5d5c"
+    }
+  }
+}
