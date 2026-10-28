@@ -13,7 +13,7 @@ bun add @stringsync/musicxml@0.3.1
 
 The API is still settling, so pin an exact version.
 
-## 🎯 Valid in, valid out
+## Valid in, valid out
 
 Not every app exports valid MusicXML. This library doesn't mind: whatever you parse is conformed to the spec, and
 whatever you serialize is valid. The tests check this against the official
@@ -26,7 +26,7 @@ To make that promise, a few things give:
   [zero.ts](packages/musicxml/src/lib/operations/zero.ts)).
 - Comments are dropped, and CDATA comes back as plain text.
 
-## 🎵 Usage
+## Usage
 
 ```ts
 import { asserts, elements, MusicXML } from '@stringsync/musicxml';
@@ -44,7 +44,7 @@ const note = new elements.Note();
 note.setColor('#800080').setStaff(new elements.Staff());
 ```
 
-## 🏷️ Aliases for variants
+## Aliases for variants
 
 MusicXML loves "one of these shapes" content, and the XSD rarely names the shapes. This library does. A `<note>`, for
 example, is a `TiedNote`, `CuedNote`, `TiedGraceNote` or `CuedGraceNote`, and `asserts` has a type guard for each:
@@ -65,7 +65,7 @@ if (asserts.isTiedNote(variation)) {
 
 No more counting tuple slots to guess which one you've got.
 
-## 💻 Development
+## Development
 
 You'll need [Bun](https://bun.sh/docs/installation) and [Docker](https://docs.docker.com/get-docker/): tests validate
 against the XSD through the [xmlvalidator](xmlvalidator) service.
