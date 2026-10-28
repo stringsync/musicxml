@@ -17,7 +17,7 @@ import { NormalType } from './NormalType';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time-modification/}
  */
 export const TimeModification = schema('time-modification', {}, [
-  t.required(ActualNotes),
-  t.required(NormalNotes),
-  t.label({ label: 'normal', value: t.optional([t.required(NormalType), t.zeroOrMore(NormalDot)]) }),
+	t.required(ActualNotes),
+	t.required(NormalNotes),
+	t.label({ label: 'normal', value: t.optional([t.required(NormalType), t.zeroOrMore(NormalDot)]) }),
 ] as const);

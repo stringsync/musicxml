@@ -26,15 +26,15 @@ import { SwingType } from './SwingType';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/swing/}
  */
 export const Swing = schema('swing', {}, [
-  t.label({
-    label: 'value',
-    value: t.choices(
-      Straight,
-      t.label({
-        label: 'alternate-swing',
-        value: [t.required(First), t.required(Second), t.optional(SwingType)] as const,
-      })
-    ),
-  }),
-  t.optional(SwingStyle),
+	t.label({
+		label: 'value',
+		value: t.choices(
+			Straight,
+			t.label({
+				label: 'alternate-swing',
+				value: [t.required(First), t.required(Second), t.optional(SwingType)] as const,
+			}),
+		),
+	}),
+	t.optional(SwingStyle),
 ] as const);

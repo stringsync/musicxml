@@ -29,36 +29,36 @@ import { WavyLine } from './WavyLine';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ornaments/}
  */
 export const Ornaments = schema(
-  'ornaments',
-  {
-    /**
-     * Specifies an ID that is unique to the entire document.
-     */
-    id: t.optional(dataTypes.id()),
-  },
-  [
-    t.label({
-      label: 'values',
-      value: t.zeroOrMore(
-        t.choices(
-          TrillMark,
-          Turn,
-          DelayedTurn,
-          InvertedTurn,
-          DelayedInvertedTurn,
-          VerticalTurn,
-          InvertedVerticalTurn,
-          Shake,
-          WavyLine,
-          Mordent,
-          InvertedMordent,
-          Schleifer,
-          Tremolo,
-          Haydn,
-          OtherOrnament
-        )
-      ),
-    }),
-    t.label({ label: 'accidental-marks', value: t.zeroOrMore(AccidentalMark) }),
-  ] as const
+	'ornaments',
+	{
+		/**
+		 * Specifies an ID that is unique to the entire document.
+		 */
+		id: t.optional(dataTypes.id()),
+	},
+	[
+		t.label({
+			label: 'values',
+			value: t.zeroOrMore(
+				t.choices(
+					TrillMark,
+					Turn,
+					DelayedTurn,
+					InvertedTurn,
+					DelayedInvertedTurn,
+					VerticalTurn,
+					InvertedVerticalTurn,
+					Shake,
+					WavyLine,
+					Mordent,
+					InvertedMordent,
+					Schleifer,
+					Tremolo,
+					Haydn,
+					OtherOrnament,
+				),
+			),
+		}),
+		t.label({ label: 'accidental-marks', value: t.zeroOrMore(AccidentalMark) }),
+	] as const,
 );

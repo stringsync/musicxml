@@ -6,5 +6,5 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/tip-direction/}
  */
 export const tipDirection = () => {
-  return t.choices(...(['down', 'left', 'northeast', 'northwest', 'right', 'southeast', 'southwest', 'up'] as const));
+	return t.choices(...(['down', 'left', 'northeast', 'northwest', 'right', 'southeast', 'southwest', 'up'] as const));
 };

@@ -15,9 +15,9 @@ import { TuningStep } from './TuningStep';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accord/}
  */
 export const Accord = schema(
-  'accord',
-  {
-    string: t.optional(dataTypes.stringNumber()),
-  },
-  [t.required(TuningStep), t.optional(TuningAlter), t.required(TuningOctave)]
+	'accord',
+	{
+		string: t.optional(dataTypes.stringNumber()),
+	},
+	[t.required(TuningStep), t.optional(TuningAlter), t.required(TuningOctave)],
 );

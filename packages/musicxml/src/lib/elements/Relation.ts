@@ -12,12 +12,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/relation/}
  */
 export const Relation = schema(
-  'relation',
-  {
-    /**
-     * Standard type values are music, words, and arrangement, but other types may be used.
-     */
-    type: t.optional(dataTypes.token()),
-  },
-  [t.required(dataTypes.string())] as const
+	'relation',
+	{
+		/**
+		 * Standard type values are music, words, and arrangement, but other types may be used.
+		 */
+		type: t.optional(dataTypes.token()),
+	},
+	[t.required(dataTypes.string())] as const,
 );

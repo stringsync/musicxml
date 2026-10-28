@@ -13,13 +13,13 @@ import { MeasurePartwise } from './MeasurePartwise';
  *  {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-partwise/}
  */
 export const PartPartwise = schema(
-  'part',
-  {
-    /**
-     * An IDREF back to a `<score-part>` element within the `<part-list>` element.
-     */
-    id: dataTypes.idref(),
-  },
-  [t.label({ label: 'measures', value: t.oneOrMore(MeasurePartwise) })] as const,
-  { className: 'part-partwise' }
+	'part',
+	{
+		/**
+		 * An IDREF back to a `<score-part>` element within the `<part-list>` element.
+		 */
+		id: dataTypes.idref(),
+	},
+	[t.label({ label: 'measures', value: t.oneOrMore(MeasurePartwise) })] as const,
+	{ className: 'part-partwise' },
 );

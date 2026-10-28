@@ -15,5 +15,5 @@ import { DisplayText } from './DisplayText';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/notehead-text/}
  */
 export const NoteheadText = schema('notehead-text', {}, [
-  t.label({ label: 'texts', value: t.oneOrMore([DisplayText, AccidentalText]) }),
+	t.label({ label: 'texts', value: t.oneOrMore([DisplayText, AccidentalText]) }),
 ] as const);

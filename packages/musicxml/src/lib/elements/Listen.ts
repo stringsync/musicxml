@@ -16,5 +16,5 @@ import { Wait } from './Wait';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/listen/}
  */
 export const Listen = schema('listen', {}, [
-  t.label({ label: 'listens', value: t.oneOrMore(t.choices(Assess, Wait, OtherListen)) }),
+	t.label({ label: 'listens', value: t.oneOrMore(t.choices(Assess, Wait, OtherListen)) }),
 ] as const);

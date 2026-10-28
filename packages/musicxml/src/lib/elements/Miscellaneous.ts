@@ -12,5 +12,5 @@ import { MiscellaneousField } from './MiscellaneousField';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/miscellaneous/}
  */
 export const Miscellaneous = schema('miscellaneous', {}, [
-  t.label({ label: 'miscellaneous-fields', value: t.zeroOrMore(MiscellaneousField) }),
+	t.label({ label: 'miscellaneous-fields', value: t.zeroOrMore(MiscellaneousField) }),
 ] as const);

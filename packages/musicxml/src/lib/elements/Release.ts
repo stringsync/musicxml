@@ -13,12 +13,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/release/}
  */
 export const Release = schema(
-  'release',
-  {
-    /**
-     * Specifies where the release starts in terms of divisions relative to the current note.
-     */
-    offset: t.optional(dataTypes.divisions()),
-  },
-  [] as const
+	'release',
+	{
+		/**
+		 * Specifies where the release starts in terms of divisions relative to the current note.
+		 */
+		offset: t.optional(dataTypes.divisions()),
+	},
+	[] as const,
 );

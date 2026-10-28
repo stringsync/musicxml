@@ -19,12 +19,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/glyph/}
  */
 export const Glyph = schema(
-  'glyph',
-  {
-    /**
-     * The type of glyph that is being defined.
-     */
-    type: t.required(dataTypes.glyphType()),
-  },
-  [t.required(dataTypes.smuflGlyphName())] as const
+	'glyph',
+	{
+		/**
+		 * The type of glyph that is being defined.
+		 */
+		type: t.required(dataTypes.glyphType()),
+	},
+	[t.required(dataTypes.smuflGlyphName())] as const,
 );

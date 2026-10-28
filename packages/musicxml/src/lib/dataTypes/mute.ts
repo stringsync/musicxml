@@ -6,26 +6,26 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/mute/}
  */
 export const mute = () => {
-  return t.label({
-    label: 'mute',
-    value: t.choices(
-      ...([
-        'on',
-        'off',
-        'bucket',
-        'cup',
-        'echo',
-        'harmon-no-stem',
-        'harmon-stem',
-        'hat',
-        'palm',
-        'plunger',
-        'practice',
-        'solotone',
-        'stop-hand',
-        'stop-mute',
-        'straight',
-      ] as const)
-    ),
-  });
+	return t.label({
+		label: 'mute',
+		value: t.choices(
+			...([
+				'on',
+				'off',
+				'bucket',
+				'cup',
+				'echo',
+				'harmon-no-stem',
+				'harmon-stem',
+				'hat',
+				'palm',
+				'plunger',
+				'practice',
+				'solotone',
+				'stop-hand',
+				'stop-mute',
+				'straight',
+			] as const),
+		),
+	});
 };

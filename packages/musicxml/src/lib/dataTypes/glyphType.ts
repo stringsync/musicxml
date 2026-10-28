@@ -34,20 +34,20 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/glyph-type/}
  */
 export const glyphType = () => {
-  return t.choices(
-    ...([
-      'quarter-rest',
-      'g-clef-ottava-bassa',
-      'c-clef',
-      'f-clef',
-      'percussion-clef',
-      'octave-shift-up-8',
-      'octave-shift-down-8',
-      'octave-shift-down-15',
-      'octave-shift-continue-15',
-      'octave-shift-down-22',
-      'octave-shift-up-22',
-      'octave-shift-continue-22',
-    ] as const)
-  );
+	return t.choices(
+		...([
+			'quarter-rest',
+			'g-clef-ottava-bassa',
+			'c-clef',
+			'f-clef',
+			'percussion-clef',
+			'octave-shift-up-8',
+			'octave-shift-down-8',
+			'octave-shift-down-15',
+			'octave-shift-continue-15',
+			'octave-shift-down-22',
+			'octave-shift-up-22',
+			'octave-shift-continue-22',
+		] as const),
+	);
 };

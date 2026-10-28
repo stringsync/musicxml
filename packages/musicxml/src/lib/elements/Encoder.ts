@@ -11,13 +11,13 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/encoder/}
  */
 export const Encoder = schema(
-  'encoder',
-  {
-    /**
-     * Standard values are music, words, and arrangement, but other types may be used. This attribute is only needed
-     * when there are multiple `<encoder>` elements.
-     */
-    type: t.optional(dataTypes.string()),
-  },
-  [t.required(dataTypes.string())] as const
+	'encoder',
+	{
+		/**
+		 * Standard values are music, words, and arrangement, but other types may be used. This attribute is only needed
+		 * when there are multiple `<encoder>` elements.
+		 */
+		type: t.optional(dataTypes.string()),
+	},
+	[t.required(dataTypes.string())] as const,
 );

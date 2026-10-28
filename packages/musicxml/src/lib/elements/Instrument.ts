@@ -14,12 +14,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instrument/}
  */
 export const Instrument = schema(
-  'instrument',
-  {
-    /**
-     * An IDREF back to the `<score-instrument>` id attribute.
-     */
-    id: t.required(dataTypes.idref()),
-  },
-  [] as const
+	'instrument',
+	{
+		/**
+		 * An IDREF back to the `<score-instrument>` id attribute.
+		 */
+		id: t.required(dataTypes.idref()),
+	},
+	[] as const,
 );

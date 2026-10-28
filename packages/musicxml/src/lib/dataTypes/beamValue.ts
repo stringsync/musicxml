@@ -6,8 +6,8 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/beam-value/}
  */
 export const beamValue = () => {
-  return t.label({
-    label: 'beam-value',
-    value: t.choices(...(['backward hook', 'begin', 'continue', 'end', 'forward hook'] as const)),
-  });
+	return t.label({
+		label: 'beam-value',
+		value: t.choices(...(['backward hook', 'begin', 'continue', 'end', 'forward hook'] as const)),
+	});
 };

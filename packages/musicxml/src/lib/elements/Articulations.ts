@@ -28,37 +28,37 @@ import { Unstress } from './Unstress';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/articulations/}
  */
 export const Articulations = schema(
-  'articulations',
-  {
-    /**
-     * Specifies an ID that is unique to the entire document.
-     */
-    id: t.optional(dataTypes.id()),
-  },
-  [
-    t.label({
-      label: 'articulations',
-      value: t.zeroOrMore(
-        t.choices(
-          Accent,
-          StrongAccent,
-          Staccato,
-          Tenuto,
-          DetachedLegato,
-          Staccatissimo,
-          Spiccato,
-          Scoop,
-          Plop,
-          Doit,
-          Falloff,
-          BreathMark,
-          Caesura,
-          Stress,
-          Unstress,
-          SoftAccent,
-          OtherArticulation
-        )
-      ),
-    }),
-  ] as const
+	'articulations',
+	{
+		/**
+		 * Specifies an ID that is unique to the entire document.
+		 */
+		id: t.optional(dataTypes.id()),
+	},
+	[
+		t.label({
+			label: 'articulations',
+			value: t.zeroOrMore(
+				t.choices(
+					Accent,
+					StrongAccent,
+					Staccato,
+					Tenuto,
+					DetachedLegato,
+					Staccatissimo,
+					Spiccato,
+					Scoop,
+					Plop,
+					Doit,
+					Falloff,
+					BreathMark,
+					Caesura,
+					Stress,
+					Unstress,
+					SoftAccent,
+					OtherArticulation,
+				),
+			),
+		}),
+	] as const,
 );

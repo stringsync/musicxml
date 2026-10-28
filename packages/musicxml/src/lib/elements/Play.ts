@@ -18,12 +18,12 @@ import { SemiPitched } from './SemiPitched';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/play/}
  */
 export const Play = schema(
-  'play',
-  {
-    /**
-     * Refers to a specific `<score-instrument>` to which this playback applies.
-     */
-    id: t.optional(dataTypes.id()),
-  },
-  [t.label({ label: 'value', value: t.zeroOrMore(t.choices(Ipa, Mute, SemiPitched, OtherPlay)) })] as const
+	'play',
+	{
+		/**
+		 * Refers to a specific `<score-instrument>` to which this playback applies.
+		 */
+		id: t.optional(dataTypes.id()),
+	},
+	[t.label({ label: 'value', value: t.zeroOrMore(t.choices(Ipa, Mute, SemiPitched, OtherPlay)) })] as const,
 );

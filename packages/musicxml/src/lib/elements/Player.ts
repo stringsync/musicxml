@@ -12,12 +12,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/player/}
  */
 export const Player = schema(
-  'player',
-  {
-    /**
-     * An identifier for this `<player>` that is unique within this document.
-     */
-    id: t.required(dataTypes.id()),
-  },
-  [] as const
+	'player',
+	{
+		/**
+		 * An identifier for this `<player>` that is unique within this document.
+		 */
+		id: t.required(dataTypes.id()),
+	},
+	[] as const,
 );

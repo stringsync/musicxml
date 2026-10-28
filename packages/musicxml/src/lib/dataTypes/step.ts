@@ -5,5 +5,5 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/step/}
  */
 export const step = () => {
-  return t.label({ label: 'step', value: t.choices(...(['A', 'B', 'C', 'D', 'E', 'F', 'G'] as const)) });
+	return t.label({ label: 'step', value: t.choices(...(['A', 'B', 'C', 'D', 'E', 'F', 'G'] as const)) });
 };

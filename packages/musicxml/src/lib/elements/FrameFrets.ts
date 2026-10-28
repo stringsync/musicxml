@@ -11,5 +11,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/frame-frets/}
  */
 export const FrameFrets = schema('frame-frets', {}, [
-  t.label({ label: 'space-size', value: t.required(dataTypes.positiveInteger()) }),
+	t.label({ label: 'space-size', value: t.required(dataTypes.positiveInteger()) }),
 ] as const);

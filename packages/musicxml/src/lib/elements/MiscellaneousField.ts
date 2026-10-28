@@ -12,12 +12,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/miscellaneous-field/}
  */
 export const MiscellaneousField = schema(
-  'miscellaneous-field',
-  {
-    /**
-     * Indicates the type of metadata the element content represents.
-     */
-    name: t.required(dataTypes.token()),
-  },
-  [t.required(dataTypes.string())] as const
+	'miscellaneous-field',
+	{
+		/**
+		 * Indicates the type of metadata the element content represents.
+		 */
+		name: t.required(dataTypes.token()),
+	},
+	[t.required(dataTypes.string())] as const,
 );

@@ -13,28 +13,28 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sync/}
  */
 export const Sync = schema(
-  'sync',
-  {
-    /**
-     * Specifies the style that a score following application should use to synchronize an accompaniment with a
-     * performer.
-     */
-    type: t.required(dataTypes.syncType()),
+	'sync',
+	{
+		/**
+		 * Specifies the style that a score following application should use to synchronize an accompaniment with a
+		 * performer.
+		 */
+		type: t.required(dataTypes.syncType()),
 
-    /**
-     * Specifies a latency time in milliseconds that the listening application should expect from the performer.
-     */
-    latency: t.optional(dataTypes.milliseconds()),
+		/**
+		 * Specifies a latency time in milliseconds that the listening application should expect from the performer.
+		 */
+		latency: t.optional(dataTypes.milliseconds()),
 
-    /**
-     * Restricts the element to apply to a single `<player>`.
-     */
-    player: t.optional(dataTypes.idref()),
+		/**
+		 * Restricts the element to apply to a single `<player>`.
+		 */
+		player: t.optional(dataTypes.idref()),
 
-    /**
-     * Restricts the element to apply to a set of times through a repeated section.
-     */
-    ['time-only']: t.optional(dataTypes.timeOnly()),
-  },
-  [] as const
+		/**
+		 * Restricts the element to apply to a set of times through a repeated section.
+		 */
+		['time-only']: t.optional(dataTypes.timeOnly()),
+	},
+	[] as const,
 );

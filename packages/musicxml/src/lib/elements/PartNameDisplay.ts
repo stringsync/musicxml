@@ -16,12 +16,12 @@ import { DisplayText } from './DisplayText';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-name-display/}
  */
 export const PartNameDisplay = schema(
-  'part-name-display',
-  {
-    /**
-     * Specifies whether or not to print an object. It is yes if not specified.
-     */
-    ['print-object']: t.optional(dataTypes.yesNo()),
-  },
-  [t.label({ label: 'texts', value: t.zeroOrMore(t.choices(DisplayText, AccidentalText)) })] as const
+	'part-name-display',
+	{
+		/**
+		 * Specifies whether or not to print an object. It is yes if not specified.
+		 */
+		['print-object']: t.optional(dataTypes.yesNo()),
+	},
+	[t.label({ label: 'texts', value: t.zeroOrMore(t.choices(DisplayText, AccidentalText)) })] as const,
 );

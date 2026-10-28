@@ -12,12 +12,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beater/}
  */
 export const Beater = schema(
-  'beater',
-  {
-    /**
-     * Indicates the direction in which the tip of the beater points.
-     */
-    tip: t.optional(dataTypes.tipDirection()),
-  },
-  [t.required(dataTypes.beaterValue())] as const
+	'beater',
+	{
+		/**
+		 * Indicates the direction in which the tip of the beater points.
+		 */
+		tip: t.optional(dataTypes.tipDirection()),
+	},
+	[t.required(dataTypes.beaterValue())] as const,
 );

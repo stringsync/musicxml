@@ -1,33 +1,13 @@
 {
-  "name": "musicxml",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "devDependencies": {
-    "@prettier/plugin-xml": "3.2.2",
-    "@types/bun": "^1.4.4",
-    "@typescript-eslint/eslint-plugin": "6.11.0",
-    "@typescript-eslint/parser": "6.11.0",
-    "eslint": "8.54.0",
-    "eslint-config-prettier": "8.3.0",
-    "eslint-config-standard-with-typescript": "21.0.1",
-    "eslint-plugin-import": "2.25.3",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "5.2.0",
-    "husky": "7.0.4",
-    "lint-staged": "12.1.2",
-    "prettier": "3.1.0",
-    "prettier-plugin-organize-imports": "2.3.4",
-    "ts-node": "10.4.0",
-    "typedoc": "^0.25.3",
-    "typescript": "^5.2.2"
-  },
-  "lint-staged": {
-    "packages/musicxml/src/**/*": [
-      "bash -c \"bunx tsc --noEmit -p packages/musicxml\"",
-      "eslint",
-      "prettier --write --ignore-unknown"
-    ]
-  }
+	"name": "musicxml",
+	"private": true,
+	"workspaces": [
+		"packages/*"
+	],
+	"devDependencies": {
+		"@types/bun": "^1.4.4",
+		"typedoc": "^0.25.3",
+		"typescript": "^5.2.2",
+		"@biomejs/biome": "2.5.1"
+	}
 }

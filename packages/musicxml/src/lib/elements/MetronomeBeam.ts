@@ -12,13 +12,13 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-beam/}
  */
 export const MetronomeBeam = schema(
-  'metronome-beam',
-  {
-    /**
-     * Indicates eighth note through 1024th note beams using number values 1 thru 8 respectively. The default value is
-     * 1.
-     */
-    number: t.optional(dataTypes.beamLevel()),
-  },
-  [t.required(dataTypes.beamValue())] as const
+	'metronome-beam',
+	{
+		/**
+		 * Indicates eighth note through 1024th note beams using number values 1 thru 8 respectively. The default value is
+		 * 1.
+		 */
+		number: t.optional(dataTypes.beamLevel()),
+	},
+	[t.required(dataTypes.beamValue())] as const,
 );

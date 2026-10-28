@@ -15,7 +15,7 @@ import { TupletType } from './TupletType';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet-actual/}
  */
 export const TupletActual = schema('tuplet-actual', {}, [
-  t.optional(TupletNumber),
-  t.optional(TupletType),
-  t.label({ label: 'tuplet-dots', value: t.zeroOrMore(TupletDot) }),
+	t.optional(TupletNumber),
+	t.optional(TupletType),
+	t.label({ label: 'tuplet-dots', value: t.zeroOrMore(TupletDot) }),
 ] as const);

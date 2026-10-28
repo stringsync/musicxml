@@ -6,5 +6,5 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/degree-type-value/}
  */
 export const degreeTypeValue = () => {
-  return t.label({ label: 'degree-type-value', value: t.choices(...(['add', 'alter', 'subtract'] as const)) });
+	return t.label({ label: 'degree-type-value', value: t.choices(...(['add', 'alter', 'subtract'] as const)) });
 };

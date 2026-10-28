@@ -18,7 +18,7 @@ import { ScorePart } from './ScorePart';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-list/}
  */
 export const PartList = schema('part-list', {}, [
-  t.label({ label: 'part-groups', value: t.zeroOrMore(PartGroup) }),
-  t.required(ScorePart),
-  t.label({ label: 'parts', value: t.zeroOrMore(t.choices(PartGroup, ScorePart)) }),
+	t.label({ label: 'part-groups', value: t.zeroOrMore(PartGroup) }),
+	t.required(ScorePart),
+	t.label({ label: 'parts', value: t.zeroOrMore(t.choices(PartGroup, ScorePart)) }),
 ] as const);

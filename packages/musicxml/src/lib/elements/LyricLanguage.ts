@@ -11,22 +11,22 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric-language/}
  */
 export const LyricLanguage = schema(
-  'lyric-language',
-  {
-    /**
-     * The default language for the specified lyric name and number.
-     */
-    ['xml:lang']: t.required(dataTypes.xml.lang()),
+	'lyric-language',
+	{
+		/**
+		 * The default language for the specified lyric name and number.
+		 */
+		['xml:lang']: t.required(dataTypes.xml.lang()),
 
-    /**
-     * The lyric name for which this is the default, corresponding to the name attribute in the `<lyric>` element.
-     */
-    name: t.optional(dataTypes.token()),
+		/**
+		 * The lyric name for which this is the default, corresponding to the name attribute in the `<lyric>` element.
+		 */
+		name: t.optional(dataTypes.token()),
 
-    /**
-     * The lyric number for which this is the default, corresponding to the number attribute in the `<lyric>` element.
-     */
-    number: t.optional(dataTypes.nmtoken()),
-  },
-  [] as const
+		/**
+		 * The lyric number for which this is the default, corresponding to the number attribute in the `<lyric>` element.
+		 */
+		number: t.optional(dataTypes.nmtoken()),
+	},
+	[] as const,
 );

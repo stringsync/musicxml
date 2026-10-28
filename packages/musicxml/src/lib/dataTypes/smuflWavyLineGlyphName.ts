@@ -7,5 +7,5 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/smufl-wavy-line-glyph-name/}
  */
 export const smuflWavyLineGlyphName = () => {
-  return t.regex({ pattern: /(wiggle)|(guitar\c*VibratoStroke)/, zero: 'wiggle' });
+	return t.regex({ pattern: /(wiggle)|(guitar\c*VibratoStroke)/, zero: 'wiggle' });
 };

@@ -16,14 +16,14 @@ import { Supports } from './Supports';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/encoding/}
  */
 export const Encoding = schema('encoding', {}, [
-  t.label({
-    label: 'encodings',
-    value: t.zeroOrMore([
-      t.optional(EncodingDate),
-      t.optional(Encoder),
-      t.optional(Software),
-      t.optional(EncodingDescription),
-      t.optional(Supports),
-    ]),
-  }),
+	t.label({
+		label: 'encodings',
+		value: t.zeroOrMore([
+			t.optional(EncodingDate),
+			t.optional(Encoder),
+			t.optional(Software),
+			t.optional(EncodingDescription),
+			t.optional(Supports),
+		]),
+	}),
 ] as const);

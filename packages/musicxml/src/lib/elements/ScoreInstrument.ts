@@ -24,18 +24,18 @@ import { VirtualInstrument } from './VirtualInstrument';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-instrument/}
  */
 export const ScoreInstrument = schema(
-  'score-instrument',
-  {
-    /**
-     * An identifier for this `<score-instrument>` that is unique to this document.
-     */
-    id: t.required(dataTypes.id()),
-  },
-  [
-    t.required(InstrumentName),
-    t.optional(InstrumentAbbreviation),
-    t.optional(InstrumentSound),
-    t.label({ label: 'instrument-types', value: t.zeroOrMore(t.choices(Solo, Ensemble)) }),
-    t.optional(VirtualInstrument),
-  ] as const
+	'score-instrument',
+	{
+		/**
+		 * An identifier for this `<score-instrument>` that is unique to this document.
+		 */
+		id: t.required(dataTypes.id()),
+	},
+	[
+		t.required(InstrumentName),
+		t.optional(InstrumentAbbreviation),
+		t.optional(InstrumentSound),
+		t.label({ label: 'instrument-types', value: t.zeroOrMore(t.choices(Solo, Ensemble)) }),
+		t.optional(VirtualInstrument),
+	] as const,
 );

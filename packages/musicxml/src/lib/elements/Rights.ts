@@ -13,13 +13,13 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rights/}
  */
 export const Rights = schema(
-  'rights',
-  {
-    /**
-     * Standard type values are music, words, and arrangement, but other types may be used. This attribute is only
-     * needed when there are multiple `<rights>` elements.
-     */
-    type: t.optional(dataTypes.token()),
-  },
-  [t.required(dataTypes.string())] as const
+	'rights',
+	{
+		/**
+		 * Standard type values are music, words, and arrangement, but other types may be used. This attribute is only
+		 * needed when there are multiple `<rights>` elements.
+		 */
+		type: t.optional(dataTypes.token()),
+	},
+	[t.required(dataTypes.string())] as const,
 );

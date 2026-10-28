@@ -11,12 +11,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-barline/}
  */
 export const GroupBarline = schema(
-  'group-barline',
-  {
-    /**
-     * Indicates the color of an element.
-     */
-    color: t.optional(dataTypes.color()),
-  },
-  [t.required(dataTypes.groupBarlineValue())] as const
+	'group-barline',
+	{
+		/**
+		 * Indicates the color of an element.
+		 */
+		color: t.optional(dataTypes.color()),
+	},
+	[t.required(dataTypes.groupBarlineValue())] as const,
 );

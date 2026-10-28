@@ -11,30 +11,30 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/grace/}
  */
 export const Grace = schema(
-  'grace',
-  {
-    /**
-     * Indicates to make time, not steal time, for grace note playback. The units are in real-time divisions for the
-     * grace note.
-     */
-    ['make-time']: t.optional(dataTypes.divisions()),
+	'grace',
+	{
+		/**
+		 * Indicates to make time, not steal time, for grace note playback. The units are in real-time divisions for the
+		 * grace note.
+		 */
+		['make-time']: t.optional(dataTypes.divisions()),
 
-    /**
-     * The value is yes for slashed grace notes and no if no slash is present.
-     */
-    slash: t.optional(dataTypes.yesNo()),
+		/**
+		 * The value is yes for slashed grace notes and no if no slash is present.
+		 */
+		slash: t.optional(dataTypes.yesNo()),
 
-    /**
-     * Indicates the percentage of time to steal from the following note for the grace note playback, as for
-     * appoggiaturas.
-     */
-    ['steal-time-following']: t.optional(dataTypes.percent()),
+		/**
+		 * Indicates the percentage of time to steal from the following note for the grace note playback, as for
+		 * appoggiaturas.
+		 */
+		['steal-time-following']: t.optional(dataTypes.percent()),
 
-    /**
-     * The steal-time-previous attribute indicates the percentage of time to steal from the previous note for the
-     * grace note playback.
-     */
-    ['steal-time-previous']: t.optional(dataTypes.percent()),
-  },
-  [] as const
+		/**
+		 * The steal-time-previous attribute indicates the percentage of time to steal from the previous note for the
+		 * grace note playback.
+		 */
+		['steal-time-previous']: t.optional(dataTypes.percent()),
+	},
+	[] as const,
 );

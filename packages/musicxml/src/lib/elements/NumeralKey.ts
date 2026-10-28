@@ -14,12 +14,12 @@ import { NumeralMode } from './NumeralMode';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral-key/}
  */
 export const NumeralKey = schema(
-  'numeral-key',
-  {
-    /**
-     * Specifies whether or not to print an object. It is yes if not specified.
-     */
-    ['print-object']: t.optional(dataTypes.yesNo()),
-  },
-  [t.required(NumeralFifths), t.required(NumeralMode)] as const
+	'numeral-key',
+	{
+		/**
+		 * Specifies whether or not to print an object. It is yes if not specified.
+		 */
+		['print-object']: t.optional(dataTypes.yesNo()),
+	},
+	[t.required(NumeralFifths), t.required(NumeralMode)] as const,
 );

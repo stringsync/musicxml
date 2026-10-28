@@ -19,32 +19,32 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/line-detail/}
  */
 export const LineDetail = schema(
-  'line-detail',
-  {
-    /**
-     * Indicates the staff line affected, numbered from bottom to top.
-     */
-    line: t.required(dataTypes.staffLine()),
+	'line-detail',
+	{
+		/**
+		 * Indicates the staff line affected, numbered from bottom to top.
+		 */
+		line: t.required(dataTypes.staffLine()),
 
-    /**
-     * Indicates the color of an element.
-     */
-    color: t.optional(dataTypes.color()),
+		/**
+		 * Indicates the color of an element.
+		 */
+		color: t.optional(dataTypes.color()),
 
-    /**
-     * Specifies if the line is solid, dashed, dotted, or wavy.
-     */
-    ['line-type']: t.optional(dataTypes.lineType()),
+		/**
+		 * Specifies if the line is solid, dashed, dotted, or wavy.
+		 */
+		['line-type']: t.optional(dataTypes.lineType()),
 
-    /**
-     * Specifies whether or not to print an object. It is yes if not specified.
-     */
-    ['print-object']: t.optional(dataTypes.yesNo()),
+		/**
+		 * Specifies whether or not to print an object. It is yes if not specified.
+		 */
+		['print-object']: t.optional(dataTypes.yesNo()),
 
-    /**
-     * Staff line width in tenths.
-     */
-    width: t.optional(dataTypes.tenths()),
-  },
-  [] as const
+		/**
+		 * Staff line width in tenths.
+		 */
+		width: t.optional(dataTypes.tenths()),
+	},
+	[] as const,
 );

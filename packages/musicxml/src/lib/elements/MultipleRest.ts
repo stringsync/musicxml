@@ -11,13 +11,13 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/multiple-rest/}
  */
 export const MultipleRest = schema(
-  'multiple-rest',
-  {
-    /**
-     * Specifies whether the multiple rests uses the 1-bar / 2-bar / 4-bar rest symbols, or a single shape. It is no if
-     * not specified.
-     */
-    ['use-symbols']: t.optional(dataTypes.yesNo()),
-  },
-  [t.label({ label: 'multiple-rest', value: t.required(dataTypes.positiveInteger()) })] as const
+	'multiple-rest',
+	{
+		/**
+		 * Specifies whether the multiple rests uses the 1-bar / 2-bar / 4-bar rest symbols, or a single shape. It is no if
+		 * not specified.
+		 */
+		['use-symbols']: t.optional(dataTypes.yesNo()),
+	},
+	[t.label({ label: 'multiple-rest', value: t.required(dataTypes.positiveInteger()) })] as const,
 );

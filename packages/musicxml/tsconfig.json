@@ -1,16 +1,16 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "strict": true,
-    "outDir": "dist",
-    "declaration": true,
-    "sourceMap": false,
-    "allowJs": true,
-    "types": ["node", "bun"],
-    "experimentalDecorators": true,
-    "skipLibCheck": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"strict": true,
+		"outDir": "dist",
+		"declaration": true,
+		"sourceMap": false,
+		"allowJs": true,
+		"types": ["node", "bun"],
+		"experimentalDecorators": true,
+		"skipLibCheck": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules"]
 }

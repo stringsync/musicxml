@@ -17,29 +17,29 @@ import { SlashType } from './SlashType';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/slash/}
  */
 export const Slash = schema(
-  'slash',
-  {
-    /**
-     * Indicates the starting or stopping point of the section displaying slash notation.
-     */
-    type: t.required(dataTypes.startStop()),
+	'slash',
+	{
+		/**
+		 * Indicates the starting or stopping point of the section displaying slash notation.
+		 */
+		type: t.required(dataTypes.startStop()),
 
-    /**
-     * Indicates whether or not to use dots as well (for instance, with mixed rhythm patterns). The value is no if not
-     * specified. This attribute only has effect if use-stems is no.
-     */
-    ['use-dots']: t.optional(dataTypes.yesNo()),
+		/**
+		 * Indicates whether or not to use dots as well (for instance, with mixed rhythm patterns). The value is no if not
+		 * specified. This attribute only has effect if use-stems is no.
+		 */
+		['use-dots']: t.optional(dataTypes.yesNo()),
 
-    /**
-     * If the slash is on every beat, use-stems is no (the default). To indicate rhythms but not pitches, use-stems is
-     * set to yes.
-     */
-    ['use-stems']: t.optional(dataTypes.yesNo()),
-  },
-  [
-    t.label({
-      label: 'value',
-      value: t.optional([t.optional([t.required(SlashType), t.zeroOrMore(SlashDot)]), t.zeroOrMore(ExceptVoice)]),
-    }),
-  ] as const
+		/**
+		 * If the slash is on every beat, use-stems is no (the default). To indicate rhythms but not pitches, use-stems is
+		 * set to yes.
+		 */
+		['use-stems']: t.optional(dataTypes.yesNo()),
+	},
+	[
+		t.label({
+			label: 'value',
+			value: t.optional([t.optional([t.required(SlashType), t.zeroOrMore(SlashDot)]), t.zeroOrMore(ExceptVoice)]),
+		}),
+	] as const,
 );

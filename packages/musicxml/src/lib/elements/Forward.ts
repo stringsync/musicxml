@@ -17,9 +17,9 @@ import { Voice } from './Voice';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/forward/}
  */
 export const Forward = schema('forward', {}, [
-  t.required(Duration),
-  t.optional(Footnote),
-  t.optional(Level),
-  t.optional(Voice),
-  t.optional(Staff),
+	t.required(Duration),
+	t.optional(Footnote),
+	t.optional(Level),
+	t.optional(Voice),
+	t.optional(Staff),
 ] as const);

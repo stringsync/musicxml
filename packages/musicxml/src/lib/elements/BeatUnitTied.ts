@@ -14,6 +14,6 @@ import { BeatUnitDot } from './BeatUnitDot';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beat-unit-tied/}
  */
 export const BeatUnitTied = schema('beat-unit-tied', {}, [
-  t.required(BeatUnit),
-  t.label({ label: 'beat-unit-dots', value: t.zeroOrMore(BeatUnitDot) }),
+	t.required(BeatUnit),
+	t.label({ label: 'beat-unit-dots', value: t.zeroOrMore(BeatUnitDot) }),
 ] as const);

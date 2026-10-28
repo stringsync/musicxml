@@ -7,5 +7,5 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/css-font-size/}
  */
 export const cssFontSize = () => {
-  return t.choices(...(['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] as const));
+	return t.choices(...(['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] as const));
 };

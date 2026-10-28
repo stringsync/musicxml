@@ -11,5 +11,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/first/}
  */
 export const First = schema('first', {}, [
-  t.label({ label: 'swing-ratio', value: t.required(dataTypes.positiveInteger()) }),
+	t.label({ label: 'swing-ratio', value: t.required(dataTypes.positiveInteger()) }),
 ] as const);

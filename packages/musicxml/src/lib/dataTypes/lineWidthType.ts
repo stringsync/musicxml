@@ -27,27 +27,27 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/line-width-type/}
  */
 export const lineWidthType = () => {
-  return t.choices(
-    ...([
-      'beam',
-      'bracket',
-      'dashes',
-      'enclosure',
-      'ending',
-      'extend',
-      'heavy barline',
-      'leger',
-      'light barline',
-      'octave shift',
-      'pedal',
-      'slur middle',
-      'slur tip',
-      'staff',
-      'stem',
-      'tie middle',
-      'tie tip',
-      'tuplet bracket',
-      'wedge',
-    ] as const)
-  );
+	return t.choices(
+		...([
+			'beam',
+			'bracket',
+			'dashes',
+			'enclosure',
+			'ending',
+			'extend',
+			'heavy barline',
+			'leger',
+			'light barline',
+			'octave shift',
+			'pedal',
+			'slur middle',
+			'slur tip',
+			'staff',
+			'stem',
+			'tie middle',
+			'tie tip',
+			'tuplet bracket',
+			'wedge',
+		] as const),
+	);
 };

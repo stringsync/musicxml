@@ -16,27 +16,27 @@ import { Feature } from './Feature';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/grouping/}
  */
 export const Grouping = schema(
-  'grouping',
-  {
-    /**
-     * Indicates if this is a single-note grouping, or the start or stop of a multi-note grouping.
-     */
-    type: t.required(dataTypes.startStopSingle()),
+	'grouping',
+	{
+		/**
+		 * Indicates if this is a single-note grouping, or the start or stop of a multi-note grouping.
+		 */
+		type: t.required(dataTypes.startStopSingle()),
 
-    /**
-     * Specifies an ID that is unique to the entire document.
-     */
-    id: t.optional(dataTypes.id()),
+		/**
+		 * Specifies an ID that is unique to the entire document.
+		 */
+		id: t.optional(dataTypes.id()),
 
-    /**
-     * Distinguishes which `<grouping>` elements are in which hierarchy.
-     */
-    ['member-of']: t.optional(dataTypes.token()),
+		/**
+		 * Distinguishes which `<grouping>` elements are in which hierarchy.
+		 */
+		['member-of']: t.optional(dataTypes.token()),
 
-    /**
-     * Distinguishes between various overlapping and hierarchical groupings. The default value is 1.
-     */
-    number: t.optional(dataTypes.token()),
-  },
-  [t.label({ label: 'features', value: t.zeroOrMore(Feature) })] as const
+		/**
+		 * Distinguishes between various overlapping and hierarchical groupings. The default value is 1.
+		 */
+		number: t.optional(dataTypes.token()),
+	},
+	[t.label({ label: 'features', value: t.zeroOrMore(Feature) })] as const,
 );

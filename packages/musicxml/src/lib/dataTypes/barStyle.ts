@@ -7,22 +7,22 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/bar-style/}
  */
 export const barStyle = () => {
-  return t.label({
-    label: 'bar-style',
-    value: t.choices(
-      ...([
-        'none',
-        'dashed',
-        'dotted',
-        'heavy',
-        'heavy-heavy',
-        'heavy-light',
-        'light-heavy',
-        'light-light',
-        'regular',
-        'short',
-        'tick',
-      ] as const)
-    ),
-  });
+	return t.label({
+		label: 'bar-style',
+		value: t.choices(
+			...([
+				'none',
+				'dashed',
+				'dotted',
+				'heavy',
+				'heavy-heavy',
+				'heavy-light',
+				'light-heavy',
+				'light-light',
+				'regular',
+				'short',
+				'tick',
+			] as const),
+		),
+	});
 };

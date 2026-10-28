@@ -6,5 +6,5 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/sync-type/}
  */
 export const syncType = () => {
-  return t.choices(...(['none', 'tempo', 'mostly-tempo', 'mostly-event', 'event', 'always-event'] as const));
+	return t.choices(...(['none', 'tempo', 'mostly-tempo', 'mostly-event', 'event', 'always-event'] as const));
 };

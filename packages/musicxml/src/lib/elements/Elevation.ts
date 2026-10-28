@@ -13,5 +13,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/elevation/}
  */
 export const Elevation = schema('elevation', {}, [
-  t.label({ label: 'elevation', value: t.required(dataTypes.rotationDegrees()) }),
+	t.label({ label: 'elevation', value: t.required(dataTypes.rotationDegrees()) }),
 ] as const);

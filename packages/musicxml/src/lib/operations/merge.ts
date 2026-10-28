@@ -1,4 +1,4 @@
-import { DescriptorChildValue, XMLElementSchema } from '../schema';
+import type { DescriptorChildValue, XMLElementSchema } from '../schema';
 import { validate } from './validate';
 import { zero } from './zero';
 
@@ -9,16 +9,16 @@ import { zero } from './zero';
  * @param schema the schema of the element
  */
 export const merge = <S extends XMLElementSchema>(
-  attributes: Record<string, any>,
-  schema: S
+	attributes: Record<string, any>,
+	schema: S,
 ): DescriptorChildValue<S['attributes']> => {
-  const result: any = {};
-  for (const [name, descriptor] of Object.entries(schema.attributes)) {
-    if (name in attributes && validate(attributes[name], descriptor)) {
-      result[name] = attributes[name];
-    } else {
-      result[name] = zero(descriptor);
-    }
-  }
-  return result;
+	const result: any = {};
+	for (const [name, descriptor] of Object.entries(schema.attributes)) {
+		if (name in attributes && validate(attributes[name], descriptor)) {
+			result[name] = attributes[name];
+		} else {
+			result[name] = zero(descriptor);
+		}
+	}
+	return result;
 };

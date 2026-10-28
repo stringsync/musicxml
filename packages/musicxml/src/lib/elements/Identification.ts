@@ -18,10 +18,10 @@ import { Source } from './Source';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/identification/}
  */
 export const Identification = schema('identification', {}, [
-  t.label({ label: 'creators', value: t.zeroOrMore(Creator) }),
-  t.label({ label: 'rights', value: t.zeroOrMore(Rights) }),
-  t.optional(Encoding),
-  t.optional(Source),
-  t.label({ label: 'relations', value: t.zeroOrMore(Relation) }),
-  t.optional(Miscellaneous),
+	t.label({ label: 'creators', value: t.zeroOrMore(Creator) }),
+	t.label({ label: 'rights', value: t.zeroOrMore(Rights) }),
+	t.optional(Encoding),
+	t.optional(Source),
+	t.label({ label: 'relations', value: t.zeroOrMore(Relation) }),
+	t.optional(Miscellaneous),
 ] as const);

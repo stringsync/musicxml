@@ -12,12 +12,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-appearance/}
  */
 export const OtherAppearance = schema(
-  'other-appearance',
-  {
-    /**
-     * The appearance type being specified.
-     */
-    type: t.required(dataTypes.string()),
-  },
-  [t.required(dataTypes.token())] as const
+	'other-appearance',
+	{
+		/**
+		 * The appearance type being specified.
+		 */
+		type: t.required(dataTypes.string()),
+	},
+	[t.required(dataTypes.token())] as const,
 );

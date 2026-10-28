@@ -19,13 +19,13 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-size/}
  */
 export const StaffSize = schema(
-  'staff-size',
-  {
-    /**
-     * Specifies the percentage scaling that applies to the notation. Values less that 100 make the notation smaller
-     * while values over 100 make the notation larger.
-     */
-    scaling: t.optional(dataTypes.nonNegativeDecimal()),
-  },
-  [t.label({ label: 'value', value: t.required(dataTypes.nonNegativeDecimal()) })] as const
+	'staff-size',
+	{
+		/**
+		 * Specifies the percentage scaling that applies to the notation. Values less that 100 make the notation smaller
+		 * while values over 100 make the notation larger.
+		 */
+		scaling: t.optional(dataTypes.nonNegativeDecimal()),
+	},
+	[t.label({ label: 'value', value: t.required(dataTypes.nonNegativeDecimal()) })] as const,
 );

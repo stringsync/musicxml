@@ -12,5 +12,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/volume/}
  */
 export const Volume = schema('volume', {}, [
-  t.label({ label: 'volume', value: t.required(dataTypes.percent()) }),
+	t.label({ label: 'volume', value: t.required(dataTypes.percent()) }),
 ] as const);

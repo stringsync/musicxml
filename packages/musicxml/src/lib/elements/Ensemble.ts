@@ -12,5 +12,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ensemble/}
  */
 export const Ensemble = schema('ensemble', {}, [
-  t.label({ label: 'size', value: t.required(dataTypes.positiveIntegerOrEmpty()) }),
+	t.label({ label: 'size', value: t.required(dataTypes.positiveIntegerOrEmpty()) }),
 ] as const);

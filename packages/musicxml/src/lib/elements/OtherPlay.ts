@@ -11,12 +11,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-play/}
  */
 export const OtherPlay = schema(
-  'other-play',
-  {
-    /**
-     * Indicates the type of playback to which the element content applies.
-     */
-    type: t.required(dataTypes.token()),
-  },
-  [] as const
+	'other-play',
+	{
+		/**
+		 * Indicates the type of playback to which the element content applies.
+		 */
+		type: t.required(dataTypes.token()),
+	},
+	[] as const,
 );

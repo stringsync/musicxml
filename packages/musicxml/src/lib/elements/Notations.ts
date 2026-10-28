@@ -30,41 +30,41 @@ import { Tuplet } from './Tuplet';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/notations/}
  */
 export const Notations = schema(
-  'notations',
-  {
-    /**
-     * Specifies an ID that is unique to the entire document.
-     */
-    id: t.optional(dataTypes.id()),
+	'notations',
+	{
+		/**
+		 * Specifies an ID that is unique to the entire document.
+		 */
+		id: t.optional(dataTypes.id()),
 
-    /**
-     * Specifies whether or not to print an object. It is yes if not specified.
-     */
-    ['print-object']: t.optional(dataTypes.yesNo()),
-  },
-  [
-    t.optional(Footnote),
-    t.optional(Level),
-    t.label({
-      label: 'values',
-      value: t.zeroOrMore(
-        t.choices(
-          Tied,
-          Slur,
-          Tuplet,
-          Glissando,
-          Slide,
-          Ornaments,
-          Technical,
-          Articulations,
-          Dynamics,
-          Fermata,
-          Arpeggiate,
-          NonArpeggiate,
-          AccidentalMark,
-          OtherNotation
-        )
-      ),
-    }),
-  ] as const
+		/**
+		 * Specifies whether or not to print an object. It is yes if not specified.
+		 */
+		['print-object']: t.optional(dataTypes.yesNo()),
+	},
+	[
+		t.optional(Footnote),
+		t.optional(Level),
+		t.label({
+			label: 'values',
+			value: t.zeroOrMore(
+				t.choices(
+					Tied,
+					Slur,
+					Tuplet,
+					Glissando,
+					Slide,
+					Ornaments,
+					Technical,
+					Articulations,
+					Dynamics,
+					Fermata,
+					Arpeggiate,
+					NonArpeggiate,
+					AccidentalMark,
+					OtherNotation,
+				),
+			),
+		}),
+	] as const,
 );

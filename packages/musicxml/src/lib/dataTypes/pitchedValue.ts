@@ -6,19 +6,19 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/pitched-value/}
  */
 export const pitchedValue = () => {
-  return t.choices(
-    ...([
-      'celesta',
-      'chimes',
-      'glockenspiel',
-      'lithophone',
-      'mallet',
-      'marimba',
-      'steel drums',
-      'tubaphone',
-      'tubular chimes',
-      'vibraphone',
-      'xylophone',
-    ] as const)
-  );
+	return t.choices(
+		...([
+			'celesta',
+			'chimes',
+			'glockenspiel',
+			'lithophone',
+			'mallet',
+			'marimba',
+			'steel drums',
+			'tubaphone',
+			'tubular chimes',
+			'vibraphone',
+			'xylophone',
+		] as const),
+	);
 };

@@ -11,5 +11,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/clef-octave-change/}
  */
 export const ClefOctaveChange = schema('clef-octave-change', {}, [
-  t.label({ label: 'clef-octave-change', value: t.required(dataTypes.integer()) }),
+	t.label({ label: 'clef-octave-change', value: t.required(dataTypes.integer()) }),
 ] as const);

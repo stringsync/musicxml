@@ -16,12 +16,12 @@ import { BassStep } from './BassStep';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bass/}
  */
 export const Bass = schema(
-  'bass',
-  {
-    /**
-     * Specifies where the bass is displayed relative to what precedes it.
-     */
-    arrangement: t.optional(dataTypes.harmonyArrangement()),
-  },
-  [t.optional(BassSeparator), t.required(BassStep), t.optional(BassAlter)] as const
+	'bass',
+	{
+		/**
+		 * Specifies where the bass is displayed relative to what precedes it.
+		 */
+		arrangement: t.optional(dataTypes.harmonyArrangement()),
+	},
+	[t.optional(BassSeparator), t.required(BassStep), t.optional(BassAlter)] as const,
 );

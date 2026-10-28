@@ -13,12 +13,12 @@ import { Accord } from './Accord';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/scordatura/}
  */
 export const Scordatura = schema(
-  'scordatura',
-  {
-    /**
-     * Specifies an ID that is unique to the entire document.
-     */
-    id: t.optional(dataTypes.id()),
-  },
-  [t.label({ label: 'accords', value: t.oneOrMore(Accord) })] as const
+	'scordatura',
+	{
+		/**
+		 * Specifies an ID that is unique to the entire document.
+		 */
+		id: t.optional(dataTypes.id()),
+	},
+	[t.label({ label: 'accords', value: t.oneOrMore(Accord) })] as const,
 );

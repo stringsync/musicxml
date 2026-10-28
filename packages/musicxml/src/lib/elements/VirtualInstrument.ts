@@ -12,6 +12,6 @@ import { VirtualName } from './VirtualName';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/virtual-instrument/}
  */
 export const VirtualInstrument = schema('virtual-instrument', {}, [
-  t.optional(VirtualLibrary),
-  t.optional(VirtualName),
+	t.optional(VirtualLibrary),
+	t.optional(VirtualName),
 ] as const);

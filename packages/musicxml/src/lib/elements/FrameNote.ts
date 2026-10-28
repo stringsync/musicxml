@@ -15,8 +15,8 @@ import { String } from './String';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/frame-note/}
  */
 export const FrameNote = schema('frame-note', {}, [
-  t.required(String),
-  t.required(Fret),
-  t.optional(Fingering),
-  t.optional(Barre),
+	t.required(String),
+	t.required(Fret),
+	t.optional(Fingering),
+	t.optional(Barre),
 ] as const);

@@ -22,14 +22,14 @@ import { WordFont } from './WordFont';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/}
  */
 export const Defaults = schema('defaults', {}, [
-  t.optional(Scaling),
-  t.optional(ConcertScore),
-  t.optional(PageLayout),
-  t.optional(SystemLayout),
-  t.label({ label: 'staff-layouts', value: t.zeroOrMore(StaffLayout) }),
-  t.optional(Appearance),
-  t.optional(MusicFont),
-  t.optional(WordFont),
-  t.label({ label: 'lyric-fonts', value: t.zeroOrMore(LyricFont) }),
-  t.label({ label: 'lyric-languages', value: t.zeroOrMore(LyricLanguage) }),
+	t.optional(Scaling),
+	t.optional(ConcertScore),
+	t.optional(PageLayout),
+	t.optional(SystemLayout),
+	t.label({ label: 'staff-layouts', value: t.zeroOrMore(StaffLayout) }),
+	t.optional(Appearance),
+	t.optional(MusicFont),
+	t.optional(WordFont),
+	t.label({ label: 'lyric-fonts', value: t.zeroOrMore(LyricFont) }),
+	t.label({ label: 'lyric-languages', value: t.zeroOrMore(LyricLanguage) }),
 ] as const);

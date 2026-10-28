@@ -18,12 +18,12 @@ import { DisplayText } from './DisplayText';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-abbreviation-display/}
  */
 export const GroupAbbreviationDisplay = schema(
-  'group-abbreviation-display',
-  {
-    /**
-     * Specifies whether or not to print an object. It is yes if not specified.
-     */
-    ['print-object']: t.optional(dataTypes.yesNo()),
-  },
-  [t.label({ label: 'texts', value: t.zeroOrMore(t.choices(DisplayText, AccidentalText)) })] as const
+	'group-abbreviation-display',
+	{
+		/**
+		 * Specifies whether or not to print an object. It is yes if not specified.
+		 */
+		['print-object']: t.optional(dataTypes.yesNo()),
+	},
+	[t.label({ label: 'texts', value: t.zeroOrMore(t.choices(DisplayText, AccidentalText)) })] as const,
 );

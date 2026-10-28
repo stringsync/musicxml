@@ -17,7 +17,7 @@ import { Sign } from './Sign';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-clef/}
  */
 export const PartClef = schema('part-clef', {}, [
-  t.required(Sign),
-  t.optional(Line),
-  t.optional(ClefOctaveChange),
+	t.required(Sign),
+	t.optional(Line),
+	t.optional(ClefOctaveChange),
 ] as const);

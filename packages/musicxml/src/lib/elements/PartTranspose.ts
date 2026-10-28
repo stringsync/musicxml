@@ -18,8 +18,8 @@ import { OctaveChange } from './OctaveChange';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-transpose/}
  */
 export const PartTranspose = schema('part-transpose', {}, [
-  t.optional(Diatonic),
-  t.required(Chromatic),
-  t.optional(OctaveChange),
-  t.optional(Double),
+	t.optional(Diatonic),
+	t.required(Chromatic),
+	t.optional(OctaveChange),
+	t.optional(Double),
 ] as const);

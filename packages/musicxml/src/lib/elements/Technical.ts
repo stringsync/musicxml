@@ -43,51 +43,51 @@ import { UpBow } from './UpBow';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/technical/}
  */
 export const Technical = schema(
-  'technical',
-  {
-    /**
-     * Specifies an ID that is unique to the entire document.
-     */
-    id: t.optional(dataTypes.id()),
-  },
-  [
-    t.label({
-      label: 'values',
-      value: t.zeroOrMore(
-        t.choices(
-          UpBow,
-          DownBow,
-          Harmonic,
-          OpenString,
-          ThumbPosition,
-          Fingering,
-          Pluck,
-          DoubleTongue,
-          TripleTongue,
-          Stopped,
-          SnapPizzicato,
-          Fret,
-          String,
-          HammerOn,
-          PullOff,
-          Bend,
-          Tap,
-          Heel,
-          Toe,
-          Fingernails,
-          Hole,
-          Arrow,
-          Handbell,
-          BrassBend,
-          Flip,
-          Smear,
-          Open,
-          HalfMuted,
-          HarmonMute,
-          Golpe,
-          OtherTechnical
-        )
-      ),
-    }),
-  ] as const
+	'technical',
+	{
+		/**
+		 * Specifies an ID that is unique to the entire document.
+		 */
+		id: t.optional(dataTypes.id()),
+	},
+	[
+		t.label({
+			label: 'values',
+			value: t.zeroOrMore(
+				t.choices(
+					UpBow,
+					DownBow,
+					Harmonic,
+					OpenString,
+					ThumbPosition,
+					Fingering,
+					Pluck,
+					DoubleTongue,
+					TripleTongue,
+					Stopped,
+					SnapPizzicato,
+					Fret,
+					String,
+					HammerOn,
+					PullOff,
+					Bend,
+					Tap,
+					Heel,
+					Toe,
+					Fingernails,
+					Hole,
+					Arrow,
+					Handbell,
+					BrassBend,
+					Flip,
+					Smear,
+					Open,
+					HalfMuted,
+					HarmonMute,
+					Golpe,
+					OtherTechnical,
+				),
+			),
+		}),
+	] as const,
 );

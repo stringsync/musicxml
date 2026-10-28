@@ -14,19 +14,19 @@ import { DisplayStep } from './DisplayStep';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rest/}
  */
 export const Rest = schema(
-  'rest',
-  {
-    /**
-     * If yes, this indicates this is a complete measure rest.
-     */
-    measure: t.optional(dataTypes.yesNo()),
-  },
-  [
-    t.optional(
-      t.label({
-        label: 'value',
-        value: [t.required(DisplayStep), t.required(DisplayOctave)],
-      })
-    ),
-  ] as const
+	'rest',
+	{
+		/**
+		 * If yes, this indicates this is a complete measure rest.
+		 */
+		measure: t.optional(dataTypes.yesNo()),
+	},
+	[
+		t.optional(
+			t.label({
+				label: 'value',
+				value: [t.required(DisplayStep), t.required(DisplayOctave)],
+			}),
+		),
+	] as const,
 );

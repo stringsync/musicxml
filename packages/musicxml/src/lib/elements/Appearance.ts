@@ -18,9 +18,9 @@ import { OtherAppearance } from './OtherAppearance';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/appearance/}
  */
 export const Appearance = schema('appearance', {}, [
-  t.label({ label: 'line-widths', value: t.zeroOrMore(LineWidth) }),
-  t.label({ label: 'note-sizes', value: t.zeroOrMore(NoteSize) }),
-  t.label({ label: 'distances', value: t.zeroOrMore(Distance) }),
-  t.label({ label: 'glyphs', value: t.zeroOrMore(Glyph) }),
-  t.label({ label: 'other-appearances', value: t.zeroOrMore(OtherAppearance) }),
+	t.label({ label: 'line-widths', value: t.zeroOrMore(LineWidth) }),
+	t.label({ label: 'note-sizes', value: t.zeroOrMore(NoteSize) }),
+	t.label({ label: 'distances', value: t.zeroOrMore(Distance) }),
+	t.label({ label: 'glyphs', value: t.zeroOrMore(Glyph) }),
+	t.label({ label: 'other-appearances', value: t.zeroOrMore(OtherAppearance) }),
 ] as const);

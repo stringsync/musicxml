@@ -15,9 +15,9 @@ import { MetronomeType } from './MetronomeType';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-note/}
  */
 export const MetronomeNote = schema('metronome-note', {}, [
-  t.required(MetronomeType),
-  t.label({ label: 'metronome-dots', value: t.zeroOrMore(MetronomeDot) }),
-  t.label({ label: 'metronome-beams', value: t.zeroOrMore(MetronomeBeam) }),
-  t.optional(MetronomeTied),
-  t.optional(MetronomeTuplet),
+	t.required(MetronomeType),
+	t.label({ label: 'metronome-dots', value: t.zeroOrMore(MetronomeDot) }),
+	t.label({ label: 'metronome-beams', value: t.zeroOrMore(MetronomeBeam) }),
+	t.optional(MetronomeTied),
+	t.optional(MetronomeTuplet),
 ] as const);

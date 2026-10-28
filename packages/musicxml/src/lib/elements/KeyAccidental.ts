@@ -14,12 +14,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key-accidental/}
  */
 export const KeyAccidental = schema(
-  'key-accidental',
-  {
-    /**
-     * Specifies a Standard Music Font Layout (SMuFL) accidental character by its canonical glyph name.
-     */
-    smufl: t.optional(dataTypes.smuflAccidentalGlyphName()),
-  },
-  [t.required(dataTypes.accidentalValue())] as const
+	'key-accidental',
+	{
+		/**
+		 * Specifies a Standard Music Font Layout (SMuFL) accidental character by its canonical glyph name.
+		 */
+		smufl: t.optional(dataTypes.smuflAccidentalGlyphName()),
+	},
+	[t.required(dataTypes.accidentalValue())] as const,
 );

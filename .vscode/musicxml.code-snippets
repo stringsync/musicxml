@@ -1,31 +1,31 @@
 {
-  "Element": {
-    "prefix": ["ele"],
-    "body": [
-      "import * as dataTypes from '../dataTypes';",
-      "import { t, xml } from '../xml';",
-      "",
-      "/**",
-      " * ",
-      " * {@link $0}",
-      " */",
-      "export type $TM_FILENAME_BASE = ReturnType<typeof $TM_FILENAME_BASE>;",
-      "",
-      "export const $TM_FILENAME_BASE = xml.element('$1', { attributes: {}, content: [] as const }, {});",
-      ""
-    ]
-  },
-  "Test": {
-    "prefix": "elet",
-    "body": [
-      "import { ${1:$TM_FILENAME_BASE} } from './${1:$TM_FILENAME_BASE}';",
-      "",
-      "describe('${1:$TM_FILENAME_BASE}', () => {",
-      "  it('runs without crashing', () => {",
-      "    expect(${1:$TM_FILENAME_BASE}).not.toThrow();",
-      "  });${0}",
-      "});",
-      ""
-    ]
-  }
+	"Element": {
+		"prefix": ["ele"],
+		"body": [
+			"import * as dataTypes from '../dataTypes';",
+			"import { t, xml } from '../xml';",
+			"",
+			"/**",
+			" * ",
+			" * {@link $0}",
+			" */",
+			"export type $TM_FILENAME_BASE = ReturnType<typeof $TM_FILENAME_BASE>;",
+			"",
+			"export const $TM_FILENAME_BASE = xml.element('$1', { attributes: {}, content: [] as const }, {});",
+			""
+		]
+	},
+	"Test": {
+		"prefix": "elet",
+		"body": [
+			"import { ${1:$TM_FILENAME_BASE} } from './${1:$TM_FILENAME_BASE}';",
+			"",
+			"describe('${1:$TM_FILENAME_BASE}', () => {",
+			"  it('runs without crashing', () => {",
+			"    expect(${1:$TM_FILENAME_BASE}).not.toThrow();",
+			"  });${0}",
+			"});",
+			""
+		]
+	}
 }

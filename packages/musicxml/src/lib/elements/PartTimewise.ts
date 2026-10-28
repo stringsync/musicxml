@@ -25,35 +25,35 @@ import { Sound } from './Sound';
  *  {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-partwise/}
  */
 export const PartTimewise = schema(
-  'part',
-  {
-    /**
-     * An IDREF back to a `<score-part>` element within the `<part-list>` element.
-     */
-    id: dataTypes.idref(),
-  },
-  [
-    t.label({
-      label: 'values',
-      value: t.zeroOrMore(
-        t.choices(
-          Note,
-          Backup,
-          Forward,
-          Direction,
-          Attributes,
-          Harmony,
-          FiguredBass,
-          Print,
-          Sound,
-          Listening,
-          Barline,
-          Grouping,
-          Link,
-          Bookmark
-        )
-      ),
-    }),
-  ] as const,
-  { className: 'part-timewise' }
+	'part',
+	{
+		/**
+		 * An IDREF back to a `<score-part>` element within the `<part-list>` element.
+		 */
+		id: dataTypes.idref(),
+	},
+	[
+		t.label({
+			label: 'values',
+			value: t.zeroOrMore(
+				t.choices(
+					Note,
+					Backup,
+					Forward,
+					Direction,
+					Attributes,
+					Harmony,
+					FiguredBass,
+					Print,
+					Sound,
+					Listening,
+					Barline,
+					Grouping,
+					Link,
+					Bookmark,
+				),
+			),
+		}),
+	] as const,
+	{ className: 'part-timewise' },
 );

@@ -5,8 +5,8 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/time-relation/}
  */
 export const timeRelation = () => {
-  return t.label({
-    label: 'time-relation',
-    value: t.choices(...(['space', 'bracket', 'equals', 'hyphen', 'parentheses', 'slash'] as const)),
-  });
+	return t.label({
+		label: 'time-relation',
+		value: t.choices(...(['space', 'bracket', 'equals', 'hyphen', 'parentheses', 'slash'] as const)),
+	});
 };

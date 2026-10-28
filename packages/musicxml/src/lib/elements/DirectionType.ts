@@ -37,41 +37,41 @@ import { Words } from './Words';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/direction-type/}
  */
 export const DirectionType = schema(
-  'direction-type',
-  {
-    /**
-     * Specifies an ID that is unique to the entire document.
-     */
-    id: t.optional(dataTypes.id()),
-  },
-  [
-    t.label({
-      label: 'direction-type',
-      value: t.choices(
-        t.label({ label: 'rehearsals', value: t.oneOrMore(Rehearsal) }),
-        t.label({ label: 'segnos', value: t.oneOrMore(Segno) }),
-        t.label({ label: 'codas', value: t.oneOrMore(Coda) }),
-        t.label({ label: 'tokens', value: t.oneOrMore(t.choices(Words, Symbol)) }),
-        Wedge,
-        t.label({ label: 'dynamics-list', value: t.oneOrMore(Dynamics) }),
-        Dashes,
-        Bracket,
-        Pedal,
-        Metronome,
-        OctaveShift,
-        HarpPedals,
-        Damp,
-        DampAll,
-        Eyeglasses,
-        StringMute,
-        Scordatura,
-        Image,
-        PrincipalVoice,
-        t.label({ label: 'percussions', value: t.oneOrMore(Percussion) }),
-        AccordionRegistration,
-        StaffDivide,
-        OtherDirection
-      ),
-    }),
-  ] as const
+	'direction-type',
+	{
+		/**
+		 * Specifies an ID that is unique to the entire document.
+		 */
+		id: t.optional(dataTypes.id()),
+	},
+	[
+		t.label({
+			label: 'direction-type',
+			value: t.choices(
+				t.label({ label: 'rehearsals', value: t.oneOrMore(Rehearsal) }),
+				t.label({ label: 'segnos', value: t.oneOrMore(Segno) }),
+				t.label({ label: 'codas', value: t.oneOrMore(Coda) }),
+				t.label({ label: 'tokens', value: t.oneOrMore(t.choices(Words, Symbol)) }),
+				Wedge,
+				t.label({ label: 'dynamics-list', value: t.oneOrMore(Dynamics) }),
+				Dashes,
+				Bracket,
+				Pedal,
+				Metronome,
+				OctaveShift,
+				HarpPedals,
+				Damp,
+				DampAll,
+				Eyeglasses,
+				StringMute,
+				Scordatura,
+				Image,
+				PrincipalVoice,
+				t.label({ label: 'percussions', value: t.oneOrMore(Percussion) }),
+				AccordionRegistration,
+				StaffDivide,
+				OtherDirection,
+			),
+		}),
+	] as const,
 );

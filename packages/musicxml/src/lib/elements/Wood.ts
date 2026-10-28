@@ -11,12 +11,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/wood/}
  */
 export const Wood = schema(
-  'wood',
-  {
-    /**
-     * Distinguishes different SMuFL stylistic alternates.
-     */
-    smufl: t.optional(dataTypes.smuflPictogramGlyphName()),
-  },
-  [t.required(dataTypes.woodValue())] as const
+	'wood',
+	{
+		/**
+		 * Distinguishes different SMuFL stylistic alternates.
+		 */
+		smufl: t.optional(dataTypes.smuflPictogramGlyphName()),
+	},
+	[t.required(dataTypes.woodValue())] as const,
 );

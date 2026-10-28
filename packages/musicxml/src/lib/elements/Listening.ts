@@ -23,6 +23,6 @@ import { Sync } from './Sync';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/listening/}
  */
 export const Listening = schema('listening', {}, [
-  t.label({ label: 'listening', value: t.oneOrMore(t.choices(Sync, OtherListening)) }),
-  t.optional(Offset),
+	t.label({ label: 'listening', value: t.oneOrMore(t.choices(Sync, OtherListening)) }),
+	t.optional(Offset),
 ] as const);

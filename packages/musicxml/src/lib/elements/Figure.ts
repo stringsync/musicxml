@@ -16,10 +16,10 @@ import { Suffix } from './Suffix';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/figure/}
  */
 export const Figure = schema('figure', {}, [
-  t.optional(Prefix),
-  t.optional(FigureNumber),
-  t.optional(Suffix),
-  t.optional(Extend),
-  t.optional(Footnote),
-  t.optional(Level),
+	t.optional(Prefix),
+	t.optional(FigureNumber),
+	t.optional(Suffix),
+	t.optional(Extend),
+	t.optional(Footnote),
+	t.optional(Level),
 ] as const);

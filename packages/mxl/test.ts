@@ -8,11 +8,11 @@ import { run } from './run';
  * rethrown after cleanup.
  */
 export async function test(opts: { args: string[]; ps: Ps; log: Logger }): Promise<void> {
-  const { ps, log } = opts;
-  try {
-    await run(ps, log, ['docker', 'compose', 'build']);
-    await run(ps, log, ['docker', 'compose', 'run', '--rm', 'test', 'bun', 'test', ...opts.args]);
-  } finally {
-    await run(ps, log, ['docker', 'compose', 'down']);
-  }
+	const { ps, log } = opts;
+	try {
+		await run(ps, log, ['docker', 'compose', 'build']);
+		await run(ps, log, ['docker', 'compose', 'run', '--rm', 'test', 'bun', 'test', ...opts.args]);
+	} finally {
+		await run(ps, log, ['docker', 'compose', 'down']);
+	}
 }

@@ -19,12 +19,12 @@ import { DegreeValue } from './DegreeValue';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/degree/}
  */
 export const Degree = schema(
-  'degree',
-  {
-    /**
-     * Specifies whether or not to print an object. It is yes if not specified.
-     */
-    ['print-object']: t.optional(dataTypes.yesNo()),
-  },
-  [t.required(DegreeValue), t.required(DegreeAlter), t.required(DegreeType)] as const
+	'degree',
+	{
+		/**
+		 * Specifies whether or not to print an object. It is yes if not specified.
+		 */
+		['print-object']: t.optional(dataTypes.yesNo()),
+	},
+	[t.required(DegreeValue), t.required(DegreeAlter), t.required(DegreeType)] as const,
 );

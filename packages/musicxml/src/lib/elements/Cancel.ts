@@ -14,12 +14,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/cancel/}
  */
 export const Cancel = schema(
-  'cancel',
-  {
-    /**
-     * Indicates where the cancellation appears relative to the new key signature. It is left if not specified.
-     */
-    location: t.optional(dataTypes.cancelLocation()),
-  },
-  [t.label({ label: 'fifths', value: t.required(dataTypes.fifths()) })] as const
+	'cancel',
+	{
+		/**
+		 * Indicates where the cancellation appears relative to the new key signature. It is left if not specified.
+		 */
+		location: t.optional(dataTypes.cancelLocation()),
+	},
+	[t.label({ label: 'fifths', value: t.required(dataTypes.fifths()) })] as const,
 );

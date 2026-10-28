@@ -11,5 +11,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/left-margin/}
  */
 export const LeftMargin = schema('left-margin', {}, [
-  t.label({ label: 'left-margin', value: t.required(dataTypes.tenths()) }),
+	t.label({ label: 'left-margin', value: t.required(dataTypes.tenths()) }),
 ] as const);

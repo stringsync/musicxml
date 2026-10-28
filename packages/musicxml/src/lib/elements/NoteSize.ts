@@ -13,12 +13,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note-size/}
  */
 export const NoteSize = schema(
-  'note-size',
-  {
-    /**
-     * The type of note size being defined.
-     */
-    type: t.required(dataTypes.noteSizeType()),
-  },
-  [t.label({ label: 'note-size', value: dataTypes.nonNegativeDecimal() })] as const
+	'note-size',
+	{
+		/**
+		 * The type of note size being defined.
+		 */
+		type: t.required(dataTypes.noteSizeType()),
+	},
+	[t.label({ label: 'note-size', value: dataTypes.nonNegativeDecimal() })] as const,
 );

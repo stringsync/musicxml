@@ -12,12 +12,12 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/feature/}
  */
 export const Feature = schema(
-  'feature',
-  {
-    /**
-     * Represents the type of the feature. This type is flexible to allow for different analyses.
-     */
-    type: t.optional(dataTypes.token()),
-  },
-  [t.required(dataTypes.string())] as const
+	'feature',
+	{
+		/**
+		 * Represents the type of the feature. This type is flexible to allow for different analyses.
+		 */
+		type: t.optional(dataTypes.token()),
+	},
+	[t.required(dataTypes.string())] as const,
 );

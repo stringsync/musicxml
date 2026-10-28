@@ -13,37 +13,37 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/}
  */
 export const LyricFont = schema(
-  'lyric-font',
-  {
-    /**
-     * A comma-separated list of font names.
-     */
-    ['font-family']: t.optional(dataTypes.fontFamily()),
+	'lyric-font',
+	{
+		/**
+		 * A comma-separated list of font names.
+		 */
+		['font-family']: t.optional(dataTypes.fontFamily()),
 
-    /**
-     * One of the CSS sizes or a numeric point size.
-     */
-    ['font-size']: t.optional(dataTypes.fontSize()),
+		/**
+		 * One of the CSS sizes or a numeric point size.
+		 */
+		['font-size']: t.optional(dataTypes.fontSize()),
 
-    /**
-     * Normal or italic style.
-     */
-    ['font-style']: t.optional(dataTypes.fontStyle()),
+		/**
+		 * Normal or italic style.
+		 */
+		['font-style']: t.optional(dataTypes.fontStyle()),
 
-    /**
-     * Normal or bold weight.
-     */
-    ['font-weight']: t.optional(dataTypes.fontWeight()),
+		/**
+		 * Normal or bold weight.
+		 */
+		['font-weight']: t.optional(dataTypes.fontWeight()),
 
-    /**
-     * The lyric name for which this is the default, corresponding to the name attribute in the `<lyric>` element.
-     */
-    name: t.optional(dataTypes.token()),
+		/**
+		 * The lyric name for which this is the default, corresponding to the name attribute in the `<lyric>` element.
+		 */
+		name: t.optional(dataTypes.token()),
 
-    /**
-     * The lyric number for which this is the default, corresponding to the number attribute in the `<lyric>` element.
-     */
-    number: t.optional(dataTypes.nmtoken()),
-  },
-  [] as const
+		/**
+		 * The lyric number for which this is the default, corresponding to the number attribute in the `<lyric>` element.
+		 */
+		number: t.optional(dataTypes.nmtoken()),
+	},
+	[] as const,
 );

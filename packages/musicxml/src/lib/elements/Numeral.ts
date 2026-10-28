@@ -14,7 +14,7 @@ import { NumeralRoot } from './NumeralRoot';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral/}
  */
 export const Numeral = schema('numeral', {}, [
-  t.required(NumeralRoot),
-  t.optional(NumeralAlter),
-  t.optional(NumeralKey),
+	t.required(NumeralRoot),
+	t.optional(NumeralAlter),
+	t.optional(NumeralKey),
 ] as const);

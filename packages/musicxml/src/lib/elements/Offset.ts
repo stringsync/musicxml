@@ -14,15 +14,15 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/offset/}
  */
 export const Offset = schema(
-  'offset',
-  {
-    /**
-     * The offset affects the visual appearance of the direction. If the sound attribute is yes, then the offset
-     * affects playback and listening too. If it is no, then any `<sound>` or `<listening>` associated with the
-     * `<direction>` takes effect at the current location. It is no if not specified for compatibility with earlier
-     * MusicXML versions.
-     */
-    sound: t.optional(dataTypes.yesNo()),
-  },
-  [t.label({ label: 'value', value: t.required(dataTypes.divisions()) })] as const
+	'offset',
+	{
+		/**
+		 * The offset affects the visual appearance of the direction. If the sound attribute is yes, then the offset
+		 * affects playback and listening too. If it is no, then any `<sound>` or `<listening>` associated with the
+		 * `<direction>` takes effect at the current location. It is no if not specified for compatibility with earlier
+		 * MusicXML versions.
+		 */
+		sound: t.optional(dataTypes.yesNo()),
+	},
+	[t.label({ label: 'value', value: t.required(dataTypes.divisions()) })] as const,
 );

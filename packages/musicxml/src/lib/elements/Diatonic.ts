@@ -13,5 +13,5 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/diatonic/}
  */
 export const Diatonic = schema('diatonic', {}, [
-  t.label({ label: 'diatonic', value: t.required(dataTypes.integer()) }),
+	t.label({ label: 'diatonic', value: t.required(dataTypes.integer()) }),
 ] as const);

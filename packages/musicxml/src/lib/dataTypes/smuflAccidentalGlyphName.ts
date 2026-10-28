@@ -7,5 +7,5 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/smufl-accidental-glyph-name/}
  */
 export const smuflAccidentalGlyphName = () => {
-  return t.regex({ pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' });
+	return t.regex({ pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' });
 };

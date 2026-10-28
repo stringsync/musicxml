@@ -12,17 +12,17 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tie/}
  */
 export const Tie = schema(
-  'tie',
-  {
-    /**
-     * Indicates if this is the start or stop of the tie.
-     */
-    type: t.required(dataTypes.startStop()),
+	'tie',
+	{
+		/**
+		 * Indicates if this is the start or stop of the tie.
+		 */
+		type: t.required(dataTypes.startStop()),
 
-    /**
-     * Indicates which particular times to apply a `<tie>` element through a repeated section.
-     */
-    ['time-only']: t.optional(dataTypes.timeOnly()),
-  },
-  [] as const
+		/**
+		 * Indicates which particular times to apply a `<tie>` element through a repeated section.
+		 */
+		['time-only']: t.optional(dataTypes.timeOnly()),
+	},
+	[] as const,
 );

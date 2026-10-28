@@ -11,22 +11,22 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-listen/}
  */
 export const OtherListen = schema(
-  'other-listen',
-  {
-    /**
-     * Indicates the type of listening to which the element content applies.
-     */
-    type: t.required(dataTypes.token()),
+	'other-listen',
+	{
+		/**
+		 * Indicates the type of listening to which the element content applies.
+		 */
+		type: t.required(dataTypes.token()),
 
-    /**
-     * Restricts the element to apply to a single player.
-     */
-    player: t.optional(dataTypes.idref()),
+		/**
+		 * Restricts the element to apply to a single player.
+		 */
+		player: t.optional(dataTypes.idref()),
 
-    /**
-     * Restrict the element to apply to a set of times through a repeated section.
-     */
-    ['time-only']: t.optional(dataTypes.timeOnly()),
-  },
-  [t.required(dataTypes.string())] as const
+		/**
+		 * Restrict the element to apply to a set of times through a repeated section.
+		 */
+		['time-only']: t.optional(dataTypes.timeOnly()),
+	},
+	[t.required(dataTypes.string())] as const,
 );

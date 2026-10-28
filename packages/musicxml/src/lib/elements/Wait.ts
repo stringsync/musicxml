@@ -13,17 +13,17 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/wait/}
  */
 export const Wait = schema(
-  'wait',
-  {
-    /**
-     * Restricts the `<wait>` to apply to a single player.
-     */
-    player: t.optional(dataTypes.idref()),
+	'wait',
+	{
+		/**
+		 * Restricts the `<wait>` to apply to a single player.
+		 */
+		player: t.optional(dataTypes.idref()),
 
-    /**
-     * Restricts the `<wait>` to apply to a set of times through a repeated section.
-     */
-    ['time-only']: t.optional(dataTypes.timeOnly()),
-  },
-  [] as const
+		/**
+		 * Restricts the `<wait>` to apply to a set of times through a repeated section.
+		 */
+		['time-only']: t.optional(dataTypes.timeOnly()),
+	},
+	[] as const,
 );

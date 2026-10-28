@@ -15,13 +15,13 @@ import { TopMargin } from './TopMargin';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-margins/}
  */
 export const PageMargins = schema(
-  'page-margins',
-  {
-    /**
-     * 	Specifies whether the margins apply to even pages, odd pages, or both. This attribute is not needed when used
-     * as part of a `<print>` element. The value is both if omitted when used in the `<defaults>` element.
-     */
-    type: t.optional(t.choices('both' as const, 'even' as const, 'odd' as const)),
-  },
-  [t.required(LeftMargin), t.required(RightMargin), t.required(TopMargin), t.required(BottomMargin)] as const
+	'page-margins',
+	{
+		/**
+		 * 	Specifies whether the margins apply to even pages, odd pages, or both. This attribute is not needed when used
+		 * as part of a `<print>` element. The value is both if omitted when used in the `<defaults>` element.
+		 */
+		type: t.optional(t.choices('both' as const, 'even' as const, 'odd' as const)),
+	},
+	[t.required(LeftMargin), t.required(RightMargin), t.required(TopMargin), t.required(BottomMargin)] as const,
 );

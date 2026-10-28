@@ -19,17 +19,17 @@ import { schema, t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-repeat/}
  */
 export const MeasureRepeat = schema(
-  'measure-repeat',
-  {
-    /**
-     * Indicates the starting or stopping point of the section displaying the measure repeat symbols.
-     */
-    type: t.required(dataTypes.startStop()),
+	'measure-repeat',
+	{
+		/**
+		 * Indicates the starting or stopping point of the section displaying the measure repeat symbols.
+		 */
+		type: t.required(dataTypes.startStop()),
 
-    /**
-     * Specifies the number of slashes to use in the symbol. The value is 1 if not specified.
-     */
-    slashes: t.optional(dataTypes.positiveInteger()),
-  },
-  [t.label({ label: 'value', value: t.required(dataTypes.positiveIntegerOrEmpty()) })] as const
+		/**
+		 * Specifies the number of slashes to use in the symbol. The value is 1 if not specified.
+		 */
+		slashes: t.optional(dataTypes.positiveInteger()),
+	},
+	[t.label({ label: 'value', value: t.required(dataTypes.positiveIntegerOrEmpty()) })] as const,
 );

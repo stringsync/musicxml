@@ -1,12 +1,12 @@
 {
-  "name": "@musicxml/mxl",
-  "private": true,
-  "type": "module",
-  "bin": {
-    "mxl": "./index.ts"
-  },
-  "dependencies": {
-    "webappwiz": "0.0.53",
-    "zod": "^4.4.3"
-  }
+	"name": "@musicxml/mxl",
+	"private": true,
+	"type": "module",
+	"bin": {
+		"mxl": "./index.ts"
+	},
+	"dependencies": {
+		"webappwiz": "0.0.53",
+		"zod": "^4.4.3"
+	}
 }

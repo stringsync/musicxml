@@ -17,43 +17,43 @@ import { Slash } from './Slash';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-style/}
  */
 export const MeasureStyle = schema(
-  'measure-style',
-  {
-    /**
-     * Indicates the color of an element.
-     */
-    color: t.optional(dataTypes.color()),
+	'measure-style',
+	{
+		/**
+		 * Indicates the color of an element.
+		 */
+		color: t.optional(dataTypes.color()),
 
-    /**
-     * A comma-separated list of font names.
-     */
-    ['font-family']: t.optional(dataTypes.fontFamily()),
+		/**
+		 * A comma-separated list of font names.
+		 */
+		['font-family']: t.optional(dataTypes.fontFamily()),
 
-    /**
-     * One of the CSS sizes or a numeric point size.
-     */
-    ['font-size']: t.optional(dataTypes.fontSize()),
+		/**
+		 * One of the CSS sizes or a numeric point size.
+		 */
+		['font-size']: t.optional(dataTypes.fontSize()),
 
-    /**
-     * Normal or italic style.
-     */
-    ['font-style']: t.optional(dataTypes.fontStyle()),
+		/**
+		 * Normal or italic style.
+		 */
+		['font-style']: t.optional(dataTypes.fontStyle()),
 
-    /**
-     * Normal or bold weight.
-     */
-    ['font-weight']: t.optional(dataTypes.fontWeight()),
+		/**
+		 * Normal or bold weight.
+		 */
+		['font-weight']: t.optional(dataTypes.fontWeight()),
 
-    /**
-     * Specifies an ID that is unique to the entire document.
-     */
-    id: t.optional(dataTypes.id()),
+		/**
+		 * Specifies an ID that is unique to the entire document.
+		 */
+		id: t.optional(dataTypes.id()),
 
-    /**
-     * Allows a measure style to apply to only the specified staff in the part. If absent, the measure style applies
-     * to all staves in the part.
-     */
-    number: t.optional(dataTypes.staffNumber()),
-  },
-  [t.label({ label: 'value', value: t.choices(MultipleRest, MeasureRepeat, BeatRepeat, Slash) })] as const
+		/**
+		 * Allows a measure style to apply to only the specified staff in the part. If absent, the measure style applies
+		 * to all staves in the part.
+		 */
+		number: t.optional(dataTypes.staffNumber()),
+	},
+	[t.label({ label: 'value', value: t.choices(MultipleRest, MeasureRepeat, BeatRepeat, Slash) })] as const,
 );

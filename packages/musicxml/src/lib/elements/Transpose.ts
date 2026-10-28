@@ -16,19 +16,19 @@ import { OctaveChange } from './OctaveChange';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/transpose/}
  */
 export const Transpose = schema(
-  'transpose',
-  {
-    /**
-     * Specifies an ID that is unique to the entire document.
-     */
-    id: t.optional(dataTypes.id()),
+	'transpose',
+	{
+		/**
+		 * Specifies an ID that is unique to the entire document.
+		 */
+		id: t.optional(dataTypes.id()),
 
-    /**
-     * Allows a transposition to apply to only the specified staff in the part. If absent, the transposition applies
-     * to all staves in the part. Per-staff transposition is most often used in parts that represent multiple
-     * instruments.
-     */
-    number: t.optional(dataTypes.staffNumber()),
-  },
-  [t.optional(Diatonic), t.required(Chromatic), t.optional(OctaveChange), t.optional(Double)] as const
+		/**
+		 * Allows a transposition to apply to only the specified staff in the part. If absent, the transposition applies
+		 * to all staves in the part. Per-staff transposition is most often used in parts that represent multiple
+		 * instruments.
+		 */
+		number: t.optional(dataTypes.staffNumber()),
+	},
+	[t.optional(Diatonic), t.required(Chromatic), t.optional(OctaveChange), t.optional(Double)] as const,
 );

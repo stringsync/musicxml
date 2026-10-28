@@ -19,10 +19,10 @@ import { PageWidth } from './PageWidth';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-layout/}
  */
 export const PageLayout = schema('page-layout', {}, [
-  t.optional(PageHeight),
-  t.optional(PageWidth),
-  t.label({
-    label: 'page-margins',
-    value: t.choices([] as const, [PageMargins] as const, [PageMargins, PageMargins] as const),
-  }),
+	t.optional(PageHeight),
+	t.optional(PageWidth),
+	t.label({
+		label: 'page-margins',
+		value: t.choices([] as const, [PageMargins] as const, [PageMargins, PageMargins] as const),
+	}),
 ] as const);

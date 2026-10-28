@@ -29,7 +29,7 @@ import { TopSystemDistance } from './TopSystemDistance';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-layout/}
  */
 export const SystemLayout = schema('system-layout', {}, [
-  t.optional(SystemMargins),
-  t.optional(SystemDistance),
-  t.optional(TopSystemDistance),
+	t.optional(SystemMargins),
+	t.optional(SystemDistance),
+	t.optional(TopSystemDistance),
 ] as const);

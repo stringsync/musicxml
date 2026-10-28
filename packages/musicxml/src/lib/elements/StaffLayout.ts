@@ -14,12 +14,12 @@ import { StaffDistance } from './StaffDistance';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/}
  */
 export const StaffLayout = schema(
-  'staff-layout',
-  {
-    /**
-     * Refers to staff numbers within the part, from top to bottom on the system. A value of 1 is used if not present.
-     */
-    number: t.optional(dataTypes.staffNumber()),
-  },
-  [t.optional(StaffDistance)] as const
+	'staff-layout',
+	{
+		/**
+		 * Refers to staff numbers within the part, from top to bottom on the system. A value of 1 is used if not present.
+		 */
+		number: t.optional(dataTypes.staffNumber()),
+	},
+	[t.optional(StaffDistance)] as const,
 );

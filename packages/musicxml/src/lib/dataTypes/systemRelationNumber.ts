@@ -6,5 +6,5 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/system-relation-number/}
  */
 export const systemRelationNumber = () => {
-  return t.choices(...(['none', 'only-top', 'only-bottom', 'also-top', 'also-bottom'] as const));
+	return t.choices(...(['none', 'only-top', 'only-bottom', 'also-top', 'also-bottom'] as const));
 };

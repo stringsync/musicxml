@@ -6,4 +6,4 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/stick-location/}
  */
 export const stickLocation = () =>
-  t.label({ label: 'stick-location', value: t.choices(...(['center', 'cymbal bell', 'cymbal edge', 'rim'] as const)) });
+	t.label({ label: 'stick-location', value: t.choices(...(['center', 'cymbal bell', 'cymbal edge', 'rim'] as const)) });
