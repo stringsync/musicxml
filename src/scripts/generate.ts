@@ -526,10 +526,10 @@ const generateFiles = (roots: XMLElementSchema[]): { elements: string; asserts: 
   process.stdout.write(' ✅\n');
 
   process.stdout.write('running eslint');
-  await new Promise((resolve) => exec(`yarn eslint --fix ${OUTPUT_DIRECTORY}`, resolve));
+  await new Promise((resolve) => exec(`bunx eslint --fix ${OUTPUT_DIRECTORY}`, resolve));
   process.stdout.write(' ✅\n');
 
   process.stdout.write('running prettier');
-  await new Promise((resolve) => exec(`yarn prettier --write ${OUTPUT_DIRECTORY}`, resolve));
+  await new Promise((resolve) => exec(`bunx prettier --write ${OUTPUT_DIRECTORY}`, resolve));
   process.stdout.write(' ✅\n');
 })();

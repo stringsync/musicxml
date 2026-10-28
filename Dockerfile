@@ -1,15 +1,11 @@
-FROM node:18.0.0
+FROM oven/bun:1.4.4
 
 WORKDIR /musicxml
 
-# install dependencies
-COPY package.json .
-COPY yarn.lock .
-RUN yarn
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
-# copy the rest of the files for tests
-COPY babel.config.json .
-COPY tsconfig.json .
+COPY bunfig.toml tsconfig.json ./
 COPY src src
 
-CMD [ "yarn", "jest" ]
+CMD ["bun", "test"]

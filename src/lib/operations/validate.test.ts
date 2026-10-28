@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'bun:test';
 import { schema, t, XMLElement } from '../schema';
 import { validate } from './validate';
 

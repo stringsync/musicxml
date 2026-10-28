@@ -12,5 +12,9 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+      - name: install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
       - name: test
-        run: yarn test --ci
+        run: bun run test --ci

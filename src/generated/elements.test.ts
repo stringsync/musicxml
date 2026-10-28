@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'bun:test';
 import { XMLElement } from '../lib/schema';
 import { Ctor } from '../lib/util';
 import * as elements from './elements';

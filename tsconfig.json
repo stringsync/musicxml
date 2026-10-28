@@ -7,7 +7,7 @@
     "declaration": true,
     "sourceMap": false,
     "allowJs": true,
-    "types": ["node", "jest", "jest-extended"],
+    "types": ["node", "bun"],
     "experimentalDecorators": true,
     "skipLibCheck": true
   },

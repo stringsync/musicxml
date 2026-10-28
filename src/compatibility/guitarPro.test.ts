@@ -1,3 +1,4 @@
+import { describe } from 'bun:test';
 import { EXAMPLE_SUITES } from '../examples';
 import { testCompatibility } from './testCompatibility';
 

@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'bun:test';
 import * as asserts from './asserts';
 
 describe('asserts', () => {

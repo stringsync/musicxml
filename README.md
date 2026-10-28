@@ -33,7 +33,7 @@ determined.
 I **highly** recommend that you lock into a specific version of this library.
 
 ```shell
-yarn add @stringsync/musicxml@0.2.1
+bun add @stringsync/musicxml@0.2.1
 ```
 
 or
@@ -316,6 +316,7 @@ which logs the following MusicXML:
 
 `musicxml` uses Docker and Docker Compose to create the test environment. The tests will not pass if you try to run them locally.
 
+- [install Bun](https://bun.sh/docs/installation)
 - [install Docker](https://docs.docker.com/get-docker/)
 - [install docker-compose](https://docs.docker.com/compose/install/)
 
@@ -326,16 +327,16 @@ which logs the following MusicXML:
 To run the tests, run the following in the project directory:
 
 ```
-yarn test
+bun run test
 ```
 
-`musicxml` uses the `jest` testing framework. You can pass any of the `jest` CLI options to the test command. For example, to run the tests in watch mode (recommended), run:
+`musicxml` uses the `bun:test` testing framework. You can pass any of the Bun test CLI options to the test command. For example, to run the tests in watch mode (recommended), run:
 
 ```
-yarn test --watchAll
+bun run test --watch
 ```
 
-A complete list of options are in the [jest docs](https://jestjs.io/docs/cli).
+A complete list of options are in the [Bun test docs](https://bun.sh/docs/cli/test).
 
 ## ❓ FAQs
 

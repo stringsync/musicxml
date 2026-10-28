@@ -1,8 +1,9 @@
+import { expect, it } from 'bun:test';
 import * as examples from '../examples';
 import { MusicXML } from '../MusicXML';
 
 /**
- * Dynamically adds a jest test that tests all of the examples in the suite are valid MusicXML and that this library can
+ * Dynamically adds a test that checks all of the examples in the suite are valid MusicXML and that this library can
  * losslessly parse and serialize the document.
  *
  * @param suite {Array<examples.Example>} the examples to test

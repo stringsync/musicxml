@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'bun:test';
 import * as examples from './examples';
 import { EXAMPLES } from './examples';
 import * as asserts from './generated/asserts';
@@ -228,7 +229,7 @@ describe('MusicXML', () => {
 
       const scorePartwise = musicXml.getRoot();
       if (!asserts.isScorePartwise(scorePartwise)) {
-        fail(`expected ScorePartwise, got: ${scorePartwise}`);
+        expect.unreachable(`expected ScorePartwise, got: ${scorePartwise}`);
       }
       expect(scorePartwise.getVersion()).toBe('4.0');
 
@@ -264,7 +265,7 @@ describe('MusicXML', () => {
 
       const attributes = measureValues[0];
       if (!asserts.isAttributes(attributes)) {
-        fail(`expected Attributes, got: ${attributes}`);
+        expect.unreachable(`expected Attributes, got: ${attributes}`);
       }
 
       const divisions = attributes.getDivisions();
@@ -280,7 +281,7 @@ describe('MusicXML', () => {
 
       const keyValue = key.getValue();
       if (!asserts.isTranditionalKey(keyValue)) {
-        fail(`expected TraditionalKey, got: ${keyValue}`);
+        expect.unreachable(`expected TraditionalKey, got: ${keyValue}`);
       }
 
       const fifths = keyValue[1];
@@ -295,7 +296,7 @@ describe('MusicXML', () => {
 
       const timeValue = time.getValue();
       if (!asserts.isTimeSignature(timeValue)) {
-        fail(`expected TimeSignature, got: ${timeValue}`);
+        expect.unreachable(`expected TimeSignature, got: ${timeValue}`);
       }
       expect(timeValue).toBeArray();
       expect(timeValue).toHaveLength(2);
@@ -325,7 +326,7 @@ describe('MusicXML', () => {
 
       const note = measureValues[1];
       if (!asserts.isNote(note)) {
-        fail(`expected Note, got: ${note}`);
+        expect.unreachable(`expected Note, got: ${note}`);
       }
 
       const noteVariation = note.getVariation();
@@ -348,7 +349,7 @@ describe('MusicXML', () => {
 
       const scorePartwise = musicXml.getRoot();
       if (!asserts.isScorePartwise(scorePartwise)) {
-        fail(`expected ScorePartwise, got: ${scorePartwise}`);
+        expect.unreachable(`expected ScorePartwise, got: ${scorePartwise}`);
       }
 
       const parts = scorePartwise.getParts();
@@ -364,7 +365,7 @@ describe('MusicXML', () => {
 
       const attributes = contents[0];
       if (!asserts.isAttributes(attributes)) {
-        fail(`expected Attributes, got ${attributes}`);
+        expect.unreachable(`expected Attributes, got ${attributes}`);
       }
 
       const divisions = attributes.getDivisions();
@@ -373,11 +374,11 @@ describe('MusicXML', () => {
 
       const note = contents[1];
       if (!asserts.isNote(note)) {
-        fail(`expected Note, got ${note}`);
+        expect.unreachable(`expected Note, got ${note}`);
       }
       const noteVariation = note.getVariation();
       if (!asserts.isTiedNote(noteVariation)) {
-        fail(`expected TiedNoteValue, got ${noteVariation}`);
+        expect.unreachable(`expected TiedNoteValue, got ${noteVariation}`);
       }
 
       const duration = noteVariation[2];

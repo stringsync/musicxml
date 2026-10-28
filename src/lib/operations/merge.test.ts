@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'bun:test';
 import { schema, t } from '../schema';
 import { merge } from './merge';
 
