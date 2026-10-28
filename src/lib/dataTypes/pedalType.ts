@@ -5,5 +5,5 @@ import { t } from '../schema';
  * {@link https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/pedal-type/}
  */
 export const pedalType = () => {
-  return t.choices(...(['start', 'stop', 'sostenuto', 'change', 'continue', 'discountiue', 'resume'] as const));
+  return t.choices(...(['start', 'stop', 'sostenuto', 'change', 'continue', 'discontinue', 'resume'] as const));
 };

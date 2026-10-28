@@ -39069,7 +39069,7 @@ export type PedalAttributes = {
   /**
    * Distinguishes different types of pedal directions.
    */
-  type: 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discountiue' | 'resume';
+  type: 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discontinue' | 'resume';
   /**
    * Used only when the sign attribute is yes and the type is start or sostenuto; otherwise it is ignored. If yes,
    * the short P and S signs are used. If no, the full Ped and Sost signs are used. It is no if not specified.
@@ -39158,7 +39158,7 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
         type: 'required',
         value: {
           type: 'choices',
-          choices: ['start', 'stop', 'sostenuto', 'change', 'continue', 'discountiue', 'resume'],
+          choices: ['start', 'stop', 'sostenuto', 'change', 'continue', 'discontinue', 'resume'],
         },
       },
       abbreviated: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
@@ -39214,11 +39214,11 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
     this.contents = opts?.contents ?? operations.zero(Pedal.schema.contents);
   }
   /** Gets @type {PedalAttributes['type']}. */
-  getType(): 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discountiue' | 'resume' {
+  getType(): 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discontinue' | 'resume' {
     return this.attributes['type'];
   }
   /** Sets @type {PedalAttributes['type']}. */
-  setType(type: 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discountiue' | 'resume'): Pedal {
+  setType(type: 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discontinue' | 'resume'): Pedal {
     this.attributes['type'] = type;
     return this;
   }
