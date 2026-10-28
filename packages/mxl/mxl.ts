@@ -4,6 +4,7 @@ import { build } from './build';
 import { docs, docsDev } from './docs';
 import { fix } from './fix';
 import { generate } from './generate';
+import { BUMPS, ship } from './ship';
 import { test } from './test';
 
 export const mxl = cli<Deps>('mxl');
@@ -42,3 +43,9 @@ mxl
 	.description('format, lint, and typecheck')
 	.option('check', z.stringbool(), { default: false, description: 'check without writing fixes' })
 	.action((opts, { ps, log }) => fix({ ...opts, ps, log }));
+
+mxl
+	.command('ship')
+	.description('bump the version, regenerate docs, commit, tag, and publish')
+	.arg('bump', z.enum(BUMPS))
+	.action((opts, { ps, log }) => ship({ bump: opts.bump, ps, log }));

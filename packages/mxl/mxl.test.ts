@@ -23,7 +23,7 @@ describe('mxl command program', () => {
 		await mxl.run({ ps, log }, ['--help']);
 
 		const help = log.entries.map((entry) => color.strip(String(entry.message))).join('\n');
-		for (const name of ['build', 'generate', 'fix', 'test', 'docs', 'docs:dev']) {
+		for (const name of ['build', 'generate', 'fix', 'test', 'docs', 'docs:dev', 'ship']) {
 			expect(help).toContain(name);
 		}
 		expect(ps.getCalls()).toEqual([]);
