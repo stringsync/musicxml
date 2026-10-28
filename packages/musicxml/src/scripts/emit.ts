@@ -1,11 +1,6 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-import * as ts from 'typescript';
 import type { DescriptorChild, XMLElementSchema } from '../lib/schema';
 import * as util from '../lib/util';
 import { MusicXMLError } from '../MusicXMLError';
-
-const ELEMENTS_INPUT_DIRECTORY = path.join(__dirname, '..', 'lib', 'elements');
 
 const capitalize = (string: string): string => {
 	return string.length > 0 ? string[0].toUpperCase() + string.substring(1) : string;
@@ -118,16 +113,12 @@ export const getTypeLiteral = (child: DescriptorChild): string => {
 	throw new MusicXMLError('cannot compute type for value', { child });
 };
 
-export const getAttributesTypeLiteral = (schema: XMLElementSchema, comments: Record<string, string>): string => {
+export const getAttributesTypeLiteral = (schema: XMLElementSchema): string => {
 	const attributes: string[] = [];
 	for (const [key, value] of Object.entries(schema.attributes)) {
 		const declaration = `'${key}': ${getTypeLiteral(value as DescriptorChild)}`;
 
-		if (key in comments) {
-			attributes.push([toMultiLineComment(comments[key]), declaration].join('\n'));
-		} else {
-			attributes.push(declaration);
-		}
+		attributes.push(declaration);
 	}
 	return attributes.length > 0 ? `{ ${attributes.join(';\n')} }` : 'Record<string, unknown>';
 };
@@ -153,15 +144,19 @@ const getAttributeLabel = (child: DescriptorChild): string => {
 	return '';
 };
 
+/** Attribute labels preserve accessor names when an attribute and a child share a name. */
+export const getAttributeAccessorNames = (schema: XMLElementSchema): Record<string, string> =>
+	Object.fromEntries(Object.entries(schema.attributes).map(([key, value]) => [key, getAttributeLabel(value) || key]));
+
 export const getAttributeAccessorMethodLiterals = (schema: XMLElementSchema): string => {
 	const methods: string[] = [];
 	const className = getClassName(schema);
 	for (const [key, value] of Object.entries(schema.attributes)) {
 		const name = getAttributeLabel(value) || key;
 		const typeLiteral = getTypeLiteral(value);
-		methods.push(`/** Gets @type {${className}Attributes['${name}']}. */`);
+		methods.push(`/** Gets @type {${className}Attributes['${key}']}. */`);
 		methods.push(`get${toPascalCase(decolonize(name))}(): ${typeLiteral} { return this.attributes['${key}']; }`);
-		methods.push(`/** Sets @type {${className}Attributes['${name}']}. */`);
+		methods.push(`/** Sets @type {${className}Attributes['${key}']}. */`);
 		methods.push(
 			`set${toPascalCase(decolonize(name))}(${toCamelCase(
 				decolonize(name),
@@ -281,17 +276,18 @@ export const getContentsAccessorMethodLiterals = (schema: XMLElementSchema): str
 	return methods.join('\n');
 };
 
-const toClassLiteral = (schema: XMLElementSchema): string => {
+const toClassLiteral = (schema: XMLElementSchema, docs: Record<string, string>): string => {
 	const className = getClassName(schema);
-	const comments = getElementComments(className);
-	const classComment = toMultiLineComment(comments.leading);
+	const classComment = toMultiLineComment(
+		`The \`<${schema.name}>\` element.\n\n${docs[className] ?? ''}\n\n@see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/${schema.name}/`,
+	);
 
 	const schemaLiteral = getSchemaLiteral(schema);
 
 	const labeledTypeLiterals = getLabeledTypeLiterals(schema);
 
 	const attributesTypeName = `${className}Attributes`;
-	const attributesTypeLiteral = getAttributesTypeLiteral(schema, comments.attributes);
+	const attributesTypeLiteral = getAttributesTypeLiteral(schema);
 	const attributesAccessorMethodLiterals = getAttributeAccessorMethodLiterals(schema);
 
 	const contentsTypeName = `${className}Contents`;
@@ -323,77 +319,15 @@ ${contentsAccessorMethodLiterals}
 }`;
 };
 
-const getElementComments = (className: string): { leading: string; attributes: Record<string, string> } => {
-	const comments: { leading: string; attributes: Record<string, string> } = { leading: '', attributes: {} };
-
-	const sourceFilePath = path.join(ELEMENTS_INPUT_DIRECTORY, `${className}.ts`);
-	const sourceFile = ts.createSourceFile(
-		sourceFilePath,
-		fs.readFileSync(sourceFilePath).toString(),
-		ts.ScriptTarget.Latest,
-		true,
-	);
-
-	function extract(node: ts.Node, sourceFile: ts.SourceFile): string {
-		const comments: string[] = [];
-
-		// Collect leading comments
-		const leadingComments = ts.getLeadingCommentRanges(sourceFile.text, node.getFullStart());
-		if (leadingComments) {
-			leadingComments.forEach((commentRange) => {
-				comments.push(sourceFile.text.substring(commentRange.pos, commentRange.end));
-			});
-		}
-
-		return comments
-			.join('\n')
-			.replace(/\/\*\*|\*\/|\*/g, '')
-			.trim();
-	}
-
-	ts.forEachChild(sourceFile, (node) => {
-		if (!ts.isVariableStatement(node)) {
-			return;
-		}
-		// Extract the leading comment.
-		comments.leading = extract(node, sourceFile);
-
-		// When a schema is being defined, extract the comments from the attributes argument (should be second).
-		const declaration = node.declarationList.declarations[0];
-		if (!ts.isVariableDeclaration(declaration)) {
-			return;
-		}
-
-		declaration.forEachChild((child) => {
-			if (!ts.isCallExpression(child)) {
-				return;
-			}
-			if (!ts.isIdentifier(child.expression)) {
-				return;
-			}
-			if (child.expression.text !== 'schema') {
-				return;
-			}
-			const args = child.arguments;
-			// Ensure there is a second argument and it's an object literal
-			if (args.length > 1 && ts.isObjectLiteralExpression(args[1])) {
-				const properties = args[1] as ts.ObjectLiteralExpression;
-				properties.properties.forEach((property) => {
-					if (ts.isPropertyAssignment(property)) {
-						// remove brackets and apostrophes
-						const propertyName = property.name.getText(sourceFile).replace(/[[\]']/g, '');
-						comments.attributes[propertyName] = extract(property, sourceFile);
-					}
-				});
-			}
-		});
-	});
-
-	return comments;
-};
-
 const toMultiLineComment = (comment: string): string =>
-	['/**', ...comment.split('\n').map((line) => `* ${line.trim()}`), '*/'].join('\n');
+	[
+		'/**',
+		...comment
+			.replace(/\*\//g, '* /')
+			.split('\n')
+			.map((line) => `* ${line.trim()}`),
+		'*/',
+	].join('\n');
 
 export const getTypeAssertMethodLiterals = (schema: XMLElementSchema): string[] => {
 	const methods = new Set<string>();
@@ -465,7 +399,10 @@ export const getTypeAssertMethodLiterals = (schema: XMLElementSchema): string[] 
 	return Array.from(methods);
 };
 
-export const generateFiles = (roots: XMLElementSchema[]): { elements: string; asserts: string } => {
+export const generateFiles = (
+	roots: XMLElementSchema[],
+	docs: Record<string, string>,
+): { elements: string; asserts: string } => {
 	const elements: string[] = [];
 	const seenElements = new Set<string>();
 	elements.push(`import { XMLElement, XMLElementSchema } from '../lib/schema';`);
@@ -506,7 +443,7 @@ export const generateFiles = (roots: XMLElementSchema[]): { elements: string; as
 			const className = getClassName(child);
 			if (!seenElements.has(className)) {
 				seenElements.add(className);
-				elements.push(toClassLiteral(child));
+				elements.push(toClassLiteral(child, docs));
 			}
 		}
 		if (util.isArray(child)) {

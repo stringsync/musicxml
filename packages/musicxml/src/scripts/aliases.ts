@@ -337,6 +337,10 @@ export const aliases: Aliases = {
 				),
 		},
 		attributes: {
+			// Preserve attribute accessor names, including attributes whose names also name children.
+			'barline@coda': () => t.label({ label: 'coda-token', value: t.optional(t.string()) }),
+			'barline@segno': () => t.label({ label: 'segno-token', value: t.optional(t.string()) }),
+			'midi-device@port': () => t.label({ label: 'midi16', value: t.optional(t.int({ min: 1, max: 16 })) }),
 			// The library writes MusicXML 4.0 documents; the XSD only says the attribute defaults to 1.0.
 			'score-partwise@version': () => t.constant('4.0'),
 			'score-timewise@version': () => t.constant('4.0'),

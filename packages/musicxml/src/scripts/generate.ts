@@ -1,8 +1,12 @@
 import { exec } from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import * as elements from '../lib/elements';
+import { aliases } from './aliases';
 import { generateFiles } from './emit';
+import { read } from './xsd/read';
+import { toSchemas } from './xsd/toSchemas';
+
+const XSD_PATH = path.join(__dirname, '..', '..', '..', '..', 'xmlvalidator', 'schema', 'musicxml.xsd');
 
 const OUTPUT_DIRECTORY = path.join(__dirname, '..', 'generated');
 const ELEMENTS_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'elements.ts');
@@ -10,7 +14,11 @@ const ASSERTS_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'asserts.ts');
 
 (async () => {
 	process.stdout.write('generating files');
-	const files = generateFiles([elements.ScorePartwise, elements.ScoreTimewise]);
+	const { schemas, docs, missing } = toSchemas(read(XSD_PATH), aliases);
+	if (missing.length > 0) {
+		throw new Error(`content needing a name in aliases.names:\n${missing.join('\n')}`);
+	}
+	const files = generateFiles([schemas.ScorePartwise, schemas.ScoreTimewise], docs);
 	process.stdout.write(' ✅\n');
 
 	process.stdout.write(`writing ${ELEMENTS_OUTPUT_PATH}`);

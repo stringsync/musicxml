@@ -777,6 +777,10 @@ export const isLaughing = (value: any): value is elements.Laughing => {
 	return operations.validate(value, elements.Laughing);
 };
 
+export const isLeftDivider = (value: any): value is elements.LeftDivider => {
+	return operations.validate(value, elements.LeftDivider);
+};
+
 export const isLeftMargin = (value: any): value is elements.LeftMargin => {
 	return operations.validate(value, elements.LeftMargin);
 };
@@ -1237,6 +1241,10 @@ export const isPlayer = (value: any): value is elements.Player => {
 	return operations.validate(value, elements.Player);
 };
 
+export const isPlayerName = (value: any): value is elements.PlayerName => {
+	return operations.validate(value, elements.PlayerName);
+};
+
 export const isPlop = (value: any): value is elements.Plop => {
 	return operations.validate(value, elements.Plop);
 };
@@ -1315,6 +1323,10 @@ export const isRf = (value: any): value is elements.Rf => {
 
 export const isRfz = (value: any): value is elements.Rfz => {
 	return operations.validate(value, elements.Rfz);
+};
+
+export const isRightDivider = (value: any): value is elements.RightDivider => {
+	return operations.validate(value, elements.RightDivider);
 };
 
 export const isRightMargin = (value: any): value is elements.RightMargin => {
@@ -1607,6 +1619,10 @@ export const isSync = (value: any): value is elements.Sync => {
 
 export const isSystemDistance = (value: any): value is elements.SystemDistance => {
 	return operations.validate(value, elements.SystemDistance);
+};
+
+export const isSystemDividers = (value: any): value is elements.SystemDividers => {
+	return operations.validate(value, elements.SystemDividers);
 };
 
 export const isSystemLayout = (value: any): value is elements.SystemLayout => {

@@ -4,7 +4,13 @@ import * as operations from '../lib/operations';
 import type { DescriptorChild, XMLElementSchema } from '../lib/schema';
 import * as util from '../lib/util';
 import { aliases } from './aliases';
-import { getClassName, getContentsAccessorNames, getTypeAssertMethodLiterals, getTypeLiteral } from './emit';
+import {
+	getAttributeAccessorNames,
+	getClassName,
+	getContentsAccessorNames,
+	getTypeAssertMethodLiterals,
+	getTypeLiteral,
+} from './emit';
 import { read } from './xsd/read';
 import { toSchemas } from './xsd/toSchemas';
 
@@ -17,6 +23,7 @@ const XSD_PATH = path.join(__dirname, '..', '..', '..', '..', 'xmlvalidator', 's
 
 type Api = {
 	attributes: Record<string, string>;
+	attributeAccessors: Record<string, string>;
 	contents: Array<{ name: string; type: string }>;
 	asserts: string[];
 	zero: string;
@@ -122,7 +129,13 @@ const toApi = (schema: XMLElementSchema): Api => {
 	}
 	const names = getContentsAccessorNames(sorted);
 	const contents = sorted.contents.map((content, ndx) => ({ name: names[ndx], type: getTypeLiteral(content) }));
-	return { attributes, contents, asserts: getTypeAssertMethodLiterals(sorted).sort(), zero: zeroOf(schema) };
+	return {
+		attributes,
+		attributeAccessors: getAttributeAccessorNames(sorted),
+		contents,
+		asserts: getTypeAssertMethodLiterals(sorted).sort(),
+		zero: zeroOf(schema),
+	};
 };
 
 const collect = (roots: XMLElementSchema[]): Record<string, XMLElementSchema> => {
@@ -243,6 +256,11 @@ const main = () => {
 				if (apiA.attributes[key] !== apiB.attributes[key]) {
 					const line = `  @${key}: ${apiA.attributes[key] ?? '(none)'}  →  ${apiB.attributes[key] ?? '(none)'}`;
 					(key in apiA.attributes ? diffs : added).push(line);
+				}
+			}
+			for (const [key, name] of Object.entries(apiA.attributeAccessors)) {
+				if (apiB.attributeAccessors[key] !== name) {
+					diffs.push(`  @${key} accessor: ${name} → ${apiB.attributeAccessors[key] ?? '(none)'}`);
 				}
 			}
 			const length = Math.max(apiA.contents.length, apiB.contents.length);

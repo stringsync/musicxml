@@ -32,3 +32,30 @@ describe('elements', () => {
 		});
 	}
 });
+
+describe('XSD API additions and compatibility', () => {
+	it('keeps barline playback tokens distinct from child symbols', () => {
+		const segno = new elements.Segno();
+		const coda = new elements.Coda();
+		const barline = new elements.Barline().setSegnoToken('segno').setCodaToken('coda');
+		barline.setSegno(segno).setCoda(coda);
+		expect(barline.getSegnoToken()).toBe('segno');
+		expect(barline.getCodaToken()).toBe('coda');
+		expect(barline.getSegno()).toBe(segno);
+		expect(barline.getCoda()).toBe(coda);
+		expect(new elements.MidiDevice().setMidi16(16).getMidi16()).toBe(16);
+	});
+
+	it('exposes newly modeled text and child elements', () => {
+		for (const Element of [elements.Elision, elements.OtherArticulation, elements.OtherPlay, elements.Symbol]) {
+			expect(new Element().setText('custom').getText()).toBe('custom');
+		}
+		expect(new elements.Pitched().setPitchedValue('celesta').getPitchedValue()).toBe('celesta');
+		const name = new elements.PlayerName().setText('Soloist');
+		expect(new elements.Player().setPlayerName(name).getPlayerName()).toBe(name);
+		const dividers = new elements.SystemDividers();
+		expect(dividers.getLeftDivider()).toBeInstanceOf(elements.LeftDivider);
+		expect(dividers.getRightDivider()).toBeInstanceOf(elements.RightDivider);
+		expect(new elements.SystemLayout().setSystemDividers(dividers).getSystemDividers()).toBe(dividers);
+	});
+});
