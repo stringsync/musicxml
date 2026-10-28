@@ -8,6 +8,7 @@ COPY packages/mxl/package.json packages/mxl/package.json
 RUN bun install --frozen-lockfile
 
 COPY packages/musicxml packages/musicxml
+COPY xmlvalidator/schema xmlvalidator/schema
 WORKDIR /musicxml/packages/musicxml
 
 CMD ["bun", "test"]
