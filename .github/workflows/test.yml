@@ -17,4 +17,4 @@ jobs:
         with:
           bun-version: 1.4.4
       - name: test
-        run: bun run test --ci
+        run: bin/mxl test --ci

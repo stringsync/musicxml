@@ -23,7 +23,7 @@ When serializing back to xml, comments are completely ommitted and CDATA is rend
 will escape special characters.
 
 In order to guarantee that parsed and serialized documents are valid, this library will replace invalid element or text
-nodes with a default value. See [src/lib/operations/zero.ts](src/lib/operations/zero.ts) for how the default values are
+nodes with a default value. See [packages/musicxml/src/lib/operations/zero.ts](packages/musicxml/src/lib/operations/zero.ts) for how the default values are
 determined.
 
 ## 🔨 Usage
@@ -327,16 +327,20 @@ which logs the following MusicXML:
 To run the tests, run the following in the project directory:
 
 ```
-bun run test
+bin/mxl test
 ```
 
 `musicxml` uses the `bun:test` testing framework. You can pass any of the Bun test CLI options to the test command. For example, to run the tests in watch mode (recommended), run:
 
 ```
-bun run test --watch
+bin/mxl test --watch
 ```
 
 A complete list of options are in the [Bun test docs](https://bun.sh/docs/cli/test).
+
+### Other commands
+
+Run `bin/mxl --help` for the development commands: `build`, `generate`, `docs`, and `docs:dev`. Run `bin/mxl build` before publishing.
 
 ## ❓ FAQs
 
@@ -406,9 +410,9 @@ For whoever wants to revisit this and make the generated client solely based off
 you leverage some library that does the heavy lifting xsd parsing for you. At the time of writing this, I did not find any
 actively maintained candidates. Conformance of an xml document against an xsd schema is a separate problem.
 
-All in all, rolling my own descriptor/schema library within this package (see [src/lib/schema](src/lib/schema/)) allowed
+All in all, rolling my own descriptor/schema library within this package (see [packages/musicxml/src/lib/schema](packages/musicxml/src/lib/schema/)) allowed
 me to use a structure that was more compatible with TypeScript. I considered transforming musicxml.xsd into these
 descriptors, but I wrote labeling functionality that made it easy to reference logical groups. For example, the
 [<note> element](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/) has multiple choices for what
 its main content can be. musicxml.xsd does not name these choices. In my descriptor library, I name them making them easier
-to work with (see [src/lib/elements/Note.ts](src/lib/elements/Note.ts)).
+to work with (see [packages/musicxml/src/lib/elements/Note.ts](packages/musicxml/src/lib/elements/Note.ts)).

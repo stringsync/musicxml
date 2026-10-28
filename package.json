@@ -1,28 +1,14 @@
 {
-  "name": "@stringsync/musicxml",
-  "version": "0.3.1",
-  "private": false,
-  "description": "a simple musicXML library",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/**/*"
+  "name": "musicxml",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "keywords": [
-    "musicxml"
-  ],
-  "repository": "git@github.com:stringsync/musicxml.git",
-  "author": "Jared Johnson <jared@jaredjohnson.dev>",
-  "license": "MIT",
-  "dependencies": {
-    "xml-js": "1.6.11"
-  },
   "devDependencies": {
     "@prettier/plugin-xml": "3.2.2",
     "@types/bun": "^1.4.4",
     "@typescript-eslint/eslint-plugin": "6.11.0",
     "@typescript-eslint/parser": "6.11.0",
-    "concurrently": "^8.2.2",
     "eslint": "8.54.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-standard-with-typescript": "21.0.1",
@@ -33,25 +19,13 @@
     "lint-staged": "12.1.2",
     "prettier": "3.1.0",
     "prettier-plugin-organize-imports": "2.3.4",
-    "serve": "^14.2.1",
     "ts-node": "10.4.0",
     "typedoc": "^0.25.3",
     "typescript": "^5.2.2"
   },
-  "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "generate": "ts-node src/scripts/generate.ts",
-    "posttest": "docker compose down",
-    "prepare": "husky install",
-    "prepublishOnly": "bun run build",
-    "pretest": "docker compose build",
-    "test": "docker compose run --rm test bun test",
-    "docs": "typedoc --tsconfig tsconfig.docs.json",
-    "docs:dev": "concurrently 'typedoc --tsconfig tsconfig.docs.json --watch --preserveWatchOutput' 'serve ./docs'"
-  },
   "lint-staged": {
-    "src/**/*": [
-      "bash -c \"bunx tsc --noEmit\"",
+    "packages/musicxml/src/**/*": [
+      "bash -c \"bunx tsc --noEmit -p packages/musicxml\"",
       "eslint",
       "prettier --write --ignore-unknown"
     ]

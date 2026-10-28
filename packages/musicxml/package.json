@@ -1,0 +1,20 @@
+{
+  "name": "@stringsync/musicxml",
+  "version": "0.3.1",
+  "private": false,
+  "description": "a simple musicXML library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "keywords": [
+    "musicxml"
+  ],
+  "repository": "git@github.com:stringsync/musicxml.git",
+  "author": "Jared Johnson <jared@jaredjohnson.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "xml-js": "1.6.11"
+  }
+}

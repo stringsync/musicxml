@@ -13,7 +13,7 @@ services:
     image: musicxml:latest
     build: .
     volumes:
-      - './src:/musicxml/src'
+      - './packages/musicxml/src:/musicxml/packages/musicxml/src'
     links:
       - xmlvalidator
     ports:
