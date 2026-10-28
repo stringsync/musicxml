@@ -37,13 +37,13 @@ export const Tuplet = schema(
 		 * the origin is changed relative to the start of the first measure on the system, and these values are used when
 		 * the current measure or a succeeding measure starts a new system. Positive x is right and negative x is left.
 		 */
-		['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
+		'default-x': t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Changes the computation of the default vertical position. The origin is changed relative to the top line of the
 		 * staff. Positive y is up and negative y is down.
 		 */
-		['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
+		'default-y': t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Specifies an ID that is unique to the entire document.
@@ -54,7 +54,7 @@ export const Tuplet = schema(
 		 * Used to specify whether the bracket is straight or in the older curved or slurred style. It is straight if not
 		 * specified.
 		 */
-		['line-shape']: t.optional(dataTypes.lineShape()),
+		'line-shape': t.optional(dataTypes.lineShape()),
 
 		/**
 		 * Distinguishes nested tuplets.
@@ -70,25 +70,25 @@ export const Tuplet = schema(
 		 * Changes the horizontal position relative to the default position, either as computed by the individual program,
 		 * or as overridden by the default-x attribute. Positive x is right and negative x is left.
 		 */
-		['relative-x']: t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
+		'relative-x': t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Changes the vertical position relative to the default position, either as computed by the individual program,
 		 * or as overridden by the default-y attribute. Positive y is up and negative y is down.
 		 */
-		['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
+		'relative-y': t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Used to display either the number of actual notes, the number of both actual and normal notes, or neither. It
 		 * is actual if not specified.
 		 */
-		['show-number']: t.optional(dataTypes.showTuplet()),
+		'show-number': t.optional(dataTypes.showTuplet()),
 
 		/**
 		 * Used to display either the actual type, both the actual and normal types, or neither. It is none if not
 		 * specified.
 		 */
-		['show-type']: t.optional(dataTypes.showTuplet()),
+		'show-type': t.optional(dataTypes.showTuplet()),
 	},
 	[t.optional(TupletActual), t.optional(TupletNormal)] as const,
 );

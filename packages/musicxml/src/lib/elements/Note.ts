@@ -64,7 +64,7 @@ export const Note = schema(
 		 * MusicXML file that can understand both features should generally rely on this attribute for its greater
 		 * accuracy.
 		 */
-		['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
+		'default-x': t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Changes the computation of the default vertical position. The origin is changed relative to the top line of the
@@ -74,7 +74,7 @@ export const Note = schema(
 		 * MusicXML file that can understand both attributes should generally rely on this attribute for its greater
 		 * accuracy.
 		 */
-		['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
+		'default-y': t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Corresponds to MIDI 1.0's Note On velocity, expressed in terms of percentage of the default forte value
@@ -86,27 +86,27 @@ export const Note = schema(
 		 * Corresponds to MIDI 1.0's Note Off velocity, expressed in terms of percentage of the default forte value
 		 * (90 for MIDI 1.0).
 		 */
-		['end-dynamics']: t.optional(dataTypes.nonNegativeDecimal()),
+		'end-dynamics': t.optional(dataTypes.nonNegativeDecimal()),
 
 		/**
 		 * A comma-separated list of font names.
 		 */
-		['font-family']: t.optional(dataTypes.fontFamily()),
+		'font-family': t.optional(dataTypes.fontFamily()),
 
 		/**
 		 * One of the CSS sizes or a numeric point size.
 		 */
-		['font-size']: t.optional(dataTypes.fontSize()),
+		'font-size': t.optional(dataTypes.fontSize()),
 
 		/**
 		 * Normal or italic style.
 		 */
-		['font-style']: t.optional(dataTypes.fontStyle()),
+		'font-style': t.optional(dataTypes.fontStyle()),
 
 		/**
 		 * Normal or bold weight.
 		 */
-		['font-weight']: t.optional(dataTypes.fontWeight()),
+		'font-weight': t.optional(dataTypes.fontWeight()),
 
 		/**
 		 * Specifies an ID that is unique to the entire document.
@@ -124,43 +124,43 @@ export const Note = schema(
 		 * useful for notes that overlap in different voices, or for chord sheets that contain lyrics and chords but no
 		 * melody. If print-object is set to no, this attribute is also interpreted as being set to no if not present.
 		 */
-		['print-dot']: t.optional(dataTypes.yesNo()),
+		'print-dot': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Indicates whether leger lines are printed. Notes without leger lines are used to indicate indeterminate high
 		 * and low notes. It is yes if not present unless print-object is set to no. This attribute is ignored for rests.
 		 */
-		['print-leger']: t.optional(dataTypes.yesNo()),
+		'print-leger': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Controls the printing of a lyric separately from the rest of the note or rest. This is especially useful for
 		 * notes that overlap in different voices, or for chord sheets that contain lyrics and chords but no melody. If
 		 * print-object is set to no, this attribute is also interpreted as being set to no if not present.
 		 */
-		['print-lyric']: t.optional(dataTypes.yesNo()),
+		'print-lyric': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Specifies whether or not to print an object. It is yes if not specified.
 		 */
-		['print-object']: t.optional(dataTypes.yesNo()),
+		'print-object': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Controls whether or not spacing is left for an invisible note or object. It is used only if no note, dot, or
 		 * lyric is being printed. The value is yes (leave spacing) if not specified.
 		 */
-		['print-spacing']: t.optional(dataTypes.yesNo()),
+		'print-spacing': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Changes the horizontal position relative to the default position, either as computed by the individual program,
 		 * or as overridden by the default-x attribute. Positive x is right and negative x is left.
 		 */
-		['relative-x']: t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
+		'relative-x': t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Changes the vertical position relative to the default position, either as computed by the individual program,
 		 * or as overridden by the default-y attribute. Positive y is up and negative y is down.
 		 */
-		['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
+		'relative-y': t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Alters the stopping time of the note from when it would otherwise occur based on the flow of durations -
@@ -173,7 +173,7 @@ export const Note = schema(
 		/**
 		 * Shows which times to play the note during a repeated section.
 		 */
-		['time-only']: t.optional(dataTypes.timeOnly()),
+		'time-only': t.optional(dataTypes.timeOnly()),
 	},
 	[
 		t.label({

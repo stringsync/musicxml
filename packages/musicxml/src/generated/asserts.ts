@@ -46,11 +46,11 @@ export const isAlter = (value: any): value is elements.Alter => {
 };
 
 export const isAlternateKey = (value: any): value is elements.AlternateKey => {
-	return operations.validate(value, elements.Key.schema.contents[0]['value']['choices'][1]);
+	return operations.validate(value, elements.Key.schema.contents[0].value.choices[1]);
 };
 
 export const isAlternateSwing = (value: any): value is elements.AlternateSwing => {
-	return operations.validate(value, elements.Swing.schema.contents[0]['value']['choices'][1]);
+	return operations.validate(value, elements.Swing.schema.contents[0].value.choices[1]);
 };
 
 export const isAppearance = (value: any): value is elements.Appearance => {
@@ -138,7 +138,7 @@ export const isBeatRepeat = (value: any): value is elements.BeatRepeat => {
 };
 
 export const isBeatSpec = (value: any): value is elements.BeatSpec => {
-	return operations.validate(value, elements.Metronome.schema.contents[0]['value']['choices'][0]);
+	return operations.validate(value, elements.Metronome.schema.contents[0].value.choices[0]);
 };
 
 export const isBeatType = (value: any): value is elements.BeatType => {
@@ -230,7 +230,7 @@ export const isCoda = (value: any): value is elements.Coda => {
 };
 
 export const isCodas = (value: any): value is elements.Codas => {
-	return operations.validate(value, elements.DirectionType.schema.contents[0]['value']['choices'][2]);
+	return operations.validate(value, elements.DirectionType.schema.contents[0].value.choices[2]);
 };
 
 export const isConcertScore = (value: any): value is elements.ConcertScore => {
@@ -254,7 +254,7 @@ export const isCreditSymbol = (value: any): value is elements.CreditSymbol => {
 };
 
 export const isCreditToken = (value: any): value is elements.CreditToken => {
-	return operations.validate(value, elements.Credit.schema.contents[3]['value']['choices'][1]);
+	return operations.validate(value, elements.Credit.schema.contents[3].value.choices[1]);
 };
 
 export const isCreditType = (value: any): value is elements.CreditType => {
@@ -270,11 +270,11 @@ export const isCue = (value: any): value is elements.Cue => {
 };
 
 export const isCuedGraceNote = (value: any): value is elements.CuedGraceNote => {
-	return operations.validate(value, elements.Note.schema.contents[0]['value']['choices'][3]);
+	return operations.validate(value, elements.Note.schema.contents[0].value.choices[3]);
 };
 
 export const isCuedNote = (value: any): value is elements.CuedNote => {
-	return operations.validate(value, elements.Note.schema.contents[0]['value']['choices'][1]);
+	return operations.validate(value, elements.Note.schema.contents[0].value.choices[1]);
 };
 
 export const isDamp = (value: any): value is elements.Damp => {
@@ -386,7 +386,7 @@ export const isDynamics = (value: any): value is elements.Dynamics => {
 };
 
 export const isDynamicsList = (value: any): value is elements.DynamicsList => {
-	return operations.validate(value, elements.DirectionType.schema.contents[0]['value']['choices'][5]);
+	return operations.validate(value, elements.DirectionType.schema.contents[0].value.choices[5]);
 };
 
 export const isEffect = (value: any): value is elements.Effect => {
@@ -526,7 +526,7 @@ export const isForPart = (value: any): value is elements.ForPart => {
 };
 
 export const isForParts = (value: any): value is elements.ForParts => {
-	return operations.validate(value, elements.Attributes.schema.contents[10]['value']['choices'][1]);
+	return operations.validate(value, elements.Attributes.schema.contents[10].value.choices[1]);
 };
 
 export const isForward = (value: any): value is elements.Forward => {
@@ -722,7 +722,7 @@ export const isInstruments = (value: any): value is elements.Instruments => {
 };
 
 export const isIntelligible = (value: any): value is elements.Intelligible => {
-	return operations.validate(value, elements.Lyric.schema.contents[0]['value']['choices'][0]);
+	return operations.validate(value, elements.Lyric.schema.contents[0].value.choices[0]);
 };
 
 export const isInterchangeable = (value: any): value is elements.Interchangeable => {
@@ -886,7 +886,7 @@ export const isMetronomeRelation = (value: any): value is elements.MetronomeRela
 };
 
 export const isMetronomeSpec = (value: any): value is elements.MetronomeSpec => {
-	return operations.validate(value, elements.Metronome.schema.contents[0]['value']['choices'][1]);
+	return operations.validate(value, elements.Metronome.schema.contents[0].value.choices[1]);
 };
 
 export const isMetronomeTied = (value: any): value is elements.MetronomeTied => {
@@ -1218,7 +1218,7 @@ export const isPercussion = (value: any): value is elements.Percussion => {
 };
 
 export const isPercussions = (value: any): value is elements.Percussions => {
-	return operations.validate(value, elements.DirectionType.schema.contents[0]['value']['choices'][19]);
+	return operations.validate(value, elements.DirectionType.schema.contents[0].value.choices[19]);
 };
 
 export const isPf = (value: any): value is elements.Pf => {
@@ -1298,7 +1298,7 @@ export const isRehearsal = (value: any): value is elements.Rehearsal => {
 };
 
 export const isRehearsals = (value: any): value is elements.Rehearsals => {
-	return operations.validate(value, elements.DirectionType.schema.contents[0]['value']['choices'][0]);
+	return operations.validate(value, elements.DirectionType.schema.contents[0].value.choices[0]);
 };
 
 export const isRelation = (value: any): value is elements.Relation => {
@@ -1390,7 +1390,7 @@ export const isSegno = (value: any): value is elements.Segno => {
 };
 
 export const isSegnos = (value: any): value is elements.Segnos => {
-	return operations.validate(value, elements.DirectionType.schema.contents[0]['value']['choices'][1]);
+	return operations.validate(value, elements.DirectionType.schema.contents[0].value.choices[1]);
 };
 
 export const isSemiPitched = (value: any): value is elements.SemiPitched => {
@@ -1666,11 +1666,11 @@ export const isTied = (value: any): value is elements.Tied => {
 };
 
 export const isTiedGraceNote = (value: any): value is elements.TiedGraceNote => {
-	return operations.validate(value, elements.Note.schema.contents[0]['value']['choices'][2]);
+	return operations.validate(value, elements.Note.schema.contents[0].value.choices[2]);
 };
 
 export const isTiedNote = (value: any): value is elements.TiedNote => {
-	return operations.validate(value, elements.Note.schema.contents[0]['value']['choices'][0]);
+	return operations.validate(value, elements.Note.schema.contents[0].value.choices[0]);
 };
 
 export const isTime = (value: any): value is elements.Time => {
@@ -1686,7 +1686,7 @@ export const isTimeRelation = (value: any): value is elements.TimeRelation => {
 };
 
 export const isTimeSignature = (value: any): value is elements.TimeSignature => {
-	return operations.validate(value, elements.Time.schema.contents[0]['value']['choices'][0]);
+	return operations.validate(value, elements.Time.schema.contents[0].value.choices[0]);
 };
 
 export const isTimpani = (value: any): value is elements.Timpani => {
@@ -1698,7 +1698,7 @@ export const isToe = (value: any): value is elements.Toe => {
 };
 
 export const isTokens = (value: any): value is elements.Tokens => {
-	return operations.validate(value, elements.DirectionType.schema.contents[0]['value']['choices'][3]);
+	return operations.validate(value, elements.DirectionType.schema.contents[0].value.choices[3]);
 };
 
 export const isTopMargin = (value: any): value is elements.TopMargin => {
@@ -1714,7 +1714,7 @@ export const isTouchingPitch = (value: any): value is elements.TouchingPitch => 
 };
 
 export const isTranditionalKey = (value: any): value is elements.TranditionalKey => {
-	return operations.validate(value, elements.Key.schema.contents[0]['value']['choices'][0]);
+	return operations.validate(value, elements.Key.schema.contents[0].value.choices[0]);
 };
 
 export const isTranspose = (value: any): value is elements.Transpose => {
@@ -1722,7 +1722,7 @@ export const isTranspose = (value: any): value is elements.Transpose => {
 };
 
 export const isTransposes = (value: any): value is elements.Transposes => {
-	return operations.validate(value, elements.Attributes.schema.contents[10]['value']['choices'][0]);
+	return operations.validate(value, elements.Attributes.schema.contents[10].value.choices[0]);
 };
 
 export const isTremolo = (value: any): value is elements.Tremolo => {

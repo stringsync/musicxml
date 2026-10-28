@@ -318,11 +318,11 @@ export class Creator implements XMLElement<'creator', CreatorAttributes, Creator
 	}
 	/** Gets @type {CreatorAttributes['type']}. */
 	getType(): string | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {CreatorAttributes['type']}. */
 	setType(type: string | null): Creator {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -362,11 +362,11 @@ export class Rights implements XMLElement<'rights', RightsAttributes, RightsCont
 	}
 	/** Gets @type {RightsAttributes['type']}. */
 	getType(): string | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {RightsAttributes['type']}. */
 	setType(type: string | null): Rights {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -442,11 +442,11 @@ export class Encoder implements XMLElement<'encoder', EncoderAttributes, Encoder
 	}
 	/** Gets @type {EncoderAttributes['type']}. */
 	getType(): string | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {EncoderAttributes['type']}. */
 	setType(type: string | null): Encoder {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -565,38 +565,38 @@ export class Supports implements XMLElement<'supports', SupportsAttributes, Supp
 	}
 	/** Gets @type {SupportsAttributes['attribute']}. */
 	getAttribute(): string | null {
-		return this.attributes['attribute'];
+		return this.attributes.attribute;
 	}
 	/** Sets @type {SupportsAttributes['attribute']}. */
 	setAttribute(attribute: string | null): Supports {
-		this.attributes['attribute'] = attribute;
+		this.attributes.attribute = attribute;
 		return this;
 	}
 	/** Gets @type {SupportsAttributes['element']}. */
 	getElement(): string {
-		return this.attributes['element'];
+		return this.attributes.element;
 	}
 	/** Sets @type {SupportsAttributes['element']}. */
 	setElement(element: string): Supports {
-		this.attributes['element'] = element;
+		this.attributes.element = element;
 		return this;
 	}
 	/** Gets @type {SupportsAttributes['type']}. */
 	getType(): 'yes' | 'no' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {SupportsAttributes['type']}. */
 	setType(type: 'yes' | 'no'): Supports {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {SupportsAttributes['value']}. */
 	getValue(): string | null {
-		return this.attributes['value'];
+		return this.attributes.value;
 	}
 	/** Sets @type {SupportsAttributes['value']}. */
 	setValue(value: string | null): Supports {
-		this.attributes['value'] = value;
+		this.attributes.value = value;
 		return this;
 	}
 }
@@ -707,11 +707,11 @@ export class Relation implements XMLElement<'relation', RelationAttributes, Rela
 	}
 	/** Gets @type {RelationAttributes['type']}. */
 	getType(): string | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {RelationAttributes['type']}. */
 	setType(type: string | null): Relation {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -753,11 +753,11 @@ export class MiscellaneousField
 	}
 	/** Gets @type {MiscellaneousFieldAttributes['name']}. */
 	getName(): string {
-		return this.attributes['name'];
+		return this.attributes.name;
 	}
 	/** Sets @type {MiscellaneousFieldAttributes['name']}. */
 	setName(name: string): MiscellaneousField {
-		this.attributes['name'] = name;
+		this.attributes.name = name;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -1296,11 +1296,11 @@ export class PageMargins implements XMLElement<'page-margins', PageMarginsAttrib
 	}
 	/** Gets @type {PageMarginsAttributes['type']}. */
 	getType(): 'both' | 'odd' | 'even' | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {PageMarginsAttributes['type']}. */
 	setType(type: 'both' | 'odd' | 'even' | null): PageMargins {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {LeftMargin}. */
@@ -1561,11 +1561,11 @@ export class LeftDivider implements XMLElement<'left-divider', LeftDividerAttrib
 	}
 	/** Gets @type {LeftDividerAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {LeftDividerAttributes['color']}. */
 	setColor(color: string | null): LeftDivider {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {LeftDividerAttributes['default-x']}. */
@@ -1626,11 +1626,11 @@ export class LeftDivider implements XMLElement<'left-divider', LeftDividerAttrib
 	}
 	/** Gets @type {LeftDividerAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {LeftDividerAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): LeftDivider {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {LeftDividerAttributes['print-object']}. */
@@ -1662,11 +1662,11 @@ export class LeftDivider implements XMLElement<'left-divider', LeftDividerAttrib
 	}
 	/** Gets @type {LeftDividerAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {LeftDividerAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): LeftDivider {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 }
@@ -1710,11 +1710,11 @@ export class RightDivider implements XMLElement<'right-divider', RightDividerAtt
 	}
 	/** Gets @type {RightDividerAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {RightDividerAttributes['color']}. */
 	setColor(color: string | null): RightDivider {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {RightDividerAttributes['default-x']}. */
@@ -1775,11 +1775,11 @@ export class RightDivider implements XMLElement<'right-divider', RightDividerAtt
 	}
 	/** Gets @type {RightDividerAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {RightDividerAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): RightDivider {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {RightDividerAttributes['print-object']}. */
@@ -1811,11 +1811,11 @@ export class RightDivider implements XMLElement<'right-divider', RightDividerAtt
 	}
 	/** Gets @type {RightDividerAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {RightDividerAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): RightDivider {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 }
@@ -2007,11 +2007,11 @@ export class StaffLayout implements XMLElement<'staff-layout', StaffLayoutAttrib
 	}
 	/** Gets @type {StaffLayoutAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {StaffLayoutAttributes['number']}. */
 	setNumber(number: number | null): StaffLayout {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {StaffDistance | null}. */
@@ -2091,7 +2091,7 @@ export class LineWidth implements XMLElement<'line-width', LineWidthAttributes, 
 		| 'tie tip'
 		| 'tuplet bracket'
 		| 'wedge' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {LineWidthAttributes['type']}. */
 	setType(
@@ -2116,7 +2116,7 @@ export class LineWidth implements XMLElement<'line-width', LineWidthAttributes, 
 			| 'tuplet bracket'
 			| 'wedge',
 	): LineWidth {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -2156,11 +2156,11 @@ export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, Not
 	}
 	/** Gets @type {NoteSizeAttributes['type']}. */
 	getType(): 'cue' | 'grace' | 'grace-cue' | 'large' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {NoteSizeAttributes['type']}. */
 	setType(type: 'cue' | 'grace' | 'grace-cue' | 'large'): NoteSize {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -2200,11 +2200,11 @@ export class Distance implements XMLElement<'distance', DistanceAttributes, Dist
 	}
 	/** Gets @type {DistanceAttributes['type']}. */
 	getType(): 'beam' | 'hyphen' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {DistanceAttributes['type']}. */
 	setType(type: 'beam' | 'hyphen'): Distance {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -2270,7 +2270,7 @@ export class Glyph implements XMLElement<'glyph', GlyphAttributes, GlyphContents
 		| 'octave-shift-down-22'
 		| 'octave-shift-up-22'
 		| 'octave-shift-continue-22' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {GlyphAttributes['type']}. */
 	setType(
@@ -2288,7 +2288,7 @@ export class Glyph implements XMLElement<'glyph', GlyphAttributes, GlyphContents
 			| 'octave-shift-up-22'
 			| 'octave-shift-continue-22',
 	): Glyph {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -2330,11 +2330,11 @@ export class OtherAppearance
 	}
 	/** Gets @type {OtherAppearanceAttributes['type']}. */
 	getType(): string {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {OtherAppearanceAttributes['type']}. */
 	setType(type: string): OtherAppearance {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -2635,20 +2635,20 @@ export class LyricFont implements XMLElement<'lyric-font', LyricFontAttributes, 
 	}
 	/** Gets @type {LyricFontAttributes['name']}. */
 	getName(): string | null {
-		return this.attributes['name'];
+		return this.attributes.name;
 	}
 	/** Sets @type {LyricFontAttributes['name']}. */
 	setName(name: string | null): LyricFont {
-		this.attributes['name'] = name;
+		this.attributes.name = name;
 		return this;
 	}
 	/** Gets @type {LyricFontAttributes['number']}. */
 	getNumber(): string | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {LyricFontAttributes['number']}. */
 	setNumber(number: string | null): LyricFont {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 }
@@ -2679,20 +2679,20 @@ export class LyricLanguage implements XMLElement<'lyric-language', LyricLanguage
 	}
 	/** Gets @type {LyricLanguageAttributes['name']}. */
 	getName(): string | null {
-		return this.attributes['name'];
+		return this.attributes.name;
 	}
 	/** Sets @type {LyricLanguageAttributes['name']}. */
 	setName(name: string | null): LyricLanguage {
-		this.attributes['name'] = name;
+		this.attributes.name = name;
 		return this;
 	}
 	/** Gets @type {LyricLanguageAttributes['number']}. */
 	getNumber(): string | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {LyricLanguageAttributes['number']}. */
 	setNumber(number: string | null): LyricLanguage {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {LyricLanguageAttributes['xml:lang']}. */
@@ -2928,29 +2928,29 @@ export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
 	}
 	/** Gets @type {LinkAttributes['element']}. */
 	getElement(): string | null {
-		return this.attributes['element'];
+		return this.attributes.element;
 	}
 	/** Sets @type {LinkAttributes['element']}. */
 	setElement(element: string | null): Link {
-		this.attributes['element'] = element;
+		this.attributes.element = element;
 		return this;
 	}
 	/** Gets @type {LinkAttributes['name']}. */
 	getName(): string | null {
-		return this.attributes['name'];
+		return this.attributes.name;
 	}
 	/** Sets @type {LinkAttributes['name']}. */
 	setName(name: string | null): Link {
-		this.attributes['name'] = name;
+		this.attributes.name = name;
 		return this;
 	}
 	/** Gets @type {LinkAttributes['position']}. */
 	getPosition(): number | null {
-		return this.attributes['position'];
+		return this.attributes.position;
 	}
 	/** Sets @type {LinkAttributes['position']}. */
 	setPosition(position: number | null): Link {
-		this.attributes['position'] = position;
+		this.attributes.position = position;
 		return this;
 	}
 	/** Gets @type {LinkAttributes['relative-x']}. */
@@ -3053,38 +3053,38 @@ export class Bookmark implements XMLElement<'bookmark', BookmarkAttributes, Book
 	}
 	/** Gets @type {BookmarkAttributes['element']}. */
 	getElement(): string | null {
-		return this.attributes['element'];
+		return this.attributes.element;
 	}
 	/** Sets @type {BookmarkAttributes['element']}. */
 	setElement(element: string | null): Bookmark {
-		this.attributes['element'] = element;
+		this.attributes.element = element;
 		return this;
 	}
 	/** Gets @type {BookmarkAttributes['id']}. */
 	getId(): string {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {BookmarkAttributes['id']}. */
 	setId(id: string): Bookmark {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {BookmarkAttributes['name']}. */
 	getName(): string | null {
-		return this.attributes['name'];
+		return this.attributes.name;
 	}
 	/** Sets @type {BookmarkAttributes['name']}. */
 	setName(name: string | null): Bookmark {
-		this.attributes['name'] = name;
+		this.attributes.name = name;
 		return this;
 	}
 	/** Gets @type {BookmarkAttributes['position']}. */
 	getPosition(): number | null {
-		return this.attributes['position'];
+		return this.attributes.position;
 	}
 	/** Sets @type {BookmarkAttributes['position']}. */
 	setPosition(position: number | null): Bookmark {
-		this.attributes['position'] = position;
+		this.attributes.position = position;
 		return this;
 	}
 }
@@ -3145,29 +3145,29 @@ export class CreditImage implements XMLElement<'credit-image', CreditImageAttrib
 	}
 	/** Gets @type {CreditImageAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {CreditImageAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): CreditImage {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {CreditImageAttributes['height']}. */
 	getHeight(): number | null {
-		return this.attributes['height'];
+		return this.attributes.height;
 	}
 	/** Sets @type {CreditImageAttributes['height']}. */
 	setHeight(height: number | null): CreditImage {
-		this.attributes['height'] = height;
+		this.attributes.height = height;
 		return this;
 	}
 	/** Gets @type {CreditImageAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {CreditImageAttributes['id']}. */
 	setId(id: string | null): CreditImage {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {CreditImageAttributes['relative-x']}. */
@@ -3190,38 +3190,38 @@ export class CreditImage implements XMLElement<'credit-image', CreditImageAttrib
 	}
 	/** Gets @type {CreditImageAttributes['source']}. */
 	getSource(): string | null {
-		return this.attributes['source'];
+		return this.attributes.source;
 	}
 	/** Sets @type {CreditImageAttributes['source']}. */
 	setSource(source: string | null): CreditImage {
-		this.attributes['source'] = source;
+		this.attributes.source = source;
 		return this;
 	}
 	/** Gets @type {CreditImageAttributes['type']}. */
 	getType(): string | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {CreditImageAttributes['type']}. */
 	setType(type: string | null): CreditImage {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {CreditImageAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {CreditImageAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | null): CreditImage {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {CreditImageAttributes['width']}. */
 	getWidth(): number | null {
-		return this.attributes['width'];
+		return this.attributes.width;
 	}
 	/** Sets @type {CreditImageAttributes['width']}. */
 	setWidth(width: number | null): CreditImage {
-		this.attributes['width'] = width;
+		this.attributes.width = width;
 		return this;
 	}
 }
@@ -3292,11 +3292,11 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
 	}
 	/** Gets @type {CreditWordsAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {CreditWordsAttributes['color']}. */
 	setColor(color: string | null): CreditWords {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {CreditWordsAttributes['default-x']}. */
@@ -3319,11 +3319,11 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
 	}
 	/** Gets @type {CreditWordsAttributes['dir']}. */
 	getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
-		return this.attributes['dir'];
+		return this.attributes.dir;
 	}
 	/** Sets @type {CreditWordsAttributes['dir']}. */
 	setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): CreditWords {
-		this.attributes['dir'] = dir;
+		this.attributes.dir = dir;
 		return this;
 	}
 	/** Gets @type {CreditWordsAttributes['enclosure']}. */
@@ -3344,7 +3344,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
 		| 'nonagon'
 		| 'decagon'
 		| null {
-		return this.attributes['enclosure'];
+		return this.attributes.enclosure;
 	}
 	/** Sets @type {CreditWordsAttributes['enclosure']}. */
 	setEnclosure(
@@ -3366,7 +3366,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
 			| 'decagon'
 			| null,
 	): CreditWords {
-		this.attributes['enclosure'] = enclosure;
+		this.attributes.enclosure = enclosure;
 		return this;
 	}
 	/** Gets @type {CreditWordsAttributes['font-family']}. */
@@ -3409,29 +3409,29 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
 	}
 	/** Gets @type {CreditWordsAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {CreditWordsAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): CreditWords {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {CreditWordsAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {CreditWordsAttributes['id']}. */
 	setId(id: string | null): CreditWords {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {CreditWordsAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {CreditWordsAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): CreditWords {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {CreditWordsAttributes['letter-spacing']}. */
@@ -3463,11 +3463,11 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
 	}
 	/** Gets @type {CreditWordsAttributes['overline']}. */
 	getOverline(): number | null {
-		return this.attributes['overline'];
+		return this.attributes.overline;
 	}
 	/** Sets @type {CreditWordsAttributes['overline']}. */
 	setOverline(overline: number | null): CreditWords {
-		this.attributes['overline'] = overline;
+		this.attributes.overline = overline;
 		return this;
 	}
 	/** Gets @type {CreditWordsAttributes['relative-x']}. */
@@ -3490,29 +3490,29 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
 	}
 	/** Gets @type {CreditWordsAttributes['rotation']}. */
 	getRotation(): number | null {
-		return this.attributes['rotation'];
+		return this.attributes.rotation;
 	}
 	/** Sets @type {CreditWordsAttributes['rotation']}. */
 	setRotation(rotation: number | null): CreditWords {
-		this.attributes['rotation'] = rotation;
+		this.attributes.rotation = rotation;
 		return this;
 	}
 	/** Gets @type {CreditWordsAttributes['underline']}. */
 	getUnderline(): number | null {
-		return this.attributes['underline'];
+		return this.attributes.underline;
 	}
 	/** Sets @type {CreditWordsAttributes['underline']}. */
 	setUnderline(underline: number | null): CreditWords {
-		this.attributes['underline'] = underline;
+		this.attributes.underline = underline;
 		return this;
 	}
 	/** Gets @type {CreditWordsAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {CreditWordsAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): CreditWords {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {CreditWordsAttributes['xml:lang']}. */
@@ -3608,11 +3608,11 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
 	}
 	/** Gets @type {CreditSymbolAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {CreditSymbolAttributes['color']}. */
 	setColor(color: string | null): CreditSymbol {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {CreditSymbolAttributes['default-x']}. */
@@ -3635,11 +3635,11 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
 	}
 	/** Gets @type {CreditSymbolAttributes['dir']}. */
 	getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
-		return this.attributes['dir'];
+		return this.attributes.dir;
 	}
 	/** Sets @type {CreditSymbolAttributes['dir']}. */
 	setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): CreditSymbol {
-		this.attributes['dir'] = dir;
+		this.attributes.dir = dir;
 		return this;
 	}
 	/** Gets @type {CreditSymbolAttributes['enclosure']}. */
@@ -3660,7 +3660,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
 		| 'nonagon'
 		| 'decagon'
 		| null {
-		return this.attributes['enclosure'];
+		return this.attributes.enclosure;
 	}
 	/** Sets @type {CreditSymbolAttributes['enclosure']}. */
 	setEnclosure(
@@ -3682,7 +3682,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
 			| 'decagon'
 			| null,
 	): CreditSymbol {
-		this.attributes['enclosure'] = enclosure;
+		this.attributes.enclosure = enclosure;
 		return this;
 	}
 	/** Gets @type {CreditSymbolAttributes['font-family']}. */
@@ -3725,29 +3725,29 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
 	}
 	/** Gets @type {CreditSymbolAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {CreditSymbolAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): CreditSymbol {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {CreditSymbolAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {CreditSymbolAttributes['id']}. */
 	setId(id: string | null): CreditSymbol {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {CreditSymbolAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {CreditSymbolAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): CreditSymbol {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {CreditSymbolAttributes['letter-spacing']}. */
@@ -3779,11 +3779,11 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
 	}
 	/** Gets @type {CreditSymbolAttributes['overline']}. */
 	getOverline(): number | null {
-		return this.attributes['overline'];
+		return this.attributes.overline;
 	}
 	/** Sets @type {CreditSymbolAttributes['overline']}. */
 	setOverline(overline: number | null): CreditSymbol {
-		this.attributes['overline'] = overline;
+		this.attributes.overline = overline;
 		return this;
 	}
 	/** Gets @type {CreditSymbolAttributes['relative-x']}. */
@@ -3806,29 +3806,29 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
 	}
 	/** Gets @type {CreditSymbolAttributes['rotation']}. */
 	getRotation(): number | null {
-		return this.attributes['rotation'];
+		return this.attributes.rotation;
 	}
 	/** Sets @type {CreditSymbolAttributes['rotation']}. */
 	setRotation(rotation: number | null): CreditSymbol {
-		this.attributes['rotation'] = rotation;
+		this.attributes.rotation = rotation;
 		return this;
 	}
 	/** Gets @type {CreditSymbolAttributes['underline']}. */
 	getUnderline(): number | null {
-		return this.attributes['underline'];
+		return this.attributes.underline;
 	}
 	/** Sets @type {CreditSymbolAttributes['underline']}. */
 	setUnderline(underline: number | null): CreditSymbol {
-		this.attributes['underline'] = underline;
+		this.attributes.underline = underline;
 		return this;
 	}
 	/** Gets @type {CreditSymbolAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {CreditSymbolAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): CreditSymbol {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -3879,20 +3879,20 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
 	}
 	/** Gets @type {CreditAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {CreditAttributes['id']}. */
 	setId(id: string | null): Credit {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {CreditAttributes['page']}. */
 	getPage(): number | null {
-		return this.attributes['page'];
+		return this.attributes.page;
 	}
 	/** Sets @type {CreditAttributes['page']}. */
 	setPage(page: number | null): Credit {
-		this.attributes['page'] = page;
+		this.attributes.page = page;
 		return this;
 	}
 	/** Gets @type {Array<CreditType>}. */
@@ -3970,11 +3970,11 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
 	}
 	/** Gets @type {GroupNameAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {GroupNameAttributes['color']}. */
 	setColor(color: string | null): GroupName {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {GroupNameAttributes['default-x']}. */
@@ -4035,11 +4035,11 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
 	}
 	/** Gets @type {GroupNameAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {GroupNameAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): GroupName {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {GroupNameAttributes['relative-x']}. */
@@ -4136,11 +4136,11 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
 	}
 	/** Gets @type {DisplayTextAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DisplayTextAttributes['color']}. */
 	setColor(color: string | null): DisplayText {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DisplayTextAttributes['default-x']}. */
@@ -4163,11 +4163,11 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
 	}
 	/** Gets @type {DisplayTextAttributes['dir']}. */
 	getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
-		return this.attributes['dir'];
+		return this.attributes.dir;
 	}
 	/** Sets @type {DisplayTextAttributes['dir']}. */
 	setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): DisplayText {
-		this.attributes['dir'] = dir;
+		this.attributes.dir = dir;
 		return this;
 	}
 	/** Gets @type {DisplayTextAttributes['enclosure']}. */
@@ -4188,7 +4188,7 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
 		| 'nonagon'
 		| 'decagon'
 		| null {
-		return this.attributes['enclosure'];
+		return this.attributes.enclosure;
 	}
 	/** Sets @type {DisplayTextAttributes['enclosure']}. */
 	setEnclosure(
@@ -4210,7 +4210,7 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
 			| 'decagon'
 			| null,
 	): DisplayText {
-		this.attributes['enclosure'] = enclosure;
+		this.attributes.enclosure = enclosure;
 		return this;
 	}
 	/** Gets @type {DisplayTextAttributes['font-family']}. */
@@ -4253,20 +4253,20 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
 	}
 	/** Gets @type {DisplayTextAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {DisplayTextAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): DisplayText {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {DisplayTextAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {DisplayTextAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): DisplayText {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {DisplayTextAttributes['letter-spacing']}. */
@@ -4298,11 +4298,11 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
 	}
 	/** Gets @type {DisplayTextAttributes['overline']}. */
 	getOverline(): number | null {
-		return this.attributes['overline'];
+		return this.attributes.overline;
 	}
 	/** Sets @type {DisplayTextAttributes['overline']}. */
 	setOverline(overline: number | null): DisplayText {
-		this.attributes['overline'] = overline;
+		this.attributes.overline = overline;
 		return this;
 	}
 	/** Gets @type {DisplayTextAttributes['relative-x']}. */
@@ -4325,29 +4325,29 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
 	}
 	/** Gets @type {DisplayTextAttributes['rotation']}. */
 	getRotation(): number | null {
-		return this.attributes['rotation'];
+		return this.attributes.rotation;
 	}
 	/** Sets @type {DisplayTextAttributes['rotation']}. */
 	setRotation(rotation: number | null): DisplayText {
-		this.attributes['rotation'] = rotation;
+		this.attributes.rotation = rotation;
 		return this;
 	}
 	/** Gets @type {DisplayTextAttributes['underline']}. */
 	getUnderline(): number | null {
-		return this.attributes['underline'];
+		return this.attributes.underline;
 	}
 	/** Sets @type {DisplayTextAttributes['underline']}. */
 	setUnderline(underline: number | null): DisplayText {
-		this.attributes['underline'] = underline;
+		this.attributes.underline = underline;
 		return this;
 	}
 	/** Gets @type {DisplayTextAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {DisplayTextAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): DisplayText {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {DisplayTextAttributes['xml:lang']}. */
@@ -4487,11 +4487,11 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
 	}
 	/** Gets @type {AccidentalTextAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {AccidentalTextAttributes['color']}. */
 	setColor(color: string | null): AccidentalText {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {AccidentalTextAttributes['default-x']}. */
@@ -4514,11 +4514,11 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
 	}
 	/** Gets @type {AccidentalTextAttributes['dir']}. */
 	getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
-		return this.attributes['dir'];
+		return this.attributes.dir;
 	}
 	/** Sets @type {AccidentalTextAttributes['dir']}. */
 	setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): AccidentalText {
-		this.attributes['dir'] = dir;
+		this.attributes.dir = dir;
 		return this;
 	}
 	/** Gets @type {AccidentalTextAttributes['enclosure']}. */
@@ -4539,7 +4539,7 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
 		| 'nonagon'
 		| 'decagon'
 		| null {
-		return this.attributes['enclosure'];
+		return this.attributes.enclosure;
 	}
 	/** Sets @type {AccidentalTextAttributes['enclosure']}. */
 	setEnclosure(
@@ -4561,7 +4561,7 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
 			| 'decagon'
 			| null,
 	): AccidentalText {
-		this.attributes['enclosure'] = enclosure;
+		this.attributes.enclosure = enclosure;
 		return this;
 	}
 	/** Gets @type {AccidentalTextAttributes['font-family']}. */
@@ -4604,20 +4604,20 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
 	}
 	/** Gets @type {AccidentalTextAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {AccidentalTextAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): AccidentalText {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {AccidentalTextAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {AccidentalTextAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): AccidentalText {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {AccidentalTextAttributes['letter-spacing']}. */
@@ -4649,11 +4649,11 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
 	}
 	/** Gets @type {AccidentalTextAttributes['overline']}. */
 	getOverline(): number | null {
-		return this.attributes['overline'];
+		return this.attributes.overline;
 	}
 	/** Sets @type {AccidentalTextAttributes['overline']}. */
 	setOverline(overline: number | null): AccidentalText {
-		this.attributes['overline'] = overline;
+		this.attributes.overline = overline;
 		return this;
 	}
 	/** Gets @type {AccidentalTextAttributes['relative-x']}. */
@@ -4676,38 +4676,38 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
 	}
 	/** Gets @type {AccidentalTextAttributes['rotation']}. */
 	getRotation(): number | null {
-		return this.attributes['rotation'];
+		return this.attributes.rotation;
 	}
 	/** Sets @type {AccidentalTextAttributes['rotation']}. */
 	setRotation(rotation: number | null): AccidentalText {
-		this.attributes['rotation'] = rotation;
+		this.attributes.rotation = rotation;
 		return this;
 	}
 	/** Gets @type {AccidentalTextAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {AccidentalTextAttributes['smufl']}. */
 	setSmufl(smufl: string | null): AccidentalText {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {AccidentalTextAttributes['underline']}. */
 	getUnderline(): number | null {
-		return this.attributes['underline'];
+		return this.attributes.underline;
 	}
 	/** Sets @type {AccidentalTextAttributes['underline']}. */
 	setUnderline(underline: number | null): AccidentalText {
-		this.attributes['underline'] = underline;
+		this.attributes.underline = underline;
 		return this;
 	}
 	/** Gets @type {AccidentalTextAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {AccidentalTextAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): AccidentalText {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {AccidentalTextAttributes['xml:lang']}. */
@@ -4908,11 +4908,11 @@ export class GroupAbbreviation
 	}
 	/** Gets @type {GroupAbbreviationAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {GroupAbbreviationAttributes['color']}. */
 	setColor(color: string | null): GroupAbbreviation {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {GroupAbbreviationAttributes['default-x']}. */
@@ -4973,11 +4973,11 @@ export class GroupAbbreviation
 	}
 	/** Gets @type {GroupAbbreviationAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {GroupAbbreviationAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): GroupAbbreviation {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {GroupAbbreviationAttributes['relative-x']}. */
@@ -5091,11 +5091,11 @@ export class GroupSymbol implements XMLElement<'group-symbol', GroupSymbolAttrib
 	}
 	/** Gets @type {GroupSymbolAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {GroupSymbolAttributes['color']}. */
 	setColor(color: string | null): GroupSymbol {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {GroupSymbolAttributes['default-x']}. */
@@ -5171,11 +5171,11 @@ export class GroupBarline implements XMLElement<'group-barline', GroupBarlineAtt
 	}
 	/** Gets @type {GroupBarlineAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {GroupBarlineAttributes['color']}. */
 	setColor(color: string | null): GroupBarline {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {'yes' | 'no' | 'Mensurstrich'}. */
@@ -5280,11 +5280,11 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
 	}
 	/** Gets @type {FootnoteAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FootnoteAttributes['color']}. */
 	setColor(color: string | null): Footnote {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FootnoteAttributes['default-x']}. */
@@ -5307,11 +5307,11 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
 	}
 	/** Gets @type {FootnoteAttributes['dir']}. */
 	getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
-		return this.attributes['dir'];
+		return this.attributes.dir;
 	}
 	/** Sets @type {FootnoteAttributes['dir']}. */
 	setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): Footnote {
-		this.attributes['dir'] = dir;
+		this.attributes.dir = dir;
 		return this;
 	}
 	/** Gets @type {FootnoteAttributes['enclosure']}. */
@@ -5332,7 +5332,7 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
 		| 'nonagon'
 		| 'decagon'
 		| null {
-		return this.attributes['enclosure'];
+		return this.attributes.enclosure;
 	}
 	/** Sets @type {FootnoteAttributes['enclosure']}. */
 	setEnclosure(
@@ -5354,7 +5354,7 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
 			| 'decagon'
 			| null,
 	): Footnote {
-		this.attributes['enclosure'] = enclosure;
+		this.attributes.enclosure = enclosure;
 		return this;
 	}
 	/** Gets @type {FootnoteAttributes['font-family']}. */
@@ -5397,20 +5397,20 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
 	}
 	/** Gets @type {FootnoteAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {FootnoteAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Footnote {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {FootnoteAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {FootnoteAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): Footnote {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {FootnoteAttributes['letter-spacing']}. */
@@ -5442,11 +5442,11 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
 	}
 	/** Gets @type {FootnoteAttributes['overline']}. */
 	getOverline(): number | null {
-		return this.attributes['overline'];
+		return this.attributes.overline;
 	}
 	/** Sets @type {FootnoteAttributes['overline']}. */
 	setOverline(overline: number | null): Footnote {
-		this.attributes['overline'] = overline;
+		this.attributes.overline = overline;
 		return this;
 	}
 	/** Gets @type {FootnoteAttributes['relative-x']}. */
@@ -5469,29 +5469,29 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
 	}
 	/** Gets @type {FootnoteAttributes['rotation']}. */
 	getRotation(): number | null {
-		return this.attributes['rotation'];
+		return this.attributes.rotation;
 	}
 	/** Sets @type {FootnoteAttributes['rotation']}. */
 	setRotation(rotation: number | null): Footnote {
-		this.attributes['rotation'] = rotation;
+		this.attributes.rotation = rotation;
 		return this;
 	}
 	/** Gets @type {FootnoteAttributes['underline']}. */
 	getUnderline(): number | null {
-		return this.attributes['underline'];
+		return this.attributes.underline;
 	}
 	/** Sets @type {FootnoteAttributes['underline']}. */
 	setUnderline(underline: number | null): Footnote {
-		this.attributes['underline'] = underline;
+		this.attributes.underline = underline;
 		return this;
 	}
 	/** Gets @type {FootnoteAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {FootnoteAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Footnote {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {FootnoteAttributes['xml:lang']}. */
@@ -5559,47 +5559,47 @@ export class Level implements XMLElement<'level', LevelAttributes, LevelContents
 	}
 	/** Gets @type {LevelAttributes['bracket']}. */
 	getBracket(): 'yes' | 'no' | null {
-		return this.attributes['bracket'];
+		return this.attributes.bracket;
 	}
 	/** Sets @type {LevelAttributes['bracket']}. */
 	setBracket(bracket: 'yes' | 'no' | null): Level {
-		this.attributes['bracket'] = bracket;
+		this.attributes.bracket = bracket;
 		return this;
 	}
 	/** Gets @type {LevelAttributes['parentheses']}. */
 	getParentheses(): 'yes' | 'no' | null {
-		return this.attributes['parentheses'];
+		return this.attributes.parentheses;
 	}
 	/** Sets @type {LevelAttributes['parentheses']}. */
 	setParentheses(parentheses: 'yes' | 'no' | null): Level {
-		this.attributes['parentheses'] = parentheses;
+		this.attributes.parentheses = parentheses;
 		return this;
 	}
 	/** Gets @type {LevelAttributes['reference']}. */
 	getReference(): 'yes' | 'no' | null {
-		return this.attributes['reference'];
+		return this.attributes.reference;
 	}
 	/** Sets @type {LevelAttributes['reference']}. */
 	setReference(reference: 'yes' | 'no' | null): Level {
-		this.attributes['reference'] = reference;
+		this.attributes.reference = reference;
 		return this;
 	}
 	/** Gets @type {LevelAttributes['size']}. */
 	getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
-		return this.attributes['size'];
+		return this.attributes.size;
 	}
 	/** Sets @type {LevelAttributes['size']}. */
 	setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): Level {
-		this.attributes['size'] = size;
+		this.attributes.size = size;
 		return this;
 	}
 	/** Gets @type {LevelAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'single' | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {LevelAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'single' | null): Level {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -5653,20 +5653,20 @@ export class PartGroup implements XMLElement<'part-group', PartGroupAttributes, 
 	}
 	/** Gets @type {PartGroupAttributes['number']}. */
 	getNumber(): string | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {PartGroupAttributes['number']}. */
 	setNumber(number: string | null): PartGroup {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {PartGroupAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {PartGroupAttributes['type']}. */
 	setType(type: 'start' | 'stop'): PartGroup {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {GroupName | null}. */
@@ -5778,11 +5778,11 @@ export class InstrumentLink implements XMLElement<'instrument-link', InstrumentL
 	}
 	/** Gets @type {InstrumentLinkAttributes['id']}. */
 	getId(): string {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {InstrumentLinkAttributes['id']}. */
 	setId(id: string): InstrumentLink {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 }
@@ -5966,11 +5966,11 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
 	}
 	/** Gets @type {PartNameAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {PartNameAttributes['color']}. */
 	setColor(color: string | null): PartName {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {PartNameAttributes['default-x']}. */
@@ -6031,11 +6031,11 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
 	}
 	/** Gets @type {PartNameAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {PartNameAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): PartName {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {PartNameAttributes['print-object']}. */
@@ -6162,11 +6162,11 @@ export class PartAbbreviation
 	}
 	/** Gets @type {PartAbbreviationAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {PartAbbreviationAttributes['color']}. */
 	setColor(color: string | null): PartAbbreviation {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {PartAbbreviationAttributes['default-x']}. */
@@ -6227,11 +6227,11 @@ export class PartAbbreviation
 	}
 	/** Gets @type {PartAbbreviationAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {PartAbbreviationAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): PartAbbreviation {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {PartAbbreviationAttributes['print-object']}. */
@@ -6691,11 +6691,11 @@ export class ScoreInstrument
 	}
 	/** Gets @type {ScoreInstrumentAttributes['id']}. */
 	getId(): string {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {ScoreInstrumentAttributes['id']}. */
 	setId(id: string): ScoreInstrument {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {InstrumentName}. */
@@ -6807,11 +6807,11 @@ export class Player implements XMLElement<'player', PlayerAttributes, PlayerCont
 	}
 	/** Gets @type {PlayerAttributes['id']}. */
 	getId(): string {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {PlayerAttributes['id']}. */
 	setId(id: string): Player {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {PlayerName}. */
@@ -6851,20 +6851,20 @@ export class MidiDevice implements XMLElement<'midi-device', MidiDeviceAttribute
 	}
 	/** Gets @type {MidiDeviceAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {MidiDeviceAttributes['id']}. */
 	setId(id: string | null): MidiDevice {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {MidiDeviceAttributes['port']}. */
 	getMidi16(): number | null {
-		return this.attributes['port'];
+		return this.attributes.port;
 	}
 	/** Sets @type {MidiDeviceAttributes['port']}. */
 	setMidi16(midi16: number | null): MidiDevice {
-		this.attributes['port'] = midi16;
+		this.attributes.port = midi16;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -7201,11 +7201,11 @@ export class MidiInstrument implements XMLElement<'midi-instrument', MidiInstrum
 	}
 	/** Gets @type {MidiInstrumentAttributes['id']}. */
 	getId(): string {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {MidiInstrumentAttributes['id']}. */
 	setId(id: string): MidiInstrument {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {MidiChannel | null}. */
@@ -7319,11 +7319,11 @@ export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, 
 	}
 	/** Gets @type {ScorePartAttributes['id']}. */
 	getId(): string {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {ScorePartAttributes['id']}. */
 	setId(id: string): ScorePart {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {Identification | null}. */
@@ -7807,11 +7807,11 @@ export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
 	}
 	/** Gets @type {RestAttributes['measure']}. */
 	getMeasure(): 'yes' | 'no' | null {
-		return this.attributes['measure'];
+		return this.attributes.measure;
 	}
 	/** Sets @type {RestAttributes['measure']}. */
 	setMeasure(measure: 'yes' | 'no' | null): Rest {
-		this.attributes['measure'] = measure;
+		this.attributes.measure = measure;
 		return this;
 	}
 	/** Gets @type {[DisplayStep, DisplayOctave] | null}. */
@@ -7898,11 +7898,11 @@ export class Tie implements XMLElement<'tie', TieAttributes, TieContents> {
 	}
 	/** Gets @type {TieAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {TieAttributes['type']}. */
 	setType(type: 'start' | 'stop'): Tie {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -7973,11 +7973,11 @@ export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents
 	}
 	/** Gets @type {GraceAttributes['slash']}. */
 	getSlash(): 'yes' | 'no' | null {
-		return this.attributes['slash'];
+		return this.attributes.slash;
 	}
 	/** Sets @type {GraceAttributes['slash']}. */
 	setSlash(slash: 'yes' | 'no' | null): Grace {
-		this.attributes['slash'] = slash;
+		this.attributes.slash = slash;
 		return this;
 	}
 	/** Gets @type {GraceAttributes['steal-time-following']}. */
@@ -8026,11 +8026,11 @@ export class Instrument implements XMLElement<'instrument', InstrumentAttributes
 	}
 	/** Gets @type {InstrumentAttributes['id']}. */
 	getId(): string {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {InstrumentAttributes['id']}. */
 	setId(id: string): Instrument {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 }
@@ -8112,11 +8112,11 @@ export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
 	}
 	/** Gets @type {TypeAttributes['size']}. */
 	getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
-		return this.attributes['size'];
+		return this.attributes.size;
 	}
 	/** Sets @type {TypeAttributes['size']}. */
 	setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): Type {
-		this.attributes['size'] = size;
+		this.attributes.size = size;
 		return this;
 	}
 	/** Gets @type {'whole' | '1024th' | '512th' | '256th' | '128th' | '64th' | '32nd' | '16th' | 'eighth' | 'quarter' | 'half' | 'breve' | 'long' | 'maxima'}. */
@@ -8197,11 +8197,11 @@ export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
 	}
 	/** Gets @type {DotAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DotAttributes['color']}. */
 	setColor(color: string | null): Dot {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DotAttributes['default-x']}. */
@@ -8262,11 +8262,11 @@ export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
 	}
 	/** Gets @type {DotAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {DotAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Dot {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {DotAttributes['relative-x']}. */
@@ -8373,29 +8373,29 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
 	}
 	/** Gets @type {AccidentalAttributes['bracket']}. */
 	getBracket(): 'yes' | 'no' | null {
-		return this.attributes['bracket'];
+		return this.attributes.bracket;
 	}
 	/** Sets @type {AccidentalAttributes['bracket']}. */
 	setBracket(bracket: 'yes' | 'no' | null): Accidental {
-		this.attributes['bracket'] = bracket;
+		this.attributes.bracket = bracket;
 		return this;
 	}
 	/** Gets @type {AccidentalAttributes['cautionary']}. */
 	getCautionary(): 'yes' | 'no' | null {
-		return this.attributes['cautionary'];
+		return this.attributes.cautionary;
 	}
 	/** Sets @type {AccidentalAttributes['cautionary']}. */
 	setCautionary(cautionary: 'yes' | 'no' | null): Accidental {
-		this.attributes['cautionary'] = cautionary;
+		this.attributes.cautionary = cautionary;
 		return this;
 	}
 	/** Gets @type {AccidentalAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {AccidentalAttributes['color']}. */
 	setColor(color: string | null): Accidental {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {AccidentalAttributes['default-x']}. */
@@ -8418,11 +8418,11 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
 	}
 	/** Gets @type {AccidentalAttributes['editorial']}. */
 	getEditorial(): 'yes' | 'no' | null {
-		return this.attributes['editorial'];
+		return this.attributes.editorial;
 	}
 	/** Sets @type {AccidentalAttributes['editorial']}. */
 	setEditorial(editorial: 'yes' | 'no' | null): Accidental {
-		this.attributes['editorial'] = editorial;
+		this.attributes.editorial = editorial;
 		return this;
 	}
 	/** Gets @type {AccidentalAttributes['font-family']}. */
@@ -8465,11 +8465,11 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
 	}
 	/** Gets @type {AccidentalAttributes['parentheses']}. */
 	getParentheses(): 'yes' | 'no' | null {
-		return this.attributes['parentheses'];
+		return this.attributes.parentheses;
 	}
 	/** Sets @type {AccidentalAttributes['parentheses']}. */
 	setParentheses(parentheses: 'yes' | 'no' | null): Accidental {
-		this.attributes['parentheses'] = parentheses;
+		this.attributes.parentheses = parentheses;
 		return this;
 	}
 	/** Gets @type {AccidentalAttributes['relative-x']}. */
@@ -8492,20 +8492,20 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
 	}
 	/** Gets @type {AccidentalAttributes['size']}. */
 	getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
-		return this.attributes['size'];
+		return this.attributes.size;
 	}
 	/** Sets @type {AccidentalAttributes['size']}. */
 	setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): Accidental {
-		this.attributes['size'] = size;
+		this.attributes.size = size;
 		return this;
 	}
 	/** Gets @type {AccidentalAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {AccidentalAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Accidental {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {'other' | 'sharp' | 'natural' | 'flat' | 'double-sharp' | 'sharp-sharp' | 'flat-flat' | 'natural-sharp' | 'natural-flat' | 'quarter-flat' | 'quarter-sharp' | 'three-quarters-flat' | 'three-quarters-sharp' | 'sharp-down' | 'sharp-up' | 'natural-down' | 'natural-up' | 'flat-down' | 'flat-up' | 'double-sharp-down' | 'double-sharp-up' | 'flat-flat-down' | 'flat-flat-up' | 'arrow-down' | 'arrow-up' | 'triple-sharp' | 'triple-flat' | 'slash-quarter-sharp' | 'slash-sharp' | 'slash-flat' | 'double-slash-flat' | 'sharp-1' | 'sharp-2' | 'sharp-3' | 'sharp-5' | 'flat-1' | 'flat-2' | 'flat-3' | 'flat-4' | 'sori' | 'koron'}. */
@@ -8870,11 +8870,11 @@ export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
 	}
 	/** Gets @type {StemAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {StemAttributes['color']}. */
 	setColor(color: string | null): Stem {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {StemAttributes['default-x']}. */
@@ -8994,20 +8994,20 @@ export class Notehead implements XMLElement<'notehead', NoteheadAttributes, Note
 	}
 	/** Gets @type {NoteheadAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {NoteheadAttributes['color']}. */
 	setColor(color: string | null): Notehead {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {NoteheadAttributes['filled']}. */
 	getFilled(): 'yes' | 'no' | null {
-		return this.attributes['filled'];
+		return this.attributes.filled;
 	}
 	/** Sets @type {NoteheadAttributes['filled']}. */
 	setFilled(filled: 'yes' | 'no' | null): Notehead {
-		this.attributes['filled'] = filled;
+		this.attributes.filled = filled;
 		return this;
 	}
 	/** Gets @type {NoteheadAttributes['font-family']}. */
@@ -9050,20 +9050,20 @@ export class Notehead implements XMLElement<'notehead', NoteheadAttributes, Note
 	}
 	/** Gets @type {NoteheadAttributes['parentheses']}. */
 	getParentheses(): 'yes' | 'no' | null {
-		return this.attributes['parentheses'];
+		return this.attributes.parentheses;
 	}
 	/** Sets @type {NoteheadAttributes['parentheses']}. */
 	setParentheses(parentheses: 'yes' | 'no' | null): Notehead {
-		this.attributes['parentheses'] = parentheses;
+		this.attributes.parentheses = parentheses;
 		return this;
 	}
 	/** Gets @type {NoteheadAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {NoteheadAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Notehead {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {'other' | 'slash' | 'triangle' | 'diamond' | 'square' | 'cross' | 'x' | 'circle-x' | 'inverted triangle' | 'arrow down' | 'arrow up' | 'circled' | 'slashed' | 'back slashed' | 'normal' | 'cluster' | 'circle dot' | 'left triangle' | 'rectangle' | 'none' | 'do' | 're' | 'mi' | 'fa' | 'fa up' | 'so' | 'la' | 'ti'}. */
@@ -9245,47 +9245,47 @@ export class Beam implements XMLElement<'beam', BeamAttributes, BeamContents> {
 	}
 	/** Gets @type {BeamAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {BeamAttributes['color']}. */
 	setColor(color: string | null): Beam {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {BeamAttributes['fan']}. */
 	getFan(): 'accel' | 'rit' | 'none' | null {
-		return this.attributes['fan'];
+		return this.attributes.fan;
 	}
 	/** Sets @type {BeamAttributes['fan']}. */
 	setFan(fan: 'accel' | 'rit' | 'none' | null): Beam {
-		this.attributes['fan'] = fan;
+		this.attributes.fan = fan;
 		return this;
 	}
 	/** Gets @type {BeamAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {BeamAttributes['id']}. */
 	setId(id: string | null): Beam {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {BeamAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {BeamAttributes['number']}. */
 	setNumber(number: number | null): Beam {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {BeamAttributes['repeater']}. */
 	getRepeater(): 'yes' | 'no' | null {
-		return this.attributes['repeater'];
+		return this.attributes.repeater;
 	}
 	/** Sets @type {BeamAttributes['repeater']}. */
 	setRepeater(repeater: 'yes' | 'no' | null): Beam {
-		this.attributes['repeater'] = repeater;
+		this.attributes.repeater = repeater;
 		return this;
 	}
 	/** Gets @type {'backward hook' | 'begin' | 'continue' | 'end' | 'forward hook'}. */
@@ -9407,11 +9407,11 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
 	}
 	/** Gets @type {TiedAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TiedAttributes['color']}. */
 	setColor(color: string | null): Tied {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TiedAttributes['dash-length']}. */
@@ -9443,11 +9443,11 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
 	}
 	/** Gets @type {TiedAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {TiedAttributes['id']}. */
 	setId(id: string | null): Tied {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {TiedAttributes['line-type']}. */
@@ -9461,29 +9461,29 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
 	}
 	/** Gets @type {TiedAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {TiedAttributes['number']}. */
 	setNumber(number: number | null): Tied {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {TiedAttributes['orientation']}. */
 	getOrientation(): 'over' | 'under' | null {
-		return this.attributes['orientation'];
+		return this.attributes.orientation;
 	}
 	/** Sets @type {TiedAttributes['orientation']}. */
 	setOrientation(orientation: 'over' | 'under' | null): Tied {
-		this.attributes['orientation'] = orientation;
+		this.attributes.orientation = orientation;
 		return this;
 	}
 	/** Gets @type {TiedAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {TiedAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Tied {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {TiedAttributes['relative-x']}. */
@@ -9515,11 +9515,11 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
 	}
 	/** Gets @type {TiedAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'continue' | 'let-ring' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {TiedAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'continue' | 'let-ring'): Tied {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -9624,11 +9624,11 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
 	}
 	/** Gets @type {SlurAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {SlurAttributes['color']}. */
 	setColor(color: string | null): Slur {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {SlurAttributes['dash-length']}. */
@@ -9660,11 +9660,11 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
 	}
 	/** Gets @type {SlurAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {SlurAttributes['id']}. */
 	setId(id: string | null): Slur {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {SlurAttributes['line-type']}. */
@@ -9678,29 +9678,29 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
 	}
 	/** Gets @type {SlurAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {SlurAttributes['number']}. */
 	setNumber(number: number | null): Slur {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {SlurAttributes['orientation']}. */
 	getOrientation(): 'over' | 'under' | null {
-		return this.attributes['orientation'];
+		return this.attributes.orientation;
 	}
 	/** Sets @type {SlurAttributes['orientation']}. */
 	setOrientation(orientation: 'over' | 'under' | null): Slur {
-		this.attributes['orientation'] = orientation;
+		this.attributes.orientation = orientation;
 		return this;
 	}
 	/** Gets @type {SlurAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {SlurAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Slur {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {SlurAttributes['relative-x']}. */
@@ -9732,11 +9732,11 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
 	}
 	/** Gets @type {SlurAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'continue' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {SlurAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'continue'): Slur {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -9773,11 +9773,11 @@ export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAtt
 	}
 	/** Gets @type {TupletNumberAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TupletNumberAttributes['color']}. */
 	setColor(color: string | null): TupletNumber {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TupletNumberAttributes['font-family']}. */
@@ -9876,11 +9876,11 @@ export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttribute
 	}
 	/** Gets @type {TupletTypeAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TupletTypeAttributes['color']}. */
 	setColor(color: string | null): TupletType {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TupletTypeAttributes['font-family']}. */
@@ -9994,11 +9994,11 @@ export class TupletDot implements XMLElement<'tuplet-dot', TupletDotAttributes, 
 	}
 	/** Gets @type {TupletDotAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TupletDotAttributes['color']}. */
 	setColor(color: string | null): TupletDot {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TupletDotAttributes['font-family']}. */
@@ -10192,11 +10192,11 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
 	}
 	/** Gets @type {TupletAttributes['bracket']}. */
 	getBracket(): 'yes' | 'no' | null {
-		return this.attributes['bracket'];
+		return this.attributes.bracket;
 	}
 	/** Sets @type {TupletAttributes['bracket']}. */
 	setBracket(bracket: 'yes' | 'no' | null): Tuplet {
-		this.attributes['bracket'] = bracket;
+		this.attributes.bracket = bracket;
 		return this;
 	}
 	/** Gets @type {TupletAttributes['default-x']}. */
@@ -10219,11 +10219,11 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
 	}
 	/** Gets @type {TupletAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {TupletAttributes['id']}. */
 	setId(id: string | null): Tuplet {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {TupletAttributes['line-shape']}. */
@@ -10237,20 +10237,20 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
 	}
 	/** Gets @type {TupletAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {TupletAttributes['number']}. */
 	setNumber(number: number | null): Tuplet {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {TupletAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {TupletAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Tuplet {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {TupletAttributes['relative-x']}. */
@@ -10291,11 +10291,11 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
 	}
 	/** Gets @type {TupletAttributes['type']}. */
 	getType(): 'start' | 'stop' | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {TupletAttributes['type']}. */
 	setType(type: 'start' | 'stop' | null): Tuplet {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {TupletActual | null}. */
@@ -10360,11 +10360,11 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
 	}
 	/** Gets @type {GlissandoAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {GlissandoAttributes['color']}. */
 	setColor(color: string | null): Glissando {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {GlissandoAttributes['dash-length']}. */
@@ -10434,11 +10434,11 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
 	}
 	/** Gets @type {GlissandoAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {GlissandoAttributes['id']}. */
 	setId(id: string | null): Glissando {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {GlissandoAttributes['line-type']}. */
@@ -10452,11 +10452,11 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
 	}
 	/** Gets @type {GlissandoAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {GlissandoAttributes['number']}. */
 	setNumber(number: number | null): Glissando {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {GlissandoAttributes['relative-x']}. */
@@ -10488,11 +10488,11 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
 	}
 	/** Gets @type {GlissandoAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {GlissandoAttributes['type']}. */
 	setType(type: 'start' | 'stop'): Glissando {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -10552,29 +10552,29 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
 	}
 	/** Gets @type {SlideAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {SlideAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): Slide {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {SlideAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {SlideAttributes['beats']}. */
 	setBeats(beats: number | null): Slide {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {SlideAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {SlideAttributes['color']}. */
 	setColor(color: string | null): Slide {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {SlideAttributes['dash-length']}. */
@@ -10653,11 +10653,11 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
 	}
 	/** Gets @type {SlideAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {SlideAttributes['id']}. */
 	setId(id: string | null): Slide {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {SlideAttributes['last-beat']}. */
@@ -10680,11 +10680,11 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
 	}
 	/** Gets @type {SlideAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {SlideAttributes['number']}. */
 	setNumber(number: number | null): Slide {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {SlideAttributes['relative-x']}. */
@@ -10716,11 +10716,11 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
 	}
 	/** Gets @type {SlideAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {SlideAttributes['type']}. */
 	setType(type: 'start' | 'stop'): Slide {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -10779,38 +10779,38 @@ export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, 
 	}
 	/** Gets @type {TrillMarkAttributes['acccelerate']}. */
 	getAcccelerate(): 'yes' | 'no' | null {
-		return this.attributes['acccelerate'];
+		return this.attributes.acccelerate;
 	}
 	/** Sets @type {TrillMarkAttributes['acccelerate']}. */
 	setAcccelerate(acccelerate: 'yes' | 'no' | null): TrillMark {
-		this.attributes['acccelerate'] = acccelerate;
+		this.attributes.acccelerate = acccelerate;
 		return this;
 	}
 	/** Gets @type {TrillMarkAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {TrillMarkAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): TrillMark {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {TrillMarkAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {TrillMarkAttributes['beats']}. */
 	setBeats(beats: number | null): TrillMark {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {TrillMarkAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TrillMarkAttributes['color']}. */
 	setColor(color: string | null): TrillMark {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TrillMarkAttributes['default-x']}. */
@@ -10880,11 +10880,11 @@ export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, 
 	}
 	/** Gets @type {TrillMarkAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {TrillMarkAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): TrillMark {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {TrillMarkAttributes['relative-x']}. */
@@ -10988,29 +10988,29 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
 	}
 	/** Gets @type {TurnAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {TurnAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): Turn {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {TurnAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {TurnAttributes['beats']}. */
 	setBeats(beats: number | null): Turn {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {TurnAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TurnAttributes['color']}. */
 	setColor(color: string | null): Turn {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TurnAttributes['default-x']}. */
@@ -11080,11 +11080,11 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
 	}
 	/** Gets @type {TurnAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {TurnAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Turn {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {TurnAttributes['relative-x']}. */
@@ -11116,11 +11116,11 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
 	}
 	/** Gets @type {TurnAttributes['slash']}. */
 	getSlash(): 'yes' | 'no' | null {
-		return this.attributes['slash'];
+		return this.attributes.slash;
 	}
 	/** Sets @type {TurnAttributes['slash']}. */
 	setSlash(slash: 'yes' | 'no' | null): Turn {
-		this.attributes['slash'] = slash;
+		this.attributes.slash = slash;
 		return this;
 	}
 	/** Gets @type {TurnAttributes['start-note']}. */
@@ -11197,29 +11197,29 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
 	}
 	/** Gets @type {DelayedTurnAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {DelayedTurnAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): DelayedTurn {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {DelayedTurnAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {DelayedTurnAttributes['beats']}. */
 	setBeats(beats: number | null): DelayedTurn {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {DelayedTurnAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DelayedTurnAttributes['color']}. */
 	setColor(color: string | null): DelayedTurn {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DelayedTurnAttributes['default-x']}. */
@@ -11289,11 +11289,11 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
 	}
 	/** Gets @type {DelayedTurnAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {DelayedTurnAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): DelayedTurn {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {DelayedTurnAttributes['relative-x']}. */
@@ -11325,11 +11325,11 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
 	}
 	/** Gets @type {DelayedTurnAttributes['slash']}. */
 	getSlash(): 'yes' | 'no' | null {
-		return this.attributes['slash'];
+		return this.attributes.slash;
 	}
 	/** Sets @type {DelayedTurnAttributes['slash']}. */
 	setSlash(slash: 'yes' | 'no' | null): DelayedTurn {
-		this.attributes['slash'] = slash;
+		this.attributes.slash = slash;
 		return this;
 	}
 	/** Gets @type {DelayedTurnAttributes['start-note']}. */
@@ -11406,29 +11406,29 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
 	}
 	/** Gets @type {InvertedTurnAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {InvertedTurnAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): InvertedTurn {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {InvertedTurnAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {InvertedTurnAttributes['beats']}. */
 	setBeats(beats: number | null): InvertedTurn {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {InvertedTurnAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {InvertedTurnAttributes['color']}. */
 	setColor(color: string | null): InvertedTurn {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {InvertedTurnAttributes['default-x']}. */
@@ -11498,11 +11498,11 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
 	}
 	/** Gets @type {InvertedTurnAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {InvertedTurnAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): InvertedTurn {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {InvertedTurnAttributes['relative-x']}. */
@@ -11534,11 +11534,11 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
 	}
 	/** Gets @type {InvertedTurnAttributes['slash']}. */
 	getSlash(): 'yes' | 'no' | null {
-		return this.attributes['slash'];
+		return this.attributes.slash;
 	}
 	/** Sets @type {InvertedTurnAttributes['slash']}. */
 	setSlash(slash: 'yes' | 'no' | null): InvertedTurn {
-		this.attributes['slash'] = slash;
+		this.attributes.slash = slash;
 		return this;
 	}
 	/** Gets @type {InvertedTurnAttributes['start-note']}. */
@@ -11617,29 +11617,29 @@ export class DelayedInvertedTurn
 	}
 	/** Gets @type {DelayedInvertedTurnAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {DelayedInvertedTurnAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): DelayedInvertedTurn {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {DelayedInvertedTurnAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {DelayedInvertedTurnAttributes['beats']}. */
 	setBeats(beats: number | null): DelayedInvertedTurn {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {DelayedInvertedTurnAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DelayedInvertedTurnAttributes['color']}. */
 	setColor(color: string | null): DelayedInvertedTurn {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DelayedInvertedTurnAttributes['default-x']}. */
@@ -11709,11 +11709,11 @@ export class DelayedInvertedTurn
 	}
 	/** Gets @type {DelayedInvertedTurnAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {DelayedInvertedTurnAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): DelayedInvertedTurn {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {DelayedInvertedTurnAttributes['relative-x']}. */
@@ -11745,11 +11745,11 @@ export class DelayedInvertedTurn
 	}
 	/** Gets @type {DelayedInvertedTurnAttributes['slash']}. */
 	getSlash(): 'yes' | 'no' | null {
-		return this.attributes['slash'];
+		return this.attributes.slash;
 	}
 	/** Sets @type {DelayedInvertedTurnAttributes['slash']}. */
 	setSlash(slash: 'yes' | 'no' | null): DelayedInvertedTurn {
-		this.attributes['slash'] = slash;
+		this.attributes.slash = slash;
 		return this;
 	}
 	/** Gets @type {DelayedInvertedTurnAttributes['start-note']}. */
@@ -11825,29 +11825,29 @@ export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAtt
 	}
 	/** Gets @type {VerticalTurnAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {VerticalTurnAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): VerticalTurn {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {VerticalTurnAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {VerticalTurnAttributes['beats']}. */
 	setBeats(beats: number | null): VerticalTurn {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {VerticalTurnAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {VerticalTurnAttributes['color']}. */
 	setColor(color: string | null): VerticalTurn {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {VerticalTurnAttributes['default-x']}. */
@@ -11917,11 +11917,11 @@ export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAtt
 	}
 	/** Gets @type {VerticalTurnAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {VerticalTurnAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): VerticalTurn {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {VerticalTurnAttributes['relative-x']}. */
@@ -12029,29 +12029,29 @@ export class InvertedVerticalTurn
 	}
 	/** Gets @type {InvertedVerticalTurnAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {InvertedVerticalTurnAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): InvertedVerticalTurn {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {InvertedVerticalTurnAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {InvertedVerticalTurnAttributes['beats']}. */
 	setBeats(beats: number | null): InvertedVerticalTurn {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {InvertedVerticalTurnAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {InvertedVerticalTurnAttributes['color']}. */
 	setColor(color: string | null): InvertedVerticalTurn {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {InvertedVerticalTurnAttributes['default-x']}. */
@@ -12121,11 +12121,11 @@ export class InvertedVerticalTurn
 	}
 	/** Gets @type {InvertedVerticalTurnAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {InvertedVerticalTurnAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): InvertedVerticalTurn {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {InvertedVerticalTurnAttributes['relative-x']}. */
@@ -12228,29 +12228,29 @@ export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents
 	}
 	/** Gets @type {ShakeAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {ShakeAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): Shake {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {ShakeAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {ShakeAttributes['beats']}. */
 	setBeats(beats: number | null): Shake {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {ShakeAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {ShakeAttributes['color']}. */
 	setColor(color: string | null): Shake {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {ShakeAttributes['default-x']}. */
@@ -12320,11 +12320,11 @@ export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents
 	}
 	/** Gets @type {ShakeAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {ShakeAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Shake {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {ShakeAttributes['relative-x']}. */
@@ -12426,29 +12426,29 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
 	}
 	/** Gets @type {WavyLineAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {WavyLineAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): WavyLine {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {WavyLineAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {WavyLineAttributes['beats']}. */
 	setBeats(beats: number | null): WavyLine {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {WavyLineAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {WavyLineAttributes['color']}. */
 	setColor(color: string | null): WavyLine {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {WavyLineAttributes['default-x']}. */
@@ -12480,20 +12480,20 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
 	}
 	/** Gets @type {WavyLineAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {WavyLineAttributes['number']}. */
 	setNumber(number: number | null): WavyLine {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {WavyLineAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {WavyLineAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): WavyLine {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {WavyLineAttributes['relative-x']}. */
@@ -12525,11 +12525,11 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
 	}
 	/** Gets @type {WavyLineAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {WavyLineAttributes['smufl']}. */
 	setSmufl(smufl: string | null): WavyLine {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {WavyLineAttributes['start-note']}. */
@@ -12561,11 +12561,11 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
 	}
 	/** Gets @type {WavyLineAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'continue' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {WavyLineAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'continue'): WavyLine {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -12617,38 +12617,38 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
 	}
 	/** Gets @type {MordentAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {MordentAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): Mordent {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {MordentAttributes['approach']}. */
 	getApproach(): 'above' | 'below' | null {
-		return this.attributes['approach'];
+		return this.attributes.approach;
 	}
 	/** Sets @type {MordentAttributes['approach']}. */
 	setApproach(approach: 'above' | 'below' | null): Mordent {
-		this.attributes['approach'] = approach;
+		this.attributes.approach = approach;
 		return this;
 	}
 	/** Gets @type {MordentAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {MordentAttributes['beats']}. */
 	setBeats(beats: number | null): Mordent {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {MordentAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {MordentAttributes['color']}. */
 	setColor(color: string | null): Mordent {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {MordentAttributes['default-x']}. */
@@ -12671,11 +12671,11 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
 	}
 	/** Gets @type {MordentAttributes['departure']}. */
 	getDeparture(): 'above' | 'below' | null {
-		return this.attributes['departure'];
+		return this.attributes.departure;
 	}
 	/** Sets @type {MordentAttributes['departure']}. */
 	setDeparture(departure: 'above' | 'below' | null): Mordent {
-		this.attributes['departure'] = departure;
+		this.attributes.departure = departure;
 		return this;
 	}
 	/** Gets @type {MordentAttributes['font-family']}. */
@@ -12727,20 +12727,20 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
 	}
 	/** Gets @type {MordentAttributes['long']}. */
 	getLong(): 'yes' | 'no' | null {
-		return this.attributes['long'];
+		return this.attributes.long;
 	}
 	/** Sets @type {MordentAttributes['long']}. */
 	setLong(long: 'yes' | 'no' | null): Mordent {
-		this.attributes['long'] = long;
+		this.attributes.long = long;
 		return this;
 	}
 	/** Gets @type {MordentAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {MordentAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Mordent {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {MordentAttributes['relative-x']}. */
@@ -12848,38 +12848,38 @@ export class InvertedMordent
 	}
 	/** Gets @type {InvertedMordentAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {InvertedMordentAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): InvertedMordent {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {InvertedMordentAttributes['approach']}. */
 	getApproach(): 'above' | 'below' | null {
-		return this.attributes['approach'];
+		return this.attributes.approach;
 	}
 	/** Sets @type {InvertedMordentAttributes['approach']}. */
 	setApproach(approach: 'above' | 'below' | null): InvertedMordent {
-		this.attributes['approach'] = approach;
+		this.attributes.approach = approach;
 		return this;
 	}
 	/** Gets @type {InvertedMordentAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {InvertedMordentAttributes['beats']}. */
 	setBeats(beats: number | null): InvertedMordent {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {InvertedMordentAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {InvertedMordentAttributes['color']}. */
 	setColor(color: string | null): InvertedMordent {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {InvertedMordentAttributes['default-x']}. */
@@ -12902,11 +12902,11 @@ export class InvertedMordent
 	}
 	/** Gets @type {InvertedMordentAttributes['departure']}. */
 	getDeparture(): 'above' | 'below' | null {
-		return this.attributes['departure'];
+		return this.attributes.departure;
 	}
 	/** Sets @type {InvertedMordentAttributes['departure']}. */
 	setDeparture(departure: 'above' | 'below' | null): InvertedMordent {
-		this.attributes['departure'] = departure;
+		this.attributes.departure = departure;
 		return this;
 	}
 	/** Gets @type {InvertedMordentAttributes['font-family']}. */
@@ -12958,20 +12958,20 @@ export class InvertedMordent
 	}
 	/** Gets @type {InvertedMordentAttributes['long']}. */
 	getLong(): 'yes' | 'no' | null {
-		return this.attributes['long'];
+		return this.attributes.long;
 	}
 	/** Sets @type {InvertedMordentAttributes['long']}. */
 	setLong(long: 'yes' | 'no' | null): InvertedMordent {
-		this.attributes['long'] = long;
+		this.attributes.long = long;
 		return this;
 	}
 	/** Gets @type {InvertedMordentAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {InvertedMordentAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): InvertedMordent {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {InvertedMordentAttributes['relative-x']}. */
@@ -13067,11 +13067,11 @@ export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, S
 	}
 	/** Gets @type {SchleiferAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {SchleiferAttributes['color']}. */
 	setColor(color: string | null): Schleifer {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {SchleiferAttributes['default-x']}. */
@@ -13132,11 +13132,11 @@ export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, S
 	}
 	/** Gets @type {SchleiferAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {SchleiferAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Schleifer {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {SchleiferAttributes['relative-x']}. */
@@ -13204,11 +13204,11 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
 	}
 	/** Gets @type {TremoloAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TremoloAttributes['color']}. */
 	setColor(color: string | null): Tremolo {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TremoloAttributes['default-x']}. */
@@ -13269,11 +13269,11 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
 	}
 	/** Gets @type {TremoloAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {TremoloAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Tremolo {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {TremoloAttributes['relative-x']}. */
@@ -13296,20 +13296,20 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
 	}
 	/** Gets @type {TremoloAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {TremoloAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Tremolo {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {TremoloAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'single' | 'unmeasured' | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {TremoloAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'single' | 'unmeasured' | null): Tremolo {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -13367,29 +13367,29 @@ export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents
 	}
 	/** Gets @type {HaydnAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {HaydnAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): Haydn {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {HaydnAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {HaydnAttributes['beats']}. */
 	setBeats(beats: number | null): Haydn {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {HaydnAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {HaydnAttributes['color']}. */
 	setColor(color: string | null): Haydn {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {HaydnAttributes['default-x']}. */
@@ -13459,11 +13459,11 @@ export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents
 	}
 	/** Gets @type {HaydnAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {HaydnAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Haydn {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {HaydnAttributes['relative-x']}. */
@@ -13560,11 +13560,11 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
 	}
 	/** Gets @type {OtherOrnamentAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {OtherOrnamentAttributes['color']}. */
 	setColor(color: string | null): OtherOrnament {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {OtherOrnamentAttributes['default-x']}. */
@@ -13625,11 +13625,11 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
 	}
 	/** Gets @type {OtherOrnamentAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {OtherOrnamentAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): OtherOrnament {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {OtherOrnamentAttributes['relative-x']}. */
@@ -13652,11 +13652,11 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
 	}
 	/** Gets @type {OtherOrnamentAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {OtherOrnamentAttributes['smufl']}. */
 	setSmufl(smufl: string | null): OtherOrnament {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -13754,20 +13754,20 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
 	}
 	/** Gets @type {AccidentalMarkAttributes['bracket']}. */
 	getBracket(): 'yes' | 'no' | null {
-		return this.attributes['bracket'];
+		return this.attributes.bracket;
 	}
 	/** Sets @type {AccidentalMarkAttributes['bracket']}. */
 	setBracket(bracket: 'yes' | 'no' | null): AccidentalMark {
-		this.attributes['bracket'] = bracket;
+		this.attributes.bracket = bracket;
 		return this;
 	}
 	/** Gets @type {AccidentalMarkAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {AccidentalMarkAttributes['color']}. */
 	setColor(color: string | null): AccidentalMark {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {AccidentalMarkAttributes['default-x']}. */
@@ -13828,29 +13828,29 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
 	}
 	/** Gets @type {AccidentalMarkAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {AccidentalMarkAttributes['id']}. */
 	setId(id: string | null): AccidentalMark {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {AccidentalMarkAttributes['parentheses']}. */
 	getParentheses(): 'yes' | 'no' | null {
-		return this.attributes['parentheses'];
+		return this.attributes.parentheses;
 	}
 	/** Sets @type {AccidentalMarkAttributes['parentheses']}. */
 	setParentheses(parentheses: 'yes' | 'no' | null): AccidentalMark {
-		this.attributes['parentheses'] = parentheses;
+		this.attributes.parentheses = parentheses;
 		return this;
 	}
 	/** Gets @type {AccidentalMarkAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {AccidentalMarkAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): AccidentalMark {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {AccidentalMarkAttributes['relative-x']}. */
@@ -13873,20 +13873,20 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
 	}
 	/** Gets @type {AccidentalMarkAttributes['size']}. */
 	getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
-		return this.attributes['size'];
+		return this.attributes.size;
 	}
 	/** Sets @type {AccidentalMarkAttributes['size']}. */
 	setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): AccidentalMark {
-		this.attributes['size'] = size;
+		this.attributes.size = size;
 		return this;
 	}
 	/** Gets @type {AccidentalMarkAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {AccidentalMarkAttributes['smufl']}. */
 	setSmufl(smufl: string | null): AccidentalMark {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {'other' | 'sharp' | 'natural' | 'flat' | 'double-sharp' | 'sharp-sharp' | 'flat-flat' | 'natural-sharp' | 'natural-flat' | 'quarter-flat' | 'quarter-sharp' | 'three-quarters-flat' | 'three-quarters-sharp' | 'sharp-down' | 'sharp-up' | 'natural-down' | 'natural-up' | 'flat-down' | 'flat-up' | 'double-sharp-down' | 'double-sharp-up' | 'flat-flat-down' | 'flat-flat-up' | 'arrow-down' | 'arrow-up' | 'triple-sharp' | 'triple-flat' | 'slash-quarter-sharp' | 'slash-sharp' | 'slash-flat' | 'double-slash-flat' | 'sharp-1' | 'sharp-2' | 'sharp-3' | 'sharp-5' | 'flat-1' | 'flat-2' | 'flat-3' | 'flat-4' | 'sori' | 'koron'}. */
@@ -14029,11 +14029,11 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
 	}
 	/** Gets @type {OrnamentsAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {OrnamentsAttributes['id']}. */
 	setId(id: string | null): Ornaments {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {Array<TrillMark | Turn | DelayedTurn | InvertedTurn | DelayedInvertedTurn | VerticalTurn | InvertedVerticalTurn | Shake | WavyLine | Mordent | InvertedMordent | Schleifer | Tremolo | Haydn | OtherOrnament>}. */
@@ -14127,11 +14127,11 @@ export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContent
 	}
 	/** Gets @type {UpBowAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {UpBowAttributes['color']}. */
 	setColor(color: string | null): UpBow {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {UpBowAttributes['default-x']}. */
@@ -14192,11 +14192,11 @@ export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContent
 	}
 	/** Gets @type {UpBowAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {UpBowAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): UpBow {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {UpBowAttributes['relative-x']}. */
@@ -14256,11 +14256,11 @@ export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBo
 	}
 	/** Gets @type {DownBowAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DownBowAttributes['color']}. */
 	setColor(color: string | null): DownBow {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DownBowAttributes['default-x']}. */
@@ -14321,11 +14321,11 @@ export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBo
 	}
 	/** Gets @type {DownBowAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {DownBowAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): DownBow {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {DownBowAttributes['relative-x']}. */
@@ -14516,11 +14516,11 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
 	}
 	/** Gets @type {HarmonicAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {HarmonicAttributes['color']}. */
 	setColor(color: string | null): Harmonic {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {HarmonicAttributes['default-x']}. */
@@ -14581,11 +14581,11 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
 	}
 	/** Gets @type {HarmonicAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {HarmonicAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Harmonic {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {HarmonicAttributes['print-object']}. */
@@ -14672,11 +14672,11 @@ export class OpenString implements XMLElement<'open-string', OpenStringAttribute
 	}
 	/** Gets @type {OpenStringAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {OpenStringAttributes['color']}. */
 	setColor(color: string | null): OpenString {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {OpenStringAttributes['default-x']}. */
@@ -14737,11 +14737,11 @@ export class OpenString implements XMLElement<'open-string', OpenStringAttribute
 	}
 	/** Gets @type {OpenStringAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {OpenStringAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): OpenString {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {OpenStringAttributes['relative-x']}. */
@@ -14801,11 +14801,11 @@ export class ThumbPosition implements XMLElement<'thumb-position', ThumbPosition
 	}
 	/** Gets @type {ThumbPositionAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {ThumbPositionAttributes['color']}. */
 	setColor(color: string | null): ThumbPosition {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {ThumbPositionAttributes['default-x']}. */
@@ -14866,11 +14866,11 @@ export class ThumbPosition implements XMLElement<'thumb-position', ThumbPosition
 	}
 	/** Gets @type {ThumbPositionAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {ThumbPositionAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): ThumbPosition {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {ThumbPositionAttributes['relative-x']}. */
@@ -14932,20 +14932,20 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
 	}
 	/** Gets @type {FingeringAttributes['alternate']}. */
 	getAlternate(): 'yes' | 'no' | null {
-		return this.attributes['alternate'];
+		return this.attributes.alternate;
 	}
 	/** Sets @type {FingeringAttributes['alternate']}. */
 	setAlternate(alternate: 'yes' | 'no' | null): Fingering {
-		this.attributes['alternate'] = alternate;
+		this.attributes.alternate = alternate;
 		return this;
 	}
 	/** Gets @type {FingeringAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FingeringAttributes['color']}. */
 	setColor(color: string | null): Fingering {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FingeringAttributes['default-x']}. */
@@ -15006,11 +15006,11 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
 	}
 	/** Gets @type {FingeringAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {FingeringAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Fingering {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {FingeringAttributes['relative-x']}. */
@@ -15033,11 +15033,11 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
 	}
 	/** Gets @type {FingeringAttributes['substitution']}. */
 	getSubstitution(): 'yes' | 'no' | null {
-		return this.attributes['substitution'];
+		return this.attributes.substitution;
 	}
 	/** Sets @type {FingeringAttributes['substitution']}. */
 	setSubstitution(substitution: 'yes' | 'no' | null): Fingering {
-		this.attributes['substitution'] = substitution;
+		this.attributes.substitution = substitution;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -15088,11 +15088,11 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
 	}
 	/** Gets @type {PluckAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {PluckAttributes['color']}. */
 	setColor(color: string | null): Pluck {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {PluckAttributes['default-x']}. */
@@ -15153,11 +15153,11 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
 	}
 	/** Gets @type {PluckAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {PluckAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Pluck {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {PluckAttributes['relative-x']}. */
@@ -15226,11 +15226,11 @@ export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAtt
 	}
 	/** Gets @type {DoubleTongueAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DoubleTongueAttributes['color']}. */
 	setColor(color: string | null): DoubleTongue {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DoubleTongueAttributes['default-x']}. */
@@ -15291,11 +15291,11 @@ export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAtt
 	}
 	/** Gets @type {DoubleTongueAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {DoubleTongueAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): DoubleTongue {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {DoubleTongueAttributes['relative-x']}. */
@@ -15355,11 +15355,11 @@ export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAtt
 	}
 	/** Gets @type {TripleTongueAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TripleTongueAttributes['color']}. */
 	setColor(color: string | null): TripleTongue {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TripleTongueAttributes['default-x']}. */
@@ -15420,11 +15420,11 @@ export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAtt
 	}
 	/** Gets @type {TripleTongueAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {TripleTongueAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): TripleTongue {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {TripleTongueAttributes['relative-x']}. */
@@ -15485,11 +15485,11 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
 	}
 	/** Gets @type {StoppedAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {StoppedAttributes['color']}. */
 	setColor(color: string | null): Stopped {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {StoppedAttributes['default-x']}. */
@@ -15550,11 +15550,11 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
 	}
 	/** Gets @type {StoppedAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {StoppedAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Stopped {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {StoppedAttributes['relative-x']}. */
@@ -15577,11 +15577,11 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
 	}
 	/** Gets @type {StoppedAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {StoppedAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Stopped {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 }
@@ -15623,11 +15623,11 @@ export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicato
 	}
 	/** Gets @type {SnapPizzicatoAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {SnapPizzicatoAttributes['color']}. */
 	setColor(color: string | null): SnapPizzicato {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {SnapPizzicatoAttributes['default-x']}. */
@@ -15688,11 +15688,11 @@ export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicato
 	}
 	/** Gets @type {SnapPizzicatoAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {SnapPizzicatoAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): SnapPizzicato {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {SnapPizzicatoAttributes['relative-x']}. */
@@ -15747,11 +15747,11 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
 	}
 	/** Gets @type {FretAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FretAttributes['color']}. */
 	setColor(color: string | null): Fret {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FretAttributes['font-family']}. */
@@ -15840,11 +15840,11 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
 	}
 	/** Gets @type {StringAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {StringAttributes['color']}. */
 	setColor(color: string | null): String {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {StringAttributes['default-x']}. */
@@ -15905,11 +15905,11 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
 	}
 	/** Gets @type {StringAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {StringAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): String {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {StringAttributes['relative-x']}. */
@@ -15980,11 +15980,11 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
 	}
 	/** Gets @type {HammerOnAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {HammerOnAttributes['color']}. */
 	setColor(color: string | null): HammerOn {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {HammerOnAttributes['default-x']}. */
@@ -16045,20 +16045,20 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
 	}
 	/** Gets @type {HammerOnAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {HammerOnAttributes['number']}. */
 	setNumber(number: number | null): HammerOn {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {HammerOnAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {HammerOnAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): HammerOn {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {HammerOnAttributes['relative-x']}. */
@@ -16081,11 +16081,11 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
 	}
 	/** Gets @type {HammerOnAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {HammerOnAttributes['type']}. */
 	setType(type: 'start' | 'stop'): HammerOn {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -16138,11 +16138,11 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
 	}
 	/** Gets @type {PullOffAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {PullOffAttributes['color']}. */
 	setColor(color: string | null): PullOff {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {PullOffAttributes['default-x']}. */
@@ -16203,20 +16203,20 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
 	}
 	/** Gets @type {PullOffAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {PullOffAttributes['number']}. */
 	setNumber(number: number | null): PullOff {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {PullOffAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {PullOffAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): PullOff {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {PullOffAttributes['relative-x']}. */
@@ -16239,11 +16239,11 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
 	}
 	/** Gets @type {PullOffAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {PullOffAttributes['type']}. */
 	setType(type: 'start' | 'stop'): PullOff {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -16345,11 +16345,11 @@ export class Release implements XMLElement<'release', ReleaseAttributes, Release
 	}
 	/** Gets @type {ReleaseAttributes['offset']}. */
 	getOffset(): number | null {
-		return this.attributes['offset'];
+		return this.attributes.offset;
 	}
 	/** Sets @type {ReleaseAttributes['offset']}. */
 	setOffset(offset: number | null): Release {
-		this.attributes['offset'] = offset;
+		this.attributes.offset = offset;
 		return this;
 	}
 }
@@ -16392,11 +16392,11 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
 	}
 	/** Gets @type {WithBarAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {WithBarAttributes['color']}. */
 	setColor(color: string | null): WithBar {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {WithBarAttributes['default-x']}. */
@@ -16466,11 +16466,11 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
 	}
 	/** Gets @type {WithBarAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {WithBarAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): WithBar {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {WithBarAttributes['relative-x']}. */
@@ -16543,29 +16543,29 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
 	}
 	/** Gets @type {BendAttributes['accelerate']}. */
 	getAccelerate(): 'yes' | 'no' | null {
-		return this.attributes['accelerate'];
+		return this.attributes.accelerate;
 	}
 	/** Sets @type {BendAttributes['accelerate']}. */
 	setAccelerate(accelerate: 'yes' | 'no' | null): Bend {
-		this.attributes['accelerate'] = accelerate;
+		this.attributes.accelerate = accelerate;
 		return this;
 	}
 	/** Gets @type {BendAttributes['beats']}. */
 	getBeats(): number | null {
-		return this.attributes['beats'];
+		return this.attributes.beats;
 	}
 	/** Sets @type {BendAttributes['beats']}. */
 	setBeats(beats: number | null): Bend {
-		this.attributes['beats'] = beats;
+		this.attributes.beats = beats;
 		return this;
 	}
 	/** Gets @type {BendAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {BendAttributes['color']}. */
 	setColor(color: string | null): Bend {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {BendAttributes['default-x']}. */
@@ -16662,11 +16662,11 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
 	}
 	/** Gets @type {BendAttributes['shape']}. */
 	getShape(): 'angled' | 'curved' | null {
-		return this.attributes['shape'];
+		return this.attributes.shape;
 	}
 	/** Sets @type {BendAttributes['shape']}. */
 	setShape(shape: 'angled' | 'curved' | null): Bend {
-		this.attributes['shape'] = shape;
+		this.attributes.shape = shape;
 		return this;
 	}
 	/** Gets @type {BendAlter}. */
@@ -16736,11 +16736,11 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
 	}
 	/** Gets @type {TapAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TapAttributes['color']}. */
 	setColor(color: string | null): Tap {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TapAttributes['default-x']}. */
@@ -16801,20 +16801,20 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
 	}
 	/** Gets @type {TapAttributes['hand']}. */
 	getHand(): 'left' | 'right' | null {
-		return this.attributes['hand'];
+		return this.attributes.hand;
 	}
 	/** Sets @type {TapAttributes['hand']}. */
 	setHand(hand: 'left' | 'right' | null): Tap {
-		this.attributes['hand'] = hand;
+		this.attributes.hand = hand;
 		return this;
 	}
 	/** Gets @type {TapAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {TapAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Tap {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {TapAttributes['relative-x']}. */
@@ -16884,11 +16884,11 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
 	}
 	/** Gets @type {HeelAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {HeelAttributes['color']}. */
 	setColor(color: string | null): Heel {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {HeelAttributes['default-x']}. */
@@ -16949,11 +16949,11 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
 	}
 	/** Gets @type {HeelAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {HeelAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Heel {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {HeelAttributes['relative-x']}. */
@@ -16976,11 +16976,11 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
 	}
 	/** Gets @type {HeelAttributes['substitution']}. */
 	getSubstitution(): 'yes' | 'no' | null {
-		return this.attributes['substitution'];
+		return this.attributes.substitution;
 	}
 	/** Sets @type {HeelAttributes['substitution']}. */
 	setSubstitution(substitution: 'yes' | 'no' | null): Heel {
-		this.attributes['substitution'] = substitution;
+		this.attributes.substitution = substitution;
 		return this;
 	}
 }
@@ -17023,11 +17023,11 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
 	}
 	/** Gets @type {ToeAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {ToeAttributes['color']}. */
 	setColor(color: string | null): Toe {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {ToeAttributes['default-x']}. */
@@ -17088,11 +17088,11 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
 	}
 	/** Gets @type {ToeAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {ToeAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Toe {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {ToeAttributes['relative-x']}. */
@@ -17115,11 +17115,11 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
 	}
 	/** Gets @type {ToeAttributes['substitution']}. */
 	getSubstitution(): 'yes' | 'no' | null {
-		return this.attributes['substitution'];
+		return this.attributes.substitution;
 	}
 	/** Sets @type {ToeAttributes['substitution']}. */
 	setSubstitution(substitution: 'yes' | 'no' | null): Toe {
-		this.attributes['substitution'] = substitution;
+		this.attributes.substitution = substitution;
 		return this;
 	}
 }
@@ -17161,11 +17161,11 @@ export class Fingernails implements XMLElement<'fingernails', FingernailsAttribu
 	}
 	/** Gets @type {FingernailsAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FingernailsAttributes['color']}. */
 	setColor(color: string | null): Fingernails {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FingernailsAttributes['default-x']}. */
@@ -17226,11 +17226,11 @@ export class Fingernails implements XMLElement<'fingernails', FingernailsAttribu
 	}
 	/** Gets @type {FingernailsAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {FingernailsAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Fingernails {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {FingernailsAttributes['relative-x']}. */
@@ -17315,11 +17315,11 @@ export class HoleClosed implements XMLElement<'hole-closed', HoleClosedAttribute
 	}
 	/** Gets @type {HoleClosedAttributes['location']}. */
 	getLocation(): 'bottom' | 'right' | 'left' | 'top' | null {
-		return this.attributes['location'];
+		return this.attributes.location;
 	}
 	/** Sets @type {HoleClosedAttributes['location']}. */
 	setLocation(location: 'bottom' | 'right' | 'left' | 'top' | null): HoleClosed {
-		this.attributes['location'] = location;
+		this.attributes.location = location;
 		return this;
 	}
 	/** Gets @type {'yes' | 'no' | 'half'}. */
@@ -17406,11 +17406,11 @@ export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
 	}
 	/** Gets @type {HoleAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {HoleAttributes['color']}. */
 	setColor(color: string | null): Hole {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {HoleAttributes['default-x']}. */
@@ -17471,11 +17471,11 @@ export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
 	}
 	/** Gets @type {HoleAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {HoleAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Hole {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {HoleAttributes['relative-x']}. */
@@ -17739,11 +17739,11 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
 	}
 	/** Gets @type {ArrowAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {ArrowAttributes['color']}. */
 	setColor(color: string | null): Arrow {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {ArrowAttributes['default-x']}. */
@@ -17804,11 +17804,11 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
 	}
 	/** Gets @type {ArrowAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {ArrowAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Arrow {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {ArrowAttributes['relative-x']}. */
@@ -17831,11 +17831,11 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
 	}
 	/** Gets @type {ArrowAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {ArrowAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Arrow {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {ArrowDirection}. */
@@ -17926,11 +17926,11 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
 	}
 	/** Gets @type {HandbellAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {HandbellAttributes['color']}. */
 	setColor(color: string | null): Handbell {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {HandbellAttributes['default-x']}. */
@@ -17991,11 +17991,11 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
 	}
 	/** Gets @type {HandbellAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {HandbellAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Handbell {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {HandbellAttributes['relative-x']}. */
@@ -18090,11 +18090,11 @@ export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, 
 	}
 	/** Gets @type {BrassBendAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {BrassBendAttributes['color']}. */
 	setColor(color: string | null): BrassBend {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {BrassBendAttributes['default-x']}. */
@@ -18155,11 +18155,11 @@ export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, 
 	}
 	/** Gets @type {BrassBendAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {BrassBendAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): BrassBend {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {BrassBendAttributes['relative-x']}. */
@@ -18219,11 +18219,11 @@ export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
 	}
 	/** Gets @type {FlipAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FlipAttributes['color']}. */
 	setColor(color: string | null): Flip {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FlipAttributes['default-x']}. */
@@ -18284,11 +18284,11 @@ export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
 	}
 	/** Gets @type {FlipAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {FlipAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Flip {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {FlipAttributes['relative-x']}. */
@@ -18348,11 +18348,11 @@ export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents
 	}
 	/** Gets @type {SmearAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {SmearAttributes['color']}. */
 	setColor(color: string | null): Smear {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {SmearAttributes['default-x']}. */
@@ -18413,11 +18413,11 @@ export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents
 	}
 	/** Gets @type {SmearAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {SmearAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Smear {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {SmearAttributes['relative-x']}. */
@@ -18478,11 +18478,11 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
 	}
 	/** Gets @type {OpenAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {OpenAttributes['color']}. */
 	setColor(color: string | null): Open {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {OpenAttributes['default-x']}. */
@@ -18543,11 +18543,11 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
 	}
 	/** Gets @type {OpenAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {OpenAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Open {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {OpenAttributes['relative-x']}. */
@@ -18570,11 +18570,11 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
 	}
 	/** Gets @type {OpenAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {OpenAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Open {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 }
@@ -18617,11 +18617,11 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
 	}
 	/** Gets @type {HalfMutedAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {HalfMutedAttributes['color']}. */
 	setColor(color: string | null): HalfMuted {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {HalfMutedAttributes['default-x']}. */
@@ -18682,11 +18682,11 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
 	}
 	/** Gets @type {HalfMutedAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {HalfMutedAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): HalfMuted {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {HalfMutedAttributes['relative-x']}. */
@@ -18709,11 +18709,11 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
 	}
 	/** Gets @type {HalfMutedAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {HalfMutedAttributes['smufl']}. */
 	setSmufl(smufl: string | null): HalfMuted {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 }
@@ -18744,11 +18744,11 @@ export class HarmonClosed implements XMLElement<'harmon-closed', HarmonClosedAtt
 	}
 	/** Gets @type {HarmonClosedAttributes['location']}. */
 	getLocation(): 'bottom' | 'right' | 'left' | 'top' | null {
-		return this.attributes['location'];
+		return this.attributes.location;
 	}
 	/** Sets @type {HarmonClosedAttributes['location']}. */
 	setLocation(location: 'bottom' | 'right' | 'left' | 'top' | null): HarmonClosed {
-		this.attributes['location'] = location;
+		this.attributes.location = location;
 		return this;
 	}
 	/** Gets @type {'yes' | 'no' | 'half'}. */
@@ -18800,11 +18800,11 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
 	}
 	/** Gets @type {HarmonMuteAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {HarmonMuteAttributes['color']}. */
 	setColor(color: string | null): HarmonMute {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {HarmonMuteAttributes['default-x']}. */
@@ -18865,11 +18865,11 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
 	}
 	/** Gets @type {HarmonMuteAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {HarmonMuteAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): HarmonMute {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {HarmonMuteAttributes['relative-x']}. */
@@ -18892,11 +18892,11 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
 	}
 	/** Gets @type {HarmonMuteAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {HarmonMuteAttributes['smufl']}. */
 	setSmufl(smufl: string | null): HarmonMute {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {HarmonClosed}. */
@@ -18947,11 +18947,11 @@ export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents
 	}
 	/** Gets @type {GolpeAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {GolpeAttributes['color']}. */
 	setColor(color: string | null): Golpe {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {GolpeAttributes['default-x']}. */
@@ -19012,11 +19012,11 @@ export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents
 	}
 	/** Gets @type {GolpeAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {GolpeAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Golpe {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {GolpeAttributes['relative-x']}. */
@@ -19077,11 +19077,11 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
 	}
 	/** Gets @type {OtherTechnicalAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {OtherTechnicalAttributes['color']}. */
 	setColor(color: string | null): OtherTechnical {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {OtherTechnicalAttributes['default-x']}. */
@@ -19142,11 +19142,11 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
 	}
 	/** Gets @type {OtherTechnicalAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {OtherTechnicalAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): OtherTechnical {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {OtherTechnicalAttributes['relative-x']}. */
@@ -19169,11 +19169,11 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
 	}
 	/** Gets @type {OtherTechnicalAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {OtherTechnicalAttributes['smufl']}. */
 	setSmufl(smufl: string | null): OtherTechnical {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {string | null}. */
@@ -19247,11 +19247,11 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
 	}
 	/** Gets @type {TechnicalAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {TechnicalAttributes['id']}. */
 	setId(id: string | null): Technical {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {Array<UpBow | DownBow | Harmonic | OpenString | ThumbPosition | Fingering | Pluck | DoubleTongue | TripleTongue | Stopped | SnapPizzicato | Fret | String | HammerOn | PullOff | Bend | Tap | Heel | Toe | Fingernails | Hole | Arrow | Handbell | BrassBend | Flip | Smear | Open | HalfMuted | HarmonMute | Golpe | OtherTechnical>}. */
@@ -19368,11 +19368,11 @@ export class Accent implements XMLElement<'accent', AccentAttributes, AccentCont
 	}
 	/** Gets @type {AccentAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {AccentAttributes['color']}. */
 	setColor(color: string | null): Accent {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {AccentAttributes['default-x']}. */
@@ -19433,11 +19433,11 @@ export class Accent implements XMLElement<'accent', AccentAttributes, AccentCont
 	}
 	/** Gets @type {AccentAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {AccentAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Accent {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {AccentAttributes['relative-x']}. */
@@ -19498,11 +19498,11 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
 	}
 	/** Gets @type {StrongAccentAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {StrongAccentAttributes['color']}. */
 	setColor(color: string | null): StrongAccent {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {StrongAccentAttributes['default-x']}. */
@@ -19563,11 +19563,11 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
 	}
 	/** Gets @type {StrongAccentAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {StrongAccentAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): StrongAccent {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {StrongAccentAttributes['relative-x']}. */
@@ -19590,11 +19590,11 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
 	}
 	/** Gets @type {StrongAccentAttributes['type']}. */
 	getType(): 'up' | 'down' | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {StrongAccentAttributes['type']}. */
 	setType(type: 'up' | 'down' | null): StrongAccent {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -19636,11 +19636,11 @@ export class Staccato implements XMLElement<'staccato', StaccatoAttributes, Stac
 	}
 	/** Gets @type {StaccatoAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {StaccatoAttributes['color']}. */
 	setColor(color: string | null): Staccato {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {StaccatoAttributes['default-x']}. */
@@ -19701,11 +19701,11 @@ export class Staccato implements XMLElement<'staccato', StaccatoAttributes, Stac
 	}
 	/** Gets @type {StaccatoAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {StaccatoAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Staccato {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {StaccatoAttributes['relative-x']}. */
@@ -19765,11 +19765,11 @@ export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoCont
 	}
 	/** Gets @type {TenutoAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TenutoAttributes['color']}. */
 	setColor(color: string | null): Tenuto {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TenutoAttributes['default-x']}. */
@@ -19830,11 +19830,11 @@ export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoCont
 	}
 	/** Gets @type {TenutoAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {TenutoAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Tenuto {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {TenutoAttributes['relative-x']}. */
@@ -19894,11 +19894,11 @@ export class DetachedLegato implements XMLElement<'detached-legato', DetachedLeg
 	}
 	/** Gets @type {DetachedLegatoAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DetachedLegatoAttributes['color']}. */
 	setColor(color: string | null): DetachedLegato {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DetachedLegatoAttributes['default-x']}. */
@@ -19959,11 +19959,11 @@ export class DetachedLegato implements XMLElement<'detached-legato', DetachedLeg
 	}
 	/** Gets @type {DetachedLegatoAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {DetachedLegatoAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): DetachedLegato {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {DetachedLegatoAttributes['relative-x']}. */
@@ -20023,11 +20023,11 @@ export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoA
 	}
 	/** Gets @type {StaccatissimoAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {StaccatissimoAttributes['color']}. */
 	setColor(color: string | null): Staccatissimo {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {StaccatissimoAttributes['default-x']}. */
@@ -20088,11 +20088,11 @@ export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoA
 	}
 	/** Gets @type {StaccatissimoAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {StaccatissimoAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Staccatissimo {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {StaccatissimoAttributes['relative-x']}. */
@@ -20152,11 +20152,11 @@ export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, Spic
 	}
 	/** Gets @type {SpiccatoAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {SpiccatoAttributes['color']}. */
 	setColor(color: string | null): Spiccato {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {SpiccatoAttributes['default-x']}. */
@@ -20217,11 +20217,11 @@ export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, Spic
 	}
 	/** Gets @type {SpiccatoAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {SpiccatoAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Spiccato {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {SpiccatoAttributes['relative-x']}. */
@@ -20286,11 +20286,11 @@ export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents
 	}
 	/** Gets @type {ScoopAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {ScoopAttributes['color']}. */
 	setColor(color: string | null): Scoop {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {ScoopAttributes['dash-length']}. */
@@ -20387,11 +20387,11 @@ export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents
 	}
 	/** Gets @type {ScoopAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {ScoopAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Scoop {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {ScoopAttributes['relative-x']}. */
@@ -20465,11 +20465,11 @@ export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
 	}
 	/** Gets @type {PlopAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {PlopAttributes['color']}. */
 	setColor(color: string | null): Plop {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {PlopAttributes['dash-length']}. */
@@ -20566,11 +20566,11 @@ export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
 	}
 	/** Gets @type {PlopAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {PlopAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Plop {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {PlopAttributes['relative-x']}. */
@@ -20644,11 +20644,11 @@ export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
 	}
 	/** Gets @type {DoitAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DoitAttributes['color']}. */
 	setColor(color: string | null): Doit {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DoitAttributes['dash-length']}. */
@@ -20745,11 +20745,11 @@ export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
 	}
 	/** Gets @type {DoitAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {DoitAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Doit {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {DoitAttributes['relative-x']}. */
@@ -20823,11 +20823,11 @@ export class Falloff implements XMLElement<'falloff', FalloffAttributes, Falloff
 	}
 	/** Gets @type {FalloffAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FalloffAttributes['color']}. */
 	setColor(color: string | null): Falloff {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FalloffAttributes['dash-length']}. */
@@ -20924,11 +20924,11 @@ export class Falloff implements XMLElement<'falloff', FalloffAttributes, Falloff
 	}
 	/** Gets @type {FalloffAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {FalloffAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Falloff {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {FalloffAttributes['relative-x']}. */
@@ -20997,11 +20997,11 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
 	}
 	/** Gets @type {BreathMarkAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {BreathMarkAttributes['color']}. */
 	setColor(color: string | null): BreathMark {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {BreathMarkAttributes['default-x']}. */
@@ -21062,11 +21062,11 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
 	}
 	/** Gets @type {BreathMarkAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {BreathMarkAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): BreathMark {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {BreathMarkAttributes['relative-x']}. */
@@ -21135,11 +21135,11 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
 	}
 	/** Gets @type {CaesuraAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {CaesuraAttributes['color']}. */
 	setColor(color: string | null): Caesura {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {CaesuraAttributes['default-x']}. */
@@ -21200,11 +21200,11 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
 	}
 	/** Gets @type {CaesuraAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {CaesuraAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Caesura {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {CaesuraAttributes['relative-x']}. */
@@ -21273,11 +21273,11 @@ export class Stress implements XMLElement<'stress', StressAttributes, StressCont
 	}
 	/** Gets @type {StressAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {StressAttributes['color']}. */
 	setColor(color: string | null): Stress {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {StressAttributes['default-x']}. */
@@ -21338,11 +21338,11 @@ export class Stress implements XMLElement<'stress', StressAttributes, StressCont
 	}
 	/** Gets @type {StressAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {StressAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Stress {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {StressAttributes['relative-x']}. */
@@ -21402,11 +21402,11 @@ export class Unstress implements XMLElement<'unstress', UnstressAttributes, Unst
 	}
 	/** Gets @type {UnstressAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {UnstressAttributes['color']}. */
 	setColor(color: string | null): Unstress {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {UnstressAttributes['default-x']}. */
@@ -21467,11 +21467,11 @@ export class Unstress implements XMLElement<'unstress', UnstressAttributes, Unst
 	}
 	/** Gets @type {UnstressAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {UnstressAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Unstress {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {UnstressAttributes['relative-x']}. */
@@ -21531,11 +21531,11 @@ export class SoftAccent implements XMLElement<'soft-accent', SoftAccentAttribute
 	}
 	/** Gets @type {SoftAccentAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {SoftAccentAttributes['color']}. */
 	setColor(color: string | null): SoftAccent {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {SoftAccentAttributes['default-x']}. */
@@ -21596,11 +21596,11 @@ export class SoftAccent implements XMLElement<'soft-accent', SoftAccentAttribute
 	}
 	/** Gets @type {SoftAccentAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {SoftAccentAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): SoftAccent {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {SoftAccentAttributes['relative-x']}. */
@@ -21663,11 +21663,11 @@ export class OtherArticulation
 	}
 	/** Gets @type {OtherArticulationAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {OtherArticulationAttributes['color']}. */
 	setColor(color: string | null): OtherArticulation {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {OtherArticulationAttributes['default-x']}. */
@@ -21728,11 +21728,11 @@ export class OtherArticulation
 	}
 	/** Gets @type {OtherArticulationAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {OtherArticulationAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): OtherArticulation {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {OtherArticulationAttributes['relative-x']}. */
@@ -21755,11 +21755,11 @@ export class OtherArticulation
 	}
 	/** Gets @type {OtherArticulationAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {OtherArticulationAttributes['smufl']}. */
 	setSmufl(smufl: string | null): OtherArticulation {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -21819,11 +21819,11 @@ export class Articulations implements XMLElement<'articulations', ArticulationsA
 	}
 	/** Gets @type {ArticulationsAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {ArticulationsAttributes['id']}. */
 	setId(id: string | null): Articulations {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {Array<Accent | StrongAccent | Staccato | Tenuto | DetachedLegato | Staccatissimo | Spiccato | Scoop | Plop | Doit | Falloff | BreathMark | Caesura | Stress | Unstress | SoftAccent | OtherArticulation>}. */
@@ -22577,11 +22577,11 @@ export class OtherDynamics implements XMLElement<'other-dynamics', OtherDynamics
 	}
 	/** Gets @type {OtherDynamicsAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {OtherDynamicsAttributes['smufl']}. */
 	setSmufl(smufl: string | null): OtherDynamics {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -22689,11 +22689,11 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
 	}
 	/** Gets @type {DynamicsAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DynamicsAttributes['color']}. */
 	setColor(color: string | null): Dynamics {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DynamicsAttributes['default-x']}. */
@@ -22732,7 +22732,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
 		| 'nonagon'
 		| 'decagon'
 		| null {
-		return this.attributes['enclosure'];
+		return this.attributes.enclosure;
 	}
 	/** Sets @type {DynamicsAttributes['enclosure']}. */
 	setEnclosure(
@@ -22754,7 +22754,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
 			| 'decagon'
 			| null,
 	): Dynamics {
-		this.attributes['enclosure'] = enclosure;
+		this.attributes.enclosure = enclosure;
 		return this;
 	}
 	/** Gets @type {DynamicsAttributes['font-family']}. */
@@ -22797,20 +22797,20 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
 	}
 	/** Gets @type {DynamicsAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {DynamicsAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Dynamics {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {DynamicsAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {DynamicsAttributes['id']}. */
 	setId(id: string | null): Dynamics {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {DynamicsAttributes['line-through']}. */
@@ -22824,20 +22824,20 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
 	}
 	/** Gets @type {DynamicsAttributes['overline']}. */
 	getOverline(): number | null {
-		return this.attributes['overline'];
+		return this.attributes.overline;
 	}
 	/** Sets @type {DynamicsAttributes['overline']}. */
 	setOverline(overline: number | null): Dynamics {
-		this.attributes['overline'] = overline;
+		this.attributes.overline = overline;
 		return this;
 	}
 	/** Gets @type {DynamicsAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {DynamicsAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Dynamics {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {DynamicsAttributes['relative-x']}. */
@@ -22860,20 +22860,20 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
 	}
 	/** Gets @type {DynamicsAttributes['underline']}. */
 	getUnderline(): number | null {
-		return this.attributes['underline'];
+		return this.attributes.underline;
 	}
 	/** Sets @type {DynamicsAttributes['underline']}. */
 	setUnderline(underline: number | null): Dynamics {
-		this.attributes['underline'] = underline;
+		this.attributes.underline = underline;
 		return this;
 	}
 	/** Gets @type {DynamicsAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {DynamicsAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Dynamics {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {Array<P | Pp | Ppp | Pppp | Ppppp | Pppppp | F | Ff | Fff | Ffff | Fffff | Ffffff | Mp | Mf | Sf | Sfp | Sfpp | Fp | Rf | Rfz | Sfz | Sffz | Fz | N | Pf | Sfzp | OtherDynamics>}. */
@@ -22985,11 +22985,11 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
 	}
 	/** Gets @type {FermataAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FermataAttributes['color']}. */
 	setColor(color: string | null): Fermata {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FermataAttributes['default-x']}. */
@@ -23050,11 +23050,11 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
 	}
 	/** Gets @type {FermataAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {FermataAttributes['id']}. */
 	setId(id: string | null): Fermata {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {FermataAttributes['relative-x']}. */
@@ -23077,11 +23077,11 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
 	}
 	/** Gets @type {FermataAttributes['type']}. */
 	getType(): 'upright' | 'inverted' | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {FermataAttributes['type']}. */
 	setType(type: 'upright' | 'inverted' | null): Fermata {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {'' | 'normal' | 'angled' | 'square' | 'double-angled' | 'double-square' | 'double-dot' | 'half-curve' | 'curlew'}. */
@@ -23152,11 +23152,11 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
 	}
 	/** Gets @type {ArpeggiateAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {ArpeggiateAttributes['color']}. */
 	setColor(color: string | null): Arpeggiate {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {ArpeggiateAttributes['default-x']}. */
@@ -23179,38 +23179,38 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
 	}
 	/** Gets @type {ArpeggiateAttributes['direction']}. */
 	getDirection(): 'up' | 'down' | null {
-		return this.attributes['direction'];
+		return this.attributes.direction;
 	}
 	/** Sets @type {ArpeggiateAttributes['direction']}. */
 	setDirection(direction: 'up' | 'down' | null): Arpeggiate {
-		this.attributes['direction'] = direction;
+		this.attributes.direction = direction;
 		return this;
 	}
 	/** Gets @type {ArpeggiateAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {ArpeggiateAttributes['id']}. */
 	setId(id: string | null): Arpeggiate {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {ArpeggiateAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {ArpeggiateAttributes['number']}. */
 	setNumber(number: number | null): Arpeggiate {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {ArpeggiateAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {ArpeggiateAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Arpeggiate {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {ArpeggiateAttributes['relative-x']}. */
@@ -23233,11 +23233,11 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
 	}
 	/** Gets @type {ArpeggiateAttributes['unbroken']}. */
 	getUnbroken(): 'yes' | 'no' | null {
-		return this.attributes['unbroken'];
+		return this.attributes.unbroken;
 	}
 	/** Sets @type {ArpeggiateAttributes['unbroken']}. */
 	setUnbroken(unbroken: 'yes' | 'no' | null): Arpeggiate {
-		this.attributes['unbroken'] = unbroken;
+		this.attributes.unbroken = unbroken;
 		return this;
 	}
 }
@@ -23278,11 +23278,11 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
 	}
 	/** Gets @type {NonArpeggiateAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {NonArpeggiateAttributes['color']}. */
 	setColor(color: string | null): NonArpeggiate {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {NonArpeggiateAttributes['default-x']}. */
@@ -23305,29 +23305,29 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
 	}
 	/** Gets @type {NonArpeggiateAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {NonArpeggiateAttributes['id']}. */
 	setId(id: string | null): NonArpeggiate {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {NonArpeggiateAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {NonArpeggiateAttributes['number']}. */
 	setNumber(number: number | null): NonArpeggiate {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {NonArpeggiateAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {NonArpeggiateAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): NonArpeggiate {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {NonArpeggiateAttributes['relative-x']}. */
@@ -23350,11 +23350,11 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
 	}
 	/** Gets @type {NonArpeggiateAttributes['type']}. */
 	getType(): 'top' | 'bottom' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {NonArpeggiateAttributes['type']}. */
 	setType(type: 'top' | 'bottom'): NonArpeggiate {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -23401,11 +23401,11 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
 	}
 	/** Gets @type {OtherNotationAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {OtherNotationAttributes['color']}. */
 	setColor(color: string | null): OtherNotation {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {OtherNotationAttributes['default-x']}. */
@@ -23466,29 +23466,29 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
 	}
 	/** Gets @type {OtherNotationAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {OtherNotationAttributes['id']}. */
 	setId(id: string | null): OtherNotation {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {OtherNotationAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {OtherNotationAttributes['number']}. */
 	setNumber(number: number | null): OtherNotation {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {OtherNotationAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {OtherNotationAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): OtherNotation {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {OtherNotationAttributes['print-object']}. */
@@ -23520,20 +23520,20 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
 	}
 	/** Gets @type {OtherNotationAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {OtherNotationAttributes['smufl']}. */
 	setSmufl(smufl: string | null): OtherNotation {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {OtherNotationAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'single' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {OtherNotationAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'single'): OtherNotation {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -23592,11 +23592,11 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
 	}
 	/** Gets @type {NotationsAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {NotationsAttributes['id']}. */
 	setId(id: string | null): Notations {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {NotationsAttributes['print-object']}. */
@@ -23746,11 +23746,11 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
 	}
 	/** Gets @type {TextAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TextAttributes['color']}. */
 	setColor(color: string | null): Text {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TextAttributes['default-x']}. */
@@ -23773,11 +23773,11 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
 	}
 	/** Gets @type {TextAttributes['dir']}. */
 	getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
-		return this.attributes['dir'];
+		return this.attributes.dir;
 	}
 	/** Sets @type {TextAttributes['dir']}. */
 	setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): Text {
-		this.attributes['dir'] = dir;
+		this.attributes.dir = dir;
 		return this;
 	}
 	/** Gets @type {TextAttributes['font-family']}. */
@@ -23838,29 +23838,29 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
 	}
 	/** Gets @type {TextAttributes['overline']}. */
 	getOverline(): number | null {
-		return this.attributes['overline'];
+		return this.attributes.overline;
 	}
 	/** Sets @type {TextAttributes['overline']}. */
 	setOverline(overline: number | null): Text {
-		this.attributes['overline'] = overline;
+		this.attributes.overline = overline;
 		return this;
 	}
 	/** Gets @type {TextAttributes['rotation']}. */
 	getRotation(): number | null {
-		return this.attributes['rotation'];
+		return this.attributes.rotation;
 	}
 	/** Sets @type {TextAttributes['rotation']}. */
 	setRotation(rotation: number | null): Text {
-		this.attributes['rotation'] = rotation;
+		this.attributes.rotation = rotation;
 		return this;
 	}
 	/** Gets @type {TextAttributes['underline']}. */
 	getUnderline(): number | null {
-		return this.attributes['underline'];
+		return this.attributes.underline;
 	}
 	/** Sets @type {TextAttributes['underline']}. */
 	setUnderline(underline: number | null): Text {
-		this.attributes['underline'] = underline;
+		this.attributes.underline = underline;
 		return this;
 	}
 	/** Gets @type {TextAttributes['xml:lang']}. */
@@ -23916,11 +23916,11 @@ export class Elision implements XMLElement<'elision', ElisionAttributes, Elision
 	}
 	/** Gets @type {ElisionAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {ElisionAttributes['color']}. */
 	setColor(color: string | null): Elision {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {ElisionAttributes['font-family']}. */
@@ -23963,11 +23963,11 @@ export class Elision implements XMLElement<'elision', ElisionAttributes, Elision
 	}
 	/** Gets @type {ElisionAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {ElisionAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Elision {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -24014,11 +24014,11 @@ export class Extend implements XMLElement<'extend', ExtendAttributes, ExtendCont
 	}
 	/** Gets @type {ExtendAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {ExtendAttributes['color']}. */
 	setColor(color: string | null): Extend {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {ExtendAttributes['default-x']}. */
@@ -24059,11 +24059,11 @@ export class Extend implements XMLElement<'extend', ExtendAttributes, ExtendCont
 	}
 	/** Gets @type {ExtendAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'continue' | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {ExtendAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'continue' | null): Extend {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -24221,11 +24221,11 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
 	}
 	/** Gets @type {LyricAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {LyricAttributes['color']}. */
 	setColor(color: string | null): Lyric {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {LyricAttributes['default-x']}. */
@@ -24248,47 +24248,47 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
 	}
 	/** Gets @type {LyricAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {LyricAttributes['id']}. */
 	setId(id: string | null): Lyric {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {LyricAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {LyricAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): Lyric {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {LyricAttributes['name']}. */
 	getName(): string | null {
-		return this.attributes['name'];
+		return this.attributes.name;
 	}
 	/** Sets @type {LyricAttributes['name']}. */
 	setName(name: string | null): Lyric {
-		this.attributes['name'] = name;
+		this.attributes.name = name;
 		return this;
 	}
 	/** Gets @type {LyricAttributes['number']}. */
 	getNumber(): string | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {LyricAttributes['number']}. */
 	setNumber(number: string | null): Lyric {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {LyricAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {LyricAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Lyric {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {LyricAttributes['print-object']}. */
@@ -24556,11 +24556,11 @@ export class OtherPlay implements XMLElement<'other-play', OtherPlayAttributes, 
 	}
 	/** Gets @type {OtherPlayAttributes['type']}. */
 	getType(): string {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {OtherPlayAttributes['type']}. */
 	setType(type: string): OtherPlay {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -24600,11 +24600,11 @@ export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
 	}
 	/** Gets @type {PlayAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {PlayAttributes['id']}. */
 	setId(id: string | null): Play {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {Array<Ipa | Mute | SemiPitched | OtherPlay>}. */
@@ -24644,11 +24644,11 @@ export class Assess implements XMLElement<'assess', AssessAttributes, AssessCont
 	}
 	/** Gets @type {AssessAttributes['player']}. */
 	getPlayer(): string | null {
-		return this.attributes['player'];
+		return this.attributes.player;
 	}
 	/** Sets @type {AssessAttributes['player']}. */
 	setPlayer(player: string | null): Assess {
-		this.attributes['player'] = player;
+		this.attributes.player = player;
 		return this;
 	}
 	/** Gets @type {AssessAttributes['time-only']}. */
@@ -24662,11 +24662,11 @@ export class Assess implements XMLElement<'assess', AssessAttributes, AssessCont
 	}
 	/** Gets @type {AssessAttributes['type']}. */
 	getType(): 'yes' | 'no' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {AssessAttributes['type']}. */
 	setType(type: 'yes' | 'no'): Assess {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -24697,11 +24697,11 @@ export class Wait implements XMLElement<'wait', WaitAttributes, WaitContents> {
 	}
 	/** Gets @type {WaitAttributes['player']}. */
 	getPlayer(): string | null {
-		return this.attributes['player'];
+		return this.attributes.player;
 	}
 	/** Sets @type {WaitAttributes['player']}. */
 	setPlayer(player: string | null): Wait {
-		this.attributes['player'] = player;
+		this.attributes.player = player;
 		return this;
 	}
 	/** Gets @type {WaitAttributes['time-only']}. */
@@ -24741,11 +24741,11 @@ export class OtherListen implements XMLElement<'other-listen', OtherListenAttrib
 	}
 	/** Gets @type {OtherListenAttributes['player']}. */
 	getPlayer(): string | null {
-		return this.attributes['player'];
+		return this.attributes.player;
 	}
 	/** Sets @type {OtherListenAttributes['player']}. */
 	setPlayer(player: string | null): OtherListen {
-		this.attributes['player'] = player;
+		this.attributes.player = player;
 		return this;
 	}
 	/** Gets @type {OtherListenAttributes['time-only']}. */
@@ -24759,11 +24759,11 @@ export class OtherListen implements XMLElement<'other-listen', OtherListenAttrib
 	}
 	/** Gets @type {OtherListenAttributes['type']}. */
 	getType(): string {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {OtherListenAttributes['type']}. */
 	setType(type: string): OtherListen {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -24908,20 +24908,20 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
 	}
 	/** Gets @type {NoteAttributes['attack']}. */
 	getAttack(): number | null {
-		return this.attributes['attack'];
+		return this.attributes.attack;
 	}
 	/** Sets @type {NoteAttributes['attack']}. */
 	setAttack(attack: number | null): Note {
-		this.attributes['attack'] = attack;
+		this.attributes.attack = attack;
 		return this;
 	}
 	/** Gets @type {NoteAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {NoteAttributes['color']}. */
 	setColor(color: string | null): Note {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {NoteAttributes['default-x']}. */
@@ -24944,11 +24944,11 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
 	}
 	/** Gets @type {NoteAttributes['dynamics']}. */
 	getDynamics(): number | null {
-		return this.attributes['dynamics'];
+		return this.attributes.dynamics;
 	}
 	/** Sets @type {NoteAttributes['dynamics']}. */
 	setDynamics(dynamics: number | null): Note {
-		this.attributes['dynamics'] = dynamics;
+		this.attributes.dynamics = dynamics;
 		return this;
 	}
 	/** Gets @type {NoteAttributes['end-dynamics']}. */
@@ -25000,20 +25000,20 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
 	}
 	/** Gets @type {NoteAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {NoteAttributes['id']}. */
 	setId(id: string | null): Note {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {NoteAttributes['pizzicato']}. */
 	getPizzicato(): 'yes' | 'no' | null {
-		return this.attributes['pizzicato'];
+		return this.attributes.pizzicato;
 	}
 	/** Sets @type {NoteAttributes['pizzicato']}. */
 	setPizzicato(pizzicato: 'yes' | 'no' | null): Note {
-		this.attributes['pizzicato'] = pizzicato;
+		this.attributes.pizzicato = pizzicato;
 		return this;
 	}
 	/** Gets @type {NoteAttributes['print-dot']}. */
@@ -25081,11 +25081,11 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
 	}
 	/** Gets @type {NoteAttributes['release']}. */
 	getRelease(): number | null {
-		return this.attributes['release'];
+		return this.attributes.release;
 	}
 	/** Sets @type {NoteAttributes['release']}. */
 	setRelease(release: number | null): Note {
-		this.attributes['release'] = release;
+		this.attributes.release = release;
 		return this;
 	}
 	/** Gets @type {NoteAttributes['time-only']}. */
@@ -25473,11 +25473,11 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
 	}
 	/** Gets @type {RehearsalAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {RehearsalAttributes['color']}. */
 	setColor(color: string | null): Rehearsal {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {RehearsalAttributes['default-x']}. */
@@ -25500,11 +25500,11 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
 	}
 	/** Gets @type {RehearsalAttributes['dir']}. */
 	getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
-		return this.attributes['dir'];
+		return this.attributes.dir;
 	}
 	/** Sets @type {RehearsalAttributes['dir']}. */
 	setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): Rehearsal {
-		this.attributes['dir'] = dir;
+		this.attributes.dir = dir;
 		return this;
 	}
 	/** Gets @type {RehearsalAttributes['enclosure']}. */
@@ -25525,7 +25525,7 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
 		| 'nonagon'
 		| 'decagon'
 		| null {
-		return this.attributes['enclosure'];
+		return this.attributes.enclosure;
 	}
 	/** Sets @type {RehearsalAttributes['enclosure']}. */
 	setEnclosure(
@@ -25547,7 +25547,7 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
 			| 'decagon'
 			| null,
 	): Rehearsal {
-		this.attributes['enclosure'] = enclosure;
+		this.attributes.enclosure = enclosure;
 		return this;
 	}
 	/** Gets @type {RehearsalAttributes['font-family']}. */
@@ -25590,29 +25590,29 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
 	}
 	/** Gets @type {RehearsalAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {RehearsalAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Rehearsal {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {RehearsalAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {RehearsalAttributes['id']}. */
 	setId(id: string | null): Rehearsal {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {RehearsalAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {RehearsalAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): Rehearsal {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {RehearsalAttributes['letter-spacing']}. */
@@ -25644,11 +25644,11 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
 	}
 	/** Gets @type {RehearsalAttributes['overline']}. */
 	getOverline(): number | null {
-		return this.attributes['overline'];
+		return this.attributes.overline;
 	}
 	/** Sets @type {RehearsalAttributes['overline']}. */
 	setOverline(overline: number | null): Rehearsal {
-		this.attributes['overline'] = overline;
+		this.attributes.overline = overline;
 		return this;
 	}
 	/** Gets @type {RehearsalAttributes['relative-x']}. */
@@ -25671,29 +25671,29 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
 	}
 	/** Gets @type {RehearsalAttributes['rotation']}. */
 	getRotation(): number | null {
-		return this.attributes['rotation'];
+		return this.attributes.rotation;
 	}
 	/** Sets @type {RehearsalAttributes['rotation']}. */
 	setRotation(rotation: number | null): Rehearsal {
-		this.attributes['rotation'] = rotation;
+		this.attributes.rotation = rotation;
 		return this;
 	}
 	/** Gets @type {RehearsalAttributes['underline']}. */
 	getUnderline(): number | null {
-		return this.attributes['underline'];
+		return this.attributes.underline;
 	}
 	/** Sets @type {RehearsalAttributes['underline']}. */
 	setUnderline(underline: number | null): Rehearsal {
-		this.attributes['underline'] = underline;
+		this.attributes.underline = underline;
 		return this;
 	}
 	/** Gets @type {RehearsalAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {RehearsalAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Rehearsal {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {RehearsalAttributes['xml:lang']}. */
@@ -25765,11 +25765,11 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
 	}
 	/** Gets @type {SegnoAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {SegnoAttributes['color']}. */
 	setColor(color: string | null): Segno {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {SegnoAttributes['default-x']}. */
@@ -25830,20 +25830,20 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
 	}
 	/** Gets @type {SegnoAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {SegnoAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Segno {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {SegnoAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {SegnoAttributes['id']}. */
 	setId(id: string | null): Segno {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {SegnoAttributes['relative-x']}. */
@@ -25866,20 +25866,20 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
 	}
 	/** Gets @type {SegnoAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {SegnoAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Segno {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {SegnoAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {SegnoAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Segno {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 }
@@ -25924,11 +25924,11 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
 	}
 	/** Gets @type {CodaAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {CodaAttributes['color']}. */
 	setColor(color: string | null): Coda {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {CodaAttributes['default-x']}. */
@@ -25989,20 +25989,20 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
 	}
 	/** Gets @type {CodaAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {CodaAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Coda {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {CodaAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {CodaAttributes['id']}. */
 	setId(id: string | null): Coda {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {CodaAttributes['relative-x']}. */
@@ -26025,20 +26025,20 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
 	}
 	/** Gets @type {CodaAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {CodaAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Coda {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {CodaAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {CodaAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Coda {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 }
@@ -26109,11 +26109,11 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
 	}
 	/** Gets @type {WordsAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {WordsAttributes['color']}. */
 	setColor(color: string | null): Words {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {WordsAttributes['default-x']}. */
@@ -26136,11 +26136,11 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
 	}
 	/** Gets @type {WordsAttributes['dir']}. */
 	getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
-		return this.attributes['dir'];
+		return this.attributes.dir;
 	}
 	/** Sets @type {WordsAttributes['dir']}. */
 	setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): Words {
-		this.attributes['dir'] = dir;
+		this.attributes.dir = dir;
 		return this;
 	}
 	/** Gets @type {WordsAttributes['enclosure']}. */
@@ -26161,7 +26161,7 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
 		| 'nonagon'
 		| 'decagon'
 		| null {
-		return this.attributes['enclosure'];
+		return this.attributes.enclosure;
 	}
 	/** Sets @type {WordsAttributes['enclosure']}. */
 	setEnclosure(
@@ -26183,7 +26183,7 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
 			| 'decagon'
 			| null,
 	): Words {
-		this.attributes['enclosure'] = enclosure;
+		this.attributes.enclosure = enclosure;
 		return this;
 	}
 	/** Gets @type {WordsAttributes['font-family']}. */
@@ -26226,29 +26226,29 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
 	}
 	/** Gets @type {WordsAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {WordsAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Words {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {WordsAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {WordsAttributes['id']}. */
 	setId(id: string | null): Words {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {WordsAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {WordsAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): Words {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {WordsAttributes['letter-spacing']}. */
@@ -26280,11 +26280,11 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
 	}
 	/** Gets @type {WordsAttributes['overline']}. */
 	getOverline(): number | null {
-		return this.attributes['overline'];
+		return this.attributes.overline;
 	}
 	/** Sets @type {WordsAttributes['overline']}. */
 	setOverline(overline: number | null): Words {
-		this.attributes['overline'] = overline;
+		this.attributes.overline = overline;
 		return this;
 	}
 	/** Gets @type {WordsAttributes['relative-x']}. */
@@ -26307,29 +26307,29 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
 	}
 	/** Gets @type {WordsAttributes['rotation']}. */
 	getRotation(): number | null {
-		return this.attributes['rotation'];
+		return this.attributes.rotation;
 	}
 	/** Sets @type {WordsAttributes['rotation']}. */
 	setRotation(rotation: number | null): Words {
-		this.attributes['rotation'] = rotation;
+		this.attributes.rotation = rotation;
 		return this;
 	}
 	/** Gets @type {WordsAttributes['underline']}. */
 	getUnderline(): number | null {
-		return this.attributes['underline'];
+		return this.attributes.underline;
 	}
 	/** Sets @type {WordsAttributes['underline']}. */
 	setUnderline(underline: number | null): Words {
-		this.attributes['underline'] = underline;
+		this.attributes.underline = underline;
 		return this;
 	}
 	/** Gets @type {WordsAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {WordsAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Words {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {WordsAttributes['xml:lang']}. */
@@ -26425,11 +26425,11 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
 	}
 	/** Gets @type {SymbolAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {SymbolAttributes['color']}. */
 	setColor(color: string | null): Symbol {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {SymbolAttributes['default-x']}. */
@@ -26452,11 +26452,11 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
 	}
 	/** Gets @type {SymbolAttributes['dir']}. */
 	getDir(): 'ltr' | 'rtl' | 'lro' | 'rlo' | null {
-		return this.attributes['dir'];
+		return this.attributes.dir;
 	}
 	/** Sets @type {SymbolAttributes['dir']}. */
 	setDir(dir: 'ltr' | 'rtl' | 'lro' | 'rlo' | null): Symbol {
-		this.attributes['dir'] = dir;
+		this.attributes.dir = dir;
 		return this;
 	}
 	/** Gets @type {SymbolAttributes['enclosure']}. */
@@ -26477,7 +26477,7 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
 		| 'nonagon'
 		| 'decagon'
 		| null {
-		return this.attributes['enclosure'];
+		return this.attributes.enclosure;
 	}
 	/** Sets @type {SymbolAttributes['enclosure']}. */
 	setEnclosure(
@@ -26499,7 +26499,7 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
 			| 'decagon'
 			| null,
 	): Symbol {
-		this.attributes['enclosure'] = enclosure;
+		this.attributes.enclosure = enclosure;
 		return this;
 	}
 	/** Gets @type {SymbolAttributes['font-family']}. */
@@ -26542,29 +26542,29 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
 	}
 	/** Gets @type {SymbolAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {SymbolAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Symbol {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {SymbolAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {SymbolAttributes['id']}. */
 	setId(id: string | null): Symbol {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {SymbolAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {SymbolAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): Symbol {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {SymbolAttributes['letter-spacing']}. */
@@ -26596,11 +26596,11 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
 	}
 	/** Gets @type {SymbolAttributes['overline']}. */
 	getOverline(): number | null {
-		return this.attributes['overline'];
+		return this.attributes.overline;
 	}
 	/** Sets @type {SymbolAttributes['overline']}. */
 	setOverline(overline: number | null): Symbol {
-		this.attributes['overline'] = overline;
+		this.attributes.overline = overline;
 		return this;
 	}
 	/** Gets @type {SymbolAttributes['relative-x']}. */
@@ -26623,29 +26623,29 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
 	}
 	/** Gets @type {SymbolAttributes['rotation']}. */
 	getRotation(): number | null {
-		return this.attributes['rotation'];
+		return this.attributes.rotation;
 	}
 	/** Sets @type {SymbolAttributes['rotation']}. */
 	setRotation(rotation: number | null): Symbol {
-		this.attributes['rotation'] = rotation;
+		this.attributes.rotation = rotation;
 		return this;
 	}
 	/** Gets @type {SymbolAttributes['underline']}. */
 	getUnderline(): number | null {
-		return this.attributes['underline'];
+		return this.attributes.underline;
 	}
 	/** Sets @type {SymbolAttributes['underline']}. */
 	setUnderline(underline: number | null): Symbol {
-		this.attributes['underline'] = underline;
+		this.attributes.underline = underline;
 		return this;
 	}
 	/** Gets @type {SymbolAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {SymbolAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Symbol {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -26699,11 +26699,11 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
 	}
 	/** Gets @type {WedgeAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {WedgeAttributes['color']}. */
 	setColor(color: string | null): Wedge {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {WedgeAttributes['dash-length']}. */
@@ -26735,11 +26735,11 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
 	}
 	/** Gets @type {WedgeAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {WedgeAttributes['id']}. */
 	setId(id: string | null): Wedge {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {WedgeAttributes['line-type']}. */
@@ -26753,20 +26753,20 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
 	}
 	/** Gets @type {WedgeAttributes['niente']}. */
 	getNiente(): 'yes' | 'no' | null {
-		return this.attributes['niente'];
+		return this.attributes.niente;
 	}
 	/** Sets @type {WedgeAttributes['niente']}. */
 	setNiente(niente: 'yes' | 'no' | null): Wedge {
-		this.attributes['niente'] = niente;
+		this.attributes.niente = niente;
 		return this;
 	}
 	/** Gets @type {WedgeAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {WedgeAttributes['number']}. */
 	setNumber(number: number | null): Wedge {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {WedgeAttributes['relative-x']}. */
@@ -26798,20 +26798,20 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
 	}
 	/** Gets @type {WedgeAttributes['spread']}. */
 	getSpread(): number | null {
-		return this.attributes['spread'];
+		return this.attributes.spread;
 	}
 	/** Sets @type {WedgeAttributes['spread']}. */
 	setSpread(spread: number | null): Wedge {
-		this.attributes['spread'] = spread;
+		this.attributes.spread = spread;
 		return this;
 	}
 	/** Gets @type {WedgeAttributes['type']}. */
 	getType(): 'crescendo' | 'diminuendo' | 'stop' | 'continue' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {WedgeAttributes['type']}. */
 	setType(type: 'crescendo' | 'diminuendo' | 'stop' | 'continue'): Wedge {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -26853,11 +26853,11 @@ export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesCont
 	}
 	/** Gets @type {DashesAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DashesAttributes['color']}. */
 	setColor(color: string | null): Dashes {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DashesAttributes['dash-length']}. */
@@ -26889,20 +26889,20 @@ export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesCont
 	}
 	/** Gets @type {DashesAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {DashesAttributes['id']}. */
 	setId(id: string | null): Dashes {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {DashesAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {DashesAttributes['number']}. */
 	setNumber(number: number | null): Dashes {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {DashesAttributes['relative-x']}. */
@@ -26934,11 +26934,11 @@ export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesCont
 	}
 	/** Gets @type {DashesAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'continue' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {DashesAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'continue'): Dashes {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -26983,11 +26983,11 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
 	}
 	/** Gets @type {BracketAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {BracketAttributes['color']}. */
 	setColor(color: string | null): Bracket {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {BracketAttributes['dash-length']}. */
@@ -27028,11 +27028,11 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
 	}
 	/** Gets @type {BracketAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {BracketAttributes['id']}. */
 	setId(id: string | null): Bracket {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {BracketAttributes['line-end']}. */
@@ -27055,11 +27055,11 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
 	}
 	/** Gets @type {BracketAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {BracketAttributes['number']}. */
 	setNumber(number: number | null): Bracket {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {BracketAttributes['relative-x']}. */
@@ -27091,11 +27091,11 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
 	}
 	/** Gets @type {BracketAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'continue' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {BracketAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'continue'): Bracket {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -27144,20 +27144,20 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
 	}
 	/** Gets @type {PedalAttributes['abbreviated']}. */
 	getAbbreviated(): 'yes' | 'no' | null {
-		return this.attributes['abbreviated'];
+		return this.attributes.abbreviated;
 	}
 	/** Sets @type {PedalAttributes['abbreviated']}. */
 	setAbbreviated(abbreviated: 'yes' | 'no' | null): Pedal {
-		this.attributes['abbreviated'] = abbreviated;
+		this.attributes.abbreviated = abbreviated;
 		return this;
 	}
 	/** Gets @type {PedalAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {PedalAttributes['color']}. */
 	setColor(color: string | null): Pedal {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {PedalAttributes['default-x']}. */
@@ -27218,38 +27218,38 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
 	}
 	/** Gets @type {PedalAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {PedalAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Pedal {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {PedalAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {PedalAttributes['id']}. */
 	setId(id: string | null): Pedal {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {PedalAttributes['line']}. */
 	getLine(): 'yes' | 'no' | null {
-		return this.attributes['line'];
+		return this.attributes.line;
 	}
 	/** Sets @type {PedalAttributes['line']}. */
 	setLine(line: 'yes' | 'no' | null): Pedal {
-		this.attributes['line'] = line;
+		this.attributes.line = line;
 		return this;
 	}
 	/** Gets @type {PedalAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {PedalAttributes['number']}. */
 	setNumber(number: number | null): Pedal {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {PedalAttributes['relative-x']}. */
@@ -27272,29 +27272,29 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
 	}
 	/** Gets @type {PedalAttributes['sign']}. */
 	getSign(): 'yes' | 'no' | null {
-		return this.attributes['sign'];
+		return this.attributes.sign;
 	}
 	/** Sets @type {PedalAttributes['sign']}. */
 	setSign(sign: 'yes' | 'no' | null): Pedal {
-		this.attributes['sign'] = sign;
+		this.attributes.sign = sign;
 		return this;
 	}
 	/** Gets @type {PedalAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discontinue' | 'resume' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {PedalAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'sostenuto' | 'change' | 'continue' | 'discontinue' | 'resume'): Pedal {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {PedalAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {PedalAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Pedal {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 }
@@ -27690,11 +27690,11 @@ export class MetronomeBeam implements XMLElement<'metronome-beam', MetronomeBeam
 	}
 	/** Gets @type {MetronomeBeamAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {MetronomeBeamAttributes['number']}. */
 	setNumber(number: number | null): MetronomeBeam {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {'backward hook' | 'begin' | 'continue' | 'end' | 'forward hook'}. */
@@ -27734,11 +27734,11 @@ export class MetronomeTied implements XMLElement<'metronome-tied', MetronomeTied
 	}
 	/** Gets @type {MetronomeTiedAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {MetronomeTiedAttributes['type']}. */
 	setType(type: 'start' | 'stop'): MetronomeTied {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -27775,11 +27775,11 @@ export class MetronomeTuplet
 	}
 	/** Gets @type {MetronomeTupletAttributes['bracket']}. */
 	getBracket(): 'yes' | 'no' | null {
-		return this.attributes['bracket'];
+		return this.attributes.bracket;
 	}
 	/** Sets @type {MetronomeTupletAttributes['bracket']}. */
 	setBracket(bracket: 'yes' | 'no' | null): MetronomeTuplet {
-		this.attributes['bracket'] = bracket;
+		this.attributes.bracket = bracket;
 		return this;
 	}
 	/** Gets @type {MetronomeTupletAttributes['show-number']}. */
@@ -27793,11 +27793,11 @@ export class MetronomeTuplet
 	}
 	/** Gets @type {MetronomeTupletAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {MetronomeTupletAttributes['type']}. */
 	setType(type: 'start' | 'stop'): MetronomeTuplet {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {ActualNotes}. */
@@ -28000,11 +28000,11 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
 	}
 	/** Gets @type {MetronomeAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {MetronomeAttributes['color']}. */
 	setColor(color: string | null): Metronome {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {MetronomeAttributes['default-x']}. */
@@ -28065,38 +28065,38 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
 	}
 	/** Gets @type {MetronomeAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {MetronomeAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Metronome {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {MetronomeAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {MetronomeAttributes['id']}. */
 	setId(id: string | null): Metronome {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {MetronomeAttributes['justify']}. */
 	getJustify(): 'left' | 'center' | 'right' | null {
-		return this.attributes['justify'];
+		return this.attributes.justify;
 	}
 	/** Sets @type {MetronomeAttributes['justify']}. */
 	setJustify(justify: 'left' | 'center' | 'right' | null): Metronome {
-		this.attributes['justify'] = justify;
+		this.attributes.justify = justify;
 		return this;
 	}
 	/** Gets @type {MetronomeAttributes['parentheses']}. */
 	getParentheses(): 'yes' | 'no' | null {
-		return this.attributes['parentheses'];
+		return this.attributes.parentheses;
 	}
 	/** Sets @type {MetronomeAttributes['parentheses']}. */
 	setParentheses(parentheses: 'yes' | 'no' | null): Metronome {
-		this.attributes['parentheses'] = parentheses;
+		this.attributes.parentheses = parentheses;
 		return this;
 	}
 	/** Gets @type {MetronomeAttributes['print-object']}. */
@@ -28128,11 +28128,11 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
 	}
 	/** Gets @type {MetronomeAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {MetronomeAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Metronome {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {BeatSpec | MetronomeSpec}. */
@@ -28188,11 +28188,11 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
 	}
 	/** Gets @type {OctaveShiftAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {OctaveShiftAttributes['color']}. */
 	setColor(color: string | null): OctaveShift {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {OctaveShiftAttributes['dash-length']}. */
@@ -28262,20 +28262,20 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
 	}
 	/** Gets @type {OctaveShiftAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {OctaveShiftAttributes['id']}. */
 	setId(id: string | null): OctaveShift {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {OctaveShiftAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {OctaveShiftAttributes['number']}. */
 	setNumber(number: number | null): OctaveShift {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {OctaveShiftAttributes['relative-x']}. */
@@ -28298,11 +28298,11 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
 	}
 	/** Gets @type {OctaveShiftAttributes['size']}. */
 	getSize(): number | null {
-		return this.attributes['size'];
+		return this.attributes.size;
 	}
 	/** Sets @type {OctaveShiftAttributes['size']}. */
 	setSize(size: number | null): OctaveShift {
-		this.attributes['size'] = size;
+		this.attributes.size = size;
 		return this;
 	}
 	/** Gets @type {OctaveShiftAttributes['space-length']}. */
@@ -28316,11 +28316,11 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
 	}
 	/** Gets @type {OctaveShiftAttributes['type']}. */
 	getType(): 'up' | 'down' | 'stop' | 'continue' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {OctaveShiftAttributes['type']}. */
 	setType(type: 'up' | 'down' | 'stop' | 'continue'): OctaveShift {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -28481,11 +28481,11 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
 	}
 	/** Gets @type {HarpPedalsAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {HarpPedalsAttributes['color']}. */
 	setColor(color: string | null): HarpPedals {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {HarpPedalsAttributes['default-x']}. */
@@ -28546,20 +28546,20 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
 	}
 	/** Gets @type {HarpPedalsAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {HarpPedalsAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): HarpPedals {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {HarpPedalsAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {HarpPedalsAttributes['id']}. */
 	setId(id: string | null): HarpPedals {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {HarpPedalsAttributes['relative-x']}. */
@@ -28582,11 +28582,11 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
 	}
 	/** Gets @type {HarpPedalsAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {HarpPedalsAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): HarpPedals {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {Array<PedalTuning>}. */
@@ -28639,11 +28639,11 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
 	}
 	/** Gets @type {DampAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DampAttributes['color']}. */
 	setColor(color: string | null): Damp {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DampAttributes['default-x']}. */
@@ -28704,20 +28704,20 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
 	}
 	/** Gets @type {DampAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {DampAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Damp {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {DampAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {DampAttributes['id']}. */
 	setId(id: string | null): Damp {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {DampAttributes['relative-x']}. */
@@ -28740,11 +28740,11 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
 	}
 	/** Gets @type {DampAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {DampAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Damp {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 }
@@ -28788,11 +28788,11 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
 	}
 	/** Gets @type {DampAllAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DampAllAttributes['color']}. */
 	setColor(color: string | null): DampAll {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DampAllAttributes['default-x']}. */
@@ -28853,20 +28853,20 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
 	}
 	/** Gets @type {DampAllAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {DampAllAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): DampAll {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {DampAllAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {DampAllAttributes['id']}. */
 	setId(id: string | null): DampAll {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {DampAllAttributes['relative-x']}. */
@@ -28889,11 +28889,11 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
 	}
 	/** Gets @type {DampAllAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {DampAllAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): DampAll {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 }
@@ -28937,11 +28937,11 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
 	}
 	/** Gets @type {EyeglassesAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {EyeglassesAttributes['color']}. */
 	setColor(color: string | null): Eyeglasses {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {EyeglassesAttributes['default-x']}. */
@@ -29002,20 +29002,20 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
 	}
 	/** Gets @type {EyeglassesAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {EyeglassesAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Eyeglasses {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {EyeglassesAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {EyeglassesAttributes['id']}. */
 	setId(id: string | null): Eyeglasses {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {EyeglassesAttributes['relative-x']}. */
@@ -29038,11 +29038,11 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
 	}
 	/** Gets @type {EyeglassesAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {EyeglassesAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Eyeglasses {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 }
@@ -29087,11 +29087,11 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
 	}
 	/** Gets @type {StringMuteAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {StringMuteAttributes['color']}. */
 	setColor(color: string | null): StringMute {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {StringMuteAttributes['default-x']}. */
@@ -29152,20 +29152,20 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
 	}
 	/** Gets @type {StringMuteAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {StringMuteAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): StringMute {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {StringMuteAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {StringMuteAttributes['id']}. */
 	setId(id: string | null): StringMute {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {StringMuteAttributes['relative-x']}. */
@@ -29188,20 +29188,20 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
 	}
 	/** Gets @type {StringMuteAttributes['type']}. */
 	getType(): 'on' | 'off' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {StringMuteAttributes['type']}. */
 	setType(type: 'on' | 'off'): StringMute {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {StringMuteAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {StringMuteAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): StringMute {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 }
@@ -29340,11 +29340,11 @@ export class Accord implements XMLElement<'accord', AccordAttributes, AccordCont
 	}
 	/** Gets @type {AccordAttributes['string']}. */
 	getString(): number | null {
-		return this.attributes['string'];
+		return this.attributes.string;
 	}
 	/** Sets @type {AccordAttributes['string']}. */
 	setString(string: number | null): Accord {
-		this.attributes['string'] = string;
+		this.attributes.string = string;
 		return this;
 	}
 	/** Gets @type {TuningStep}. */
@@ -29402,11 +29402,11 @@ export class Scordatura implements XMLElement<'scordatura', ScordaturaAttributes
 	}
 	/** Gets @type {ScordaturaAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {ScordaturaAttributes['id']}. */
 	setId(id: string | null): Scordatura {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {Array<Accord>}. */
@@ -29476,29 +29476,29 @@ export class Image implements XMLElement<'image', ImageAttributes, ImageContents
 	}
 	/** Gets @type {ImageAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {ImageAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Image {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {ImageAttributes['height']}. */
 	getHeight(): number | null {
-		return this.attributes['height'];
+		return this.attributes.height;
 	}
 	/** Sets @type {ImageAttributes['height']}. */
 	setHeight(height: number | null): Image {
-		this.attributes['height'] = height;
+		this.attributes.height = height;
 		return this;
 	}
 	/** Gets @type {ImageAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {ImageAttributes['id']}. */
 	setId(id: string | null): Image {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {ImageAttributes['relative-x']}. */
@@ -29521,38 +29521,38 @@ export class Image implements XMLElement<'image', ImageAttributes, ImageContents
 	}
 	/** Gets @type {ImageAttributes['source']}. */
 	getSource(): string {
-		return this.attributes['source'];
+		return this.attributes.source;
 	}
 	/** Sets @type {ImageAttributes['source']}. */
 	setSource(source: string): Image {
-		this.attributes['source'] = source;
+		this.attributes.source = source;
 		return this;
 	}
 	/** Gets @type {ImageAttributes['type']}. */
 	getType(): string {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {ImageAttributes['type']}. */
 	setType(type: string): Image {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {ImageAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {ImageAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Image {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {ImageAttributes['width']}. */
 	getWidth(): number | null {
-		return this.attributes['width'];
+		return this.attributes.width;
 	}
 	/** Sets @type {ImageAttributes['width']}. */
 	setWidth(width: number | null): Image {
-		this.attributes['width'] = width;
+		this.attributes.width = width;
 		return this;
 	}
 }
@@ -29598,11 +29598,11 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
 	}
 	/** Gets @type {PrincipalVoiceAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {PrincipalVoiceAttributes['color']}. */
 	setColor(color: string | null): PrincipalVoice {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {PrincipalVoiceAttributes['default-x']}. */
@@ -29663,20 +29663,20 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
 	}
 	/** Gets @type {PrincipalVoiceAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {PrincipalVoiceAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): PrincipalVoice {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {PrincipalVoiceAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {PrincipalVoiceAttributes['id']}. */
 	setId(id: string | null): PrincipalVoice {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {PrincipalVoiceAttributes['relative-x']}. */
@@ -29699,29 +29699,29 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
 	}
 	/** Gets @type {PrincipalVoiceAttributes['symbol']}. */
 	getSymbol(): 'none' | 'Hauptstimme' | 'Nebenstimme' | 'plain' {
-		return this.attributes['symbol'];
+		return this.attributes.symbol;
 	}
 	/** Sets @type {PrincipalVoiceAttributes['symbol']}. */
 	setSymbol(symbol: 'none' | 'Hauptstimme' | 'Nebenstimme' | 'plain'): PrincipalVoice {
-		this.attributes['symbol'] = symbol;
+		this.attributes.symbol = symbol;
 		return this;
 	}
 	/** Gets @type {PrincipalVoiceAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {PrincipalVoiceAttributes['type']}. */
 	setType(type: 'start' | 'stop'): PrincipalVoice {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {PrincipalVoiceAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {PrincipalVoiceAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): PrincipalVoice {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -29761,11 +29761,11 @@ export class Glass implements XMLElement<'glass', GlassAttributes, GlassContents
 	}
 	/** Gets @type {GlassAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {GlassAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Glass {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {'glass harmonica' | 'glass harp' | 'wind chimes'}. */
@@ -29838,11 +29838,11 @@ export class Metal implements XMLElement<'metal', MetalAttributes, MetalContents
 	}
 	/** Gets @type {MetalAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {MetalAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Metal {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {'agogo' | 'almglocken' | 'bell' | 'bell plate' | 'bell tree' | 'brake drum' | 'cencerro' | 'chain rattle' | 'Chinese cymbal' | 'cowbell' | 'crash cymbals' | 'crotale' | 'cymbal tongs' | 'domed gong' | 'finger cymbals' | 'flexatone' | 'gong' | 'hi-hat' | 'high-hat cymbals' | 'handbell' | 'jaw harp' | 'jingle bells' | 'musical saw' | 'shell bells' | 'sistrum' | 'sizzle cymbal' | 'sleigh bells' | 'suspended cymbal' | 'tam tam' | 'tam tam with beater' | 'triangle' | 'Vietnamese hat'}. */
@@ -29970,11 +29970,11 @@ export class Wood implements XMLElement<'wood', WoodAttributes, WoodContents> {
 	}
 	/** Gets @type {WoodAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {WoodAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Wood {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {'bamboo scraper' | 'board clapper' | 'cabasa' | 'castanets' | 'castanets with handle' | 'claves' | 'footbal rattle' | 'guiro' | 'log drum' | 'maraca' | 'maracas' | 'quijada' | 'rainstick' | 'ratchet' | 'reco-reco' | 'sandpaper blocks' | 'slit drum' | 'temple block' | 'vibraslap' | 'whip' | 'wood block'}. */
@@ -30070,11 +30070,11 @@ export class Pitched implements XMLElement<'pitched', PitchedAttributes, Pitched
 	}
 	/** Gets @type {PitchedAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {PitchedAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Pitched {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {'celesta' | 'chimes' | 'glockenspiel' | 'lithophone' | 'mallet' | 'marimba' | 'steel drums' | 'tubaphone' | 'tubular chimes' | 'vibraphone' | 'xylophone'}. */
@@ -30156,11 +30156,11 @@ export class Membrane implements XMLElement<'membrane', MembraneAttributes, Memb
 	}
 	/** Gets @type {MembraneAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {MembraneAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Membrane {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {'bass drum' | 'bass drum on side' | 'bongos' | 'Chinese tomtom' | 'conga drum' | 'cuica' | 'goblet drum' | 'Indo-American tomtom' | 'Japanese tomtom' | 'military drum' | 'snare drum' | 'snare drum snares off' | 'tabla' | 'tambourine' | 'tenor drum' | 'timbales' | 'tomtom'}. */
@@ -30253,11 +30253,11 @@ export class Effect implements XMLElement<'effect', EffectAttributes, EffectCont
 	}
 	/** Gets @type {EffectAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {EffectAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Effect {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {'anvil' | 'auto horn' | 'bird whistle' | 'cannon' | 'duck call' | 'gun shot' | 'klaxon horn' | 'lions roar' | 'lotus flute' | 'megaphone' | 'police whistle' | 'siren' | 'slide whistle' | 'thunder sheet' | 'wind machine' | 'wind whistle'}. */
@@ -30331,11 +30331,11 @@ export class Timpani implements XMLElement<'timpani', TimpaniAttributes, Timpani
 	}
 	/** Gets @type {TimpaniAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {TimpaniAttributes['smufl']}. */
 	setSmufl(smufl: string | null): Timpani {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 }
@@ -30389,11 +30389,11 @@ export class Beater implements XMLElement<'beater', BeaterAttributes, BeaterCont
 	}
 	/** Gets @type {BeaterAttributes['tip']}. */
 	getTip(): 'down' | 'up' | 'left' | 'right' | 'northwest' | 'northeast' | 'southeast' | 'southwest' | null {
-		return this.attributes['tip'];
+		return this.attributes.tip;
 	}
 	/** Sets @type {BeaterAttributes['tip']}. */
 	setTip(tip: 'down' | 'up' | 'left' | 'right' | 'northwest' | 'northeast' | 'southeast' | 'southwest' | null): Beater {
-		this.attributes['tip'] = tip;
+		this.attributes.tip = tip;
 		return this;
 	}
 	/** Gets @type {'bow' | 'chime hammer' | 'coin' | 'drum stick' | 'finger' | 'fingernail' | 'fist' | 'guiro scraper' | 'hammer' | 'hand' | 'jazz stick' | 'knitting needle' | 'metal hammer' | 'slide brush on gong' | 'snare stick' | 'spoon mallet' | 'superball' | 'triangle beater' | 'triangle beater plain' | 'wire brush'}. */
@@ -30593,20 +30593,20 @@ export class Stick implements XMLElement<'stick', StickAttributes, StickContents
 	}
 	/** Gets @type {StickAttributes['parentheses']}. */
 	getParentheses(): 'yes' | 'no' | null {
-		return this.attributes['parentheses'];
+		return this.attributes.parentheses;
 	}
 	/** Sets @type {StickAttributes['parentheses']}. */
 	setParentheses(parentheses: 'yes' | 'no' | null): Stick {
-		this.attributes['parentheses'] = parentheses;
+		this.attributes.parentheses = parentheses;
 		return this;
 	}
 	/** Gets @type {StickAttributes['tip']}. */
 	getTip(): 'down' | 'up' | 'left' | 'right' | 'northwest' | 'northeast' | 'southeast' | 'southwest' | null {
-		return this.attributes['tip'];
+		return this.attributes.tip;
 	}
 	/** Sets @type {StickAttributes['tip']}. */
 	setTip(tip: 'down' | 'up' | 'left' | 'right' | 'northwest' | 'northeast' | 'southeast' | 'southwest' | null): Stick {
-		this.attributes['tip'] = tip;
+		this.attributes.tip = tip;
 		return this;
 	}
 	/** Gets @type {StickType}. */
@@ -30693,11 +30693,11 @@ export class OtherPercussion
 	}
 	/** Gets @type {OtherPercussionAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {OtherPercussionAttributes['smufl']}. */
 	setSmufl(smufl: string | null): OtherPercussion {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -30769,11 +30769,11 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
 	}
 	/** Gets @type {PercussionAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {PercussionAttributes['color']}. */
 	setColor(color: string | null): Percussion {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {PercussionAttributes['default-x']}. */
@@ -30812,7 +30812,7 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
 		| 'nonagon'
 		| 'decagon'
 		| null {
-		return this.attributes['enclosure'];
+		return this.attributes.enclosure;
 	}
 	/** Sets @type {PercussionAttributes['enclosure']}. */
 	setEnclosure(
@@ -30834,7 +30834,7 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
 			| 'decagon'
 			| null,
 	): Percussion {
-		this.attributes['enclosure'] = enclosure;
+		this.attributes.enclosure = enclosure;
 		return this;
 	}
 	/** Gets @type {PercussionAttributes['font-family']}. */
@@ -30877,20 +30877,20 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
 	}
 	/** Gets @type {PercussionAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {PercussionAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Percussion {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {PercussionAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {PercussionAttributes['id']}. */
 	setId(id: string | null): Percussion {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {PercussionAttributes['relative-x']}. */
@@ -30913,11 +30913,11 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
 	}
 	/** Gets @type {PercussionAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {PercussionAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Percussion {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {Glass | Metal | Wood | Pitched | Membrane | Effect | Timpani | Beater | Stick | StickLocation | OtherPercussion}. */
@@ -31089,11 +31089,11 @@ export class AccordionRegistration
 	}
 	/** Gets @type {AccordionRegistrationAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {AccordionRegistrationAttributes['color']}. */
 	setColor(color: string | null): AccordionRegistration {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {AccordionRegistrationAttributes['default-x']}. */
@@ -31154,20 +31154,20 @@ export class AccordionRegistration
 	}
 	/** Gets @type {AccordionRegistrationAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {AccordionRegistrationAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): AccordionRegistration {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {AccordionRegistrationAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {AccordionRegistrationAttributes['id']}. */
 	setId(id: string | null): AccordionRegistration {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {AccordionRegistrationAttributes['relative-x']}. */
@@ -31190,11 +31190,11 @@ export class AccordionRegistration
 	}
 	/** Gets @type {AccordionRegistrationAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {AccordionRegistrationAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): AccordionRegistration {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {AccordionHigh | null}. */
@@ -31266,11 +31266,11 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
 	}
 	/** Gets @type {StaffDivideAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {StaffDivideAttributes['color']}. */
 	setColor(color: string | null): StaffDivide {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {StaffDivideAttributes['default-x']}. */
@@ -31331,20 +31331,20 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
 	}
 	/** Gets @type {StaffDivideAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {StaffDivideAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): StaffDivide {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {StaffDivideAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {StaffDivideAttributes['id']}. */
 	setId(id: string | null): StaffDivide {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {StaffDivideAttributes['relative-x']}. */
@@ -31367,20 +31367,20 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
 	}
 	/** Gets @type {StaffDivideAttributes['type']}. */
 	getType(): 'down' | 'up' | 'up-down' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {StaffDivideAttributes['type']}. */
 	setType(type: 'down' | 'up' | 'up-down'): StaffDivide {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {StaffDivideAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {StaffDivideAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): StaffDivide {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 }
@@ -31426,11 +31426,11 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
 	}
 	/** Gets @type {OtherDirectionAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {OtherDirectionAttributes['color']}. */
 	setColor(color: string | null): OtherDirection {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {OtherDirectionAttributes['default-x']}. */
@@ -31491,20 +31491,20 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
 	}
 	/** Gets @type {OtherDirectionAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {OtherDirectionAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): OtherDirection {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {OtherDirectionAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {OtherDirectionAttributes['id']}. */
 	setId(id: string | null): OtherDirection {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {OtherDirectionAttributes['print-object']}. */
@@ -31536,20 +31536,20 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
 	}
 	/** Gets @type {OtherDirectionAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {OtherDirectionAttributes['smufl']}. */
 	setSmufl(smufl: string | null): OtherDirection {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {OtherDirectionAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {OtherDirectionAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): OtherDirection {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -31625,11 +31625,11 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
 	}
 	/** Gets @type {DirectionTypeAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {DirectionTypeAttributes['id']}. */
 	setId(id: string | null): DirectionType {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {Rehearsals | Segnos | Codas | Tokens | Wedge | DynamicsList | Dashes | Bracket | Pedal | Metronome | OctaveShift | HarpPedals | Damp | DampAll | Eyeglasses | StringMute | Scordatura | Image | PrincipalVoice | Percussions | AccordionRegistration | StaffDivide | OtherDirection}. */
@@ -31719,11 +31719,11 @@ export class Offset implements XMLElement<'offset', OffsetAttributes, OffsetCont
 	}
 	/** Gets @type {OffsetAttributes['sound']}. */
 	getSound(): 'yes' | 'no' | null {
-		return this.attributes['sound'];
+		return this.attributes.sound;
 	}
 	/** Sets @type {OffsetAttributes['sound']}. */
 	setSound(sound: 'yes' | 'no' | null): Offset {
-		this.attributes['sound'] = sound;
+		this.attributes.sound = sound;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -31765,11 +31765,11 @@ export class InstrumentChange
 	}
 	/** Gets @type {InstrumentChangeAttributes['id']}. */
 	getId(): string {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {InstrumentChangeAttributes['id']}. */
 	setId(id: string): InstrumentChange {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {InstrumentSound | null}. */
@@ -32103,29 +32103,29 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
 	}
 	/** Gets @type {SoundAttributes['coda']}. */
 	getCoda(): string | null {
-		return this.attributes['coda'];
+		return this.attributes.coda;
 	}
 	/** Sets @type {SoundAttributes['coda']}. */
 	setCoda(coda: string | null): Sound {
-		this.attributes['coda'] = coda;
+		this.attributes.coda = coda;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['dacapo']}. */
 	getDacapo(): 'yes' | 'no' | null {
-		return this.attributes['dacapo'];
+		return this.attributes.dacapo;
 	}
 	/** Sets @type {SoundAttributes['dacapo']}. */
 	setDacapo(dacapo: 'yes' | 'no' | null): Sound {
-		this.attributes['dacapo'] = dacapo;
+		this.attributes.dacapo = dacapo;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['dalsegno']}. */
 	getDalsegno(): string | null {
-		return this.attributes['dalsegno'];
+		return this.attributes.dalsegno;
 	}
 	/** Sets @type {SoundAttributes['dalsegno']}. */
 	setDalsegno(dalsegno: string | null): Sound {
-		this.attributes['dalsegno'] = dalsegno;
+		this.attributes.dalsegno = dalsegno;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['damper-pedal']}. */
@@ -32139,38 +32139,38 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
 	}
 	/** Gets @type {SoundAttributes['divisions']}. */
 	getDivisions(): number | null {
-		return this.attributes['divisions'];
+		return this.attributes.divisions;
 	}
 	/** Sets @type {SoundAttributes['divisions']}. */
 	setDivisions(divisions: number | null): Sound {
-		this.attributes['divisions'] = divisions;
+		this.attributes.divisions = divisions;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['dynamics']}. */
 	getDynamics(): number | null {
-		return this.attributes['dynamics'];
+		return this.attributes.dynamics;
 	}
 	/** Sets @type {SoundAttributes['dynamics']}. */
 	setDynamics(dynamics: number | null): Sound {
-		this.attributes['dynamics'] = dynamics;
+		this.attributes.dynamics = dynamics;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['elevation']}. */
 	getElevation(): number | null {
-		return this.attributes['elevation'];
+		return this.attributes.elevation;
 	}
 	/** Sets @type {SoundAttributes['elevation']}. */
 	setElevation(elevation: number | null): Sound {
-		this.attributes['elevation'] = elevation;
+		this.attributes.elevation = elevation;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['fine']}. */
 	getFine(): string | null {
-		return this.attributes['fine'];
+		return this.attributes.fine;
 	}
 	/** Sets @type {SoundAttributes['fine']}. */
 	setFine(fine: string | null): Sound {
-		this.attributes['fine'] = fine;
+		this.attributes.fine = fine;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['forward-repeat']}. */
@@ -32184,38 +32184,38 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
 	}
 	/** Gets @type {SoundAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {SoundAttributes['id']}. */
 	setId(id: string | null): Sound {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['pan']}. */
 	getPan(): number | null {
-		return this.attributes['pan'];
+		return this.attributes.pan;
 	}
 	/** Sets @type {SoundAttributes['pan']}. */
 	setPan(pan: number | null): Sound {
-		this.attributes['pan'] = pan;
+		this.attributes.pan = pan;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['pizzicato']}. */
 	getPizzicato(): 'yes' | 'no' | null {
-		return this.attributes['pizzicato'];
+		return this.attributes.pizzicato;
 	}
 	/** Sets @type {SoundAttributes['pizzicato']}. */
 	setPizzicato(pizzicato: 'yes' | 'no' | null): Sound {
-		this.attributes['pizzicato'] = pizzicato;
+		this.attributes.pizzicato = pizzicato;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['segno']}. */
 	getSegno(): string | null {
-		return this.attributes['segno'];
+		return this.attributes.segno;
 	}
 	/** Sets @type {SoundAttributes['segno']}. */
 	setSegno(segno: string | null): Sound {
-		this.attributes['segno'] = segno;
+		this.attributes.segno = segno;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['soft-pedal']}. */
@@ -32238,11 +32238,11 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
 	}
 	/** Gets @type {SoundAttributes['tempo']}. */
 	getTempo(): number | null {
-		return this.attributes['tempo'];
+		return this.attributes.tempo;
 	}
 	/** Sets @type {SoundAttributes['tempo']}. */
 	setTempo(tempo: number | null): Sound {
-		this.attributes['tempo'] = tempo;
+		this.attributes.tempo = tempo;
 		return this;
 	}
 	/** Gets @type {SoundAttributes['time-only']}. */
@@ -32256,11 +32256,11 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
 	}
 	/** Gets @type {SoundAttributes['tocoda']}. */
 	getTocoda(): string | null {
-		return this.attributes['tocoda'];
+		return this.attributes.tocoda;
 	}
 	/** Sets @type {SoundAttributes['tocoda']}. */
 	setTocoda(tocoda: string | null): Sound {
-		this.attributes['tocoda'] = tocoda;
+		this.attributes.tocoda = tocoda;
 		return this;
 	}
 	/** Gets @type {Array<[InstrumentChange | null, MidiDevice | null, MidiInstrument | null, Play | null]>}. */
@@ -32327,20 +32327,20 @@ export class Sync implements XMLElement<'sync', SyncAttributes, SyncContents> {
 	}
 	/** Gets @type {SyncAttributes['latency']}. */
 	getLatency(): number | null {
-		return this.attributes['latency'];
+		return this.attributes.latency;
 	}
 	/** Sets @type {SyncAttributes['latency']}. */
 	setLatency(latency: number | null): Sync {
-		this.attributes['latency'] = latency;
+		this.attributes.latency = latency;
 		return this;
 	}
 	/** Gets @type {SyncAttributes['player']}. */
 	getPlayer(): string | null {
-		return this.attributes['player'];
+		return this.attributes.player;
 	}
 	/** Sets @type {SyncAttributes['player']}. */
 	setPlayer(player: string | null): Sync {
-		this.attributes['player'] = player;
+		this.attributes.player = player;
 		return this;
 	}
 	/** Gets @type {SyncAttributes['time-only']}. */
@@ -32354,11 +32354,11 @@ export class Sync implements XMLElement<'sync', SyncAttributes, SyncContents> {
 	}
 	/** Gets @type {SyncAttributes['type']}. */
 	getType(): 'none' | 'tempo' | 'mostly-tempo' | 'mostly-event' | 'event' | 'always-event' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {SyncAttributes['type']}. */
 	setType(type: 'none' | 'tempo' | 'mostly-tempo' | 'mostly-event' | 'event' | 'always-event'): Sync {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -32389,11 +32389,11 @@ export class OtherListening implements XMLElement<'other-listening', OtherListen
 	}
 	/** Gets @type {OtherListeningAttributes['player']}. */
 	getPlayer(): string | null {
-		return this.attributes['player'];
+		return this.attributes.player;
 	}
 	/** Sets @type {OtherListeningAttributes['player']}. */
 	setPlayer(player: string | null): OtherListening {
-		this.attributes['player'] = player;
+		this.attributes.player = player;
 		return this;
 	}
 	/** Gets @type {OtherListeningAttributes['time-only']}. */
@@ -32407,11 +32407,11 @@ export class OtherListening implements XMLElement<'other-listening', OtherListen
 	}
 	/** Gets @type {OtherListeningAttributes['type']}. */
 	getType(): string {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {OtherListeningAttributes['type']}. */
 	setType(type: string): OtherListening {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -32514,38 +32514,38 @@ export class Direction implements XMLElement<'direction', DirectionAttributes, D
 	}
 	/** Gets @type {DirectionAttributes['directive']}. */
 	getDirective(): 'yes' | 'no' | null {
-		return this.attributes['directive'];
+		return this.attributes.directive;
 	}
 	/** Sets @type {DirectionAttributes['directive']}. */
 	setDirective(directive: 'yes' | 'no' | null): Direction {
-		this.attributes['directive'] = directive;
+		this.attributes.directive = directive;
 		return this;
 	}
 	/** Gets @type {DirectionAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {DirectionAttributes['id']}. */
 	setId(id: string | null): Direction {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {DirectionAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {DirectionAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Direction {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {DirectionAttributes['system']}. */
 	getSystem(): 'none' | 'only-top' | 'also-top' | null {
-		return this.attributes['system'];
+		return this.attributes.system;
 	}
 	/** Sets @type {DirectionAttributes['system']}. */
 	setSystem(system: 'none' | 'only-top' | 'also-top' | null): Direction {
-		this.attributes['system'] = system;
+		this.attributes.system = system;
 		return this;
 	}
 	/** Gets @type {Array<DirectionType>}. */
@@ -32684,11 +32684,11 @@ export class Cancel implements XMLElement<'cancel', CancelAttributes, CancelCont
 	}
 	/** Gets @type {CancelAttributes['location']}. */
 	getLocation(): 'left' | 'right' | 'beforeBarline' | null {
-		return this.attributes['location'];
+		return this.attributes.location;
 	}
 	/** Sets @type {CancelAttributes['location']}. */
 	setLocation(location: 'left' | 'right' | 'beforeBarline' | null): Cancel {
-		this.attributes['location'] = location;
+		this.attributes.location = location;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -32950,11 +32950,11 @@ export class KeyAccidental implements XMLElement<'key-accidental', KeyAccidental
 	}
 	/** Gets @type {KeyAccidentalAttributes['smufl']}. */
 	getSmufl(): string | null {
-		return this.attributes['smufl'];
+		return this.attributes.smufl;
 	}
 	/** Sets @type {KeyAccidentalAttributes['smufl']}. */
 	setSmufl(smufl: string | null): KeyAccidental {
-		this.attributes['smufl'] = smufl;
+		this.attributes.smufl = smufl;
 		return this;
 	}
 	/** Gets @type {'other' | 'sharp' | 'natural' | 'flat' | 'double-sharp' | 'sharp-sharp' | 'flat-flat' | 'natural-sharp' | 'natural-flat' | 'quarter-flat' | 'quarter-sharp' | 'three-quarters-flat' | 'three-quarters-sharp' | 'sharp-down' | 'sharp-up' | 'natural-down' | 'natural-up' | 'flat-down' | 'flat-up' | 'double-sharp-down' | 'double-sharp-up' | 'flat-flat-down' | 'flat-flat-up' | 'arrow-down' | 'arrow-up' | 'triple-sharp' | 'triple-flat' | 'slash-quarter-sharp' | 'slash-sharp' | 'slash-flat' | 'double-slash-flat' | 'sharp-1' | 'sharp-2' | 'sharp-3' | 'sharp-5' | 'flat-1' | 'flat-2' | 'flat-3' | 'flat-4' | 'sori' | 'koron'}. */
@@ -33078,20 +33078,20 @@ export class KeyOctave implements XMLElement<'key-octave', KeyOctaveAttributes, 
 	}
 	/** Gets @type {KeyOctaveAttributes['cancel']}. */
 	getCancel(): 'yes' | 'no' | null {
-		return this.attributes['cancel'];
+		return this.attributes.cancel;
 	}
 	/** Sets @type {KeyOctaveAttributes['cancel']}. */
 	setCancel(cancel: 'yes' | 'no' | null): KeyOctave {
-		this.attributes['cancel'] = cancel;
+		this.attributes.cancel = cancel;
 		return this;
 	}
 	/** Gets @type {KeyOctaveAttributes['number']}. */
 	getNumber(): number {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {KeyOctaveAttributes['number']}. */
 	setNumber(number: number): KeyOctave {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -33148,11 +33148,11 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
 	}
 	/** Gets @type {KeyAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {KeyAttributes['color']}. */
 	setColor(color: string | null): Key {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {KeyAttributes['default-x']}. */
@@ -33213,20 +33213,20 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
 	}
 	/** Gets @type {KeyAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {KeyAttributes['id']}. */
 	setId(id: string | null): Key {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {KeyAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {KeyAttributes['number']}. */
 	setNumber(number: number | null): Key {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {KeyAttributes['print-object']}. */
@@ -33415,20 +33415,20 @@ export class Interchangeable
 	}
 	/** Gets @type {InterchangeableAttributes['separator']}. */
 	getSeparator(): 'none' | 'horizontal' | 'diagonal' | 'vertical' | 'adjacent' | null {
-		return this.attributes['separator'];
+		return this.attributes.separator;
 	}
 	/** Sets @type {InterchangeableAttributes['separator']}. */
 	setSeparator(separator: 'none' | 'horizontal' | 'diagonal' | 'vertical' | 'adjacent' | null): Interchangeable {
-		this.attributes['separator'] = separator;
+		this.attributes.separator = separator;
 		return this;
 	}
 	/** Gets @type {InterchangeableAttributes['symbol']}. */
 	getSymbol(): 'normal' | 'common' | 'cut' | 'single-number' | 'note' | 'dotted-note' | null {
-		return this.attributes['symbol'];
+		return this.attributes.symbol;
 	}
 	/** Sets @type {InterchangeableAttributes['symbol']}. */
 	setSymbol(symbol: 'normal' | 'common' | 'cut' | 'single-number' | 'note' | 'dotted-note' | null): Interchangeable {
-		this.attributes['symbol'] = symbol;
+		this.attributes.symbol = symbol;
 		return this;
 	}
 	/** Gets @type {TimeRelation | null}. */
@@ -33532,11 +33532,11 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
 	}
 	/** Gets @type {TimeAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {TimeAttributes['color']}. */
 	setColor(color: string | null): Time {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {TimeAttributes['default-x']}. */
@@ -33597,29 +33597,29 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
 	}
 	/** Gets @type {TimeAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {TimeAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Time {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {TimeAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {TimeAttributes['id']}. */
 	setId(id: string | null): Time {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {TimeAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {TimeAttributes['number']}. */
 	setNumber(number: number | null): Time {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {TimeAttributes['print-object']}. */
@@ -33651,29 +33651,29 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
 	}
 	/** Gets @type {TimeAttributes['separator']}. */
 	getSeparator(): 'none' | 'horizontal' | 'diagonal' | 'vertical' | 'adjacent' | null {
-		return this.attributes['separator'];
+		return this.attributes.separator;
 	}
 	/** Sets @type {TimeAttributes['separator']}. */
 	setSeparator(separator: 'none' | 'horizontal' | 'diagonal' | 'vertical' | 'adjacent' | null): Time {
-		this.attributes['separator'] = separator;
+		this.attributes.separator = separator;
 		return this;
 	}
 	/** Gets @type {TimeAttributes['symbol']}. */
 	getSymbol(): 'normal' | 'common' | 'cut' | 'single-number' | 'note' | 'dotted-note' | null {
-		return this.attributes['symbol'];
+		return this.attributes.symbol;
 	}
 	/** Sets @type {TimeAttributes['symbol']}. */
 	setSymbol(symbol: 'normal' | 'common' | 'cut' | 'single-number' | 'note' | 'dotted-note' | null): Time {
-		this.attributes['symbol'] = symbol;
+		this.attributes.symbol = symbol;
 		return this;
 	}
 	/** Gets @type {TimeAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {TimeAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Time {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {TimeSignature | SenzaMisura}. */
@@ -33770,11 +33770,11 @@ export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttribute
 	}
 	/** Gets @type {PartSymbolAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {PartSymbolAttributes['color']}. */
 	setColor(color: string | null): PartSymbol {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {PartSymbolAttributes['default-x']}. */
@@ -34059,11 +34059,11 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
 	}
 	/** Gets @type {ClefAttributes['additional']}. */
 	getAdditional(): 'yes' | 'no' | null {
-		return this.attributes['additional'];
+		return this.attributes.additional;
 	}
 	/** Sets @type {ClefAttributes['additional']}. */
 	setAdditional(additional: 'yes' | 'no' | null): Clef {
-		this.attributes['additional'] = additional;
+		this.attributes.additional = additional;
 		return this;
 	}
 	/** Gets @type {ClefAttributes['after-barline']}. */
@@ -34077,11 +34077,11 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
 	}
 	/** Gets @type {ClefAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {ClefAttributes['color']}. */
 	setColor(color: string | null): Clef {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {ClefAttributes['default-x']}. */
@@ -34142,20 +34142,20 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
 	}
 	/** Gets @type {ClefAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {ClefAttributes['id']}. */
 	setId(id: string | null): Clef {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {ClefAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {ClefAttributes['number']}. */
 	setNumber(number: number | null): Clef {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {ClefAttributes['print-object']}. */
@@ -34187,11 +34187,11 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
 	}
 	/** Gets @type {ClefAttributes['size']}. */
 	getSize(): 'cue' | 'full' | 'grace-cue' | 'large' | null {
-		return this.attributes['size'];
+		return this.attributes.size;
 	}
 	/** Sets @type {ClefAttributes['size']}. */
 	setSize(size: 'cue' | 'full' | 'grace-cue' | 'large' | null): Clef {
-		this.attributes['size'] = size;
+		this.attributes.size = size;
 		return this;
 	}
 	/** Gets @type {Sign}. */
@@ -34327,20 +34327,20 @@ export class LineDetail implements XMLElement<'line-detail', LineDetailAttribute
 	}
 	/** Gets @type {LineDetailAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {LineDetailAttributes['color']}. */
 	setColor(color: string | null): LineDetail {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {LineDetailAttributes['line']}. */
 	getLine(): number {
-		return this.attributes['line'];
+		return this.attributes.line;
 	}
 	/** Sets @type {LineDetailAttributes['line']}. */
 	setLine(line: number): LineDetail {
-		this.attributes['line'] = line;
+		this.attributes.line = line;
 		return this;
 	}
 	/** Gets @type {LineDetailAttributes['line-type']}. */
@@ -34363,11 +34363,11 @@ export class LineDetail implements XMLElement<'line-detail', LineDetailAttribute
 	}
 	/** Gets @type {LineDetailAttributes['width']}. */
 	getWidth(): number | null {
-		return this.attributes['width'];
+		return this.attributes.width;
 	}
 	/** Sets @type {LineDetailAttributes['width']}. */
 	setWidth(width: number | null): LineDetail {
-		this.attributes['width'] = width;
+		this.attributes.width = width;
 		return this;
 	}
 }
@@ -34398,11 +34398,11 @@ export class StaffTuning implements XMLElement<'staff-tuning', StaffTuningAttrib
 	}
 	/** Gets @type {StaffTuningAttributes['line']}. */
 	getLine(): number {
-		return this.attributes['line'];
+		return this.attributes.line;
 	}
 	/** Sets @type {StaffTuningAttributes['line']}. */
 	setLine(line: number): StaffTuning {
-		this.attributes['line'] = line;
+		this.attributes.line = line;
 		return this;
 	}
 	/** Gets @type {TuningStep}. */
@@ -34498,11 +34498,11 @@ export class StaffSize implements XMLElement<'staff-size', StaffSizeAttributes, 
 	}
 	/** Gets @type {StaffSizeAttributes['scaling']}. */
 	getScaling(): number | null {
-		return this.attributes['scaling'];
+		return this.attributes.scaling;
 	}
 	/** Sets @type {StaffSizeAttributes['scaling']}. */
 	setScaling(scaling: number | null): StaffSize {
-		this.attributes['scaling'] = scaling;
+		this.attributes.scaling = scaling;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -34553,11 +34553,11 @@ export class StaffDetails implements XMLElement<'staff-details', StaffDetailsAtt
 	}
 	/** Gets @type {StaffDetailsAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {StaffDetailsAttributes['number']}. */
 	setNumber(number: number | null): StaffDetails {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {StaffDetailsAttributes['print-object']}. */
@@ -34768,11 +34768,11 @@ export class Double implements XMLElement<'double', DoubleAttributes, DoubleCont
 	}
 	/** Gets @type {DoubleAttributes['above']}. */
 	getAbove(): 'yes' | 'no' | null {
-		return this.attributes['above'];
+		return this.attributes.above;
 	}
 	/** Sets @type {DoubleAttributes['above']}. */
 	setAbove(above: 'yes' | 'no' | null): Double {
-		this.attributes['above'] = above;
+		this.attributes.above = above;
 		return this;
 	}
 }
@@ -34803,20 +34803,20 @@ export class Transpose implements XMLElement<'transpose', TransposeAttributes, T
 	}
 	/** Gets @type {TransposeAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {TransposeAttributes['id']}. */
 	setId(id: string | null): Transpose {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {TransposeAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {TransposeAttributes['number']}. */
 	setNumber(number: number | null): Transpose {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {Diatonic | null}. */
@@ -35000,20 +35000,20 @@ export class ForPart implements XMLElement<'for-part', ForPartAttributes, ForPar
 	}
 	/** Gets @type {ForPartAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {ForPartAttributes['id']}. */
 	setId(id: string | null): ForPart {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {ForPartAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {ForPartAttributes['number']}. */
 	setNumber(number: number | null): ForPart {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {PartClef | null}. */
@@ -35073,11 +35073,11 @@ export class Directive implements XMLElement<'directive', DirectiveAttributes, D
 	}
 	/** Gets @type {DirectiveAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DirectiveAttributes['color']}. */
 	setColor(color: string | null): Directive {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DirectiveAttributes['default-x']}. */
@@ -35248,20 +35248,20 @@ export class MeasureRepeat implements XMLElement<'measure-repeat', MeasureRepeat
 	}
 	/** Gets @type {MeasureRepeatAttributes['slashes']}. */
 	getSlashes(): number | null {
-		return this.attributes['slashes'];
+		return this.attributes.slashes;
 	}
 	/** Sets @type {MeasureRepeatAttributes['slashes']}. */
 	setSlashes(slashes: number | null): MeasureRepeat {
-		this.attributes['slashes'] = slashes;
+		this.attributes.slashes = slashes;
 		return this;
 	}
 	/** Gets @type {MeasureRepeatAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {MeasureRepeatAttributes['type']}. */
 	setType(type: 'start' | 'stop'): MeasureRepeat {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {'' | number}. */
@@ -35448,20 +35448,20 @@ export class BeatRepeat implements XMLElement<'beat-repeat', BeatRepeatAttribute
 	}
 	/** Gets @type {BeatRepeatAttributes['slashes']}. */
 	getSlashes(): number | null {
-		return this.attributes['slashes'];
+		return this.attributes.slashes;
 	}
 	/** Sets @type {BeatRepeatAttributes['slashes']}. */
 	setSlashes(slashes: number | null): BeatRepeat {
-		this.attributes['slashes'] = slashes;
+		this.attributes.slashes = slashes;
 		return this;
 	}
 	/** Gets @type {BeatRepeatAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {BeatRepeatAttributes['type']}. */
 	setType(type: 'start' | 'stop'): BeatRepeat {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {BeatRepeatAttributes['use-dots']}. */
@@ -35514,11 +35514,11 @@ export class Slash implements XMLElement<'slash', SlashAttributes, SlashContents
 	}
 	/** Gets @type {SlashAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {SlashAttributes['type']}. */
 	setType(type: 'start' | 'stop'): Slash {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {SlashAttributes['use-dots']}. */
@@ -35584,11 +35584,11 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
 	}
 	/** Gets @type {MeasureStyleAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {MeasureStyleAttributes['color']}. */
 	setColor(color: string | null): MeasureStyle {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {MeasureStyleAttributes['font-family']}. */
@@ -35631,20 +35631,20 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
 	}
 	/** Gets @type {MeasureStyleAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {MeasureStyleAttributes['id']}. */
 	setId(id: string | null): MeasureStyle {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {MeasureStyleAttributes['number']}. */
 	getNumber(): number | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {MeasureStyleAttributes['number']}. */
 	setNumber(number: number | null): MeasureStyle {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {MultipleRest | MeasureRepeat | BeatRepeat | Slash}. */
@@ -35857,11 +35857,11 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
 	}
 	/** Gets @type {RootStepAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {RootStepAttributes['color']}. */
 	setColor(color: string | null): RootStep {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {RootStepAttributes['default-x']}. */
@@ -35940,11 +35940,11 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
 	}
 	/** Gets @type {RootStepAttributes['text']}. */
 	getText(): string | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {RootStepAttributes['text']}. */
 	setText(text: string | null): RootStep {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'}. */
@@ -35996,11 +35996,11 @@ export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, 
 	}
 	/** Gets @type {RootAlterAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {RootAlterAttributes['color']}. */
 	setColor(color: string | null): RootAlter {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {RootAlterAttributes['default-x']}. */
@@ -36061,11 +36061,11 @@ export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, 
 	}
 	/** Gets @type {RootAlterAttributes['location']}. */
 	getLocation(): 'left' | 'right' | null {
-		return this.attributes['location'];
+		return this.attributes.location;
 	}
 	/** Sets @type {RootAlterAttributes['location']}. */
 	setLocation(location: 'left' | 'right' | null): RootAlter {
-		this.attributes['location'] = location;
+		this.attributes.location = location;
 		return this;
 	}
 	/** Gets @type {RootAlterAttributes['print-object']}. */
@@ -36188,11 +36188,11 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
 	}
 	/** Gets @type {NumeralRootAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {NumeralRootAttributes['color']}. */
 	setColor(color: string | null): NumeralRoot {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {NumeralRootAttributes['default-x']}. */
@@ -36271,11 +36271,11 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
 	}
 	/** Gets @type {NumeralRootAttributes['text']}. */
 	getText(): string | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {NumeralRootAttributes['text']}. */
 	setText(text: string | null): NumeralRoot {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -36328,11 +36328,11 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
 	}
 	/** Gets @type {NumeralAlterAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {NumeralAlterAttributes['color']}. */
 	setColor(color: string | null): NumeralAlter {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {NumeralAlterAttributes['default-x']}. */
@@ -36393,11 +36393,11 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
 	}
 	/** Gets @type {NumeralAlterAttributes['location']}. */
 	getLocation(): 'left' | 'right' | null {
-		return this.attributes['location'];
+		return this.attributes.location;
 	}
 	/** Sets @type {NumeralAlterAttributes['location']}. */
 	setLocation(location: 'left' | 'right' | null): NumeralAlter {
-		this.attributes['location'] = location;
+		this.attributes.location = location;
 		return this;
 	}
 	/** Gets @type {NumeralAlterAttributes['print-object']}. */
@@ -36429,11 +36429,11 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
 	}
 	/** Gets @type {NumeralAlterAttributes['text']}. */
 	getText(): string | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {NumeralAlterAttributes['text']}. */
 	setText(text: string | null): NumeralAlter {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -36662,11 +36662,11 @@ export class Function implements XMLElement<'function', FunctionAttributes, Func
 	}
 	/** Gets @type {FunctionAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FunctionAttributes['color']}. */
 	setColor(color: string | null): Function {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FunctionAttributes['default-x']}. */
@@ -36856,11 +36856,11 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
 	}
 	/** Gets @type {KindAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {KindAttributes['color']}. */
 	setColor(color: string | null): Kind {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {KindAttributes['default-x']}. */
@@ -36921,11 +36921,11 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
 	}
 	/** Gets @type {KindAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {KindAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Kind {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {KindAttributes['parentheses-degrees']}. */
@@ -36966,11 +36966,11 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
 	}
 	/** Gets @type {KindAttributes['text']}. */
 	getText(): string | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {KindAttributes['text']}. */
 	setText(text: string | null): Kind {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {KindAttributes['use-symbols']}. */
@@ -36984,11 +36984,11 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
 	}
 	/** Gets @type {KindAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {KindAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): Kind {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {'none' | 'major' | 'minor' | 'augmented' | 'diminished' | 'dominant' | 'major-seventh' | 'minor-seventh' | 'diminished-seventh' | 'augmented-seventh' | 'half-diminished' | 'major-minor' | 'major-sixth' | 'minor-sixth' | 'dominant-ninth' | 'major-ninth' | 'minor-ninth' | 'dominant-11th' | 'major-11th' | 'minor-11th' | 'dominant-13th' | 'major-13th' | 'minor-13th' | 'suspended-second' | 'suspended-fourth' | 'Neapolitan' | 'Italian' | 'French' | 'German' | 'pedal' | 'power' | 'Tristan' | 'other'}. */
@@ -37107,11 +37107,11 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
 	}
 	/** Gets @type {InversionAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {InversionAttributes['color']}. */
 	setColor(color: string | null): Inversion {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {InversionAttributes['default-x']}. */
@@ -37190,11 +37190,11 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
 	}
 	/** Gets @type {InversionAttributes['text']}. */
 	getText(): string | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {InversionAttributes['text']}. */
 	setText(text: string | null): Inversion {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -37244,11 +37244,11 @@ export class BassSeparator implements XMLElement<'bass-separator', BassSeparator
 	}
 	/** Gets @type {BassSeparatorAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {BassSeparatorAttributes['color']}. */
 	setColor(color: string | null): BassSeparator {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {BassSeparatorAttributes['default-x']}. */
@@ -37373,11 +37373,11 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
 	}
 	/** Gets @type {BassStepAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {BassStepAttributes['color']}. */
 	setColor(color: string | null): BassStep {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {BassStepAttributes['default-x']}. */
@@ -37456,11 +37456,11 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
 	}
 	/** Gets @type {BassStepAttributes['text']}. */
 	getText(): string | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {BassStepAttributes['text']}. */
 	setText(text: string | null): BassStep {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'}. */
@@ -37512,11 +37512,11 @@ export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, 
 	}
 	/** Gets @type {BassAlterAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {BassAlterAttributes['color']}. */
 	setColor(color: string | null): BassAlter {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {BassAlterAttributes['default-x']}. */
@@ -37577,11 +37577,11 @@ export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, 
 	}
 	/** Gets @type {BassAlterAttributes['location']}. */
 	getLocation(): 'left' | 'right' | null {
-		return this.attributes['location'];
+		return this.attributes.location;
 	}
 	/** Sets @type {BassAlterAttributes['location']}. */
 	setLocation(location: 'left' | 'right' | null): BassAlter {
-		this.attributes['location'] = location;
+		this.attributes.location = location;
 		return this;
 	}
 	/** Gets @type {BassAlterAttributes['print-object']}. */
@@ -37648,11 +37648,11 @@ export class Bass implements XMLElement<'bass', BassAttributes, BassContents> {
 	}
 	/** Gets @type {BassAttributes['arrangement']}. */
 	getArrangement(): 'horizontal' | 'vertical' | 'diagonal' | null {
-		return this.attributes['arrangement'];
+		return this.attributes.arrangement;
 	}
 	/** Sets @type {BassAttributes['arrangement']}. */
 	setArrangement(arrangement: 'horizontal' | 'vertical' | 'diagonal' | null): Bass {
-		this.attributes['arrangement'] = arrangement;
+		this.attributes.arrangement = arrangement;
 		return this;
 	}
 	/** Gets @type {BassSeparator | null}. */
@@ -37722,11 +37722,11 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
 	}
 	/** Gets @type {DegreeValueAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DegreeValueAttributes['color']}. */
 	setColor(color: string | null): DegreeValue {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DegreeValueAttributes['default-x']}. */
@@ -37805,20 +37805,20 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
 	}
 	/** Gets @type {DegreeValueAttributes['symbol']}. */
 	getSymbol(): 'major' | 'minor' | 'augmented' | 'diminished' | 'half-diminished' | null {
-		return this.attributes['symbol'];
+		return this.attributes.symbol;
 	}
 	/** Sets @type {DegreeValueAttributes['symbol']}. */
 	setSymbol(symbol: 'major' | 'minor' | 'augmented' | 'diminished' | 'half-diminished' | null): DegreeValue {
-		this.attributes['symbol'] = symbol;
+		this.attributes.symbol = symbol;
 		return this;
 	}
 	/** Gets @type {DegreeValueAttributes['text']}. */
 	getText(): string | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {DegreeValueAttributes['text']}. */
 	setText(text: string | null): DegreeValue {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -37869,11 +37869,11 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
 	}
 	/** Gets @type {DegreeAlterAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DegreeAlterAttributes['color']}. */
 	setColor(color: string | null): DegreeAlter {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DegreeAlterAttributes['default-x']}. */
@@ -38007,11 +38007,11 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
 	}
 	/** Gets @type {DegreeTypeAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {DegreeTypeAttributes['color']}. */
 	setColor(color: string | null): DegreeType {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {DegreeTypeAttributes['default-x']}. */
@@ -38090,11 +38090,11 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
 	}
 	/** Gets @type {DegreeTypeAttributes['text']}. */
 	getText(): string | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {DegreeTypeAttributes['text']}. */
 	setText(text: string | null): DegreeType {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {'add' | 'alter' | 'subtract'}. */
@@ -38270,20 +38270,20 @@ export class FirstFret implements XMLElement<'first-fret', FirstFretAttributes, 
 	}
 	/** Gets @type {FirstFretAttributes['location']}. */
 	getLocation(): 'left' | 'right' | null {
-		return this.attributes['location'];
+		return this.attributes.location;
 	}
 	/** Sets @type {FirstFretAttributes['location']}. */
 	setLocation(location: 'left' | 'right' | null): FirstFret {
-		this.attributes['location'] = location;
+		this.attributes.location = location;
 		return this;
 	}
 	/** Gets @type {FirstFretAttributes['text']}. */
 	getText(): string | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {FirstFretAttributes['text']}. */
 	setText(text: string | null): FirstFret {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {number}. */
@@ -38323,20 +38323,20 @@ export class Barre implements XMLElement<'barre', BarreAttributes, BarreContents
 	}
 	/** Gets @type {BarreAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {BarreAttributes['color']}. */
 	setColor(color: string | null): Barre {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {BarreAttributes['type']}. */
 	getType(): 'start' | 'stop' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {BarreAttributes['type']}. */
 	setType(type: 'start' | 'stop'): Barre {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 }
@@ -38446,11 +38446,11 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
 	}
 	/** Gets @type {FrameAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FrameAttributes['color']}. */
 	setColor(color: string | null): Frame {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FrameAttributes['default-x']}. */
@@ -38511,29 +38511,29 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
 	}
 	/** Gets @type {FrameAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {FrameAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): Frame {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {FrameAttributes['height']}. */
 	getHeight(): number | null {
-		return this.attributes['height'];
+		return this.attributes.height;
 	}
 	/** Sets @type {FrameAttributes['height']}. */
 	setHeight(height: number | null): Frame {
-		this.attributes['height'] = height;
+		this.attributes.height = height;
 		return this;
 	}
 	/** Gets @type {FrameAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {FrameAttributes['id']}. */
 	setId(id: string | null): Frame {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {FrameAttributes['relative-x']}. */
@@ -38556,29 +38556,29 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
 	}
 	/** Gets @type {FrameAttributes['unplayed']}. */
 	getUnplayed(): string | null {
-		return this.attributes['unplayed'];
+		return this.attributes.unplayed;
 	}
 	/** Sets @type {FrameAttributes['unplayed']}. */
 	setUnplayed(unplayed: string | null): Frame {
-		this.attributes['unplayed'] = unplayed;
+		this.attributes.unplayed = unplayed;
 		return this;
 	}
 	/** Gets @type {FrameAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {FrameAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | null): Frame {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {FrameAttributes['width']}. */
 	getWidth(): number | null {
-		return this.attributes['width'];
+		return this.attributes.width;
 	}
 	/** Sets @type {FrameAttributes['width']}. */
 	setWidth(width: number | null): Frame {
-		this.attributes['width'] = width;
+		this.attributes.width = width;
 		return this;
 	}
 	/** Gets @type {FrameStrings}. */
@@ -38673,20 +38673,20 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
 	}
 	/** Gets @type {HarmonyAttributes['arrangement']}. */
 	getArrangement(): 'horizontal' | 'vertical' | 'diagonal' | null {
-		return this.attributes['arrangement'];
+		return this.attributes.arrangement;
 	}
 	/** Sets @type {HarmonyAttributes['arrangement']}. */
 	setArrangement(arrangement: 'horizontal' | 'vertical' | 'diagonal' | null): Harmony {
-		this.attributes['arrangement'] = arrangement;
+		this.attributes.arrangement = arrangement;
 		return this;
 	}
 	/** Gets @type {HarmonyAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {HarmonyAttributes['color']}. */
 	setColor(color: string | null): Harmony {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {HarmonyAttributes['default-x']}. */
@@ -38747,20 +38747,20 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
 	}
 	/** Gets @type {HarmonyAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {HarmonyAttributes['id']}. */
 	setId(id: string | null): Harmony {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {HarmonyAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {HarmonyAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): Harmony {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {HarmonyAttributes['print-frame']}. */
@@ -38801,20 +38801,20 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
 	}
 	/** Gets @type {HarmonyAttributes['system']}. */
 	getSystem(): 'none' | 'only-top' | 'also-top' | null {
-		return this.attributes['system'];
+		return this.attributes.system;
 	}
 	/** Sets @type {HarmonyAttributes['system']}. */
 	setSystem(system: 'none' | 'only-top' | 'also-top' | null): Harmony {
-		this.attributes['system'] = system;
+		this.attributes.system = system;
 		return this;
 	}
 	/** Gets @type {HarmonyAttributes['type']}. */
 	getType(): 'alternate' | 'explicit' | 'implied' | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {HarmonyAttributes['type']}. */
 	setType(type: 'alternate' | 'explicit' | 'implied' | null): Harmony {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {Array<[Root | Numeral | Function, Kind, Inversion | null, Bass | null, Array<Degree>]>}. */
@@ -38909,11 +38909,11 @@ export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixCont
 	}
 	/** Gets @type {PrefixAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {PrefixAttributes['color']}. */
 	setColor(color: string | null): Prefix {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {PrefixAttributes['default-x']}. */
@@ -39037,11 +39037,11 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
 	}
 	/** Gets @type {FigureNumberAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FigureNumberAttributes['color']}. */
 	setColor(color: string | null): FigureNumber {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FigureNumberAttributes['default-x']}. */
@@ -39165,11 +39165,11 @@ export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixCont
 	}
 	/** Gets @type {SuffixAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {SuffixAttributes['color']}. */
 	setColor(color: string | null): Suffix {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {SuffixAttributes['default-x']}. */
@@ -39392,11 +39392,11 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
 	}
 	/** Gets @type {FiguredBassAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {FiguredBassAttributes['color']}. */
 	setColor(color: string | null): FiguredBass {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {FiguredBassAttributes['default-x']}. */
@@ -39457,38 +39457,38 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
 	}
 	/** Gets @type {FiguredBassAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {FiguredBassAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): FiguredBass {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {FiguredBassAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {FiguredBassAttributes['id']}. */
 	setId(id: string | null): FiguredBass {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {FiguredBassAttributes['parentheses']}. */
 	getParentheses(): 'yes' | 'no' | null {
-		return this.attributes['parentheses'];
+		return this.attributes.parentheses;
 	}
 	/** Sets @type {FiguredBassAttributes['parentheses']}. */
 	setParentheses(parentheses: 'yes' | 'no' | null): FiguredBass {
-		this.attributes['parentheses'] = parentheses;
+		this.attributes.parentheses = parentheses;
 		return this;
 	}
 	/** Gets @type {FiguredBassAttributes['placement']}. */
 	getPlacement(): 'above' | 'below' | null {
-		return this.attributes['placement'];
+		return this.attributes.placement;
 	}
 	/** Sets @type {FiguredBassAttributes['placement']}. */
 	setPlacement(placement: 'above' | 'below' | null): FiguredBass {
-		this.attributes['placement'] = placement;
+		this.attributes.placement = placement;
 		return this;
 	}
 	/** Gets @type {FiguredBassAttributes['print-dot']}. */
@@ -39547,11 +39547,11 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
 	}
 	/** Gets @type {FiguredBassAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {FiguredBassAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): FiguredBass {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {Array<Figure>}. */
@@ -39714,11 +39714,11 @@ export class MeasureNumbering
 	}
 	/** Gets @type {MeasureNumberingAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {MeasureNumberingAttributes['color']}. */
 	setColor(color: string | null): MeasureNumbering {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {MeasureNumberingAttributes['default-x']}. */
@@ -39779,11 +39779,11 @@ export class MeasureNumbering
 	}
 	/** Gets @type {MeasureNumberingAttributes['halign']}. */
 	getHalign(): 'left' | 'center' | 'right' | null {
-		return this.attributes['halign'];
+		return this.attributes.halign;
 	}
 	/** Sets @type {MeasureNumberingAttributes['halign']}. */
 	setHalign(halign: 'left' | 'center' | 'right' | null): MeasureNumbering {
-		this.attributes['halign'] = halign;
+		this.attributes.halign = halign;
 		return this;
 	}
 	/** Gets @type {MeasureNumberingAttributes['multiple-rest-always']}. */
@@ -39824,29 +39824,29 @@ export class MeasureNumbering
 	}
 	/** Gets @type {MeasureNumberingAttributes['staff']}. */
 	getStaff(): number | null {
-		return this.attributes['staff'];
+		return this.attributes.staff;
 	}
 	/** Sets @type {MeasureNumberingAttributes['staff']}. */
 	setStaff(staff: number | null): MeasureNumbering {
-		this.attributes['staff'] = staff;
+		this.attributes.staff = staff;
 		return this;
 	}
 	/** Gets @type {MeasureNumberingAttributes['system']}. */
 	getSystem(): 'none' | 'only-top' | 'only-bottom' | 'also-top' | 'also-bottom' | null {
-		return this.attributes['system'];
+		return this.attributes.system;
 	}
 	/** Sets @type {MeasureNumberingAttributes['system']}. */
 	setSystem(system: 'none' | 'only-top' | 'only-bottom' | 'also-top' | 'also-bottom' | null): MeasureNumbering {
-		this.attributes['system'] = system;
+		this.attributes.system = system;
 		return this;
 	}
 	/** Gets @type {MeasureNumberingAttributes['valign']}. */
 	getValign(): 'top' | 'middle' | 'bottom' | 'baseline' | null {
-		return this.attributes['valign'];
+		return this.attributes.valign;
 	}
 	/** Sets @type {MeasureNumberingAttributes['valign']}. */
 	setValign(valign: 'top' | 'middle' | 'bottom' | 'baseline' | null): MeasureNumbering {
-		this.attributes['valign'] = valign;
+		this.attributes.valign = valign;
 		return this;
 	}
 	/** Gets @type {'none' | 'measure' | 'system'}. */
@@ -39912,11 +39912,11 @@ export class Print implements XMLElement<'print', PrintAttributes, PrintContents
 	}
 	/** Gets @type {PrintAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {PrintAttributes['id']}. */
 	setId(id: string | null): Print {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {PrintAttributes['new-page']}. */
@@ -40058,11 +40058,11 @@ export class BarStyle implements XMLElement<'bar-style', BarStyleAttributes, Bar
 	}
 	/** Gets @type {BarStyleAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {BarStyleAttributes['color']}. */
 	setColor(color: string | null): BarStyle {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {'none' | 'regular' | 'dotted' | 'dashed' | 'heavy' | 'light-light' | 'light-heavy' | 'heavy-light' | 'heavy-heavy' | 'tick' | 'short'}. */
@@ -40145,11 +40145,11 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
 	}
 	/** Gets @type {EndingAttributes['color']}. */
 	getColor(): string | null {
-		return this.attributes['color'];
+		return this.attributes.color;
 	}
 	/** Sets @type {EndingAttributes['color']}. */
 	setColor(color: string | null): Ending {
-		this.attributes['color'] = color;
+		this.attributes.color = color;
 		return this;
 	}
 	/** Gets @type {EndingAttributes['default-x']}. */
@@ -40219,11 +40219,11 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
 	}
 	/** Gets @type {EndingAttributes['number']}. */
 	getNumber(): string {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {EndingAttributes['number']}. */
 	setNumber(number: string): Ending {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {EndingAttributes['print-object']}. */
@@ -40255,11 +40255,11 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
 	}
 	/** Gets @type {EndingAttributes['system']}. */
 	getSystem(): 'none' | 'only-top' | 'also-top' | null {
-		return this.attributes['system'];
+		return this.attributes.system;
 	}
 	/** Sets @type {EndingAttributes['system']}. */
 	setSystem(system: 'none' | 'only-top' | 'also-top' | null): Ending {
-		this.attributes['system'] = system;
+		this.attributes.system = system;
 		return this;
 	}
 	/** Gets @type {EndingAttributes['text-x']}. */
@@ -40282,11 +40282,11 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
 	}
 	/** Gets @type {EndingAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'discontinue' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {EndingAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'discontinue'): Ending {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -40340,29 +40340,29 @@ export class Repeat implements XMLElement<'repeat', RepeatAttributes, RepeatCont
 	}
 	/** Gets @type {RepeatAttributes['direction']}. */
 	getDirection(): 'backward' | 'forward' {
-		return this.attributes['direction'];
+		return this.attributes.direction;
 	}
 	/** Sets @type {RepeatAttributes['direction']}. */
 	setDirection(direction: 'backward' | 'forward'): Repeat {
-		this.attributes['direction'] = direction;
+		this.attributes.direction = direction;
 		return this;
 	}
 	/** Gets @type {RepeatAttributes['times']}. */
 	getTimes(): number | null {
-		return this.attributes['times'];
+		return this.attributes.times;
 	}
 	/** Sets @type {RepeatAttributes['times']}. */
 	setTimes(times: number | null): Repeat {
-		this.attributes['times'] = times;
+		this.attributes.times = times;
 		return this;
 	}
 	/** Gets @type {RepeatAttributes['winged']}. */
 	getWinged(): 'none' | 'straight' | 'curved' | 'double-straight' | 'double-curved' | null {
-		return this.attributes['winged'];
+		return this.attributes.winged;
 	}
 	/** Sets @type {RepeatAttributes['winged']}. */
 	setWinged(winged: 'none' | 'straight' | 'curved' | 'double-straight' | 'double-curved' | null): Repeat {
-		this.attributes['winged'] = winged;
+		this.attributes.winged = winged;
 		return this;
 	}
 }
@@ -40411,47 +40411,47 @@ export class Barline implements XMLElement<'barline', BarlineAttributes, Barline
 	}
 	/** Gets @type {BarlineAttributes['coda']}. */
 	getCodaToken(): string | null {
-		return this.attributes['coda'];
+		return this.attributes.coda;
 	}
 	/** Sets @type {BarlineAttributes['coda']}. */
 	setCodaToken(codaToken: string | null): Barline {
-		this.attributes['coda'] = codaToken;
+		this.attributes.coda = codaToken;
 		return this;
 	}
 	/** Gets @type {BarlineAttributes['divisions']}. */
 	getDivisions(): number | null {
-		return this.attributes['divisions'];
+		return this.attributes.divisions;
 	}
 	/** Sets @type {BarlineAttributes['divisions']}. */
 	setDivisions(divisions: number | null): Barline {
-		this.attributes['divisions'] = divisions;
+		this.attributes.divisions = divisions;
 		return this;
 	}
 	/** Gets @type {BarlineAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {BarlineAttributes['id']}. */
 	setId(id: string | null): Barline {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {BarlineAttributes['location']}. */
 	getLocation(): 'right' | 'left' | 'middle' | null {
-		return this.attributes['location'];
+		return this.attributes.location;
 	}
 	/** Sets @type {BarlineAttributes['location']}. */
 	setLocation(location: 'right' | 'left' | 'middle' | null): Barline {
-		this.attributes['location'] = location;
+		this.attributes.location = location;
 		return this;
 	}
 	/** Gets @type {BarlineAttributes['segno']}. */
 	getSegnoToken(): string | null {
-		return this.attributes['segno'];
+		return this.attributes.segno;
 	}
 	/** Sets @type {BarlineAttributes['segno']}. */
 	setSegnoToken(segnoToken: string | null): Barline {
-		this.attributes['segno'] = segnoToken;
+		this.attributes.segno = segnoToken;
 		return this;
 	}
 	/** Gets @type {BarStyle | null}. */
@@ -40563,11 +40563,11 @@ export class Feature implements XMLElement<'feature', FeatureAttributes, Feature
 	}
 	/** Gets @type {FeatureAttributes['type']}. */
 	getType(): string | null {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {FeatureAttributes['type']}. */
 	setType(type: string | null): Feature {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {string}. */
@@ -40614,11 +40614,11 @@ export class Grouping implements XMLElement<'grouping', GroupingAttributes, Grou
 	}
 	/** Gets @type {GroupingAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {GroupingAttributes['id']}. */
 	setId(id: string | null): Grouping {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {GroupingAttributes['member-of']}. */
@@ -40632,20 +40632,20 @@ export class Grouping implements XMLElement<'grouping', GroupingAttributes, Grou
 	}
 	/** Gets @type {GroupingAttributes['number']}. */
 	getNumber(): string | null {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {GroupingAttributes['number']}. */
 	setNumber(number: string | null): Grouping {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {GroupingAttributes['type']}. */
 	getType(): 'start' | 'stop' | 'single' {
-		return this.attributes['type'];
+		return this.attributes.type;
 	}
 	/** Sets @type {GroupingAttributes['type']}. */
 	setType(type: 'start' | 'stop' | 'single'): Grouping {
-		this.attributes['type'] = type;
+		this.attributes.type = type;
 		return this;
 	}
 	/** Gets @type {Array<Feature>}. */
@@ -40710,20 +40710,20 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
 	}
 	/** Gets @type {MeasurePartwiseAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {MeasurePartwiseAttributes['id']}. */
 	setId(id: string | null): MeasurePartwise {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {MeasurePartwiseAttributes['implicit']}. */
 	getImplicit(): 'yes' | 'no' | null {
-		return this.attributes['implicit'];
+		return this.attributes.implicit;
 	}
 	/** Sets @type {MeasurePartwiseAttributes['implicit']}. */
 	setImplicit(implicit: 'yes' | 'no' | null): MeasurePartwise {
-		this.attributes['implicit'] = implicit;
+		this.attributes.implicit = implicit;
 		return this;
 	}
 	/** Gets @type {MeasurePartwiseAttributes['non-controller']}. */
@@ -40746,29 +40746,29 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
 	}
 	/** Gets @type {MeasurePartwiseAttributes['number']}. */
 	getNumber(): string {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {MeasurePartwiseAttributes['number']}. */
 	setNumber(number: string): MeasurePartwise {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {MeasurePartwiseAttributes['text']}. */
 	getText(): Exclude<'yes' | string, ''> | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {MeasurePartwiseAttributes['text']}. */
 	setText(text: Exclude<'yes' | string, ''> | null): MeasurePartwise {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {MeasurePartwiseAttributes['width']}. */
 	getWidth(): number | null {
-		return this.attributes['width'];
+		return this.attributes.width;
 	}
 	/** Sets @type {MeasurePartwiseAttributes['width']}. */
 	setWidth(width: number | null): MeasurePartwise {
-		this.attributes['width'] = width;
+		this.attributes.width = width;
 		return this;
 	}
 	/** Gets @type {Array<Note | Backup | Forward | Direction | Attributes | Harmony | FiguredBass | Print | Sound | Listening | Barline | Grouping | Link | Bookmark>}. */
@@ -40840,11 +40840,11 @@ export class PartPartwise implements XMLElement<'part', PartPartwiseAttributes, 
 	}
 	/** Gets @type {PartPartwiseAttributes['id']}. */
 	getId(): string {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {PartPartwiseAttributes['id']}. */
 	setId(id: string): PartPartwise {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {Array<MeasurePartwise>}. */
@@ -40893,11 +40893,11 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
 	}
 	/** Gets @type {ScorePartwiseAttributes['version']}. */
 	getVersion(): '4.0' {
-		return this.attributes['version'];
+		return this.attributes.version;
 	}
 	/** Sets @type {ScorePartwiseAttributes['version']}. */
 	setVersion(version: '4.0'): ScorePartwise {
-		this.attributes['version'] = version;
+		this.attributes.version = version;
 		return this;
 	}
 	/** Gets @type {Work | null}. */
@@ -41017,11 +41017,11 @@ export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, 
 	}
 	/** Gets @type {PartTimewiseAttributes['id']}. */
 	getId(): string {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {PartTimewiseAttributes['id']}. */
 	setId(id: string): PartTimewise {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {Array<Note | Backup | Forward | Direction | Attributes | Harmony | FiguredBass | Print | Sound | Listening | Barline | Grouping | Link | Bookmark>}. */
@@ -41101,20 +41101,20 @@ export class MeasureTimewise implements XMLElement<'measure', MeasureTimewiseAtt
 	}
 	/** Gets @type {MeasureTimewiseAttributes['id']}. */
 	getId(): string | null {
-		return this.attributes['id'];
+		return this.attributes.id;
 	}
 	/** Sets @type {MeasureTimewiseAttributes['id']}. */
 	setId(id: string | null): MeasureTimewise {
-		this.attributes['id'] = id;
+		this.attributes.id = id;
 		return this;
 	}
 	/** Gets @type {MeasureTimewiseAttributes['implicit']}. */
 	getImplicit(): 'yes' | 'no' | null {
-		return this.attributes['implicit'];
+		return this.attributes.implicit;
 	}
 	/** Sets @type {MeasureTimewiseAttributes['implicit']}. */
 	setImplicit(implicit: 'yes' | 'no' | null): MeasureTimewise {
-		this.attributes['implicit'] = implicit;
+		this.attributes.implicit = implicit;
 		return this;
 	}
 	/** Gets @type {MeasureTimewiseAttributes['non-controller']}. */
@@ -41137,29 +41137,29 @@ export class MeasureTimewise implements XMLElement<'measure', MeasureTimewiseAtt
 	}
 	/** Gets @type {MeasureTimewiseAttributes['number']}. */
 	getNumber(): string {
-		return this.attributes['number'];
+		return this.attributes.number;
 	}
 	/** Sets @type {MeasureTimewiseAttributes['number']}. */
 	setNumber(number: string): MeasureTimewise {
-		this.attributes['number'] = number;
+		this.attributes.number = number;
 		return this;
 	}
 	/** Gets @type {MeasureTimewiseAttributes['text']}. */
 	getText(): Exclude<'yes' | string, ''> | null {
-		return this.attributes['text'];
+		return this.attributes.text;
 	}
 	/** Sets @type {MeasureTimewiseAttributes['text']}. */
 	setText(text: Exclude<'yes' | string, ''> | null): MeasureTimewise {
-		this.attributes['text'] = text;
+		this.attributes.text = text;
 		return this;
 	}
 	/** Gets @type {MeasureTimewiseAttributes['width']}. */
 	getWidth(): number | null {
-		return this.attributes['width'];
+		return this.attributes.width;
 	}
 	/** Sets @type {MeasureTimewiseAttributes['width']}. */
 	setWidth(width: number | null): MeasureTimewise {
-		this.attributes['width'] = width;
+		this.attributes.width = width;
 		return this;
 	}
 	/** Gets @type {Array<PartTimewise>}. */
@@ -41208,11 +41208,11 @@ export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewise
 	}
 	/** Gets @type {ScoreTimewiseAttributes['version']}. */
 	getVersion(): '4.0' {
-		return this.attributes['version'];
+		return this.attributes.version;
 	}
 	/** Sets @type {ScoreTimewiseAttributes['version']}. */
 	setVersion(version: '4.0'): ScoreTimewise {
-		this.attributes['version'] = version;
+		this.attributes.version = version;
 		return this;
 	}
 	/** Gets @type {Work | null}. */

@@ -58,7 +58,7 @@ export const Sound = schema(
 		 * used for half pedaling. This value is the percentage that the pedal is depressed. A value of 0 is equivalent to
 		 * no, and a value of 100 is equivalent to yes.
 		 */
-		['damper-pedal']: t.optional(dataTypes.yesNoNumber()),
+		'damper-pedal': t.optional(dataTypes.yesNoNumber()),
 
 		/**
 		 * If the segno or coda attributes are used, the divisions attribute can be used to indicate the number of
@@ -92,7 +92,7 @@ export const Sound = schema(
 		 * with repeats, such as a minuet and trio where no repeat is displayed at the start of the trio. This usually
 		 * occurs after a barline. When used it always has the value of "yes".
 		 */
-		['forward-repeat']: t.optional(dataTypes.yesNo()),
+		'forward-repeat': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Specifies an ID that is unique to the entire document.
@@ -125,7 +125,7 @@ export const Sound = schema(
 		 * half pedaling. This value is the percentage that the pedal is depressed. A value of 0 is equivalent to no, and
 		 * a value of 100 is equivalent to yes.
 		 */
-		['soft-pedal']: t.optional(dataTypes.yesNoNumber()),
+		'soft-pedal': t.optional(dataTypes.yesNoNumber()),
 
 		/**
 		 * Effects playback of the the common center piano pedal and its MIDI controller equivalent. The yes value
@@ -133,7 +133,7 @@ export const Sound = schema(
 		 * used for half pedaling. This value is the percentage that the pedal is depressed. A value of 0 is equivalent to
 		 * no, and a value of 100 is equivalent to yes.
 		 */
-		['sostenuto-pedal']: t.optional(dataTypes.yesNoNumber()),
+		'sostenuto-pedal': t.optional(dataTypes.yesNoNumber()),
 
 		/**
 		 * Tempo is expressed in quarter notes per minute. If 0, the sound-generating program should prompt the user at
@@ -145,7 +145,7 @@ export const Sound = schema(
 		 * Indicates which times to apply the sound element if the <sound> element applies only particular times through a
 		 * repeat.
 		 */
-		['time-only']: t.optional(dataTypes.timeOnly()),
+		'time-only': t.optional(dataTypes.timeOnly()),
 
 		/**
 		 * Indicates the starting point for a forward jump to a coda sign. If there are multiple jumps, the value of these

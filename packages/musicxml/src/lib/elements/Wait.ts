@@ -23,7 +23,7 @@ export const Wait = schema(
 		/**
 		 * Restricts the `<wait>` to apply to a set of times through a repeated section.
 		 */
-		['time-only']: t.optional(dataTypes.timeOnly()),
+		'time-only': t.optional(dataTypes.timeOnly()),
 	},
 	[] as const,
 );

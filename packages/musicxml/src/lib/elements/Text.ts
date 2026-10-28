@@ -35,45 +35,45 @@ export const Text = schema(
 		 * the origin is changed relative to the start of the first measure on the system, and these values are used when
 		 * the current measure or a succeeding measure starts a new system. Positive x is right and negative x is left.
 		 */
-		['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
+		'default-x': t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Changes the computation of the default vertical position. The origin is changed relative to the top line of the
 		 * staff. Positive y is up and negative y is down.
 		 */
-		['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
+		'default-y': t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * A comma-separated list of font names.
 		 */
-		['font-family']: t.optional(dataTypes.fontFamily()),
+		'font-family': t.optional(dataTypes.fontFamily()),
 
 		/**
 		 * One of the CSS sizes or a numeric point size.
 		 */
-		['font-size']: t.optional(dataTypes.fontSize()),
+		'font-size': t.optional(dataTypes.fontSize()),
 
 		/**
 		 * Normal or italic style.
 		 */
-		['font-style']: t.optional(dataTypes.fontStyle()),
+		'font-style': t.optional(dataTypes.fontStyle()),
 
 		/**
 		 * Normal or bold weight.
 		 */
-		['font-weight']: t.optional(dataTypes.fontWeight()),
+		'font-weight': t.optional(dataTypes.fontWeight()),
 
 		/**
 		 * Specifies text tracking. Values are either normal, which allows flexibility of letter-spacing for purposes of
 		 * text justification. or a number representing the number of ems to add between each letter. The number may be
 		 * negative in order to subtract space. The value is normal if not specified.
 		 */
-		['letter-spacing']: t.optional(dataTypes.numberOrNormal()),
+		'letter-spacing': t.optional(dataTypes.numberOrNormal()),
 
 		/**
 		 * Number of lines to use when striking through text.
 		 */
-		['line-through']: t.optional(dataTypes.numberOfLines()),
+		'line-through': t.optional(dataTypes.numberOfLines()),
 
 		/**
 		 * Number of lines to use when overlining text.
@@ -94,7 +94,7 @@ export const Text = schema(
 		/**
 		 * Specifies the language used in the element content.
 		 */
-		['xml:lang']: t.optional(dataTypes.xml.lang()),
+		'xml:lang': t.optional(dataTypes.xml.lang()),
 	},
 	[t.string()] as const,
 );

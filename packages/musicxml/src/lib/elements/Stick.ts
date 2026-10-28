@@ -19,7 +19,7 @@ export const Stick = schema(
 		 * Indicates the presence of a dashed circle around the round beater part of a pictogram. The value is no if not
 		 * specified.
 		 */
-		['dashed-circle']: t.optional(dataTypes.yesNo()),
+		'dashed-circle': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Indicates the presence of parentheses around the round beater part of a pictogram. The value is no if not

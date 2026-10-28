@@ -22,7 +22,7 @@ export const Tie = schema(
 		/**
 		 * Indicates which particular times to apply a `<tie>` element through a repeated section.
 		 */
-		['time-only']: t.optional(dataTypes.timeOnly()),
+		'time-only': t.optional(dataTypes.timeOnly()),
 	},
 	[] as const,
 );

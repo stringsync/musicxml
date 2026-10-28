@@ -34,12 +34,12 @@ export const LineDetail = schema(
 		/**
 		 * Specifies if the line is solid, dashed, dotted, or wavy.
 		 */
-		['line-type']: t.optional(dataTypes.lineType()),
+		'line-type': t.optional(dataTypes.lineType()),
 
 		/**
 		 * Specifies whether or not to print an object. It is yes if not specified.
 		 */
-		['print-object']: t.optional(dataTypes.yesNo()),
+		'print-object': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Staff line width in tenths.

@@ -41,7 +41,7 @@ export const MeasureTimewise = schema(
 		 * Intended for use in multimetric music like the Don Giovanni minuet. If set to "yes", the left barline in this
 		 * measure does not coincide with the left barline of measures in other parts. The value is "no" if not specified.
 		 */
-		['non-controller']: t.optional(dataTypes.yesNo()),
+		'non-controller': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * If measure numbers are not unique within a part, this can cause problems for conversions between partwise and

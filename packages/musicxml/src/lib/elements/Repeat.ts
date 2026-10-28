@@ -22,7 +22,7 @@ export const Repeat = schema(
 		 * Indicates if the repeats are played after a jump due to a da capo or dal segno. It is only used with backward
 		 * repeats that are not part of an ending.
 		 */
-		['after-jump']: t.optional(dataTypes.yesNo()),
+		'after-jump': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Indicates the number of times the repeated section is played. It is only used with backward repeats that are not

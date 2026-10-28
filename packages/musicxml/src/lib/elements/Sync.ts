@@ -34,7 +34,7 @@ export const Sync = schema(
 		/**
 		 * Restricts the element to apply to a set of times through a repeated section.
 		 */
-		['time-only']: t.optional(dataTypes.timeOnly()),
+		'time-only': t.optional(dataTypes.timeOnly()),
 	},
 	[] as const,
 );

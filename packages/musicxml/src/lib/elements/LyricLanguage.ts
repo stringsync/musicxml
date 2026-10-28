@@ -16,7 +16,7 @@ export const LyricLanguage = schema(
 		/**
 		 * The default language for the specified lyric name and number.
 		 */
-		['xml:lang']: t.required(dataTypes.xml.lang()),
+		'xml:lang': t.required(dataTypes.xml.lang()),
 
 		/**
 		 * The lyric name for which this is the default, corresponding to the name attribute in the `<lyric>` element.

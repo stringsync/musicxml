@@ -30,7 +30,7 @@ export const Kind = schema(
 		 * The bracket-degrees attribute is yes if all the degrees should be in a bracket. The default is
 		 * implementation-dependent.
 		 */
-		['bracket-degrees']: t.optional(dataTypes.yesNo()),
+		'bracket-degrees': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Indicates the color of an element.
@@ -45,7 +45,7 @@ export const Kind = schema(
 		 * MusicXML file that can understand both features should generally rely on this attribute for its greater
 		 * accuracy.
 		 */
-		['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
+		'default-x': t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Changes the computation of the default vertical position. The origin is changed relative to the top line of the
@@ -55,27 +55,27 @@ export const Kind = schema(
 		 * MusicXML file that can understand both attributes should generally rely on this attribute for its greater
 		 * accuracy.
 		 */
-		['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
+		'default-y': t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * A comma-separated list of font names.
 		 */
-		['font-family']: t.optional(dataTypes.fontFamily()),
+		'font-family': t.optional(dataTypes.fontFamily()),
 
 		/**
 		 * One of the CSS sizes or a numeric point size.
 		 */
-		['font-size']: t.optional(dataTypes.fontSize()),
+		'font-size': t.optional(dataTypes.fontSize()),
 
 		/**
 		 * Normal or italic style.
 		 */
-		['font-style']: t.optional(dataTypes.fontStyle()),
+		'font-style': t.optional(dataTypes.fontStyle()),
 
 		/**
 		 * Normal or bold weight.
 		 */
-		['font-weight']: t.optional(dataTypes.fontWeight()),
+		'font-weight': t.optional(dataTypes.fontWeight()),
 
 		/**
 		 * In cases where text extends over more than one line, horizontal alignment and justify values can be different.
@@ -97,26 +97,26 @@ export const Kind = schema(
 		 * The parentheses-degrees attribute is yes if all the degrees should be in parentheses. The default is
 		 * implementation-dependent.
 		 */
-		['parentheses-degrees']: t.optional(dataTypes.yesNo()),
+		'parentheses-degrees': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Changes the horizontal position relative to the default position, either as computed by the individual
 		 * program, or as overridden by the default-x attribute. Positive x is right and negative x is left. It should be
 		 * interpreted in the context of the <offset> element or directive attribute if those are present.
 		 */
-		['relative-x']: t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
+		'relative-x': t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Changes the horizontal position relative to the default position, either as computed by the individual
 		 * program, or as overridden by the default-x attribute. Positive x is right and negative x is left. It should be
 		 * interpreted in the context of the <offset> element or directive attribute if those are present.
 		 */
-		['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
+		'relative-y': t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * If yes, the `<degree>` elements should be stacked above each other. The default is implementation-dependent.
 		 */
-		['stack-degrees']: t.optional(dataTypes.yesNo()),
+		'stack-degrees': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Describes how the `<kind>` should be spelled in a score. If the use-symbols attribute is yes, this value
@@ -136,7 +136,7 @@ export const Kind = schema(
 		 *
 		 * The default is implementation-dependent.
 		 */
-		['use-symbols']: t.optional(dataTypes.yesNo()),
+		'use-symbols': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Indicates vertical alignment to the top, middle, bottom, or baseline of the text. The default is

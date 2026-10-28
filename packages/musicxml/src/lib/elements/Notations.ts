@@ -40,7 +40,7 @@ export const Notations = schema(
 		/**
 		 * Specifies whether or not to print an object. It is yes if not specified.
 		 */
-		['print-object']: t.optional(dataTypes.yesNo()),
+		'print-object': t.optional(dataTypes.yesNo()),
 	},
 	[
 		t.optional(Footnote),

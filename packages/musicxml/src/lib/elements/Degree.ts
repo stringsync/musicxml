@@ -24,7 +24,7 @@ export const Degree = schema(
 		/**
 		 * Specifies whether or not to print an object. It is yes if not specified.
 		 */
-		['print-object']: t.optional(dataTypes.yesNo()),
+		'print-object': t.optional(dataTypes.yesNo()),
 	},
 	[t.required(DegreeValue), t.required(DegreeAlter), t.required(DegreeType)] as const,
 );

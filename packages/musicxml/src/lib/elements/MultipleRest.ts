@@ -17,7 +17,7 @@ export const MultipleRest = schema(
 		 * Specifies whether the multiple rests uses the 1-bar / 2-bar / 4-bar rest symbols, or a single shape. It is no if
 		 * not specified.
 		 */
-		['use-symbols']: t.optional(dataTypes.yesNo()),
+		'use-symbols': t.optional(dataTypes.yesNo()),
 	},
 	[t.label({ label: 'multiple-rest', value: t.required(dataTypes.positiveInteger()) })] as const,
 );

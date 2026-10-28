@@ -16,22 +16,22 @@ export const MusicFont = schema(
 		/**
 		 * A comma-separated list of font names.
 		 */
-		['font-family']: t.optional(dataTypes.fontFamily()),
+		'font-family': t.optional(dataTypes.fontFamily()),
 
 		/**
 		 * One of the CSS sizes or a numeric point size.
 		 */
-		['font-size']: t.optional(dataTypes.fontSize()),
+		'font-size': t.optional(dataTypes.fontSize()),
 
 		/**
 		 * Normal or italic style.
 		 */
-		['font-style']: t.optional(dataTypes.fontStyle()),
+		'font-style': t.optional(dataTypes.fontStyle()),
 
 		/**
 		 * Normal or bold weight.
 		 */
-		['font-weight']: t.optional(dataTypes.fontWeight()),
+		'font-weight': t.optional(dataTypes.fontWeight()),
 	},
 	[] as const,
 );

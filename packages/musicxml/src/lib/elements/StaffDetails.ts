@@ -27,19 +27,19 @@ export const StaffDetails = schema(
 		/**
 		 * Specifies whether or not to print an object. It is yes if not specified.
 		 */
-		['print-object']: t.optional(dataTypes.yesNo()),
+		'print-object': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Controls whether or not spacing is left for an invisible note or object. It is used only if no note, dot, or
 		 * lyric is being printed. The value is yes (leave spacing) if not specified.
 		 */
-		['print-spacing']: t.optional(dataTypes.yesNo()),
+		'print-spacing': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Indicates whether to show tablature frets as numbers (0, 1, 2) or letters (a, b, c). It is numbers if not
 		 * specified.
 		 */
-		['show-frets']: t.optional(dataTypes.showFrets()),
+		'show-frets': t.optional(dataTypes.showFrets()),
 	},
 	[
 		t.optional(StaffType),

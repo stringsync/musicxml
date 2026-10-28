@@ -36,7 +36,7 @@ export const BeatRepeat = schema(
 		 * Indicates whether or not to use dots as well (for instance, with mixed rhythm patterns). The value is no if not
 		 * specified.
 		 */
-		['use-dots']: t.optional(dataTypes.yesNo()),
+		'use-dots': t.optional(dataTypes.yesNo()),
 	},
 	[
 		t.label({

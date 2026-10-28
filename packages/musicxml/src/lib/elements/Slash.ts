@@ -28,13 +28,13 @@ export const Slash = schema(
 		 * Indicates whether or not to use dots as well (for instance, with mixed rhythm patterns). The value is no if not
 		 * specified. This attribute only has effect if use-stems is no.
 		 */
-		['use-dots']: t.optional(dataTypes.yesNo()),
+		'use-dots': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * If the slash is on every beat, use-stems is no (the default). To indicate rhythms but not pitches, use-stems is
 		 * set to yes.
 		 */
-		['use-stems']: t.optional(dataTypes.yesNo()),
+		'use-stems': t.optional(dataTypes.yesNo()),
 	},
 	[
 		t.label({

@@ -29,39 +29,39 @@ export const OctaveShift = schema(
 		/**
 		 * The length of dashes in a dashed line. Ignored if the corresponding line-type attribute is not dashed.
 		 */
-		['dash-length']: t.optional(dataTypes.tenths()),
+		'dash-length': t.optional(dataTypes.tenths()),
 
 		/**
 		 * Changes the computation of the default horizontal position. The origin is changed relative to the bottom
 		 * left-hand corner of the specified page. Positive x is right and negative x is left.
 		 */
-		['default-x']: t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
+		'default-x': t.label({ label: 'default-x', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Changes the computation of the default vertical position. The origin is changed relative to the bottom
 		 * left-hand corner of the specified page. Positive y is up and negative y is down.
 		 */
-		['default-y']: t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
+		'default-y': t.label({ label: 'default-y', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * A comma-separated list of font names.
 		 */
-		['font-family']: t.optional(dataTypes.fontFamily()),
+		'font-family': t.optional(dataTypes.fontFamily()),
 
 		/**
 		 * One of the CSS sizes or a numeric point size.
 		 */
-		['font-size']: t.optional(dataTypes.fontSize()),
+		'font-size': t.optional(dataTypes.fontSize()),
 
 		/**
 		 * Normal or italic style.
 		 */
-		['font-style']: t.optional(dataTypes.fontStyle()),
+		'font-style': t.optional(dataTypes.fontStyle()),
 
 		/**
 		 * Normal or bold weight.
 		 */
-		['font-weight']: t.optional(dataTypes.fontWeight()),
+		'font-weight': t.optional(dataTypes.fontWeight()),
 
 		/**
 		 * Specifies an ID that is unique to the entire document.
@@ -77,13 +77,13 @@ export const OctaveShift = schema(
 		 * Changes the horizontal position relative to the default position, either as computed by the individual program,
 		 * or as overridden by the default-x attribute. Positive x is right and negative x is left.
 		 */
-		['relative-x']: t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
+		'relative-x': t.label({ label: 'relative-x', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * Changes the vertical position relative to the default position, either as computed by the individual program,
 		 * or as overridden by the default-y attribute. Positive y is up and negative y is down.
 		 */
-		['relative-y']: t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
+		'relative-y': t.label({ label: 'relative-y', value: t.optional(dataTypes.tenths()) }),
 
 		/**
 		 * 8 indicates one octave; 15 indicates two octaves; 22 indicates 3 octaves. The default value is 8.
@@ -93,7 +93,7 @@ export const OctaveShift = schema(
 		/**
 		 * The length of spaces in a dashed line. Ignored if the corresponding line-type attribute is not dashed.
 		 */
-		['space-length']: t.optional(dataTypes.tenths()),
+		'space-length': t.optional(dataTypes.tenths()),
 	},
 	[] as const,
 );

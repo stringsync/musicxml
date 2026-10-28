@@ -31,7 +31,7 @@ export const Assess = schema(
 		 * Restricts the type to apply to a set of times through a repeated section. If missing, the type applies all
 		 * times through the repeated section.
 		 */
-		['time-only']: t.optional(dataTypes.timeOnly()),
+		'time-only': t.optional(dataTypes.timeOnly()),
 	},
 	[] as const,
 );

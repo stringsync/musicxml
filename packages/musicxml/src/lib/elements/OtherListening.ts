@@ -27,7 +27,7 @@ export const OtherListening = schema(
 		/**
 		 * Restrict the element to apply to a set of times through a repeated section.
 		 */
-		['time-only']: t.optional(dataTypes.timeOnly()),
+		'time-only': t.optional(dataTypes.timeOnly()),
 	},
 	[t.required(dataTypes.string())] as const,
 );

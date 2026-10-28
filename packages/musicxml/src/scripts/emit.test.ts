@@ -33,12 +33,17 @@ describe('generateFiles', () => {
 	it('keeps labeled attribute accessors attached to the XML attribute', () => {
 		const root = schema(
 			'example',
-			{ token: t.optional(t.label({ label: 'playback-token', value: t.string() })) },
+			{
+				token: t.optional(t.label({ label: 'playback-token', value: t.string() })),
+				'font-size': t.optional(t.string()),
+			},
 			[] as const,
 		);
-		expect(getAttributeAccessorNames(root)).toEqual({ token: 'playback-token' });
+		expect(getAttributeAccessorNames(root)).toEqual({ token: 'playback-token', 'font-size': 'font-size' });
 		const { elements } = generateFiles([root], {});
-		expect(elements).toContain("getPlaybackToken(): string | null { return this.attributes['token']; }");
+		expect(elements).toContain('getPlaybackToken(): string | null { return this.attributes.token; }');
+		expect(elements).toContain('return this.attributes["font-size"];');
+		expect(elements).toContain('this.attributes["font-size"] = fontSize;');
 		expect(elements).toContain("ExampleAttributes['token']");
 	});
 });

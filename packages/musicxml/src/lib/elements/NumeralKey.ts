@@ -19,7 +19,7 @@ export const NumeralKey = schema(
 		/**
 		 * Specifies whether or not to print an object. It is yes if not specified.
 		 */
-		['print-object']: t.optional(dataTypes.yesNo()),
+		'print-object': t.optional(dataTypes.yesNo()),
 	},
 	[t.required(NumeralFifths), t.required(NumeralMode)] as const,
 );

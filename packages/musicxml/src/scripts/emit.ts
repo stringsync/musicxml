@@ -148,6 +148,9 @@ const getAttributeLabel = (child: DescriptorChild): string => {
 export const getAttributeAccessorNames = (schema: XMLElementSchema): Record<string, string> =>
 	Object.fromEntries(Object.entries(schema.attributes).map(([key, value]) => [key, getAttributeLabel(value) || key]));
 
+const propertyAccess = (key: string): string =>
+	/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key) ? `.${key}` : `[${JSON.stringify(key)}]`;
+
 export const getAttributeAccessorMethodLiterals = (schema: XMLElementSchema): string => {
 	const methods: string[] = [];
 	const className = getClassName(schema);
@@ -155,12 +158,14 @@ export const getAttributeAccessorMethodLiterals = (schema: XMLElementSchema): st
 		const name = getAttributeLabel(value) || key;
 		const typeLiteral = getTypeLiteral(value);
 		methods.push(`/** Gets @type {${className}Attributes['${key}']}. */`);
-		methods.push(`get${toPascalCase(decolonize(name))}(): ${typeLiteral} { return this.attributes['${key}']; }`);
+		methods.push(
+			`get${toPascalCase(decolonize(name))}(): ${typeLiteral} { return this.attributes${propertyAccess(key)}; }`,
+		);
 		methods.push(`/** Sets @type {${className}Attributes['${key}']}. */`);
 		methods.push(
 			`set${toPascalCase(decolonize(name))}(${toCamelCase(
 				decolonize(name),
-			)}: ${typeLiteral}): ${className} { this.attributes['${key}'] = ${toCamelCase(decolonize(name))}; return this; }`,
+			)}: ${typeLiteral}): ${className} { this.attributes${propertyAccess(key)} = ${toCamelCase(decolonize(name))}; return this; }`,
 		);
 	}
 	return methods.join('\n');
@@ -382,7 +387,7 @@ export const getTypeAssertMethodLiterals = (schema: XMLElementSchema): string[] 
 		const base = `${getClassName(schema)}`;
 		return path.length === 0
 			? base
-			: `${base}.schema.contents${path.map((part) => (util.isString(part) ? `['${part}']` : `[${part}]`)).join('')}`;
+			: `${base}.schema.contents${path.map((part) => (util.isString(part) ? propertyAccess(part) : `[${part}]`)).join('')}`;
 	};
 
 	const onChoice = (choice: DescriptorChild, path: Array<string | number>) => {

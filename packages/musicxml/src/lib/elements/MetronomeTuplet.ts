@@ -33,7 +33,7 @@ export const MetronomeTuplet = schema(
 		 * Used to display either the number of actual notes, the number of both actual and normal notes, or neither. It
 		 * is actual if not specified.
 		 */
-		['show-number']: t.optional(dataTypes.showTuplet()),
+		'show-number': t.optional(dataTypes.showTuplet()),
 	},
 	[
 		t.required(ActualNotes),

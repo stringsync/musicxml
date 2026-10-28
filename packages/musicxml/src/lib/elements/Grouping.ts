@@ -31,7 +31,7 @@ export const Grouping = schema(
 		/**
 		 * Distinguishes which `<grouping>` elements are in which hierarchy.
 		 */
-		['member-of']: t.optional(dataTypes.token()),
+		'member-of': t.optional(dataTypes.token()),
 
 		/**
 		 * Distinguishes between various overlapping and hierarchical groupings. The default value is 1.

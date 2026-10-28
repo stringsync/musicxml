@@ -30,7 +30,7 @@ export const Print = schema(
 		 * blank pages have no music, but may have text or images specified by the credit element. This is used to allow
 		 * a combination of pages that are all text, or all text and images, together with pages of music.
 		 */
-		['blank-page']: t.optional(dataTypes.positiveInteger()),
+		'blank-page': t.optional(dataTypes.positiveInteger()),
 
 		/**
 		 * Specifies an ID that is unique to the entire document.
@@ -42,25 +42,25 @@ export const Print = schema(
 		 * music. Normally this is the first music data within a measure. If used in multi-part music, the attributes
 		 * should be placed in the same positions within each part, or the results are undefined.
 		 */
-		['new-page']: t.optional(dataTypes.yesNo()),
+		'new-page': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Indicates whether to force a system break, or to force the current music onto the same system as the preceding
 		 * music. Normally this is the first music data within a measure. If used in multi-part music, the attributes
 		 * should be placed in the same positions within each part, or the results are undefined.
 		 */
-		['new-system']: t.optional(dataTypes.yesNo()),
+		'new-system': t.optional(dataTypes.yesNo()),
 
 		/**
 		 * Sets the number of a new page. It is ignored if new-page is not "yes".
 		 */
-		['page-number']: t.optional(dataTypes.token()),
+		'page-number': t.optional(dataTypes.token()),
 
 		/**
 		 * Specifies spacing between multiple staves in tenths of staff space. Deprecated as of Version 1.1; the
 		 * staff-layout element should be used instead. If both are present, the staff-layout values take priority.
 		 */
-		['staff-spacing']: t.optional(dataTypes.tenths()),
+		'staff-spacing': t.optional(dataTypes.tenths()),
 	},
 	[
 		t.optional(PageLayout),
