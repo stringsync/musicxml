@@ -10,6 +10,7 @@ const XSD_PATH = path.join(__dirname, '..', '..', '..', '..', 'xmlvalidator', 's
 
 const OUTPUT_DIRECTORY = path.join(__dirname, '..', 'generated');
 const ELEMENTS_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'elements.ts');
+const SCHEMA_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'schema.ts');
 const ASSERTS_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'asserts.ts');
 
 (async () => {
@@ -27,6 +28,10 @@ const ASSERTS_OUTPUT_PATH = path.join(OUTPUT_DIRECTORY, 'asserts.ts');
 
 	process.stdout.write(`writing ${ASSERTS_OUTPUT_PATH}`);
 	fs.writeFileSync(ASSERTS_OUTPUT_PATH, files.asserts);
+	process.stdout.write(' ✅\n');
+
+	process.stdout.write(`writing ${SCHEMA_OUTPUT_PATH}`);
+	fs.writeFileSync(SCHEMA_OUTPUT_PATH, files.schema);
 	process.stdout.write(' ✅\n');
 
 	process.stdout.write('running biome');

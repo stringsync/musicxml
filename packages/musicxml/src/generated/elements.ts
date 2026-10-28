@@ -1,5 +1,12 @@
 import * as operations from '../lib/operations';
-import { type XMLElement, XMLElementSchema } from '../lib/schema';
+import type { XMLElement, XMLElementSchema } from '../lib/schema';
+import { registerElement, schema } from './schema';
+
+// Schema types are deliberately erased; the emitted Attributes types describe the result.
+const mergeAttributes = operations.merge as unknown as (
+	attributes: Record<string, any>,
+	schema: XMLElementSchema,
+) => any;
 
 export type WorkNumberAttributes = Record<string, unknown>;
 
@@ -13,11 +20,7 @@ export type WorkNumberContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work-number/
  */
 export class WorkNumber implements XMLElement<'work-number', WorkNumberAttributes, WorkNumberContents> {
-	static readonly schema = {
-		name: 'work-number',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'work-number'> = schema.WorkNumber;
 
 	readonly schema = WorkNumber.schema;
 
@@ -25,7 +28,7 @@ export class WorkNumber implements XMLElement<'work-number', WorkNumberAttribute
 	contents: WorkNumberContents;
 
 	constructor(opts?: { attributes?: Partial<WorkNumberAttributes>; contents?: WorkNumberContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, WorkNumber.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, WorkNumber.schema);
 		this.contents = opts?.contents ?? operations.zero(WorkNumber.schema.contents);
 	}
 
@@ -39,6 +42,7 @@ export class WorkNumber implements XMLElement<'work-number', WorkNumberAttribute
 		return this;
 	}
 }
+registerElement('WorkNumber', WorkNumber);
 
 export type WorkTitleAttributes = Record<string, unknown>;
 
@@ -52,11 +56,7 @@ export type WorkTitleContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work-title/
  */
 export class WorkTitle implements XMLElement<'work-title', WorkTitleAttributes, WorkTitleContents> {
-	static readonly schema = {
-		name: 'work-title',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'work-title'> = schema.WorkTitle;
 
 	readonly schema = WorkTitle.schema;
 
@@ -64,7 +64,7 @@ export class WorkTitle implements XMLElement<'work-title', WorkTitleAttributes, 
 	contents: WorkTitleContents;
 
 	constructor(opts?: { attributes?: Partial<WorkTitleAttributes>; contents?: WorkTitleContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, WorkTitle.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, WorkTitle.schema);
 		this.contents = opts?.contents ?? operations.zero(WorkTitle.schema.contents);
 	}
 
@@ -78,6 +78,7 @@ export class WorkTitle implements XMLElement<'work-title', WorkTitleAttributes, 
 		return this;
 	}
 }
+registerElement('WorkTitle', WorkTitle);
 
 export type OpusAttributes = {
 	'xlink:actuate': 'none' | 'onRequest' | 'onLoad' | 'other' | null;
@@ -98,24 +99,7 @@ export type OpusContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/opus/
  */
 export class Opus implements XMLElement<'opus', OpusAttributes, OpusContents> {
-	static readonly schema = {
-		name: 'opus',
-		attributes: {
-			'xlink:actuate': {
-				type: 'optional',
-				value: { type: 'choices', choices: ['none', 'onRequest', 'onLoad', 'other'] },
-			},
-			'xlink:href': { type: 'required', value: { type: 'string' } },
-			'xlink:role': { type: 'optional', value: { type: 'string' } },
-			'xlink:show': {
-				type: 'optional',
-				value: { type: 'choices', choices: ['none', 'new', 'replace', 'embed', 'other'] },
-			},
-			'xlink:title': { type: 'optional', value: { type: 'string' } },
-			'xlink:type': { type: 'optional', value: { type: 'choices', choices: ['simple'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'opus'> = schema.Opus;
 
 	readonly schema = Opus.schema;
 
@@ -123,7 +107,7 @@ export class Opus implements XMLElement<'opus', OpusAttributes, OpusContents> {
 	contents: OpusContents;
 
 	constructor(opts?: { attributes?: Partial<OpusAttributes>; contents?: OpusContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Opus.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Opus.schema);
 		this.contents = opts?.contents ?? operations.zero(Opus.schema.contents);
 	}
 	/** Gets @type {OpusAttributes['xlink:actuate']}. */
@@ -181,6 +165,7 @@ export class Opus implements XMLElement<'opus', OpusAttributes, OpusContents> {
 		return this;
 	}
 }
+registerElement('Opus', Opus);
 
 export type WorkAttributes = Record<string, unknown>;
 
@@ -194,15 +179,7 @@ export type WorkContents = [WorkNumber | null, WorkTitle | null, Opus | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/work/
  */
 export class Work implements XMLElement<'work', WorkAttributes, WorkContents> {
-	static readonly schema = {
-		name: 'work',
-		attributes: {},
-		contents: [
-			{ type: 'optional', value: WorkNumber },
-			{ type: 'optional', value: WorkTitle },
-			{ type: 'optional', value: Opus },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'work'> = schema.Work;
 
 	readonly schema = Work.schema;
 
@@ -210,7 +187,7 @@ export class Work implements XMLElement<'work', WorkAttributes, WorkContents> {
 	contents: WorkContents;
 
 	constructor(opts?: { attributes?: Partial<WorkAttributes>; contents?: WorkContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Work.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Work.schema);
 		this.contents = opts?.contents ?? operations.zero(Work.schema.contents);
 	}
 
@@ -242,6 +219,7 @@ export class Work implements XMLElement<'work', WorkAttributes, WorkContents> {
 		return this;
 	}
 }
+registerElement('Work', Work);
 
 export type MovementNumberAttributes = Record<string, unknown>;
 
@@ -255,11 +233,7 @@ export type MovementNumberContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/movement-number/
  */
 export class MovementNumber implements XMLElement<'movement-number', MovementNumberAttributes, MovementNumberContents> {
-	static readonly schema = {
-		name: 'movement-number',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'movement-number'> = schema.MovementNumber;
 
 	readonly schema = MovementNumber.schema;
 
@@ -267,7 +241,7 @@ export class MovementNumber implements XMLElement<'movement-number', MovementNum
 	contents: MovementNumberContents;
 
 	constructor(opts?: { attributes?: Partial<MovementNumberAttributes>; contents?: MovementNumberContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MovementNumber.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MovementNumber.schema);
 		this.contents = opts?.contents ?? operations.zero(MovementNumber.schema.contents);
 	}
 
@@ -281,6 +255,7 @@ export class MovementNumber implements XMLElement<'movement-number', MovementNum
 		return this;
 	}
 }
+registerElement('MovementNumber', MovementNumber);
 
 export type MovementTitleAttributes = Record<string, unknown>;
 
@@ -294,11 +269,7 @@ export type MovementTitleContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/movement-title/
  */
 export class MovementTitle implements XMLElement<'movement-title', MovementTitleAttributes, MovementTitleContents> {
-	static readonly schema = {
-		name: 'movement-title',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'movement-title'> = schema.MovementTitle;
 
 	readonly schema = MovementTitle.schema;
 
@@ -306,7 +277,7 @@ export class MovementTitle implements XMLElement<'movement-title', MovementTitle
 	contents: MovementTitleContents;
 
 	constructor(opts?: { attributes?: Partial<MovementTitleAttributes>; contents?: MovementTitleContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MovementTitle.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MovementTitle.schema);
 		this.contents = opts?.contents ?? operations.zero(MovementTitle.schema.contents);
 	}
 
@@ -320,6 +291,7 @@ export class MovementTitle implements XMLElement<'movement-title', MovementTitle
 		return this;
 	}
 }
+registerElement('MovementTitle', MovementTitle);
 
 export type CreatorAttributes = { type: string | null };
 
@@ -333,11 +305,7 @@ export type CreatorContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/creator/
  */
 export class Creator implements XMLElement<'creator', CreatorAttributes, CreatorContents> {
-	static readonly schema = {
-		name: 'creator',
-		attributes: { type: { type: 'optional', value: { type: 'string' } } },
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'creator'> = schema.Creator;
 
 	readonly schema = Creator.schema;
 
@@ -345,7 +313,7 @@ export class Creator implements XMLElement<'creator', CreatorAttributes, Creator
 	contents: CreatorContents;
 
 	constructor(opts?: { attributes?: Partial<CreatorAttributes>; contents?: CreatorContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Creator.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Creator.schema);
 		this.contents = opts?.contents ?? operations.zero(Creator.schema.contents);
 	}
 	/** Gets @type {CreatorAttributes['type']}. */
@@ -367,6 +335,7 @@ export class Creator implements XMLElement<'creator', CreatorAttributes, Creator
 		return this;
 	}
 }
+registerElement('Creator', Creator);
 
 export type RightsAttributes = { type: string | null };
 
@@ -380,11 +349,7 @@ export type RightsContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rights/
  */
 export class Rights implements XMLElement<'rights', RightsAttributes, RightsContents> {
-	static readonly schema = {
-		name: 'rights',
-		attributes: { type: { type: 'optional', value: { type: 'string' } } },
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'rights'> = schema.Rights;
 
 	readonly schema = Rights.schema;
 
@@ -392,7 +357,7 @@ export class Rights implements XMLElement<'rights', RightsAttributes, RightsCont
 	contents: RightsContents;
 
 	constructor(opts?: { attributes?: Partial<RightsAttributes>; contents?: RightsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Rights.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Rights.schema);
 		this.contents = opts?.contents ?? operations.zero(Rights.schema.contents);
 	}
 	/** Gets @type {RightsAttributes['type']}. */
@@ -414,6 +379,7 @@ export class Rights implements XMLElement<'rights', RightsAttributes, RightsCont
 		return this;
 	}
 }
+registerElement('Rights', Rights);
 
 export type EncodingDateAttributes = Record<string, unknown>;
 
@@ -427,11 +393,7 @@ export type EncodingDateContents = [Date];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/encoding-date/
  */
 export class EncodingDate implements XMLElement<'encoding-date', EncodingDateAttributes, EncodingDateContents> {
-	static readonly schema = {
-		name: 'encoding-date',
-		attributes: {},
-		contents: [{ type: 'label', label: 'yyyy-mm-dd', value: { type: 'required', value: { type: 'date' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'encoding-date'> = schema.EncodingDate;
 
 	readonly schema = EncodingDate.schema;
 
@@ -439,7 +401,7 @@ export class EncodingDate implements XMLElement<'encoding-date', EncodingDateAtt
 	contents: EncodingDateContents;
 
 	constructor(opts?: { attributes?: Partial<EncodingDateAttributes>; contents?: EncodingDateContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, EncodingDate.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, EncodingDate.schema);
 		this.contents = opts?.contents ?? operations.zero(EncodingDate.schema.contents);
 	}
 
@@ -453,6 +415,7 @@ export class EncodingDate implements XMLElement<'encoding-date', EncodingDateAtt
 		return this;
 	}
 }
+registerElement('EncodingDate', EncodingDate);
 
 export type EncoderAttributes = { type: string | null };
 
@@ -466,11 +429,7 @@ export type EncoderContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/encoder/
  */
 export class Encoder implements XMLElement<'encoder', EncoderAttributes, EncoderContents> {
-	static readonly schema = {
-		name: 'encoder',
-		attributes: { type: { type: 'optional', value: { type: 'string' } } },
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'encoder'> = schema.Encoder;
 
 	readonly schema = Encoder.schema;
 
@@ -478,7 +437,7 @@ export class Encoder implements XMLElement<'encoder', EncoderAttributes, Encoder
 	contents: EncoderContents;
 
 	constructor(opts?: { attributes?: Partial<EncoderAttributes>; contents?: EncoderContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Encoder.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Encoder.schema);
 		this.contents = opts?.contents ?? operations.zero(Encoder.schema.contents);
 	}
 	/** Gets @type {EncoderAttributes['type']}. */
@@ -500,6 +459,7 @@ export class Encoder implements XMLElement<'encoder', EncoderAttributes, Encoder
 		return this;
 	}
 }
+registerElement('Encoder', Encoder);
 
 export type SoftwareAttributes = Record<string, unknown>;
 
@@ -513,11 +473,7 @@ export type SoftwareContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/software/
  */
 export class Software implements XMLElement<'software', SoftwareAttributes, SoftwareContents> {
-	static readonly schema = {
-		name: 'software',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'software'> = schema.Software;
 
 	readonly schema = Software.schema;
 
@@ -525,7 +481,7 @@ export class Software implements XMLElement<'software', SoftwareAttributes, Soft
 	contents: SoftwareContents;
 
 	constructor(opts?: { attributes?: Partial<SoftwareAttributes>; contents?: SoftwareContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Software.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Software.schema);
 		this.contents = opts?.contents ?? operations.zero(Software.schema.contents);
 	}
 
@@ -539,6 +495,7 @@ export class Software implements XMLElement<'software', SoftwareAttributes, Soft
 		return this;
 	}
 }
+registerElement('Software', Software);
 
 export type EncodingDescriptionAttributes = Record<string, unknown>;
 
@@ -554,11 +511,7 @@ export type EncodingDescriptionContents = [string];
 export class EncodingDescription
 	implements XMLElement<'encoding-description', EncodingDescriptionAttributes, EncodingDescriptionContents>
 {
-	static readonly schema = {
-		name: 'encoding-description',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'encoding-description'> = schema.EncodingDescription;
 
 	readonly schema = EncodingDescription.schema;
 
@@ -566,7 +519,7 @@ export class EncodingDescription
 	contents: EncodingDescriptionContents;
 
 	constructor(opts?: { attributes?: Partial<EncodingDescriptionAttributes>; contents?: EncodingDescriptionContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, EncodingDescription.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, EncodingDescription.schema);
 		this.contents = opts?.contents ?? operations.zero(EncodingDescription.schema.contents);
 	}
 
@@ -580,6 +533,7 @@ export class EncodingDescription
 		return this;
 	}
 }
+registerElement('EncodingDescription', EncodingDescription);
 
 export type SupportsAttributes = {
 	attribute: string | null;
@@ -598,16 +552,7 @@ export type SupportsContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/supports/
  */
 export class Supports implements XMLElement<'supports', SupportsAttributes, SupportsContents> {
-	static readonly schema = {
-		name: 'supports',
-		attributes: {
-			attribute: { type: 'optional', value: { type: 'string' } },
-			element: { type: 'required', value: { type: 'string' } },
-			type: { type: 'required', value: { type: 'choices', choices: ['yes', 'no'] } },
-			value: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'supports'> = schema.Supports;
 
 	readonly schema = Supports.schema;
 
@@ -615,7 +560,7 @@ export class Supports implements XMLElement<'supports', SupportsAttributes, Supp
 	contents: SupportsContents;
 
 	constructor(opts?: { attributes?: Partial<SupportsAttributes>; contents?: SupportsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Supports.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Supports.schema);
 		this.contents = opts?.contents ?? operations.zero(Supports.schema.contents);
 	}
 	/** Gets @type {SupportsAttributes['attribute']}. */
@@ -655,6 +600,7 @@ export class Supports implements XMLElement<'supports', SupportsAttributes, Supp
 		return this;
 	}
 }
+registerElement('Supports', Supports);
 
 export type EncodingAttributes = Record<string, unknown>;
 
@@ -670,26 +616,7 @@ export type EncodingContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/encoding/
  */
 export class Encoding implements XMLElement<'encoding', EncodingAttributes, EncodingContents> {
-	static readonly schema = {
-		name: 'encoding',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'encodings',
-				value: {
-					type: 'zeroOrMore',
-					value: [
-						{ type: 'optional', value: EncodingDate },
-						{ type: 'optional', value: Encoder },
-						{ type: 'optional', value: Software },
-						{ type: 'optional', value: EncodingDescription },
-						{ type: 'optional', value: Supports },
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'encoding'> = schema.Encoding;
 
 	readonly schema = Encoding.schema;
 
@@ -697,7 +624,7 @@ export class Encoding implements XMLElement<'encoding', EncodingAttributes, Enco
 	contents: EncodingContents;
 
 	constructor(opts?: { attributes?: Partial<EncodingAttributes>; contents?: EncodingContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Encoding.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Encoding.schema);
 		this.contents = opts?.contents ?? operations.zero(Encoding.schema.contents);
 	}
 
@@ -717,6 +644,7 @@ export class Encoding implements XMLElement<'encoding', EncodingAttributes, Enco
 		return this;
 	}
 }
+registerElement('Encoding', Encoding);
 
 export type SourceAttributes = Record<string, unknown>;
 
@@ -730,11 +658,7 @@ export type SourceContents = [string | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/source/
  */
 export class Source implements XMLElement<'source', SourceAttributes, SourceContents> {
-	static readonly schema = {
-		name: 'source',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'optional', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'source'> = schema.Source;
 
 	readonly schema = Source.schema;
 
@@ -742,7 +666,7 @@ export class Source implements XMLElement<'source', SourceAttributes, SourceCont
 	contents: SourceContents;
 
 	constructor(opts?: { attributes?: Partial<SourceAttributes>; contents?: SourceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Source.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Source.schema);
 		this.contents = opts?.contents ?? operations.zero(Source.schema.contents);
 	}
 
@@ -756,6 +680,7 @@ export class Source implements XMLElement<'source', SourceAttributes, SourceCont
 		return this;
 	}
 }
+registerElement('Source', Source);
 
 export type RelationAttributes = { type: string | null };
 
@@ -769,11 +694,7 @@ export type RelationContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/relation/
  */
 export class Relation implements XMLElement<'relation', RelationAttributes, RelationContents> {
-	static readonly schema = {
-		name: 'relation',
-		attributes: { type: { type: 'optional', value: { type: 'string' } } },
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'relation'> = schema.Relation;
 
 	readonly schema = Relation.schema;
 
@@ -781,7 +702,7 @@ export class Relation implements XMLElement<'relation', RelationAttributes, Rela
 	contents: RelationContents;
 
 	constructor(opts?: { attributes?: Partial<RelationAttributes>; contents?: RelationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Relation.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Relation.schema);
 		this.contents = opts?.contents ?? operations.zero(Relation.schema.contents);
 	}
 	/** Gets @type {RelationAttributes['type']}. */
@@ -803,6 +724,7 @@ export class Relation implements XMLElement<'relation', RelationAttributes, Rela
 		return this;
 	}
 }
+registerElement('Relation', Relation);
 
 export type MiscellaneousFieldAttributes = { name: string };
 
@@ -818,11 +740,7 @@ export type MiscellaneousFieldContents = [string];
 export class MiscellaneousField
 	implements XMLElement<'miscellaneous-field', MiscellaneousFieldAttributes, MiscellaneousFieldContents>
 {
-	static readonly schema = {
-		name: 'miscellaneous-field',
-		attributes: { name: { type: 'required', value: { type: 'string' } } },
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'miscellaneous-field'> = schema.MiscellaneousField;
 
 	readonly schema = MiscellaneousField.schema;
 
@@ -830,7 +748,7 @@ export class MiscellaneousField
 	contents: MiscellaneousFieldContents;
 
 	constructor(opts?: { attributes?: Partial<MiscellaneousFieldAttributes>; contents?: MiscellaneousFieldContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MiscellaneousField.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MiscellaneousField.schema);
 		this.contents = opts?.contents ?? operations.zero(MiscellaneousField.schema.contents);
 	}
 	/** Gets @type {MiscellaneousFieldAttributes['name']}. */
@@ -852,6 +770,7 @@ export class MiscellaneousField
 		return this;
 	}
 }
+registerElement('MiscellaneousField', MiscellaneousField);
 
 export type MiscellaneousAttributes = Record<string, unknown>;
 
@@ -865,13 +784,7 @@ export type MiscellaneousContents = [Array<MiscellaneousField>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/miscellaneous/
  */
 export class Miscellaneous implements XMLElement<'miscellaneous', MiscellaneousAttributes, MiscellaneousContents> {
-	static readonly schema = {
-		name: 'miscellaneous',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'miscellaneous-fields', value: { type: 'zeroOrMore', value: MiscellaneousField } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'miscellaneous'> = schema.Miscellaneous;
 
 	readonly schema = Miscellaneous.schema;
 
@@ -879,7 +792,7 @@ export class Miscellaneous implements XMLElement<'miscellaneous', MiscellaneousA
 	contents: MiscellaneousContents;
 
 	constructor(opts?: { attributes?: Partial<MiscellaneousAttributes>; contents?: MiscellaneousContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Miscellaneous.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Miscellaneous.schema);
 		this.contents = opts?.contents ?? operations.zero(Miscellaneous.schema.contents);
 	}
 
@@ -893,6 +806,7 @@ export class Miscellaneous implements XMLElement<'miscellaneous', MiscellaneousA
 		return this;
 	}
 }
+registerElement('Miscellaneous', Miscellaneous);
 
 export type IdentificationAttributes = Record<string, unknown>;
 
@@ -913,18 +827,7 @@ export type IdentificationContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/identification/
  */
 export class Identification implements XMLElement<'identification', IdentificationAttributes, IdentificationContents> {
-	static readonly schema = {
-		name: 'identification',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'creators', value: { type: 'zeroOrMore', value: Creator } },
-			{ type: 'label', label: 'rights', value: { type: 'zeroOrMore', value: Rights } },
-			{ type: 'optional', value: Encoding },
-			{ type: 'optional', value: Source },
-			{ type: 'label', label: 'relations', value: { type: 'zeroOrMore', value: Relation } },
-			{ type: 'optional', value: Miscellaneous },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'identification'> = schema.Identification;
 
 	readonly schema = Identification.schema;
 
@@ -932,7 +835,7 @@ export class Identification implements XMLElement<'identification', Identificati
 	contents: IdentificationContents;
 
 	constructor(opts?: { attributes?: Partial<IdentificationAttributes>; contents?: IdentificationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Identification.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Identification.schema);
 		this.contents = opts?.contents ?? operations.zero(Identification.schema.contents);
 	}
 
@@ -991,6 +894,7 @@ export class Identification implements XMLElement<'identification', Identificati
 		return this;
 	}
 }
+registerElement('Identification', Identification);
 
 export type MillimetersAttributes = Record<string, unknown>;
 
@@ -1004,17 +908,7 @@ export type MillimetersContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/millimeters/
  */
 export class Millimeters implements XMLElement<'millimeters', MillimetersAttributes, MillimetersContents> {
-	static readonly schema = {
-		name: 'millimeters',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'millimeters',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'millimeters'> = schema.Millimeters;
 
 	readonly schema = Millimeters.schema;
 
@@ -1022,7 +916,7 @@ export class Millimeters implements XMLElement<'millimeters', MillimetersAttribu
 	contents: MillimetersContents;
 
 	constructor(opts?: { attributes?: Partial<MillimetersAttributes>; contents?: MillimetersContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Millimeters.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Millimeters.schema);
 		this.contents = opts?.contents ?? operations.zero(Millimeters.schema.contents);
 	}
 
@@ -1036,6 +930,7 @@ export class Millimeters implements XMLElement<'millimeters', MillimetersAttribu
 		return this;
 	}
 }
+registerElement('Millimeters', Millimeters);
 
 export type TenthsAttributes = Record<string, unknown>;
 
@@ -1051,17 +946,7 @@ export type TenthsContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tenths/
  */
 export class Tenths implements XMLElement<'tenths', TenthsAttributes, TenthsContents> {
-	static readonly schema = {
-		name: 'tenths',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'tenths-value',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'tenths'> = schema.Tenths;
 
 	readonly schema = Tenths.schema;
 
@@ -1069,7 +954,7 @@ export class Tenths implements XMLElement<'tenths', TenthsAttributes, TenthsCont
 	contents: TenthsContents;
 
 	constructor(opts?: { attributes?: Partial<TenthsAttributes>; contents?: TenthsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Tenths.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Tenths.schema);
 		this.contents = opts?.contents ?? operations.zero(Tenths.schema.contents);
 	}
 
@@ -1083,6 +968,7 @@ export class Tenths implements XMLElement<'tenths', TenthsAttributes, TenthsCont
 		return this;
 	}
 }
+registerElement('Tenths', Tenths);
 
 export type ScalingAttributes = Record<string, unknown>;
 
@@ -1096,14 +982,7 @@ export type ScalingContents = [Millimeters, Tenths];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/scaling/
  */
 export class Scaling implements XMLElement<'scaling', ScalingAttributes, ScalingContents> {
-	static readonly schema = {
-		name: 'scaling',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: Millimeters },
-			{ type: 'required', value: Tenths },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'scaling'> = schema.Scaling;
 
 	readonly schema = Scaling.schema;
 
@@ -1111,7 +990,7 @@ export class Scaling implements XMLElement<'scaling', ScalingAttributes, Scaling
 	contents: ScalingContents;
 
 	constructor(opts?: { attributes?: Partial<ScalingAttributes>; contents?: ScalingContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Scaling.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Scaling.schema);
 		this.contents = opts?.contents ?? operations.zero(Scaling.schema.contents);
 	}
 
@@ -1134,6 +1013,7 @@ export class Scaling implements XMLElement<'scaling', ScalingAttributes, Scaling
 		return this;
 	}
 }
+registerElement('Scaling', Scaling);
 
 export type ConcertScoreAttributes = Record<string, unknown>;
 
@@ -1149,7 +1029,7 @@ export type ConcertScoreContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/concert-score/
  */
 export class ConcertScore implements XMLElement<'concert-score', ConcertScoreAttributes, ConcertScoreContents> {
-	static readonly schema = { name: 'concert-score', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'concert-score'> = schema.ConcertScore;
 
 	readonly schema = ConcertScore.schema;
 
@@ -1157,10 +1037,11 @@ export class ConcertScore implements XMLElement<'concert-score', ConcertScoreAtt
 	contents: ConcertScoreContents;
 
 	constructor(opts?: { attributes?: Partial<ConcertScoreAttributes>; contents?: ConcertScoreContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ConcertScore.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ConcertScore.schema);
 		this.contents = opts?.contents ?? operations.zero(ConcertScore.schema.contents);
 	}
 }
+registerElement('ConcertScore', ConcertScore);
 
 export type PageHeightAttributes = Record<string, unknown>;
 
@@ -1176,17 +1057,7 @@ export type PageHeightContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-height/
  */
 export class PageHeight implements XMLElement<'page-height', PageHeightAttributes, PageHeightContents> {
-	static readonly schema = {
-		name: 'page-height',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'page-height'> = schema.PageHeight;
 
 	readonly schema = PageHeight.schema;
 
@@ -1194,7 +1065,7 @@ export class PageHeight implements XMLElement<'page-height', PageHeightAttribute
 	contents: PageHeightContents;
 
 	constructor(opts?: { attributes?: Partial<PageHeightAttributes>; contents?: PageHeightContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PageHeight.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PageHeight.schema);
 		this.contents = opts?.contents ?? operations.zero(PageHeight.schema.contents);
 	}
 
@@ -1208,6 +1079,7 @@ export class PageHeight implements XMLElement<'page-height', PageHeightAttribute
 		return this;
 	}
 }
+registerElement('PageHeight', PageHeight);
 
 export type PageWidthAttributes = Record<string, unknown>;
 
@@ -1223,17 +1095,7 @@ export type PageWidthContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-width/
  */
 export class PageWidth implements XMLElement<'page-width', PageWidthAttributes, PageWidthContents> {
-	static readonly schema = {
-		name: 'page-width',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'page-width'> = schema.PageWidth;
 
 	readonly schema = PageWidth.schema;
 
@@ -1241,7 +1103,7 @@ export class PageWidth implements XMLElement<'page-width', PageWidthAttributes, 
 	contents: PageWidthContents;
 
 	constructor(opts?: { attributes?: Partial<PageWidthAttributes>; contents?: PageWidthContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PageWidth.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PageWidth.schema);
 		this.contents = opts?.contents ?? operations.zero(PageWidth.schema.contents);
 	}
 
@@ -1255,6 +1117,7 @@ export class PageWidth implements XMLElement<'page-width', PageWidthAttributes, 
 		return this;
 	}
 }
+registerElement('PageWidth', PageWidth);
 
 export type LeftMarginAttributes = Record<string, unknown>;
 
@@ -1270,17 +1133,7 @@ export type LeftMarginContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/left-margin/
  */
 export class LeftMargin implements XMLElement<'left-margin', LeftMarginAttributes, LeftMarginContents> {
-	static readonly schema = {
-		name: 'left-margin',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'left-margin',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'left-margin'> = schema.LeftMargin;
 
 	readonly schema = LeftMargin.schema;
 
@@ -1288,7 +1141,7 @@ export class LeftMargin implements XMLElement<'left-margin', LeftMarginAttribute
 	contents: LeftMarginContents;
 
 	constructor(opts?: { attributes?: Partial<LeftMarginAttributes>; contents?: LeftMarginContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, LeftMargin.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, LeftMargin.schema);
 		this.contents = opts?.contents ?? operations.zero(LeftMargin.schema.contents);
 	}
 
@@ -1302,6 +1155,7 @@ export class LeftMargin implements XMLElement<'left-margin', LeftMarginAttribute
 		return this;
 	}
 }
+registerElement('LeftMargin', LeftMargin);
 
 export type RightMarginAttributes = Record<string, unknown>;
 
@@ -1317,17 +1171,7 @@ export type RightMarginContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/right-margin/
  */
 export class RightMargin implements XMLElement<'right-margin', RightMarginAttributes, RightMarginContents> {
-	static readonly schema = {
-		name: 'right-margin',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'right-margin'> = schema.RightMargin;
 
 	readonly schema = RightMargin.schema;
 
@@ -1335,7 +1179,7 @@ export class RightMargin implements XMLElement<'right-margin', RightMarginAttrib
 	contents: RightMarginContents;
 
 	constructor(opts?: { attributes?: Partial<RightMarginAttributes>; contents?: RightMarginContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, RightMargin.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, RightMargin.schema);
 		this.contents = opts?.contents ?? operations.zero(RightMargin.schema.contents);
 	}
 
@@ -1349,6 +1193,7 @@ export class RightMargin implements XMLElement<'right-margin', RightMarginAttrib
 		return this;
 	}
 }
+registerElement('RightMargin', RightMargin);
 
 export type TopMarginAttributes = Record<string, unknown>;
 
@@ -1364,17 +1209,7 @@ export type TopMarginContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/top-margin/
  */
 export class TopMargin implements XMLElement<'top-margin', TopMarginAttributes, TopMarginContents> {
-	static readonly schema = {
-		name: 'top-margin',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'top-margin-value',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'top-margin'> = schema.TopMargin;
 
 	readonly schema = TopMargin.schema;
 
@@ -1382,7 +1217,7 @@ export class TopMargin implements XMLElement<'top-margin', TopMarginAttributes, 
 	contents: TopMarginContents;
 
 	constructor(opts?: { attributes?: Partial<TopMarginAttributes>; contents?: TopMarginContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TopMargin.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TopMargin.schema);
 		this.contents = opts?.contents ?? operations.zero(TopMargin.schema.contents);
 	}
 
@@ -1396,6 +1231,7 @@ export class TopMargin implements XMLElement<'top-margin', TopMarginAttributes, 
 		return this;
 	}
 }
+registerElement('TopMargin', TopMargin);
 
 export type BottomMarginAttributes = Record<string, unknown>;
 
@@ -1411,17 +1247,7 @@ export type BottomMarginContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bottom-margin/
  */
 export class BottomMargin implements XMLElement<'bottom-margin', BottomMarginAttributes, BottomMarginContents> {
-	static readonly schema = {
-		name: 'bottom-margin',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'bottom-margin',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'bottom-margin'> = schema.BottomMargin;
 
 	readonly schema = BottomMargin.schema;
 
@@ -1429,7 +1255,7 @@ export class BottomMargin implements XMLElement<'bottom-margin', BottomMarginAtt
 	contents: BottomMarginContents;
 
 	constructor(opts?: { attributes?: Partial<BottomMarginAttributes>; contents?: BottomMarginContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BottomMargin.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BottomMargin.schema);
 		this.contents = opts?.contents ?? operations.zero(BottomMargin.schema.contents);
 	}
 
@@ -1443,6 +1269,7 @@ export class BottomMargin implements XMLElement<'bottom-margin', BottomMarginAtt
 		return this;
 	}
 }
+registerElement('BottomMargin', BottomMargin);
 
 export type PageMarginsAttributes = { type: 'both' | 'odd' | 'even' | null };
 
@@ -1456,16 +1283,7 @@ export type PageMarginsContents = [LeftMargin, RightMargin, TopMargin, BottomMar
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-margins/
  */
 export class PageMargins implements XMLElement<'page-margins', PageMarginsAttributes, PageMarginsContents> {
-	static readonly schema = {
-		name: 'page-margins',
-		attributes: { type: { type: 'optional', value: { type: 'choices', choices: ['both', 'odd', 'even'] } } },
-		contents: [
-			{ type: 'required', value: LeftMargin },
-			{ type: 'required', value: RightMargin },
-			{ type: 'required', value: TopMargin },
-			{ type: 'required', value: BottomMargin },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'page-margins'> = schema.PageMargins;
 
 	readonly schema = PageMargins.schema;
 
@@ -1473,7 +1291,7 @@ export class PageMargins implements XMLElement<'page-margins', PageMarginsAttrib
 	contents: PageMarginsContents;
 
 	constructor(opts?: { attributes?: Partial<PageMarginsAttributes>; contents?: PageMarginsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PageMargins.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PageMargins.schema);
 		this.contents = opts?.contents ?? operations.zero(PageMargins.schema.contents);
 	}
 	/** Gets @type {PageMarginsAttributes['type']}. */
@@ -1522,6 +1340,7 @@ export class PageMargins implements XMLElement<'page-margins', PageMarginsAttrib
 		return this;
 	}
 }
+registerElement('PageMargins', PageMargins);
 
 export type PageLayoutAttributes = Record<string, unknown>;
 
@@ -1539,19 +1358,7 @@ export type PageLayoutContents = [PageHeight | null, PageWidth | null, [] | [Pag
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/page-layout/
  */
 export class PageLayout implements XMLElement<'page-layout', PageLayoutAttributes, PageLayoutContents> {
-	static readonly schema = {
-		name: 'page-layout',
-		attributes: {},
-		contents: [
-			{ type: 'optional', value: PageHeight },
-			{ type: 'optional', value: PageWidth },
-			{
-				type: 'label',
-				label: 'page-margins',
-				value: { type: 'choices', choices: [[], [PageMargins], [PageMargins, PageMargins]] },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'page-layout'> = schema.PageLayout;
 
 	readonly schema = PageLayout.schema;
 
@@ -1559,7 +1366,7 @@ export class PageLayout implements XMLElement<'page-layout', PageLayoutAttribute
 	contents: PageLayoutContents;
 
 	constructor(opts?: { attributes?: Partial<PageLayoutAttributes>; contents?: PageLayoutContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PageLayout.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PageLayout.schema);
 		this.contents = opts?.contents ?? operations.zero(PageLayout.schema.contents);
 	}
 
@@ -1591,6 +1398,7 @@ export class PageLayout implements XMLElement<'page-layout', PageLayoutAttribute
 		return this;
 	}
 }
+registerElement('PageLayout', PageLayout);
 
 export type SystemMarginsAttributes = Record<string, unknown>;
 
@@ -1604,14 +1412,7 @@ export type SystemMarginsContents = [LeftMargin, RightMargin];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-margins/
  */
 export class SystemMargins implements XMLElement<'system-margins', SystemMarginsAttributes, SystemMarginsContents> {
-	static readonly schema = {
-		name: 'system-margins',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: LeftMargin },
-			{ type: 'required', value: RightMargin },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'system-margins'> = schema.SystemMargins;
 
 	readonly schema = SystemMargins.schema;
 
@@ -1619,7 +1420,7 @@ export class SystemMargins implements XMLElement<'system-margins', SystemMargins
 	contents: SystemMarginsContents;
 
 	constructor(opts?: { attributes?: Partial<SystemMarginsAttributes>; contents?: SystemMarginsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SystemMargins.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SystemMargins.schema);
 		this.contents = opts?.contents ?? operations.zero(SystemMargins.schema.contents);
 	}
 
@@ -1642,6 +1443,7 @@ export class SystemMargins implements XMLElement<'system-margins', SystemMargins
 		return this;
 	}
 }
+registerElement('SystemMargins', SystemMargins);
 
 export type SystemDistanceAttributes = Record<string, unknown>;
 
@@ -1657,17 +1459,7 @@ export type SystemDistanceContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-distance/
  */
 export class SystemDistance implements XMLElement<'system-distance', SystemDistanceAttributes, SystemDistanceContents> {
-	static readonly schema = {
-		name: 'system-distance',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'system-distance-value',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'system-distance'> = schema.SystemDistance;
 
 	readonly schema = SystemDistance.schema;
 
@@ -1675,7 +1467,7 @@ export class SystemDistance implements XMLElement<'system-distance', SystemDista
 	contents: SystemDistanceContents;
 
 	constructor(opts?: { attributes?: Partial<SystemDistanceAttributes>; contents?: SystemDistanceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SystemDistance.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SystemDistance.schema);
 		this.contents = opts?.contents ?? operations.zero(SystemDistance.schema.contents);
 	}
 
@@ -1689,6 +1481,7 @@ export class SystemDistance implements XMLElement<'system-distance', SystemDista
 		return this;
 	}
 }
+registerElement('SystemDistance', SystemDistance);
 
 export type TopSystemDistanceAttributes = Record<string, unknown>;
 
@@ -1706,17 +1499,7 @@ export type TopSystemDistanceContents = [number];
 export class TopSystemDistance
 	implements XMLElement<'top-system-distance', TopSystemDistanceAttributes, TopSystemDistanceContents>
 {
-	static readonly schema = {
-		name: 'top-system-distance',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'top-system-distance'> = schema.TopSystemDistance;
 
 	readonly schema = TopSystemDistance.schema;
 
@@ -1724,7 +1507,7 @@ export class TopSystemDistance
 	contents: TopSystemDistanceContents;
 
 	constructor(opts?: { attributes?: Partial<TopSystemDistanceAttributes>; contents?: TopSystemDistanceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TopSystemDistance.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TopSystemDistance.schema);
 		this.contents = opts?.contents ?? operations.zero(TopSystemDistance.schema.contents);
 	}
 
@@ -1738,6 +1521,7 @@ export class TopSystemDistance
 		return this;
 	}
 }
+registerElement('TopSystemDistance', TopSystemDistance);
 
 export type LeftDividerAttributes = {
 	color: string | null;
@@ -1764,33 +1548,7 @@ export type LeftDividerContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/left-divider/
  */
 export class LeftDivider implements XMLElement<'left-divider', LeftDividerAttributes, LeftDividerContents> {
-	static readonly schema = {
-		name: 'left-divider',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'left-divider'> = schema.LeftDivider;
 
 	readonly schema = LeftDivider.schema;
 
@@ -1798,7 +1556,7 @@ export class LeftDivider implements XMLElement<'left-divider', LeftDividerAttrib
 	contents: LeftDividerContents;
 
 	constructor(opts?: { attributes?: Partial<LeftDividerAttributes>; contents?: LeftDividerContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, LeftDivider.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, LeftDivider.schema);
 		this.contents = opts?.contents ?? operations.zero(LeftDivider.schema.contents);
 	}
 	/** Gets @type {LeftDividerAttributes['color']}. */
@@ -1912,6 +1670,7 @@ export class LeftDivider implements XMLElement<'left-divider', LeftDividerAttrib
 		return this;
 	}
 }
+registerElement('LeftDivider', LeftDivider);
 
 export type RightDividerAttributes = {
 	color: string | null;
@@ -1938,33 +1697,7 @@ export type RightDividerContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/right-divider/
  */
 export class RightDivider implements XMLElement<'right-divider', RightDividerAttributes, RightDividerContents> {
-	static readonly schema = {
-		name: 'right-divider',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'right-divider'> = schema.RightDivider;
 
 	readonly schema = RightDivider.schema;
 
@@ -1972,7 +1705,7 @@ export class RightDivider implements XMLElement<'right-divider', RightDividerAtt
 	contents: RightDividerContents;
 
 	constructor(opts?: { attributes?: Partial<RightDividerAttributes>; contents?: RightDividerContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, RightDivider.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, RightDivider.schema);
 		this.contents = opts?.contents ?? operations.zero(RightDivider.schema.contents);
 	}
 	/** Gets @type {RightDividerAttributes['color']}. */
@@ -2086,6 +1819,7 @@ export class RightDivider implements XMLElement<'right-divider', RightDividerAtt
 		return this;
 	}
 }
+registerElement('RightDivider', RightDivider);
 
 export type SystemDividersAttributes = Record<string, unknown>;
 
@@ -2101,14 +1835,7 @@ export type SystemDividersContents = [LeftDivider, RightDivider];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-dividers/
  */
 export class SystemDividers implements XMLElement<'system-dividers', SystemDividersAttributes, SystemDividersContents> {
-	static readonly schema = {
-		name: 'system-dividers',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: LeftDivider },
-			{ type: 'required', value: RightDivider },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'system-dividers'> = schema.SystemDividers;
 
 	readonly schema = SystemDividers.schema;
 
@@ -2116,7 +1843,7 @@ export class SystemDividers implements XMLElement<'system-dividers', SystemDivid
 	contents: SystemDividersContents;
 
 	constructor(opts?: { attributes?: Partial<SystemDividersAttributes>; contents?: SystemDividersContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SystemDividers.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SystemDividers.schema);
 		this.contents = opts?.contents ?? operations.zero(SystemDividers.schema.contents);
 	}
 
@@ -2139,6 +1866,7 @@ export class SystemDividers implements XMLElement<'system-dividers', SystemDivid
 		return this;
 	}
 }
+registerElement('SystemDividers', SystemDividers);
 
 export type SystemLayoutAttributes = Record<string, unknown>;
 
@@ -2163,16 +1891,7 @@ export type SystemLayoutContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/system-layout/
  */
 export class SystemLayout implements XMLElement<'system-layout', SystemLayoutAttributes, SystemLayoutContents> {
-	static readonly schema = {
-		name: 'system-layout',
-		attributes: {},
-		contents: [
-			{ type: 'optional', value: SystemMargins },
-			{ type: 'optional', value: SystemDistance },
-			{ type: 'optional', value: TopSystemDistance },
-			{ type: 'optional', value: SystemDividers },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'system-layout'> = schema.SystemLayout;
 
 	readonly schema = SystemLayout.schema;
 
@@ -2180,7 +1899,7 @@ export class SystemLayout implements XMLElement<'system-layout', SystemLayoutAtt
 	contents: SystemLayoutContents;
 
 	constructor(opts?: { attributes?: Partial<SystemLayoutAttributes>; contents?: SystemLayoutContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SystemLayout.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SystemLayout.schema);
 		this.contents = opts?.contents ?? operations.zero(SystemLayout.schema.contents);
 	}
 
@@ -2221,6 +1940,7 @@ export class SystemLayout implements XMLElement<'system-layout', SystemLayoutAtt
 		return this;
 	}
 }
+registerElement('SystemLayout', SystemLayout);
 
 export type StaffDistanceAttributes = Record<string, unknown>;
 
@@ -2236,17 +1956,7 @@ export type StaffDistanceContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-distance/
  */
 export class StaffDistance implements XMLElement<'staff-distance', StaffDistanceAttributes, StaffDistanceContents> {
-	static readonly schema = {
-		name: 'staff-distance',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'staff-distance'> = schema.StaffDistance;
 
 	readonly schema = StaffDistance.schema;
 
@@ -2254,7 +1964,7 @@ export class StaffDistance implements XMLElement<'staff-distance', StaffDistance
 	contents: StaffDistanceContents;
 
 	constructor(opts?: { attributes?: Partial<StaffDistanceAttributes>; contents?: StaffDistanceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StaffDistance.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StaffDistance.schema);
 		this.contents = opts?.contents ?? operations.zero(StaffDistance.schema.contents);
 	}
 
@@ -2268,6 +1978,7 @@ export class StaffDistance implements XMLElement<'staff-distance', StaffDistance
 		return this;
 	}
 }
+registerElement('StaffDistance', StaffDistance);
 
 export type StaffLayoutAttributes = { number: number | null };
 
@@ -2283,11 +1994,7 @@ export type StaffLayoutContents = [StaffDistance | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-layout/
  */
 export class StaffLayout implements XMLElement<'staff-layout', StaffLayoutAttributes, StaffLayoutContents> {
-	static readonly schema = {
-		name: 'staff-layout',
-		attributes: { number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } } },
-		contents: [{ type: 'optional', value: StaffDistance }],
-	} as const;
+	static readonly schema: XMLElementSchema<'staff-layout'> = schema.StaffLayout;
 
 	readonly schema = StaffLayout.schema;
 
@@ -2295,7 +2002,7 @@ export class StaffLayout implements XMLElement<'staff-layout', StaffLayoutAttrib
 	contents: StaffLayoutContents;
 
 	constructor(opts?: { attributes?: Partial<StaffLayoutAttributes>; contents?: StaffLayoutContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StaffLayout.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StaffLayout.schema);
 		this.contents = opts?.contents ?? operations.zero(StaffLayout.schema.contents);
 	}
 	/** Gets @type {StaffLayoutAttributes['number']}. */
@@ -2317,6 +2024,7 @@ export class StaffLayout implements XMLElement<'staff-layout', StaffLayoutAttrib
 		return this;
 	}
 }
+registerElement('StaffLayout', StaffLayout);
 
 export type LineWidthAttributes = {
 	type:
@@ -2351,45 +2059,7 @@ export type LineWidthContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/line-width/
  */
 export class LineWidth implements XMLElement<'line-width', LineWidthAttributes, LineWidthContents> {
-	static readonly schema = {
-		name: 'line-width',
-		attributes: {
-			type: {
-				type: 'required',
-				value: {
-					type: 'choices',
-					choices: [
-						'beam',
-						'bracket',
-						'dashes',
-						'enclosure',
-						'ending',
-						'extend',
-						'heavy barline',
-						'leger',
-						'light barline',
-						'octave shift',
-						'pedal',
-						'slur middle',
-						'slur tip',
-						'staff',
-						'stem',
-						'tie middle',
-						'tie tip',
-						'tuplet bracket',
-						'wedge',
-					],
-				},
-			},
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'line-width',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'line-width'> = schema.LineWidth;
 
 	readonly schema = LineWidth.schema;
 
@@ -2397,7 +2067,7 @@ export class LineWidth implements XMLElement<'line-width', LineWidthAttributes, 
 	contents: LineWidthContents;
 
 	constructor(opts?: { attributes?: Partial<LineWidthAttributes>; contents?: LineWidthContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, LineWidth.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, LineWidth.schema);
 		this.contents = opts?.contents ?? operations.zero(LineWidth.schema.contents);
 	}
 	/** Gets @type {LineWidthAttributes['type']}. */
@@ -2459,6 +2129,7 @@ export class LineWidth implements XMLElement<'line-width', LineWidthAttributes, 
 		return this;
 	}
 }
+registerElement('LineWidth', LineWidth);
 
 export type NoteSizeAttributes = { type: 'cue' | 'grace' | 'grace-cue' | 'large' };
 
@@ -2472,19 +2143,7 @@ export type NoteSizeContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note-size/
  */
 export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, NoteSizeContents> {
-	static readonly schema = {
-		name: 'note-size',
-		attributes: {
-			type: { type: 'required', value: { type: 'choices', choices: ['cue', 'grace', 'grace-cue', 'large'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'note-size',
-				value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'note-size'> = schema.NoteSize;
 
 	readonly schema = NoteSize.schema;
 
@@ -2492,7 +2151,7 @@ export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, Not
 	contents: NoteSizeContents;
 
 	constructor(opts?: { attributes?: Partial<NoteSizeAttributes>; contents?: NoteSizeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NoteSize.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NoteSize.schema);
 		this.contents = opts?.contents ?? operations.zero(NoteSize.schema.contents);
 	}
 	/** Gets @type {NoteSizeAttributes['type']}. */
@@ -2514,6 +2173,7 @@ export class NoteSize implements XMLElement<'note-size', NoteSizeAttributes, Not
 		return this;
 	}
 }
+registerElement('NoteSize', NoteSize);
 
 export type DistanceAttributes = { type: 'beam' | 'hyphen' };
 
@@ -2527,17 +2187,7 @@ export type DistanceContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/distance/
  */
 export class Distance implements XMLElement<'distance', DistanceAttributes, DistanceContents> {
-	static readonly schema = {
-		name: 'distance',
-		attributes: { type: { type: 'required', value: { type: 'choices', choices: ['beam', 'hyphen'] } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'distance',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'distance'> = schema.Distance;
 
 	readonly schema = Distance.schema;
 
@@ -2545,7 +2195,7 @@ export class Distance implements XMLElement<'distance', DistanceAttributes, Dist
 	contents: DistanceContents;
 
 	constructor(opts?: { attributes?: Partial<DistanceAttributes>; contents?: DistanceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Distance.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Distance.schema);
 		this.contents = opts?.contents ?? operations.zero(Distance.schema.contents);
 	}
 	/** Gets @type {DistanceAttributes['type']}. */
@@ -2567,6 +2217,7 @@ export class Distance implements XMLElement<'distance', DistanceAttributes, Dist
 		return this;
 	}
 }
+registerElement('Distance', Distance);
 
 export type GlyphAttributes = {
 	type:
@@ -2594,32 +2245,7 @@ export type GlyphContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/glyph/
  */
 export class Glyph implements XMLElement<'glyph', GlyphAttributes, GlyphContents> {
-	static readonly schema = {
-		name: 'glyph',
-		attributes: {
-			type: {
-				type: 'required',
-				value: {
-					type: 'choices',
-					choices: [
-						'quarter-rest',
-						'g-clef-ottava-bassa',
-						'c-clef',
-						'f-clef',
-						'percussion-clef',
-						'octave-shift-up-8',
-						'octave-shift-down-8',
-						'octave-shift-down-15',
-						'octave-shift-continue-15',
-						'octave-shift-down-22',
-						'octave-shift-up-22',
-						'octave-shift-continue-22',
-					],
-				},
-			},
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'glyph'> = schema.Glyph;
 
 	readonly schema = Glyph.schema;
 
@@ -2627,7 +2253,7 @@ export class Glyph implements XMLElement<'glyph', GlyphAttributes, GlyphContents
 	contents: GlyphContents;
 
 	constructor(opts?: { attributes?: Partial<GlyphAttributes>; contents?: GlyphContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Glyph.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Glyph.schema);
 		this.contents = opts?.contents ?? operations.zero(Glyph.schema.contents);
 	}
 	/** Gets @type {GlyphAttributes['type']}. */
@@ -2675,6 +2301,7 @@ export class Glyph implements XMLElement<'glyph', GlyphAttributes, GlyphContents
 		return this;
 	}
 }
+registerElement('Glyph', Glyph);
 
 export type OtherAppearanceAttributes = { type: string };
 
@@ -2690,11 +2317,7 @@ export type OtherAppearanceContents = [string];
 export class OtherAppearance
 	implements XMLElement<'other-appearance', OtherAppearanceAttributes, OtherAppearanceContents>
 {
-	static readonly schema = {
-		name: 'other-appearance',
-		attributes: { type: { type: 'required', value: { type: 'string' } } },
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-appearance'> = schema.OtherAppearance;
 
 	readonly schema = OtherAppearance.schema;
 
@@ -2702,7 +2325,7 @@ export class OtherAppearance
 	contents: OtherAppearanceContents;
 
 	constructor(opts?: { attributes?: Partial<OtherAppearanceAttributes>; contents?: OtherAppearanceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherAppearance.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherAppearance.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherAppearance.schema.contents);
 	}
 	/** Gets @type {OtherAppearanceAttributes['type']}. */
@@ -2724,6 +2347,7 @@ export class OtherAppearance
 		return this;
 	}
 }
+registerElement('OtherAppearance', OtherAppearance);
 
 export type AppearanceAttributes = Record<string, unknown>;
 
@@ -2743,17 +2367,7 @@ export type AppearanceContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/appearance/
  */
 export class Appearance implements XMLElement<'appearance', AppearanceAttributes, AppearanceContents> {
-	static readonly schema = {
-		name: 'appearance',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'line-widths', value: { type: 'zeroOrMore', value: LineWidth } },
-			{ type: 'label', label: 'note-sizes', value: { type: 'zeroOrMore', value: NoteSize } },
-			{ type: 'label', label: 'distances', value: { type: 'zeroOrMore', value: Distance } },
-			{ type: 'label', label: 'glyphs', value: { type: 'zeroOrMore', value: Glyph } },
-			{ type: 'label', label: 'other-appearances', value: { type: 'zeroOrMore', value: OtherAppearance } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'appearance'> = schema.Appearance;
 
 	readonly schema = Appearance.schema;
 
@@ -2761,7 +2375,7 @@ export class Appearance implements XMLElement<'appearance', AppearanceAttributes
 	contents: AppearanceContents;
 
 	constructor(opts?: { attributes?: Partial<AppearanceAttributes>; contents?: AppearanceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Appearance.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Appearance.schema);
 		this.contents = opts?.contents ?? operations.zero(Appearance.schema.contents);
 	}
 
@@ -2811,6 +2425,7 @@ export class Appearance implements XMLElement<'appearance', AppearanceAttributes
 		return this;
 	}
 }
+registerElement('Appearance', Appearance);
 
 export type MusicFontAttributes = {
 	'font-family': string | null;
@@ -2829,25 +2444,7 @@ export type MusicFontContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/music-font/
  */
 export class MusicFont implements XMLElement<'music-font', MusicFontAttributes, MusicFontContents> {
-	static readonly schema = {
-		name: 'music-font',
-		attributes: {
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'music-font'> = schema.MusicFont;
 
 	readonly schema = MusicFont.schema;
 
@@ -2855,7 +2452,7 @@ export class MusicFont implements XMLElement<'music-font', MusicFontAttributes, 
 	contents: MusicFontContents;
 
 	constructor(opts?: { attributes?: Partial<MusicFontAttributes>; contents?: MusicFontContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MusicFont.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MusicFont.schema);
 		this.contents = opts?.contents ?? operations.zero(MusicFont.schema.contents);
 	}
 	/** Gets @type {MusicFontAttributes['font-family']}. */
@@ -2897,6 +2494,7 @@ export class MusicFont implements XMLElement<'music-font', MusicFontAttributes, 
 		return this;
 	}
 }
+registerElement('MusicFont', MusicFont);
 
 export type WordFontAttributes = {
 	'font-family': string | null;
@@ -2915,25 +2513,7 @@ export type WordFontContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/word-font/
  */
 export class WordFont implements XMLElement<'word-font', WordFontAttributes, WordFontContents> {
-	static readonly schema = {
-		name: 'word-font',
-		attributes: {
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'word-font'> = schema.WordFont;
 
 	readonly schema = WordFont.schema;
 
@@ -2941,7 +2521,7 @@ export class WordFont implements XMLElement<'word-font', WordFontAttributes, Wor
 	contents: WordFontContents;
 
 	constructor(opts?: { attributes?: Partial<WordFontAttributes>; contents?: WordFontContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, WordFont.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, WordFont.schema);
 		this.contents = opts?.contents ?? operations.zero(WordFont.schema.contents);
 	}
 	/** Gets @type {WordFontAttributes['font-family']}. */
@@ -2983,6 +2563,7 @@ export class WordFont implements XMLElement<'word-font', WordFontAttributes, Wor
 		return this;
 	}
 }
+registerElement('WordFont', WordFont);
 
 export type LyricFontAttributes = {
 	'font-family': string | null;
@@ -3003,27 +2584,7 @@ export type LyricFontContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric-font/
  */
 export class LyricFont implements XMLElement<'lyric-font', LyricFontAttributes, LyricFontContents> {
-	static readonly schema = {
-		name: 'lyric-font',
-		attributes: {
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			name: { type: 'optional', value: { type: 'string' } },
-			number: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'lyric-font'> = schema.LyricFont;
 
 	readonly schema = LyricFont.schema;
 
@@ -3031,7 +2592,7 @@ export class LyricFont implements XMLElement<'lyric-font', LyricFontAttributes, 
 	contents: LyricFontContents;
 
 	constructor(opts?: { attributes?: Partial<LyricFontAttributes>; contents?: LyricFontContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, LyricFont.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, LyricFont.schema);
 		this.contents = opts?.contents ?? operations.zero(LyricFont.schema.contents);
 	}
 	/** Gets @type {LyricFontAttributes['font-family']}. */
@@ -3091,6 +2652,7 @@ export class LyricFont implements XMLElement<'lyric-font', LyricFontAttributes, 
 		return this;
 	}
 }
+registerElement('LyricFont', LyricFont);
 
 export type LyricLanguageAttributes = { name: string | null; number: string | null; 'xml:lang': string };
 
@@ -3104,15 +2666,7 @@ export type LyricLanguageContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric-language/
  */
 export class LyricLanguage implements XMLElement<'lyric-language', LyricLanguageAttributes, LyricLanguageContents> {
-	static readonly schema = {
-		name: 'lyric-language',
-		attributes: {
-			name: { type: 'optional', value: { type: 'string' } },
-			number: { type: 'optional', value: { type: 'string' } },
-			'xml:lang': { type: 'required', value: { type: 'string' } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'lyric-language'> = schema.LyricLanguage;
 
 	readonly schema = LyricLanguage.schema;
 
@@ -3120,7 +2674,7 @@ export class LyricLanguage implements XMLElement<'lyric-language', LyricLanguage
 	contents: LyricLanguageContents;
 
 	constructor(opts?: { attributes?: Partial<LyricLanguageAttributes>; contents?: LyricLanguageContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, LyricLanguage.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, LyricLanguage.schema);
 		this.contents = opts?.contents ?? operations.zero(LyricLanguage.schema.contents);
 	}
 	/** Gets @type {LyricLanguageAttributes['name']}. */
@@ -3151,6 +2705,7 @@ export class LyricLanguage implements XMLElement<'lyric-language', LyricLanguage
 		return this;
 	}
 }
+registerElement('LyricLanguage', LyricLanguage);
 
 export type DefaultsAttributes = Record<string, unknown>;
 
@@ -3175,22 +2730,7 @@ export type DefaultsContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/
  */
 export class Defaults implements XMLElement<'defaults', DefaultsAttributes, DefaultsContents> {
-	static readonly schema = {
-		name: 'defaults',
-		attributes: {},
-		contents: [
-			{ type: 'optional', value: Scaling },
-			{ type: 'optional', value: ConcertScore },
-			{ type: 'optional', value: PageLayout },
-			{ type: 'optional', value: SystemLayout },
-			{ type: 'label', label: 'staff-layouts', value: { type: 'zeroOrMore', value: StaffLayout } },
-			{ type: 'optional', value: Appearance },
-			{ type: 'optional', value: MusicFont },
-			{ type: 'optional', value: WordFont },
-			{ type: 'label', label: 'lyric-fonts', value: { type: 'zeroOrMore', value: LyricFont } },
-			{ type: 'label', label: 'lyric-languages', value: { type: 'zeroOrMore', value: LyricLanguage } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'defaults'> = schema.Defaults;
 
 	readonly schema = Defaults.schema;
 
@@ -3198,7 +2738,7 @@ export class Defaults implements XMLElement<'defaults', DefaultsAttributes, Defa
 	contents: DefaultsContents;
 
 	constructor(opts?: { attributes?: Partial<DefaultsAttributes>; contents?: DefaultsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Defaults.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Defaults.schema);
 		this.contents = opts?.contents ?? operations.zero(Defaults.schema.contents);
 	}
 
@@ -3293,6 +2833,7 @@ export class Defaults implements XMLElement<'defaults', DefaultsAttributes, Defa
 		return this;
 	}
 }
+registerElement('Defaults', Defaults);
 
 export type CreditTypeAttributes = Record<string, unknown>;
 
@@ -3306,11 +2847,7 @@ export type CreditTypeContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-type/
  */
 export class CreditType implements XMLElement<'credit-type', CreditTypeAttributes, CreditTypeContents> {
-	static readonly schema = {
-		name: 'credit-type',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'credit-type'> = schema.CreditType;
 
 	readonly schema = CreditType.schema;
 
@@ -3318,7 +2855,7 @@ export class CreditType implements XMLElement<'credit-type', CreditTypeAttribute
 	contents: CreditTypeContents;
 
 	constructor(opts?: { attributes?: Partial<CreditTypeAttributes>; contents?: CreditTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, CreditType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, CreditType.schema);
 		this.contents = opts?.contents ?? operations.zero(CreditType.schema.contents);
 	}
 
@@ -3332,6 +2869,7 @@ export class CreditType implements XMLElement<'credit-type', CreditTypeAttribute
 		return this;
 	}
 }
+registerElement('CreditType', CreditType);
 
 export type LinkAttributes = {
 	'default-x': number | null;
@@ -3359,31 +2897,7 @@ export type LinkContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/link/
  */
 export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
-	static readonly schema = {
-		name: 'link',
-		attributes: {
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			element: { type: 'optional', value: { type: 'string' } },
-			name: { type: 'optional', value: { type: 'string' } },
-			position: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'xlink:actuate': {
-				type: 'optional',
-				value: { type: 'choices', choices: ['none', 'onRequest', 'onLoad', 'other'] },
-			},
-			'xlink:href': { type: 'required', value: { type: 'string' } },
-			'xlink:role': { type: 'optional', value: { type: 'string' } },
-			'xlink:show': {
-				type: 'optional',
-				value: { type: 'choices', choices: ['none', 'new', 'replace', 'embed', 'other'] },
-			},
-			'xlink:title': { type: 'optional', value: { type: 'string' } },
-			'xlink:type': { type: 'optional', value: { type: 'choices', choices: ['simple'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'link'> = schema.Link;
 
 	readonly schema = Link.schema;
 
@@ -3391,7 +2905,7 @@ export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
 	contents: LinkContents;
 
 	constructor(opts?: { attributes?: Partial<LinkAttributes>; contents?: LinkContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Link.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Link.schema);
 		this.contents = opts?.contents ?? operations.zero(Link.schema.contents);
 	}
 	/** Gets @type {LinkAttributes['default-x']}. */
@@ -3512,6 +3026,7 @@ export class Link implements XMLElement<'link', LinkAttributes, LinkContents> {
 		return this;
 	}
 }
+registerElement('Link', Link);
 
 export type BookmarkAttributes = { element: string | null; id: string; name: string | null; position: number | null };
 
@@ -3525,16 +3040,7 @@ export type BookmarkContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bookmark/
  */
 export class Bookmark implements XMLElement<'bookmark', BookmarkAttributes, BookmarkContents> {
-	static readonly schema = {
-		name: 'bookmark',
-		attributes: {
-			element: { type: 'optional', value: { type: 'string' } },
-			id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			name: { type: 'optional', value: { type: 'string' } },
-			position: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'bookmark'> = schema.Bookmark;
 
 	readonly schema = Bookmark.schema;
 
@@ -3542,7 +3048,7 @@ export class Bookmark implements XMLElement<'bookmark', BookmarkAttributes, Book
 	contents: BookmarkContents;
 
 	constructor(opts?: { attributes?: Partial<BookmarkAttributes>; contents?: BookmarkContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Bookmark.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Bookmark.schema);
 		this.contents = opts?.contents ?? operations.zero(Bookmark.schema.contents);
 	}
 	/** Gets @type {BookmarkAttributes['element']}. */
@@ -3582,6 +3088,7 @@ export class Bookmark implements XMLElement<'bookmark', BookmarkAttributes, Book
 		return this;
 	}
 }
+registerElement('Bookmark', Bookmark);
 
 export type CreditImageAttributes = {
 	'default-x': number | null;
@@ -3607,23 +3114,7 @@ export type CreditImageContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-image/
  */
 export class CreditImage implements XMLElement<'credit-image', CreditImageAttributes, CreditImageContents> {
-	static readonly schema = {
-		name: 'credit-image',
-		attributes: {
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			height: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			source: { type: 'optional', value: { type: 'string' } },
-			type: { type: 'optional', value: { type: 'string' } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom'] } },
-			width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'credit-image'> = schema.CreditImage;
 
 	readonly schema = CreditImage.schema;
 
@@ -3631,7 +3122,7 @@ export class CreditImage implements XMLElement<'credit-image', CreditImageAttrib
 	contents: CreditImageContents;
 
 	constructor(opts?: { attributes?: Partial<CreditImageAttributes>; contents?: CreditImageContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, CreditImage.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, CreditImage.schema);
 		this.contents = opts?.contents ?? operations.zero(CreditImage.schema.contents);
 	}
 	/** Gets @type {CreditImageAttributes['default-x']}. */
@@ -3734,6 +3225,7 @@ export class CreditImage implements XMLElement<'credit-image', CreditImageAttrib
 		return this;
 	}
 }
+registerElement('CreditImage', CreditImage);
 
 export type CreditWordsAttributes = {
 	color: string | null;
@@ -3787,84 +3279,7 @@ export type CreditWordsContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-words/
  */
 export class CreditWords implements XMLElement<'credit-words', CreditWordsAttributes, CreditWordsContents> {
-	static readonly schema = {
-		name: 'credit-words',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
-			enclosure: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						'none',
-						'rectangle',
-						'square',
-						'oval',
-						'circle',
-						'bracket',
-						'inverted-bracket',
-						'triangle',
-						'diamond',
-						'pentagon',
-						'hexagon',
-						'heptagon',
-						'octagon',
-						'nonagon',
-						'decagon',
-					],
-				},
-			},
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'letter-spacing': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-height': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-			'xml:lang': { type: 'optional', value: { type: 'string' } },
-			'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'credit-words'> = schema.CreditWords;
 
 	readonly schema = CreditWords.schema;
 
@@ -3872,7 +3287,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
 	contents: CreditWordsContents;
 
 	constructor(opts?: { attributes?: Partial<CreditWordsAttributes>; contents?: CreditWordsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, CreditWords.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, CreditWords.schema);
 		this.contents = opts?.contents ?? operations.zero(CreditWords.schema.contents);
 	}
 	/** Gets @type {CreditWordsAttributes['color']}. */
@@ -4128,6 +3543,7 @@ export class CreditWords implements XMLElement<'credit-words', CreditWordsAttrib
 		return this;
 	}
 }
+registerElement('CreditWords', CreditWords);
 
 export type CreditSymbolAttributes = {
 	color: string | null;
@@ -4179,82 +3595,7 @@ export type CreditSymbolContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-symbol/
  */
 export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAttributes, CreditSymbolContents> {
-	static readonly schema = {
-		name: 'credit-symbol',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
-			enclosure: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						'none',
-						'rectangle',
-						'square',
-						'oval',
-						'circle',
-						'bracket',
-						'inverted-bracket',
-						'triangle',
-						'diamond',
-						'pentagon',
-						'hexagon',
-						'heptagon',
-						'octagon',
-						'nonagon',
-						'decagon',
-					],
-				},
-			},
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'letter-spacing': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-height': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'credit-symbol'> = schema.CreditSymbol;
 
 	readonly schema = CreditSymbol.schema;
 
@@ -4262,7 +3603,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
 	contents: CreditSymbolContents;
 
 	constructor(opts?: { attributes?: Partial<CreditSymbolAttributes>; contents?: CreditSymbolContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, CreditSymbol.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, CreditSymbol.schema);
 		this.contents = opts?.contents ?? operations.zero(CreditSymbol.schema.contents);
 	}
 	/** Gets @type {CreditSymbolAttributes['color']}. */
@@ -4500,6 +3841,7 @@ export class CreditSymbol implements XMLElement<'credit-symbol', CreditSymbolAtt
 		return this;
 	}
 }
+registerElement('CreditSymbol', CreditSymbol);
 
 export type CreditToken = [
 	CreditWords | CreditSymbol,
@@ -4524,43 +3866,7 @@ export type CreditContents = [Array<CreditType>, Array<Link>, Array<Bookmark>, C
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit/
  */
 export class Credit implements XMLElement<'credit', CreditAttributes, CreditContents> {
-	static readonly schema = {
-		name: 'credit',
-		attributes: {
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			page: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-		},
-		contents: [
-			{ type: 'label', label: 'credit-types', value: { type: 'zeroOrMore', value: CreditType } },
-			{ type: 'label', label: 'links', value: { type: 'zeroOrMore', value: Link } },
-			{ type: 'label', label: 'bookmarks', value: { type: 'zeroOrMore', value: Bookmark } },
-			{
-				type: 'label',
-				label: 'value',
-				value: {
-					type: 'choices',
-					choices: [
-						CreditImage,
-						{
-							type: 'label',
-							label: 'credit-token',
-							value: [
-								{ type: 'choices', choices: [CreditWords, CreditSymbol] },
-								{
-									type: 'zeroOrMore',
-									value: [
-										{ type: 'zeroOrMore', value: Link },
-										{ type: 'zeroOrMore', value: Bookmark },
-										{ type: 'choices', choices: [CreditWords, CreditSymbol] },
-									],
-								},
-							],
-						},
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'credit'> = schema.Credit;
 
 	readonly schema = Credit.schema;
 
@@ -4568,7 +3874,7 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
 	contents: CreditContents;
 
 	constructor(opts?: { attributes?: Partial<CreditAttributes>; contents?: CreditContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Credit.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Credit.schema);
 		this.contents = opts?.contents ?? operations.zero(Credit.schema.contents);
 	}
 	/** Gets @type {CreditAttributes['id']}. */
@@ -4626,6 +3932,7 @@ export class Credit implements XMLElement<'credit', CreditAttributes, CreditCont
 		return this;
 	}
 }
+registerElement('Credit', Credit);
 
 export type GroupNameAttributes = {
 	color: string | null;
@@ -4650,31 +3957,7 @@ export type GroupNameContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-name/
  */
 export class GroupName implements XMLElement<'group-name', GroupNameAttributes, GroupNameContents> {
-	static readonly schema = {
-		name: 'group-name',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'group-name'> = schema.GroupName;
 
 	readonly schema = GroupName.schema;
 
@@ -4682,7 +3965,7 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
 	contents: GroupNameContents;
 
 	constructor(opts?: { attributes?: Partial<GroupNameAttributes>; contents?: GroupNameContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, GroupName.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, GroupName.schema);
 		this.contents = opts?.contents ?? operations.zero(GroupName.schema.contents);
 	}
 	/** Gets @type {GroupNameAttributes['color']}. */
@@ -4787,6 +4070,7 @@ export class GroupName implements XMLElement<'group-name', GroupNameAttributes, 
 		return this;
 	}
 }
+registerElement('GroupName', GroupName);
 
 export type DisplayTextAttributes = {
 	color: string | null;
@@ -4839,83 +4123,7 @@ export type DisplayTextContents = [string | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/display-text/
  */
 export class DisplayText implements XMLElement<'display-text', DisplayTextAttributes, DisplayTextContents> {
-	static readonly schema = {
-		name: 'display-text',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
-			enclosure: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						'none',
-						'rectangle',
-						'square',
-						'oval',
-						'circle',
-						'bracket',
-						'inverted-bracket',
-						'triangle',
-						'diamond',
-						'pentagon',
-						'hexagon',
-						'heptagon',
-						'octagon',
-						'nonagon',
-						'decagon',
-					],
-				},
-			},
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'letter-spacing': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-height': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-			'xml:lang': { type: 'optional', value: { type: 'string' } },
-			'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'optional', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'display-text'> = schema.DisplayText;
 
 	readonly schema = DisplayText.schema;
 
@@ -4923,7 +4131,7 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
 	contents: DisplayTextContents;
 
 	constructor(opts?: { attributes?: Partial<DisplayTextAttributes>; contents?: DisplayTextContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DisplayText.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DisplayText.schema);
 		this.contents = opts?.contents ?? operations.zero(DisplayText.schema.contents);
 	}
 	/** Gets @type {DisplayTextAttributes['color']}. */
@@ -5170,6 +4378,7 @@ export class DisplayText implements XMLElement<'display-text', DisplayTextAttrib
 		return this;
 	}
 }
+registerElement('DisplayText', DisplayText);
 
 export type AccidentalTextAttributes = {
 	color: string | null;
@@ -5265,141 +4474,7 @@ export type AccidentalTextContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accidental-text/
  */
 export class AccidentalText implements XMLElement<'accidental-text', AccidentalTextAttributes, AccidentalTextContents> {
-	static readonly schema = {
-		name: 'accidental-text',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
-			enclosure: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						'none',
-						'rectangle',
-						'square',
-						'oval',
-						'circle',
-						'bracket',
-						'inverted-bracket',
-						'triangle',
-						'diamond',
-						'pentagon',
-						'hexagon',
-						'heptagon',
-						'octagon',
-						'nonagon',
-						'decagon',
-					],
-				},
-			},
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'letter-spacing': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-height': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			smufl: {
-				type: 'optional',
-				value: { type: 'regex', pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' },
-			},
-			underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-			'xml:lang': { type: 'optional', value: { type: 'string' } },
-			'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'accidental-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'other',
-							'sharp',
-							'natural',
-							'flat',
-							'double-sharp',
-							'sharp-sharp',
-							'flat-flat',
-							'natural-sharp',
-							'natural-flat',
-							'quarter-flat',
-							'quarter-sharp',
-							'three-quarters-flat',
-							'three-quarters-sharp',
-							'sharp-down',
-							'sharp-up',
-							'natural-down',
-							'natural-up',
-							'flat-down',
-							'flat-up',
-							'double-sharp-down',
-							'double-sharp-up',
-							'flat-flat-down',
-							'flat-flat-up',
-							'arrow-down',
-							'arrow-up',
-							'triple-sharp',
-							'triple-flat',
-							'slash-quarter-sharp',
-							'slash-sharp',
-							'slash-flat',
-							'double-slash-flat',
-							'sharp-1',
-							'sharp-2',
-							'sharp-3',
-							'sharp-5',
-							'flat-1',
-							'flat-2',
-							'flat-3',
-							'flat-4',
-							'sori',
-							'koron',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'accidental-text'> = schema.AccidentalText;
 
 	readonly schema = AccidentalText.schema;
 
@@ -5407,7 +4482,7 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
 	contents: AccidentalTextContents;
 
 	constructor(opts?: { attributes?: Partial<AccidentalTextAttributes>; contents?: AccidentalTextContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, AccidentalText.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, AccidentalText.schema);
 		this.contents = opts?.contents ?? operations.zero(AccidentalText.schema.contents);
 	}
 	/** Gets @type {AccidentalTextAttributes['color']}. */
@@ -5747,6 +4822,7 @@ export class AccidentalText implements XMLElement<'accidental-text', AccidentalT
 		return this;
 	}
 }
+registerElement('AccidentalText', AccidentalText);
 
 export type GroupNameDisplayAttributes = { 'print-object': 'yes' | 'no' | null };
 
@@ -5762,17 +4838,7 @@ export type GroupNameDisplayContents = [Array<DisplayText | AccidentalText>];
 export class GroupNameDisplay
 	implements XMLElement<'group-name-display', GroupNameDisplayAttributes, GroupNameDisplayContents>
 {
-	static readonly schema = {
-		name: 'group-name-display',
-		attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'texts',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [DisplayText, AccidentalText] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'group-name-display'> = schema.GroupNameDisplay;
 
 	readonly schema = GroupNameDisplay.schema;
 
@@ -5780,7 +4846,7 @@ export class GroupNameDisplay
 	contents: GroupNameDisplayContents;
 
 	constructor(opts?: { attributes?: Partial<GroupNameDisplayAttributes>; contents?: GroupNameDisplayContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, GroupNameDisplay.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, GroupNameDisplay.schema);
 		this.contents = opts?.contents ?? operations.zero(GroupNameDisplay.schema.contents);
 	}
 	/** Gets @type {GroupNameDisplayAttributes['print-object']}. */
@@ -5802,6 +4868,7 @@ export class GroupNameDisplay
 		return this;
 	}
 }
+registerElement('GroupNameDisplay', GroupNameDisplay);
 
 export type GroupAbbreviationAttributes = {
 	color: string | null;
@@ -5828,31 +4895,7 @@ export type GroupAbbreviationContents = [string];
 export class GroupAbbreviation
 	implements XMLElement<'group-abbreviation', GroupAbbreviationAttributes, GroupAbbreviationContents>
 {
-	static readonly schema = {
-		name: 'group-abbreviation',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'group-abbreviation'> = schema.GroupAbbreviation;
 
 	readonly schema = GroupAbbreviation.schema;
 
@@ -5860,7 +4903,7 @@ export class GroupAbbreviation
 	contents: GroupAbbreviationContents;
 
 	constructor(opts?: { attributes?: Partial<GroupAbbreviationAttributes>; contents?: GroupAbbreviationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, GroupAbbreviation.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, GroupAbbreviation.schema);
 		this.contents = opts?.contents ?? operations.zero(GroupAbbreviation.schema.contents);
 	}
 	/** Gets @type {GroupAbbreviationAttributes['color']}. */
@@ -5965,6 +5008,7 @@ export class GroupAbbreviation
 		return this;
 	}
 }
+registerElement('GroupAbbreviation', GroupAbbreviation);
 
 export type GroupAbbreviationDisplayAttributes = { 'print-object': 'yes' | 'no' | null };
 
@@ -5981,17 +5025,7 @@ export class GroupAbbreviationDisplay
 	implements
 		XMLElement<'group-abbreviation-display', GroupAbbreviationDisplayAttributes, GroupAbbreviationDisplayContents>
 {
-	static readonly schema = {
-		name: 'group-abbreviation-display',
-		attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'texts',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [DisplayText, AccidentalText] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'group-abbreviation-display'> = schema.GroupAbbreviationDisplay;
 
 	readonly schema = GroupAbbreviationDisplay.schema;
 
@@ -6002,7 +5036,7 @@ export class GroupAbbreviationDisplay
 		attributes?: Partial<GroupAbbreviationDisplayAttributes>;
 		contents?: GroupAbbreviationDisplayContents;
 	}) {
-		this.attributes = operations.merge(opts?.attributes || {}, GroupAbbreviationDisplay.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, GroupAbbreviationDisplay.schema);
 		this.contents = opts?.contents ?? operations.zero(GroupAbbreviationDisplay.schema.contents);
 	}
 	/** Gets @type {GroupAbbreviationDisplayAttributes['print-object']}. */
@@ -6024,6 +5058,7 @@ export class GroupAbbreviationDisplay
 		return this;
 	}
 }
+registerElement('GroupAbbreviationDisplay', GroupAbbreviationDisplay);
 
 export type GroupSymbolAttributes = {
 	color: string | null;
@@ -6043,26 +5078,7 @@ export type GroupSymbolContents = ['none' | 'brace' | 'line' | 'bracket' | 'squa
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-symbol/
  */
 export class GroupSymbol implements XMLElement<'group-symbol', GroupSymbolAttributes, GroupSymbolContents> {
-	static readonly schema = {
-		name: 'group-symbol',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'group-symbol-value',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['none', 'brace', 'line', 'bracket', 'square'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'group-symbol'> = schema.GroupSymbol;
 
 	readonly schema = GroupSymbol.schema;
 
@@ -6070,7 +5086,7 @@ export class GroupSymbol implements XMLElement<'group-symbol', GroupSymbolAttrib
 	contents: GroupSymbolContents;
 
 	constructor(opts?: { attributes?: Partial<GroupSymbolAttributes>; contents?: GroupSymbolContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, GroupSymbol.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, GroupSymbol.schema);
 		this.contents = opts?.contents ?? operations.zero(GroupSymbol.schema.contents);
 	}
 	/** Gets @type {GroupSymbolAttributes['color']}. */
@@ -6128,6 +5144,7 @@ export class GroupSymbol implements XMLElement<'group-symbol', GroupSymbolAttrib
 		return this;
 	}
 }
+registerElement('GroupSymbol', GroupSymbol);
 
 export type GroupBarlineAttributes = { color: string | null };
 
@@ -6141,19 +5158,7 @@ export type GroupBarlineContents = ['yes' | 'no' | 'Mensurstrich'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-barline/
  */
 export class GroupBarline implements XMLElement<'group-barline', GroupBarlineAttributes, GroupBarlineContents> {
-	static readonly schema = {
-		name: 'group-barline',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'group-barline-value',
-				value: { type: 'required', value: { type: 'choices', choices: ['yes', 'no', 'Mensurstrich'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'group-barline'> = schema.GroupBarline;
 
 	readonly schema = GroupBarline.schema;
 
@@ -6161,7 +5166,7 @@ export class GroupBarline implements XMLElement<'group-barline', GroupBarlineAtt
 	contents: GroupBarlineContents;
 
 	constructor(opts?: { attributes?: Partial<GroupBarlineAttributes>; contents?: GroupBarlineContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, GroupBarline.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, GroupBarline.schema);
 		this.contents = opts?.contents ?? operations.zero(GroupBarline.schema.contents);
 	}
 	/** Gets @type {GroupBarlineAttributes['color']}. */
@@ -6183,6 +5188,7 @@ export class GroupBarline implements XMLElement<'group-barline', GroupBarlineAtt
 		return this;
 	}
 }
+registerElement('GroupBarline', GroupBarline);
 
 export type GroupTimeAttributes = Record<string, unknown>;
 
@@ -6196,7 +5202,7 @@ export type GroupTimeContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-time/
  */
 export class GroupTime implements XMLElement<'group-time', GroupTimeAttributes, GroupTimeContents> {
-	static readonly schema = { name: 'group-time', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'group-time'> = schema.GroupTime;
 
 	readonly schema = GroupTime.schema;
 
@@ -6204,10 +5210,11 @@ export class GroupTime implements XMLElement<'group-time', GroupTimeAttributes, 
 	contents: GroupTimeContents;
 
 	constructor(opts?: { attributes?: Partial<GroupTimeAttributes>; contents?: GroupTimeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, GroupTime.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, GroupTime.schema);
 		this.contents = opts?.contents ?? operations.zero(GroupTime.schema.contents);
 	}
 }
+registerElement('GroupTime', GroupTime);
 
 export type FootnoteAttributes = {
 	color: string | null;
@@ -6260,83 +5267,7 @@ export type FootnoteContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/footnote/
  */
 export class Footnote implements XMLElement<'footnote', FootnoteAttributes, FootnoteContents> {
-	static readonly schema = {
-		name: 'footnote',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
-			enclosure: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						'none',
-						'rectangle',
-						'square',
-						'oval',
-						'circle',
-						'bracket',
-						'inverted-bracket',
-						'triangle',
-						'diamond',
-						'pentagon',
-						'hexagon',
-						'heptagon',
-						'octagon',
-						'nonagon',
-						'decagon',
-					],
-				},
-			},
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'letter-spacing': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-height': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-			'xml:lang': { type: 'optional', value: { type: 'string' } },
-			'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'footnote'> = schema.Footnote;
 
 	readonly schema = Footnote.schema;
 
@@ -6344,7 +5275,7 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
 	contents: FootnoteContents;
 
 	constructor(opts?: { attributes?: Partial<FootnoteAttributes>; contents?: FootnoteContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Footnote.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Footnote.schema);
 		this.contents = opts?.contents ?? operations.zero(Footnote.schema.contents);
 	}
 	/** Gets @type {FootnoteAttributes['color']}. */
@@ -6591,6 +5522,7 @@ export class Footnote implements XMLElement<'footnote', FootnoteAttributes, Foot
 		return this;
 	}
 }
+registerElement('Footnote', Footnote);
 
 export type LevelAttributes = {
 	bracket: 'yes' | 'no' | null;
@@ -6614,17 +5546,7 @@ export type LevelContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/level/
  */
 export class Level implements XMLElement<'level', LevelAttributes, LevelContents> {
-	static readonly schema = {
-		name: 'level',
-		attributes: {
-			bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			reference: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
-			type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop', 'single'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'level'> = schema.Level;
 
 	readonly schema = Level.schema;
 
@@ -6632,7 +5554,7 @@ export class Level implements XMLElement<'level', LevelAttributes, LevelContents
 	contents: LevelContents;
 
 	constructor(opts?: { attributes?: Partial<LevelAttributes>; contents?: LevelContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Level.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Level.schema);
 		this.contents = opts?.contents ?? operations.zero(Level.schema.contents);
 	}
 	/** Gets @type {LevelAttributes['bracket']}. */
@@ -6690,6 +5612,7 @@ export class Level implements XMLElement<'level', LevelAttributes, LevelContents
 		return this;
 	}
 }
+registerElement('Level', Level);
 
 export type PartGroupAttributes = { number: string | null; type: 'start' | 'stop' };
 
@@ -6717,24 +5640,7 @@ export type PartGroupContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-group/
  */
 export class PartGroup implements XMLElement<'part-group', PartGroupAttributes, PartGroupContents> {
-	static readonly schema = {
-		name: 'part-group',
-		attributes: {
-			number: { type: 'optional', value: { type: 'string' } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-		},
-		contents: [
-			{ type: 'optional', value: GroupName },
-			{ type: 'optional', value: GroupNameDisplay },
-			{ type: 'optional', value: GroupAbbreviation },
-			{ type: 'optional', value: GroupAbbreviationDisplay },
-			{ type: 'optional', value: GroupSymbol },
-			{ type: 'optional', value: GroupBarline },
-			{ type: 'optional', value: GroupTime },
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'part-group'> = schema.PartGroup;
 
 	readonly schema = PartGroup.schema;
 
@@ -6742,7 +5648,7 @@ export class PartGroup implements XMLElement<'part-group', PartGroupAttributes, 
 	contents: PartGroupContents;
 
 	constructor(opts?: { attributes?: Partial<PartGroupAttributes>; contents?: PartGroupContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartGroup.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartGroup.schema);
 		this.contents = opts?.contents ?? operations.zero(PartGroup.schema.contents);
 	}
 	/** Gets @type {PartGroupAttributes['number']}. */
@@ -6845,6 +5751,7 @@ export class PartGroup implements XMLElement<'part-group', PartGroupAttributes, 
 		return this;
 	}
 }
+registerElement('PartGroup', PartGroup);
 
 export type InstrumentLinkAttributes = { id: string };
 
@@ -6858,11 +5765,7 @@ export type InstrumentLinkContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instrument-link/
  */
 export class InstrumentLink implements XMLElement<'instrument-link', InstrumentLinkAttributes, InstrumentLinkContents> {
-	static readonly schema = {
-		name: 'instrument-link',
-		attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'instrument-link'> = schema.InstrumentLink;
 
 	readonly schema = InstrumentLink.schema;
 
@@ -6870,7 +5773,7 @@ export class InstrumentLink implements XMLElement<'instrument-link', InstrumentL
 	contents: InstrumentLinkContents;
 
 	constructor(opts?: { attributes?: Partial<InstrumentLinkAttributes>; contents?: InstrumentLinkContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, InstrumentLink.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, InstrumentLink.schema);
 		this.contents = opts?.contents ?? operations.zero(InstrumentLink.schema.contents);
 	}
 	/** Gets @type {InstrumentLinkAttributes['id']}. */
@@ -6883,6 +5786,7 @@ export class InstrumentLink implements XMLElement<'instrument-link', InstrumentL
 		return this;
 	}
 }
+registerElement('InstrumentLink', InstrumentLink);
 
 export type GroupLinkAttributes = Record<string, unknown>;
 
@@ -6896,11 +5800,7 @@ export type GroupLinkContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-link/
  */
 export class GroupLink implements XMLElement<'group-link', GroupLinkAttributes, GroupLinkContents> {
-	static readonly schema = {
-		name: 'group-link',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'group-link'> = schema.GroupLink;
 
 	readonly schema = GroupLink.schema;
 
@@ -6908,7 +5808,7 @@ export class GroupLink implements XMLElement<'group-link', GroupLinkAttributes, 
 	contents: GroupLinkContents;
 
 	constructor(opts?: { attributes?: Partial<GroupLinkAttributes>; contents?: GroupLinkContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, GroupLink.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, GroupLink.schema);
 		this.contents = opts?.contents ?? operations.zero(GroupLink.schema.contents);
 	}
 
@@ -6922,6 +5822,7 @@ export class GroupLink implements XMLElement<'group-link', GroupLinkAttributes, 
 		return this;
 	}
 }
+registerElement('GroupLink', GroupLink);
 
 export type PartLinkAttributes = {
 	'xlink:actuate': 'none' | 'onRequest' | 'onLoad' | 'other' | null;
@@ -6942,27 +5843,7 @@ export type PartLinkContents = [Array<InstrumentLink>, Array<GroupLink>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-link/
  */
 export class PartLink implements XMLElement<'part-link', PartLinkAttributes, PartLinkContents> {
-	static readonly schema = {
-		name: 'part-link',
-		attributes: {
-			'xlink:actuate': {
-				type: 'optional',
-				value: { type: 'choices', choices: ['none', 'onRequest', 'onLoad', 'other'] },
-			},
-			'xlink:href': { type: 'required', value: { type: 'string' } },
-			'xlink:role': { type: 'optional', value: { type: 'string' } },
-			'xlink:show': {
-				type: 'optional',
-				value: { type: 'choices', choices: ['none', 'new', 'replace', 'embed', 'other'] },
-			},
-			'xlink:title': { type: 'optional', value: { type: 'string' } },
-			'xlink:type': { type: 'optional', value: { type: 'choices', choices: ['simple'] } },
-		},
-		contents: [
-			{ type: 'label', label: 'instrument-links', value: { type: 'zeroOrMore', value: InstrumentLink } },
-			{ type: 'label', label: 'group-links', value: { type: 'zeroOrMore', value: GroupLink } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'part-link'> = schema.PartLink;
 
 	readonly schema = PartLink.schema;
 
@@ -6970,7 +5851,7 @@ export class PartLink implements XMLElement<'part-link', PartLinkAttributes, Par
 	contents: PartLinkContents;
 
 	constructor(opts?: { attributes?: Partial<PartLinkAttributes>; contents?: PartLinkContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartLink.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartLink.schema);
 		this.contents = opts?.contents ?? operations.zero(PartLink.schema.contents);
 	}
 	/** Gets @type {PartLinkAttributes['xlink:actuate']}. */
@@ -7046,6 +5927,7 @@ export class PartLink implements XMLElement<'part-link', PartLinkAttributes, Par
 		return this;
 	}
 }
+registerElement('PartLink', PartLink);
 
 export type PartNameAttributes = {
 	color: string | null;
@@ -7071,32 +5953,7 @@ export type PartNameContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-name/
  */
 export class PartName implements XMLElement<'part-name', PartNameAttributes, PartNameContents> {
-	static readonly schema = {
-		name: 'part-name',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'part-name'> = schema.PartName;
 
 	readonly schema = PartName.schema;
 
@@ -7104,7 +5961,7 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
 	contents: PartNameContents;
 
 	constructor(opts?: { attributes?: Partial<PartNameAttributes>; contents?: PartNameContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartName.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartName.schema);
 		this.contents = opts?.contents ?? operations.zero(PartName.schema.contents);
 	}
 	/** Gets @type {PartNameAttributes['color']}. */
@@ -7218,6 +6075,7 @@ export class PartName implements XMLElement<'part-name', PartNameAttributes, Par
 		return this;
 	}
 }
+registerElement('PartName', PartName);
 
 export type PartNameDisplayAttributes = { 'print-object': 'yes' | 'no' | null };
 
@@ -7233,17 +6091,7 @@ export type PartNameDisplayContents = [Array<DisplayText | AccidentalText>];
 export class PartNameDisplay
 	implements XMLElement<'part-name-display', PartNameDisplayAttributes, PartNameDisplayContents>
 {
-	static readonly schema = {
-		name: 'part-name-display',
-		attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'texts',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [DisplayText, AccidentalText] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'part-name-display'> = schema.PartNameDisplay;
 
 	readonly schema = PartNameDisplay.schema;
 
@@ -7251,7 +6099,7 @@ export class PartNameDisplay
 	contents: PartNameDisplayContents;
 
 	constructor(opts?: { attributes?: Partial<PartNameDisplayAttributes>; contents?: PartNameDisplayContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartNameDisplay.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartNameDisplay.schema);
 		this.contents = opts?.contents ?? operations.zero(PartNameDisplay.schema.contents);
 	}
 	/** Gets @type {PartNameDisplayAttributes['print-object']}. */
@@ -7273,6 +6121,7 @@ export class PartNameDisplay
 		return this;
 	}
 }
+registerElement('PartNameDisplay', PartNameDisplay);
 
 export type PartAbbreviationAttributes = {
 	color: string | null;
@@ -7300,32 +6149,7 @@ export type PartAbbreviationContents = [string];
 export class PartAbbreviation
 	implements XMLElement<'part-abbreviation', PartAbbreviationAttributes, PartAbbreviationContents>
 {
-	static readonly schema = {
-		name: 'part-abbreviation',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'part-abbreviation'> = schema.PartAbbreviation;
 
 	readonly schema = PartAbbreviation.schema;
 
@@ -7333,7 +6157,7 @@ export class PartAbbreviation
 	contents: PartAbbreviationContents;
 
 	constructor(opts?: { attributes?: Partial<PartAbbreviationAttributes>; contents?: PartAbbreviationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartAbbreviation.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartAbbreviation.schema);
 		this.contents = opts?.contents ?? operations.zero(PartAbbreviation.schema.contents);
 	}
 	/** Gets @type {PartAbbreviationAttributes['color']}. */
@@ -7447,6 +6271,7 @@ export class PartAbbreviation
 		return this;
 	}
 }
+registerElement('PartAbbreviation', PartAbbreviation);
 
 export type PartAbbreviationDisplayAttributes = { 'print-object': 'yes' | 'no' | null };
 
@@ -7462,17 +6287,7 @@ export type PartAbbreviationDisplayContents = [Array<DisplayText | AccidentalTex
 export class PartAbbreviationDisplay
 	implements XMLElement<'part-abbreviation-display', PartAbbreviationDisplayAttributes, PartAbbreviationDisplayContents>
 {
-	static readonly schema = {
-		name: 'part-abbreviation-display',
-		attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'texts',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [DisplayText, AccidentalText] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'part-abbreviation-display'> = schema.PartAbbreviationDisplay;
 
 	readonly schema = PartAbbreviationDisplay.schema;
 
@@ -7483,7 +6298,7 @@ export class PartAbbreviationDisplay
 		attributes?: Partial<PartAbbreviationDisplayAttributes>;
 		contents?: PartAbbreviationDisplayContents;
 	}) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartAbbreviationDisplay.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartAbbreviationDisplay.schema);
 		this.contents = opts?.contents ?? operations.zero(PartAbbreviationDisplay.schema.contents);
 	}
 	/** Gets @type {PartAbbreviationDisplayAttributes['print-object']}. */
@@ -7505,6 +6320,7 @@ export class PartAbbreviationDisplay
 		return this;
 	}
 }
+registerElement('PartAbbreviationDisplay', PartAbbreviationDisplay);
 
 export type GroupAttributes = Record<string, unknown>;
 
@@ -7518,11 +6334,7 @@ export type GroupContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group/
  */
 export class Group implements XMLElement<'group', GroupAttributes, GroupContents> {
-	static readonly schema = {
-		name: 'group',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'group'> = schema.Group;
 
 	readonly schema = Group.schema;
 
@@ -7530,7 +6342,7 @@ export class Group implements XMLElement<'group', GroupAttributes, GroupContents
 	contents: GroupContents;
 
 	constructor(opts?: { attributes?: Partial<GroupAttributes>; contents?: GroupContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Group.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Group.schema);
 		this.contents = opts?.contents ?? operations.zero(Group.schema.contents);
 	}
 
@@ -7544,6 +6356,7 @@ export class Group implements XMLElement<'group', GroupAttributes, GroupContents
 		return this;
 	}
 }
+registerElement('Group', Group);
 
 export type InstrumentNameAttributes = Record<string, unknown>;
 
@@ -7557,11 +6370,7 @@ export type InstrumentNameContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instrument-name/
  */
 export class InstrumentName implements XMLElement<'instrument-name', InstrumentNameAttributes, InstrumentNameContents> {
-	static readonly schema = {
-		name: 'instrument-name',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'instrument-name'> = schema.InstrumentName;
 
 	readonly schema = InstrumentName.schema;
 
@@ -7569,7 +6378,7 @@ export class InstrumentName implements XMLElement<'instrument-name', InstrumentN
 	contents: InstrumentNameContents;
 
 	constructor(opts?: { attributes?: Partial<InstrumentNameAttributes>; contents?: InstrumentNameContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, InstrumentName.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, InstrumentName.schema);
 		this.contents = opts?.contents ?? operations.zero(InstrumentName.schema.contents);
 	}
 
@@ -7583,6 +6392,7 @@ export class InstrumentName implements XMLElement<'instrument-name', InstrumentN
 		return this;
 	}
 }
+registerElement('InstrumentName', InstrumentName);
 
 export type InstrumentAbbreviationAttributes = Record<string, unknown>;
 
@@ -7598,11 +6408,7 @@ export type InstrumentAbbreviationContents = [string];
 export class InstrumentAbbreviation
 	implements XMLElement<'instrument-abbreviation', InstrumentAbbreviationAttributes, InstrumentAbbreviationContents>
 {
-	static readonly schema = {
-		name: 'instrument-abbreviation',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'instrument-abbreviation'> = schema.InstrumentAbbreviation;
 
 	readonly schema = InstrumentAbbreviation.schema;
 
@@ -7613,7 +6419,7 @@ export class InstrumentAbbreviation
 		attributes?: Partial<InstrumentAbbreviationAttributes>;
 		contents?: InstrumentAbbreviationContents;
 	}) {
-		this.attributes = operations.merge(opts?.attributes || {}, InstrumentAbbreviation.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, InstrumentAbbreviation.schema);
 		this.contents = opts?.contents ?? operations.zero(InstrumentAbbreviation.schema.contents);
 	}
 
@@ -7627,6 +6433,7 @@ export class InstrumentAbbreviation
 		return this;
 	}
 }
+registerElement('InstrumentAbbreviation', InstrumentAbbreviation);
 
 export type InstrumentSoundAttributes = Record<string, unknown>;
 
@@ -7642,11 +6449,7 @@ export type InstrumentSoundContents = [string];
 export class InstrumentSound
 	implements XMLElement<'instrument-sound', InstrumentSoundAttributes, InstrumentSoundContents>
 {
-	static readonly schema = {
-		name: 'instrument-sound',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'instrument-sound'> = schema.InstrumentSound;
 
 	readonly schema = InstrumentSound.schema;
 
@@ -7654,7 +6457,7 @@ export class InstrumentSound
 	contents: InstrumentSoundContents;
 
 	constructor(opts?: { attributes?: Partial<InstrumentSoundAttributes>; contents?: InstrumentSoundContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, InstrumentSound.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, InstrumentSound.schema);
 		this.contents = opts?.contents ?? operations.zero(InstrumentSound.schema.contents);
 	}
 
@@ -7668,6 +6471,7 @@ export class InstrumentSound
 		return this;
 	}
 }
+registerElement('InstrumentSound', InstrumentSound);
 
 export type SoloAttributes = Record<string, unknown>;
 
@@ -7681,7 +6485,7 @@ export type SoloContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/solo/
  */
 export class Solo implements XMLElement<'solo', SoloAttributes, SoloContents> {
-	static readonly schema = { name: 'solo', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'solo'> = schema.Solo;
 
 	readonly schema = Solo.schema;
 
@@ -7689,10 +6493,11 @@ export class Solo implements XMLElement<'solo', SoloAttributes, SoloContents> {
 	contents: SoloContents;
 
 	constructor(opts?: { attributes?: Partial<SoloAttributes>; contents?: SoloContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Solo.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Solo.schema);
 		this.contents = opts?.contents ?? operations.zero(Solo.schema.contents);
 	}
 }
+registerElement('Solo', Solo);
 
 export type EnsembleAttributes = Record<string, unknown>;
 
@@ -7706,26 +6511,7 @@ export type EnsembleContents = ['' | number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ensemble/
  */
 export class Ensemble implements XMLElement<'ensemble', EnsembleAttributes, EnsembleContents> {
-	static readonly schema = {
-		name: 'ensemble',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'size',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							{ type: 'choices', choices: [''] },
-							{ type: 'int', min: 1, max: Infinity },
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'ensemble'> = schema.Ensemble;
 
 	readonly schema = Ensemble.schema;
 
@@ -7733,7 +6519,7 @@ export class Ensemble implements XMLElement<'ensemble', EnsembleAttributes, Ense
 	contents: EnsembleContents;
 
 	constructor(opts?: { attributes?: Partial<EnsembleAttributes>; contents?: EnsembleContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Ensemble.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Ensemble.schema);
 		this.contents = opts?.contents ?? operations.zero(Ensemble.schema.contents);
 	}
 
@@ -7747,6 +6533,7 @@ export class Ensemble implements XMLElement<'ensemble', EnsembleAttributes, Ense
 		return this;
 	}
 }
+registerElement('Ensemble', Ensemble);
 
 export type VirtualLibraryAttributes = Record<string, unknown>;
 
@@ -7760,11 +6547,7 @@ export type VirtualLibraryContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/virtual-library/
  */
 export class VirtualLibrary implements XMLElement<'virtual-library', VirtualLibraryAttributes, VirtualLibraryContents> {
-	static readonly schema = {
-		name: 'virtual-library',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'virtual-library'> = schema.VirtualLibrary;
 
 	readonly schema = VirtualLibrary.schema;
 
@@ -7772,7 +6555,7 @@ export class VirtualLibrary implements XMLElement<'virtual-library', VirtualLibr
 	contents: VirtualLibraryContents;
 
 	constructor(opts?: { attributes?: Partial<VirtualLibraryAttributes>; contents?: VirtualLibraryContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, VirtualLibrary.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, VirtualLibrary.schema);
 		this.contents = opts?.contents ?? operations.zero(VirtualLibrary.schema.contents);
 	}
 
@@ -7786,6 +6569,7 @@ export class VirtualLibrary implements XMLElement<'virtual-library', VirtualLibr
 		return this;
 	}
 }
+registerElement('VirtualLibrary', VirtualLibrary);
 
 export type VirtualNameAttributes = Record<string, unknown>;
 
@@ -7799,11 +6583,7 @@ export type VirtualNameContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/virtual-name/
  */
 export class VirtualName implements XMLElement<'virtual-name', VirtualNameAttributes, VirtualNameContents> {
-	static readonly schema = {
-		name: 'virtual-name',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'virtual-name'> = schema.VirtualName;
 
 	readonly schema = VirtualName.schema;
 
@@ -7811,7 +6591,7 @@ export class VirtualName implements XMLElement<'virtual-name', VirtualNameAttrib
 	contents: VirtualNameContents;
 
 	constructor(opts?: { attributes?: Partial<VirtualNameAttributes>; contents?: VirtualNameContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, VirtualName.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, VirtualName.schema);
 		this.contents = opts?.contents ?? operations.zero(VirtualName.schema.contents);
 	}
 
@@ -7825,6 +6605,7 @@ export class VirtualName implements XMLElement<'virtual-name', VirtualNameAttrib
 		return this;
 	}
 }
+registerElement('VirtualName', VirtualName);
 
 export type VirtualInstrumentAttributes = Record<string, unknown>;
 
@@ -7840,14 +6621,7 @@ export type VirtualInstrumentContents = [VirtualLibrary | null, VirtualName | nu
 export class VirtualInstrument
 	implements XMLElement<'virtual-instrument', VirtualInstrumentAttributes, VirtualInstrumentContents>
 {
-	static readonly schema = {
-		name: 'virtual-instrument',
-		attributes: {},
-		contents: [
-			{ type: 'optional', value: VirtualLibrary },
-			{ type: 'optional', value: VirtualName },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'virtual-instrument'> = schema.VirtualInstrument;
 
 	readonly schema = VirtualInstrument.schema;
 
@@ -7855,7 +6629,7 @@ export class VirtualInstrument
 	contents: VirtualInstrumentContents;
 
 	constructor(opts?: { attributes?: Partial<VirtualInstrumentAttributes>; contents?: VirtualInstrumentContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, VirtualInstrument.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, VirtualInstrument.schema);
 		this.contents = opts?.contents ?? operations.zero(VirtualInstrument.schema.contents);
 	}
 
@@ -7878,6 +6652,7 @@ export class VirtualInstrument
 		return this;
 	}
 }
+registerElement('VirtualInstrument', VirtualInstrument);
 
 export type ScoreInstrumentAttributes = { id: string };
 
@@ -7903,21 +6678,7 @@ export type ScoreInstrumentContents = [
 export class ScoreInstrument
 	implements XMLElement<'score-instrument', ScoreInstrumentAttributes, ScoreInstrumentContents>
 {
-	static readonly schema = {
-		name: 'score-instrument',
-		attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [
-			{ type: 'required', value: InstrumentName },
-			{ type: 'optional', value: InstrumentAbbreviation },
-			{ type: 'optional', value: InstrumentSound },
-			{
-				type: 'label',
-				label: 'instrument-types',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [Solo, Ensemble] } },
-			},
-			{ type: 'optional', value: VirtualInstrument },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'score-instrument'> = schema.ScoreInstrument;
 
 	readonly schema = ScoreInstrument.schema;
 
@@ -7925,7 +6686,7 @@ export class ScoreInstrument
 	contents: ScoreInstrumentContents;
 
 	constructor(opts?: { attributes?: Partial<ScoreInstrumentAttributes>; contents?: ScoreInstrumentContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ScoreInstrument.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ScoreInstrument.schema);
 		this.contents = opts?.contents ?? operations.zero(ScoreInstrument.schema.contents);
 	}
 	/** Gets @type {ScoreInstrumentAttributes['id']}. */
@@ -7983,6 +6744,7 @@ export class ScoreInstrument
 		return this;
 	}
 }
+registerElement('ScoreInstrument', ScoreInstrument);
 
 export type PlayerNameAttributes = Record<string, unknown>;
 
@@ -7996,11 +6758,7 @@ export type PlayerNameContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/player-name/
  */
 export class PlayerName implements XMLElement<'player-name', PlayerNameAttributes, PlayerNameContents> {
-	static readonly schema = {
-		name: 'player-name',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'player-name'> = schema.PlayerName;
 
 	readonly schema = PlayerName.schema;
 
@@ -8008,7 +6766,7 @@ export class PlayerName implements XMLElement<'player-name', PlayerNameAttribute
 	contents: PlayerNameContents;
 
 	constructor(opts?: { attributes?: Partial<PlayerNameAttributes>; contents?: PlayerNameContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PlayerName.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PlayerName.schema);
 		this.contents = opts?.contents ?? operations.zero(PlayerName.schema.contents);
 	}
 
@@ -8022,6 +6780,7 @@ export class PlayerName implements XMLElement<'player-name', PlayerNameAttribute
 		return this;
 	}
 }
+registerElement('PlayerName', PlayerName);
 
 export type PlayerAttributes = { id: string };
 
@@ -8035,11 +6794,7 @@ export type PlayerContents = [PlayerName];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/player/
  */
 export class Player implements XMLElement<'player', PlayerAttributes, PlayerContents> {
-	static readonly schema = {
-		name: 'player',
-		attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [{ type: 'required', value: PlayerName }],
-	} as const;
+	static readonly schema: XMLElementSchema<'player'> = schema.Player;
 
 	readonly schema = Player.schema;
 
@@ -8047,7 +6802,7 @@ export class Player implements XMLElement<'player', PlayerAttributes, PlayerCont
 	contents: PlayerContents;
 
 	constructor(opts?: { attributes?: Partial<PlayerAttributes>; contents?: PlayerContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Player.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Player.schema);
 		this.contents = opts?.contents ?? operations.zero(Player.schema.contents);
 	}
 	/** Gets @type {PlayerAttributes['id']}. */
@@ -8069,6 +6824,7 @@ export class Player implements XMLElement<'player', PlayerAttributes, PlayerCont
 		return this;
 	}
 }
+registerElement('Player', Player);
 
 export type MidiDeviceAttributes = { id: string | null; port: number | null };
 
@@ -8082,14 +6838,7 @@ export type MidiDeviceContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/midi-device/
  */
 export class MidiDevice implements XMLElement<'midi-device', MidiDeviceAttributes, MidiDeviceContents> {
-	static readonly schema = {
-		name: 'midi-device',
-		attributes: {
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			port: { type: 'label', label: 'midi16', value: { type: 'optional', value: { type: 'int', min: 1, max: 16 } } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'midi-device'> = schema.MidiDevice;
 
 	readonly schema = MidiDevice.schema;
 
@@ -8097,7 +6846,7 @@ export class MidiDevice implements XMLElement<'midi-device', MidiDeviceAttribute
 	contents: MidiDeviceContents;
 
 	constructor(opts?: { attributes?: Partial<MidiDeviceAttributes>; contents?: MidiDeviceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MidiDevice.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MidiDevice.schema);
 		this.contents = opts?.contents ?? operations.zero(MidiDevice.schema.contents);
 	}
 	/** Gets @type {MidiDeviceAttributes['id']}. */
@@ -8128,6 +6877,7 @@ export class MidiDevice implements XMLElement<'midi-device', MidiDeviceAttribute
 		return this;
 	}
 }
+registerElement('MidiDevice', MidiDevice);
 
 export type MidiChannelAttributes = Record<string, unknown>;
 
@@ -8141,13 +6891,7 @@ export type MidiChannelContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/midi-channel/
  */
 export class MidiChannel implements XMLElement<'midi-channel', MidiChannelAttributes, MidiChannelContents> {
-	static readonly schema = {
-		name: 'midi-channel',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'midi16', value: { type: 'required', value: { type: 'int', min: 1, max: 16 } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'midi-channel'> = schema.MidiChannel;
 
 	readonly schema = MidiChannel.schema;
 
@@ -8155,7 +6899,7 @@ export class MidiChannel implements XMLElement<'midi-channel', MidiChannelAttrib
 	contents: MidiChannelContents;
 
 	constructor(opts?: { attributes?: Partial<MidiChannelAttributes>; contents?: MidiChannelContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MidiChannel.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MidiChannel.schema);
 		this.contents = opts?.contents ?? operations.zero(MidiChannel.schema.contents);
 	}
 
@@ -8169,6 +6913,7 @@ export class MidiChannel implements XMLElement<'midi-channel', MidiChannelAttrib
 		return this;
 	}
 }
+registerElement('MidiChannel', MidiChannel);
 
 export type MidiNameAttributes = Record<string, unknown>;
 
@@ -8182,11 +6927,7 @@ export type MidiNameContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/midi-name/
  */
 export class MidiName implements XMLElement<'midi-name', MidiNameAttributes, MidiNameContents> {
-	static readonly schema = {
-		name: 'midi-name',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'midi-name'> = schema.MidiName;
 
 	readonly schema = MidiName.schema;
 
@@ -8194,7 +6935,7 @@ export class MidiName implements XMLElement<'midi-name', MidiNameAttributes, Mid
 	contents: MidiNameContents;
 
 	constructor(opts?: { attributes?: Partial<MidiNameAttributes>; contents?: MidiNameContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MidiName.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MidiName.schema);
 		this.contents = opts?.contents ?? operations.zero(MidiName.schema.contents);
 	}
 
@@ -8208,6 +6949,7 @@ export class MidiName implements XMLElement<'midi-name', MidiNameAttributes, Mid
 		return this;
 	}
 }
+registerElement('MidiName', MidiName);
 
 export type MidiBankAttributes = Record<string, unknown>;
 
@@ -8221,13 +6963,7 @@ export type MidiBankContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/midi-bank/
  */
 export class MidiBank implements XMLElement<'midi-bank', MidiBankAttributes, MidiBankContents> {
-	static readonly schema = {
-		name: 'midi-bank',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'midi16384', value: { type: 'required', value: { type: 'int', min: 1, max: 16384 } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'midi-bank'> = schema.MidiBank;
 
 	readonly schema = MidiBank.schema;
 
@@ -8235,7 +6971,7 @@ export class MidiBank implements XMLElement<'midi-bank', MidiBankAttributes, Mid
 	contents: MidiBankContents;
 
 	constructor(opts?: { attributes?: Partial<MidiBankAttributes>; contents?: MidiBankContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MidiBank.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MidiBank.schema);
 		this.contents = opts?.contents ?? operations.zero(MidiBank.schema.contents);
 	}
 
@@ -8249,6 +6985,7 @@ export class MidiBank implements XMLElement<'midi-bank', MidiBankAttributes, Mid
 		return this;
 	}
 }
+registerElement('MidiBank', MidiBank);
 
 export type MidiProgramAttributes = Record<string, unknown>;
 
@@ -8262,13 +6999,7 @@ export type MidiProgramContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/midi-program/
  */
 export class MidiProgram implements XMLElement<'midi-program', MidiProgramAttributes, MidiProgramContents> {
-	static readonly schema = {
-		name: 'midi-program',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'midi128', value: { type: 'required', value: { type: 'int', min: 1, max: 128 } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'midi-program'> = schema.MidiProgram;
 
 	readonly schema = MidiProgram.schema;
 
@@ -8276,7 +7007,7 @@ export class MidiProgram implements XMLElement<'midi-program', MidiProgramAttrib
 	contents: MidiProgramContents;
 
 	constructor(opts?: { attributes?: Partial<MidiProgramAttributes>; contents?: MidiProgramContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MidiProgram.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MidiProgram.schema);
 		this.contents = opts?.contents ?? operations.zero(MidiProgram.schema.contents);
 	}
 
@@ -8290,6 +7021,7 @@ export class MidiProgram implements XMLElement<'midi-program', MidiProgramAttrib
 		return this;
 	}
 }
+registerElement('MidiProgram', MidiProgram);
 
 export type MidiUnpitchedAttributes = Record<string, unknown>;
 
@@ -8303,13 +7035,7 @@ export type MidiUnpitchedContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/midi-unpitched/
  */
 export class MidiUnpitched implements XMLElement<'midi-unpitched', MidiUnpitchedAttributes, MidiUnpitchedContents> {
-	static readonly schema = {
-		name: 'midi-unpitched',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'midi128', value: { type: 'required', value: { type: 'int', min: 1, max: 128 } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'midi-unpitched'> = schema.MidiUnpitched;
 
 	readonly schema = MidiUnpitched.schema;
 
@@ -8317,7 +7043,7 @@ export class MidiUnpitched implements XMLElement<'midi-unpitched', MidiUnpitched
 	contents: MidiUnpitchedContents;
 
 	constructor(opts?: { attributes?: Partial<MidiUnpitchedAttributes>; contents?: MidiUnpitchedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MidiUnpitched.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MidiUnpitched.schema);
 		this.contents = opts?.contents ?? operations.zero(MidiUnpitched.schema.contents);
 	}
 
@@ -8331,6 +7057,7 @@ export class MidiUnpitched implements XMLElement<'midi-unpitched', MidiUnpitched
 		return this;
 	}
 }
+registerElement('MidiUnpitched', MidiUnpitched);
 
 export type VolumeAttributes = Record<string, unknown>;
 
@@ -8344,13 +7071,7 @@ export type VolumeContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/volume/
  */
 export class Volume implements XMLElement<'volume', VolumeAttributes, VolumeContents> {
-	static readonly schema = {
-		name: 'volume',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'volume', value: { type: 'required', value: { type: 'float', min: 0, max: 100 } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'volume'> = schema.Volume;
 
 	readonly schema = Volume.schema;
 
@@ -8358,7 +7079,7 @@ export class Volume implements XMLElement<'volume', VolumeAttributes, VolumeCont
 	contents: VolumeContents;
 
 	constructor(opts?: { attributes?: Partial<VolumeAttributes>; contents?: VolumeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Volume.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Volume.schema);
 		this.contents = opts?.contents ?? operations.zero(Volume.schema.contents);
 	}
 
@@ -8372,6 +7093,7 @@ export class Volume implements XMLElement<'volume', VolumeAttributes, VolumeCont
 		return this;
 	}
 }
+registerElement('Volume', Volume);
 
 export type PanAttributes = Record<string, unknown>;
 
@@ -8385,13 +7107,7 @@ export type PanContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pan/
  */
 export class Pan implements XMLElement<'pan', PanAttributes, PanContents> {
-	static readonly schema = {
-		name: 'pan',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'float', min: -180, max: 180 } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'pan'> = schema.Pan;
 
 	readonly schema = Pan.schema;
 
@@ -8399,7 +7115,7 @@ export class Pan implements XMLElement<'pan', PanAttributes, PanContents> {
 	contents: PanContents;
 
 	constructor(opts?: { attributes?: Partial<PanAttributes>; contents?: PanContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Pan.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Pan.schema);
 		this.contents = opts?.contents ?? operations.zero(Pan.schema.contents);
 	}
 
@@ -8413,6 +7129,7 @@ export class Pan implements XMLElement<'pan', PanAttributes, PanContents> {
 		return this;
 	}
 }
+registerElement('Pan', Pan);
 
 export type ElevationAttributes = Record<string, unknown>;
 
@@ -8426,13 +7143,7 @@ export type ElevationContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/elevation/
  */
 export class Elevation implements XMLElement<'elevation', ElevationAttributes, ElevationContents> {
-	static readonly schema = {
-		name: 'elevation',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'elevation', value: { type: 'required', value: { type: 'float', min: -180, max: 180 } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'elevation'> = schema.Elevation;
 
 	readonly schema = Elevation.schema;
 
@@ -8440,7 +7151,7 @@ export class Elevation implements XMLElement<'elevation', ElevationAttributes, E
 	contents: ElevationContents;
 
 	constructor(opts?: { attributes?: Partial<ElevationAttributes>; contents?: ElevationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Elevation.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Elevation.schema);
 		this.contents = opts?.contents ?? operations.zero(Elevation.schema.contents);
 	}
 
@@ -8454,6 +7165,7 @@ export class Elevation implements XMLElement<'elevation', ElevationAttributes, E
 		return this;
 	}
 }
+registerElement('Elevation', Elevation);
 
 export type MidiInstrumentAttributes = { id: string };
 
@@ -8476,20 +7188,7 @@ export type MidiInstrumentContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/midi-instrument/
  */
 export class MidiInstrument implements XMLElement<'midi-instrument', MidiInstrumentAttributes, MidiInstrumentContents> {
-	static readonly schema = {
-		name: 'midi-instrument',
-		attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [
-			{ type: 'optional', value: MidiChannel },
-			{ type: 'optional', value: MidiName },
-			{ type: 'optional', value: MidiBank },
-			{ type: 'optional', value: MidiProgram },
-			{ type: 'optional', value: MidiUnpitched },
-			{ type: 'optional', value: Volume },
-			{ type: 'optional', value: Pan },
-			{ type: 'optional', value: Elevation },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'midi-instrument'> = schema.MidiInstrument;
 
 	readonly schema = MidiInstrument.schema;
 
@@ -8497,7 +7196,7 @@ export class MidiInstrument implements XMLElement<'midi-instrument', MidiInstrum
 	contents: MidiInstrumentContents;
 
 	constructor(opts?: { attributes?: Partial<MidiInstrumentAttributes>; contents?: MidiInstrumentContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MidiInstrument.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MidiInstrument.schema);
 		this.contents = opts?.contents ?? operations.zero(MidiInstrument.schema.contents);
 	}
 	/** Gets @type {MidiInstrumentAttributes['id']}. */
@@ -8582,6 +7281,7 @@ export class MidiInstrument implements XMLElement<'midi-instrument', MidiInstrum
 		return this;
 	}
 }
+registerElement('MidiInstrument', MidiInstrument);
 
 export type ScorePartAttributes = { id: string };
 
@@ -8606,26 +7306,7 @@ export type ScorePartContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-part/
  */
 export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, ScorePartContents> {
-	static readonly schema = {
-		name: 'score-part',
-		attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [
-			{ type: 'optional', value: Identification },
-			{ type: 'label', label: 'part-links', value: { type: 'zeroOrMore', value: PartLink } },
-			{ type: 'required', value: PartName },
-			{ type: 'optional', value: PartNameDisplay },
-			{ type: 'optional', value: PartAbbreviation },
-			{ type: 'optional', value: PartAbbreviationDisplay },
-			{ type: 'label', label: 'groups', value: { type: 'zeroOrMore', value: Group } },
-			{ type: 'label', label: 'score-instruments', value: { type: 'zeroOrMore', value: ScoreInstrument } },
-			{ type: 'label', label: 'players', value: { type: 'zeroOrMore', value: Player } },
-			{
-				type: 'label',
-				label: 'midis',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [MidiDevice, MidiInstrument] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'score-part'> = schema.ScorePart;
 
 	readonly schema = ScorePart.schema;
 
@@ -8633,7 +7314,7 @@ export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, 
 	contents: ScorePartContents;
 
 	constructor(opts?: { attributes?: Partial<ScorePartAttributes>; contents?: ScorePartContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ScorePart.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ScorePart.schema);
 		this.contents = opts?.contents ?? operations.zero(ScorePart.schema.contents);
 	}
 	/** Gets @type {ScorePartAttributes['id']}. */
@@ -8736,6 +7417,7 @@ export class ScorePart implements XMLElement<'score-part', ScorePartAttributes, 
 		return this;
 	}
 }
+registerElement('ScorePart', ScorePart);
 
 export type PartListAttributes = Record<string, unknown>;
 
@@ -8749,28 +7431,7 @@ export type PartListContents = [Array<PartGroup>, ScorePart, Array<PartGroup | S
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-list/
  */
 export class PartList implements XMLElement<'part-list', PartListAttributes, PartListContents> {
-	static readonly schema = {
-		name: 'part-list',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'part-groups', value: { type: 'zeroOrMore', value: PartGroup } },
-			{ type: 'required', value: ScorePart },
-			{
-				type: 'label',
-				label: 'parts',
-				value: {
-					type: 'zeroOrMore',
-					value: {
-						type: 'choices',
-						choices: [
-							{ type: 'required', value: PartGroup },
-							{ type: 'required', value: ScorePart },
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'part-list'> = schema.PartList;
 
 	readonly schema = PartList.schema;
 
@@ -8778,7 +7439,7 @@ export class PartList implements XMLElement<'part-list', PartListAttributes, Par
 	contents: PartListContents;
 
 	constructor(opts?: { attributes?: Partial<PartListAttributes>; contents?: PartListContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartList.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartList.schema);
 		this.contents = opts?.contents ?? operations.zero(PartList.schema.contents);
 	}
 
@@ -8810,6 +7471,7 @@ export class PartList implements XMLElement<'part-list', PartListAttributes, Par
 		return this;
 	}
 }
+registerElement('PartList', PartList);
 
 export type ChordAttributes = Record<string, unknown>;
 
@@ -8827,7 +7489,7 @@ export type ChordContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/chord/
  */
 export class Chord implements XMLElement<'chord', ChordAttributes, ChordContents> {
-	static readonly schema = { name: 'chord', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'chord'> = schema.Chord;
 
 	readonly schema = Chord.schema;
 
@@ -8835,10 +7497,11 @@ export class Chord implements XMLElement<'chord', ChordAttributes, ChordContents
 	contents: ChordContents;
 
 	constructor(opts?: { attributes?: Partial<ChordAttributes>; contents?: ChordContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Chord.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Chord.schema);
 		this.contents = opts?.contents ?? operations.zero(Chord.schema.contents);
 	}
 }
+registerElement('Chord', Chord);
 
 export type StepAttributes = Record<string, unknown>;
 
@@ -8852,17 +7515,7 @@ export type StepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/step/
  */
 export class Step implements XMLElement<'step', StepAttributes, StepContents> {
-	static readonly schema = {
-		name: 'step',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'step',
-				value: { type: 'required', value: { type: 'choices', choices: ['A', 'B', 'C', 'D', 'E', 'F', 'G'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'step'> = schema.Step;
 
 	readonly schema = Step.schema;
 
@@ -8870,7 +7523,7 @@ export class Step implements XMLElement<'step', StepAttributes, StepContents> {
 	contents: StepContents;
 
 	constructor(opts?: { attributes?: Partial<StepAttributes>; contents?: StepContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Step.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Step.schema);
 		this.contents = opts?.contents ?? operations.zero(Step.schema.contents);
 	}
 
@@ -8884,6 +7537,7 @@ export class Step implements XMLElement<'step', StepAttributes, StepContents> {
 		return this;
 	}
 }
+registerElement('Step', Step);
 
 export type AlterAttributes = Record<string, unknown>;
 
@@ -8897,17 +7551,7 @@ export type AlterContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/alter/
  */
 export class Alter implements XMLElement<'alter', AlterAttributes, AlterContents> {
-	static readonly schema = {
-		name: 'alter',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'semitones',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'alter'> = schema.Alter;
 
 	readonly schema = Alter.schema;
 
@@ -8915,7 +7559,7 @@ export class Alter implements XMLElement<'alter', AlterAttributes, AlterContents
 	contents: AlterContents;
 
 	constructor(opts?: { attributes?: Partial<AlterAttributes>; contents?: AlterContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Alter.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Alter.schema);
 		this.contents = opts?.contents ?? operations.zero(Alter.schema.contents);
 	}
 
@@ -8929,6 +7573,7 @@ export class Alter implements XMLElement<'alter', AlterAttributes, AlterContents
 		return this;
 	}
 }
+registerElement('Alter', Alter);
 
 export type OctaveAttributes = Record<string, unknown>;
 
@@ -8942,11 +7587,7 @@ export type OctaveContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/octave/
  */
 export class Octave implements XMLElement<'octave', OctaveAttributes, OctaveContents> {
-	static readonly schema = {
-		name: 'octave',
-		attributes: {},
-		contents: [{ type: 'label', label: 'octave', value: { type: 'required', value: { type: 'int', min: 0, max: 9 } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'octave'> = schema.Octave;
 
 	readonly schema = Octave.schema;
 
@@ -8954,7 +7595,7 @@ export class Octave implements XMLElement<'octave', OctaveAttributes, OctaveCont
 	contents: OctaveContents;
 
 	constructor(opts?: { attributes?: Partial<OctaveAttributes>; contents?: OctaveContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Octave.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Octave.schema);
 		this.contents = opts?.contents ?? operations.zero(Octave.schema.contents);
 	}
 
@@ -8968,6 +7609,7 @@ export class Octave implements XMLElement<'octave', OctaveAttributes, OctaveCont
 		return this;
 	}
 }
+registerElement('Octave', Octave);
 
 export type PitchAttributes = Record<string, unknown>;
 
@@ -8981,15 +7623,7 @@ export type PitchContents = [Step, Alter | null, Octave];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pitch/
  */
 export class Pitch implements XMLElement<'pitch', PitchAttributes, PitchContents> {
-	static readonly schema = {
-		name: 'pitch',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: Step },
-			{ type: 'optional', value: Alter },
-			{ type: 'required', value: Octave },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'pitch'> = schema.Pitch;
 
 	readonly schema = Pitch.schema;
 
@@ -8997,7 +7631,7 @@ export class Pitch implements XMLElement<'pitch', PitchAttributes, PitchContents
 	contents: PitchContents;
 
 	constructor(opts?: { attributes?: Partial<PitchAttributes>; contents?: PitchContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Pitch.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Pitch.schema);
 		this.contents = opts?.contents ?? operations.zero(Pitch.schema.contents);
 	}
 
@@ -9029,6 +7663,7 @@ export class Pitch implements XMLElement<'pitch', PitchAttributes, PitchContents
 		return this;
 	}
 }
+registerElement('Pitch', Pitch);
 
 export type DisplayStepAttributes = Record<string, unknown>;
 
@@ -9042,17 +7677,7 @@ export type DisplayStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/display-step/
  */
 export class DisplayStep implements XMLElement<'display-step', DisplayStepAttributes, DisplayStepContents> {
-	static readonly schema = {
-		name: 'display-step',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'step',
-				value: { type: 'required', value: { type: 'choices', choices: ['A', 'B', 'C', 'D', 'E', 'F', 'G'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'display-step'> = schema.DisplayStep;
 
 	readonly schema = DisplayStep.schema;
 
@@ -9060,7 +7685,7 @@ export class DisplayStep implements XMLElement<'display-step', DisplayStepAttrib
 	contents: DisplayStepContents;
 
 	constructor(opts?: { attributes?: Partial<DisplayStepAttributes>; contents?: DisplayStepContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DisplayStep.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DisplayStep.schema);
 		this.contents = opts?.contents ?? operations.zero(DisplayStep.schema.contents);
 	}
 
@@ -9074,6 +7699,7 @@ export class DisplayStep implements XMLElement<'display-step', DisplayStepAttrib
 		return this;
 	}
 }
+registerElement('DisplayStep', DisplayStep);
 
 export type DisplayOctaveAttributes = Record<string, unknown>;
 
@@ -9087,11 +7713,7 @@ export type DisplayOctaveContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/display-octave/
  */
 export class DisplayOctave implements XMLElement<'display-octave', DisplayOctaveAttributes, DisplayOctaveContents> {
-	static readonly schema = {
-		name: 'display-octave',
-		attributes: {},
-		contents: [{ type: 'label', label: 'octave', value: { type: 'required', value: { type: 'int', min: 0, max: 9 } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'display-octave'> = schema.DisplayOctave;
 
 	readonly schema = DisplayOctave.schema;
 
@@ -9099,7 +7721,7 @@ export class DisplayOctave implements XMLElement<'display-octave', DisplayOctave
 	contents: DisplayOctaveContents;
 
 	constructor(opts?: { attributes?: Partial<DisplayOctaveAttributes>; contents?: DisplayOctaveContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DisplayOctave.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DisplayOctave.schema);
 		this.contents = opts?.contents ?? operations.zero(DisplayOctave.schema.contents);
 	}
 
@@ -9113,6 +7735,7 @@ export class DisplayOctave implements XMLElement<'display-octave', DisplayOctave
 		return this;
 	}
 }
+registerElement('DisplayOctave', DisplayOctave);
 
 export type UnpitchedAttributes = Record<string, unknown>;
 
@@ -9126,14 +7749,7 @@ export type UnpitchedContents = [DisplayStep, DisplayOctave];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/unpitched/
  */
 export class Unpitched implements XMLElement<'unpitched', UnpitchedAttributes, UnpitchedContents> {
-	static readonly schema = {
-		name: 'unpitched',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: DisplayStep },
-			{ type: 'required', value: DisplayOctave },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'unpitched'> = schema.Unpitched;
 
 	readonly schema = Unpitched.schema;
 
@@ -9141,7 +7757,7 @@ export class Unpitched implements XMLElement<'unpitched', UnpitchedAttributes, U
 	contents: UnpitchedContents;
 
 	constructor(opts?: { attributes?: Partial<UnpitchedAttributes>; contents?: UnpitchedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Unpitched.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Unpitched.schema);
 		this.contents = opts?.contents ?? operations.zero(Unpitched.schema.contents);
 	}
 
@@ -9164,6 +7780,7 @@ export class Unpitched implements XMLElement<'unpitched', UnpitchedAttributes, U
 		return this;
 	}
 }
+registerElement('Unpitched', Unpitched);
 
 export type RestAttributes = { measure: 'yes' | 'no' | null };
 
@@ -9177,23 +7794,7 @@ export type RestContents = [[DisplayStep, DisplayOctave] | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rest/
  */
 export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
-	static readonly schema = {
-		name: 'rest',
-		attributes: { measure: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: {
-					type: 'optional',
-					value: [
-						{ type: 'required', value: DisplayStep },
-						{ type: 'required', value: DisplayOctave },
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'rest'> = schema.Rest;
 
 	readonly schema = Rest.schema;
 
@@ -9201,7 +7802,7 @@ export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
 	contents: RestContents;
 
 	constructor(opts?: { attributes?: Partial<RestAttributes>; contents?: RestContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Rest.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Rest.schema);
 		this.contents = opts?.contents ?? operations.zero(Rest.schema.contents);
 	}
 	/** Gets @type {RestAttributes['measure']}. */
@@ -9223,6 +7824,7 @@ export class Rest implements XMLElement<'rest', RestAttributes, RestContents> {
 		return this;
 	}
 }
+registerElement('Rest', Rest);
 
 export type DurationAttributes = Record<string, unknown>;
 
@@ -9238,17 +7840,7 @@ export type DurationContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/duration/
  */
 export class Duration implements XMLElement<'duration', DurationAttributes, DurationContents> {
-	static readonly schema = {
-		name: 'duration',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'positive-divisions',
-				value: { type: 'required', value: { type: 'float', min: 1, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'duration'> = schema.Duration;
 
 	readonly schema = Duration.schema;
 
@@ -9256,7 +7848,7 @@ export class Duration implements XMLElement<'duration', DurationAttributes, Dura
 	contents: DurationContents;
 
 	constructor(opts?: { attributes?: Partial<DurationAttributes>; contents?: DurationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Duration.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Duration.schema);
 		this.contents = opts?.contents ?? operations.zero(Duration.schema.contents);
 	}
 
@@ -9270,6 +7862,7 @@ export class Duration implements XMLElement<'duration', DurationAttributes, Dura
 		return this;
 	}
 }
+registerElement('Duration', Duration);
 
 export type TieAttributes = { 'time-only': string | null; type: 'start' | 'stop' };
 
@@ -9283,14 +7876,7 @@ export type TieContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tie/
  */
 export class Tie implements XMLElement<'tie', TieAttributes, TieContents> {
-	static readonly schema = {
-		name: 'tie',
-		attributes: {
-			'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'tie'> = schema.Tie;
 
 	readonly schema = Tie.schema;
 
@@ -9298,7 +7884,7 @@ export class Tie implements XMLElement<'tie', TieAttributes, TieContents> {
 	contents: TieContents;
 
 	constructor(opts?: { attributes?: Partial<TieAttributes>; contents?: TieContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Tie.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Tie.schema);
 		this.contents = opts?.contents ?? operations.zero(Tie.schema.contents);
 	}
 	/** Gets @type {TieAttributes['time-only']}. */
@@ -9320,6 +7906,7 @@ export class Tie implements XMLElement<'tie', TieAttributes, TieContents> {
 		return this;
 	}
 }
+registerElement('Tie', Tie);
 
 export type CueAttributes = Record<string, unknown>;
 
@@ -9333,7 +7920,7 @@ export type CueContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/cue/
  */
 export class Cue implements XMLElement<'cue', CueAttributes, CueContents> {
-	static readonly schema = { name: 'cue', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'cue'> = schema.Cue;
 
 	readonly schema = Cue.schema;
 
@@ -9341,10 +7928,11 @@ export class Cue implements XMLElement<'cue', CueAttributes, CueContents> {
 	contents: CueContents;
 
 	constructor(opts?: { attributes?: Partial<CueAttributes>; contents?: CueContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Cue.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Cue.schema);
 		this.contents = opts?.contents ?? operations.zero(Cue.schema.contents);
 	}
 }
+registerElement('Cue', Cue);
 
 export type GraceAttributes = {
 	'make-time': number | null;
@@ -9363,16 +7951,7 @@ export type GraceContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/grace/
  */
 export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents> {
-	static readonly schema = {
-		name: 'grace',
-		attributes: {
-			'make-time': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'steal-time-following': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'steal-time-previous': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'grace'> = schema.Grace;
 
 	readonly schema = Grace.schema;
 
@@ -9380,7 +7959,7 @@ export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents
 	contents: GraceContents;
 
 	constructor(opts?: { attributes?: Partial<GraceAttributes>; contents?: GraceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Grace.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Grace.schema);
 		this.contents = opts?.contents ?? operations.zero(Grace.schema.contents);
 	}
 	/** Gets @type {GraceAttributes['make-time']}. */
@@ -9420,6 +7999,7 @@ export class Grace implements XMLElement<'grace', GraceAttributes, GraceContents
 		return this;
 	}
 }
+registerElement('Grace', Grace);
 
 export type InstrumentAttributes = { id: string };
 
@@ -9433,11 +8013,7 @@ export type InstrumentContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instrument/
  */
 export class Instrument implements XMLElement<'instrument', InstrumentAttributes, InstrumentContents> {
-	static readonly schema = {
-		name: 'instrument',
-		attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'instrument'> = schema.Instrument;
 
 	readonly schema = Instrument.schema;
 
@@ -9445,7 +8021,7 @@ export class Instrument implements XMLElement<'instrument', InstrumentAttributes
 	contents: InstrumentContents;
 
 	constructor(opts?: { attributes?: Partial<InstrumentAttributes>; contents?: InstrumentContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Instrument.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Instrument.schema);
 		this.contents = opts?.contents ?? operations.zero(Instrument.schema.contents);
 	}
 	/** Gets @type {InstrumentAttributes['id']}. */
@@ -9458,6 +8034,7 @@ export class Instrument implements XMLElement<'instrument', InstrumentAttributes
 		return this;
 	}
 }
+registerElement('Instrument', Instrument);
 
 export type VoiceAttributes = Record<string, unknown>;
 
@@ -9471,11 +8048,7 @@ export type VoiceContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/voice/
  */
 export class Voice implements XMLElement<'voice', VoiceAttributes, VoiceContents> {
-	static readonly schema = {
-		name: 'voice',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'voice'> = schema.Voice;
 
 	readonly schema = Voice.schema;
 
@@ -9483,7 +8056,7 @@ export class Voice implements XMLElement<'voice', VoiceAttributes, VoiceContents
 	contents: VoiceContents;
 
 	constructor(opts?: { attributes?: Partial<VoiceAttributes>; contents?: VoiceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Voice.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Voice.schema);
 		this.contents = opts?.contents ?? operations.zero(Voice.schema.contents);
 	}
 
@@ -9497,6 +8070,7 @@ export class Voice implements XMLElement<'voice', VoiceAttributes, VoiceContents
 		return this;
 	}
 }
+registerElement('Voice', Voice);
 
 export type TypeAttributes = { size: 'cue' | 'full' | 'grace-cue' | 'large' | null };
 
@@ -9525,40 +8099,7 @@ export type TypeContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/type/
  */
 export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
-	static readonly schema = {
-		name: 'type',
-		attributes: {
-			size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'note-type-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'whole',
-							'1024th',
-							'512th',
-							'256th',
-							'128th',
-							'64th',
-							'32nd',
-							'16th',
-							'eighth',
-							'quarter',
-							'half',
-							'breve',
-							'long',
-							'maxima',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'type'> = schema.Type;
 
 	readonly schema = Type.schema;
 
@@ -9566,7 +8107,7 @@ export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
 	contents: TypeContents;
 
 	constructor(opts?: { attributes?: Partial<TypeAttributes>; contents?: TypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Type.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Type.schema);
 		this.contents = opts?.contents ?? operations.zero(Type.schema.contents);
 	}
 	/** Gets @type {TypeAttributes['size']}. */
@@ -9618,6 +8159,7 @@ export class Type implements XMLElement<'type', TypeAttributes, TypeContents> {
 		return this;
 	}
 }
+registerElement('Type', Type);
 
 export type DotAttributes = {
 	color: string | null;
@@ -9642,31 +8184,7 @@ export type DotContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/dot/
  */
 export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
-	static readonly schema = {
-		name: 'dot',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'dot'> = schema.Dot;
 
 	readonly schema = Dot.schema;
 
@@ -9674,7 +8192,7 @@ export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
 	contents: DotContents;
 
 	constructor(opts?: { attributes?: Partial<DotAttributes>; contents?: DotContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Dot.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Dot.schema);
 		this.contents = opts?.contents ?? operations.zero(Dot.schema.contents);
 	}
 	/** Gets @type {DotAttributes['color']}. */
@@ -9770,6 +8288,7 @@ export class Dot implements XMLElement<'dot', DotAttributes, DotContents> {
 		return this;
 	}
 }
+registerElement('Dot', Dot);
 
 export type AccidentalAttributes = {
 	bracket: 'yes' | 'no' | null;
@@ -9841,93 +8360,7 @@ export type AccidentalContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accidental/
  */
 export class Accidental implements XMLElement<'accidental', AccidentalAttributes, AccidentalContents> {
-	static readonly schema = {
-		name: 'accidental',
-		attributes: {
-			bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			cautionary: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			editorial: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
-			smufl: {
-				type: 'optional',
-				value: { type: 'regex', pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' },
-			},
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'accidental-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'other',
-							'sharp',
-							'natural',
-							'flat',
-							'double-sharp',
-							'sharp-sharp',
-							'flat-flat',
-							'natural-sharp',
-							'natural-flat',
-							'quarter-flat',
-							'quarter-sharp',
-							'three-quarters-flat',
-							'three-quarters-sharp',
-							'sharp-down',
-							'sharp-up',
-							'natural-down',
-							'natural-up',
-							'flat-down',
-							'flat-up',
-							'double-sharp-down',
-							'double-sharp-up',
-							'flat-flat-down',
-							'flat-flat-up',
-							'arrow-down',
-							'arrow-up',
-							'triple-sharp',
-							'triple-flat',
-							'slash-quarter-sharp',
-							'slash-sharp',
-							'slash-flat',
-							'double-slash-flat',
-							'sharp-1',
-							'sharp-2',
-							'sharp-3',
-							'sharp-5',
-							'flat-1',
-							'flat-2',
-							'flat-3',
-							'flat-4',
-							'sori',
-							'koron',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'accidental'> = schema.Accidental;
 
 	readonly schema = Accidental.schema;
 
@@ -9935,7 +8368,7 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
 	contents: AccidentalContents;
 
 	constructor(opts?: { attributes?: Partial<AccidentalAttributes>; contents?: AccidentalContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Accidental.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Accidental.schema);
 		this.contents = opts?.contents ?? operations.zero(Accidental.schema.contents);
 	}
 	/** Gets @type {AccidentalAttributes['bracket']}. */
@@ -10169,6 +8602,7 @@ export class Accidental implements XMLElement<'accidental', AccidentalAttributes
 		return this;
 	}
 }
+registerElement('Accidental', Accidental);
 
 export type ActualNotesAttributes = Record<string, unknown>;
 
@@ -10182,13 +8616,7 @@ export type ActualNotesContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/actual-notes/
  */
 export class ActualNotes implements XMLElement<'actual-notes', ActualNotesAttributes, ActualNotesContents> {
-	static readonly schema = {
-		name: 'actual-notes',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'actual-notes'> = schema.ActualNotes;
 
 	readonly schema = ActualNotes.schema;
 
@@ -10196,7 +8624,7 @@ export class ActualNotes implements XMLElement<'actual-notes', ActualNotesAttrib
 	contents: ActualNotesContents;
 
 	constructor(opts?: { attributes?: Partial<ActualNotesAttributes>; contents?: ActualNotesContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ActualNotes.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ActualNotes.schema);
 		this.contents = opts?.contents ?? operations.zero(ActualNotes.schema.contents);
 	}
 
@@ -10210,6 +8638,7 @@ export class ActualNotes implements XMLElement<'actual-notes', ActualNotesAttrib
 		return this;
 	}
 }
+registerElement('ActualNotes', ActualNotes);
 
 export type NormalNotesAttributes = Record<string, unknown>;
 
@@ -10223,13 +8652,7 @@ export type NormalNotesContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/normal-notes/
  */
 export class NormalNotes implements XMLElement<'normal-notes', NormalNotesAttributes, NormalNotesContents> {
-	static readonly schema = {
-		name: 'normal-notes',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'normal-notes'> = schema.NormalNotes;
 
 	readonly schema = NormalNotes.schema;
 
@@ -10237,7 +8660,7 @@ export class NormalNotes implements XMLElement<'normal-notes', NormalNotesAttrib
 	contents: NormalNotesContents;
 
 	constructor(opts?: { attributes?: Partial<NormalNotesAttributes>; contents?: NormalNotesContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NormalNotes.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NormalNotes.schema);
 		this.contents = opts?.contents ?? operations.zero(NormalNotes.schema.contents);
 	}
 
@@ -10251,6 +8674,7 @@ export class NormalNotes implements XMLElement<'normal-notes', NormalNotesAttrib
 		return this;
 	}
 }
+registerElement('NormalNotes', NormalNotes);
 
 export type NormalTypeAttributes = Record<string, unknown>;
 
@@ -10279,38 +8703,7 @@ export type NormalTypeContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/normal-type/
  */
 export class NormalType implements XMLElement<'normal-type', NormalTypeAttributes, NormalTypeContents> {
-	static readonly schema = {
-		name: 'normal-type',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'note-type-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'whole',
-							'1024th',
-							'512th',
-							'256th',
-							'128th',
-							'64th',
-							'32nd',
-							'16th',
-							'eighth',
-							'quarter',
-							'half',
-							'breve',
-							'long',
-							'maxima',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'normal-type'> = schema.NormalType;
 
 	readonly schema = NormalType.schema;
 
@@ -10318,7 +8711,7 @@ export class NormalType implements XMLElement<'normal-type', NormalTypeAttribute
 	contents: NormalTypeContents;
 
 	constructor(opts?: { attributes?: Partial<NormalTypeAttributes>; contents?: NormalTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NormalType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NormalType.schema);
 		this.contents = opts?.contents ?? operations.zero(NormalType.schema.contents);
 	}
 
@@ -10362,6 +8755,7 @@ export class NormalType implements XMLElement<'normal-type', NormalTypeAttribute
 		return this;
 	}
 }
+registerElement('NormalType', NormalType);
 
 export type NormalDotAttributes = Record<string, unknown>;
 
@@ -10375,7 +8769,7 @@ export type NormalDotContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/normal-dot/
  */
 export class NormalDot implements XMLElement<'normal-dot', NormalDotAttributes, NormalDotContents> {
-	static readonly schema = { name: 'normal-dot', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'normal-dot'> = schema.NormalDot;
 
 	readonly schema = NormalDot.schema;
 
@@ -10383,10 +8777,11 @@ export class NormalDot implements XMLElement<'normal-dot', NormalDotAttributes, 
 	contents: NormalDotContents;
 
 	constructor(opts?: { attributes?: Partial<NormalDotAttributes>; contents?: NormalDotContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NormalDot.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NormalDot.schema);
 		this.contents = opts?.contents ?? operations.zero(NormalDot.schema.contents);
 	}
 }
+registerElement('NormalDot', NormalDot);
 
 export type TimeModificationAttributes = Record<string, unknown>;
 
@@ -10402,25 +8797,7 @@ export type TimeModificationContents = [ActualNotes, NormalNotes, [NormalType, A
 export class TimeModification
 	implements XMLElement<'time-modification', TimeModificationAttributes, TimeModificationContents>
 {
-	static readonly schema = {
-		name: 'time-modification',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: ActualNotes },
-			{ type: 'required', value: NormalNotes },
-			{
-				type: 'label',
-				label: 'normal',
-				value: {
-					type: 'optional',
-					value: [
-						{ type: 'required', value: NormalType },
-						{ type: 'zeroOrMore', value: NormalDot },
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'time-modification'> = schema.TimeModification;
 
 	readonly schema = TimeModification.schema;
 
@@ -10428,7 +8805,7 @@ export class TimeModification
 	contents: TimeModificationContents;
 
 	constructor(opts?: { attributes?: Partial<TimeModificationAttributes>; contents?: TimeModificationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TimeModification.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TimeModification.schema);
 		this.contents = opts?.contents ?? operations.zero(TimeModification.schema.contents);
 	}
 
@@ -10460,6 +8837,7 @@ export class TimeModification
 		return this;
 	}
 }
+registerElement('TimeModification', TimeModification);
 
 export type StemAttributes = {
 	color: string | null;
@@ -10479,23 +8857,7 @@ export type StemContents = ['none' | 'down' | 'up' | 'double'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stem/
  */
 export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
-	static readonly schema = {
-		name: 'stem',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'stem-value',
-				value: { type: 'required', value: { type: 'choices', choices: ['none', 'down', 'up', 'double'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'stem'> = schema.Stem;
 
 	readonly schema = Stem.schema;
 
@@ -10503,7 +8865,7 @@ export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
 	contents: StemContents;
 
 	constructor(opts?: { attributes?: Partial<StemAttributes>; contents?: StemContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Stem.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Stem.schema);
 		this.contents = opts?.contents ?? operations.zero(Stem.schema.contents);
 	}
 	/** Gets @type {StemAttributes['color']}. */
@@ -10561,6 +8923,7 @@ export class Stem implements XMLElement<'stem', StemAttributes, StemContents> {
 		return this;
 	}
 }
+registerElement('Stem', Stem);
 
 export type NoteheadAttributes = {
 	color: string | null;
@@ -10618,70 +8981,7 @@ export type NoteheadContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/notehead/
  */
 export class Notehead implements XMLElement<'notehead', NoteheadAttributes, NoteheadContents> {
-	static readonly schema = {
-		name: 'notehead',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			filled: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'notehead-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'other',
-							'slash',
-							'triangle',
-							'diamond',
-							'square',
-							'cross',
-							'x',
-							'circle-x',
-							'inverted triangle',
-							'arrow down',
-							'arrow up',
-							'circled',
-							'slashed',
-							'back slashed',
-							'normal',
-							'cluster',
-							'circle dot',
-							'left triangle',
-							'rectangle',
-							'none',
-							'do',
-							're',
-							'mi',
-							'fa',
-							'fa up',
-							'so',
-							'la',
-							'ti',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'notehead'> = schema.Notehead;
 
 	readonly schema = Notehead.schema;
 
@@ -10689,7 +8989,7 @@ export class Notehead implements XMLElement<'notehead', NoteheadAttributes, Note
 	contents: NoteheadContents;
 
 	constructor(opts?: { attributes?: Partial<NoteheadAttributes>; contents?: NoteheadContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Notehead.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Notehead.schema);
 		this.contents = opts?.contents ?? operations.zero(Notehead.schema.contents);
 	}
 	/** Gets @type {NoteheadAttributes['color']}. */
@@ -10834,6 +9134,7 @@ export class Notehead implements XMLElement<'notehead', NoteheadAttributes, Note
 		return this;
 	}
 }
+registerElement('Notehead', Notehead);
 
 export type NoteheadTextAttributes = Record<string, unknown>;
 
@@ -10847,23 +9148,7 @@ export type NoteheadTextContents = [Array<[DisplayText, AccidentalText]>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/notehead-text/
  */
 export class NoteheadText implements XMLElement<'notehead-text', NoteheadTextAttributes, NoteheadTextContents> {
-	static readonly schema = {
-		name: 'notehead-text',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'texts',
-				value: {
-					type: 'oneOrMore',
-					value: [
-						{ type: 'required', value: DisplayText },
-						{ type: 'required', value: AccidentalText },
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'notehead-text'> = schema.NoteheadText;
 
 	readonly schema = NoteheadText.schema;
 
@@ -10871,7 +9156,7 @@ export class NoteheadText implements XMLElement<'notehead-text', NoteheadTextAtt
 	contents: NoteheadTextContents;
 
 	constructor(opts?: { attributes?: Partial<NoteheadTextAttributes>; contents?: NoteheadTextContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NoteheadText.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NoteheadText.schema);
 		this.contents = opts?.contents ?? operations.zero(NoteheadText.schema.contents);
 	}
 
@@ -10885,6 +9170,7 @@ export class NoteheadText implements XMLElement<'notehead-text', NoteheadTextAtt
 		return this;
 	}
 }
+registerElement('NoteheadText', NoteheadText);
 
 export type StaffAttributes = Record<string, unknown>;
 
@@ -10898,13 +9184,7 @@ export type StaffContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff/
  */
 export class Staff implements XMLElement<'staff', StaffAttributes, StaffContents> {
-	static readonly schema = {
-		name: 'staff',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'staff'> = schema.Staff;
 
 	readonly schema = Staff.schema;
 
@@ -10912,7 +9192,7 @@ export class Staff implements XMLElement<'staff', StaffAttributes, StaffContents
 	contents: StaffContents;
 
 	constructor(opts?: { attributes?: Partial<StaffAttributes>; contents?: StaffContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Staff.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Staff.schema);
 		this.contents = opts?.contents ?? operations.zero(Staff.schema.contents);
 	}
 
@@ -10926,6 +9206,7 @@ export class Staff implements XMLElement<'staff', StaffAttributes, StaffContents
 		return this;
 	}
 }
+registerElement('Staff', Staff);
 
 export type BeamAttributes = {
 	color: string | null;
@@ -10951,26 +9232,7 @@ export type BeamContents = ['backward hook' | 'begin' | 'continue' | 'end' | 'fo
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beam/
  */
 export class Beam implements XMLElement<'beam', BeamAttributes, BeamContents> {
-	static readonly schema = {
-		name: 'beam',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			fan: { type: 'optional', value: { type: 'choices', choices: ['accel', 'rit', 'none'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 8 } },
-			repeater: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'beam-value',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['backward hook', 'begin', 'continue', 'end', 'forward hook'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'beam'> = schema.Beam;
 
 	readonly schema = Beam.schema;
 
@@ -10978,7 +9240,7 @@ export class Beam implements XMLElement<'beam', BeamAttributes, BeamContents> {
 	contents: BeamContents;
 
 	constructor(opts?: { attributes?: Partial<BeamAttributes>; contents?: BeamContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Beam.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Beam.schema);
 		this.contents = opts?.contents ?? operations.zero(Beam.schema.contents);
 	}
 	/** Gets @type {BeamAttributes['color']}. */
@@ -11036,6 +9298,7 @@ export class Beam implements XMLElement<'beam', BeamAttributes, BeamContents> {
 		return this;
 	}
 }
+registerElement('Beam', Beam);
 
 export type TiedAttributes = {
 	'bezier-offset': number | null;
@@ -11077,31 +9340,7 @@ export type TiedContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tied/
  */
 export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
-	static readonly schema = {
-		name: 'tied',
-		attributes: {
-			'bezier-offset': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'bezier-offset2': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'bezier-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'bezier-x2': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'bezier-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'bezier-y2': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			orientation: { type: 'optional', value: { type: 'choices', choices: ['over', 'under'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue', 'let-ring'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'tied'> = schema.Tied;
 
 	readonly schema = Tied.schema;
 
@@ -11109,7 +9348,7 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
 	contents: TiedContents;
 
 	constructor(opts?: { attributes?: Partial<TiedAttributes>; contents?: TiedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Tied.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Tied.schema);
 		this.contents = opts?.contents ?? operations.zero(Tied.schema.contents);
 	}
 	/** Gets @type {TiedAttributes['bezier-offset']}. */
@@ -11284,6 +9523,7 @@ export class Tied implements XMLElement<'tied', TiedAttributes, TiedContents> {
 		return this;
 	}
 }
+registerElement('Tied', Tied);
 
 export type SlurAttributes = {
 	'bezier-offset': number | null;
@@ -11317,31 +9557,7 @@ export type SlurContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/slur/
  */
 export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
-	static readonly schema = {
-		name: 'slur',
-		attributes: {
-			'bezier-offset': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'bezier-offset2': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'bezier-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'bezier-x2': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'bezier-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'bezier-y2': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			orientation: { type: 'optional', value: { type: 'choices', choices: ['over', 'under'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'slur'> = schema.Slur;
 
 	readonly schema = Slur.schema;
 
@@ -11349,7 +9565,7 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
 	contents: SlurContents;
 
 	constructor(opts?: { attributes?: Partial<SlurAttributes>; contents?: SlurContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Slur.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Slur.schema);
 		this.contents = opts?.contents ?? operations.zero(Slur.schema.contents);
 	}
 	/** Gets @type {SlurAttributes['bezier-offset']}. */
@@ -11524,6 +9740,7 @@ export class Slur implements XMLElement<'slur', SlurAttributes, SlurContents> {
 		return this;
 	}
 }
+registerElement('Slur', Slur);
 
 export type TupletNumberAttributes = {
 	color: string | null;
@@ -11543,28 +9760,7 @@ export type TupletNumberContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet-number/
  */
 export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAttributes, TupletNumberContents> {
-	static readonly schema = {
-		name: 'tuplet-number',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-		},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'tuplet-number'> = schema.TupletNumber;
 
 	readonly schema = TupletNumber.schema;
 
@@ -11572,7 +9768,7 @@ export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAtt
 	contents: TupletNumberContents;
 
 	constructor(opts?: { attributes?: Partial<TupletNumberAttributes>; contents?: TupletNumberContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TupletNumber.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TupletNumber.schema);
 		this.contents = opts?.contents ?? operations.zero(TupletNumber.schema.contents);
 	}
 	/** Gets @type {TupletNumberAttributes['color']}. */
@@ -11632,6 +9828,7 @@ export class TupletNumber implements XMLElement<'tuplet-number', TupletNumberAtt
 		return this;
 	}
 }
+registerElement('TupletNumber', TupletNumber);
 
 export type TupletTypeAttributes = {
 	color: string | null;
@@ -11666,53 +9863,7 @@ export type TupletTypeContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet-type/
  */
 export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttributes, TupletTypeContents> {
-	static readonly schema = {
-		name: 'tuplet-type',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'note-type-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'whole',
-							'1024th',
-							'512th',
-							'256th',
-							'128th',
-							'64th',
-							'32nd',
-							'16th',
-							'eighth',
-							'quarter',
-							'half',
-							'breve',
-							'long',
-							'maxima',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'tuplet-type'> = schema.TupletType;
 
 	readonly schema = TupletType.schema;
 
@@ -11720,7 +9871,7 @@ export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttribute
 	contents: TupletTypeContents;
 
 	constructor(opts?: { attributes?: Partial<TupletTypeAttributes>; contents?: TupletTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TupletType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TupletType.schema);
 		this.contents = opts?.contents ?? operations.zero(TupletType.schema.contents);
 	}
 	/** Gets @type {TupletTypeAttributes['color']}. */
@@ -11810,6 +9961,7 @@ export class TupletType implements XMLElement<'tuplet-type', TupletTypeAttribute
 		return this;
 	}
 }
+registerElement('TupletType', TupletType);
 
 export type TupletDotAttributes = {
 	color: string | null;
@@ -11829,26 +9981,7 @@ export type TupletDotContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet-dot/
  */
 export class TupletDot implements XMLElement<'tuplet-dot', TupletDotAttributes, TupletDotContents> {
-	static readonly schema = {
-		name: 'tuplet-dot',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'tuplet-dot'> = schema.TupletDot;
 
 	readonly schema = TupletDot.schema;
 
@@ -11856,7 +9989,7 @@ export class TupletDot implements XMLElement<'tuplet-dot', TupletDotAttributes, 
 	contents: TupletDotContents;
 
 	constructor(opts?: { attributes?: Partial<TupletDotAttributes>; contents?: TupletDotContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TupletDot.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TupletDot.schema);
 		this.contents = opts?.contents ?? operations.zero(TupletDot.schema.contents);
 	}
 	/** Gets @type {TupletDotAttributes['color']}. */
@@ -11907,6 +10040,7 @@ export class TupletDot implements XMLElement<'tuplet-dot', TupletDotAttributes, 
 		return this;
 	}
 }
+registerElement('TupletDot', TupletDot);
 
 export type TupletActualAttributes = Record<string, unknown>;
 
@@ -11920,15 +10054,7 @@ export type TupletActualContents = [TupletNumber | null, TupletType | null, Arra
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet-actual/
  */
 export class TupletActual implements XMLElement<'tuplet-actual', TupletActualAttributes, TupletActualContents> {
-	static readonly schema = {
-		name: 'tuplet-actual',
-		attributes: {},
-		contents: [
-			{ type: 'optional', value: TupletNumber },
-			{ type: 'optional', value: TupletType },
-			{ type: 'label', label: 'tuplet-dots', value: { type: 'zeroOrMore', value: TupletDot } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'tuplet-actual'> = schema.TupletActual;
 
 	readonly schema = TupletActual.schema;
 
@@ -11936,7 +10062,7 @@ export class TupletActual implements XMLElement<'tuplet-actual', TupletActualAtt
 	contents: TupletActualContents;
 
 	constructor(opts?: { attributes?: Partial<TupletActualAttributes>; contents?: TupletActualContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TupletActual.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TupletActual.schema);
 		this.contents = opts?.contents ?? operations.zero(TupletActual.schema.contents);
 	}
 
@@ -11968,6 +10094,7 @@ export class TupletActual implements XMLElement<'tuplet-actual', TupletActualAtt
 		return this;
 	}
 }
+registerElement('TupletActual', TupletActual);
 
 export type TupletNormalAttributes = Record<string, unknown>;
 
@@ -11981,15 +10108,7 @@ export type TupletNormalContents = [TupletNumber | null, TupletType | null, Arra
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet-normal/
  */
 export class TupletNormal implements XMLElement<'tuplet-normal', TupletNormalAttributes, TupletNormalContents> {
-	static readonly schema = {
-		name: 'tuplet-normal',
-		attributes: {},
-		contents: [
-			{ type: 'optional', value: TupletNumber },
-			{ type: 'optional', value: TupletType },
-			{ type: 'label', label: 'tuplet-dots', value: { type: 'zeroOrMore', value: TupletDot } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'tuplet-normal'> = schema.TupletNormal;
 
 	readonly schema = TupletNormal.schema;
 
@@ -11997,7 +10116,7 @@ export class TupletNormal implements XMLElement<'tuplet-normal', TupletNormalAtt
 	contents: TupletNormalContents;
 
 	constructor(opts?: { attributes?: Partial<TupletNormalAttributes>; contents?: TupletNormalContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TupletNormal.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TupletNormal.schema);
 		this.contents = opts?.contents ?? operations.zero(TupletNormal.schema.contents);
 	}
 
@@ -12029,6 +10148,7 @@ export class TupletNormal implements XMLElement<'tuplet-normal', TupletNormalAtt
 		return this;
 	}
 }
+registerElement('TupletNormal', TupletNormal);
 
 export type TupletAttributes = {
 	bracket: 'yes' | 'no' | null;
@@ -12059,27 +10179,7 @@ export type TupletContents = [TupletActual | null, TupletNormal | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet/
  */
 export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletContents> {
-	static readonly schema = {
-		name: 'tuplet',
-		attributes: {
-			bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'line-shape': { type: 'optional', value: { type: 'choices', choices: ['straight', 'curved'] } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'show-number': { type: 'optional', value: { type: 'choices', choices: ['none', 'actual', 'both'] } },
-			'show-type': { type: 'optional', value: { type: 'choices', choices: ['none', 'actual', 'both'] } },
-			type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop'] } },
-		},
-		contents: [
-			{ type: 'optional', value: TupletActual },
-			{ type: 'optional', value: TupletNormal },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'tuplet'> = schema.Tuplet;
 
 	readonly schema = Tuplet.schema;
 
@@ -12087,7 +10187,7 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
 	contents: TupletContents;
 
 	constructor(opts?: { attributes?: Partial<TupletAttributes>; contents?: TupletContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Tuplet.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Tuplet.schema);
 		this.contents = opts?.contents ?? operations.zero(Tuplet.schema.contents);
 	}
 	/** Gets @type {TupletAttributes['bracket']}. */
@@ -12217,6 +10317,7 @@ export class Tuplet implements XMLElement<'tuplet', TupletAttributes, TupletCont
 		return this;
 	}
 }
+registerElement('Tuplet', Tuplet);
 
 export type GlissandoAttributes = {
 	color: string | null;
@@ -12246,36 +10347,7 @@ export type GlissandoContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/glissando/
  */
 export class Glissando implements XMLElement<'glissando', GlissandoAttributes, GlissandoContents> {
-	static readonly schema = {
-		name: 'glissando',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'glissando'> = schema.Glissando;
 
 	readonly schema = Glissando.schema;
 
@@ -12283,7 +10355,7 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
 	contents: GlissandoContents;
 
 	constructor(opts?: { attributes?: Partial<GlissandoAttributes>; contents?: GlissandoContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Glissando.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Glissando.schema);
 		this.contents = opts?.contents ?? operations.zero(Glissando.schema.contents);
 	}
 	/** Gets @type {GlissandoAttributes['color']}. */
@@ -12433,6 +10505,7 @@ export class Glissando implements XMLElement<'glissando', GlissandoAttributes, G
 		return this;
 	}
 }
+registerElement('Glissando', Glissando);
 
 export type SlideAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -12466,40 +10539,7 @@ export type SlideContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/slide/
  */
 export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents> {
-	static readonly schema = {
-		name: 'slide',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'first-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'slide'> = schema.Slide;
 
 	readonly schema = Slide.schema;
 
@@ -12507,7 +10547,7 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
 	contents: SlideContents;
 
 	constructor(opts?: { attributes?: Partial<SlideAttributes>; contents?: SlideContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Slide.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Slide.schema);
 		this.contents = opts?.contents ?? operations.zero(Slide.schema.contents);
 	}
 	/** Gets @type {SlideAttributes['accelerate']}. */
@@ -12693,6 +10733,7 @@ export class Slide implements XMLElement<'slide', SlideAttributes, SlideContents
 		return this;
 	}
 }
+registerElement('Slide', Slide);
 
 export type TrillMarkAttributes = {
 	acccelerate: 'yes' | 'no' | null;
@@ -12725,39 +10766,7 @@ export type TrillMarkContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/trill-mark/
  */
 export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, TrillMarkContents> {
-	static readonly schema = {
-		name: 'trill-mark',
-		attributes: {
-			acccelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'trill-mark'> = schema.TrillMark;
 
 	readonly schema = TrillMark.schema;
 
@@ -12765,7 +10774,7 @@ export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, 
 	contents: TrillMarkContents;
 
 	constructor(opts?: { attributes?: Partial<TrillMarkAttributes>; contents?: TrillMarkContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TrillMark.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TrillMark.schema);
 		this.contents = opts?.contents ?? operations.zero(TrillMark.schema.contents);
 	}
 	/** Gets @type {TrillMarkAttributes['acccelerate']}. */
@@ -12933,6 +10942,7 @@ export class TrillMark implements XMLElement<'trill-mark', TrillMarkAttributes, 
 		return this;
 	}
 }
+registerElement('TrillMark', TrillMark);
 
 export type TurnAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -12965,39 +10975,7 @@ export type TurnContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/turn/
  */
 export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
-	static readonly schema = {
-		name: 'turn',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'turn'> = schema.Turn;
 
 	readonly schema = Turn.schema;
 
@@ -13005,7 +10983,7 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
 	contents: TurnContents;
 
 	constructor(opts?: { attributes?: Partial<TurnAttributes>; contents?: TurnContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Turn.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Turn.schema);
 		this.contents = opts?.contents ?? operations.zero(Turn.schema.contents);
 	}
 	/** Gets @type {TurnAttributes['accelerate']}. */
@@ -13173,6 +11151,7 @@ export class Turn implements XMLElement<'turn', TurnAttributes, TurnContents> {
 		return this;
 	}
 }
+registerElement('Turn', Turn);
 
 export type DelayedTurnAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -13205,39 +11184,7 @@ export type DelayedTurnContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/delayed-turn/
  */
 export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttributes, DelayedTurnContents> {
-	static readonly schema = {
-		name: 'delayed-turn',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'delayed-turn'> = schema.DelayedTurn;
 
 	readonly schema = DelayedTurn.schema;
 
@@ -13245,7 +11192,7 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
 	contents: DelayedTurnContents;
 
 	constructor(opts?: { attributes?: Partial<DelayedTurnAttributes>; contents?: DelayedTurnContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DelayedTurn.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DelayedTurn.schema);
 		this.contents = opts?.contents ?? operations.zero(DelayedTurn.schema.contents);
 	}
 	/** Gets @type {DelayedTurnAttributes['accelerate']}. */
@@ -13413,6 +11360,7 @@ export class DelayedTurn implements XMLElement<'delayed-turn', DelayedTurnAttrib
 		return this;
 	}
 }
+registerElement('DelayedTurn', DelayedTurn);
 
 export type InvertedTurnAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -13445,39 +11393,7 @@ export type InvertedTurnContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/inverted-turn/
  */
 export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAttributes, InvertedTurnContents> {
-	static readonly schema = {
-		name: 'inverted-turn',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'inverted-turn'> = schema.InvertedTurn;
 
 	readonly schema = InvertedTurn.schema;
 
@@ -13485,7 +11401,7 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
 	contents: InvertedTurnContents;
 
 	constructor(opts?: { attributes?: Partial<InvertedTurnAttributes>; contents?: InvertedTurnContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, InvertedTurn.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, InvertedTurn.schema);
 		this.contents = opts?.contents ?? operations.zero(InvertedTurn.schema.contents);
 	}
 	/** Gets @type {InvertedTurnAttributes['accelerate']}. */
@@ -13653,6 +11569,7 @@ export class InvertedTurn implements XMLElement<'inverted-turn', InvertedTurnAtt
 		return this;
 	}
 }
+registerElement('InvertedTurn', InvertedTurn);
 
 export type DelayedInvertedTurnAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -13687,39 +11604,7 @@ export type DelayedInvertedTurnContents = [];
 export class DelayedInvertedTurn
 	implements XMLElement<'delayed-inverted-turn', DelayedInvertedTurnAttributes, DelayedInvertedTurnContents>
 {
-	static readonly schema = {
-		name: 'delayed-inverted-turn',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			slash: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'delayed-inverted-turn'> = schema.DelayedInvertedTurn;
 
 	readonly schema = DelayedInvertedTurn.schema;
 
@@ -13727,7 +11612,7 @@ export class DelayedInvertedTurn
 	contents: DelayedInvertedTurnContents;
 
 	constructor(opts?: { attributes?: Partial<DelayedInvertedTurnAttributes>; contents?: DelayedInvertedTurnContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DelayedInvertedTurn.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DelayedInvertedTurn.schema);
 		this.contents = opts?.contents ?? operations.zero(DelayedInvertedTurn.schema.contents);
 	}
 	/** Gets @type {DelayedInvertedTurnAttributes['accelerate']}. */
@@ -13895,6 +11780,7 @@ export class DelayedInvertedTurn
 		return this;
 	}
 }
+registerElement('DelayedInvertedTurn', DelayedInvertedTurn);
 
 export type VerticalTurnAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -13926,38 +11812,7 @@ export type VerticalTurnContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/vertical-turn/
  */
 export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAttributes, VerticalTurnContents> {
-	static readonly schema = {
-		name: 'vertical-turn',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'vertical-turn'> = schema.VerticalTurn;
 
 	readonly schema = VerticalTurn.schema;
 
@@ -13965,7 +11820,7 @@ export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAtt
 	contents: VerticalTurnContents;
 
 	constructor(opts?: { attributes?: Partial<VerticalTurnAttributes>; contents?: VerticalTurnContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, VerticalTurn.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, VerticalTurn.schema);
 		this.contents = opts?.contents ?? operations.zero(VerticalTurn.schema.contents);
 	}
 	/** Gets @type {VerticalTurnAttributes['accelerate']}. */
@@ -14124,6 +11979,7 @@ export class VerticalTurn implements XMLElement<'vertical-turn', VerticalTurnAtt
 		return this;
 	}
 }
+registerElement('VerticalTurn', VerticalTurn);
 
 export type InvertedVerticalTurnAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -14157,38 +12013,7 @@ export type InvertedVerticalTurnContents = [];
 export class InvertedVerticalTurn
 	implements XMLElement<'inverted-vertical-turn', InvertedVerticalTurnAttributes, InvertedVerticalTurnContents>
 {
-	static readonly schema = {
-		name: 'inverted-vertical-turn',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'inverted-vertical-turn'> = schema.InvertedVerticalTurn;
 
 	readonly schema = InvertedVerticalTurn.schema;
 
@@ -14199,7 +12024,7 @@ export class InvertedVerticalTurn
 		attributes?: Partial<InvertedVerticalTurnAttributes>;
 		contents?: InvertedVerticalTurnContents;
 	}) {
-		this.attributes = operations.merge(opts?.attributes || {}, InvertedVerticalTurn.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, InvertedVerticalTurn.schema);
 		this.contents = opts?.contents ?? operations.zero(InvertedVerticalTurn.schema.contents);
 	}
 	/** Gets @type {InvertedVerticalTurnAttributes['accelerate']}. */
@@ -14358,6 +12183,7 @@ export class InvertedVerticalTurn
 		return this;
 	}
 }
+registerElement('InvertedVerticalTurn', InvertedVerticalTurn);
 
 export type ShakeAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -14389,38 +12215,7 @@ export type ShakeContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/shake/
  */
 export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents> {
-	static readonly schema = {
-		name: 'shake',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'shake'> = schema.Shake;
 
 	readonly schema = Shake.schema;
 
@@ -14428,7 +12223,7 @@ export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents
 	contents: ShakeContents;
 
 	constructor(opts?: { attributes?: Partial<ShakeAttributes>; contents?: ShakeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Shake.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Shake.schema);
 		this.contents = opts?.contents ?? operations.zero(Shake.schema.contents);
 	}
 	/** Gets @type {ShakeAttributes['accelerate']}. */
@@ -14587,6 +12382,7 @@ export class Shake implements XMLElement<'shake', ShakeAttributes, ShakeContents
 		return this;
 	}
 }
+registerElement('Shake', Shake);
 
 export type WavyLineAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -14617,31 +12413,7 @@ export type WavyLineContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/wavy-line/
  */
 export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, WavyLineContents> {
-	static readonly schema = {
-		name: 'wavy-line',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			smufl: {
-				type: 'optional',
-				value: { type: 'regex', pattern: /(wiggle)|(guitar\c*VibratoStroke)/, zero: 'wiggle' },
-			},
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'wavy-line'> = schema.WavyLine;
 
 	readonly schema = WavyLine.schema;
 
@@ -14649,7 +12421,7 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
 	contents: WavyLineContents;
 
 	constructor(opts?: { attributes?: Partial<WavyLineAttributes>; contents?: WavyLineContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, WavyLine.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, WavyLine.schema);
 		this.contents = opts?.contents ?? operations.zero(WavyLine.schema.contents);
 	}
 	/** Gets @type {WavyLineAttributes['accelerate']}. */
@@ -14797,6 +12569,7 @@ export class WavyLine implements XMLElement<'wavy-line', WavyLineAttributes, Wav
 		return this;
 	}
 }
+registerElement('WavyLine', WavyLine);
 
 export type MordentAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -14831,41 +12604,7 @@ export type MordentContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mordent/
  */
 export class Mordent implements XMLElement<'mordent', MordentAttributes, MordentContents> {
-	static readonly schema = {
-		name: 'mordent',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			approach: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			departure: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			long: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'mordent'> = schema.Mordent;
 
 	readonly schema = Mordent.schema;
 
@@ -14873,7 +12612,7 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
 	contents: MordentContents;
 
 	constructor(opts?: { attributes?: Partial<MordentAttributes>; contents?: MordentContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Mordent.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Mordent.schema);
 		this.contents = opts?.contents ?? operations.zero(Mordent.schema.contents);
 	}
 	/** Gets @type {MordentAttributes['accelerate']}. */
@@ -15059,6 +12798,7 @@ export class Mordent implements XMLElement<'mordent', MordentAttributes, Mordent
 		return this;
 	}
 }
+registerElement('Mordent', Mordent);
 
 export type InvertedMordentAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -15095,41 +12835,7 @@ export type InvertedMordentContents = [];
 export class InvertedMordent
 	implements XMLElement<'inverted-mordent', InvertedMordentAttributes, InvertedMordentContents>
 {
-	static readonly schema = {
-		name: 'inverted-mordent',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			approach: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			departure: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			long: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'inverted-mordent'> = schema.InvertedMordent;
 
 	readonly schema = InvertedMordent.schema;
 
@@ -15137,7 +12843,7 @@ export class InvertedMordent
 	contents: InvertedMordentContents;
 
 	constructor(opts?: { attributes?: Partial<InvertedMordentAttributes>; contents?: InvertedMordentContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, InvertedMordent.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, InvertedMordent.schema);
 		this.contents = opts?.contents ?? operations.zero(InvertedMordent.schema.contents);
 	}
 	/** Gets @type {InvertedMordentAttributes['accelerate']}. */
@@ -15323,6 +13029,7 @@ export class InvertedMordent
 		return this;
 	}
 }
+registerElement('InvertedMordent', InvertedMordent);
 
 export type SchleiferAttributes = {
 	color: string | null;
@@ -15347,31 +13054,7 @@ export type SchleiferContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/schleifer/
  */
 export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, SchleiferContents> {
-	static readonly schema = {
-		name: 'schleifer',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'schleifer'> = schema.Schleifer;
 
 	readonly schema = Schleifer.schema;
 
@@ -15379,7 +13062,7 @@ export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, S
 	contents: SchleiferContents;
 
 	constructor(opts?: { attributes?: Partial<SchleiferAttributes>; contents?: SchleiferContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Schleifer.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Schleifer.schema);
 		this.contents = opts?.contents ?? operations.zero(Schleifer.schema.contents);
 	}
 	/** Gets @type {SchleiferAttributes['color']}. */
@@ -15475,6 +13158,7 @@ export class Schleifer implements XMLElement<'schleifer', SchleiferAttributes, S
 		return this;
 	}
 }
+registerElement('Schleifer', Schleifer);
 
 export type TremoloAttributes = {
 	color: string | null;
@@ -15507,35 +13191,7 @@ export type TremoloContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tremolo/
  */
 export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, TremoloContents> {
-	static readonly schema = {
-		name: 'tremolo',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-			type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop', 'single', 'unmeasured'] } },
-		},
-		contents: [
-			{ type: 'label', label: 'tremolo-marks', value: { type: 'required', value: { type: 'int', min: 0, max: 8 } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'tremolo'> = schema.Tremolo;
 
 	readonly schema = Tremolo.schema;
 
@@ -15543,7 +13199,7 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
 	contents: TremoloContents;
 
 	constructor(opts?: { attributes?: Partial<TremoloAttributes>; contents?: TremoloContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Tremolo.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Tremolo.schema);
 		this.contents = opts?.contents ?? operations.zero(Tremolo.schema.contents);
 	}
 	/** Gets @type {TremoloAttributes['color']}. */
@@ -15666,6 +13322,7 @@ export class Tremolo implements XMLElement<'tremolo', TremoloAttributes, Tremolo
 		return this;
 	}
 }
+registerElement('Tremolo', Tremolo);
 
 export type HaydnAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -15697,38 +13354,7 @@ export type HaydnContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/haydn/
  */
 export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents> {
-	static readonly schema = {
-		name: 'haydn',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'second-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'start-note': { type: 'optional', value: { type: 'choices', choices: ['below', 'upper', 'main'] } },
-			'trill-step': { type: 'optional', value: { type: 'choices', choices: ['unison', 'whole', 'half'] } },
-			'two-note-turn': { type: 'optional', value: { type: 'choices', choices: ['none', 'whole', 'half'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'haydn'> = schema.Haydn;
 
 	readonly schema = Haydn.schema;
 
@@ -15736,7 +13362,7 @@ export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents
 	contents: HaydnContents;
 
 	constructor(opts?: { attributes?: Partial<HaydnAttributes>; contents?: HaydnContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Haydn.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Haydn.schema);
 		this.contents = opts?.contents ?? operations.zero(Haydn.schema.contents);
 	}
 	/** Gets @type {HaydnAttributes['accelerate']}. */
@@ -15895,6 +13521,7 @@ export class Haydn implements XMLElement<'haydn', HaydnAttributes, HaydnContents
 		return this;
 	}
 }
+registerElement('Haydn', Haydn);
 
 export type OtherOrnamentAttributes = {
 	color: string | null;
@@ -15920,32 +13547,7 @@ export type OtherOrnamentContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-ornament/
  */
 export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnamentAttributes, OtherOrnamentContents> {
-	static readonly schema = {
-		name: 'other-ornament',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-ornament'> = schema.OtherOrnament;
 
 	readonly schema = OtherOrnament.schema;
 
@@ -15953,7 +13555,7 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
 	contents: OtherOrnamentContents;
 
 	constructor(opts?: { attributes?: Partial<OtherOrnamentAttributes>; contents?: OtherOrnamentContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherOrnament.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherOrnament.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherOrnament.schema.contents);
 	}
 	/** Gets @type {OtherOrnamentAttributes['color']}. */
@@ -16067,6 +13669,7 @@ export class OtherOrnament implements XMLElement<'other-ornament', OtherOrnament
 		return this;
 	}
 }
+registerElement('OtherOrnament', OtherOrnament);
 
 export type AccidentalMarkAttributes = {
 	bracket: 'yes' | 'no' | null;
@@ -16138,93 +13741,7 @@ export type AccidentalMarkContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accidental-mark/
  */
 export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalMarkAttributes, AccidentalMarkContents> {
-	static readonly schema = {
-		name: 'accidental-mark',
-		attributes: {
-			bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
-			smufl: {
-				type: 'optional',
-				value: { type: 'regex', pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' },
-			},
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'accidental-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'other',
-							'sharp',
-							'natural',
-							'flat',
-							'double-sharp',
-							'sharp-sharp',
-							'flat-flat',
-							'natural-sharp',
-							'natural-flat',
-							'quarter-flat',
-							'quarter-sharp',
-							'three-quarters-flat',
-							'three-quarters-sharp',
-							'sharp-down',
-							'sharp-up',
-							'natural-down',
-							'natural-up',
-							'flat-down',
-							'flat-up',
-							'double-sharp-down',
-							'double-sharp-up',
-							'flat-flat-down',
-							'flat-flat-up',
-							'arrow-down',
-							'arrow-up',
-							'triple-sharp',
-							'triple-flat',
-							'slash-quarter-sharp',
-							'slash-sharp',
-							'slash-flat',
-							'double-slash-flat',
-							'sharp-1',
-							'sharp-2',
-							'sharp-3',
-							'sharp-5',
-							'flat-1',
-							'flat-2',
-							'flat-3',
-							'flat-4',
-							'sori',
-							'koron',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'accidental-mark'> = schema.AccidentalMark;
 
 	readonly schema = AccidentalMark.schema;
 
@@ -16232,7 +13749,7 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
 	contents: AccidentalMarkContents;
 
 	constructor(opts?: { attributes?: Partial<AccidentalMarkAttributes>; contents?: AccidentalMarkContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, AccidentalMark.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, AccidentalMark.schema);
 		this.contents = opts?.contents ?? operations.zero(AccidentalMark.schema.contents);
 	}
 	/** Gets @type {AccidentalMarkAttributes['bracket']}. */
@@ -16466,6 +13983,7 @@ export class AccidentalMark implements XMLElement<'accidental-mark', AccidentalM
 		return this;
 	}
 }
+registerElement('AccidentalMark', AccidentalMark);
 
 export type OrnamentsAttributes = { id: string | null };
 
@@ -16498,40 +14016,7 @@ export type OrnamentsContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ornaments/
  */
 export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, OrnamentsContents> {
-	static readonly schema = {
-		name: 'ornaments',
-		attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'values',
-				value: {
-					type: 'zeroOrMore',
-					value: {
-						type: 'choices',
-						choices: [
-							TrillMark,
-							Turn,
-							DelayedTurn,
-							InvertedTurn,
-							DelayedInvertedTurn,
-							VerticalTurn,
-							InvertedVerticalTurn,
-							Shake,
-							WavyLine,
-							Mordent,
-							InvertedMordent,
-							Schleifer,
-							Tremolo,
-							Haydn,
-							OtherOrnament,
-						],
-					},
-				},
-			},
-			{ type: 'label', label: 'accidental-marks', value: { type: 'zeroOrMore', value: AccidentalMark } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'ornaments'> = schema.Ornaments;
 
 	readonly schema = Ornaments.schema;
 
@@ -16539,7 +14024,7 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
 	contents: OrnamentsContents;
 
 	constructor(opts?: { attributes?: Partial<OrnamentsAttributes>; contents?: OrnamentsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Ornaments.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Ornaments.schema);
 		this.contents = opts?.contents ?? operations.zero(Ornaments.schema.contents);
 	}
 	/** Gets @type {OrnamentsAttributes['id']}. */
@@ -16604,6 +14089,7 @@ export class Ornaments implements XMLElement<'ornaments', OrnamentsAttributes, O
 		return this;
 	}
 }
+registerElement('Ornaments', Ornaments);
 
 export type UpBowAttributes = {
 	color: string | null;
@@ -16628,31 +14114,7 @@ export type UpBowContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/up-bow/
  */
 export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContents> {
-	static readonly schema = {
-		name: 'up-bow',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'up-bow'> = schema.UpBow;
 
 	readonly schema = UpBow.schema;
 
@@ -16660,7 +14122,7 @@ export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContent
 	contents: UpBowContents;
 
 	constructor(opts?: { attributes?: Partial<UpBowAttributes>; contents?: UpBowContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, UpBow.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, UpBow.schema);
 		this.contents = opts?.contents ?? operations.zero(UpBow.schema.contents);
 	}
 	/** Gets @type {UpBowAttributes['color']}. */
@@ -16756,6 +14218,7 @@ export class UpBow implements XMLElement<'up-bow', UpBowAttributes, UpBowContent
 		return this;
 	}
 }
+registerElement('UpBow', UpBow);
 
 export type DownBowAttributes = {
 	color: string | null;
@@ -16780,31 +14243,7 @@ export type DownBowContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/down-bow/
  */
 export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBowContents> {
-	static readonly schema = {
-		name: 'down-bow',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'down-bow'> = schema.DownBow;
 
 	readonly schema = DownBow.schema;
 
@@ -16812,7 +14251,7 @@ export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBo
 	contents: DownBowContents;
 
 	constructor(opts?: { attributes?: Partial<DownBowAttributes>; contents?: DownBowContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DownBow.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DownBow.schema);
 		this.contents = opts?.contents ?? operations.zero(DownBow.schema.contents);
 	}
 	/** Gets @type {DownBowAttributes['color']}. */
@@ -16908,6 +14347,7 @@ export class DownBow implements XMLElement<'down-bow', DownBowAttributes, DownBo
 		return this;
 	}
 }
+registerElement('DownBow', DownBow);
 
 export type NaturalAttributes = Record<string, unknown>;
 
@@ -16921,7 +14361,7 @@ export type NaturalContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/natural/
  */
 export class Natural implements XMLElement<'natural', NaturalAttributes, NaturalContents> {
-	static readonly schema = { name: 'natural', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'natural'> = schema.Natural;
 
 	readonly schema = Natural.schema;
 
@@ -16929,10 +14369,11 @@ export class Natural implements XMLElement<'natural', NaturalAttributes, Natural
 	contents: NaturalContents;
 
 	constructor(opts?: { attributes?: Partial<NaturalAttributes>; contents?: NaturalContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Natural.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Natural.schema);
 		this.contents = opts?.contents ?? operations.zero(Natural.schema.contents);
 	}
 }
+registerElement('Natural', Natural);
 
 export type ArtificialAttributes = Record<string, unknown>;
 
@@ -16946,7 +14387,7 @@ export type ArtificialContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/artificial/
  */
 export class Artificial implements XMLElement<'artificial', ArtificialAttributes, ArtificialContents> {
-	static readonly schema = { name: 'artificial', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'artificial'> = schema.Artificial;
 
 	readonly schema = Artificial.schema;
 
@@ -16954,10 +14395,11 @@ export class Artificial implements XMLElement<'artificial', ArtificialAttributes
 	contents: ArtificialContents;
 
 	constructor(opts?: { attributes?: Partial<ArtificialAttributes>; contents?: ArtificialContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Artificial.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Artificial.schema);
 		this.contents = opts?.contents ?? operations.zero(Artificial.schema.contents);
 	}
 }
+registerElement('Artificial', Artificial);
 
 export type BasePitchAttributes = Record<string, unknown>;
 
@@ -16971,7 +14413,7 @@ export type BasePitchContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/base-pitch/
  */
 export class BasePitch implements XMLElement<'base-pitch', BasePitchAttributes, BasePitchContents> {
-	static readonly schema = { name: 'base-pitch', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'base-pitch'> = schema.BasePitch;
 
 	readonly schema = BasePitch.schema;
 
@@ -16979,10 +14421,11 @@ export class BasePitch implements XMLElement<'base-pitch', BasePitchAttributes, 
 	contents: BasePitchContents;
 
 	constructor(opts?: { attributes?: Partial<BasePitchAttributes>; contents?: BasePitchContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BasePitch.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BasePitch.schema);
 		this.contents = opts?.contents ?? operations.zero(BasePitch.schema.contents);
 	}
 }
+registerElement('BasePitch', BasePitch);
 
 export type TouchingPitchAttributes = Record<string, unknown>;
 
@@ -16996,7 +14439,7 @@ export type TouchingPitchContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/touching-pitch/
  */
 export class TouchingPitch implements XMLElement<'touching-pitch', TouchingPitchAttributes, TouchingPitchContents> {
-	static readonly schema = { name: 'touching-pitch', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'touching-pitch'> = schema.TouchingPitch;
 
 	readonly schema = TouchingPitch.schema;
 
@@ -17004,10 +14447,11 @@ export class TouchingPitch implements XMLElement<'touching-pitch', TouchingPitch
 	contents: TouchingPitchContents;
 
 	constructor(opts?: { attributes?: Partial<TouchingPitchAttributes>; contents?: TouchingPitchContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TouchingPitch.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TouchingPitch.schema);
 		this.contents = opts?.contents ?? operations.zero(TouchingPitch.schema.contents);
 	}
 }
+registerElement('TouchingPitch', TouchingPitch);
 
 export type SoundingPitchAttributes = Record<string, unknown>;
 
@@ -17021,7 +14465,7 @@ export type SoundingPitchContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sounding-pitch/
  */
 export class SoundingPitch implements XMLElement<'sounding-pitch', SoundingPitchAttributes, SoundingPitchContents> {
-	static readonly schema = { name: 'sounding-pitch', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'sounding-pitch'> = schema.SoundingPitch;
 
 	readonly schema = SoundingPitch.schema;
 
@@ -17029,10 +14473,11 @@ export class SoundingPitch implements XMLElement<'sounding-pitch', SoundingPitch
 	contents: SoundingPitchContents;
 
 	constructor(opts?: { attributes?: Partial<SoundingPitchAttributes>; contents?: SoundingPitchContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SoundingPitch.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SoundingPitch.schema);
 		this.contents = opts?.contents ?? operations.zero(SoundingPitch.schema.contents);
 	}
 }
+registerElement('SoundingPitch', SoundingPitch);
 
 export type HarmonicAttributes = {
 	color: string | null;
@@ -17058,43 +14503,7 @@ export type HarmonicContents = [Array<Natural | Artificial>, Array<BasePitch | T
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harmonic/
  */
 export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, HarmonicContents> {
-	static readonly schema = {
-		name: 'harmonic',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'types',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [Natural, Artificial] } },
-			},
-			{
-				type: 'label',
-				label: 'pitches',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [BasePitch, TouchingPitch, SoundingPitch] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'harmonic'> = schema.Harmonic;
 
 	readonly schema = Harmonic.schema;
 
@@ -17102,7 +14511,7 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
 	contents: HarmonicContents;
 
 	constructor(opts?: { attributes?: Partial<HarmonicAttributes>; contents?: HarmonicContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Harmonic.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Harmonic.schema);
 		this.contents = opts?.contents ?? operations.zero(Harmonic.schema.contents);
 	}
 	/** Gets @type {HarmonicAttributes['color']}. */
@@ -17225,6 +14634,7 @@ export class Harmonic implements XMLElement<'harmonic', HarmonicAttributes, Harm
 		return this;
 	}
 }
+registerElement('Harmonic', Harmonic);
 
 export type OpenStringAttributes = {
 	color: string | null;
@@ -17249,31 +14659,7 @@ export type OpenStringContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/open-string/
  */
 export class OpenString implements XMLElement<'open-string', OpenStringAttributes, OpenStringContents> {
-	static readonly schema = {
-		name: 'open-string',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'open-string'> = schema.OpenString;
 
 	readonly schema = OpenString.schema;
 
@@ -17281,7 +14667,7 @@ export class OpenString implements XMLElement<'open-string', OpenStringAttribute
 	contents: OpenStringContents;
 
 	constructor(opts?: { attributes?: Partial<OpenStringAttributes>; contents?: OpenStringContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OpenString.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OpenString.schema);
 		this.contents = opts?.contents ?? operations.zero(OpenString.schema.contents);
 	}
 	/** Gets @type {OpenStringAttributes['color']}. */
@@ -17377,6 +14763,7 @@ export class OpenString implements XMLElement<'open-string', OpenStringAttribute
 		return this;
 	}
 }
+registerElement('OpenString', OpenString);
 
 export type ThumbPositionAttributes = {
 	color: string | null;
@@ -17401,31 +14788,7 @@ export type ThumbPositionContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/thumb-position/
  */
 export class ThumbPosition implements XMLElement<'thumb-position', ThumbPositionAttributes, ThumbPositionContents> {
-	static readonly schema = {
-		name: 'thumb-position',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'thumb-position'> = schema.ThumbPosition;
 
 	readonly schema = ThumbPosition.schema;
 
@@ -17433,7 +14796,7 @@ export class ThumbPosition implements XMLElement<'thumb-position', ThumbPosition
 	contents: ThumbPositionContents;
 
 	constructor(opts?: { attributes?: Partial<ThumbPositionAttributes>; contents?: ThumbPositionContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ThumbPosition.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ThumbPosition.schema);
 		this.contents = opts?.contents ?? operations.zero(ThumbPosition.schema.contents);
 	}
 	/** Gets @type {ThumbPositionAttributes['color']}. */
@@ -17529,6 +14892,7 @@ export class ThumbPosition implements XMLElement<'thumb-position', ThumbPosition
 		return this;
 	}
 }
+registerElement('ThumbPosition', ThumbPosition);
 
 export type FingeringAttributes = {
 	alternate: 'yes' | 'no' | null;
@@ -17555,33 +14919,7 @@ export type FingeringContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fingering/
  */
 export class Fingering implements XMLElement<'fingering', FingeringAttributes, FingeringContents> {
-	static readonly schema = {
-		name: 'fingering',
-		attributes: {
-			alternate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			substitution: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'fingering'> = schema.Fingering;
 
 	readonly schema = Fingering.schema;
 
@@ -17589,7 +14927,7 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
 	contents: FingeringContents;
 
 	constructor(opts?: { attributes?: Partial<FingeringAttributes>; contents?: FingeringContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Fingering.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Fingering.schema);
 		this.contents = opts?.contents ?? operations.zero(Fingering.schema.contents);
 	}
 	/** Gets @type {FingeringAttributes['alternate']}. */
@@ -17712,6 +15050,7 @@ export class Fingering implements XMLElement<'fingering', FingeringAttributes, F
 		return this;
 	}
 }
+registerElement('Fingering', Fingering);
 
 export type PluckAttributes = {
 	color: string | null;
@@ -17736,31 +15075,7 @@ export type PluckContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pluck/
  */
 export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents> {
-	static readonly schema = {
-		name: 'pluck',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'pluck'> = schema.Pluck;
 
 	readonly schema = Pluck.schema;
 
@@ -17768,7 +15083,7 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
 	contents: PluckContents;
 
 	constructor(opts?: { attributes?: Partial<PluckAttributes>; contents?: PluckContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Pluck.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Pluck.schema);
 		this.contents = opts?.contents ?? operations.zero(Pluck.schema.contents);
 	}
 	/** Gets @type {PluckAttributes['color']}. */
@@ -17873,6 +15188,7 @@ export class Pluck implements XMLElement<'pluck', PluckAttributes, PluckContents
 		return this;
 	}
 }
+registerElement('Pluck', Pluck);
 
 export type DoubleTongueAttributes = {
 	color: string | null;
@@ -17897,31 +15213,7 @@ export type DoubleTongueContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/double-tongue/
  */
 export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAttributes, DoubleTongueContents> {
-	static readonly schema = {
-		name: 'double-tongue',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'double-tongue'> = schema.DoubleTongue;
 
 	readonly schema = DoubleTongue.schema;
 
@@ -17929,7 +15221,7 @@ export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAtt
 	contents: DoubleTongueContents;
 
 	constructor(opts?: { attributes?: Partial<DoubleTongueAttributes>; contents?: DoubleTongueContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DoubleTongue.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DoubleTongue.schema);
 		this.contents = opts?.contents ?? operations.zero(DoubleTongue.schema.contents);
 	}
 	/** Gets @type {DoubleTongueAttributes['color']}. */
@@ -18025,6 +15317,7 @@ export class DoubleTongue implements XMLElement<'double-tongue', DoubleTongueAtt
 		return this;
 	}
 }
+registerElement('DoubleTongue', DoubleTongue);
 
 export type TripleTongueAttributes = {
 	color: string | null;
@@ -18049,31 +15342,7 @@ export type TripleTongueContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/triple-tongue/
  */
 export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAttributes, TripleTongueContents> {
-	static readonly schema = {
-		name: 'triple-tongue',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'triple-tongue'> = schema.TripleTongue;
 
 	readonly schema = TripleTongue.schema;
 
@@ -18081,7 +15350,7 @@ export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAtt
 	contents: TripleTongueContents;
 
 	constructor(opts?: { attributes?: Partial<TripleTongueAttributes>; contents?: TripleTongueContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TripleTongue.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TripleTongue.schema);
 		this.contents = opts?.contents ?? operations.zero(TripleTongue.schema.contents);
 	}
 	/** Gets @type {TripleTongueAttributes['color']}. */
@@ -18177,6 +15446,7 @@ export class TripleTongue implements XMLElement<'triple-tongue', TripleTongueAtt
 		return this;
 	}
 }
+registerElement('TripleTongue', TripleTongue);
 
 export type StoppedAttributes = {
 	color: string | null;
@@ -18202,32 +15472,7 @@ export type StoppedContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stopped/
  */
 export class Stopped implements XMLElement<'stopped', StoppedAttributes, StoppedContents> {
-	static readonly schema = {
-		name: 'stopped',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'stopped'> = schema.Stopped;
 
 	readonly schema = Stopped.schema;
 
@@ -18235,7 +15480,7 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
 	contents: StoppedContents;
 
 	constructor(opts?: { attributes?: Partial<StoppedAttributes>; contents?: StoppedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Stopped.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Stopped.schema);
 		this.contents = opts?.contents ?? operations.zero(Stopped.schema.contents);
 	}
 	/** Gets @type {StoppedAttributes['color']}. */
@@ -18340,6 +15585,7 @@ export class Stopped implements XMLElement<'stopped', StoppedAttributes, Stopped
 		return this;
 	}
 }
+registerElement('Stopped', Stopped);
 
 export type SnapPizzicatoAttributes = {
 	color: string | null;
@@ -18364,31 +15610,7 @@ export type SnapPizzicatoContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/snap-pizzicato/
  */
 export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicatoAttributes, SnapPizzicatoContents> {
-	static readonly schema = {
-		name: 'snap-pizzicato',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'snap-pizzicato'> = schema.SnapPizzicato;
 
 	readonly schema = SnapPizzicato.schema;
 
@@ -18396,7 +15618,7 @@ export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicato
 	contents: SnapPizzicatoContents;
 
 	constructor(opts?: { attributes?: Partial<SnapPizzicatoAttributes>; contents?: SnapPizzicatoContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SnapPizzicato.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SnapPizzicato.schema);
 		this.contents = opts?.contents ?? operations.zero(SnapPizzicato.schema.contents);
 	}
 	/** Gets @type {SnapPizzicatoAttributes['color']}. */
@@ -18492,6 +15714,7 @@ export class SnapPizzicato implements XMLElement<'snap-pizzicato', SnapPizzicato
 		return this;
 	}
 }
+registerElement('SnapPizzicato', SnapPizzicato);
 
 export type FretAttributes = {
 	color: string | null;
@@ -18511,28 +15734,7 @@ export type FretContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fret/
  */
 export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
-	static readonly schema = {
-		name: 'fret',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-		},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'fret'> = schema.Fret;
 
 	readonly schema = Fret.schema;
 
@@ -18540,7 +15742,7 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
 	contents: FretContents;
 
 	constructor(opts?: { attributes?: Partial<FretAttributes>; contents?: FretContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Fret.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Fret.schema);
 		this.contents = opts?.contents ?? operations.zero(Fret.schema.contents);
 	}
 	/** Gets @type {FretAttributes['color']}. */
@@ -18600,6 +15802,7 @@ export class Fret implements XMLElement<'fret', FretAttributes, FretContents> {
 		return this;
 	}
 }
+registerElement('Fret', Fret);
 
 export type StringAttributes = {
 	color: string | null;
@@ -18624,37 +15827,7 @@ export type StringContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/string/
  */
 export class String implements XMLElement<'string', StringAttributes, StringContents> {
-	static readonly schema = {
-		name: 'string',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'string-number',
-				value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'string'> = schema.String;
 
 	readonly schema = String.schema;
 
@@ -18662,7 +15835,7 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
 	contents: StringContents;
 
 	constructor(opts?: { attributes?: Partial<StringAttributes>; contents?: StringContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, String.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, String.schema);
 		this.contents = opts?.contents ?? operations.zero(String.schema.contents);
 	}
 	/** Gets @type {StringAttributes['color']}. */
@@ -18767,6 +15940,7 @@ export class String implements XMLElement<'string', StringAttributes, StringCont
 		return this;
 	}
 }
+registerElement('String', String);
 
 export type HammerOnAttributes = {
 	color: string | null;
@@ -18793,33 +15967,7 @@ export type HammerOnContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/hammer-on/
  */
 export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, HammerOnContents> {
-	static readonly schema = {
-		name: 'hammer-on',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'hammer-on'> = schema.HammerOn;
 
 	readonly schema = HammerOn.schema;
 
@@ -18827,7 +15975,7 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
 	contents: HammerOnContents;
 
 	constructor(opts?: { attributes?: Partial<HammerOnAttributes>; contents?: HammerOnContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, HammerOn.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, HammerOn.schema);
 		this.contents = opts?.contents ?? operations.zero(HammerOn.schema.contents);
 	}
 	/** Gets @type {HammerOnAttributes['color']}. */
@@ -18950,6 +16098,7 @@ export class HammerOn implements XMLElement<'hammer-on', HammerOnAttributes, Ham
 		return this;
 	}
 }
+registerElement('HammerOn', HammerOn);
 
 export type PullOffAttributes = {
 	color: string | null;
@@ -18976,33 +16125,7 @@ export type PullOffContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pull-off/
  */
 export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOffContents> {
-	static readonly schema = {
-		name: 'pull-off',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'pull-off'> = schema.PullOff;
 
 	readonly schema = PullOff.schema;
 
@@ -19010,7 +16133,7 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
 	contents: PullOffContents;
 
 	constructor(opts?: { attributes?: Partial<PullOffAttributes>; contents?: PullOffContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PullOff.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PullOff.schema);
 		this.contents = opts?.contents ?? operations.zero(PullOff.schema.contents);
 	}
 	/** Gets @type {PullOffAttributes['color']}. */
@@ -19133,6 +16256,7 @@ export class PullOff implements XMLElement<'pull-off', PullOffAttributes, PullOf
 		return this;
 	}
 }
+registerElement('PullOff', PullOff);
 
 export type BendAlterAttributes = Record<string, unknown>;
 
@@ -19146,17 +16270,7 @@ export type BendAlterContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bend-alter/
  */
 export class BendAlter implements XMLElement<'bend-alter', BendAlterAttributes, BendAlterContents> {
-	static readonly schema = {
-		name: 'bend-alter',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'semitones',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'bend-alter'> = schema.BendAlter;
 
 	readonly schema = BendAlter.schema;
 
@@ -19164,7 +16278,7 @@ export class BendAlter implements XMLElement<'bend-alter', BendAlterAttributes, 
 	contents: BendAlterContents;
 
 	constructor(opts?: { attributes?: Partial<BendAlterAttributes>; contents?: BendAlterContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BendAlter.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BendAlter.schema);
 		this.contents = opts?.contents ?? operations.zero(BendAlter.schema.contents);
 	}
 
@@ -19178,6 +16292,7 @@ export class BendAlter implements XMLElement<'bend-alter', BendAlterAttributes, 
 		return this;
 	}
 }
+registerElement('BendAlter', BendAlter);
 
 export type PreBendAttributes = Record<string, unknown>;
 
@@ -19191,7 +16306,7 @@ export type PreBendContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pre-bend/
  */
 export class PreBend implements XMLElement<'pre-bend', PreBendAttributes, PreBendContents> {
-	static readonly schema = { name: 'pre-bend', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'pre-bend'> = schema.PreBend;
 
 	readonly schema = PreBend.schema;
 
@@ -19199,10 +16314,11 @@ export class PreBend implements XMLElement<'pre-bend', PreBendAttributes, PreBen
 	contents: PreBendContents;
 
 	constructor(opts?: { attributes?: Partial<PreBendAttributes>; contents?: PreBendContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PreBend.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PreBend.schema);
 		this.contents = opts?.contents ?? operations.zero(PreBend.schema.contents);
 	}
 }
+registerElement('PreBend', PreBend);
 
 export type ReleaseAttributes = { offset: number | null };
 
@@ -19216,11 +16332,7 @@ export type ReleaseContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/release/
  */
 export class Release implements XMLElement<'release', ReleaseAttributes, ReleaseContents> {
-	static readonly schema = {
-		name: 'release',
-		attributes: { offset: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } } },
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'release'> = schema.Release;
 
 	readonly schema = Release.schema;
 
@@ -19228,7 +16340,7 @@ export class Release implements XMLElement<'release', ReleaseAttributes, Release
 	contents: ReleaseContents;
 
 	constructor(opts?: { attributes?: Partial<ReleaseAttributes>; contents?: ReleaseContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Release.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Release.schema);
 		this.contents = opts?.contents ?? operations.zero(Release.schema.contents);
 	}
 	/** Gets @type {ReleaseAttributes['offset']}. */
@@ -19241,6 +16353,7 @@ export class Release implements XMLElement<'release', ReleaseAttributes, Release
 		return this;
 	}
 }
+registerElement('Release', Release);
 
 export type WithBarAttributes = {
 	color: string | null;
@@ -19266,32 +16379,7 @@ export type WithBarContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/with-bar/
  */
 export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBarContents> {
-	static readonly schema = {
-		name: 'with-bar',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'first-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'with-bar'> = schema.WithBar;
 
 	readonly schema = WithBar.schema;
 
@@ -19299,7 +16387,7 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
 	contents: WithBarContents;
 
 	constructor(opts?: { attributes?: Partial<WithBarAttributes>; contents?: WithBarContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, WithBar.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, WithBar.schema);
 		this.contents = opts?.contents ?? operations.zero(WithBar.schema.contents);
 	}
 	/** Gets @type {WithBarAttributes['color']}. */
@@ -19413,6 +16501,7 @@ export class WithBar implements XMLElement<'with-bar', WithBarAttributes, WithBa
 		return this;
 	}
 }
+registerElement('WithBar', WithBar);
 
 export type BendAttributes = {
 	accelerate: 'yes' | 'no' | null;
@@ -19441,43 +16530,7 @@ export type BendContents = [BendAlter, Array<PreBend | Release>, WithBar | null]
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bend/
  */
 export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
-	static readonly schema = {
-		name: 'bend',
-		attributes: {
-			accelerate: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			beats: { type: 'optional', value: { type: 'float', min: 2, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'first-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'last-beat': { type: 'optional', value: { type: 'float', min: 0, max: 100 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			shape: { type: 'optional', value: { type: 'choices', choices: ['angled', 'curved'] } },
-		},
-		contents: [
-			{ type: 'required', value: BendAlter },
-			{
-				type: 'label',
-				label: 'bends',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [PreBend, Release] } },
-			},
-			{ type: 'optional', value: WithBar },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'bend'> = schema.Bend;
 
 	readonly schema = Bend.schema;
 
@@ -19485,7 +16538,7 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
 	contents: BendContents;
 
 	constructor(opts?: { attributes?: Partial<BendAttributes>; contents?: BendContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Bend.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Bend.schema);
 		this.contents = opts?.contents ?? operations.zero(Bend.schema.contents);
 	}
 	/** Gets @type {BendAttributes['accelerate']}. */
@@ -19644,6 +16697,7 @@ export class Bend implements XMLElement<'bend', BendAttributes, BendContents> {
 		return this;
 	}
 }
+registerElement('Bend', Bend);
 
 export type TapAttributes = {
 	color: string | null;
@@ -19669,32 +16723,7 @@ export type TapContents = [string | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tap/
  */
 export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
-	static readonly schema = {
-		name: 'tap',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			hand: { type: 'optional', value: { type: 'choices', choices: ['left', 'right'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'optional', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'tap'> = schema.Tap;
 
 	readonly schema = Tap.schema;
 
@@ -19702,7 +16731,7 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
 	contents: TapContents;
 
 	constructor(opts?: { attributes?: Partial<TapAttributes>; contents?: TapContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Tap.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Tap.schema);
 		this.contents = opts?.contents ?? operations.zero(Tap.schema.contents);
 	}
 	/** Gets @type {TapAttributes['color']}. */
@@ -19816,6 +16845,7 @@ export class Tap implements XMLElement<'tap', TapAttributes, TapContents> {
 		return this;
 	}
 }
+registerElement('Tap', Tap);
 
 export type HeelAttributes = {
 	color: string | null;
@@ -19841,32 +16871,7 @@ export type HeelContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/heel/
  */
 export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
-	static readonly schema = {
-		name: 'heel',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			substitution: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'heel'> = schema.Heel;
 
 	readonly schema = Heel.schema;
 
@@ -19874,7 +16879,7 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
 	contents: HeelContents;
 
 	constructor(opts?: { attributes?: Partial<HeelAttributes>; contents?: HeelContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Heel.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Heel.schema);
 		this.contents = opts?.contents ?? operations.zero(Heel.schema.contents);
 	}
 	/** Gets @type {HeelAttributes['color']}. */
@@ -19979,6 +16984,7 @@ export class Heel implements XMLElement<'heel', HeelAttributes, HeelContents> {
 		return this;
 	}
 }
+registerElement('Heel', Heel);
 
 export type ToeAttributes = {
 	color: string | null;
@@ -20004,32 +17010,7 @@ export type ToeContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/toe/
  */
 export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
-	static readonly schema = {
-		name: 'toe',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			substitution: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'toe'> = schema.Toe;
 
 	readonly schema = Toe.schema;
 
@@ -20037,7 +17018,7 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
 	contents: ToeContents;
 
 	constructor(opts?: { attributes?: Partial<ToeAttributes>; contents?: ToeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Toe.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Toe.schema);
 		this.contents = opts?.contents ?? operations.zero(Toe.schema.contents);
 	}
 	/** Gets @type {ToeAttributes['color']}. */
@@ -20142,6 +17123,7 @@ export class Toe implements XMLElement<'toe', ToeAttributes, ToeContents> {
 		return this;
 	}
 }
+registerElement('Toe', Toe);
 
 export type FingernailsAttributes = {
 	color: string | null;
@@ -20166,31 +17148,7 @@ export type FingernailsContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fingernails/
  */
 export class Fingernails implements XMLElement<'fingernails', FingernailsAttributes, FingernailsContents> {
-	static readonly schema = {
-		name: 'fingernails',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'fingernails'> = schema.Fingernails;
 
 	readonly schema = Fingernails.schema;
 
@@ -20198,7 +17156,7 @@ export class Fingernails implements XMLElement<'fingernails', FingernailsAttribu
 	contents: FingernailsContents;
 
 	constructor(opts?: { attributes?: Partial<FingernailsAttributes>; contents?: FingernailsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Fingernails.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Fingernails.schema);
 		this.contents = opts?.contents ?? operations.zero(Fingernails.schema.contents);
 	}
 	/** Gets @type {FingernailsAttributes['color']}. */
@@ -20294,6 +17252,7 @@ export class Fingernails implements XMLElement<'fingernails', FingernailsAttribu
 		return this;
 	}
 }
+registerElement('Fingernails', Fingernails);
 
 export type HoleTypeAttributes = Record<string, unknown>;
 
@@ -20307,11 +17266,7 @@ export type HoleTypeContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/hole-type/
  */
 export class HoleType implements XMLElement<'hole-type', HoleTypeAttributes, HoleTypeContents> {
-	static readonly schema = {
-		name: 'hole-type',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'hole-type'> = schema.HoleType;
 
 	readonly schema = HoleType.schema;
 
@@ -20319,7 +17274,7 @@ export class HoleType implements XMLElement<'hole-type', HoleTypeAttributes, Hol
 	contents: HoleTypeContents;
 
 	constructor(opts?: { attributes?: Partial<HoleTypeAttributes>; contents?: HoleTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, HoleType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, HoleType.schema);
 		this.contents = opts?.contents ?? operations.zero(HoleType.schema.contents);
 	}
 
@@ -20333,6 +17288,7 @@ export class HoleType implements XMLElement<'hole-type', HoleTypeAttributes, Hol
 		return this;
 	}
 }
+registerElement('HoleType', HoleType);
 
 export type HoleClosedAttributes = { location: 'bottom' | 'right' | 'left' | 'top' | null };
 
@@ -20346,19 +17302,7 @@ export type HoleClosedContents = ['yes' | 'no' | 'half'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/hole-closed/
  */
 export class HoleClosed implements XMLElement<'hole-closed', HoleClosedAttributes, HoleClosedContents> {
-	static readonly schema = {
-		name: 'hole-closed',
-		attributes: {
-			location: { type: 'optional', value: { type: 'choices', choices: ['bottom', 'right', 'left', 'top'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'hole-closed-value',
-				value: { type: 'required', value: { type: 'choices', choices: ['yes', 'no', 'half'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'hole-closed'> = schema.HoleClosed;
 
 	readonly schema = HoleClosed.schema;
 
@@ -20366,7 +17310,7 @@ export class HoleClosed implements XMLElement<'hole-closed', HoleClosedAttribute
 	contents: HoleClosedContents;
 
 	constructor(opts?: { attributes?: Partial<HoleClosedAttributes>; contents?: HoleClosedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, HoleClosed.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, HoleClosed.schema);
 		this.contents = opts?.contents ?? operations.zero(HoleClosed.schema.contents);
 	}
 	/** Gets @type {HoleClosedAttributes['location']}. */
@@ -20388,6 +17332,7 @@ export class HoleClosed implements XMLElement<'hole-closed', HoleClosedAttribute
 		return this;
 	}
 }
+registerElement('HoleClosed', HoleClosed);
 
 export type HoleShapeAttributes = Record<string, unknown>;
 
@@ -20401,11 +17346,7 @@ export type HoleShapeContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/hole-shape/
  */
 export class HoleShape implements XMLElement<'hole-shape', HoleShapeAttributes, HoleShapeContents> {
-	static readonly schema = {
-		name: 'hole-shape',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'hole-shape'> = schema.HoleShape;
 
 	readonly schema = HoleShape.schema;
 
@@ -20413,7 +17354,7 @@ export class HoleShape implements XMLElement<'hole-shape', HoleShapeAttributes, 
 	contents: HoleShapeContents;
 
 	constructor(opts?: { attributes?: Partial<HoleShapeAttributes>; contents?: HoleShapeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, HoleShape.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, HoleShape.schema);
 		this.contents = opts?.contents ?? operations.zero(HoleShape.schema.contents);
 	}
 
@@ -20427,6 +17368,7 @@ export class HoleShape implements XMLElement<'hole-shape', HoleShapeAttributes, 
 		return this;
 	}
 }
+registerElement('HoleShape', HoleShape);
 
 export type HoleAttributes = {
 	color: string | null;
@@ -20451,35 +17393,7 @@ export type HoleContents = [HoleType | null, HoleClosed, HoleShape | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/hole/
  */
 export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
-	static readonly schema = {
-		name: 'hole',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{ type: 'optional', value: HoleType },
-			{ type: 'required', value: HoleClosed },
-			{ type: 'optional', value: HoleShape },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'hole'> = schema.Hole;
 
 	readonly schema = Hole.schema;
 
@@ -20487,7 +17401,7 @@ export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
 	contents: HoleContents;
 
 	constructor(opts?: { attributes?: Partial<HoleAttributes>; contents?: HoleContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Hole.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Hole.schema);
 		this.contents = opts?.contents ?? operations.zero(Hole.schema.contents);
 	}
 	/** Gets @type {HoleAttributes['color']}. */
@@ -20610,6 +17524,7 @@ export class Hole implements XMLElement<'hole', HoleAttributes, HoleContents> {
 		return this;
 	}
 }
+registerElement('Hole', Hole);
 
 export type ArrowDirectionAttributes = Record<string, unknown>;
 
@@ -20637,37 +17552,7 @@ export type ArrowDirectionContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/arrow-direction/
  */
 export class ArrowDirection implements XMLElement<'arrow-direction', ArrowDirectionAttributes, ArrowDirectionContents> {
-	static readonly schema = {
-		name: 'arrow-direction',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'arrow-direction',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'down',
-							'left',
-							'up',
-							'right',
-							'northwest',
-							'northeast',
-							'southeast',
-							'southwest',
-							'left right',
-							'up down',
-							'northwest southeast',
-							'northeast southwest',
-							'other',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'arrow-direction'> = schema.ArrowDirection;
 
 	readonly schema = ArrowDirection.schema;
 
@@ -20675,7 +17560,7 @@ export class ArrowDirection implements XMLElement<'arrow-direction', ArrowDirect
 	contents: ArrowDirectionContents;
 
 	constructor(opts?: { attributes?: Partial<ArrowDirectionAttributes>; contents?: ArrowDirectionContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ArrowDirection.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ArrowDirection.schema);
 		this.contents = opts?.contents ?? operations.zero(ArrowDirection.schema.contents);
 	}
 
@@ -20717,6 +17602,7 @@ export class ArrowDirection implements XMLElement<'arrow-direction', ArrowDirect
 		return this;
 	}
 }
+registerElement('ArrowDirection', ArrowDirection);
 
 export type ArrowStyleAttributes = Record<string, unknown>;
 
@@ -20730,20 +17616,7 @@ export type ArrowStyleContents = ['combined' | 'single' | 'double' | 'filled' | 
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/arrow-style/
  */
 export class ArrowStyle implements XMLElement<'arrow-style', ArrowStyleAttributes, ArrowStyleContents> {
-	static readonly schema = {
-		name: 'arrow-style',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'arrow-style',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['combined', 'single', 'double', 'filled', 'hollow', 'paired', 'other'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'arrow-style'> = schema.ArrowStyle;
 
 	readonly schema = ArrowStyle.schema;
 
@@ -20751,7 +17624,7 @@ export class ArrowStyle implements XMLElement<'arrow-style', ArrowStyleAttribute
 	contents: ArrowStyleContents;
 
 	constructor(opts?: { attributes?: Partial<ArrowStyleAttributes>; contents?: ArrowStyleContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ArrowStyle.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ArrowStyle.schema);
 		this.contents = opts?.contents ?? operations.zero(ArrowStyle.schema.contents);
 	}
 
@@ -20765,6 +17638,7 @@ export class ArrowStyle implements XMLElement<'arrow-style', ArrowStyleAttribute
 		return this;
 	}
 }
+registerElement('ArrowStyle', ArrowStyle);
 
 export type ArrowheadAttributes = Record<string, unknown>;
 
@@ -20778,7 +17652,7 @@ export type ArrowheadContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/arrowhead/
  */
 export class Arrowhead implements XMLElement<'arrowhead', ArrowheadAttributes, ArrowheadContents> {
-	static readonly schema = { name: 'arrowhead', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'arrowhead'> = schema.Arrowhead;
 
 	readonly schema = Arrowhead.schema;
 
@@ -20786,10 +17660,11 @@ export class Arrowhead implements XMLElement<'arrowhead', ArrowheadAttributes, A
 	contents: ArrowheadContents;
 
 	constructor(opts?: { attributes?: Partial<ArrowheadAttributes>; contents?: ArrowheadContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Arrowhead.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Arrowhead.schema);
 		this.contents = opts?.contents ?? operations.zero(Arrowhead.schema.contents);
 	}
 }
+registerElement('Arrowhead', Arrowhead);
 
 export type CircularArrowAttributes = Record<string, unknown>;
 
@@ -20803,17 +17678,7 @@ export type CircularArrowContents = ['anticlockwise' | 'clockwise'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/circular-arrow/
  */
 export class CircularArrow implements XMLElement<'circular-arrow', CircularArrowAttributes, CircularArrowContents> {
-	static readonly schema = {
-		name: 'circular-arrow',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'circular-arrow',
-				value: { type: 'required', value: { type: 'choices', choices: ['anticlockwise', 'clockwise'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'circular-arrow'> = schema.CircularArrow;
 
 	readonly schema = CircularArrow.schema;
 
@@ -20821,7 +17686,7 @@ export class CircularArrow implements XMLElement<'circular-arrow', CircularArrow
 	contents: CircularArrowContents;
 
 	constructor(opts?: { attributes?: Partial<CircularArrowAttributes>; contents?: CircularArrowContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, CircularArrow.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, CircularArrow.schema);
 		this.contents = opts?.contents ?? operations.zero(CircularArrow.schema.contents);
 	}
 
@@ -20835,6 +17700,7 @@ export class CircularArrow implements XMLElement<'circular-arrow', CircularArrow
 		return this;
 	}
 }
+registerElement('CircularArrow', CircularArrow);
 
 export type ArrowAttributes = {
 	color: string | null;
@@ -20860,37 +17726,7 @@ export type ArrowContents = [ArrowDirection, ArrowStyle | null, Arrowhead | null
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/arrow/
  */
 export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents> {
-	static readonly schema = {
-		name: 'arrow',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{ type: 'required', value: ArrowDirection },
-			{ type: 'optional', value: ArrowStyle },
-			{ type: 'optional', value: Arrowhead },
-			{ type: 'optional', value: CircularArrow },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'arrow'> = schema.Arrow;
 
 	readonly schema = Arrow.schema;
 
@@ -20898,7 +17734,7 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
 	contents: ArrowContents;
 
 	constructor(opts?: { attributes?: Partial<ArrowAttributes>; contents?: ArrowContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Arrow.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Arrow.schema);
 		this.contents = opts?.contents ?? operations.zero(Arrow.schema.contents);
 	}
 	/** Gets @type {ArrowAttributes['color']}. */
@@ -21039,6 +17875,7 @@ export class Arrow implements XMLElement<'arrow', ArrowAttributes, ArrowContents
 		return this;
 	}
 }
+registerElement('Arrow', Arrow);
 
 export type HandbellAttributes = {
 	color: string | null;
@@ -21076,56 +17913,7 @@ export type HandbellContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/handbell/
  */
 export class Handbell implements XMLElement<'handbell', HandbellAttributes, HandbellContents> {
-	static readonly schema = {
-		name: 'handbell',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'handbell-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'belltree',
-							'damp',
-							'echo',
-							'gyro',
-							'hand martellato',
-							'mallet lift',
-							'mallet table',
-							'martellato',
-							'martellato lift',
-							'muted martellato',
-							'pluck lift',
-							'swing',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'handbell'> = schema.Handbell;
 
 	readonly schema = Handbell.schema;
 
@@ -21133,7 +17921,7 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
 	contents: HandbellContents;
 
 	constructor(opts?: { attributes?: Partial<HandbellAttributes>; contents?: HandbellContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Handbell.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Handbell.schema);
 		this.contents = opts?.contents ?? operations.zero(Handbell.schema.contents);
 	}
 	/** Gets @type {HandbellAttributes['color']}. */
@@ -21264,6 +18052,7 @@ export class Handbell implements XMLElement<'handbell', HandbellAttributes, Hand
 		return this;
 	}
 }
+registerElement('Handbell', Handbell);
 
 export type BrassBendAttributes = {
 	color: string | null;
@@ -21288,31 +18077,7 @@ export type BrassBendContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/brass-bend/
  */
 export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, BrassBendContents> {
-	static readonly schema = {
-		name: 'brass-bend',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'brass-bend'> = schema.BrassBend;
 
 	readonly schema = BrassBend.schema;
 
@@ -21320,7 +18085,7 @@ export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, 
 	contents: BrassBendContents;
 
 	constructor(opts?: { attributes?: Partial<BrassBendAttributes>; contents?: BrassBendContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BrassBend.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BrassBend.schema);
 		this.contents = opts?.contents ?? operations.zero(BrassBend.schema.contents);
 	}
 	/** Gets @type {BrassBendAttributes['color']}. */
@@ -21416,6 +18181,7 @@ export class BrassBend implements XMLElement<'brass-bend', BrassBendAttributes, 
 		return this;
 	}
 }
+registerElement('BrassBend', BrassBend);
 
 export type FlipAttributes = {
 	color: string | null;
@@ -21440,31 +18206,7 @@ export type FlipContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/flip/
  */
 export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
-	static readonly schema = {
-		name: 'flip',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'flip'> = schema.Flip;
 
 	readonly schema = Flip.schema;
 
@@ -21472,7 +18214,7 @@ export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
 	contents: FlipContents;
 
 	constructor(opts?: { attributes?: Partial<FlipAttributes>; contents?: FlipContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Flip.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Flip.schema);
 		this.contents = opts?.contents ?? operations.zero(Flip.schema.contents);
 	}
 	/** Gets @type {FlipAttributes['color']}. */
@@ -21568,6 +18310,7 @@ export class Flip implements XMLElement<'flip', FlipAttributes, FlipContents> {
 		return this;
 	}
 }
+registerElement('Flip', Flip);
 
 export type SmearAttributes = {
 	color: string | null;
@@ -21592,31 +18335,7 @@ export type SmearContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/smear/
  */
 export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents> {
-	static readonly schema = {
-		name: 'smear',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'smear'> = schema.Smear;
 
 	readonly schema = Smear.schema;
 
@@ -21624,7 +18343,7 @@ export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents
 	contents: SmearContents;
 
 	constructor(opts?: { attributes?: Partial<SmearAttributes>; contents?: SmearContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Smear.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Smear.schema);
 		this.contents = opts?.contents ?? operations.zero(Smear.schema.contents);
 	}
 	/** Gets @type {SmearAttributes['color']}. */
@@ -21720,6 +18439,7 @@ export class Smear implements XMLElement<'smear', SmearAttributes, SmearContents
 		return this;
 	}
 }
+registerElement('Smear', Smear);
 
 export type OpenAttributes = {
 	color: string | null;
@@ -21745,32 +18465,7 @@ export type OpenContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/open/
  */
 export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
-	static readonly schema = {
-		name: 'open',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'open'> = schema.Open;
 
 	readonly schema = Open.schema;
 
@@ -21778,7 +18473,7 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
 	contents: OpenContents;
 
 	constructor(opts?: { attributes?: Partial<OpenAttributes>; contents?: OpenContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Open.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Open.schema);
 		this.contents = opts?.contents ?? operations.zero(Open.schema.contents);
 	}
 	/** Gets @type {OpenAttributes['color']}. */
@@ -21883,6 +18578,7 @@ export class Open implements XMLElement<'open', OpenAttributes, OpenContents> {
 		return this;
 	}
 }
+registerElement('Open', Open);
 
 export type HalfMutedAttributes = {
 	color: string | null;
@@ -21908,32 +18604,7 @@ export type HalfMutedContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/half-muted/
  */
 export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, HalfMutedContents> {
-	static readonly schema = {
-		name: 'half-muted',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'half-muted'> = schema.HalfMuted;
 
 	readonly schema = HalfMuted.schema;
 
@@ -21941,7 +18612,7 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
 	contents: HalfMutedContents;
 
 	constructor(opts?: { attributes?: Partial<HalfMutedAttributes>; contents?: HalfMutedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, HalfMuted.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, HalfMuted.schema);
 		this.contents = opts?.contents ?? operations.zero(HalfMuted.schema.contents);
 	}
 	/** Gets @type {HalfMutedAttributes['color']}. */
@@ -22046,6 +18717,7 @@ export class HalfMuted implements XMLElement<'half-muted', HalfMutedAttributes, 
 		return this;
 	}
 }
+registerElement('HalfMuted', HalfMuted);
 
 export type HarmonClosedAttributes = { location: 'bottom' | 'right' | 'left' | 'top' | null };
 
@@ -22059,19 +18731,7 @@ export type HarmonClosedContents = ['yes' | 'no' | 'half'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harmon-closed/
  */
 export class HarmonClosed implements XMLElement<'harmon-closed', HarmonClosedAttributes, HarmonClosedContents> {
-	static readonly schema = {
-		name: 'harmon-closed',
-		attributes: {
-			location: { type: 'optional', value: { type: 'choices', choices: ['bottom', 'right', 'left', 'top'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'harmon-closed-value',
-				value: { type: 'required', value: { type: 'choices', choices: ['yes', 'no', 'half'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'harmon-closed'> = schema.HarmonClosed;
 
 	readonly schema = HarmonClosed.schema;
 
@@ -22079,7 +18739,7 @@ export class HarmonClosed implements XMLElement<'harmon-closed', HarmonClosedAtt
 	contents: HarmonClosedContents;
 
 	constructor(opts?: { attributes?: Partial<HarmonClosedAttributes>; contents?: HarmonClosedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, HarmonClosed.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, HarmonClosed.schema);
 		this.contents = opts?.contents ?? operations.zero(HarmonClosed.schema.contents);
 	}
 	/** Gets @type {HarmonClosedAttributes['location']}. */
@@ -22101,6 +18761,7 @@ export class HarmonClosed implements XMLElement<'harmon-closed', HarmonClosedAtt
 		return this;
 	}
 }
+registerElement('HarmonClosed', HarmonClosed);
 
 export type HarmonMuteAttributes = {
 	color: string | null;
@@ -22126,32 +18787,7 @@ export type HarmonMuteContents = [HarmonClosed];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harmon-mute/
  */
 export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttributes, HarmonMuteContents> {
-	static readonly schema = {
-		name: 'harmon-mute',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [{ type: 'required', value: HarmonClosed }],
-	} as const;
+	static readonly schema: XMLElementSchema<'harmon-mute'> = schema.HarmonMute;
 
 	readonly schema = HarmonMute.schema;
 
@@ -22159,7 +18795,7 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
 	contents: HarmonMuteContents;
 
 	constructor(opts?: { attributes?: Partial<HarmonMuteAttributes>; contents?: HarmonMuteContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, HarmonMute.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, HarmonMute.schema);
 		this.contents = opts?.contents ?? operations.zero(HarmonMute.schema.contents);
 	}
 	/** Gets @type {HarmonMuteAttributes['color']}. */
@@ -22273,6 +18909,7 @@ export class HarmonMute implements XMLElement<'harmon-mute', HarmonMuteAttribute
 		return this;
 	}
 }
+registerElement('HarmonMute', HarmonMute);
 
 export type GolpeAttributes = {
 	color: string | null;
@@ -22297,31 +18934,7 @@ export type GolpeContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/golpe/
  */
 export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents> {
-	static readonly schema = {
-		name: 'golpe',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'golpe'> = schema.Golpe;
 
 	readonly schema = Golpe.schema;
 
@@ -22329,7 +18942,7 @@ export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents
 	contents: GolpeContents;
 
 	constructor(opts?: { attributes?: Partial<GolpeAttributes>; contents?: GolpeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Golpe.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Golpe.schema);
 		this.contents = opts?.contents ?? operations.zero(Golpe.schema.contents);
 	}
 	/** Gets @type {GolpeAttributes['color']}. */
@@ -22425,6 +19038,7 @@ export class Golpe implements XMLElement<'golpe', GolpeAttributes, GolpeContents
 		return this;
 	}
 }
+registerElement('Golpe', Golpe);
 
 export type OtherTechnicalAttributes = {
 	color: string | null;
@@ -22450,32 +19064,7 @@ export type OtherTechnicalContents = [string | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-technical/
  */
 export class OtherTechnical implements XMLElement<'other-technical', OtherTechnicalAttributes, OtherTechnicalContents> {
-	static readonly schema = {
-		name: 'other-technical',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'optional', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-technical'> = schema.OtherTechnical;
 
 	readonly schema = OtherTechnical.schema;
 
@@ -22483,7 +19072,7 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
 	contents: OtherTechnicalContents;
 
 	constructor(opts?: { attributes?: Partial<OtherTechnicalAttributes>; contents?: OtherTechnicalContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherTechnical.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherTechnical.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherTechnical.schema.contents);
 	}
 	/** Gets @type {OtherTechnicalAttributes['color']}. */
@@ -22597,6 +19186,7 @@ export class OtherTechnical implements XMLElement<'other-technical', OtherTechni
 		return this;
 	}
 }
+registerElement('OtherTechnical', OtherTechnical);
 
 export type TechnicalAttributes = { id: string | null };
 
@@ -22644,55 +19234,7 @@ export type TechnicalContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/technical/
  */
 export class Technical implements XMLElement<'technical', TechnicalAttributes, TechnicalContents> {
-	static readonly schema = {
-		name: 'technical',
-		attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'values',
-				value: {
-					type: 'zeroOrMore',
-					value: {
-						type: 'choices',
-						choices: [
-							UpBow,
-							DownBow,
-							Harmonic,
-							OpenString,
-							ThumbPosition,
-							Fingering,
-							Pluck,
-							DoubleTongue,
-							TripleTongue,
-							Stopped,
-							SnapPizzicato,
-							Fret,
-							String,
-							HammerOn,
-							PullOff,
-							Bend,
-							Tap,
-							Heel,
-							Toe,
-							Fingernails,
-							Hole,
-							Arrow,
-							Handbell,
-							BrassBend,
-							Flip,
-							Smear,
-							Open,
-							HalfMuted,
-							HarmonMute,
-							Golpe,
-							OtherTechnical,
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'technical'> = schema.Technical;
 
 	readonly schema = Technical.schema;
 
@@ -22700,7 +19242,7 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
 	contents: TechnicalContents;
 
 	constructor(opts?: { attributes?: Partial<TechnicalAttributes>; contents?: TechnicalContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Technical.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Technical.schema);
 		this.contents = opts?.contents ?? operations.zero(Technical.schema.contents);
 	}
 	/** Gets @type {TechnicalAttributes['id']}. */
@@ -22788,6 +19330,7 @@ export class Technical implements XMLElement<'technical', TechnicalAttributes, T
 		return this;
 	}
 }
+registerElement('Technical', Technical);
 
 export type AccentAttributes = {
 	color: string | null;
@@ -22812,31 +19355,7 @@ export type AccentContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accent/
  */
 export class Accent implements XMLElement<'accent', AccentAttributes, AccentContents> {
-	static readonly schema = {
-		name: 'accent',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'accent'> = schema.Accent;
 
 	readonly schema = Accent.schema;
 
@@ -22844,7 +19363,7 @@ export class Accent implements XMLElement<'accent', AccentAttributes, AccentCont
 	contents: AccentContents;
 
 	constructor(opts?: { attributes?: Partial<AccentAttributes>; contents?: AccentContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Accent.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Accent.schema);
 		this.contents = opts?.contents ?? operations.zero(Accent.schema.contents);
 	}
 	/** Gets @type {AccentAttributes['color']}. */
@@ -22940,6 +19459,7 @@ export class Accent implements XMLElement<'accent', AccentAttributes, AccentCont
 		return this;
 	}
 }
+registerElement('Accent', Accent);
 
 export type StrongAccentAttributes = {
 	color: string | null;
@@ -22965,32 +19485,7 @@ export type StrongAccentContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/strong-accent/
  */
 export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAttributes, StrongAccentContents> {
-	static readonly schema = {
-		name: 'strong-accent',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'optional', value: { type: 'choices', choices: ['up', 'down'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'strong-accent'> = schema.StrongAccent;
 
 	readonly schema = StrongAccent.schema;
 
@@ -22998,7 +19493,7 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
 	contents: StrongAccentContents;
 
 	constructor(opts?: { attributes?: Partial<StrongAccentAttributes>; contents?: StrongAccentContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StrongAccent.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StrongAccent.schema);
 		this.contents = opts?.contents ?? operations.zero(StrongAccent.schema.contents);
 	}
 	/** Gets @type {StrongAccentAttributes['color']}. */
@@ -23103,6 +19598,7 @@ export class StrongAccent implements XMLElement<'strong-accent', StrongAccentAtt
 		return this;
 	}
 }
+registerElement('StrongAccent', StrongAccent);
 
 export type StaccatoAttributes = {
 	color: string | null;
@@ -23127,31 +19623,7 @@ export type StaccatoContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staccato/
  */
 export class Staccato implements XMLElement<'staccato', StaccatoAttributes, StaccatoContents> {
-	static readonly schema = {
-		name: 'staccato',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'staccato'> = schema.Staccato;
 
 	readonly schema = Staccato.schema;
 
@@ -23159,7 +19631,7 @@ export class Staccato implements XMLElement<'staccato', StaccatoAttributes, Stac
 	contents: StaccatoContents;
 
 	constructor(opts?: { attributes?: Partial<StaccatoAttributes>; contents?: StaccatoContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Staccato.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Staccato.schema);
 		this.contents = opts?.contents ?? operations.zero(Staccato.schema.contents);
 	}
 	/** Gets @type {StaccatoAttributes['color']}. */
@@ -23255,6 +19727,7 @@ export class Staccato implements XMLElement<'staccato', StaccatoAttributes, Stac
 		return this;
 	}
 }
+registerElement('Staccato', Staccato);
 
 export type TenutoAttributes = {
 	color: string | null;
@@ -23279,31 +19752,7 @@ export type TenutoContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tenuto/
  */
 export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoContents> {
-	static readonly schema = {
-		name: 'tenuto',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'tenuto'> = schema.Tenuto;
 
 	readonly schema = Tenuto.schema;
 
@@ -23311,7 +19760,7 @@ export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoCont
 	contents: TenutoContents;
 
 	constructor(opts?: { attributes?: Partial<TenutoAttributes>; contents?: TenutoContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Tenuto.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Tenuto.schema);
 		this.contents = opts?.contents ?? operations.zero(Tenuto.schema.contents);
 	}
 	/** Gets @type {TenutoAttributes['color']}. */
@@ -23407,6 +19856,7 @@ export class Tenuto implements XMLElement<'tenuto', TenutoAttributes, TenutoCont
 		return this;
 	}
 }
+registerElement('Tenuto', Tenuto);
 
 export type DetachedLegatoAttributes = {
 	color: string | null;
@@ -23431,31 +19881,7 @@ export type DetachedLegatoContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/detached-legato/
  */
 export class DetachedLegato implements XMLElement<'detached-legato', DetachedLegatoAttributes, DetachedLegatoContents> {
-	static readonly schema = {
-		name: 'detached-legato',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'detached-legato'> = schema.DetachedLegato;
 
 	readonly schema = DetachedLegato.schema;
 
@@ -23463,7 +19889,7 @@ export class DetachedLegato implements XMLElement<'detached-legato', DetachedLeg
 	contents: DetachedLegatoContents;
 
 	constructor(opts?: { attributes?: Partial<DetachedLegatoAttributes>; contents?: DetachedLegatoContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DetachedLegato.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DetachedLegato.schema);
 		this.contents = opts?.contents ?? operations.zero(DetachedLegato.schema.contents);
 	}
 	/** Gets @type {DetachedLegatoAttributes['color']}. */
@@ -23559,6 +19985,7 @@ export class DetachedLegato implements XMLElement<'detached-legato', DetachedLeg
 		return this;
 	}
 }
+registerElement('DetachedLegato', DetachedLegato);
 
 export type StaccatissimoAttributes = {
 	color: string | null;
@@ -23583,31 +20010,7 @@ export type StaccatissimoContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staccatissimo/
  */
 export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoAttributes, StaccatissimoContents> {
-	static readonly schema = {
-		name: 'staccatissimo',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'staccatissimo'> = schema.Staccatissimo;
 
 	readonly schema = Staccatissimo.schema;
 
@@ -23615,7 +20018,7 @@ export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoA
 	contents: StaccatissimoContents;
 
 	constructor(opts?: { attributes?: Partial<StaccatissimoAttributes>; contents?: StaccatissimoContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Staccatissimo.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Staccatissimo.schema);
 		this.contents = opts?.contents ?? operations.zero(Staccatissimo.schema.contents);
 	}
 	/** Gets @type {StaccatissimoAttributes['color']}. */
@@ -23711,6 +20114,7 @@ export class Staccatissimo implements XMLElement<'staccatissimo', StaccatissimoA
 		return this;
 	}
 }
+registerElement('Staccatissimo', Staccatissimo);
 
 export type SpiccatoAttributes = {
 	color: string | null;
@@ -23735,31 +20139,7 @@ export type SpiccatoContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/spiccato/
  */
 export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, SpiccatoContents> {
-	static readonly schema = {
-		name: 'spiccato',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'spiccato'> = schema.Spiccato;
 
 	readonly schema = Spiccato.schema;
 
@@ -23767,7 +20147,7 @@ export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, Spic
 	contents: SpiccatoContents;
 
 	constructor(opts?: { attributes?: Partial<SpiccatoAttributes>; contents?: SpiccatoContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Spiccato.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Spiccato.schema);
 		this.contents = opts?.contents ?? operations.zero(Spiccato.schema.contents);
 	}
 	/** Gets @type {SpiccatoAttributes['color']}. */
@@ -23863,6 +20243,7 @@ export class Spiccato implements XMLElement<'spiccato', SpiccatoAttributes, Spic
 		return this;
 	}
 }
+registerElement('Spiccato', Spiccato);
 
 export type ScoopAttributes = {
 	color: string | null;
@@ -23892,36 +20273,7 @@ export type ScoopContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/scoop/
  */
 export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents> {
-	static readonly schema = {
-		name: 'scoop',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'line-length': { type: 'optional', value: { type: 'choices', choices: ['short', 'medium', 'long'] } },
-			'line-shape': { type: 'optional', value: { type: 'choices', choices: ['straight', 'curved'] } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'scoop'> = schema.Scoop;
 
 	readonly schema = Scoop.schema;
 
@@ -23929,7 +20281,7 @@ export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents
 	contents: ScoopContents;
 
 	constructor(opts?: { attributes?: Partial<ScoopAttributes>; contents?: ScoopContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Scoop.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Scoop.schema);
 		this.contents = opts?.contents ?? operations.zero(Scoop.schema.contents);
 	}
 	/** Gets @type {ScoopAttributes['color']}. */
@@ -24070,6 +20422,7 @@ export class Scoop implements XMLElement<'scoop', ScoopAttributes, ScoopContents
 		return this;
 	}
 }
+registerElement('Scoop', Scoop);
 
 export type PlopAttributes = {
 	color: string | null;
@@ -24099,36 +20452,7 @@ export type PlopContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/plop/
  */
 export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
-	static readonly schema = {
-		name: 'plop',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'line-length': { type: 'optional', value: { type: 'choices', choices: ['short', 'medium', 'long'] } },
-			'line-shape': { type: 'optional', value: { type: 'choices', choices: ['straight', 'curved'] } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'plop'> = schema.Plop;
 
 	readonly schema = Plop.schema;
 
@@ -24136,7 +20460,7 @@ export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
 	contents: PlopContents;
 
 	constructor(opts?: { attributes?: Partial<PlopAttributes>; contents?: PlopContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Plop.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Plop.schema);
 		this.contents = opts?.contents ?? operations.zero(Plop.schema.contents);
 	}
 	/** Gets @type {PlopAttributes['color']}. */
@@ -24277,6 +20601,7 @@ export class Plop implements XMLElement<'plop', PlopAttributes, PlopContents> {
 		return this;
 	}
 }
+registerElement('Plop', Plop);
 
 export type DoitAttributes = {
 	color: string | null;
@@ -24306,36 +20631,7 @@ export type DoitContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/doit/
  */
 export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
-	static readonly schema = {
-		name: 'doit',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'line-length': { type: 'optional', value: { type: 'choices', choices: ['short', 'medium', 'long'] } },
-			'line-shape': { type: 'optional', value: { type: 'choices', choices: ['straight', 'curved'] } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'doit'> = schema.Doit;
 
 	readonly schema = Doit.schema;
 
@@ -24343,7 +20639,7 @@ export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
 	contents: DoitContents;
 
 	constructor(opts?: { attributes?: Partial<DoitAttributes>; contents?: DoitContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Doit.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Doit.schema);
 		this.contents = opts?.contents ?? operations.zero(Doit.schema.contents);
 	}
 	/** Gets @type {DoitAttributes['color']}. */
@@ -24484,6 +20780,7 @@ export class Doit implements XMLElement<'doit', DoitAttributes, DoitContents> {
 		return this;
 	}
 }
+registerElement('Doit', Doit);
 
 export type FalloffAttributes = {
 	color: string | null;
@@ -24513,36 +20810,7 @@ export type FalloffContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/falloff/
  */
 export class Falloff implements XMLElement<'falloff', FalloffAttributes, FalloffContents> {
-	static readonly schema = {
-		name: 'falloff',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'line-length': { type: 'optional', value: { type: 'choices', choices: ['short', 'medium', 'long'] } },
-			'line-shape': { type: 'optional', value: { type: 'choices', choices: ['straight', 'curved'] } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'falloff'> = schema.Falloff;
 
 	readonly schema = Falloff.schema;
 
@@ -24550,7 +20818,7 @@ export class Falloff implements XMLElement<'falloff', FalloffAttributes, Falloff
 	contents: FalloffContents;
 
 	constructor(opts?: { attributes?: Partial<FalloffAttributes>; contents?: FalloffContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Falloff.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Falloff.schema);
 		this.contents = opts?.contents ?? operations.zero(Falloff.schema.contents);
 	}
 	/** Gets @type {FalloffAttributes['color']}. */
@@ -24691,6 +20959,7 @@ export class Falloff implements XMLElement<'falloff', FalloffAttributes, Falloff
 		return this;
 	}
 }
+registerElement('Falloff', Falloff);
 
 export type BreathMarkAttributes = {
 	color: string | null;
@@ -24715,37 +20984,7 @@ export type BreathMarkContents = ['comma' | '' | 'tick' | 'upbow' | 'salzedo' | 
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/breath-mark/
  */
 export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttributes, BreathMarkContents> {
-	static readonly schema = {
-		name: 'breath-mark',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'breath-mark-value',
-				value: { type: 'optional', value: { type: 'choices', choices: ['comma', '', 'tick', 'upbow', 'salzedo'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'breath-mark'> = schema.BreathMark;
 
 	readonly schema = BreathMark.schema;
 
@@ -24753,7 +20992,7 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
 	contents: BreathMarkContents;
 
 	constructor(opts?: { attributes?: Partial<BreathMarkAttributes>; contents?: BreathMarkContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BreathMark.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BreathMark.schema);
 		this.contents = opts?.contents ?? operations.zero(BreathMark.schema.contents);
 	}
 	/** Gets @type {BreathMarkAttributes['color']}. */
@@ -24858,6 +21097,7 @@ export class BreathMark implements XMLElement<'breath-mark', BreathMarkAttribute
 		return this;
 	}
 }
+registerElement('BreathMark', BreathMark);
 
 export type CaesuraAttributes = {
 	color: string | null;
@@ -24882,40 +21122,7 @@ export type CaesuraContents = ['normal' | 'thick' | 'short' | 'curved' | 'single
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/caesura/
  */
 export class Caesura implements XMLElement<'caesura', CaesuraAttributes, CaesuraContents> {
-	static readonly schema = {
-		name: 'caesura',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'caesura-value',
-				value: {
-					type: 'optional',
-					value: { type: 'choices', choices: ['normal', 'thick', 'short', 'curved', 'single', ''] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'caesura'> = schema.Caesura;
 
 	readonly schema = Caesura.schema;
 
@@ -24923,7 +21130,7 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
 	contents: CaesuraContents;
 
 	constructor(opts?: { attributes?: Partial<CaesuraAttributes>; contents?: CaesuraContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Caesura.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Caesura.schema);
 		this.contents = opts?.contents ?? operations.zero(Caesura.schema.contents);
 	}
 	/** Gets @type {CaesuraAttributes['color']}. */
@@ -25028,6 +21235,7 @@ export class Caesura implements XMLElement<'caesura', CaesuraAttributes, Caesura
 		return this;
 	}
 }
+registerElement('Caesura', Caesura);
 
 export type StressAttributes = {
 	color: string | null;
@@ -25052,31 +21260,7 @@ export type StressContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stress/
  */
 export class Stress implements XMLElement<'stress', StressAttributes, StressContents> {
-	static readonly schema = {
-		name: 'stress',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'stress'> = schema.Stress;
 
 	readonly schema = Stress.schema;
 
@@ -25084,7 +21268,7 @@ export class Stress implements XMLElement<'stress', StressAttributes, StressCont
 	contents: StressContents;
 
 	constructor(opts?: { attributes?: Partial<StressAttributes>; contents?: StressContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Stress.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Stress.schema);
 		this.contents = opts?.contents ?? operations.zero(Stress.schema.contents);
 	}
 	/** Gets @type {StressAttributes['color']}. */
@@ -25180,6 +21364,7 @@ export class Stress implements XMLElement<'stress', StressAttributes, StressCont
 		return this;
 	}
 }
+registerElement('Stress', Stress);
 
 export type UnstressAttributes = {
 	color: string | null;
@@ -25204,31 +21389,7 @@ export type UnstressContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/unstress/
  */
 export class Unstress implements XMLElement<'unstress', UnstressAttributes, UnstressContents> {
-	static readonly schema = {
-		name: 'unstress',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'unstress'> = schema.Unstress;
 
 	readonly schema = Unstress.schema;
 
@@ -25236,7 +21397,7 @@ export class Unstress implements XMLElement<'unstress', UnstressAttributes, Unst
 	contents: UnstressContents;
 
 	constructor(opts?: { attributes?: Partial<UnstressAttributes>; contents?: UnstressContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Unstress.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Unstress.schema);
 		this.contents = opts?.contents ?? operations.zero(Unstress.schema.contents);
 	}
 	/** Gets @type {UnstressAttributes['color']}. */
@@ -25332,6 +21493,7 @@ export class Unstress implements XMLElement<'unstress', UnstressAttributes, Unst
 		return this;
 	}
 }
+registerElement('Unstress', Unstress);
 
 export type SoftAccentAttributes = {
 	color: string | null;
@@ -25356,31 +21518,7 @@ export type SoftAccentContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/soft-accent/
  */
 export class SoftAccent implements XMLElement<'soft-accent', SoftAccentAttributes, SoftAccentContents> {
-	static readonly schema = {
-		name: 'soft-accent',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'soft-accent'> = schema.SoftAccent;
 
 	readonly schema = SoftAccent.schema;
 
@@ -25388,7 +21526,7 @@ export class SoftAccent implements XMLElement<'soft-accent', SoftAccentAttribute
 	contents: SoftAccentContents;
 
 	constructor(opts?: { attributes?: Partial<SoftAccentAttributes>; contents?: SoftAccentContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SoftAccent.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SoftAccent.schema);
 		this.contents = opts?.contents ?? operations.zero(SoftAccent.schema.contents);
 	}
 	/** Gets @type {SoftAccentAttributes['color']}. */
@@ -25484,6 +21622,7 @@ export class SoftAccent implements XMLElement<'soft-accent', SoftAccentAttribute
 		return this;
 	}
 }
+registerElement('SoftAccent', SoftAccent);
 
 export type OtherArticulationAttributes = {
 	color: string | null;
@@ -25511,32 +21650,7 @@ export type OtherArticulationContents = [string];
 export class OtherArticulation
 	implements XMLElement<'other-articulation', OtherArticulationAttributes, OtherArticulationContents>
 {
-	static readonly schema = {
-		name: 'other-articulation',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-articulation'> = schema.OtherArticulation;
 
 	readonly schema = OtherArticulation.schema;
 
@@ -25544,7 +21658,7 @@ export class OtherArticulation
 	contents: OtherArticulationContents;
 
 	constructor(opts?: { attributes?: Partial<OtherArticulationAttributes>; contents?: OtherArticulationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherArticulation.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherArticulation.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherArticulation.schema.contents);
 	}
 	/** Gets @type {OtherArticulationAttributes['color']}. */
@@ -25658,6 +21772,7 @@ export class OtherArticulation
 		return this;
 	}
 }
+registerElement('OtherArticulation', OtherArticulation);
 
 export type ArticulationsAttributes = { id: string | null };
 
@@ -25691,41 +21806,7 @@ export type ArticulationsContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/articulations/
  */
 export class Articulations implements XMLElement<'articulations', ArticulationsAttributes, ArticulationsContents> {
-	static readonly schema = {
-		name: 'articulations',
-		attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'articulations',
-				value: {
-					type: 'zeroOrMore',
-					value: {
-						type: 'choices',
-						choices: [
-							Accent,
-							StrongAccent,
-							Staccato,
-							Tenuto,
-							DetachedLegato,
-							Staccatissimo,
-							Spiccato,
-							Scoop,
-							Plop,
-							Doit,
-							Falloff,
-							BreathMark,
-							Caesura,
-							Stress,
-							Unstress,
-							SoftAccent,
-							OtherArticulation,
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'articulations'> = schema.Articulations;
 
 	readonly schema = Articulations.schema;
 
@@ -25733,7 +21814,7 @@ export class Articulations implements XMLElement<'articulations', ArticulationsA
 	contents: ArticulationsContents;
 
 	constructor(opts?: { attributes?: Partial<ArticulationsAttributes>; contents?: ArticulationsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Articulations.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Articulations.schema);
 		this.contents = opts?.contents ?? operations.zero(Articulations.schema.contents);
 	}
 	/** Gets @type {ArticulationsAttributes['id']}. */
@@ -25793,6 +21874,7 @@ export class Articulations implements XMLElement<'articulations', ArticulationsA
 		return this;
 	}
 }
+registerElement('Articulations', Articulations);
 
 export type PAttributes = Record<string, unknown>;
 
@@ -25806,7 +21888,7 @@ export type PContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/p/
  */
 export class P implements XMLElement<'p', PAttributes, PContents> {
-	static readonly schema = { name: 'p', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'p'> = schema.P;
 
 	readonly schema = P.schema;
 
@@ -25814,10 +21896,11 @@ export class P implements XMLElement<'p', PAttributes, PContents> {
 	contents: PContents;
 
 	constructor(opts?: { attributes?: Partial<PAttributes>; contents?: PContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, P.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, P.schema);
 		this.contents = opts?.contents ?? operations.zero(P.schema.contents);
 	}
 }
+registerElement('P', P);
 
 export type PpAttributes = Record<string, unknown>;
 
@@ -25831,7 +21914,7 @@ export type PpContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pp/
  */
 export class Pp implements XMLElement<'pp', PpAttributes, PpContents> {
-	static readonly schema = { name: 'pp', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'pp'> = schema.Pp;
 
 	readonly schema = Pp.schema;
 
@@ -25839,10 +21922,11 @@ export class Pp implements XMLElement<'pp', PpAttributes, PpContents> {
 	contents: PpContents;
 
 	constructor(opts?: { attributes?: Partial<PpAttributes>; contents?: PpContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Pp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Pp.schema);
 		this.contents = opts?.contents ?? operations.zero(Pp.schema.contents);
 	}
 }
+registerElement('Pp', Pp);
 
 export type PppAttributes = Record<string, unknown>;
 
@@ -25856,7 +21940,7 @@ export type PppContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ppp/
  */
 export class Ppp implements XMLElement<'ppp', PppAttributes, PppContents> {
-	static readonly schema = { name: 'ppp', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'ppp'> = schema.Ppp;
 
 	readonly schema = Ppp.schema;
 
@@ -25864,10 +21948,11 @@ export class Ppp implements XMLElement<'ppp', PppAttributes, PppContents> {
 	contents: PppContents;
 
 	constructor(opts?: { attributes?: Partial<PppAttributes>; contents?: PppContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Ppp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Ppp.schema);
 		this.contents = opts?.contents ?? operations.zero(Ppp.schema.contents);
 	}
 }
+registerElement('Ppp', Ppp);
 
 export type PpppAttributes = Record<string, unknown>;
 
@@ -25881,7 +21966,7 @@ export type PpppContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pppp/
  */
 export class Pppp implements XMLElement<'pppp', PpppAttributes, PpppContents> {
-	static readonly schema = { name: 'pppp', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'pppp'> = schema.Pppp;
 
 	readonly schema = Pppp.schema;
 
@@ -25889,10 +21974,11 @@ export class Pppp implements XMLElement<'pppp', PpppAttributes, PpppContents> {
 	contents: PpppContents;
 
 	constructor(opts?: { attributes?: Partial<PpppAttributes>; contents?: PpppContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Pppp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Pppp.schema);
 		this.contents = opts?.contents ?? operations.zero(Pppp.schema.contents);
 	}
 }
+registerElement('Pppp', Pppp);
 
 export type PppppAttributes = Record<string, unknown>;
 
@@ -25906,7 +21992,7 @@ export type PppppContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ppppp/
  */
 export class Ppppp implements XMLElement<'ppppp', PppppAttributes, PppppContents> {
-	static readonly schema = { name: 'ppppp', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'ppppp'> = schema.Ppppp;
 
 	readonly schema = Ppppp.schema;
 
@@ -25914,10 +22000,11 @@ export class Ppppp implements XMLElement<'ppppp', PppppAttributes, PppppContents
 	contents: PppppContents;
 
 	constructor(opts?: { attributes?: Partial<PppppAttributes>; contents?: PppppContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Ppppp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Ppppp.schema);
 		this.contents = opts?.contents ?? operations.zero(Ppppp.schema.contents);
 	}
 }
+registerElement('Ppppp', Ppppp);
 
 export type PpppppAttributes = Record<string, unknown>;
 
@@ -25931,7 +22018,7 @@ export type PpppppContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pppppp/
  */
 export class Pppppp implements XMLElement<'pppppp', PpppppAttributes, PpppppContents> {
-	static readonly schema = { name: 'pppppp', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'pppppp'> = schema.Pppppp;
 
 	readonly schema = Pppppp.schema;
 
@@ -25939,10 +22026,11 @@ export class Pppppp implements XMLElement<'pppppp', PpppppAttributes, PpppppCont
 	contents: PpppppContents;
 
 	constructor(opts?: { attributes?: Partial<PpppppAttributes>; contents?: PpppppContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Pppppp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Pppppp.schema);
 		this.contents = opts?.contents ?? operations.zero(Pppppp.schema.contents);
 	}
 }
+registerElement('Pppppp', Pppppp);
 
 export type FAttributes = Record<string, unknown>;
 
@@ -25956,7 +22044,7 @@ export type FContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/f/
  */
 export class F implements XMLElement<'f', FAttributes, FContents> {
-	static readonly schema = { name: 'f', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'f'> = schema.F;
 
 	readonly schema = F.schema;
 
@@ -25964,10 +22052,11 @@ export class F implements XMLElement<'f', FAttributes, FContents> {
 	contents: FContents;
 
 	constructor(opts?: { attributes?: Partial<FAttributes>; contents?: FContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, F.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, F.schema);
 		this.contents = opts?.contents ?? operations.zero(F.schema.contents);
 	}
 }
+registerElement('F', F);
 
 export type FfAttributes = Record<string, unknown>;
 
@@ -25981,7 +22070,7 @@ export type FfContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ff/
  */
 export class Ff implements XMLElement<'ff', FfAttributes, FfContents> {
-	static readonly schema = { name: 'ff', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'ff'> = schema.Ff;
 
 	readonly schema = Ff.schema;
 
@@ -25989,10 +22078,11 @@ export class Ff implements XMLElement<'ff', FfAttributes, FfContents> {
 	contents: FfContents;
 
 	constructor(opts?: { attributes?: Partial<FfAttributes>; contents?: FfContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Ff.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Ff.schema);
 		this.contents = opts?.contents ?? operations.zero(Ff.schema.contents);
 	}
 }
+registerElement('Ff', Ff);
 
 export type FffAttributes = Record<string, unknown>;
 
@@ -26006,7 +22096,7 @@ export type FffContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fff/
  */
 export class Fff implements XMLElement<'fff', FffAttributes, FffContents> {
-	static readonly schema = { name: 'fff', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'fff'> = schema.Fff;
 
 	readonly schema = Fff.schema;
 
@@ -26014,10 +22104,11 @@ export class Fff implements XMLElement<'fff', FffAttributes, FffContents> {
 	contents: FffContents;
 
 	constructor(opts?: { attributes?: Partial<FffAttributes>; contents?: FffContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Fff.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Fff.schema);
 		this.contents = opts?.contents ?? operations.zero(Fff.schema.contents);
 	}
 }
+registerElement('Fff', Fff);
 
 export type FfffAttributes = Record<string, unknown>;
 
@@ -26031,7 +22122,7 @@ export type FfffContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ffff/
  */
 export class Ffff implements XMLElement<'ffff', FfffAttributes, FfffContents> {
-	static readonly schema = { name: 'ffff', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'ffff'> = schema.Ffff;
 
 	readonly schema = Ffff.schema;
 
@@ -26039,10 +22130,11 @@ export class Ffff implements XMLElement<'ffff', FfffAttributes, FfffContents> {
 	contents: FfffContents;
 
 	constructor(opts?: { attributes?: Partial<FfffAttributes>; contents?: FfffContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Ffff.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Ffff.schema);
 		this.contents = opts?.contents ?? operations.zero(Ffff.schema.contents);
 	}
 }
+registerElement('Ffff', Ffff);
 
 export type FffffAttributes = Record<string, unknown>;
 
@@ -26056,7 +22148,7 @@ export type FffffContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fffff/
  */
 export class Fffff implements XMLElement<'fffff', FffffAttributes, FffffContents> {
-	static readonly schema = { name: 'fffff', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'fffff'> = schema.Fffff;
 
 	readonly schema = Fffff.schema;
 
@@ -26064,10 +22156,11 @@ export class Fffff implements XMLElement<'fffff', FffffAttributes, FffffContents
 	contents: FffffContents;
 
 	constructor(opts?: { attributes?: Partial<FffffAttributes>; contents?: FffffContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Fffff.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Fffff.schema);
 		this.contents = opts?.contents ?? operations.zero(Fffff.schema.contents);
 	}
 }
+registerElement('Fffff', Fffff);
 
 export type FfffffAttributes = Record<string, unknown>;
 
@@ -26081,7 +22174,7 @@ export type FfffffContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ffffff/
  */
 export class Ffffff implements XMLElement<'ffffff', FfffffAttributes, FfffffContents> {
-	static readonly schema = { name: 'ffffff', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'ffffff'> = schema.Ffffff;
 
 	readonly schema = Ffffff.schema;
 
@@ -26089,10 +22182,11 @@ export class Ffffff implements XMLElement<'ffffff', FfffffAttributes, FfffffCont
 	contents: FfffffContents;
 
 	constructor(opts?: { attributes?: Partial<FfffffAttributes>; contents?: FfffffContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Ffffff.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Ffffff.schema);
 		this.contents = opts?.contents ?? operations.zero(Ffffff.schema.contents);
 	}
 }
+registerElement('Ffffff', Ffffff);
 
 export type MpAttributes = Record<string, unknown>;
 
@@ -26106,7 +22200,7 @@ export type MpContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mp/
  */
 export class Mp implements XMLElement<'mp', MpAttributes, MpContents> {
-	static readonly schema = { name: 'mp', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'mp'> = schema.Mp;
 
 	readonly schema = Mp.schema;
 
@@ -26114,10 +22208,11 @@ export class Mp implements XMLElement<'mp', MpAttributes, MpContents> {
 	contents: MpContents;
 
 	constructor(opts?: { attributes?: Partial<MpAttributes>; contents?: MpContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Mp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Mp.schema);
 		this.contents = opts?.contents ?? operations.zero(Mp.schema.contents);
 	}
 }
+registerElement('Mp', Mp);
 
 export type MfAttributes = Record<string, unknown>;
 
@@ -26131,7 +22226,7 @@ export type MfContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mf/
  */
 export class Mf implements XMLElement<'mf', MfAttributes, MfContents> {
-	static readonly schema = { name: 'mf', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'mf'> = schema.Mf;
 
 	readonly schema = Mf.schema;
 
@@ -26139,10 +22234,11 @@ export class Mf implements XMLElement<'mf', MfAttributes, MfContents> {
 	contents: MfContents;
 
 	constructor(opts?: { attributes?: Partial<MfAttributes>; contents?: MfContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Mf.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Mf.schema);
 		this.contents = opts?.contents ?? operations.zero(Mf.schema.contents);
 	}
 }
+registerElement('Mf', Mf);
 
 export type SfAttributes = Record<string, unknown>;
 
@@ -26156,7 +22252,7 @@ export type SfContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sf/
  */
 export class Sf implements XMLElement<'sf', SfAttributes, SfContents> {
-	static readonly schema = { name: 'sf', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'sf'> = schema.Sf;
 
 	readonly schema = Sf.schema;
 
@@ -26164,10 +22260,11 @@ export class Sf implements XMLElement<'sf', SfAttributes, SfContents> {
 	contents: SfContents;
 
 	constructor(opts?: { attributes?: Partial<SfAttributes>; contents?: SfContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Sf.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Sf.schema);
 		this.contents = opts?.contents ?? operations.zero(Sf.schema.contents);
 	}
 }
+registerElement('Sf', Sf);
 
 export type SfpAttributes = Record<string, unknown>;
 
@@ -26181,7 +22278,7 @@ export type SfpContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sfp/
  */
 export class Sfp implements XMLElement<'sfp', SfpAttributes, SfpContents> {
-	static readonly schema = { name: 'sfp', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'sfp'> = schema.Sfp;
 
 	readonly schema = Sfp.schema;
 
@@ -26189,10 +22286,11 @@ export class Sfp implements XMLElement<'sfp', SfpAttributes, SfpContents> {
 	contents: SfpContents;
 
 	constructor(opts?: { attributes?: Partial<SfpAttributes>; contents?: SfpContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Sfp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Sfp.schema);
 		this.contents = opts?.contents ?? operations.zero(Sfp.schema.contents);
 	}
 }
+registerElement('Sfp', Sfp);
 
 export type SfppAttributes = Record<string, unknown>;
 
@@ -26206,7 +22304,7 @@ export type SfppContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sfpp/
  */
 export class Sfpp implements XMLElement<'sfpp', SfppAttributes, SfppContents> {
-	static readonly schema = { name: 'sfpp', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'sfpp'> = schema.Sfpp;
 
 	readonly schema = Sfpp.schema;
 
@@ -26214,10 +22312,11 @@ export class Sfpp implements XMLElement<'sfpp', SfppAttributes, SfppContents> {
 	contents: SfppContents;
 
 	constructor(opts?: { attributes?: Partial<SfppAttributes>; contents?: SfppContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Sfpp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Sfpp.schema);
 		this.contents = opts?.contents ?? operations.zero(Sfpp.schema.contents);
 	}
 }
+registerElement('Sfpp', Sfpp);
 
 export type FpAttributes = Record<string, unknown>;
 
@@ -26231,7 +22330,7 @@ export type FpContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fp/
  */
 export class Fp implements XMLElement<'fp', FpAttributes, FpContents> {
-	static readonly schema = { name: 'fp', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'fp'> = schema.Fp;
 
 	readonly schema = Fp.schema;
 
@@ -26239,10 +22338,11 @@ export class Fp implements XMLElement<'fp', FpAttributes, FpContents> {
 	contents: FpContents;
 
 	constructor(opts?: { attributes?: Partial<FpAttributes>; contents?: FpContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Fp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Fp.schema);
 		this.contents = opts?.contents ?? operations.zero(Fp.schema.contents);
 	}
 }
+registerElement('Fp', Fp);
 
 export type RfAttributes = Record<string, unknown>;
 
@@ -26256,7 +22356,7 @@ export type RfContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rf/
  */
 export class Rf implements XMLElement<'rf', RfAttributes, RfContents> {
-	static readonly schema = { name: 'rf', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'rf'> = schema.Rf;
 
 	readonly schema = Rf.schema;
 
@@ -26264,10 +22364,11 @@ export class Rf implements XMLElement<'rf', RfAttributes, RfContents> {
 	contents: RfContents;
 
 	constructor(opts?: { attributes?: Partial<RfAttributes>; contents?: RfContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Rf.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Rf.schema);
 		this.contents = opts?.contents ?? operations.zero(Rf.schema.contents);
 	}
 }
+registerElement('Rf', Rf);
 
 export type RfzAttributes = Record<string, unknown>;
 
@@ -26281,7 +22382,7 @@ export type RfzContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rfz/
  */
 export class Rfz implements XMLElement<'rfz', RfzAttributes, RfzContents> {
-	static readonly schema = { name: 'rfz', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'rfz'> = schema.Rfz;
 
 	readonly schema = Rfz.schema;
 
@@ -26289,10 +22390,11 @@ export class Rfz implements XMLElement<'rfz', RfzAttributes, RfzContents> {
 	contents: RfzContents;
 
 	constructor(opts?: { attributes?: Partial<RfzAttributes>; contents?: RfzContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Rfz.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Rfz.schema);
 		this.contents = opts?.contents ?? operations.zero(Rfz.schema.contents);
 	}
 }
+registerElement('Rfz', Rfz);
 
 export type SfzAttributes = Record<string, unknown>;
 
@@ -26306,7 +22408,7 @@ export type SfzContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sfz/
  */
 export class Sfz implements XMLElement<'sfz', SfzAttributes, SfzContents> {
-	static readonly schema = { name: 'sfz', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'sfz'> = schema.Sfz;
 
 	readonly schema = Sfz.schema;
 
@@ -26314,10 +22416,11 @@ export class Sfz implements XMLElement<'sfz', SfzAttributes, SfzContents> {
 	contents: SfzContents;
 
 	constructor(opts?: { attributes?: Partial<SfzAttributes>; contents?: SfzContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Sfz.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Sfz.schema);
 		this.contents = opts?.contents ?? operations.zero(Sfz.schema.contents);
 	}
 }
+registerElement('Sfz', Sfz);
 
 export type SffzAttributes = Record<string, unknown>;
 
@@ -26331,7 +22434,7 @@ export type SffzContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sffz/
  */
 export class Sffz implements XMLElement<'sffz', SffzAttributes, SffzContents> {
-	static readonly schema = { name: 'sffz', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'sffz'> = schema.Sffz;
 
 	readonly schema = Sffz.schema;
 
@@ -26339,10 +22442,11 @@ export class Sffz implements XMLElement<'sffz', SffzAttributes, SffzContents> {
 	contents: SffzContents;
 
 	constructor(opts?: { attributes?: Partial<SffzAttributes>; contents?: SffzContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Sffz.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Sffz.schema);
 		this.contents = opts?.contents ?? operations.zero(Sffz.schema.contents);
 	}
 }
+registerElement('Sffz', Sffz);
 
 export type FzAttributes = Record<string, unknown>;
 
@@ -26356,7 +22460,7 @@ export type FzContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fz/
  */
 export class Fz implements XMLElement<'fz', FzAttributes, FzContents> {
-	static readonly schema = { name: 'fz', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'fz'> = schema.Fz;
 
 	readonly schema = Fz.schema;
 
@@ -26364,10 +22468,11 @@ export class Fz implements XMLElement<'fz', FzAttributes, FzContents> {
 	contents: FzContents;
 
 	constructor(opts?: { attributes?: Partial<FzAttributes>; contents?: FzContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Fz.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Fz.schema);
 		this.contents = opts?.contents ?? operations.zero(Fz.schema.contents);
 	}
 }
+registerElement('Fz', Fz);
 
 export type NAttributes = Record<string, unknown>;
 
@@ -26381,7 +22486,7 @@ export type NContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/n/
  */
 export class N implements XMLElement<'n', NAttributes, NContents> {
-	static readonly schema = { name: 'n', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'n'> = schema.N;
 
 	readonly schema = N.schema;
 
@@ -26389,10 +22494,11 @@ export class N implements XMLElement<'n', NAttributes, NContents> {
 	contents: NContents;
 
 	constructor(opts?: { attributes?: Partial<NAttributes>; contents?: NContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, N.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, N.schema);
 		this.contents = opts?.contents ?? operations.zero(N.schema.contents);
 	}
 }
+registerElement('N', N);
 
 export type PfAttributes = Record<string, unknown>;
 
@@ -26406,7 +22512,7 @@ export type PfContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pf/
  */
 export class Pf implements XMLElement<'pf', PfAttributes, PfContents> {
-	static readonly schema = { name: 'pf', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'pf'> = schema.Pf;
 
 	readonly schema = Pf.schema;
 
@@ -26414,10 +22520,11 @@ export class Pf implements XMLElement<'pf', PfAttributes, PfContents> {
 	contents: PfContents;
 
 	constructor(opts?: { attributes?: Partial<PfAttributes>; contents?: PfContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Pf.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Pf.schema);
 		this.contents = opts?.contents ?? operations.zero(Pf.schema.contents);
 	}
 }
+registerElement('Pf', Pf);
 
 export type SfzpAttributes = Record<string, unknown>;
 
@@ -26431,7 +22538,7 @@ export type SfzpContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sfzp/
  */
 export class Sfzp implements XMLElement<'sfzp', SfzpAttributes, SfzpContents> {
-	static readonly schema = { name: 'sfzp', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'sfzp'> = schema.Sfzp;
 
 	readonly schema = Sfzp.schema;
 
@@ -26439,10 +22546,11 @@ export class Sfzp implements XMLElement<'sfzp', SfzpAttributes, SfzpContents> {
 	contents: SfzpContents;
 
 	constructor(opts?: { attributes?: Partial<SfzpAttributes>; contents?: SfzpContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Sfzp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Sfzp.schema);
 		this.contents = opts?.contents ?? operations.zero(Sfzp.schema.contents);
 	}
 }
+registerElement('Sfzp', Sfzp);
 
 export type OtherDynamicsAttributes = { smufl: string | null };
 
@@ -26456,11 +22564,7 @@ export type OtherDynamicsContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-dynamics/
  */
 export class OtherDynamics implements XMLElement<'other-dynamics', OtherDynamicsAttributes, OtherDynamicsContents> {
-	static readonly schema = {
-		name: 'other-dynamics',
-		attributes: { smufl: { type: 'optional', value: { type: 'string' } } },
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-dynamics'> = schema.OtherDynamics;
 
 	readonly schema = OtherDynamics.schema;
 
@@ -26468,7 +22572,7 @@ export class OtherDynamics implements XMLElement<'other-dynamics', OtherDynamics
 	contents: OtherDynamicsContents;
 
 	constructor(opts?: { attributes?: Partial<OtherDynamicsAttributes>; contents?: OtherDynamicsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherDynamics.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherDynamics.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherDynamics.schema.contents);
 	}
 	/** Gets @type {OtherDynamicsAttributes['smufl']}. */
@@ -26490,6 +22594,7 @@ export class OtherDynamics implements XMLElement<'other-dynamics', OtherDynamics
 		return this;
 	}
 }
+registerElement('OtherDynamics', OtherDynamics);
 
 export type DynamicsAttributes = {
 	color: string | null;
@@ -26571,100 +22676,7 @@ export type DynamicsContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/dynamics/
  */
 export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, DynamicsContents> {
-	static readonly schema = {
-		name: 'dynamics',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			enclosure: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						'none',
-						'rectangle',
-						'square',
-						'oval',
-						'circle',
-						'bracket',
-						'inverted-bracket',
-						'triangle',
-						'diamond',
-						'pentagon',
-						'hexagon',
-						'heptagon',
-						'octagon',
-						'nonagon',
-						'decagon',
-					],
-				},
-			},
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: {
-					type: 'zeroOrMore',
-					value: {
-						type: 'choices',
-						choices: [
-							P,
-							Pp,
-							Ppp,
-							Pppp,
-							Ppppp,
-							Pppppp,
-							F,
-							Ff,
-							Fff,
-							Ffff,
-							Fffff,
-							Ffffff,
-							Mp,
-							Mf,
-							Sf,
-							Sfp,
-							Sfpp,
-							Fp,
-							Rf,
-							Rfz,
-							Sfz,
-							Sffz,
-							Fz,
-							N,
-							Pf,
-							Sfzp,
-							OtherDynamics,
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'dynamics'> = schema.Dynamics;
 
 	readonly schema = Dynamics.schema;
 
@@ -26672,7 +22684,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
 	contents: DynamicsContents;
 
 	constructor(opts?: { attributes?: Partial<DynamicsAttributes>; contents?: DynamicsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Dynamics.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Dynamics.schema);
 		this.contents = opts?.contents ?? operations.zero(Dynamics.schema.contents);
 	}
 	/** Gets @type {DynamicsAttributes['color']}. */
@@ -26932,6 +22944,7 @@ export class Dynamics implements XMLElement<'dynamics', DynamicsAttributes, Dyna
 		return this;
 	}
 }
+registerElement('Dynamics', Dynamics);
 
 export type FermataAttributes = {
 	color: string | null;
@@ -26959,54 +22972,7 @@ export type FermataContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fermata/
  */
 export class Fermata implements XMLElement<'fermata', FermataAttributes, FermataContents> {
-	static readonly schema = {
-		name: 'fermata',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'optional', value: { type: 'choices', choices: ['upright', 'inverted'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'fermata-shape',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'',
-							'normal',
-							'angled',
-							'square',
-							'double-angled',
-							'double-square',
-							'double-dot',
-							'half-curve',
-							'curlew',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'fermata'> = schema.Fermata;
 
 	readonly schema = Fermata.schema;
 
@@ -27014,7 +22980,7 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
 	contents: FermataContents;
 
 	constructor(opts?: { attributes?: Partial<FermataAttributes>; contents?: FermataContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Fermata.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Fermata.schema);
 		this.contents = opts?.contents ?? operations.zero(Fermata.schema.contents);
 	}
 	/** Gets @type {FermataAttributes['color']}. */
@@ -27148,6 +23114,7 @@ export class Fermata implements XMLElement<'fermata', FermataAttributes, Fermata
 		return this;
 	}
 }
+registerElement('Fermata', Fermata);
 
 export type ArpeggiateAttributes = {
 	color: string | null;
@@ -27172,22 +23139,7 @@ export type ArpeggiateContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/arpeggiate/
  */
 export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes, ArpeggiateContents> {
-	static readonly schema = {
-		name: 'arpeggiate',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			direction: { type: 'optional', value: { type: 'choices', choices: ['up', 'down'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			unbroken: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'arpeggiate'> = schema.Arpeggiate;
 
 	readonly schema = Arpeggiate.schema;
 
@@ -27195,7 +23147,7 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
 	contents: ArpeggiateContents;
 
 	constructor(opts?: { attributes?: Partial<ArpeggiateAttributes>; contents?: ArpeggiateContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Arpeggiate.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Arpeggiate.schema);
 		this.contents = opts?.contents ?? operations.zero(Arpeggiate.schema.contents);
 	}
 	/** Gets @type {ArpeggiateAttributes['color']}. */
@@ -27289,6 +23241,7 @@ export class Arpeggiate implements XMLElement<'arpeggiate', ArpeggiateAttributes
 		return this;
 	}
 }
+registerElement('Arpeggiate', Arpeggiate);
 
 export type NonArpeggiateAttributes = {
 	color: string | null;
@@ -27312,21 +23265,7 @@ export type NonArpeggiateContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/non-arpeggiate/
  */
 export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiateAttributes, NonArpeggiateContents> {
-	static readonly schema = {
-		name: 'non-arpeggiate',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['top', 'bottom'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'non-arpeggiate'> = schema.NonArpeggiate;
 
 	readonly schema = NonArpeggiate.schema;
 
@@ -27334,7 +23273,7 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
 	contents: NonArpeggiateContents;
 
 	constructor(opts?: { attributes?: Partial<NonArpeggiateAttributes>; contents?: NonArpeggiateContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NonArpeggiate.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NonArpeggiate.schema);
 		this.contents = opts?.contents ?? operations.zero(NonArpeggiate.schema.contents);
 	}
 	/** Gets @type {NonArpeggiateAttributes['color']}. */
@@ -27419,6 +23358,7 @@ export class NonArpeggiate implements XMLElement<'non-arpeggiate', NonArpeggiate
 		return this;
 	}
 }
+registerElement('NonArpeggiate', NonArpeggiate);
 
 export type OtherNotationAttributes = {
 	color: string | null;
@@ -27448,36 +23388,7 @@ export type OtherNotationContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-notation/
  */
 export class OtherNotation implements XMLElement<'other-notation', OtherNotationAttributes, OtherNotationContents> {
-	static readonly schema = {
-		name: 'other-notation',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'single'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-notation'> = schema.OtherNotation;
 
 	readonly schema = OtherNotation.schema;
 
@@ -27485,7 +23396,7 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
 	contents: OtherNotationContents;
 
 	constructor(opts?: { attributes?: Partial<OtherNotationAttributes>; contents?: OtherNotationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherNotation.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherNotation.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherNotation.schema.contents);
 	}
 	/** Gets @type {OtherNotationAttributes['color']}. */
@@ -27635,6 +23546,7 @@ export class OtherNotation implements XMLElement<'other-notation', OtherNotation
 		return this;
 	}
 }
+registerElement('OtherNotation', OtherNotation);
 
 export type NotationsAttributes = { id: string | null; 'print-object': 'yes' | 'no' | null };
 
@@ -27667,43 +23579,7 @@ export type NotationsContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/notations/
  */
 export class Notations implements XMLElement<'notations', NotationsAttributes, NotationsContents> {
-	static readonly schema = {
-		name: 'notations',
-		attributes: {
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-		},
-		contents: [
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-			{
-				type: 'label',
-				label: 'values',
-				value: {
-					type: 'zeroOrMore',
-					value: {
-						type: 'choices',
-						choices: [
-							Tied,
-							Slur,
-							Tuplet,
-							Glissando,
-							Slide,
-							Ornaments,
-							Technical,
-							Articulations,
-							Dynamics,
-							Fermata,
-							Arpeggiate,
-							NonArpeggiate,
-							AccidentalMark,
-							OtherNotation,
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'notations'> = schema.Notations;
 
 	readonly schema = Notations.schema;
 
@@ -27711,7 +23587,7 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
 	contents: NotationsContents;
 
 	constructor(opts?: { attributes?: Partial<NotationsAttributes>; contents?: NotationsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Notations.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Notations.schema);
 		this.contents = opts?.contents ?? operations.zero(Notations.schema.contents);
 	}
 	/** Gets @type {NotationsAttributes['id']}. */
@@ -27792,6 +23668,7 @@ export class Notations implements XMLElement<'notations', NotationsAttributes, N
 		return this;
 	}
 }
+registerElement('Notations', Notations);
 
 export type SyllabicAttributes = Record<string, unknown>;
 
@@ -27805,17 +23682,7 @@ export type SyllabicContents = ['begin' | 'single' | 'end' | 'middle'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/syllabic/
  */
 export class Syllabic implements XMLElement<'syllabic', SyllabicAttributes, SyllabicContents> {
-	static readonly schema = {
-		name: 'syllabic',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'syllabic',
-				value: { type: 'required', value: { type: 'choices', choices: ['begin', 'single', 'end', 'middle'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'syllabic'> = schema.Syllabic;
 
 	readonly schema = Syllabic.schema;
 
@@ -27823,7 +23690,7 @@ export class Syllabic implements XMLElement<'syllabic', SyllabicAttributes, Syll
 	contents: SyllabicContents;
 
 	constructor(opts?: { attributes?: Partial<SyllabicAttributes>; contents?: SyllabicContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Syllabic.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Syllabic.schema);
 		this.contents = opts?.contents ?? operations.zero(Syllabic.schema.contents);
 	}
 
@@ -27837,6 +23704,7 @@ export class Syllabic implements XMLElement<'syllabic', SyllabicAttributes, Syll
 		return this;
 	}
 }
+registerElement('Syllabic', Syllabic);
 
 export type TextAttributes = {
 	color: string | null;
@@ -27865,44 +23733,7 @@ export type TextContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/text/
  */
 export class Text implements XMLElement<'text', TextAttributes, TextContents> {
-	static readonly schema = {
-		name: 'text',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'letter-spacing': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			'xml:lang': { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'text'> = schema.Text;
 
 	readonly schema = Text.schema;
 
@@ -27910,7 +23741,7 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
 	contents: TextContents;
 
 	constructor(opts?: { attributes?: Partial<TextAttributes>; contents?: TextContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Text.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Text.schema);
 		this.contents = opts?.contents ?? operations.zero(Text.schema.contents);
 	}
 	/** Gets @type {TextAttributes['color']}. */
@@ -28051,6 +23882,7 @@ export class Text implements XMLElement<'text', TextAttributes, TextContents> {
 		return this;
 	}
 }
+registerElement('Text', Text);
 
 export type ElisionAttributes = {
 	color: string | null;
@@ -28071,27 +23903,7 @@ export type ElisionContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/elision/
  */
 export class Elision implements XMLElement<'elision', ElisionAttributes, ElisionContents> {
-	static readonly schema = {
-		name: 'elision',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			smufl: { type: 'optional', value: { type: 'regex', pattern: /lyrics/, zero: 'lyrics' } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'elision'> = schema.Elision;
 
 	readonly schema = Elision.schema;
 
@@ -28099,7 +23911,7 @@ export class Elision implements XMLElement<'elision', ElisionAttributes, Elision
 	contents: ElisionContents;
 
 	constructor(opts?: { attributes?: Partial<ElisionAttributes>; contents?: ElisionContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Elision.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Elision.schema);
 		this.contents = opts?.contents ?? operations.zero(Elision.schema.contents);
 	}
 	/** Gets @type {ElisionAttributes['color']}. */
@@ -28168,6 +23980,7 @@ export class Elision implements XMLElement<'elision', ElisionAttributes, Elision
 		return this;
 	}
 }
+registerElement('Elision', Elision);
 
 export type ExtendAttributes = {
 	color: string | null;
@@ -28188,18 +24001,7 @@ export type ExtendContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/extend/
  */
 export class Extend implements XMLElement<'extend', ExtendAttributes, ExtendContents> {
-	static readonly schema = {
-		name: 'extend',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'optional', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'extend'> = schema.Extend;
 
 	readonly schema = Extend.schema;
 
@@ -28207,7 +24009,7 @@ export class Extend implements XMLElement<'extend', ExtendAttributes, ExtendCont
 	contents: ExtendContents;
 
 	constructor(opts?: { attributes?: Partial<ExtendAttributes>; contents?: ExtendContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Extend.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Extend.schema);
 		this.contents = opts?.contents ?? operations.zero(Extend.schema.contents);
 	}
 	/** Gets @type {ExtendAttributes['color']}. */
@@ -28265,6 +24067,7 @@ export class Extend implements XMLElement<'extend', ExtendAttributes, ExtendCont
 		return this;
 	}
 }
+registerElement('Extend', Extend);
 
 export type LaughingAttributes = Record<string, unknown>;
 
@@ -28278,7 +24081,7 @@ export type LaughingContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/laughing/
  */
 export class Laughing implements XMLElement<'laughing', LaughingAttributes, LaughingContents> {
-	static readonly schema = { name: 'laughing', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'laughing'> = schema.Laughing;
 
 	readonly schema = Laughing.schema;
 
@@ -28286,10 +24089,11 @@ export class Laughing implements XMLElement<'laughing', LaughingAttributes, Laug
 	contents: LaughingContents;
 
 	constructor(opts?: { attributes?: Partial<LaughingAttributes>; contents?: LaughingContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Laughing.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Laughing.schema);
 		this.contents = opts?.contents ?? operations.zero(Laughing.schema.contents);
 	}
 }
+registerElement('Laughing', Laughing);
 
 export type HummingAttributes = Record<string, unknown>;
 
@@ -28303,7 +24107,7 @@ export type HummingContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/humming/
  */
 export class Humming implements XMLElement<'humming', HummingAttributes, HummingContents> {
-	static readonly schema = { name: 'humming', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'humming'> = schema.Humming;
 
 	readonly schema = Humming.schema;
 
@@ -28311,10 +24115,11 @@ export class Humming implements XMLElement<'humming', HummingAttributes, Humming
 	contents: HummingContents;
 
 	constructor(opts?: { attributes?: Partial<HummingAttributes>; contents?: HummingContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Humming.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Humming.schema);
 		this.contents = opts?.contents ?? operations.zero(Humming.schema.contents);
 	}
 }
+registerElement('Humming', Humming);
 
 export type EndLineAttributes = Record<string, unknown>;
 
@@ -28328,7 +24133,7 @@ export type EndLineContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/end-line/
  */
 export class EndLine implements XMLElement<'end-line', EndLineAttributes, EndLineContents> {
-	static readonly schema = { name: 'end-line', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'end-line'> = schema.EndLine;
 
 	readonly schema = EndLine.schema;
 
@@ -28336,10 +24141,11 @@ export class EndLine implements XMLElement<'end-line', EndLineAttributes, EndLin
 	contents: EndLineContents;
 
 	constructor(opts?: { attributes?: Partial<EndLineAttributes>; contents?: EndLineContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, EndLine.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, EndLine.schema);
 		this.contents = opts?.contents ?? operations.zero(EndLine.schema.contents);
 	}
 }
+registerElement('EndLine', EndLine);
 
 export type EndParagraphAttributes = Record<string, unknown>;
 
@@ -28353,7 +24159,7 @@ export type EndParagraphContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/end-paragraph/
  */
 export class EndParagraph implements XMLElement<'end-paragraph', EndParagraphAttributes, EndParagraphContents> {
-	static readonly schema = { name: 'end-paragraph', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'end-paragraph'> = schema.EndParagraph;
 
 	readonly schema = EndParagraph.schema;
 
@@ -28361,10 +24167,11 @@ export class EndParagraph implements XMLElement<'end-paragraph', EndParagraphAtt
 	contents: EndParagraphContents;
 
 	constructor(opts?: { attributes?: Partial<EndParagraphAttributes>; contents?: EndParagraphContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, EndParagraph.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, EndParagraph.schema);
 		this.contents = opts?.contents ?? operations.zero(EndParagraph.schema.contents);
 	}
 }
+registerElement('EndParagraph', EndParagraph);
 
 export type Intelligible = [Syllabic | null, Text, Array<[[Elision, Syllabic | null] | null, Text]>, Extend | null];
 
@@ -28401,63 +24208,7 @@ export type LyricContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric/
  */
 export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents> {
-	static readonly schema = {
-		name: 'lyric',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			name: { type: 'optional', value: { type: 'string' } },
-			number: { type: 'optional', value: { type: 'string' } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: {
-					type: 'choices',
-					choices: [
-						{
-							type: 'label',
-							label: 'intelligible',
-							value: [
-								{ type: 'optional', value: Syllabic },
-								{ type: 'required', value: Text },
-								{
-									type: 'zeroOrMore',
-									value: [
-										{
-											type: 'optional',
-											value: [
-												{ type: 'required', value: Elision },
-												{ type: 'optional', value: Syllabic },
-											],
-										},
-										{ type: 'required', value: Text },
-									],
-								},
-								{ type: 'optional', value: Extend },
-							],
-						},
-						Extend,
-						Laughing,
-						Humming,
-					],
-				},
-			},
-			{ type: 'optional', value: EndLine },
-			{ type: 'optional', value: EndParagraph },
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'lyric'> = schema.Lyric;
 
 	readonly schema = Lyric.schema;
 
@@ -28465,7 +24216,7 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
 	contents: LyricContents;
 
 	constructor(opts?: { attributes?: Partial<LyricAttributes>; contents?: LyricContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Lyric.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Lyric.schema);
 		this.contents = opts?.contents ?? operations.zero(Lyric.schema.contents);
 	}
 	/** Gets @type {LyricAttributes['color']}. */
@@ -28622,6 +24373,7 @@ export class Lyric implements XMLElement<'lyric', LyricAttributes, LyricContents
 		return this;
 	}
 }
+registerElement('Lyric', Lyric);
 
 export type IpaAttributes = Record<string, unknown>;
 
@@ -28635,11 +24387,7 @@ export type IpaContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ipa/
  */
 export class Ipa implements XMLElement<'ipa', IpaAttributes, IpaContents> {
-	static readonly schema = {
-		name: 'ipa',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'ipa'> = schema.Ipa;
 
 	readonly schema = Ipa.schema;
 
@@ -28647,7 +24395,7 @@ export class Ipa implements XMLElement<'ipa', IpaAttributes, IpaContents> {
 	contents: IpaContents;
 
 	constructor(opts?: { attributes?: Partial<IpaAttributes>; contents?: IpaContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Ipa.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Ipa.schema);
 		this.contents = opts?.contents ?? operations.zero(Ipa.schema.contents);
 	}
 
@@ -28661,6 +24409,7 @@ export class Ipa implements XMLElement<'ipa', IpaAttributes, IpaContents> {
 		return this;
 	}
 }
+registerElement('Ipa', Ipa);
 
 export type MuteAttributes = Record<string, unknown>;
 
@@ -28690,39 +24439,7 @@ export type MuteContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mute/
  */
 export class Mute implements XMLElement<'mute', MuteAttributes, MuteContents> {
-	static readonly schema = {
-		name: 'mute',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'mute',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'on',
-							'off',
-							'straight',
-							'cup',
-							'harmon-no-stem',
-							'harmon-stem',
-							'bucket',
-							'plunger',
-							'hat',
-							'solotone',
-							'practice',
-							'stop-mute',
-							'stop-hand',
-							'echo',
-							'palm',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'mute'> = schema.Mute;
 
 	readonly schema = Mute.schema;
 
@@ -28730,7 +24447,7 @@ export class Mute implements XMLElement<'mute', MuteAttributes, MuteContents> {
 	contents: MuteContents;
 
 	constructor(opts?: { attributes?: Partial<MuteAttributes>; contents?: MuteContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Mute.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Mute.schema);
 		this.contents = opts?.contents ?? operations.zero(Mute.schema.contents);
 	}
 
@@ -28776,6 +24493,7 @@ export class Mute implements XMLElement<'mute', MuteAttributes, MuteContents> {
 		return this;
 	}
 }
+registerElement('Mute', Mute);
 
 export type SemiPitchedAttributes = Record<string, unknown>;
 
@@ -28789,20 +24507,7 @@ export type SemiPitchedContents = ['high' | 'medium-high' | 'medium' | 'medium-l
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/semi-pitched/
  */
 export class SemiPitched implements XMLElement<'semi-pitched', SemiPitchedAttributes, SemiPitchedContents> {
-	static readonly schema = {
-		name: 'semi-pitched',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'semi-pitched',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['high', 'medium-high', 'medium', 'medium-low', 'low', 'very-low'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'semi-pitched'> = schema.SemiPitched;
 
 	readonly schema = SemiPitched.schema;
 
@@ -28810,7 +24515,7 @@ export class SemiPitched implements XMLElement<'semi-pitched', SemiPitchedAttrib
 	contents: SemiPitchedContents;
 
 	constructor(opts?: { attributes?: Partial<SemiPitchedAttributes>; contents?: SemiPitchedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SemiPitched.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SemiPitched.schema);
 		this.contents = opts?.contents ?? operations.zero(SemiPitched.schema.contents);
 	}
 
@@ -28824,6 +24529,7 @@ export class SemiPitched implements XMLElement<'semi-pitched', SemiPitchedAttrib
 		return this;
 	}
 }
+registerElement('SemiPitched', SemiPitched);
 
 export type OtherPlayAttributes = { type: string };
 
@@ -28837,11 +24543,7 @@ export type OtherPlayContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-play/
  */
 export class OtherPlay implements XMLElement<'other-play', OtherPlayAttributes, OtherPlayContents> {
-	static readonly schema = {
-		name: 'other-play',
-		attributes: { type: { type: 'required', value: { type: 'string' } } },
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-play'> = schema.OtherPlay;
 
 	readonly schema = OtherPlay.schema;
 
@@ -28849,7 +24551,7 @@ export class OtherPlay implements XMLElement<'other-play', OtherPlayAttributes, 
 	contents: OtherPlayContents;
 
 	constructor(opts?: { attributes?: Partial<OtherPlayAttributes>; contents?: OtherPlayContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherPlay.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherPlay.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherPlay.schema.contents);
 	}
 	/** Gets @type {OtherPlayAttributes['type']}. */
@@ -28871,6 +24573,7 @@ export class OtherPlay implements XMLElement<'other-play', OtherPlayAttributes, 
 		return this;
 	}
 }
+registerElement('OtherPlay', OtherPlay);
 
 export type PlayAttributes = { id: string | null };
 
@@ -28884,17 +24587,7 @@ export type PlayContents = [Array<Ipa | Mute | SemiPitched | OtherPlay>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/play/
  */
 export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
-	static readonly schema = {
-		name: 'play',
-		attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [Ipa, Mute, SemiPitched, OtherPlay] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'play'> = schema.Play;
 
 	readonly schema = Play.schema;
 
@@ -28902,7 +24595,7 @@ export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
 	contents: PlayContents;
 
 	constructor(opts?: { attributes?: Partial<PlayAttributes>; contents?: PlayContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Play.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Play.schema);
 		this.contents = opts?.contents ?? operations.zero(Play.schema.contents);
 	}
 	/** Gets @type {PlayAttributes['id']}. */
@@ -28924,6 +24617,7 @@ export class Play implements XMLElement<'play', PlayAttributes, PlayContents> {
 		return this;
 	}
 }
+registerElement('Play', Play);
 
 export type AssessAttributes = { player: string | null; 'time-only': string | null; type: 'yes' | 'no' };
 
@@ -28937,15 +24631,7 @@ export type AssessContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/assess/
  */
 export class Assess implements XMLElement<'assess', AssessAttributes, AssessContents> {
-	static readonly schema = {
-		name: 'assess',
-		attributes: {
-			player: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
-			type: { type: 'required', value: { type: 'choices', choices: ['yes', 'no'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'assess'> = schema.Assess;
 
 	readonly schema = Assess.schema;
 
@@ -28953,7 +24639,7 @@ export class Assess implements XMLElement<'assess', AssessAttributes, AssessCont
 	contents: AssessContents;
 
 	constructor(opts?: { attributes?: Partial<AssessAttributes>; contents?: AssessContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Assess.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Assess.schema);
 		this.contents = opts?.contents ?? operations.zero(Assess.schema.contents);
 	}
 	/** Gets @type {AssessAttributes['player']}. */
@@ -28984,6 +24670,7 @@ export class Assess implements XMLElement<'assess', AssessAttributes, AssessCont
 		return this;
 	}
 }
+registerElement('Assess', Assess);
 
 export type WaitAttributes = { player: string | null; 'time-only': string | null };
 
@@ -28997,14 +24684,7 @@ export type WaitContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/wait/
  */
 export class Wait implements XMLElement<'wait', WaitAttributes, WaitContents> {
-	static readonly schema = {
-		name: 'wait',
-		attributes: {
-			player: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'wait'> = schema.Wait;
 
 	readonly schema = Wait.schema;
 
@@ -29012,7 +24692,7 @@ export class Wait implements XMLElement<'wait', WaitAttributes, WaitContents> {
 	contents: WaitContents;
 
 	constructor(opts?: { attributes?: Partial<WaitAttributes>; contents?: WaitContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Wait.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Wait.schema);
 		this.contents = opts?.contents ?? operations.zero(Wait.schema.contents);
 	}
 	/** Gets @type {WaitAttributes['player']}. */
@@ -29034,6 +24714,7 @@ export class Wait implements XMLElement<'wait', WaitAttributes, WaitContents> {
 		return this;
 	}
 }
+registerElement('Wait', Wait);
 
 export type OtherListenAttributes = { player: string | null; 'time-only': string | null; type: string };
 
@@ -29047,15 +24728,7 @@ export type OtherListenContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-listen/
  */
 export class OtherListen implements XMLElement<'other-listen', OtherListenAttributes, OtherListenContents> {
-	static readonly schema = {
-		name: 'other-listen',
-		attributes: {
-			player: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
-			type: { type: 'required', value: { type: 'string' } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-listen'> = schema.OtherListen;
 
 	readonly schema = OtherListen.schema;
 
@@ -29063,7 +24736,7 @@ export class OtherListen implements XMLElement<'other-listen', OtherListenAttrib
 	contents: OtherListenContents;
 
 	constructor(opts?: { attributes?: Partial<OtherListenAttributes>; contents?: OtherListenContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherListen.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherListen.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherListen.schema.contents);
 	}
 	/** Gets @type {OtherListenAttributes['player']}. */
@@ -29103,6 +24776,7 @@ export class OtherListen implements XMLElement<'other-listen', OtherListenAttrib
 		return this;
 	}
 }
+registerElement('OtherListen', OtherListen);
 
 export type ListenAttributes = Record<string, unknown>;
 
@@ -29116,17 +24790,7 @@ export type ListenContents = [Array<Assess | Wait | OtherListen>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/listen/
  */
 export class Listen implements XMLElement<'listen', ListenAttributes, ListenContents> {
-	static readonly schema = {
-		name: 'listen',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'listens',
-				value: { type: 'oneOrMore', value: { type: 'choices', choices: [Assess, Wait, OtherListen] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'listen'> = schema.Listen;
 
 	readonly schema = Listen.schema;
 
@@ -29134,7 +24798,7 @@ export class Listen implements XMLElement<'listen', ListenAttributes, ListenCont
 	contents: ListenContents;
 
 	constructor(opts?: { attributes?: Partial<ListenAttributes>; contents?: ListenContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Listen.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Listen.schema);
 		this.contents = opts?.contents ?? operations.zero(Listen.schema.contents);
 	}
 
@@ -29148,6 +24812,7 @@ export class Listen implements XMLElement<'listen', ListenAttributes, ListenCont
 		return this;
 	}
 }
+registerElement('Listen', Listen);
 
 export type TiedNote = [Chord | null, Pitch | Unpitched | Rest, Duration, [] | [Tie] | [Tie, Tie]];
 
@@ -29230,127 +24895,7 @@ export type NoteContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/
  */
 export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
-	static readonly schema = {
-		name: 'note',
-		attributes: {
-			attack: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dynamics: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-			'end-dynamics': { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			pizzicato: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-dot': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-leger': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-lyric': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-spacing': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			release: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'variation',
-				value: {
-					type: 'choices',
-					choices: [
-						{
-							type: 'label',
-							label: 'tied-note',
-							value: [
-								{ type: 'optional', value: Chord },
-								{ type: 'choices', choices: [Pitch, Unpitched, Rest] },
-								{ type: 'required', value: Duration },
-								{ type: 'choices', choices: [[], [Tie], [Tie, Tie]] },
-							],
-						},
-						{
-							type: 'label',
-							label: 'cued-note',
-							value: [
-								{ type: 'required', value: Cue },
-								{ type: 'optional', value: Chord },
-								{ type: 'choices', choices: [Pitch, Unpitched, Rest] },
-								{ type: 'required', value: Duration },
-							],
-						},
-						{
-							type: 'label',
-							label: 'tied-grace-note',
-							value: [
-								{ type: 'required', value: Grace },
-								{ type: 'optional', value: Chord },
-								{ type: 'choices', choices: [Pitch, Unpitched, Rest] },
-								{ type: 'choices', choices: [[], [Tie], [Tie, Tie]] },
-							],
-						},
-						{
-							type: 'label',
-							label: 'cued-grace-note',
-							value: [
-								{ type: 'required', value: Grace },
-								{ type: 'required', value: Cue },
-								{ type: 'optional', value: Chord },
-								{ type: 'choices', choices: [Pitch, Unpitched, Rest] },
-								{ type: 'required', value: Duration },
-							],
-						},
-					],
-				},
-			},
-			{ type: 'label', label: 'instruments', value: { type: 'zeroOrMore', value: Instrument } },
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-			{ type: 'optional', value: Voice },
-			{ type: 'optional', value: Type },
-			{ type: 'label', label: 'dots', value: { type: 'zeroOrMore', value: Dot } },
-			{ type: 'optional', value: Accidental },
-			{ type: 'optional', value: TimeModification },
-			{ type: 'optional', value: Stem },
-			{ type: 'optional', value: Notehead },
-			{ type: 'optional', value: NoteheadText },
-			{ type: 'optional', value: Staff },
-			{
-				type: 'label',
-				label: 'beams',
-				value: {
-					type: 'choices',
-					choices: [
-						[],
-						[Beam],
-						[Beam, Beam],
-						[Beam, Beam, Beam],
-						[Beam, Beam, Beam, Beam],
-						[Beam, Beam, Beam, Beam, Beam],
-						[Beam, Beam, Beam, Beam, Beam, Beam],
-						[Beam, Beam, Beam, Beam, Beam, Beam, Beam],
-						[Beam, Beam, Beam, Beam, Beam, Beam, Beam, Beam],
-					],
-				},
-			},
-			{ type: 'label', label: 'notations', value: { type: 'zeroOrMore', value: Notations } },
-			{ type: 'label', label: 'lyrics', value: { type: 'zeroOrMore', value: Lyric } },
-			{ type: 'optional', value: Play },
-			{ type: 'optional', value: Listen },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'note'> = schema.Note;
 
 	readonly schema = Note.schema;
 
@@ -29358,7 +24903,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
 	contents: NoteContents;
 
 	constructor(opts?: { attributes?: Partial<NoteAttributes>; contents?: NoteContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Note.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Note.schema);
 		this.contents = opts?.contents ?? operations.zero(Note.schema.contents);
 	}
 	/** Gets @type {NoteAttributes['attack']}. */
@@ -29735,6 +25280,7 @@ export class Note implements XMLElement<'note', NoteAttributes, NoteContents> {
 		return this;
 	}
 }
+registerElement('Note', Note);
 
 export type BackupAttributes = Record<string, unknown>;
 
@@ -29748,15 +25294,7 @@ export type BackupContents = [Duration, Footnote | null, Level | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/backup/
  */
 export class Backup implements XMLElement<'backup', BackupAttributes, BackupContents> {
-	static readonly schema = {
-		name: 'backup',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: Duration },
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'backup'> = schema.Backup;
 
 	readonly schema = Backup.schema;
 
@@ -29764,7 +25302,7 @@ export class Backup implements XMLElement<'backup', BackupAttributes, BackupCont
 	contents: BackupContents;
 
 	constructor(opts?: { attributes?: Partial<BackupAttributes>; contents?: BackupContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Backup.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Backup.schema);
 		this.contents = opts?.contents ?? operations.zero(Backup.schema.contents);
 	}
 
@@ -29796,6 +25334,7 @@ export class Backup implements XMLElement<'backup', BackupAttributes, BackupCont
 		return this;
 	}
 }
+registerElement('Backup', Backup);
 
 export type ForwardAttributes = Record<string, unknown>;
 
@@ -29809,17 +25348,7 @@ export type ForwardContents = [Duration, Footnote | null, Level | null, Voice | 
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/forward/
  */
 export class Forward implements XMLElement<'forward', ForwardAttributes, ForwardContents> {
-	static readonly schema = {
-		name: 'forward',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: Duration },
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-			{ type: 'optional', value: Voice },
-			{ type: 'optional', value: Staff },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'forward'> = schema.Forward;
 
 	readonly schema = Forward.schema;
 
@@ -29827,7 +25356,7 @@ export class Forward implements XMLElement<'forward', ForwardAttributes, Forward
 	contents: ForwardContents;
 
 	constructor(opts?: { attributes?: Partial<ForwardAttributes>; contents?: ForwardContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Forward.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Forward.schema);
 		this.contents = opts?.contents ?? operations.zero(Forward.schema.contents);
 	}
 
@@ -29877,6 +25406,7 @@ export class Forward implements XMLElement<'forward', ForwardAttributes, Forward
 		return this;
 	}
 }
+registerElement('Forward', Forward);
 
 export type RehearsalAttributes = {
 	color: string | null;
@@ -29930,84 +25460,7 @@ export type RehearsalContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rehearsal/
  */
 export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, RehearsalContents> {
-	static readonly schema = {
-		name: 'rehearsal',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
-			enclosure: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						'none',
-						'rectangle',
-						'square',
-						'oval',
-						'circle',
-						'bracket',
-						'inverted-bracket',
-						'triangle',
-						'diamond',
-						'pentagon',
-						'hexagon',
-						'heptagon',
-						'octagon',
-						'nonagon',
-						'decagon',
-					],
-				},
-			},
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'letter-spacing': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-height': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-			'xml:lang': { type: 'optional', value: { type: 'string' } },
-			'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'rehearsal'> = schema.Rehearsal;
 
 	readonly schema = Rehearsal.schema;
 
@@ -30015,7 +25468,7 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
 	contents: RehearsalContents;
 
 	constructor(opts?: { attributes?: Partial<RehearsalAttributes>; contents?: RehearsalContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Rehearsal.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Rehearsal.schema);
 		this.contents = opts?.contents ?? operations.zero(Rehearsal.schema.contents);
 	}
 	/** Gets @type {RehearsalAttributes['color']}. */
@@ -30271,6 +25724,7 @@ export class Rehearsal implements XMLElement<'rehearsal', RehearsalAttributes, R
 		return this;
 	}
 }
+registerElement('Rehearsal', Rehearsal);
 
 export type SegnoAttributes = {
 	color: string | null;
@@ -30298,34 +25752,7 @@ export type SegnoContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/segno/
  */
 export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents> {
-	static readonly schema = {
-		name: 'segno',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'regex', pattern: /segno[\w.:-]*/, zero: 'segno' } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'segno'> = schema.Segno;
 
 	readonly schema = Segno.schema;
 
@@ -30333,7 +25760,7 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
 	contents: SegnoContents;
 
 	constructor(opts?: { attributes?: Partial<SegnoAttributes>; contents?: SegnoContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Segno.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Segno.schema);
 		this.contents = opts?.contents ?? operations.zero(Segno.schema.contents);
 	}
 	/** Gets @type {SegnoAttributes['color']}. */
@@ -30456,6 +25883,7 @@ export class Segno implements XMLElement<'segno', SegnoAttributes, SegnoContents
 		return this;
 	}
 }
+registerElement('Segno', Segno);
 
 export type CodaAttributes = {
 	color: string | null;
@@ -30483,34 +25911,7 @@ export type CodaContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/coda/
  */
 export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
-	static readonly schema = {
-		name: 'coda',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'regex', pattern: /coda[\w.:-]*/, zero: 'coda' } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'coda'> = schema.Coda;
 
 	readonly schema = Coda.schema;
 
@@ -30518,7 +25919,7 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
 	contents: CodaContents;
 
 	constructor(opts?: { attributes?: Partial<CodaAttributes>; contents?: CodaContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Coda.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Coda.schema);
 		this.contents = opts?.contents ?? operations.zero(Coda.schema.contents);
 	}
 	/** Gets @type {CodaAttributes['color']}. */
@@ -30641,6 +26042,7 @@ export class Coda implements XMLElement<'coda', CodaAttributes, CodaContents> {
 		return this;
 	}
 }
+registerElement('Coda', Coda);
 
 export type WordsAttributes = {
 	color: string | null;
@@ -30694,84 +26096,7 @@ export type WordsContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/words/
  */
 export class Words implements XMLElement<'words', WordsAttributes, WordsContents> {
-	static readonly schema = {
-		name: 'words',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
-			enclosure: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						'none',
-						'rectangle',
-						'square',
-						'oval',
-						'circle',
-						'bracket',
-						'inverted-bracket',
-						'triangle',
-						'diamond',
-						'pentagon',
-						'hexagon',
-						'heptagon',
-						'octagon',
-						'nonagon',
-						'decagon',
-					],
-				},
-			},
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'letter-spacing': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-height': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-			'xml:lang': { type: 'optional', value: { type: 'string' } },
-			'xml:space': { type: 'optional', value: { type: 'choices', choices: ['default', 'preserve'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'words'> = schema.Words;
 
 	readonly schema = Words.schema;
 
@@ -30779,7 +26104,7 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
 	contents: WordsContents;
 
 	constructor(opts?: { attributes?: Partial<WordsAttributes>; contents?: WordsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Words.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Words.schema);
 		this.contents = opts?.contents ?? operations.zero(Words.schema.contents);
 	}
 	/** Gets @type {WordsAttributes['color']}. */
@@ -31035,6 +26360,7 @@ export class Words implements XMLElement<'words', WordsAttributes, WordsContents
 		return this;
 	}
 }
+registerElement('Words', Words);
 
 export type SymbolAttributes = {
 	color: string | null;
@@ -31086,82 +26412,7 @@ export type SymbolContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/symbol/
  */
 export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolContents> {
-	static readonly schema = {
-		name: 'symbol',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dir: { type: 'optional', value: { type: 'choices', choices: ['ltr', 'rtl', 'lro', 'rlo'] } },
-			enclosure: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						'none',
-						'rectangle',
-						'square',
-						'oval',
-						'circle',
-						'bracket',
-						'inverted-bracket',
-						'triangle',
-						'diamond',
-						'pentagon',
-						'hexagon',
-						'heptagon',
-						'octagon',
-						'nonagon',
-						'decagon',
-					],
-				},
-			},
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'letter-spacing': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-height': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['normal'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'line-through': { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			overline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			rotation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			underline: { type: 'optional', value: { type: 'int', min: 0, max: 3 } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'symbol'> = schema.Symbol;
 
 	readonly schema = Symbol.schema;
 
@@ -31169,7 +26420,7 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
 	contents: SymbolContents;
 
 	constructor(opts?: { attributes?: Partial<SymbolAttributes>; contents?: SymbolContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Symbol.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Symbol.schema);
 		this.contents = opts?.contents ?? operations.zero(Symbol.schema.contents);
 	}
 	/** Gets @type {SymbolAttributes['color']}. */
@@ -31407,6 +26658,7 @@ export class Symbol implements XMLElement<'symbol', SymbolAttributes, SymbolCont
 		return this;
 	}
 }
+registerElement('Symbol', Symbol);
 
 export type WedgeAttributes = {
 	color: string | null;
@@ -31434,25 +26686,7 @@ export type WedgeContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/wedge/
  */
 export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents> {
-	static readonly schema = {
-		name: 'wedge',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			niente: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			spread: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['crescendo', 'diminuendo', 'stop', 'continue'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'wedge'> = schema.Wedge;
 
 	readonly schema = Wedge.schema;
 
@@ -31460,7 +26694,7 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
 	contents: WedgeContents;
 
 	constructor(opts?: { attributes?: Partial<WedgeAttributes>; contents?: WedgeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Wedge.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Wedge.schema);
 		this.contents = opts?.contents ?? operations.zero(Wedge.schema.contents);
 	}
 	/** Gets @type {WedgeAttributes['color']}. */
@@ -31581,6 +26815,7 @@ export class Wedge implements XMLElement<'wedge', WedgeAttributes, WedgeContents
 		return this;
 	}
 }
+registerElement('Wedge', Wedge);
 
 export type DashesAttributes = {
 	color: string | null;
@@ -31605,22 +26840,7 @@ export type DashesContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/dashes/
  */
 export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesContents> {
-	static readonly schema = {
-		name: 'dashes',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'dashes'> = schema.Dashes;
 
 	readonly schema = Dashes.schema;
 
@@ -31628,7 +26848,7 @@ export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesCont
 	contents: DashesContents;
 
 	constructor(opts?: { attributes?: Partial<DashesAttributes>; contents?: DashesContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Dashes.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Dashes.schema);
 		this.contents = opts?.contents ?? operations.zero(Dashes.schema.contents);
 	}
 	/** Gets @type {DashesAttributes['color']}. */
@@ -31722,6 +26942,7 @@ export class Dashes implements XMLElement<'dashes', DashesAttributes, DashesCont
 		return this;
 	}
 }
+registerElement('Dashes', Dashes);
 
 export type BracketAttributes = {
 	color: string | null;
@@ -31749,25 +26970,7 @@ export type BracketContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bracket/
  */
 export class Bracket implements XMLElement<'bracket', BracketAttributes, BracketContents> {
-	static readonly schema = {
-		name: 'bracket',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'end-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'line-end': { type: 'required', value: { type: 'choices', choices: ['none', 'up', 'down', 'both', 'arrow'] } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'continue'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'bracket'> = schema.Bracket;
 
 	readonly schema = Bracket.schema;
 
@@ -31775,7 +26978,7 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
 	contents: BracketContents;
 
 	constructor(opts?: { attributes?: Partial<BracketAttributes>; contents?: BracketContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Bracket.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Bracket.schema);
 		this.contents = opts?.contents ?? operations.zero(Bracket.schema.contents);
 	}
 	/** Gets @type {BracketAttributes['color']}. */
@@ -31896,6 +27099,7 @@ export class Bracket implements XMLElement<'bracket', BracketAttributes, Bracket
 		return this;
 	}
 }
+registerElement('Bracket', Bracket);
 
 export type PedalAttributes = {
 	abbreviated: 'yes' | 'no' | null;
@@ -31927,44 +27131,7 @@ export type PedalContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pedal/
  */
 export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents> {
-	static readonly schema = {
-		name: 'pedal',
-		attributes: {
-			abbreviated: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			line: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			sign: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			type: {
-				type: 'required',
-				value: {
-					type: 'choices',
-					choices: ['start', 'stop', 'sostenuto', 'change', 'continue', 'discontinue', 'resume'],
-				},
-			},
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'pedal'> = schema.Pedal;
 
 	readonly schema = Pedal.schema;
 
@@ -31972,7 +27139,7 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
 	contents: PedalContents;
 
 	constructor(opts?: { attributes?: Partial<PedalAttributes>; contents?: PedalContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Pedal.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Pedal.schema);
 		this.contents = opts?.contents ?? operations.zero(Pedal.schema.contents);
 	}
 	/** Gets @type {PedalAttributes['abbreviated']}. */
@@ -32131,6 +27298,7 @@ export class Pedal implements XMLElement<'pedal', PedalAttributes, PedalContents
 		return this;
 	}
 }
+registerElement('Pedal', Pedal);
 
 export type BeatUnitAttributes = Record<string, unknown>;
 
@@ -32159,38 +27327,7 @@ export type BeatUnitContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beat-unit/
  */
 export class BeatUnit implements XMLElement<'beat-unit', BeatUnitAttributes, BeatUnitContents> {
-	static readonly schema = {
-		name: 'beat-unit',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'note-type-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'whole',
-							'1024th',
-							'512th',
-							'256th',
-							'128th',
-							'64th',
-							'32nd',
-							'16th',
-							'eighth',
-							'quarter',
-							'half',
-							'breve',
-							'long',
-							'maxima',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'beat-unit'> = schema.BeatUnit;
 
 	readonly schema = BeatUnit.schema;
 
@@ -32198,7 +27335,7 @@ export class BeatUnit implements XMLElement<'beat-unit', BeatUnitAttributes, Bea
 	contents: BeatUnitContents;
 
 	constructor(opts?: { attributes?: Partial<BeatUnitAttributes>; contents?: BeatUnitContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BeatUnit.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BeatUnit.schema);
 		this.contents = opts?.contents ?? operations.zero(BeatUnit.schema.contents);
 	}
 
@@ -32242,6 +27379,7 @@ export class BeatUnit implements XMLElement<'beat-unit', BeatUnitAttributes, Bea
 		return this;
 	}
 }
+registerElement('BeatUnit', BeatUnit);
 
 export type BeatUnitDotAttributes = Record<string, unknown>;
 
@@ -32255,7 +27393,7 @@ export type BeatUnitDotContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beat-unit-dot/
  */
 export class BeatUnitDot implements XMLElement<'beat-unit-dot', BeatUnitDotAttributes, BeatUnitDotContents> {
-	static readonly schema = { name: 'beat-unit-dot', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'beat-unit-dot'> = schema.BeatUnitDot;
 
 	readonly schema = BeatUnitDot.schema;
 
@@ -32263,10 +27401,11 @@ export class BeatUnitDot implements XMLElement<'beat-unit-dot', BeatUnitDotAttri
 	contents: BeatUnitDotContents;
 
 	constructor(opts?: { attributes?: Partial<BeatUnitDotAttributes>; contents?: BeatUnitDotContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BeatUnitDot.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BeatUnitDot.schema);
 		this.contents = opts?.contents ?? operations.zero(BeatUnitDot.schema.contents);
 	}
 }
+registerElement('BeatUnitDot', BeatUnitDot);
 
 export type BeatUnitTiedAttributes = Record<string, unknown>;
 
@@ -32280,14 +27419,7 @@ export type BeatUnitTiedContents = [BeatUnit, Array<BeatUnitDot>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beat-unit-tied/
  */
 export class BeatUnitTied implements XMLElement<'beat-unit-tied', BeatUnitTiedAttributes, BeatUnitTiedContents> {
-	static readonly schema = {
-		name: 'beat-unit-tied',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: BeatUnit },
-			{ type: 'label', label: 'beat-unit-dots', value: { type: 'zeroOrMore', value: BeatUnitDot } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'beat-unit-tied'> = schema.BeatUnitTied;
 
 	readonly schema = BeatUnitTied.schema;
 
@@ -32295,7 +27427,7 @@ export class BeatUnitTied implements XMLElement<'beat-unit-tied', BeatUnitTiedAt
 	contents: BeatUnitTiedContents;
 
 	constructor(opts?: { attributes?: Partial<BeatUnitTiedAttributes>; contents?: BeatUnitTiedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BeatUnitTied.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BeatUnitTied.schema);
 		this.contents = opts?.contents ?? operations.zero(BeatUnitTied.schema.contents);
 	}
 
@@ -32318,6 +27450,7 @@ export class BeatUnitTied implements XMLElement<'beat-unit-tied', BeatUnitTiedAt
 		return this;
 	}
 }
+registerElement('BeatUnitTied', BeatUnitTied);
 
 export type PerMinuteAttributes = {
 	'font-family': string | null;
@@ -32336,25 +27469,7 @@ export type PerMinuteContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/per-minute/
  */
 export class PerMinute implements XMLElement<'per-minute', PerMinuteAttributes, PerMinuteContents> {
-	static readonly schema = {
-		name: 'per-minute',
-		attributes: {
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'per-minute'> = schema.PerMinute;
 
 	readonly schema = PerMinute.schema;
 
@@ -32362,7 +27477,7 @@ export class PerMinute implements XMLElement<'per-minute', PerMinuteAttributes, 
 	contents: PerMinuteContents;
 
 	constructor(opts?: { attributes?: Partial<PerMinuteAttributes>; contents?: PerMinuteContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PerMinute.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PerMinute.schema);
 		this.contents = opts?.contents ?? operations.zero(PerMinute.schema.contents);
 	}
 	/** Gets @type {PerMinuteAttributes['font-family']}. */
@@ -32413,6 +27528,7 @@ export class PerMinute implements XMLElement<'per-minute', PerMinuteAttributes, 
 		return this;
 	}
 }
+registerElement('PerMinute', PerMinute);
 
 export type MetronomeArrowsAttributes = Record<string, unknown>;
 
@@ -32428,7 +27544,7 @@ export type MetronomeArrowsContents = [];
 export class MetronomeArrows
 	implements XMLElement<'metronome-arrows', MetronomeArrowsAttributes, MetronomeArrowsContents>
 {
-	static readonly schema = { name: 'metronome-arrows', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'metronome-arrows'> = schema.MetronomeArrows;
 
 	readonly schema = MetronomeArrows.schema;
 
@@ -32436,10 +27552,11 @@ export class MetronomeArrows
 	contents: MetronomeArrowsContents;
 
 	constructor(opts?: { attributes?: Partial<MetronomeArrowsAttributes>; contents?: MetronomeArrowsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MetronomeArrows.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MetronomeArrows.schema);
 		this.contents = opts?.contents ?? operations.zero(MetronomeArrows.schema.contents);
 	}
 }
+registerElement('MetronomeArrows', MetronomeArrows);
 
 export type MetronomeTypeAttributes = Record<string, unknown>;
 
@@ -32468,38 +27585,7 @@ export type MetronomeTypeContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-type/
  */
 export class MetronomeType implements XMLElement<'metronome-type', MetronomeTypeAttributes, MetronomeTypeContents> {
-	static readonly schema = {
-		name: 'metronome-type',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'note-type-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'whole',
-							'1024th',
-							'512th',
-							'256th',
-							'128th',
-							'64th',
-							'32nd',
-							'16th',
-							'eighth',
-							'quarter',
-							'half',
-							'breve',
-							'long',
-							'maxima',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'metronome-type'> = schema.MetronomeType;
 
 	readonly schema = MetronomeType.schema;
 
@@ -32507,7 +27593,7 @@ export class MetronomeType implements XMLElement<'metronome-type', MetronomeType
 	contents: MetronomeTypeContents;
 
 	constructor(opts?: { attributes?: Partial<MetronomeTypeAttributes>; contents?: MetronomeTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MetronomeType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MetronomeType.schema);
 		this.contents = opts?.contents ?? operations.zero(MetronomeType.schema.contents);
 	}
 
@@ -32551,6 +27637,7 @@ export class MetronomeType implements XMLElement<'metronome-type', MetronomeType
 		return this;
 	}
 }
+registerElement('MetronomeType', MetronomeType);
 
 export type MetronomeDotAttributes = Record<string, unknown>;
 
@@ -32564,7 +27651,7 @@ export type MetronomeDotContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-dot/
  */
 export class MetronomeDot implements XMLElement<'metronome-dot', MetronomeDotAttributes, MetronomeDotContents> {
-	static readonly schema = { name: 'metronome-dot', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'metronome-dot'> = schema.MetronomeDot;
 
 	readonly schema = MetronomeDot.schema;
 
@@ -32572,10 +27659,11 @@ export class MetronomeDot implements XMLElement<'metronome-dot', MetronomeDotAtt
 	contents: MetronomeDotContents;
 
 	constructor(opts?: { attributes?: Partial<MetronomeDotAttributes>; contents?: MetronomeDotContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MetronomeDot.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MetronomeDot.schema);
 		this.contents = opts?.contents ?? operations.zero(MetronomeDot.schema.contents);
 	}
 }
+registerElement('MetronomeDot', MetronomeDot);
 
 export type MetronomeBeamAttributes = { number: number | null };
 
@@ -32589,20 +27677,7 @@ export type MetronomeBeamContents = ['backward hook' | 'begin' | 'continue' | 'e
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-beam/
  */
 export class MetronomeBeam implements XMLElement<'metronome-beam', MetronomeBeamAttributes, MetronomeBeamContents> {
-	static readonly schema = {
-		name: 'metronome-beam',
-		attributes: { number: { type: 'optional', value: { type: 'int', min: 1, max: 8 } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'beam-value',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['backward hook', 'begin', 'continue', 'end', 'forward hook'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'metronome-beam'> = schema.MetronomeBeam;
 
 	readonly schema = MetronomeBeam.schema;
 
@@ -32610,7 +27685,7 @@ export class MetronomeBeam implements XMLElement<'metronome-beam', MetronomeBeam
 	contents: MetronomeBeamContents;
 
 	constructor(opts?: { attributes?: Partial<MetronomeBeamAttributes>; contents?: MetronomeBeamContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MetronomeBeam.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MetronomeBeam.schema);
 		this.contents = opts?.contents ?? operations.zero(MetronomeBeam.schema.contents);
 	}
 	/** Gets @type {MetronomeBeamAttributes['number']}. */
@@ -32632,6 +27707,7 @@ export class MetronomeBeam implements XMLElement<'metronome-beam', MetronomeBeam
 		return this;
 	}
 }
+registerElement('MetronomeBeam', MetronomeBeam);
 
 export type MetronomeTiedAttributes = { type: 'start' | 'stop' };
 
@@ -32645,11 +27721,7 @@ export type MetronomeTiedContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-tied/
  */
 export class MetronomeTied implements XMLElement<'metronome-tied', MetronomeTiedAttributes, MetronomeTiedContents> {
-	static readonly schema = {
-		name: 'metronome-tied',
-		attributes: { type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } } },
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'metronome-tied'> = schema.MetronomeTied;
 
 	readonly schema = MetronomeTied.schema;
 
@@ -32657,7 +27729,7 @@ export class MetronomeTied implements XMLElement<'metronome-tied', MetronomeTied
 	contents: MetronomeTiedContents;
 
 	constructor(opts?: { attributes?: Partial<MetronomeTiedAttributes>; contents?: MetronomeTiedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MetronomeTied.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MetronomeTied.schema);
 		this.contents = opts?.contents ?? operations.zero(MetronomeTied.schema.contents);
 	}
 	/** Gets @type {MetronomeTiedAttributes['type']}. */
@@ -32670,6 +27742,7 @@ export class MetronomeTied implements XMLElement<'metronome-tied', MetronomeTied
 		return this;
 	}
 }
+registerElement('MetronomeTied', MetronomeTied);
 
 export type MetronomeTupletAttributes = {
 	bracket: 'yes' | 'no' | null;
@@ -32689,29 +27762,7 @@ export type MetronomeTupletContents = [ActualNotes, NormalNotes, [NormalType, Ar
 export class MetronomeTuplet
 	implements XMLElement<'metronome-tuplet', MetronomeTupletAttributes, MetronomeTupletContents>
 {
-	static readonly schema = {
-		name: 'metronome-tuplet',
-		attributes: {
-			bracket: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'show-number': { type: 'optional', value: { type: 'choices', choices: ['none', 'actual', 'both'] } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-		},
-		contents: [
-			{ type: 'required', value: ActualNotes },
-			{ type: 'required', value: NormalNotes },
-			{
-				type: 'label',
-				label: 'normal',
-				value: {
-					type: 'optional',
-					value: [
-						{ type: 'required', value: NormalType },
-						{ type: 'zeroOrMore', value: NormalDot },
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'metronome-tuplet'> = schema.MetronomeTuplet;
 
 	readonly schema = MetronomeTuplet.schema;
 
@@ -32719,7 +27770,7 @@ export class MetronomeTuplet
 	contents: MetronomeTupletContents;
 
 	constructor(opts?: { attributes?: Partial<MetronomeTupletAttributes>; contents?: MetronomeTupletContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MetronomeTuplet.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MetronomeTuplet.schema);
 		this.contents = opts?.contents ?? operations.zero(MetronomeTuplet.schema.contents);
 	}
 	/** Gets @type {MetronomeTupletAttributes['bracket']}. */
@@ -32777,6 +27828,7 @@ export class MetronomeTuplet
 		return this;
 	}
 }
+registerElement('MetronomeTuplet', MetronomeTuplet);
 
 export type MetronomeNoteAttributes = Record<string, unknown>;
 
@@ -32796,17 +27848,7 @@ export type MetronomeNoteContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-note/
  */
 export class MetronomeNote implements XMLElement<'metronome-note', MetronomeNoteAttributes, MetronomeNoteContents> {
-	static readonly schema = {
-		name: 'metronome-note',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: MetronomeType },
-			{ type: 'label', label: 'metronome-dots', value: { type: 'zeroOrMore', value: MetronomeDot } },
-			{ type: 'label', label: 'metronome-beams', value: { type: 'zeroOrMore', value: MetronomeBeam } },
-			{ type: 'optional', value: MetronomeTied },
-			{ type: 'optional', value: MetronomeTuplet },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'metronome-note'> = schema.MetronomeNote;
 
 	readonly schema = MetronomeNote.schema;
 
@@ -32814,7 +27856,7 @@ export class MetronomeNote implements XMLElement<'metronome-note', MetronomeNote
 	contents: MetronomeNoteContents;
 
 	constructor(opts?: { attributes?: Partial<MetronomeNoteAttributes>; contents?: MetronomeNoteContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MetronomeNote.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MetronomeNote.schema);
 		this.contents = opts?.contents ?? operations.zero(MetronomeNote.schema.contents);
 	}
 
@@ -32864,6 +27906,7 @@ export class MetronomeNote implements XMLElement<'metronome-note', MetronomeNote
 		return this;
 	}
 }
+registerElement('MetronomeNote', MetronomeNote);
 
 export type MetronomeRelationAttributes = Record<string, unknown>;
 
@@ -32879,11 +27922,7 @@ export type MetronomeRelationContents = [string | null];
 export class MetronomeRelation
 	implements XMLElement<'metronome-relation', MetronomeRelationAttributes, MetronomeRelationContents>
 {
-	static readonly schema = {
-		name: 'metronome-relation',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'optional', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'metronome-relation'> = schema.MetronomeRelation;
 
 	readonly schema = MetronomeRelation.schema;
 
@@ -32891,7 +27930,7 @@ export class MetronomeRelation
 	contents: MetronomeRelationContents;
 
 	constructor(opts?: { attributes?: Partial<MetronomeRelationAttributes>; contents?: MetronomeRelationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MetronomeRelation.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MetronomeRelation.schema);
 		this.contents = opts?.contents ?? operations.zero(MetronomeRelation.schema.contents);
 	}
 
@@ -32905,6 +27944,7 @@ export class MetronomeRelation
 		return this;
 	}
 }
+registerElement('MetronomeRelation', MetronomeRelation);
 
 export type BeatSpec = [
 	BeatUnit,
@@ -32947,81 +27987,7 @@ export type MetronomeContents = [BeatSpec | MetronomeSpec];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome/
  */
 export class Metronome implements XMLElement<'metronome', MetronomeAttributes, MetronomeContents> {
-	static readonly schema = {
-		name: 'metronome',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			justify: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'metronome',
-				value: {
-					type: 'choices',
-					choices: [
-						{
-							type: 'label',
-							label: 'beat-spec',
-							value: [
-								{ type: 'required', value: BeatUnit },
-								{ type: 'zeroOrMore', value: BeatUnitDot },
-								{ type: 'zeroOrMore', value: BeatUnitTied },
-								{
-									type: 'choices',
-									choices: [
-										PerMinute,
-										[
-											{ type: 'required', value: BeatUnit },
-											{ type: 'zeroOrMore', value: BeatUnitDot },
-											{ type: 'zeroOrMore', value: BeatUnitTied },
-										],
-									],
-								},
-							],
-						},
-						{
-							type: 'label',
-							label: 'metronome-spec',
-							value: [
-								{ type: 'optional', value: MetronomeArrows },
-								{ type: 'oneOrMore', value: MetronomeNote },
-								{
-									type: 'optional',
-									value: [
-										{ type: 'required', value: MetronomeRelation },
-										{ type: 'oneOrMore', value: MetronomeNote },
-									],
-								},
-							],
-						},
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'metronome'> = schema.Metronome;
 
 	readonly schema = Metronome.schema;
 
@@ -33029,7 +27995,7 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
 	contents: MetronomeContents;
 
 	constructor(opts?: { attributes?: Partial<MetronomeAttributes>; contents?: MetronomeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Metronome.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Metronome.schema);
 		this.contents = opts?.contents ?? operations.zero(Metronome.schema.contents);
 	}
 	/** Gets @type {MetronomeAttributes['color']}. */
@@ -33179,6 +28145,7 @@ export class Metronome implements XMLElement<'metronome', MetronomeAttributes, M
 		return this;
 	}
 }
+registerElement('Metronome', Metronome);
 
 export type OctaveShiftAttributes = {
 	color: string | null;
@@ -33208,36 +28175,7 @@ export type OctaveShiftContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/octave-shift/
  */
 export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttributes, OctaveShiftContents> {
-	static readonly schema = {
-		name: 'octave-shift',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'dash-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: 16 } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			size: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			'space-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['up', 'down', 'stop', 'continue'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'octave-shift'> = schema.OctaveShift;
 
 	readonly schema = OctaveShift.schema;
 
@@ -33245,7 +28183,7 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
 	contents: OctaveShiftContents;
 
 	constructor(opts?: { attributes?: Partial<OctaveShiftAttributes>; contents?: OctaveShiftContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OctaveShift.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OctaveShift.schema);
 		this.contents = opts?.contents ?? operations.zero(OctaveShift.schema.contents);
 	}
 	/** Gets @type {OctaveShiftAttributes['color']}. */
@@ -33386,6 +28324,7 @@ export class OctaveShift implements XMLElement<'octave-shift', OctaveShiftAttrib
 		return this;
 	}
 }
+registerElement('OctaveShift', OctaveShift);
 
 export type PedalStepAttributes = Record<string, unknown>;
 
@@ -33399,17 +28338,7 @@ export type PedalStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pedal-step/
  */
 export class PedalStep implements XMLElement<'pedal-step', PedalStepAttributes, PedalStepContents> {
-	static readonly schema = {
-		name: 'pedal-step',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'step',
-				value: { type: 'required', value: { type: 'choices', choices: ['A', 'B', 'C', 'D', 'E', 'F', 'G'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'pedal-step'> = schema.PedalStep;
 
 	readonly schema = PedalStep.schema;
 
@@ -33417,7 +28346,7 @@ export class PedalStep implements XMLElement<'pedal-step', PedalStepAttributes, 
 	contents: PedalStepContents;
 
 	constructor(opts?: { attributes?: Partial<PedalStepAttributes>; contents?: PedalStepContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PedalStep.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PedalStep.schema);
 		this.contents = opts?.contents ?? operations.zero(PedalStep.schema.contents);
 	}
 
@@ -33431,6 +28360,7 @@ export class PedalStep implements XMLElement<'pedal-step', PedalStepAttributes, 
 		return this;
 	}
 }
+registerElement('PedalStep', PedalStep);
 
 export type PedalAlterAttributes = Record<string, unknown>;
 
@@ -33444,17 +28374,7 @@ export type PedalAlterContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pedal-alter/
  */
 export class PedalAlter implements XMLElement<'pedal-alter', PedalAlterAttributes, PedalAlterContents> {
-	static readonly schema = {
-		name: 'pedal-alter',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'semitones',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'pedal-alter'> = schema.PedalAlter;
 
 	readonly schema = PedalAlter.schema;
 
@@ -33462,7 +28382,7 @@ export class PedalAlter implements XMLElement<'pedal-alter', PedalAlterAttribute
 	contents: PedalAlterContents;
 
 	constructor(opts?: { attributes?: Partial<PedalAlterAttributes>; contents?: PedalAlterContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PedalAlter.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PedalAlter.schema);
 		this.contents = opts?.contents ?? operations.zero(PedalAlter.schema.contents);
 	}
 
@@ -33476,6 +28396,7 @@ export class PedalAlter implements XMLElement<'pedal-alter', PedalAlterAttribute
 		return this;
 	}
 }
+registerElement('PedalAlter', PedalAlter);
 
 export type PedalTuningAttributes = Record<string, unknown>;
 
@@ -33489,14 +28410,7 @@ export type PedalTuningContents = [PedalStep, PedalAlter];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pedal-tuning/
  */
 export class PedalTuning implements XMLElement<'pedal-tuning', PedalTuningAttributes, PedalTuningContents> {
-	static readonly schema = {
-		name: 'pedal-tuning',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: PedalStep },
-			{ type: 'required', value: PedalAlter },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'pedal-tuning'> = schema.PedalTuning;
 
 	readonly schema = PedalTuning.schema;
 
@@ -33504,7 +28418,7 @@ export class PedalTuning implements XMLElement<'pedal-tuning', PedalTuningAttrib
 	contents: PedalTuningContents;
 
 	constructor(opts?: { attributes?: Partial<PedalTuningAttributes>; contents?: PedalTuningContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PedalTuning.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PedalTuning.schema);
 		this.contents = opts?.contents ?? operations.zero(PedalTuning.schema.contents);
 	}
 
@@ -33527,6 +28441,7 @@ export class PedalTuning implements XMLElement<'pedal-tuning', PedalTuningAttrib
 		return this;
 	}
 }
+registerElement('PedalTuning', PedalTuning);
 
 export type HarpPedalsAttributes = {
 	color: string | null;
@@ -33553,33 +28468,7 @@ export type HarpPedalsContents = [Array<PedalTuning>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harp-pedals/
  */
 export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttributes, HarpPedalsContents> {
-	static readonly schema = {
-		name: 'harp-pedals',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [{ type: 'label', label: 'pedal-tunings', value: { type: 'oneOrMore', value: PedalTuning } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'harp-pedals'> = schema.HarpPedals;
 
 	readonly schema = HarpPedals.schema;
 
@@ -33587,7 +28476,7 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
 	contents: HarpPedalsContents;
 
 	constructor(opts?: { attributes?: Partial<HarpPedalsAttributes>; contents?: HarpPedalsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, HarpPedals.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, HarpPedals.schema);
 		this.contents = opts?.contents ?? operations.zero(HarpPedals.schema.contents);
 	}
 	/** Gets @type {HarpPedalsAttributes['color']}. */
@@ -33710,6 +28599,7 @@ export class HarpPedals implements XMLElement<'harp-pedals', HarpPedalsAttribute
 		return this;
 	}
 }
+registerElement('HarpPedals', HarpPedals);
 
 export type DampAttributes = {
 	color: string | null;
@@ -33736,33 +28626,7 @@ export type DampContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/damp/
  */
 export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
-	static readonly schema = {
-		name: 'damp',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'damp'> = schema.Damp;
 
 	readonly schema = Damp.schema;
 
@@ -33770,7 +28634,7 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
 	contents: DampContents;
 
 	constructor(opts?: { attributes?: Partial<DampAttributes>; contents?: DampContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Damp.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Damp.schema);
 		this.contents = opts?.contents ?? operations.zero(Damp.schema.contents);
 	}
 	/** Gets @type {DampAttributes['color']}. */
@@ -33884,6 +28748,7 @@ export class Damp implements XMLElement<'damp', DampAttributes, DampContents> {
 		return this;
 	}
 }
+registerElement('Damp', Damp);
 
 export type DampAllAttributes = {
 	color: string | null;
@@ -33910,33 +28775,7 @@ export type DampAllContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/damp-all/
  */
 export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAllContents> {
-	static readonly schema = {
-		name: 'damp-all',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'damp-all'> = schema.DampAll;
 
 	readonly schema = DampAll.schema;
 
@@ -33944,7 +28783,7 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
 	contents: DampAllContents;
 
 	constructor(opts?: { attributes?: Partial<DampAllAttributes>; contents?: DampAllContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DampAll.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DampAll.schema);
 		this.contents = opts?.contents ?? operations.zero(DampAll.schema.contents);
 	}
 	/** Gets @type {DampAllAttributes['color']}. */
@@ -34058,6 +28897,7 @@ export class DampAll implements XMLElement<'damp-all', DampAllAttributes, DampAl
 		return this;
 	}
 }
+registerElement('DampAll', DampAll);
 
 export type EyeglassesAttributes = {
 	color: string | null;
@@ -34084,33 +28924,7 @@ export type EyeglassesContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/eyeglasses/
  */
 export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes, EyeglassesContents> {
-	static readonly schema = {
-		name: 'eyeglasses',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'eyeglasses'> = schema.Eyeglasses;
 
 	readonly schema = Eyeglasses.schema;
 
@@ -34118,7 +28932,7 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
 	contents: EyeglassesContents;
 
 	constructor(opts?: { attributes?: Partial<EyeglassesAttributes>; contents?: EyeglassesContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Eyeglasses.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Eyeglasses.schema);
 		this.contents = opts?.contents ?? operations.zero(Eyeglasses.schema.contents);
 	}
 	/** Gets @type {EyeglassesAttributes['color']}. */
@@ -34232,6 +29046,7 @@ export class Eyeglasses implements XMLElement<'eyeglasses', EyeglassesAttributes
 		return this;
 	}
 }
+registerElement('Eyeglasses', Eyeglasses);
 
 export type StringMuteAttributes = {
 	color: string | null;
@@ -34259,34 +29074,7 @@ export type StringMuteContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/string-mute/
  */
 export class StringMute implements XMLElement<'string-mute', StringMuteAttributes, StringMuteContents> {
-	static readonly schema = {
-		name: 'string-mute',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['on', 'off'] } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'string-mute'> = schema.StringMute;
 
 	readonly schema = StringMute.schema;
 
@@ -34294,7 +29082,7 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
 	contents: StringMuteContents;
 
 	constructor(opts?: { attributes?: Partial<StringMuteAttributes>; contents?: StringMuteContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StringMute.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StringMute.schema);
 		this.contents = opts?.contents ?? operations.zero(StringMute.schema.contents);
 	}
 	/** Gets @type {StringMuteAttributes['color']}. */
@@ -34417,6 +29205,7 @@ export class StringMute implements XMLElement<'string-mute', StringMuteAttribute
 		return this;
 	}
 }
+registerElement('StringMute', StringMute);
 
 export type TuningStepAttributes = Record<string, unknown>;
 
@@ -34430,17 +29219,7 @@ export type TuningStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuning-step/
  */
 export class TuningStep implements XMLElement<'tuning-step', TuningStepAttributes, TuningStepContents> {
-	static readonly schema = {
-		name: 'tuning-step',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'step',
-				value: { type: 'required', value: { type: 'choices', choices: ['A', 'B', 'C', 'D', 'E', 'F', 'G'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'tuning-step'> = schema.TuningStep;
 
 	readonly schema = TuningStep.schema;
 
@@ -34448,7 +29227,7 @@ export class TuningStep implements XMLElement<'tuning-step', TuningStepAttribute
 	contents: TuningStepContents;
 
 	constructor(opts?: { attributes?: Partial<TuningStepAttributes>; contents?: TuningStepContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TuningStep.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TuningStep.schema);
 		this.contents = opts?.contents ?? operations.zero(TuningStep.schema.contents);
 	}
 
@@ -34462,6 +29241,7 @@ export class TuningStep implements XMLElement<'tuning-step', TuningStepAttribute
 		return this;
 	}
 }
+registerElement('TuningStep', TuningStep);
 
 export type TuningAlterAttributes = Record<string, unknown>;
 
@@ -34475,17 +29255,7 @@ export type TuningAlterContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuning-alter/
  */
 export class TuningAlter implements XMLElement<'tuning-alter', TuningAlterAttributes, TuningAlterContents> {
-	static readonly schema = {
-		name: 'tuning-alter',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'semitones',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'tuning-alter'> = schema.TuningAlter;
 
 	readonly schema = TuningAlter.schema;
 
@@ -34493,7 +29263,7 @@ export class TuningAlter implements XMLElement<'tuning-alter', TuningAlterAttrib
 	contents: TuningAlterContents;
 
 	constructor(opts?: { attributes?: Partial<TuningAlterAttributes>; contents?: TuningAlterContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TuningAlter.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TuningAlter.schema);
 		this.contents = opts?.contents ?? operations.zero(TuningAlter.schema.contents);
 	}
 
@@ -34507,6 +29277,7 @@ export class TuningAlter implements XMLElement<'tuning-alter', TuningAlterAttrib
 		return this;
 	}
 }
+registerElement('TuningAlter', TuningAlter);
 
 export type TuningOctaveAttributes = Record<string, unknown>;
 
@@ -34520,11 +29291,7 @@ export type TuningOctaveContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuning-octave/
  */
 export class TuningOctave implements XMLElement<'tuning-octave', TuningOctaveAttributes, TuningOctaveContents> {
-	static readonly schema = {
-		name: 'tuning-octave',
-		attributes: {},
-		contents: [{ type: 'label', label: 'octave', value: { type: 'required', value: { type: 'int', min: 0, max: 9 } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'tuning-octave'> = schema.TuningOctave;
 
 	readonly schema = TuningOctave.schema;
 
@@ -34532,7 +29299,7 @@ export class TuningOctave implements XMLElement<'tuning-octave', TuningOctaveAtt
 	contents: TuningOctaveContents;
 
 	constructor(opts?: { attributes?: Partial<TuningOctaveAttributes>; contents?: TuningOctaveContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TuningOctave.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TuningOctave.schema);
 		this.contents = opts?.contents ?? operations.zero(TuningOctave.schema.contents);
 	}
 
@@ -34546,6 +29313,7 @@ export class TuningOctave implements XMLElement<'tuning-octave', TuningOctaveAtt
 		return this;
 	}
 }
+registerElement('TuningOctave', TuningOctave);
 
 export type AccordAttributes = { string: number | null };
 
@@ -34559,15 +29327,7 @@ export type AccordContents = [TuningStep, TuningAlter | null, TuningOctave];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accord/
  */
 export class Accord implements XMLElement<'accord', AccordAttributes, AccordContents> {
-	static readonly schema = {
-		name: 'accord',
-		attributes: { string: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } } },
-		contents: [
-			{ type: 'required', value: TuningStep },
-			{ type: 'optional', value: TuningAlter },
-			{ type: 'required', value: TuningOctave },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'accord'> = schema.Accord;
 
 	readonly schema = Accord.schema;
 
@@ -34575,7 +29335,7 @@ export class Accord implements XMLElement<'accord', AccordAttributes, AccordCont
 	contents: AccordContents;
 
 	constructor(opts?: { attributes?: Partial<AccordAttributes>; contents?: AccordContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Accord.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Accord.schema);
 		this.contents = opts?.contents ?? operations.zero(Accord.schema.contents);
 	}
 	/** Gets @type {AccordAttributes['string']}. */
@@ -34615,6 +29375,7 @@ export class Accord implements XMLElement<'accord', AccordAttributes, AccordCont
 		return this;
 	}
 }
+registerElement('Accord', Accord);
 
 export type ScordaturaAttributes = { id: string | null };
 
@@ -34628,11 +29389,7 @@ export type ScordaturaContents = [Array<Accord>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/scordatura/
  */
 export class Scordatura implements XMLElement<'scordatura', ScordaturaAttributes, ScordaturaContents> {
-	static readonly schema = {
-		name: 'scordatura',
-		attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [{ type: 'label', label: 'accords', value: { type: 'oneOrMore', value: Accord } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'scordatura'> = schema.Scordatura;
 
 	readonly schema = Scordatura.schema;
 
@@ -34640,7 +29397,7 @@ export class Scordatura implements XMLElement<'scordatura', ScordaturaAttributes
 	contents: ScordaturaContents;
 
 	constructor(opts?: { attributes?: Partial<ScordaturaAttributes>; contents?: ScordaturaContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Scordatura.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Scordatura.schema);
 		this.contents = opts?.contents ?? operations.zero(Scordatura.schema.contents);
 	}
 	/** Gets @type {ScordaturaAttributes['id']}. */
@@ -34662,6 +29419,7 @@ export class Scordatura implements XMLElement<'scordatura', ScordaturaAttributes
 		return this;
 	}
 }
+registerElement('Scordatura', Scordatura);
 
 export type ImageAttributes = {
 	'default-x': number | null;
@@ -34687,23 +29445,7 @@ export type ImageContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/image/
  */
 export class Image implements XMLElement<'image', ImageAttributes, ImageContents> {
-	static readonly schema = {
-		name: 'image',
-		attributes: {
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			height: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			source: { type: 'required', value: { type: 'string' } },
-			type: { type: 'required', value: { type: 'string' } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-			width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'image'> = schema.Image;
 
 	readonly schema = Image.schema;
 
@@ -34711,7 +29453,7 @@ export class Image implements XMLElement<'image', ImageAttributes, ImageContents
 	contents: ImageContents;
 
 	constructor(opts?: { attributes?: Partial<ImageAttributes>; contents?: ImageContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Image.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Image.schema);
 		this.contents = opts?.contents ?? operations.zero(Image.schema.contents);
 	}
 	/** Gets @type {ImageAttributes['default-x']}. */
@@ -34814,6 +29556,7 @@ export class Image implements XMLElement<'image', ImageAttributes, ImageContents
 		return this;
 	}
 }
+registerElement('Image', Image);
 
 export type PrincipalVoiceAttributes = {
 	color: string | null;
@@ -34842,38 +29585,7 @@ export type PrincipalVoiceContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/principal-voice/
  */
 export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVoiceAttributes, PrincipalVoiceContents> {
-	static readonly schema = {
-		name: 'principal-voice',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			symbol: {
-				type: 'required',
-				value: { type: 'choices', choices: ['none', 'Hauptstimme', 'Nebenstimme', 'plain'] },
-			},
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'principal-voice'> = schema.PrincipalVoice;
 
 	readonly schema = PrincipalVoice.schema;
 
@@ -34881,7 +29593,7 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
 	contents: PrincipalVoiceContents;
 
 	constructor(opts?: { attributes?: Partial<PrincipalVoiceAttributes>; contents?: PrincipalVoiceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PrincipalVoice.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PrincipalVoice.schema);
 		this.contents = opts?.contents ?? operations.zero(PrincipalVoice.schema.contents);
 	}
 	/** Gets @type {PrincipalVoiceAttributes['color']}. */
@@ -35022,6 +29734,7 @@ export class PrincipalVoice implements XMLElement<'principal-voice', PrincipalVo
 		return this;
 	}
 }
+registerElement('PrincipalVoice', PrincipalVoice);
 
 export type GlassAttributes = { smufl: string | null };
 
@@ -35035,20 +29748,7 @@ export type GlassContents = ['glass harmonica' | 'glass harp' | 'wind chimes'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/glass/
  */
 export class Glass implements XMLElement<'glass', GlassAttributes, GlassContents> {
-	static readonly schema = {
-		name: 'glass',
-		attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'glass-value',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['glass harmonica', 'glass harp', 'wind chimes'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'glass'> = schema.Glass;
 
 	readonly schema = Glass.schema;
 
@@ -35056,7 +29756,7 @@ export class Glass implements XMLElement<'glass', GlassAttributes, GlassContents
 	contents: GlassContents;
 
 	constructor(opts?: { attributes?: Partial<GlassAttributes>; contents?: GlassContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Glass.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Glass.schema);
 		this.contents = opts?.contents ?? operations.zero(Glass.schema.contents);
 	}
 	/** Gets @type {GlassAttributes['smufl']}. */
@@ -35078,6 +29778,7 @@ export class Glass implements XMLElement<'glass', GlassAttributes, GlassContents
 		return this;
 	}
 }
+registerElement('Glass', Glass);
 
 export type MetalAttributes = { smufl: string | null };
 
@@ -35124,56 +29825,7 @@ export type MetalContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metal/
  */
 export class Metal implements XMLElement<'metal', MetalAttributes, MetalContents> {
-	static readonly schema = {
-		name: 'metal',
-		attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'metal-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'agogo',
-							'almglocken',
-							'bell',
-							'bell plate',
-							'bell tree',
-							'brake drum',
-							'cencerro',
-							'chain rattle',
-							'Chinese cymbal',
-							'cowbell',
-							'crash cymbals',
-							'crotale',
-							'cymbal tongs',
-							'domed gong',
-							'finger cymbals',
-							'flexatone',
-							'gong',
-							'hi-hat',
-							'high-hat cymbals',
-							'handbell',
-							'jaw harp',
-							'jingle bells',
-							'musical saw',
-							'shell bells',
-							'sistrum',
-							'sizzle cymbal',
-							'sleigh bells',
-							'suspended cymbal',
-							'tam tam',
-							'tam tam with beater',
-							'triangle',
-							'Vietnamese hat',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'metal'> = schema.Metal;
 
 	readonly schema = Metal.schema;
 
@@ -35181,7 +29833,7 @@ export class Metal implements XMLElement<'metal', MetalAttributes, MetalContents
 	contents: MetalContents;
 
 	constructor(opts?: { attributes?: Partial<MetalAttributes>; contents?: MetalContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Metal.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Metal.schema);
 		this.contents = opts?.contents ?? operations.zero(Metal.schema.contents);
 	}
 	/** Gets @type {MetalAttributes['smufl']}. */
@@ -35269,6 +29921,7 @@ export class Metal implements XMLElement<'metal', MetalAttributes, MetalContents
 		return this;
 	}
 }
+registerElement('Metal', Metal);
 
 export type WoodAttributes = { smufl: string | null };
 
@@ -35304,45 +29957,7 @@ export type WoodContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/wood/
  */
 export class Wood implements XMLElement<'wood', WoodAttributes, WoodContents> {
-	static readonly schema = {
-		name: 'wood',
-		attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'wood-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'bamboo scraper',
-							'board clapper',
-							'cabasa',
-							'castanets',
-							'castanets with handle',
-							'claves',
-							'footbal rattle',
-							'guiro',
-							'log drum',
-							'maraca',
-							'maracas',
-							'quijada',
-							'rainstick',
-							'ratchet',
-							'reco-reco',
-							'sandpaper blocks',
-							'slit drum',
-							'temple block',
-							'vibraslap',
-							'whip',
-							'wood block',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'wood'> = schema.Wood;
 
 	readonly schema = Wood.schema;
 
@@ -35350,7 +29965,7 @@ export class Wood implements XMLElement<'wood', WoodAttributes, WoodContents> {
 	contents: WoodContents;
 
 	constructor(opts?: { attributes?: Partial<WoodAttributes>; contents?: WoodContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Wood.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Wood.schema);
 		this.contents = opts?.contents ?? operations.zero(Wood.schema.contents);
 	}
 	/** Gets @type {WoodAttributes['smufl']}. */
@@ -35416,6 +30031,7 @@ export class Wood implements XMLElement<'wood', WoodAttributes, WoodContents> {
 		return this;
 	}
 }
+registerElement('Wood', Wood);
 
 export type PitchedAttributes = { smufl: string | null };
 
@@ -35441,35 +30057,7 @@ export type PitchedContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pitched/
  */
 export class Pitched implements XMLElement<'pitched', PitchedAttributes, PitchedContents> {
-	static readonly schema = {
-		name: 'pitched',
-		attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'pitched-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'celesta',
-							'chimes',
-							'glockenspiel',
-							'lithophone',
-							'mallet',
-							'marimba',
-							'steel drums',
-							'tubaphone',
-							'tubular chimes',
-							'vibraphone',
-							'xylophone',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'pitched'> = schema.Pitched;
 
 	readonly schema = Pitched.schema;
 
@@ -35477,7 +30065,7 @@ export class Pitched implements XMLElement<'pitched', PitchedAttributes, Pitched
 	contents: PitchedContents;
 
 	constructor(opts?: { attributes?: Partial<PitchedAttributes>; contents?: PitchedContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Pitched.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Pitched.schema);
 		this.contents = opts?.contents ?? operations.zero(Pitched.schema.contents);
 	}
 	/** Gets @type {PitchedAttributes['smufl']}. */
@@ -35523,6 +30111,7 @@ export class Pitched implements XMLElement<'pitched', PitchedAttributes, Pitched
 		return this;
 	}
 }
+registerElement('Pitched', Pitched);
 
 export type MembraneAttributes = { smufl: string | null };
 
@@ -35554,41 +30143,7 @@ export type MembraneContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/membrane/
  */
 export class Membrane implements XMLElement<'membrane', MembraneAttributes, MembraneContents> {
-	static readonly schema = {
-		name: 'membrane',
-		attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'membrane-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'bass drum',
-							'bass drum on side',
-							'bongos',
-							'Chinese tomtom',
-							'conga drum',
-							'cuica',
-							'goblet drum',
-							'Indo-American tomtom',
-							'Japanese tomtom',
-							'military drum',
-							'snare drum',
-							'snare drum snares off',
-							'tabla',
-							'tambourine',
-							'tenor drum',
-							'timbales',
-							'tomtom',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'membrane'> = schema.Membrane;
 
 	readonly schema = Membrane.schema;
 
@@ -35596,7 +30151,7 @@ export class Membrane implements XMLElement<'membrane', MembraneAttributes, Memb
 	contents: MembraneContents;
 
 	constructor(opts?: { attributes?: Partial<MembraneAttributes>; contents?: MembraneContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Membrane.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Membrane.schema);
 		this.contents = opts?.contents ?? operations.zero(Membrane.schema.contents);
 	}
 	/** Gets @type {MembraneAttributes['smufl']}. */
@@ -35654,6 +30209,7 @@ export class Membrane implements XMLElement<'membrane', MembraneAttributes, Memb
 		return this;
 	}
 }
+registerElement('Membrane', Membrane);
 
 export type EffectAttributes = { smufl: string | null };
 
@@ -35684,40 +30240,7 @@ export type EffectContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/effect/
  */
 export class Effect implements XMLElement<'effect', EffectAttributes, EffectContents> {
-	static readonly schema = {
-		name: 'effect',
-		attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'effect-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'anvil',
-							'auto horn',
-							'bird whistle',
-							'cannon',
-							'duck call',
-							'gun shot',
-							'klaxon horn',
-							'lions roar',
-							'lotus flute',
-							'megaphone',
-							'police whistle',
-							'siren',
-							'slide whistle',
-							'thunder sheet',
-							'wind machine',
-							'wind whistle',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'effect'> = schema.Effect;
 
 	readonly schema = Effect.schema;
 
@@ -35725,7 +30248,7 @@ export class Effect implements XMLElement<'effect', EffectAttributes, EffectCont
 	contents: EffectContents;
 
 	constructor(opts?: { attributes?: Partial<EffectAttributes>; contents?: EffectContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Effect.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Effect.schema);
 		this.contents = opts?.contents ?? operations.zero(Effect.schema.contents);
 	}
 	/** Gets @type {EffectAttributes['smufl']}. */
@@ -35781,6 +30304,7 @@ export class Effect implements XMLElement<'effect', EffectAttributes, EffectCont
 		return this;
 	}
 }
+registerElement('Effect', Effect);
 
 export type TimpaniAttributes = { smufl: string | null };
 
@@ -35794,11 +30318,7 @@ export type TimpaniContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/timpani/
  */
 export class Timpani implements XMLElement<'timpani', TimpaniAttributes, TimpaniContents> {
-	static readonly schema = {
-		name: 'timpani',
-		attributes: { smufl: { type: 'optional', value: { type: 'regex', pattern: /pict/, zero: 'pict' } } },
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'timpani'> = schema.Timpani;
 
 	readonly schema = Timpani.schema;
 
@@ -35806,7 +30326,7 @@ export class Timpani implements XMLElement<'timpani', TimpaniAttributes, Timpani
 	contents: TimpaniContents;
 
 	constructor(opts?: { attributes?: Partial<TimpaniAttributes>; contents?: TimpaniContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Timpani.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Timpani.schema);
 		this.contents = opts?.contents ?? operations.zero(Timpani.schema.contents);
 	}
 	/** Gets @type {TimpaniAttributes['smufl']}. */
@@ -35819,6 +30339,7 @@ export class Timpani implements XMLElement<'timpani', TimpaniAttributes, Timpani
 		return this;
 	}
 }
+registerElement('Timpani', Timpani);
 
 export type BeaterAttributes = {
 	tip: 'down' | 'up' | 'left' | 'right' | 'northwest' | 'northeast' | 'southeast' | 'southwest' | null;
@@ -35855,52 +30376,7 @@ export type BeaterContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beater/
  */
 export class Beater implements XMLElement<'beater', BeaterAttributes, BeaterContents> {
-	static readonly schema = {
-		name: 'beater',
-		attributes: {
-			tip: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: ['down', 'up', 'left', 'right', 'northwest', 'northeast', 'southeast', 'southwest'],
-				},
-			},
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'beater-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'bow',
-							'chime hammer',
-							'coin',
-							'drum stick',
-							'finger',
-							'fingernail',
-							'fist',
-							'guiro scraper',
-							'hammer',
-							'hand',
-							'jazz stick',
-							'knitting needle',
-							'metal hammer',
-							'slide brush on gong',
-							'snare stick',
-							'spoon mallet',
-							'superball',
-							'triangle beater',
-							'triangle beater plain',
-							'wire brush',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'beater'> = schema.Beater;
 
 	readonly schema = Beater.schema;
 
@@ -35908,7 +30384,7 @@ export class Beater implements XMLElement<'beater', BeaterAttributes, BeaterCont
 	contents: BeaterContents;
 
 	constructor(opts?: { attributes?: Partial<BeaterAttributes>; contents?: BeaterContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Beater.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Beater.schema);
 		this.contents = opts?.contents ?? operations.zero(Beater.schema.contents);
 	}
 	/** Gets @type {BeaterAttributes['tip']}. */
@@ -35972,6 +30448,7 @@ export class Beater implements XMLElement<'beater', BeaterAttributes, BeaterCont
 		return this;
 	}
 }
+registerElement('Beater', Beater);
 
 export type StickTypeAttributes = Record<string, unknown>;
 
@@ -35996,34 +30473,7 @@ export type StickTypeContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stick-type/
  */
 export class StickType implements XMLElement<'stick-type', StickTypeAttributes, StickTypeContents> {
-	static readonly schema = {
-		name: 'stick-type',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'stick-type',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'bass drum',
-							'double bass drum',
-							'glockenspiel',
-							'gum',
-							'hammer',
-							'superball',
-							'timpani',
-							'wound',
-							'xylophone',
-							'yarn',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'stick-type'> = schema.StickType;
 
 	readonly schema = StickType.schema;
 
@@ -36031,7 +30481,7 @@ export class StickType implements XMLElement<'stick-type', StickTypeAttributes, 
 	contents: StickTypeContents;
 
 	constructor(opts?: { attributes?: Partial<StickTypeAttributes>; contents?: StickTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StickType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StickType.schema);
 		this.contents = opts?.contents ?? operations.zero(StickType.schema.contents);
 	}
 
@@ -36067,6 +30517,7 @@ export class StickType implements XMLElement<'stick-type', StickTypeAttributes, 
 		return this;
 	}
 }
+registerElement('StickType', StickType);
 
 export type StickMaterialAttributes = Record<string, unknown>;
 
@@ -36080,17 +30531,7 @@ export type StickMaterialContents = ['x' | 'soft' | 'medium' | 'hard' | 'shaded'
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stick-material/
  */
 export class StickMaterial implements XMLElement<'stick-material', StickMaterialAttributes, StickMaterialContents> {
-	static readonly schema = {
-		name: 'stick-material',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'stick-material',
-				value: { type: 'required', value: { type: 'choices', choices: ['x', 'soft', 'medium', 'hard', 'shaded'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'stick-material'> = schema.StickMaterial;
 
 	readonly schema = StickMaterial.schema;
 
@@ -36098,7 +30539,7 @@ export class StickMaterial implements XMLElement<'stick-material', StickMaterial
 	contents: StickMaterialContents;
 
 	constructor(opts?: { attributes?: Partial<StickMaterialAttributes>; contents?: StickMaterialContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StickMaterial.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StickMaterial.schema);
 		this.contents = opts?.contents ?? operations.zero(StickMaterial.schema.contents);
 	}
 
@@ -36112,6 +30553,7 @@ export class StickMaterial implements XMLElement<'stick-material', StickMaterial
 		return this;
 	}
 }
+registerElement('StickMaterial', StickMaterial);
 
 export type StickAttributes = {
 	'dashed-circle': 'yes' | 'no' | null;
@@ -36129,24 +30571,7 @@ export type StickContents = [StickType, StickMaterial];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stick/
  */
 export class Stick implements XMLElement<'stick', StickAttributes, StickContents> {
-	static readonly schema = {
-		name: 'stick',
-		attributes: {
-			'dashed-circle': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			tip: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: ['down', 'up', 'left', 'right', 'northwest', 'northeast', 'southeast', 'southwest'],
-				},
-			},
-		},
-		contents: [
-			{ type: 'required', value: StickType },
-			{ type: 'required', value: StickMaterial },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'stick'> = schema.Stick;
 
 	readonly schema = Stick.schema;
 
@@ -36154,7 +30579,7 @@ export class Stick implements XMLElement<'stick', StickAttributes, StickContents
 	contents: StickContents;
 
 	constructor(opts?: { attributes?: Partial<StickAttributes>; contents?: StickContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Stick.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Stick.schema);
 		this.contents = opts?.contents ?? operations.zero(Stick.schema.contents);
 	}
 	/** Gets @type {StickAttributes['dashed-circle']}. */
@@ -36203,6 +30628,7 @@ export class Stick implements XMLElement<'stick', StickAttributes, StickContents
 		return this;
 	}
 }
+registerElement('Stick', Stick);
 
 export type StickLocationAttributes = Record<string, unknown>;
 
@@ -36216,20 +30642,7 @@ export type StickLocationContents = ['center' | 'rim' | 'cymbal bell' | 'cymbal 
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stick-location/
  */
 export class StickLocation implements XMLElement<'stick-location', StickLocationAttributes, StickLocationContents> {
-	static readonly schema = {
-		name: 'stick-location',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'stick-location',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['center', 'rim', 'cymbal bell', 'cymbal edge'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'stick-location'> = schema.StickLocation;
 
 	readonly schema = StickLocation.schema;
 
@@ -36237,7 +30650,7 @@ export class StickLocation implements XMLElement<'stick-location', StickLocation
 	contents: StickLocationContents;
 
 	constructor(opts?: { attributes?: Partial<StickLocationAttributes>; contents?: StickLocationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StickLocation.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StickLocation.schema);
 		this.contents = opts?.contents ?? operations.zero(StickLocation.schema.contents);
 	}
 
@@ -36251,6 +30664,7 @@ export class StickLocation implements XMLElement<'stick-location', StickLocation
 		return this;
 	}
 }
+registerElement('StickLocation', StickLocation);
 
 export type OtherPercussionAttributes = { smufl: string | null };
 
@@ -36266,11 +30680,7 @@ export type OtherPercussionContents = [string];
 export class OtherPercussion
 	implements XMLElement<'other-percussion', OtherPercussionAttributes, OtherPercussionContents>
 {
-	static readonly schema = {
-		name: 'other-percussion',
-		attributes: { smufl: { type: 'optional', value: { type: 'string' } } },
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-percussion'> = schema.OtherPercussion;
 
 	readonly schema = OtherPercussion.schema;
 
@@ -36278,7 +30688,7 @@ export class OtherPercussion
 	contents: OtherPercussionContents;
 
 	constructor(opts?: { attributes?: Partial<OtherPercussionAttributes>; contents?: OtherPercussionContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherPercussion.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherPercussion.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherPercussion.schema.contents);
 	}
 	/** Gets @type {OtherPercussionAttributes['smufl']}. */
@@ -36300,6 +30710,7 @@ export class OtherPercussion
 		return this;
 	}
 }
+registerElement('OtherPercussion', OtherPercussion);
 
 export type PercussionAttributes = {
 	color: string | null;
@@ -36345,77 +30756,7 @@ export type PercussionContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/percussion/
  */
 export class Percussion implements XMLElement<'percussion', PercussionAttributes, PercussionContents> {
-	static readonly schema = {
-		name: 'percussion',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			enclosure: {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						'none',
-						'rectangle',
-						'square',
-						'oval',
-						'circle',
-						'bracket',
-						'inverted-bracket',
-						'triangle',
-						'diamond',
-						'pentagon',
-						'hexagon',
-						'heptagon',
-						'octagon',
-						'nonagon',
-						'decagon',
-					],
-				},
-			},
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: {
-					type: 'choices',
-					choices: [
-						Glass,
-						Metal,
-						Wood,
-						Pitched,
-						Membrane,
-						Effect,
-						Timpani,
-						Beater,
-						Stick,
-						StickLocation,
-						OtherPercussion,
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'percussion'> = schema.Percussion;
 
 	readonly schema = Percussion.schema;
 
@@ -36423,7 +30764,7 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
 	contents: PercussionContents;
 
 	constructor(opts?: { attributes?: Partial<PercussionAttributes>; contents?: PercussionContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Percussion.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Percussion.schema);
 		this.contents = opts?.contents ?? operations.zero(Percussion.schema.contents);
 	}
 	/** Gets @type {PercussionAttributes['color']}. */
@@ -36613,6 +30954,7 @@ export class Percussion implements XMLElement<'percussion', PercussionAttributes
 		return this;
 	}
 }
+registerElement('Percussion', Percussion);
 
 export type AccordionHighAttributes = Record<string, unknown>;
 
@@ -36626,7 +30968,7 @@ export type AccordionHighContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accordion-high/
  */
 export class AccordionHigh implements XMLElement<'accordion-high', AccordionHighAttributes, AccordionHighContents> {
-	static readonly schema = { name: 'accordion-high', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'accordion-high'> = schema.AccordionHigh;
 
 	readonly schema = AccordionHigh.schema;
 
@@ -36634,10 +30976,11 @@ export class AccordionHigh implements XMLElement<'accordion-high', AccordionHigh
 	contents: AccordionHighContents;
 
 	constructor(opts?: { attributes?: Partial<AccordionHighAttributes>; contents?: AccordionHighContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, AccordionHigh.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, AccordionHigh.schema);
 		this.contents = opts?.contents ?? operations.zero(AccordionHigh.schema.contents);
 	}
 }
+registerElement('AccordionHigh', AccordionHigh);
 
 export type AccordionMiddleAttributes = Record<string, unknown>;
 
@@ -36653,11 +30996,7 @@ export type AccordionMiddleContents = [number];
 export class AccordionMiddle
 	implements XMLElement<'accordion-middle', AccordionMiddleAttributes, AccordionMiddleContents>
 {
-	static readonly schema = {
-		name: 'accordion-middle',
-		attributes: {},
-		contents: [{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 1, max: 3 } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'accordion-middle'> = schema.AccordionMiddle;
 
 	readonly schema = AccordionMiddle.schema;
 
@@ -36665,7 +31004,7 @@ export class AccordionMiddle
 	contents: AccordionMiddleContents;
 
 	constructor(opts?: { attributes?: Partial<AccordionMiddleAttributes>; contents?: AccordionMiddleContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, AccordionMiddle.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, AccordionMiddle.schema);
 		this.contents = opts?.contents ?? operations.zero(AccordionMiddle.schema.contents);
 	}
 
@@ -36679,6 +31018,7 @@ export class AccordionMiddle
 		return this;
 	}
 }
+registerElement('AccordionMiddle', AccordionMiddle);
 
 export type AccordionLowAttributes = Record<string, unknown>;
 
@@ -36692,7 +31032,7 @@ export type AccordionLowContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accordion-low/
  */
 export class AccordionLow implements XMLElement<'accordion-low', AccordionLowAttributes, AccordionLowContents> {
-	static readonly schema = { name: 'accordion-low', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'accordion-low'> = schema.AccordionLow;
 
 	readonly schema = AccordionLow.schema;
 
@@ -36700,10 +31040,11 @@ export class AccordionLow implements XMLElement<'accordion-low', AccordionLowAtt
 	contents: AccordionLowContents;
 
 	constructor(opts?: { attributes?: Partial<AccordionLowAttributes>; contents?: AccordionLowContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, AccordionLow.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, AccordionLow.schema);
 		this.contents = opts?.contents ?? operations.zero(AccordionLow.schema.contents);
 	}
 }
+registerElement('AccordionLow', AccordionLow);
 
 export type AccordionRegistrationAttributes = {
 	color: string | null;
@@ -36732,37 +31073,7 @@ export type AccordionRegistrationContents = [AccordionHigh | null, AccordionMidd
 export class AccordionRegistration
 	implements XMLElement<'accordion-registration', AccordionRegistrationAttributes, AccordionRegistrationContents>
 {
-	static readonly schema = {
-		name: 'accordion-registration',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [
-			{ type: 'optional', value: AccordionHigh },
-			{ type: 'optional', value: AccordionMiddle },
-			{ type: 'optional', value: AccordionLow },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'accordion-registration'> = schema.AccordionRegistration;
 
 	readonly schema = AccordionRegistration.schema;
 
@@ -36773,7 +31084,7 @@ export class AccordionRegistration
 		attributes?: Partial<AccordionRegistrationAttributes>;
 		contents?: AccordionRegistrationContents;
 	}) {
-		this.attributes = operations.merge(opts?.attributes || {}, AccordionRegistration.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, AccordionRegistration.schema);
 		this.contents = opts?.contents ?? operations.zero(AccordionRegistration.schema.contents);
 	}
 	/** Gets @type {AccordionRegistrationAttributes['color']}. */
@@ -36914,6 +31225,7 @@ export class AccordionRegistration
 		return this;
 	}
 }
+registerElement('AccordionRegistration', AccordionRegistration);
 
 export type StaffDivideAttributes = {
 	color: string | null;
@@ -36941,34 +31253,7 @@ export type StaffDivideContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-divide/
  */
 export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttributes, StaffDivideContents> {
-	static readonly schema = {
-		name: 'staff-divide',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['down', 'up', 'up-down'] } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'staff-divide'> = schema.StaffDivide;
 
 	readonly schema = StaffDivide.schema;
 
@@ -36976,7 +31261,7 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
 	contents: StaffDivideContents;
 
 	constructor(opts?: { attributes?: Partial<StaffDivideAttributes>; contents?: StaffDivideContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StaffDivide.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StaffDivide.schema);
 		this.contents = opts?.contents ?? operations.zero(StaffDivide.schema.contents);
 	}
 	/** Gets @type {StaffDivideAttributes['color']}. */
@@ -37099,6 +31384,7 @@ export class StaffDivide implements XMLElement<'staff-divide', StaffDivideAttrib
 		return this;
 	}
 }
+registerElement('StaffDivide', StaffDivide);
 
 export type OtherDirectionAttributes = {
 	color: string | null;
@@ -37127,35 +31413,7 @@ export type OtherDirectionContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-direction/
  */
 export class OtherDirection implements XMLElement<'other-direction', OtherDirectionAttributes, OtherDirectionContents> {
-	static readonly schema = {
-		name: 'other-direction',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			smufl: { type: 'optional', value: { type: 'string' } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-direction'> = schema.OtherDirection;
 
 	readonly schema = OtherDirection.schema;
 
@@ -37163,7 +31421,7 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
 	contents: OtherDirectionContents;
 
 	constructor(opts?: { attributes?: Partial<OtherDirectionAttributes>; contents?: OtherDirectionContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherDirection.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherDirection.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherDirection.schema.contents);
 	}
 	/** Gets @type {OtherDirectionAttributes['color']}. */
@@ -37304,6 +31562,7 @@ export class OtherDirection implements XMLElement<'other-direction', OtherDirect
 		return this;
 	}
 }
+registerElement('OtherDirection', OtherDirection);
 
 export type Rehearsals = Array<Rehearsal>;
 
@@ -37353,48 +31612,7 @@ export type DirectionTypeContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/direction-type/
  */
 export class DirectionType implements XMLElement<'direction-type', DirectionTypeAttributes, DirectionTypeContents> {
-	static readonly schema = {
-		name: 'direction-type',
-		attributes: { id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'direction-type',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'label', label: 'rehearsals', value: { type: 'oneOrMore', value: Rehearsal } },
-						{ type: 'label', label: 'segnos', value: { type: 'oneOrMore', value: Segno } },
-						{ type: 'label', label: 'codas', value: { type: 'oneOrMore', value: Coda } },
-						{
-							type: 'label',
-							label: 'tokens',
-							value: { type: 'oneOrMore', value: { type: 'choices', choices: [Words, Symbol] } },
-						},
-						Wedge,
-						{ type: 'label', label: 'dynamics-list', value: { type: 'oneOrMore', value: Dynamics } },
-						Dashes,
-						Bracket,
-						Pedal,
-						Metronome,
-						OctaveShift,
-						HarpPedals,
-						Damp,
-						DampAll,
-						Eyeglasses,
-						StringMute,
-						Scordatura,
-						Image,
-						PrincipalVoice,
-						{ type: 'label', label: 'percussions', value: { type: 'oneOrMore', value: Percussion } },
-						AccordionRegistration,
-						StaffDivide,
-						OtherDirection,
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'direction-type'> = schema.DirectionType;
 
 	readonly schema = DirectionType.schema;
 
@@ -37402,7 +31620,7 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
 	contents: DirectionTypeContents;
 
 	constructor(opts?: { attributes?: Partial<DirectionTypeAttributes>; contents?: DirectionTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DirectionType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DirectionType.schema);
 		this.contents = opts?.contents ?? operations.zero(DirectionType.schema.contents);
 	}
 	/** Gets @type {DirectionTypeAttributes['id']}. */
@@ -37472,6 +31690,7 @@ export class DirectionType implements XMLElement<'direction-type', DirectionType
 		return this;
 	}
 }
+registerElement('DirectionType', DirectionType);
 
 export type OffsetAttributes = { sound: 'yes' | 'no' | null };
 
@@ -37487,17 +31706,7 @@ export type OffsetContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/offset/
  */
 export class Offset implements XMLElement<'offset', OffsetAttributes, OffsetContents> {
-	static readonly schema = {
-		name: 'offset',
-		attributes: { sound: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'offset'> = schema.Offset;
 
 	readonly schema = Offset.schema;
 
@@ -37505,7 +31714,7 @@ export class Offset implements XMLElement<'offset', OffsetAttributes, OffsetCont
 	contents: OffsetContents;
 
 	constructor(opts?: { attributes?: Partial<OffsetAttributes>; contents?: OffsetContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Offset.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Offset.schema);
 		this.contents = opts?.contents ?? operations.zero(Offset.schema.contents);
 	}
 	/** Gets @type {OffsetAttributes['sound']}. */
@@ -37527,6 +31736,7 @@ export class Offset implements XMLElement<'offset', OffsetAttributes, OffsetCont
 		return this;
 	}
 }
+registerElement('Offset', Offset);
 
 export type InstrumentChangeAttributes = { id: string };
 
@@ -37542,19 +31752,7 @@ export type InstrumentChangeContents = [InstrumentSound | null, Array<Solo | Ens
 export class InstrumentChange
 	implements XMLElement<'instrument-change', InstrumentChangeAttributes, InstrumentChangeContents>
 {
-	static readonly schema = {
-		name: 'instrument-change',
-		attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [
-			{ type: 'optional', value: InstrumentSound },
-			{
-				type: 'label',
-				label: 'instrument-types',
-				value: { type: 'zeroOrMore', value: { type: 'choices', choices: [Solo, Ensemble] } },
-			},
-			{ type: 'optional', value: VirtualInstrument },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'instrument-change'> = schema.InstrumentChange;
 
 	readonly schema = InstrumentChange.schema;
 
@@ -37562,7 +31760,7 @@ export class InstrumentChange
 	contents: InstrumentChangeContents;
 
 	constructor(opts?: { attributes?: Partial<InstrumentChangeAttributes>; contents?: InstrumentChangeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, InstrumentChange.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, InstrumentChange.schema);
 		this.contents = opts?.contents ?? operations.zero(InstrumentChange.schema.contents);
 	}
 	/** Gets @type {InstrumentChangeAttributes['id']}. */
@@ -37602,6 +31800,7 @@ export class InstrumentChange
 		return this;
 	}
 }
+registerElement('InstrumentChange', InstrumentChange);
 
 export type StraightAttributes = Record<string, unknown>;
 
@@ -37615,7 +31814,7 @@ export type StraightContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/straight/
  */
 export class Straight implements XMLElement<'straight', StraightAttributes, StraightContents> {
-	static readonly schema = { name: 'straight', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'straight'> = schema.Straight;
 
 	readonly schema = Straight.schema;
 
@@ -37623,10 +31822,11 @@ export class Straight implements XMLElement<'straight', StraightAttributes, Stra
 	contents: StraightContents;
 
 	constructor(opts?: { attributes?: Partial<StraightAttributes>; contents?: StraightContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Straight.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Straight.schema);
 		this.contents = opts?.contents ?? operations.zero(Straight.schema.contents);
 	}
 }
+registerElement('Straight', Straight);
 
 export type FirstAttributes = Record<string, unknown>;
 
@@ -37640,17 +31840,7 @@ export type FirstContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/first/
  */
 export class First implements XMLElement<'first', FirstAttributes, FirstContents> {
-	static readonly schema = {
-		name: 'first',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'swing-ratio',
-				value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'first'> = schema.First;
 
 	readonly schema = First.schema;
 
@@ -37658,7 +31848,7 @@ export class First implements XMLElement<'first', FirstAttributes, FirstContents
 	contents: FirstContents;
 
 	constructor(opts?: { attributes?: Partial<FirstAttributes>; contents?: FirstContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, First.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, First.schema);
 		this.contents = opts?.contents ?? operations.zero(First.schema.contents);
 	}
 
@@ -37672,6 +31862,7 @@ export class First implements XMLElement<'first', FirstAttributes, FirstContents
 		return this;
 	}
 }
+registerElement('First', First);
 
 export type SecondAttributes = Record<string, unknown>;
 
@@ -37685,13 +31876,7 @@ export type SecondContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/second/
  */
 export class Second implements XMLElement<'second', SecondAttributes, SecondContents> {
-	static readonly schema = {
-		name: 'second',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'second'> = schema.Second;
 
 	readonly schema = Second.schema;
 
@@ -37699,7 +31884,7 @@ export class Second implements XMLElement<'second', SecondAttributes, SecondCont
 	contents: SecondContents;
 
 	constructor(opts?: { attributes?: Partial<SecondAttributes>; contents?: SecondContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Second.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Second.schema);
 		this.contents = opts?.contents ?? operations.zero(Second.schema.contents);
 	}
 
@@ -37713,6 +31898,7 @@ export class Second implements XMLElement<'second', SecondAttributes, SecondCont
 		return this;
 	}
 }
+registerElement('Second', Second);
 
 export type SwingTypeAttributes = Record<string, unknown>;
 
@@ -37726,17 +31912,7 @@ export type SwingTypeContents = ['eighth' | '16th'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/swing-type/
  */
 export class SwingType implements XMLElement<'swing-type', SwingTypeAttributes, SwingTypeContents> {
-	static readonly schema = {
-		name: 'swing-type',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'eighth',
-				value: { type: 'required', value: { type: 'choices', choices: ['eighth', '16th'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'swing-type'> = schema.SwingType;
 
 	readonly schema = SwingType.schema;
 
@@ -37744,7 +31920,7 @@ export class SwingType implements XMLElement<'swing-type', SwingTypeAttributes, 
 	contents: SwingTypeContents;
 
 	constructor(opts?: { attributes?: Partial<SwingTypeAttributes>; contents?: SwingTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SwingType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SwingType.schema);
 		this.contents = opts?.contents ?? operations.zero(SwingType.schema.contents);
 	}
 
@@ -37758,6 +31934,7 @@ export class SwingType implements XMLElement<'swing-type', SwingTypeAttributes, 
 		return this;
 	}
 }
+registerElement('SwingType', SwingType);
 
 export type SwingStyleAttributes = Record<string, unknown>;
 
@@ -37771,11 +31948,7 @@ export type SwingStyleContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/swing-style/
  */
 export class SwingStyle implements XMLElement<'swing-style', SwingStyleAttributes, SwingStyleContents> {
-	static readonly schema = {
-		name: 'swing-style',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'swing-style'> = schema.SwingStyle;
 
 	readonly schema = SwingStyle.schema;
 
@@ -37783,7 +31956,7 @@ export class SwingStyle implements XMLElement<'swing-style', SwingStyleAttribute
 	contents: SwingStyleContents;
 
 	constructor(opts?: { attributes?: Partial<SwingStyleAttributes>; contents?: SwingStyleContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SwingStyle.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SwingStyle.schema);
 		this.contents = opts?.contents ?? operations.zero(SwingStyle.schema.contents);
 	}
 
@@ -37797,6 +31970,7 @@ export class SwingStyle implements XMLElement<'swing-style', SwingStyleAttribute
 		return this;
 	}
 }
+registerElement('SwingStyle', SwingStyle);
 
 export type AlternateSwing = [First, Second, SwingType | null];
 
@@ -37822,32 +31996,7 @@ export type SwingContents = [Straight | AlternateSwing, SwingStyle | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/swing/
  */
 export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents> {
-	static readonly schema = {
-		name: 'swing',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: {
-					type: 'choices',
-					choices: [
-						Straight,
-						{
-							type: 'label',
-							label: 'alternate-swing',
-							value: [
-								{ type: 'required', value: First },
-								{ type: 'required', value: Second },
-								{ type: 'optional', value: SwingType },
-							],
-						},
-					],
-				},
-			},
-			{ type: 'optional', value: SwingStyle },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'swing'> = schema.Swing;
 
 	readonly schema = Swing.schema;
 
@@ -37855,7 +32004,7 @@ export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents
 	contents: SwingContents;
 
 	constructor(opts?: { attributes?: Partial<SwingAttributes>; contents?: SwingContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Swing.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Swing.schema);
 		this.contents = opts?.contents ?? operations.zero(Swing.schema.contents);
 	}
 
@@ -37878,6 +32027,7 @@ export class Swing implements XMLElement<'swing', SwingAttributes, SwingContents
 		return this;
 	}
 }
+registerElement('Swing', Swing);
 
 export type SoundAttributes = {
 	coda: string | null;
@@ -37940,46 +32090,7 @@ export type SoundContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sound/
  */
 export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents> {
-	static readonly schema = {
-		name: 'sound',
-		attributes: {
-			coda: { type: 'optional', value: { type: 'string' } },
-			dacapo: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			dalsegno: { type: 'optional', value: { type: 'string' } },
-			'damper-pedal': { type: 'optional', value: { type: 'choices', choices: ['no', 'yes', 0, 1] } },
-			divisions: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			dynamics: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-			elevation: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			fine: { type: 'optional', value: { type: 'string' } },
-			'forward-repeat': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			pan: { type: 'optional', value: { type: 'float', min: -180, max: 180 } },
-			pizzicato: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			segno: { type: 'optional', value: { type: 'string' } },
-			'soft-pedal': { type: 'optional', value: { type: 'choices', choices: ['no', 'yes', 0, 1] } },
-			'sostenuto-pedal': { type: 'optional', value: { type: 'choices', choices: ['no', 'yes', 0, 1] } },
-			tempo: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } },
-			'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
-			tocoda: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'playbacks',
-				value: {
-					type: 'zeroOrMore',
-					value: [
-						{ type: 'optional', value: InstrumentChange },
-						{ type: 'optional', value: MidiDevice },
-						{ type: 'optional', value: MidiInstrument },
-						{ type: 'optional', value: Play },
-					],
-				},
-			},
-			{ type: 'optional', value: Swing },
-			{ type: 'optional', value: Offset },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'sound'> = schema.Sound;
 
 	readonly schema = Sound.schema;
 
@@ -37987,7 +32098,7 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
 	contents: SoundContents;
 
 	constructor(opts?: { attributes?: Partial<SoundAttributes>; contents?: SoundContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Sound.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Sound.schema);
 		this.contents = opts?.contents ?? operations.zero(Sound.schema.contents);
 	}
 	/** Gets @type {SoundAttributes['coda']}. */
@@ -38182,6 +32293,7 @@ export class Sound implements XMLElement<'sound', SoundAttributes, SoundContents
 		return this;
 	}
 }
+registerElement('Sound', Sound);
 
 export type SyncAttributes = {
 	latency: number | null;
@@ -38202,19 +32314,7 @@ export type SyncContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sync/
  */
 export class Sync implements XMLElement<'sync', SyncAttributes, SyncContents> {
-	static readonly schema = {
-		name: 'sync',
-		attributes: {
-			latency: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
-			player: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
-			type: {
-				type: 'required',
-				value: { type: 'choices', choices: ['none', 'tempo', 'mostly-tempo', 'mostly-event', 'event', 'always-event'] },
-			},
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'sync'> = schema.Sync;
 
 	readonly schema = Sync.schema;
 
@@ -38222,7 +32322,7 @@ export class Sync implements XMLElement<'sync', SyncAttributes, SyncContents> {
 	contents: SyncContents;
 
 	constructor(opts?: { attributes?: Partial<SyncAttributes>; contents?: SyncContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Sync.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Sync.schema);
 		this.contents = opts?.contents ?? operations.zero(Sync.schema.contents);
 	}
 	/** Gets @type {SyncAttributes['latency']}. */
@@ -38262,6 +32362,7 @@ export class Sync implements XMLElement<'sync', SyncAttributes, SyncContents> {
 		return this;
 	}
 }
+registerElement('Sync', Sync);
 
 export type OtherListeningAttributes = { player: string | null; 'time-only': string | null; type: string };
 
@@ -38275,15 +32376,7 @@ export type OtherListeningContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-listening/
  */
 export class OtherListening implements XMLElement<'other-listening', OtherListeningAttributes, OtherListeningContents> {
-	static readonly schema = {
-		name: 'other-listening',
-		attributes: {
-			player: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'time-only': { type: 'optional', value: { type: 'regex', pattern: /[1-9][0-9]*(, ?[1-9][0-9]*)*/, zero: '1' } },
-			type: { type: 'required', value: { type: 'string' } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'other-listening'> = schema.OtherListening;
 
 	readonly schema = OtherListening.schema;
 
@@ -38291,7 +32384,7 @@ export class OtherListening implements XMLElement<'other-listening', OtherListen
 	contents: OtherListeningContents;
 
 	constructor(opts?: { attributes?: Partial<OtherListeningAttributes>; contents?: OtherListeningContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OtherListening.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OtherListening.schema);
 		this.contents = opts?.contents ?? operations.zero(OtherListening.schema.contents);
 	}
 	/** Gets @type {OtherListeningAttributes['player']}. */
@@ -38331,6 +32424,7 @@ export class OtherListening implements XMLElement<'other-listening', OtherListen
 		return this;
 	}
 }
+registerElement('OtherListening', OtherListening);
 
 export type ListeningAttributes = Record<string, unknown>;
 
@@ -38346,18 +32440,7 @@ export type ListeningContents = [Array<Sync | OtherListening>, Offset | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/listening/
  */
 export class Listening implements XMLElement<'listening', ListeningAttributes, ListeningContents> {
-	static readonly schema = {
-		name: 'listening',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'listening',
-				value: { type: 'oneOrMore', value: { type: 'choices', choices: [Sync, OtherListening] } },
-			},
-			{ type: 'optional', value: Offset },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'listening'> = schema.Listening;
 
 	readonly schema = Listening.schema;
 
@@ -38365,7 +32448,7 @@ export class Listening implements XMLElement<'listening', ListeningAttributes, L
 	contents: ListeningContents;
 
 	constructor(opts?: { attributes?: Partial<ListeningAttributes>; contents?: ListeningContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Listening.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Listening.schema);
 		this.contents = opts?.contents ?? operations.zero(Listening.schema.contents);
 	}
 
@@ -38388,6 +32471,7 @@ export class Listening implements XMLElement<'listening', ListeningAttributes, L
 		return this;
 	}
 }
+registerElement('Listening', Listening);
 
 export type DirectionAttributes = {
 	directive: 'yes' | 'no' | null;
@@ -38417,25 +32501,7 @@ export type DirectionContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/direction/
  */
 export class Direction implements XMLElement<'direction', DirectionAttributes, DirectionContents> {
-	static readonly schema = {
-		name: 'direction',
-		attributes: {
-			directive: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			system: { type: 'optional', value: { type: 'choices', choices: ['none', 'only-top', 'also-top'] } },
-		},
-		contents: [
-			{ type: 'label', label: 'direction-types', value: { type: 'oneOrMore', value: DirectionType } },
-			{ type: 'optional', value: Offset },
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-			{ type: 'optional', value: Voice },
-			{ type: 'optional', value: Staff },
-			{ type: 'optional', value: Sound },
-			{ type: 'optional', value: Listening },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'direction'> = schema.Direction;
 
 	readonly schema = Direction.schema;
 
@@ -38443,7 +32509,7 @@ export class Direction implements XMLElement<'direction', DirectionAttributes, D
 	contents: DirectionContents;
 
 	constructor(opts?: { attributes?: Partial<DirectionAttributes>; contents?: DirectionContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Direction.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Direction.schema);
 		this.contents = opts?.contents ?? operations.zero(Direction.schema.contents);
 	}
 	/** Gets @type {DirectionAttributes['directive']}. */
@@ -38555,6 +32621,7 @@ export class Direction implements XMLElement<'direction', DirectionAttributes, D
 		return this;
 	}
 }
+registerElement('Direction', Direction);
 
 export type DivisionsAttributes = Record<string, unknown>;
 
@@ -38568,17 +32635,7 @@ export type DivisionsContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/divisions/
  */
 export class Divisions implements XMLElement<'divisions', DivisionsAttributes, DivisionsContents> {
-	static readonly schema = {
-		name: 'divisions',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'positive-divisions',
-				value: { type: 'required', value: { type: 'float', min: 1, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'divisions'> = schema.Divisions;
 
 	readonly schema = Divisions.schema;
 
@@ -38586,7 +32643,7 @@ export class Divisions implements XMLElement<'divisions', DivisionsAttributes, D
 	contents: DivisionsContents;
 
 	constructor(opts?: { attributes?: Partial<DivisionsAttributes>; contents?: DivisionsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Divisions.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Divisions.schema);
 		this.contents = opts?.contents ?? operations.zero(Divisions.schema.contents);
 	}
 
@@ -38600,6 +32657,7 @@ export class Divisions implements XMLElement<'divisions', DivisionsAttributes, D
 		return this;
 	}
 }
+registerElement('Divisions', Divisions);
 
 export type CancelAttributes = { location: 'left' | 'right' | 'beforeBarline' | null };
 
@@ -38613,19 +32671,7 @@ export type CancelContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/cancel/
  */
 export class Cancel implements XMLElement<'cancel', CancelAttributes, CancelContents> {
-	static readonly schema = {
-		name: 'cancel',
-		attributes: {
-			location: { type: 'optional', value: { type: 'choices', choices: ['left', 'right', 'beforeBarline'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'fifths',
-				value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'cancel'> = schema.Cancel;
 
 	readonly schema = Cancel.schema;
 
@@ -38633,7 +32679,7 @@ export class Cancel implements XMLElement<'cancel', CancelAttributes, CancelCont
 	contents: CancelContents;
 
 	constructor(opts?: { attributes?: Partial<CancelAttributes>; contents?: CancelContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Cancel.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Cancel.schema);
 		this.contents = opts?.contents ?? operations.zero(Cancel.schema.contents);
 	}
 	/** Gets @type {CancelAttributes['location']}. */
@@ -38655,6 +32701,7 @@ export class Cancel implements XMLElement<'cancel', CancelAttributes, CancelCont
 		return this;
 	}
 }
+registerElement('Cancel', Cancel);
 
 export type FifthsAttributes = Record<string, unknown>;
 
@@ -38668,17 +32715,7 @@ export type FifthsContents = [number | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fifths/
  */
 export class Fifths implements XMLElement<'fifths', FifthsAttributes, FifthsContents> {
-	static readonly schema = {
-		name: 'fifths',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'optional', value: { type: 'int', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'fifths'> = schema.Fifths;
 
 	readonly schema = Fifths.schema;
 
@@ -38686,7 +32723,7 @@ export class Fifths implements XMLElement<'fifths', FifthsAttributes, FifthsCont
 	contents: FifthsContents;
 
 	constructor(opts?: { attributes?: Partial<FifthsAttributes>; contents?: FifthsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Fifths.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Fifths.schema);
 		this.contents = opts?.contents ?? operations.zero(Fifths.schema.contents);
 	}
 
@@ -38700,6 +32737,7 @@ export class Fifths implements XMLElement<'fifths', FifthsAttributes, FifthsCont
 		return this;
 	}
 }
+registerElement('Fifths', Fifths);
 
 export type ModeAttributes = Record<string, unknown>;
 
@@ -38725,35 +32763,7 @@ export type ModeContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mode/
  */
 export class Mode implements XMLElement<'mode', ModeAttributes, ModeContents> {
-	static readonly schema = {
-		name: 'mode',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'mode',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'none',
-							'major',
-							'minor',
-							'dorian',
-							'phrygian',
-							'lydian',
-							'mixolydian',
-							'aeolian',
-							'ionian',
-							'locrian',
-							{ type: 'string' },
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'mode'> = schema.Mode;
 
 	readonly schema = Mode.schema;
 
@@ -38761,7 +32771,7 @@ export class Mode implements XMLElement<'mode', ModeAttributes, ModeContents> {
 	contents: ModeContents;
 
 	constructor(opts?: { attributes?: Partial<ModeAttributes>; contents?: ModeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Mode.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Mode.schema);
 		this.contents = opts?.contents ?? operations.zero(Mode.schema.contents);
 	}
 
@@ -38799,6 +32809,7 @@ export class Mode implements XMLElement<'mode', ModeAttributes, ModeContents> {
 		return this;
 	}
 }
+registerElement('Mode', Mode);
 
 export type KeyStepAttributes = Record<string, unknown>;
 
@@ -38812,17 +32823,7 @@ export type KeyStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key-step/
  */
 export class KeyStep implements XMLElement<'key-step', KeyStepAttributes, KeyStepContents> {
-	static readonly schema = {
-		name: 'key-step',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'step',
-				value: { type: 'required', value: { type: 'choices', choices: ['A', 'B', 'C', 'D', 'E', 'F', 'G'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'key-step'> = schema.KeyStep;
 
 	readonly schema = KeyStep.schema;
 
@@ -38830,7 +32831,7 @@ export class KeyStep implements XMLElement<'key-step', KeyStepAttributes, KeySte
 	contents: KeyStepContents;
 
 	constructor(opts?: { attributes?: Partial<KeyStepAttributes>; contents?: KeyStepContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, KeyStep.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, KeyStep.schema);
 		this.contents = opts?.contents ?? operations.zero(KeyStep.schema.contents);
 	}
 
@@ -38844,6 +32845,7 @@ export class KeyStep implements XMLElement<'key-step', KeyStepAttributes, KeySte
 		return this;
 	}
 }
+registerElement('KeyStep', KeyStep);
 
 export type KeyAlterAttributes = Record<string, unknown>;
 
@@ -38857,17 +32859,7 @@ export type KeyAlterContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key-alter/
  */
 export class KeyAlter implements XMLElement<'key-alter', KeyAlterAttributes, KeyAlterContents> {
-	static readonly schema = {
-		name: 'key-alter',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'semitones',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'key-alter'> = schema.KeyAlter;
 
 	readonly schema = KeyAlter.schema;
 
@@ -38875,7 +32867,7 @@ export class KeyAlter implements XMLElement<'key-alter', KeyAlterAttributes, Key
 	contents: KeyAlterContents;
 
 	constructor(opts?: { attributes?: Partial<KeyAlterAttributes>; contents?: KeyAlterContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, KeyAlter.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, KeyAlter.schema);
 		this.contents = opts?.contents ?? operations.zero(KeyAlter.schema.contents);
 	}
 
@@ -38889,6 +32881,7 @@ export class KeyAlter implements XMLElement<'key-alter', KeyAlterAttributes, Key
 		return this;
 	}
 }
+registerElement('KeyAlter', KeyAlter);
 
 export type KeyAccidentalAttributes = { smufl: string | null };
 
@@ -38944,70 +32937,7 @@ export type KeyAccidentalContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key-accidental/
  */
 export class KeyAccidental implements XMLElement<'key-accidental', KeyAccidentalAttributes, KeyAccidentalContents> {
-	static readonly schema = {
-		name: 'key-accidental',
-		attributes: {
-			smufl: {
-				type: 'optional',
-				value: { type: 'regex', pattern: /(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)/, zero: 'acc' },
-			},
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'accidental-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'other',
-							'sharp',
-							'natural',
-							'flat',
-							'double-sharp',
-							'sharp-sharp',
-							'flat-flat',
-							'natural-sharp',
-							'natural-flat',
-							'quarter-flat',
-							'quarter-sharp',
-							'three-quarters-flat',
-							'three-quarters-sharp',
-							'sharp-down',
-							'sharp-up',
-							'natural-down',
-							'natural-up',
-							'flat-down',
-							'flat-up',
-							'double-sharp-down',
-							'double-sharp-up',
-							'flat-flat-down',
-							'flat-flat-up',
-							'arrow-down',
-							'arrow-up',
-							'triple-sharp',
-							'triple-flat',
-							'slash-quarter-sharp',
-							'slash-sharp',
-							'slash-flat',
-							'double-slash-flat',
-							'sharp-1',
-							'sharp-2',
-							'sharp-3',
-							'sharp-5',
-							'flat-1',
-							'flat-2',
-							'flat-3',
-							'flat-4',
-							'sori',
-							'koron',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'key-accidental'> = schema.KeyAccidental;
 
 	readonly schema = KeyAccidental.schema;
 
@@ -39015,7 +32945,7 @@ export class KeyAccidental implements XMLElement<'key-accidental', KeyAccidental
 	contents: KeyAccidentalContents;
 
 	constructor(opts?: { attributes?: Partial<KeyAccidentalAttributes>; contents?: KeyAccidentalContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, KeyAccidental.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, KeyAccidental.schema);
 		this.contents = opts?.contents ?? operations.zero(KeyAccidental.schema.contents);
 	}
 	/** Gets @type {KeyAccidentalAttributes['smufl']}. */
@@ -39121,6 +33051,7 @@ export class KeyAccidental implements XMLElement<'key-accidental', KeyAccidental
 		return this;
 	}
 }
+registerElement('KeyAccidental', KeyAccidental);
 
 export type KeyOctaveAttributes = { cancel: 'yes' | 'no' | null; number: number };
 
@@ -39134,14 +33065,7 @@ export type KeyOctaveContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key-octave/
  */
 export class KeyOctave implements XMLElement<'key-octave', KeyOctaveAttributes, KeyOctaveContents> {
-	static readonly schema = {
-		name: 'key-octave',
-		attributes: {
-			cancel: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			number: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'octave', value: { type: 'required', value: { type: 'int', min: 0, max: 9 } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'key-octave'> = schema.KeyOctave;
 
 	readonly schema = KeyOctave.schema;
 
@@ -39149,7 +33073,7 @@ export class KeyOctave implements XMLElement<'key-octave', KeyOctaveAttributes, 
 	contents: KeyOctaveContents;
 
 	constructor(opts?: { attributes?: Partial<KeyOctaveAttributes>; contents?: KeyOctaveContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, KeyOctave.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, KeyOctave.schema);
 		this.contents = opts?.contents ?? operations.zero(KeyOctave.schema.contents);
 	}
 	/** Gets @type {KeyOctaveAttributes['cancel']}. */
@@ -39180,6 +33104,7 @@ export class KeyOctave implements XMLElement<'key-octave', KeyOctaveAttributes, 
 		return this;
 	}
 }
+registerElement('KeyOctave', KeyOctave);
 
 export type TranditionalKey = [Cancel | null, Fifths, Mode | null];
 
@@ -39210,65 +33135,7 @@ export type KeyContents = [TranditionalKey | AlternateKey, Array<KeyOctave>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key/
  */
 export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
-	static readonly schema = {
-		name: 'key',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: {
-					type: 'choices',
-					choices: [
-						{
-							type: 'label',
-							label: 'tranditional-key',
-							value: [
-								{ type: 'optional', value: Cancel },
-								{ type: 'required', value: Fifths },
-								{ type: 'optional', value: Mode },
-							],
-						},
-						{
-							type: 'label',
-							label: 'alternate-key',
-							value: {
-								type: 'zeroOrMore',
-								value: [
-									{ type: 'required', value: KeyStep },
-									{ type: 'required', value: KeyAlter },
-									{ type: 'optional', value: KeyAccidental },
-								],
-							},
-						},
-					],
-				},
-			},
-			{ type: 'label', label: 'key-octaves', value: { type: 'zeroOrMore', value: KeyOctave } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'key'> = schema.Key;
 
 	readonly schema = Key.schema;
 
@@ -39276,7 +33143,7 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
 	contents: KeyContents;
 
 	constructor(opts?: { attributes?: Partial<KeyAttributes>; contents?: KeyContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Key.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Key.schema);
 		this.contents = opts?.contents ?? operations.zero(Key.schema.contents);
 	}
 	/** Gets @type {KeyAttributes['color']}. */
@@ -39408,6 +33275,7 @@ export class Key implements XMLElement<'key', KeyAttributes, KeyContents> {
 		return this;
 	}
 }
+registerElement('Key', Key);
 
 export type BeatsAttributes = Record<string, unknown>;
 
@@ -39421,11 +33289,7 @@ export type BeatsContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beats/
  */
 export class Beats implements XMLElement<'beats', BeatsAttributes, BeatsContents> {
-	static readonly schema = {
-		name: 'beats',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'beats'> = schema.Beats;
 
 	readonly schema = Beats.schema;
 
@@ -39433,7 +33297,7 @@ export class Beats implements XMLElement<'beats', BeatsAttributes, BeatsContents
 	contents: BeatsContents;
 
 	constructor(opts?: { attributes?: Partial<BeatsAttributes>; contents?: BeatsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Beats.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Beats.schema);
 		this.contents = opts?.contents ?? operations.zero(Beats.schema.contents);
 	}
 
@@ -39447,6 +33311,7 @@ export class Beats implements XMLElement<'beats', BeatsAttributes, BeatsContents
 		return this;
 	}
 }
+registerElement('Beats', Beats);
 
 export type BeatTypeAttributes = Record<string, unknown>;
 
@@ -39460,11 +33325,7 @@ export type BeatTypeContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beat-type/
  */
 export class BeatType implements XMLElement<'beat-type', BeatTypeAttributes, BeatTypeContents> {
-	static readonly schema = {
-		name: 'beat-type',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'beat-type'> = schema.BeatType;
 
 	readonly schema = BeatType.schema;
 
@@ -39472,7 +33333,7 @@ export class BeatType implements XMLElement<'beat-type', BeatTypeAttributes, Bea
 	contents: BeatTypeContents;
 
 	constructor(opts?: { attributes?: Partial<BeatTypeAttributes>; contents?: BeatTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BeatType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BeatType.schema);
 		this.contents = opts?.contents ?? operations.zero(BeatType.schema.contents);
 	}
 
@@ -39486,6 +33347,7 @@ export class BeatType implements XMLElement<'beat-type', BeatTypeAttributes, Bea
 		return this;
 	}
 }
+registerElement('BeatType', BeatType);
 
 export type TimeRelationAttributes = Record<string, unknown>;
 
@@ -39499,20 +33361,7 @@ export type TimeRelationContents = ['space' | 'parentheses' | 'bracket' | 'equal
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time-relation/
  */
 export class TimeRelation implements XMLElement<'time-relation', TimeRelationAttributes, TimeRelationContents> {
-	static readonly schema = {
-		name: 'time-relation',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'time-relation',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['space', 'parentheses', 'bracket', 'equals', 'slash', 'hyphen'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'time-relation'> = schema.TimeRelation;
 
 	readonly schema = TimeRelation.schema;
 
@@ -39520,7 +33369,7 @@ export class TimeRelation implements XMLElement<'time-relation', TimeRelationAtt
 	contents: TimeRelationContents;
 
 	constructor(opts?: { attributes?: Partial<TimeRelationAttributes>; contents?: TimeRelationContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, TimeRelation.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, TimeRelation.schema);
 		this.contents = opts?.contents ?? operations.zero(TimeRelation.schema.contents);
 	}
 
@@ -39534,6 +33383,7 @@ export class TimeRelation implements XMLElement<'time-relation', TimeRelationAtt
 		return this;
 	}
 }
+registerElement('TimeRelation', TimeRelation);
 
 export type InterchangeableAttributes = {
 	separator: 'none' | 'horizontal' | 'diagonal' | 'vertical' | 'adjacent' | null;
@@ -39552,33 +33402,7 @@ export type InterchangeableContents = [TimeRelation | null, Array<[Beats, BeatTy
 export class Interchangeable
 	implements XMLElement<'interchangeable', InterchangeableAttributes, InterchangeableContents>
 {
-	static readonly schema = {
-		name: 'interchangeable',
-		attributes: {
-			separator: {
-				type: 'optional',
-				value: { type: 'choices', choices: ['none', 'horizontal', 'diagonal', 'vertical', 'adjacent'] },
-			},
-			symbol: {
-				type: 'optional',
-				value: { type: 'choices', choices: ['normal', 'common', 'cut', 'single-number', 'note', 'dotted-note'] },
-			},
-		},
-		contents: [
-			{ type: 'optional', value: TimeRelation },
-			{
-				type: 'label',
-				label: 'beats',
-				value: {
-					type: 'oneOrMore',
-					value: [
-						{ type: 'required', value: Beats },
-						{ type: 'required', value: BeatType },
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'interchangeable'> = schema.Interchangeable;
 
 	readonly schema = Interchangeable.schema;
 
@@ -39586,7 +33410,7 @@ export class Interchangeable
 	contents: InterchangeableContents;
 
 	constructor(opts?: { attributes?: Partial<InterchangeableAttributes>; contents?: InterchangeableContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Interchangeable.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Interchangeable.schema);
 		this.contents = opts?.contents ?? operations.zero(Interchangeable.schema.contents);
 	}
 	/** Gets @type {InterchangeableAttributes['separator']}. */
@@ -39626,6 +33450,7 @@ export class Interchangeable
 		return this;
 	}
 }
+registerElement('Interchangeable', Interchangeable);
 
 export type SenzaMisuraAttributes = Record<string, unknown>;
 
@@ -39639,11 +33464,7 @@ export type SenzaMisuraContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/senza-misura/
  */
 export class SenzaMisura implements XMLElement<'senza-misura', SenzaMisuraAttributes, SenzaMisuraContents> {
-	static readonly schema = {
-		name: 'senza-misura',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'senza-misura'> = schema.SenzaMisura;
 
 	readonly schema = SenzaMisura.schema;
 
@@ -39651,7 +33472,7 @@ export class SenzaMisura implements XMLElement<'senza-misura', SenzaMisuraAttrib
 	contents: SenzaMisuraContents;
 
 	constructor(opts?: { attributes?: Partial<SenzaMisuraAttributes>; contents?: SenzaMisuraContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SenzaMisura.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SenzaMisura.schema);
 		this.contents = opts?.contents ?? operations.zero(SenzaMisura.schema.contents);
 	}
 
@@ -39665,6 +33486,7 @@ export class SenzaMisura implements XMLElement<'senza-misura', SenzaMisuraAttrib
 		return this;
 	}
 }
+registerElement('SenzaMisura', SenzaMisura);
 
 export type TimeSignature = [Array<[Beats, BeatType]>, Interchangeable | null];
 
@@ -39697,68 +33519,7 @@ export type TimeContents = [TimeSignature | SenzaMisura];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time/
  */
 export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
-	static readonly schema = {
-		name: 'time',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			separator: {
-				type: 'optional',
-				value: { type: 'choices', choices: ['none', 'horizontal', 'diagonal', 'vertical', 'adjacent'] },
-			},
-			symbol: {
-				type: 'optional',
-				value: { type: 'choices', choices: ['normal', 'common', 'cut', 'single-number', 'note', 'dotted-note'] },
-			},
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: {
-					type: 'choices',
-					choices: [
-						{
-							type: 'label',
-							label: 'time-signature',
-							value: [
-								{
-									type: 'oneOrMore',
-									value: [
-										{ type: 'required', value: Beats },
-										{ type: 'required', value: BeatType },
-									],
-								},
-								{ type: 'optional', value: Interchangeable },
-							],
-						},
-						SenzaMisura,
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'time'> = schema.Time;
 
 	readonly schema = Time.schema;
 
@@ -39766,7 +33527,7 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
 	contents: TimeContents;
 
 	constructor(opts?: { attributes?: Partial<TimeAttributes>; contents?: TimeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Time.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Time.schema);
 		this.contents = opts?.contents ?? operations.zero(Time.schema.contents);
 	}
 	/** Gets @type {TimeAttributes['color']}. */
@@ -39925,6 +33686,7 @@ export class Time implements XMLElement<'time', TimeAttributes, TimeContents> {
 		return this;
 	}
 }
+registerElement('Time', Time);
 
 export type StavesAttributes = Record<string, unknown>;
 
@@ -39938,13 +33700,7 @@ export type StavesContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staves/
  */
 export class Staves implements XMLElement<'staves', StavesAttributes, StavesContents> {
-	static readonly schema = {
-		name: 'staves',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'staves'> = schema.Staves;
 
 	readonly schema = Staves.schema;
 
@@ -39952,7 +33708,7 @@ export class Staves implements XMLElement<'staves', StavesAttributes, StavesCont
 	contents: StavesContents;
 
 	constructor(opts?: { attributes?: Partial<StavesAttributes>; contents?: StavesContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Staves.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Staves.schema);
 		this.contents = opts?.contents ?? operations.zero(Staves.schema.contents);
 	}
 
@@ -39966,6 +33722,7 @@ export class Staves implements XMLElement<'staves', StavesAttributes, StavesCont
 		return this;
 	}
 }
+registerElement('Staves', Staves);
 
 export type PartSymbolAttributes = {
 	'bottom-staff': number | null;
@@ -39991,41 +33748,7 @@ export type PartSymbolContents = ['none' | 'brace' | 'line' | 'bracket' | 'squar
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-symbol/
  */
 export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttributes, PartSymbolContents> {
-	static readonly schema = {
-		name: 'part-symbol',
-		attributes: {
-			'bottom-staff': { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'top-staff': { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'group-symbol-value',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['none', 'brace', 'line', 'bracket', 'square'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'part-symbol'> = schema.PartSymbol;
 
 	readonly schema = PartSymbol.schema;
 
@@ -40033,7 +33756,7 @@ export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttribute
 	contents: PartSymbolContents;
 
 	constructor(opts?: { attributes?: Partial<PartSymbolAttributes>; contents?: PartSymbolContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartSymbol.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartSymbol.schema);
 		this.contents = opts?.contents ?? operations.zero(PartSymbol.schema.contents);
 	}
 	/** Gets @type {PartSymbolAttributes['bottom-staff']}. */
@@ -40147,6 +33870,7 @@ export class PartSymbol implements XMLElement<'part-symbol', PartSymbolAttribute
 		return this;
 	}
 }
+registerElement('PartSymbol', PartSymbol);
 
 export type InstrumentsAttributes = Record<string, unknown>;
 
@@ -40160,13 +33884,7 @@ export type InstrumentsContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instruments/
  */
 export class Instruments implements XMLElement<'instruments', InstrumentsAttributes, InstrumentsContents> {
-	static readonly schema = {
-		name: 'instruments',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'instruments'> = schema.Instruments;
 
 	readonly schema = Instruments.schema;
 
@@ -40174,7 +33892,7 @@ export class Instruments implements XMLElement<'instruments', InstrumentsAttribu
 	contents: InstrumentsContents;
 
 	constructor(opts?: { attributes?: Partial<InstrumentsAttributes>; contents?: InstrumentsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Instruments.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Instruments.schema);
 		this.contents = opts?.contents ?? operations.zero(Instruments.schema.contents);
 	}
 
@@ -40188,6 +33906,7 @@ export class Instruments implements XMLElement<'instruments', InstrumentsAttribu
 		return this;
 	}
 }
+registerElement('Instruments', Instruments);
 
 export type SignAttributes = Record<string, unknown>;
 
@@ -40201,20 +33920,7 @@ export type SignContents = ['G' | 'F' | 'C' | 'percussion' | 'TAB' | 'jianpu' | 
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sign/
  */
 export class Sign implements XMLElement<'sign', SignAttributes, SignContents> {
-	static readonly schema = {
-		name: 'sign',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'clef-sign',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['G', 'F', 'C', 'percussion', 'TAB', 'jianpu', 'none'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'sign'> = schema.Sign;
 
 	readonly schema = Sign.schema;
 
@@ -40222,7 +33928,7 @@ export class Sign implements XMLElement<'sign', SignAttributes, SignContents> {
 	contents: SignContents;
 
 	constructor(opts?: { attributes?: Partial<SignAttributes>; contents?: SignContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Sign.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Sign.schema);
 		this.contents = opts?.contents ?? operations.zero(Sign.schema.contents);
 	}
 
@@ -40236,6 +33942,7 @@ export class Sign implements XMLElement<'sign', SignAttributes, SignContents> {
 		return this;
 	}
 }
+registerElement('Sign', Sign);
 
 export type LineAttributes = Record<string, unknown>;
 
@@ -40249,17 +33956,7 @@ export type LineContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/line/
  */
 export class Line implements XMLElement<'line', LineAttributes, LineContents> {
-	static readonly schema = {
-		name: 'line',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'staff-line-position',
-				value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'line'> = schema.Line;
 
 	readonly schema = Line.schema;
 
@@ -40267,7 +33964,7 @@ export class Line implements XMLElement<'line', LineAttributes, LineContents> {
 	contents: LineContents;
 
 	constructor(opts?: { attributes?: Partial<LineAttributes>; contents?: LineContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Line.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Line.schema);
 		this.contents = opts?.contents ?? operations.zero(Line.schema.contents);
 	}
 
@@ -40281,6 +33978,7 @@ export class Line implements XMLElement<'line', LineAttributes, LineContents> {
 		return this;
 	}
 }
+registerElement('Line', Line);
 
 export type ClefOctaveChangeAttributes = Record<string, unknown>;
 
@@ -40296,17 +33994,7 @@ export type ClefOctaveChangeContents = [number];
 export class ClefOctaveChange
 	implements XMLElement<'clef-octave-change', ClefOctaveChangeAttributes, ClefOctaveChangeContents>
 {
-	static readonly schema = {
-		name: 'clef-octave-change',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'clef-octave-change',
-				value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'clef-octave-change'> = schema.ClefOctaveChange;
 
 	readonly schema = ClefOctaveChange.schema;
 
@@ -40314,7 +34002,7 @@ export class ClefOctaveChange
 	contents: ClefOctaveChangeContents;
 
 	constructor(opts?: { attributes?: Partial<ClefOctaveChangeAttributes>; contents?: ClefOctaveChangeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ClefOctaveChange.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ClefOctaveChange.schema);
 		this.contents = opts?.contents ?? operations.zero(ClefOctaveChange.schema.contents);
 	}
 
@@ -40328,6 +34016,7 @@ export class ClefOctaveChange
 		return this;
 	}
 }
+registerElement('ClefOctaveChange', ClefOctaveChange);
 
 export type ClefAttributes = {
 	additional: 'yes' | 'no' | null;
@@ -40357,40 +34046,7 @@ export type ClefContents = [Sign, Line | null, ClefOctaveChange | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/clef/
  */
 export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
-	static readonly schema = {
-		name: 'clef',
-		attributes: {
-			additional: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'after-barline': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			size: { type: 'optional', value: { type: 'choices', choices: ['cue', 'full', 'grace-cue', 'large'] } },
-		},
-		contents: [
-			{ type: 'required', value: Sign },
-			{ type: 'optional', value: Line },
-			{ type: 'optional', value: ClefOctaveChange },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'clef'> = schema.Clef;
 
 	readonly schema = Clef.schema;
 
@@ -40398,7 +34054,7 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
 	contents: ClefContents;
 
 	constructor(opts?: { attributes?: Partial<ClefAttributes>; contents?: ClefContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Clef.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Clef.schema);
 		this.contents = opts?.contents ?? operations.zero(Clef.schema.contents);
 	}
 	/** Gets @type {ClefAttributes['additional']}. */
@@ -40566,6 +34222,7 @@ export class Clef implements XMLElement<'clef', ClefAttributes, ClefContents> {
 		return this;
 	}
 }
+registerElement('Clef', Clef);
 
 export type StaffTypeAttributes = Record<string, unknown>;
 
@@ -40579,20 +34236,7 @@ export type StaffTypeContents = ['regular' | 'ossia' | 'editorial' | 'cue' | 'al
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-type/
  */
 export class StaffType implements XMLElement<'staff-type', StaffTypeAttributes, StaffTypeContents> {
-	static readonly schema = {
-		name: 'staff-type',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'staff-type',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['regular', 'ossia', 'editorial', 'cue', 'alternate'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'staff-type'> = schema.StaffType;
 
 	readonly schema = StaffType.schema;
 
@@ -40600,7 +34244,7 @@ export class StaffType implements XMLElement<'staff-type', StaffTypeAttributes, 
 	contents: StaffTypeContents;
 
 	constructor(opts?: { attributes?: Partial<StaffTypeAttributes>; contents?: StaffTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StaffType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StaffType.schema);
 		this.contents = opts?.contents ?? operations.zero(StaffType.schema.contents);
 	}
 
@@ -40614,6 +34258,7 @@ export class StaffType implements XMLElement<'staff-type', StaffTypeAttributes, 
 		return this;
 	}
 }
+registerElement('StaffType', StaffType);
 
 export type StaffLinesAttributes = Record<string, unknown>;
 
@@ -40627,13 +34272,7 @@ export type StaffLinesContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-lines/
  */
 export class StaffLines implements XMLElement<'staff-lines', StaffLinesAttributes, StaffLinesContents> {
-	static readonly schema = {
-		name: 'staff-lines',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'staff-lines'> = schema.StaffLines;
 
 	readonly schema = StaffLines.schema;
 
@@ -40641,7 +34280,7 @@ export class StaffLines implements XMLElement<'staff-lines', StaffLinesAttribute
 	contents: StaffLinesContents;
 
 	constructor(opts?: { attributes?: Partial<StaffLinesAttributes>; contents?: StaffLinesContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StaffLines.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StaffLines.schema);
 		this.contents = opts?.contents ?? operations.zero(StaffLines.schema.contents);
 	}
 
@@ -40655,6 +34294,7 @@ export class StaffLines implements XMLElement<'staff-lines', StaffLinesAttribute
 		return this;
 	}
 }
+registerElement('StaffLines', StaffLines);
 
 export type LineDetailAttributes = {
 	color: string | null;
@@ -40674,17 +34314,7 @@ export type LineDetailContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/line-detail/
  */
 export class LineDetail implements XMLElement<'line-detail', LineDetailAttributes, LineDetailContents> {
-	static readonly schema = {
-		name: 'line-detail',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			line: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-			'line-type': { type: 'optional', value: { type: 'choices', choices: ['dashed', 'solid', 'dotted', 'wavy'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'line-detail'> = schema.LineDetail;
 
 	readonly schema = LineDetail.schema;
 
@@ -40692,7 +34322,7 @@ export class LineDetail implements XMLElement<'line-detail', LineDetailAttribute
 	contents: LineDetailContents;
 
 	constructor(opts?: { attributes?: Partial<LineDetailAttributes>; contents?: LineDetailContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, LineDetail.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, LineDetail.schema);
 		this.contents = opts?.contents ?? operations.zero(LineDetail.schema.contents);
 	}
 	/** Gets @type {LineDetailAttributes['color']}. */
@@ -40741,6 +34371,7 @@ export class LineDetail implements XMLElement<'line-detail', LineDetailAttribute
 		return this;
 	}
 }
+registerElement('LineDetail', LineDetail);
 
 export type StaffTuningAttributes = { line: number };
 
@@ -40754,15 +34385,7 @@ export type StaffTuningContents = [TuningStep, TuningAlter | null, TuningOctave]
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-tuning/
  */
 export class StaffTuning implements XMLElement<'staff-tuning', StaffTuningAttributes, StaffTuningContents> {
-	static readonly schema = {
-		name: 'staff-tuning',
-		attributes: { line: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
-		contents: [
-			{ type: 'required', value: TuningStep },
-			{ type: 'optional', value: TuningAlter },
-			{ type: 'required', value: TuningOctave },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'staff-tuning'> = schema.StaffTuning;
 
 	readonly schema = StaffTuning.schema;
 
@@ -40770,7 +34393,7 @@ export class StaffTuning implements XMLElement<'staff-tuning', StaffTuningAttrib
 	contents: StaffTuningContents;
 
 	constructor(opts?: { attributes?: Partial<StaffTuningAttributes>; contents?: StaffTuningContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StaffTuning.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StaffTuning.schema);
 		this.contents = opts?.contents ?? operations.zero(StaffTuning.schema.contents);
 	}
 	/** Gets @type {StaffTuningAttributes['line']}. */
@@ -40810,6 +34433,7 @@ export class StaffTuning implements XMLElement<'staff-tuning', StaffTuningAttrib
 		return this;
 	}
 }
+registerElement('StaffTuning', StaffTuning);
 
 export type CapoAttributes = Record<string, unknown>;
 
@@ -40823,13 +34447,7 @@ export type CapoContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/capo/
  */
 export class Capo implements XMLElement<'capo', CapoAttributes, CapoContents> {
-	static readonly schema = {
-		name: 'capo',
-		attributes: {},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'capo'> = schema.Capo;
 
 	readonly schema = Capo.schema;
 
@@ -40837,7 +34455,7 @@ export class Capo implements XMLElement<'capo', CapoAttributes, CapoContents> {
 	contents: CapoContents;
 
 	constructor(opts?: { attributes?: Partial<CapoAttributes>; contents?: CapoContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Capo.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Capo.schema);
 		this.contents = opts?.contents ?? operations.zero(Capo.schema.contents);
 	}
 
@@ -40851,6 +34469,7 @@ export class Capo implements XMLElement<'capo', CapoAttributes, CapoContents> {
 		return this;
 	}
 }
+registerElement('Capo', Capo);
 
 export type StaffSizeAttributes = { scaling: number | null };
 
@@ -40866,13 +34485,7 @@ export type StaffSizeContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-size/
  */
 export class StaffSize implements XMLElement<'staff-size', StaffSizeAttributes, StaffSizeContents> {
-	static readonly schema = {
-		name: 'staff-size',
-		attributes: { scaling: { type: 'optional', value: { type: 'float', min: 0, max: Infinity } } },
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'float', min: 0, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'staff-size'> = schema.StaffSize;
 
 	readonly schema = StaffSize.schema;
 
@@ -40880,7 +34493,7 @@ export class StaffSize implements XMLElement<'staff-size', StaffSizeAttributes, 
 	contents: StaffSizeContents;
 
 	constructor(opts?: { attributes?: Partial<StaffSizeAttributes>; contents?: StaffSizeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StaffSize.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StaffSize.schema);
 		this.contents = opts?.contents ?? operations.zero(StaffSize.schema.contents);
 	}
 	/** Gets @type {StaffSizeAttributes['scaling']}. */
@@ -40902,6 +34515,7 @@ export class StaffSize implements XMLElement<'staff-size', StaffSizeAttributes, 
 		return this;
 	}
 }
+registerElement('StaffSize', StaffSize);
 
 export type StaffDetailsAttributes = {
 	number: number | null;
@@ -40926,32 +34540,7 @@ export type StaffDetailsContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-details/
  */
 export class StaffDetails implements XMLElement<'staff-details', StaffDetailsAttributes, StaffDetailsContents> {
-	static readonly schema = {
-		name: 'staff-details',
-		attributes: {
-			number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-spacing': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'show-frets': { type: 'optional', value: { type: 'choices', choices: ['letters', 'numbers'] } },
-		},
-		contents: [
-			{ type: 'optional', value: StaffType },
-			{
-				type: 'label',
-				label: 'lines',
-				value: {
-					type: 'optional',
-					value: [
-						{ type: 'required', value: StaffLines },
-						{ type: 'zeroOrMore', value: LineDetail },
-					],
-				},
-			},
-			{ type: 'label', label: 'staff-tunings', value: { type: 'zeroOrMore', value: StaffTuning } },
-			{ type: 'optional', value: Capo },
-			{ type: 'optional', value: StaffSize },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'staff-details'> = schema.StaffDetails;
 
 	readonly schema = StaffDetails.schema;
 
@@ -40959,7 +34548,7 @@ export class StaffDetails implements XMLElement<'staff-details', StaffDetailsAtt
 	contents: StaffDetailsContents;
 
 	constructor(opts?: { attributes?: Partial<StaffDetailsAttributes>; contents?: StaffDetailsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, StaffDetails.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, StaffDetails.schema);
 		this.contents = opts?.contents ?? operations.zero(StaffDetails.schema.contents);
 	}
 	/** Gets @type {StaffDetailsAttributes['number']}. */
@@ -41044,6 +34633,7 @@ export class StaffDetails implements XMLElement<'staff-details', StaffDetailsAtt
 		return this;
 	}
 }
+registerElement('StaffDetails', StaffDetails);
 
 export type DiatonicAttributes = Record<string, unknown>;
 
@@ -41057,17 +34647,7 @@ export type DiatonicContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/diatonic/
  */
 export class Diatonic implements XMLElement<'diatonic', DiatonicAttributes, DiatonicContents> {
-	static readonly schema = {
-		name: 'diatonic',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'diatonic',
-				value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'diatonic'> = schema.Diatonic;
 
 	readonly schema = Diatonic.schema;
 
@@ -41075,7 +34655,7 @@ export class Diatonic implements XMLElement<'diatonic', DiatonicAttributes, Diat
 	contents: DiatonicContents;
 
 	constructor(opts?: { attributes?: Partial<DiatonicAttributes>; contents?: DiatonicContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Diatonic.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Diatonic.schema);
 		this.contents = opts?.contents ?? operations.zero(Diatonic.schema.contents);
 	}
 
@@ -41089,6 +34669,7 @@ export class Diatonic implements XMLElement<'diatonic', DiatonicAttributes, Diat
 		return this;
 	}
 }
+registerElement('Diatonic', Diatonic);
 
 export type ChromaticAttributes = Record<string, unknown>;
 
@@ -41102,17 +34683,7 @@ export type ChromaticContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/chromatic/
  */
 export class Chromatic implements XMLElement<'chromatic', ChromaticAttributes, ChromaticContents> {
-	static readonly schema = {
-		name: 'chromatic',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'semitones',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'chromatic'> = schema.Chromatic;
 
 	readonly schema = Chromatic.schema;
 
@@ -41120,7 +34691,7 @@ export class Chromatic implements XMLElement<'chromatic', ChromaticAttributes, C
 	contents: ChromaticContents;
 
 	constructor(opts?: { attributes?: Partial<ChromaticAttributes>; contents?: ChromaticContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Chromatic.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Chromatic.schema);
 		this.contents = opts?.contents ?? operations.zero(Chromatic.schema.contents);
 	}
 
@@ -41134,6 +34705,7 @@ export class Chromatic implements XMLElement<'chromatic', ChromaticAttributes, C
 		return this;
 	}
 }
+registerElement('Chromatic', Chromatic);
 
 export type OctaveChangeAttributes = Record<string, unknown>;
 
@@ -41147,17 +34719,7 @@ export type OctaveChangeContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/octave-change/
  */
 export class OctaveChange implements XMLElement<'octave-change', OctaveChangeAttributes, OctaveChangeContents> {
-	static readonly schema = {
-		name: 'octave-change',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'octave-change'> = schema.OctaveChange;
 
 	readonly schema = OctaveChange.schema;
 
@@ -41165,7 +34727,7 @@ export class OctaveChange implements XMLElement<'octave-change', OctaveChangeAtt
 	contents: OctaveChangeContents;
 
 	constructor(opts?: { attributes?: Partial<OctaveChangeAttributes>; contents?: OctaveChangeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, OctaveChange.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, OctaveChange.schema);
 		this.contents = opts?.contents ?? operations.zero(OctaveChange.schema.contents);
 	}
 
@@ -41179,6 +34741,7 @@ export class OctaveChange implements XMLElement<'octave-change', OctaveChangeAtt
 		return this;
 	}
 }
+registerElement('OctaveChange', OctaveChange);
 
 export type DoubleAttributes = { above: 'yes' | 'no' | null };
 
@@ -41192,11 +34755,7 @@ export type DoubleContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/double/
  */
 export class Double implements XMLElement<'double', DoubleAttributes, DoubleContents> {
-	static readonly schema = {
-		name: 'double',
-		attributes: { above: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'double'> = schema.Double;
 
 	readonly schema = Double.schema;
 
@@ -41204,7 +34763,7 @@ export class Double implements XMLElement<'double', DoubleAttributes, DoubleCont
 	contents: DoubleContents;
 
 	constructor(opts?: { attributes?: Partial<DoubleAttributes>; contents?: DoubleContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Double.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Double.schema);
 		this.contents = opts?.contents ?? operations.zero(Double.schema.contents);
 	}
 	/** Gets @type {DoubleAttributes['above']}. */
@@ -41217,6 +34776,7 @@ export class Double implements XMLElement<'double', DoubleAttributes, DoubleCont
 		return this;
 	}
 }
+registerElement('Double', Double);
 
 export type TransposeAttributes = { id: string | null; number: number | null };
 
@@ -41230,19 +34790,7 @@ export type TransposeContents = [Diatonic | null, Chromatic, OctaveChange | null
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/transpose/
  */
 export class Transpose implements XMLElement<'transpose', TransposeAttributes, TransposeContents> {
-	static readonly schema = {
-		name: 'transpose',
-		attributes: {
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-		},
-		contents: [
-			{ type: 'optional', value: Diatonic },
-			{ type: 'required', value: Chromatic },
-			{ type: 'optional', value: OctaveChange },
-			{ type: 'optional', value: Double },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'transpose'> = schema.Transpose;
 
 	readonly schema = Transpose.schema;
 
@@ -41250,7 +34798,7 @@ export class Transpose implements XMLElement<'transpose', TransposeAttributes, T
 	contents: TransposeContents;
 
 	constructor(opts?: { attributes?: Partial<TransposeAttributes>; contents?: TransposeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Transpose.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Transpose.schema);
 		this.contents = opts?.contents ?? operations.zero(Transpose.schema.contents);
 	}
 	/** Gets @type {TransposeAttributes['id']}. */
@@ -41308,6 +34856,7 @@ export class Transpose implements XMLElement<'transpose', TransposeAttributes, T
 		return this;
 	}
 }
+registerElement('Transpose', Transpose);
 
 export type PartClefAttributes = Record<string, unknown>;
 
@@ -41321,15 +34870,7 @@ export type PartClefContents = [Sign, Line | null, ClefOctaveChange | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-clef/
  */
 export class PartClef implements XMLElement<'part-clef', PartClefAttributes, PartClefContents> {
-	static readonly schema = {
-		name: 'part-clef',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: Sign },
-			{ type: 'optional', value: Line },
-			{ type: 'optional', value: ClefOctaveChange },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'part-clef'> = schema.PartClef;
 
 	readonly schema = PartClef.schema;
 
@@ -41337,7 +34878,7 @@ export class PartClef implements XMLElement<'part-clef', PartClefAttributes, Par
 	contents: PartClefContents;
 
 	constructor(opts?: { attributes?: Partial<PartClefAttributes>; contents?: PartClefContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartClef.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartClef.schema);
 		this.contents = opts?.contents ?? operations.zero(PartClef.schema.contents);
 	}
 
@@ -41369,6 +34910,7 @@ export class PartClef implements XMLElement<'part-clef', PartClefAttributes, Par
 		return this;
 	}
 }
+registerElement('PartClef', PartClef);
 
 export type PartTransposeAttributes = Record<string, unknown>;
 
@@ -41382,16 +34924,7 @@ export type PartTransposeContents = [Diatonic | null, Chromatic, OctaveChange | 
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part-transpose/
  */
 export class PartTranspose implements XMLElement<'part-transpose', PartTransposeAttributes, PartTransposeContents> {
-	static readonly schema = {
-		name: 'part-transpose',
-		attributes: {},
-		contents: [
-			{ type: 'optional', value: Diatonic },
-			{ type: 'required', value: Chromatic },
-			{ type: 'optional', value: OctaveChange },
-			{ type: 'optional', value: Double },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'part-transpose'> = schema.PartTranspose;
 
 	readonly schema = PartTranspose.schema;
 
@@ -41399,7 +34932,7 @@ export class PartTranspose implements XMLElement<'part-transpose', PartTranspose
 	contents: PartTransposeContents;
 
 	constructor(opts?: { attributes?: Partial<PartTransposeAttributes>; contents?: PartTransposeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartTranspose.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartTranspose.schema);
 		this.contents = opts?.contents ?? operations.zero(PartTranspose.schema.contents);
 	}
 
@@ -41440,6 +34973,7 @@ export class PartTranspose implements XMLElement<'part-transpose', PartTranspose
 		return this;
 	}
 }
+registerElement('PartTranspose', PartTranspose);
 
 export type ForPartAttributes = { id: string | null; number: number | null };
 
@@ -41453,17 +34987,7 @@ export type ForPartContents = [PartClef | null, PartTranspose];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/for-part/
  */
 export class ForPart implements XMLElement<'for-part', ForPartAttributes, ForPartContents> {
-	static readonly schema = {
-		name: 'for-part',
-		attributes: {
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-		},
-		contents: [
-			{ type: 'optional', value: PartClef },
-			{ type: 'required', value: PartTranspose },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'for-part'> = schema.ForPart;
 
 	readonly schema = ForPart.schema;
 
@@ -41471,7 +34995,7 @@ export class ForPart implements XMLElement<'for-part', ForPartAttributes, ForPar
 	contents: ForPartContents;
 
 	constructor(opts?: { attributes?: Partial<ForPartAttributes>; contents?: ForPartContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ForPart.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ForPart.schema);
 		this.contents = opts?.contents ?? operations.zero(ForPart.schema.contents);
 	}
 	/** Gets @type {ForPartAttributes['id']}. */
@@ -41511,6 +35035,7 @@ export class ForPart implements XMLElement<'for-part', ForPartAttributes, ForPar
 		return this;
 	}
 }
+registerElement('ForPart', ForPart);
 
 export type DirectiveAttributes = {
 	color: string | null;
@@ -41535,31 +35060,7 @@ export type DirectiveContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/directive/
  */
 export class Directive implements XMLElement<'directive', DirectiveAttributes, DirectiveContents> {
-	static readonly schema = {
-		name: 'directive',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'xml:lang': { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'directive'> = schema.Directive;
 
 	readonly schema = Directive.schema;
 
@@ -41567,7 +35068,7 @@ export class Directive implements XMLElement<'directive', DirectiveAttributes, D
 	contents: DirectiveContents;
 
 	constructor(opts?: { attributes?: Partial<DirectiveAttributes>; contents?: DirectiveContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Directive.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Directive.schema);
 		this.contents = opts?.contents ?? operations.zero(Directive.schema.contents);
 	}
 	/** Gets @type {DirectiveAttributes['color']}. */
@@ -41672,6 +35173,7 @@ export class Directive implements XMLElement<'directive', DirectiveAttributes, D
 		return this;
 	}
 }
+registerElement('Directive', Directive);
 
 export type MultipleRestAttributes = { 'use-symbols': 'yes' | 'no' | null };
 
@@ -41685,17 +35187,7 @@ export type MultipleRestContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/multiple-rest/
  */
 export class MultipleRest implements XMLElement<'multiple-rest', MultipleRestAttributes, MultipleRestContents> {
-	static readonly schema = {
-		name: 'multiple-rest',
-		attributes: { 'use-symbols': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'multiple-rest',
-				value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'multiple-rest'> = schema.MultipleRest;
 
 	readonly schema = MultipleRest.schema;
 
@@ -41703,7 +35195,7 @@ export class MultipleRest implements XMLElement<'multiple-rest', MultipleRestAtt
 	contents: MultipleRestContents;
 
 	constructor(opts?: { attributes?: Partial<MultipleRestAttributes>; contents?: MultipleRestContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MultipleRest.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MultipleRest.schema);
 		this.contents = opts?.contents ?? operations.zero(MultipleRest.schema.contents);
 	}
 	/** Gets @type {MultipleRestAttributes['use-symbols']}. */
@@ -41725,6 +35217,7 @@ export class MultipleRest implements XMLElement<'multiple-rest', MultipleRestAtt
 		return this;
 	}
 }
+registerElement('MultipleRest', MultipleRest);
 
 export type MeasureRepeatAttributes = { slashes: number | null; type: 'start' | 'stop' };
 
@@ -41742,29 +35235,7 @@ export type MeasureRepeatContents = ['' | number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-repeat/
  */
 export class MeasureRepeat implements XMLElement<'measure-repeat', MeasureRepeatAttributes, MeasureRepeatContents> {
-	static readonly schema = {
-		name: 'measure-repeat',
-		attributes: {
-			slashes: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							{ type: 'choices', choices: [''] },
-							{ type: 'int', min: 1, max: Infinity },
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'measure-repeat'> = schema.MeasureRepeat;
 
 	readonly schema = MeasureRepeat.schema;
 
@@ -41772,7 +35243,7 @@ export class MeasureRepeat implements XMLElement<'measure-repeat', MeasureRepeat
 	contents: MeasureRepeatContents;
 
 	constructor(opts?: { attributes?: Partial<MeasureRepeatAttributes>; contents?: MeasureRepeatContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MeasureRepeat.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MeasureRepeat.schema);
 		this.contents = opts?.contents ?? operations.zero(MeasureRepeat.schema.contents);
 	}
 	/** Gets @type {MeasureRepeatAttributes['slashes']}. */
@@ -41803,6 +35274,7 @@ export class MeasureRepeat implements XMLElement<'measure-repeat', MeasureRepeat
 		return this;
 	}
 }
+registerElement('MeasureRepeat', MeasureRepeat);
 
 export type SlashTypeAttributes = Record<string, unknown>;
 
@@ -41831,38 +35303,7 @@ export type SlashTypeContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/slash-type/
  */
 export class SlashType implements XMLElement<'slash-type', SlashTypeAttributes, SlashTypeContents> {
-	static readonly schema = {
-		name: 'slash-type',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'note-type-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'whole',
-							'1024th',
-							'512th',
-							'256th',
-							'128th',
-							'64th',
-							'32nd',
-							'16th',
-							'eighth',
-							'quarter',
-							'half',
-							'breve',
-							'long',
-							'maxima',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'slash-type'> = schema.SlashType;
 
 	readonly schema = SlashType.schema;
 
@@ -41870,7 +35311,7 @@ export class SlashType implements XMLElement<'slash-type', SlashTypeAttributes, 
 	contents: SlashTypeContents;
 
 	constructor(opts?: { attributes?: Partial<SlashTypeAttributes>; contents?: SlashTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SlashType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SlashType.schema);
 		this.contents = opts?.contents ?? operations.zero(SlashType.schema.contents);
 	}
 
@@ -41914,6 +35355,7 @@ export class SlashType implements XMLElement<'slash-type', SlashTypeAttributes, 
 		return this;
 	}
 }
+registerElement('SlashType', SlashType);
 
 export type SlashDotAttributes = Record<string, unknown>;
 
@@ -41927,7 +35369,7 @@ export type SlashDotContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/slash-dot/
  */
 export class SlashDot implements XMLElement<'slash-dot', SlashDotAttributes, SlashDotContents> {
-	static readonly schema = { name: 'slash-dot', attributes: {}, contents: [] } as const;
+	static readonly schema: XMLElementSchema<'slash-dot'> = schema.SlashDot;
 
 	readonly schema = SlashDot.schema;
 
@@ -41935,10 +35377,11 @@ export class SlashDot implements XMLElement<'slash-dot', SlashDotAttributes, Sla
 	contents: SlashDotContents;
 
 	constructor(opts?: { attributes?: Partial<SlashDotAttributes>; contents?: SlashDotContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, SlashDot.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, SlashDot.schema);
 		this.contents = opts?.contents ?? operations.zero(SlashDot.schema.contents);
 	}
 }
+registerElement('SlashDot', SlashDot);
 
 export type ExceptVoiceAttributes = Record<string, unknown>;
 
@@ -41952,11 +35395,7 @@ export type ExceptVoiceContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/except-voice/
  */
 export class ExceptVoice implements XMLElement<'except-voice', ExceptVoiceAttributes, ExceptVoiceContents> {
-	static readonly schema = {
-		name: 'except-voice',
-		attributes: {},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'except-voice'> = schema.ExceptVoice;
 
 	readonly schema = ExceptVoice.schema;
 
@@ -41964,7 +35403,7 @@ export class ExceptVoice implements XMLElement<'except-voice', ExceptVoiceAttrib
 	contents: ExceptVoiceContents;
 
 	constructor(opts?: { attributes?: Partial<ExceptVoiceAttributes>; contents?: ExceptVoiceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ExceptVoice.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ExceptVoice.schema);
 		this.contents = opts?.contents ?? operations.zero(ExceptVoice.schema.contents);
 	}
 
@@ -41978,6 +35417,7 @@ export class ExceptVoice implements XMLElement<'except-voice', ExceptVoiceAttrib
 		return this;
 	}
 }
+registerElement('ExceptVoice', ExceptVoice);
 
 export type BeatRepeatAttributes = { slashes: number | null; type: 'start' | 'stop'; 'use-dots': 'yes' | 'no' | null };
 
@@ -41995,33 +35435,7 @@ export type BeatRepeatContents = [[[SlashType, Array<SlashDot>] | null, Array<Ex
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beat-repeat/
  */
 export class BeatRepeat implements XMLElement<'beat-repeat', BeatRepeatAttributes, BeatRepeatContents> {
-	static readonly schema = {
-		name: 'beat-repeat',
-		attributes: {
-			slashes: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-			'use-dots': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'beat-repeat',
-				value: {
-					type: 'optional',
-					value: [
-						{
-							type: 'optional',
-							value: [
-								{ type: 'required', value: SlashType },
-								{ type: 'zeroOrMore', value: SlashDot },
-							],
-						},
-						{ type: 'zeroOrMore', value: ExceptVoice },
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'beat-repeat'> = schema.BeatRepeat;
 
 	readonly schema = BeatRepeat.schema;
 
@@ -42029,7 +35443,7 @@ export class BeatRepeat implements XMLElement<'beat-repeat', BeatRepeatAttribute
 	contents: BeatRepeatContents;
 
 	constructor(opts?: { attributes?: Partial<BeatRepeatAttributes>; contents?: BeatRepeatContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BeatRepeat.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BeatRepeat.schema);
 		this.contents = opts?.contents ?? operations.zero(BeatRepeat.schema.contents);
 	}
 	/** Gets @type {BeatRepeatAttributes['slashes']}. */
@@ -42069,6 +35483,7 @@ export class BeatRepeat implements XMLElement<'beat-repeat', BeatRepeatAttribute
 		return this;
 	}
 }
+registerElement('BeatRepeat', BeatRepeat);
 
 export type SlashAttributes = {
 	type: 'start' | 'stop';
@@ -42086,33 +35501,7 @@ export type SlashContents = [[[SlashType, Array<SlashDot>] | null, Array<ExceptV
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/slash/
  */
 export class Slash implements XMLElement<'slash', SlashAttributes, SlashContents> {
-	static readonly schema = {
-		name: 'slash',
-		attributes: {
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-			'use-dots': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'use-stems': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: {
-					type: 'optional',
-					value: [
-						{
-							type: 'optional',
-							value: [
-								{ type: 'required', value: SlashType },
-								{ type: 'zeroOrMore', value: SlashDot },
-							],
-						},
-						{ type: 'zeroOrMore', value: ExceptVoice },
-					],
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'slash'> = schema.Slash;
 
 	readonly schema = Slash.schema;
 
@@ -42120,7 +35509,7 @@ export class Slash implements XMLElement<'slash', SlashAttributes, SlashContents
 	contents: SlashContents;
 
 	constructor(opts?: { attributes?: Partial<SlashAttributes>; contents?: SlashContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Slash.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Slash.schema);
 		this.contents = opts?.contents ?? operations.zero(Slash.schema.contents);
 	}
 	/** Gets @type {SlashAttributes['type']}. */
@@ -42160,6 +35549,7 @@ export class Slash implements XMLElement<'slash', SlashAttributes, SlashContents
 		return this;
 	}
 }
+registerElement('Slash', Slash);
 
 export type MeasureStyleAttributes = {
 	color: string | null;
@@ -42181,34 +35571,7 @@ export type MeasureStyleContents = [MultipleRest | MeasureRepeat | BeatRepeat | 
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-style/
  */
 export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAttributes, MeasureStyleContents> {
-	static readonly schema = {
-		name: 'measure-style',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			number: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'choices', choices: [MultipleRest, MeasureRepeat, BeatRepeat, Slash] },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'measure-style'> = schema.MeasureStyle;
 
 	readonly schema = MeasureStyle.schema;
 
@@ -42216,7 +35579,7 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
 	contents: MeasureStyleContents;
 
 	constructor(opts?: { attributes?: Partial<MeasureStyleAttributes>; contents?: MeasureStyleContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MeasureStyle.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MeasureStyle.schema);
 		this.contents = opts?.contents ?? operations.zero(MeasureStyle.schema.contents);
 	}
 	/** Gets @type {MeasureStyleAttributes['color']}. */
@@ -42294,6 +35657,7 @@ export class MeasureStyle implements XMLElement<'measure-style', MeasureStyleAtt
 		return this;
 	}
 }
+registerElement('MeasureStyle', MeasureStyle);
 
 export type Transposes = Array<Transpose>;
 
@@ -42325,35 +35689,7 @@ export type AttributesContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/attributes/
  */
 export class Attributes implements XMLElement<'attributes', AttributesAttributes, AttributesContents> {
-	static readonly schema = {
-		name: 'attributes',
-		attributes: {},
-		contents: [
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-			{ type: 'optional', value: Divisions },
-			{ type: 'label', label: 'keys', value: { type: 'zeroOrMore', value: Key } },
-			{ type: 'label', label: 'times', value: { type: 'zeroOrMore', value: Time } },
-			{ type: 'optional', value: Staves },
-			{ type: 'optional', value: PartSymbol },
-			{ type: 'optional', value: Instruments },
-			{ type: 'label', label: 'clefs', value: { type: 'zeroOrMore', value: Clef } },
-			{ type: 'label', label: 'staff-details', value: { type: 'zeroOrMore', value: StaffDetails } },
-			{
-				type: 'label',
-				label: 'transpositions',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'label', label: 'transposes', value: { type: 'zeroOrMore', value: Transpose } },
-						{ type: 'label', label: 'for-parts', value: { type: 'zeroOrMore', value: ForPart } },
-					],
-				},
-			},
-			{ type: 'label', label: 'directives', value: { type: 'zeroOrMore', value: Directive } },
-			{ type: 'label', label: 'measure-styles', value: { type: 'zeroOrMore', value: MeasureStyle } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'attributes'> = schema.Attributes;
 
 	readonly schema = Attributes.schema;
 
@@ -42361,7 +35697,7 @@ export class Attributes implements XMLElement<'attributes', AttributesAttributes
 	contents: AttributesContents;
 
 	constructor(opts?: { attributes?: Partial<AttributesAttributes>; contents?: AttributesContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Attributes.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Attributes.schema);
 		this.contents = opts?.contents ?? operations.zero(Attributes.schema.contents);
 	}
 
@@ -42483,6 +35819,7 @@ export class Attributes implements XMLElement<'attributes', AttributesAttributes
 		return this;
 	}
 }
+registerElement('Attributes', Attributes);
 
 export type RootStepAttributes = {
 	color: string | null;
@@ -42507,37 +35844,7 @@ export type RootStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/root-step/
  */
 export class RootStep implements XMLElement<'root-step', RootStepAttributes, RootStepContents> {
-	static readonly schema = {
-		name: 'root-step',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			text: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'step',
-				value: { type: 'required', value: { type: 'choices', choices: ['A', 'B', 'C', 'D', 'E', 'F', 'G'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'root-step'> = schema.RootStep;
 
 	readonly schema = RootStep.schema;
 
@@ -42545,7 +35852,7 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
 	contents: RootStepContents;
 
 	constructor(opts?: { attributes?: Partial<RootStepAttributes>; contents?: RootStepContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, RootStep.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, RootStep.schema);
 		this.contents = opts?.contents ?? operations.zero(RootStep.schema.contents);
 	}
 	/** Gets @type {RootStepAttributes['color']}. */
@@ -42650,6 +35957,7 @@ export class RootStep implements XMLElement<'root-step', RootStepAttributes, Roo
 		return this;
 	}
 }
+registerElement('RootStep', RootStep);
 
 export type RootAlterAttributes = {
 	color: string | null;
@@ -42675,38 +35983,7 @@ export type RootAlterContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/root-alter/
  */
 export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, RootAlterContents> {
-	static readonly schema = {
-		name: 'root-alter',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			location: { type: 'optional', value: { type: 'choices', choices: ['left', 'right'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'semitones',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'root-alter'> = schema.RootAlter;
 
 	readonly schema = RootAlter.schema;
 
@@ -42714,7 +35991,7 @@ export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, 
 	contents: RootAlterContents;
 
 	constructor(opts?: { attributes?: Partial<RootAlterAttributes>; contents?: RootAlterContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, RootAlter.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, RootAlter.schema);
 		this.contents = opts?.contents ?? operations.zero(RootAlter.schema.contents);
 	}
 	/** Gets @type {RootAlterAttributes['color']}. */
@@ -42828,6 +36105,7 @@ export class RootAlter implements XMLElement<'root-alter', RootAlterAttributes, 
 		return this;
 	}
 }
+registerElement('RootAlter', RootAlter);
 
 export type RootAttributes = Record<string, unknown>;
 
@@ -42841,14 +36119,7 @@ export type RootContents = [RootStep, RootAlter | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/root/
  */
 export class Root implements XMLElement<'root', RootAttributes, RootContents> {
-	static readonly schema = {
-		name: 'root',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: RootStep },
-			{ type: 'optional', value: RootAlter },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'root'> = schema.Root;
 
 	readonly schema = Root.schema;
 
@@ -42856,7 +36127,7 @@ export class Root implements XMLElement<'root', RootAttributes, RootContents> {
 	contents: RootContents;
 
 	constructor(opts?: { attributes?: Partial<RootAttributes>; contents?: RootContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Root.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Root.schema);
 		this.contents = opts?.contents ?? operations.zero(Root.schema.contents);
 	}
 
@@ -42879,6 +36150,7 @@ export class Root implements XMLElement<'root', RootAttributes, RootContents> {
 		return this;
 	}
 }
+registerElement('Root', Root);
 
 export type NumeralRootAttributes = {
 	color: string | null;
@@ -42903,33 +36175,7 @@ export type NumeralRootContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral-root/
  */
 export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttributes, NumeralRootContents> {
-	static readonly schema = {
-		name: 'numeral-root',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			text: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{ type: 'label', label: 'numeral-value', value: { type: 'required', value: { type: 'int', min: 1, max: 7 } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'numeral-root'> = schema.NumeralRoot;
 
 	readonly schema = NumeralRoot.schema;
 
@@ -42937,7 +36183,7 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
 	contents: NumeralRootContents;
 
 	constructor(opts?: { attributes?: Partial<NumeralRootAttributes>; contents?: NumeralRootContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NumeralRoot.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NumeralRoot.schema);
 		this.contents = opts?.contents ?? operations.zero(NumeralRoot.schema.contents);
 	}
 	/** Gets @type {NumeralRootAttributes['color']}. */
@@ -43042,6 +36288,7 @@ export class NumeralRoot implements XMLElement<'numeral-root', NumeralRootAttrib
 		return this;
 	}
 }
+registerElement('NumeralRoot', NumeralRoot);
 
 export type NumeralAlterAttributes = {
 	color: string | null;
@@ -43068,39 +36315,7 @@ export type NumeralAlterContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral-alter/
  */
 export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAttributes, NumeralAlterContents> {
-	static readonly schema = {
-		name: 'numeral-alter',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			location: { type: 'optional', value: { type: 'choices', choices: ['left', 'right'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			text: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'semitones',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'numeral-alter'> = schema.NumeralAlter;
 
 	readonly schema = NumeralAlter.schema;
 
@@ -43108,7 +36323,7 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
 	contents: NumeralAlterContents;
 
 	constructor(opts?: { attributes?: Partial<NumeralAlterAttributes>; contents?: NumeralAlterContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NumeralAlter.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NumeralAlter.schema);
 		this.contents = opts?.contents ?? operations.zero(NumeralAlter.schema.contents);
 	}
 	/** Gets @type {NumeralAlterAttributes['color']}. */
@@ -43231,6 +36446,7 @@ export class NumeralAlter implements XMLElement<'numeral-alter', NumeralAlterAtt
 		return this;
 	}
 }
+registerElement('NumeralAlter', NumeralAlter);
 
 export type NumeralFifthsAttributes = Record<string, unknown>;
 
@@ -43244,17 +36460,7 @@ export type NumeralFifthsContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral-fifths/
  */
 export class NumeralFifths implements XMLElement<'numeral-fifths', NumeralFifthsAttributes, NumeralFifthsContents> {
-	static readonly schema = {
-		name: 'numeral-fifths',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'required', value: { type: 'int', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'numeral-fifths'> = schema.NumeralFifths;
 
 	readonly schema = NumeralFifths.schema;
 
@@ -43262,7 +36468,7 @@ export class NumeralFifths implements XMLElement<'numeral-fifths', NumeralFifths
 	contents: NumeralFifthsContents;
 
 	constructor(opts?: { attributes?: Partial<NumeralFifthsAttributes>; contents?: NumeralFifthsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NumeralFifths.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NumeralFifths.schema);
 		this.contents = opts?.contents ?? operations.zero(NumeralFifths.schema.contents);
 	}
 
@@ -43276,6 +36482,7 @@ export class NumeralFifths implements XMLElement<'numeral-fifths', NumeralFifths
 		return this;
 	}
 }
+registerElement('NumeralFifths', NumeralFifths);
 
 export type NumeralModeAttributes = Record<string, unknown>;
 
@@ -43289,20 +36496,7 @@ export type NumeralModeContents = ['major' | 'minor' | 'natural minor' | 'melodi
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral-mode/
  */
 export class NumeralMode implements XMLElement<'numeral-mode', NumeralModeAttributes, NumeralModeContents> {
-	static readonly schema = {
-		name: 'numeral-mode',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'numeral-mode',
-				value: {
-					type: 'required',
-					value: { type: 'choices', choices: ['major', 'minor', 'natural minor', 'melodic minor', 'harmonic minor'] },
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'numeral-mode'> = schema.NumeralMode;
 
 	readonly schema = NumeralMode.schema;
 
@@ -43310,7 +36504,7 @@ export class NumeralMode implements XMLElement<'numeral-mode', NumeralModeAttrib
 	contents: NumeralModeContents;
 
 	constructor(opts?: { attributes?: Partial<NumeralModeAttributes>; contents?: NumeralModeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NumeralMode.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NumeralMode.schema);
 		this.contents = opts?.contents ?? operations.zero(NumeralMode.schema.contents);
 	}
 
@@ -43324,6 +36518,7 @@ export class NumeralMode implements XMLElement<'numeral-mode', NumeralModeAttrib
 		return this;
 	}
 }
+registerElement('NumeralMode', NumeralMode);
 
 export type NumeralKeyAttributes = { 'print-object': 'yes' | 'no' | null };
 
@@ -43337,14 +36532,7 @@ export type NumeralKeyContents = [NumeralFifths, NumeralMode];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral-key/
  */
 export class NumeralKey implements XMLElement<'numeral-key', NumeralKeyAttributes, NumeralKeyContents> {
-	static readonly schema = {
-		name: 'numeral-key',
-		attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-		contents: [
-			{ type: 'required', value: NumeralFifths },
-			{ type: 'required', value: NumeralMode },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'numeral-key'> = schema.NumeralKey;
 
 	readonly schema = NumeralKey.schema;
 
@@ -43352,7 +36540,7 @@ export class NumeralKey implements XMLElement<'numeral-key', NumeralKeyAttribute
 	contents: NumeralKeyContents;
 
 	constructor(opts?: { attributes?: Partial<NumeralKeyAttributes>; contents?: NumeralKeyContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, NumeralKey.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, NumeralKey.schema);
 		this.contents = opts?.contents ?? operations.zero(NumeralKey.schema.contents);
 	}
 	/** Gets @type {NumeralKeyAttributes['print-object']}. */
@@ -43383,6 +36571,7 @@ export class NumeralKey implements XMLElement<'numeral-key', NumeralKeyAttribute
 		return this;
 	}
 }
+registerElement('NumeralKey', NumeralKey);
 
 export type NumeralAttributes = Record<string, unknown>;
 
@@ -43396,15 +36585,7 @@ export type NumeralContents = [NumeralRoot, NumeralAlter | null, NumeralKey | nu
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/numeral/
  */
 export class Numeral implements XMLElement<'numeral', NumeralAttributes, NumeralContents> {
-	static readonly schema = {
-		name: 'numeral',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: NumeralRoot },
-			{ type: 'optional', value: NumeralAlter },
-			{ type: 'optional', value: NumeralKey },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'numeral'> = schema.Numeral;
 
 	readonly schema = Numeral.schema;
 
@@ -43412,7 +36593,7 @@ export class Numeral implements XMLElement<'numeral', NumeralAttributes, Numeral
 	contents: NumeralContents;
 
 	constructor(opts?: { attributes?: Partial<NumeralAttributes>; contents?: NumeralContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Numeral.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Numeral.schema);
 		this.contents = opts?.contents ?? operations.zero(Numeral.schema.contents);
 	}
 
@@ -43444,6 +36625,7 @@ export class Numeral implements XMLElement<'numeral', NumeralAttributes, Numeral
 		return this;
 	}
 }
+registerElement('Numeral', Numeral);
 
 export type FunctionAttributes = {
 	color: string | null;
@@ -43467,30 +36649,7 @@ export type FunctionContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/function/
  */
 export class Function implements XMLElement<'function', FunctionAttributes, FunctionContents> {
-	static readonly schema = {
-		name: 'function',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'function'> = schema.Function;
 
 	readonly schema = Function.schema;
 
@@ -43498,7 +36657,7 @@ export class Function implements XMLElement<'function', FunctionAttributes, Func
 	contents: FunctionContents;
 
 	constructor(opts?: { attributes?: Partial<FunctionAttributes>; contents?: FunctionContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Function.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Function.schema);
 		this.contents = opts?.contents ?? operations.zero(Function.schema.contents);
 	}
 	/** Gets @type {FunctionAttributes['color']}. */
@@ -43594,6 +36753,7 @@ export class Function implements XMLElement<'function', FunctionAttributes, Func
 		return this;
 	}
 }
+registerElement('Function', Function);
 
 export type KindAttributes = {
 	'bracket-degrees': 'yes' | 'no' | null;
@@ -43674,83 +36834,7 @@ export type KindContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/kind/
  */
 export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
-	static readonly schema = {
-		name: 'kind',
-		attributes: {
-			'bracket-degrees': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'parentheses-degrees': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'stack-degrees': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			text: { type: 'optional', value: { type: 'string' } },
-			'use-symbols': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'kind-value',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'none',
-							'major',
-							'minor',
-							'augmented',
-							'diminished',
-							'dominant',
-							'major-seventh',
-							'minor-seventh',
-							'diminished-seventh',
-							'augmented-seventh',
-							'half-diminished',
-							'major-minor',
-							'major-sixth',
-							'minor-sixth',
-							'dominant-ninth',
-							'major-ninth',
-							'minor-ninth',
-							'dominant-11th',
-							'major-11th',
-							'minor-11th',
-							'dominant-13th',
-							'major-13th',
-							'minor-13th',
-							'suspended-second',
-							'suspended-fourth',
-							'Neapolitan',
-							'Italian',
-							'French',
-							'German',
-							'pedal',
-							'power',
-							'Tristan',
-							'other',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'kind'> = schema.Kind;
 
 	readonly schema = Kind.schema;
 
@@ -43758,7 +36842,7 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
 	contents: KindContents;
 
 	constructor(opts?: { attributes?: Partial<KindAttributes>; contents?: KindContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Kind.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Kind.schema);
 		this.contents = opts?.contents ?? operations.zero(Kind.schema.contents);
 	}
 	/** Gets @type {KindAttributes['bracket-degrees']}. */
@@ -43985,6 +37069,7 @@ export class Kind implements XMLElement<'kind', KindAttributes, KindContents> {
 		return this;
 	}
 }
+registerElement('Kind', Kind);
 
 export type InversionAttributes = {
 	color: string | null;
@@ -44009,33 +37094,7 @@ export type InversionContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/inversion/
  */
 export class Inversion implements XMLElement<'inversion', InversionAttributes, InversionContents> {
-	static readonly schema = {
-		name: 'inversion',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			text: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{ type: 'label', label: 'inversion', value: { type: 'required', value: { type: 'int', min: 0, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'inversion'> = schema.Inversion;
 
 	readonly schema = Inversion.schema;
 
@@ -44043,7 +37102,7 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
 	contents: InversionContents;
 
 	constructor(opts?: { attributes?: Partial<InversionAttributes>; contents?: InversionContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Inversion.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Inversion.schema);
 		this.contents = opts?.contents ?? operations.zero(Inversion.schema.contents);
 	}
 	/** Gets @type {InversionAttributes['color']}. */
@@ -44148,6 +37207,7 @@ export class Inversion implements XMLElement<'inversion', InversionAttributes, I
 		return this;
 	}
 }
+registerElement('Inversion', Inversion);
 
 export type BassSeparatorAttributes = {
 	color: string | null;
@@ -44171,30 +37231,7 @@ export type BassSeparatorContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bass-separator/
  */
 export class BassSeparator implements XMLElement<'bass-separator', BassSeparatorAttributes, BassSeparatorContents> {
-	static readonly schema = {
-		name: 'bass-separator',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'bass-separator'> = schema.BassSeparator;
 
 	readonly schema = BassSeparator.schema;
 
@@ -44202,7 +37239,7 @@ export class BassSeparator implements XMLElement<'bass-separator', BassSeparator
 	contents: BassSeparatorContents;
 
 	constructor(opts?: { attributes?: Partial<BassSeparatorAttributes>; contents?: BassSeparatorContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BassSeparator.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BassSeparator.schema);
 		this.contents = opts?.contents ?? operations.zero(BassSeparator.schema.contents);
 	}
 	/** Gets @type {BassSeparatorAttributes['color']}. */
@@ -44298,6 +37335,7 @@ export class BassSeparator implements XMLElement<'bass-separator', BassSeparator
 		return this;
 	}
 }
+registerElement('BassSeparator', BassSeparator);
 
 export type BassStepAttributes = {
 	color: string | null;
@@ -44322,37 +37360,7 @@ export type BassStepContents = ['A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bass-step/
  */
 export class BassStep implements XMLElement<'bass-step', BassStepAttributes, BassStepContents> {
-	static readonly schema = {
-		name: 'bass-step',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			text: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'step',
-				value: { type: 'required', value: { type: 'choices', choices: ['A', 'B', 'C', 'D', 'E', 'F', 'G'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'bass-step'> = schema.BassStep;
 
 	readonly schema = BassStep.schema;
 
@@ -44360,7 +37368,7 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
 	contents: BassStepContents;
 
 	constructor(opts?: { attributes?: Partial<BassStepAttributes>; contents?: BassStepContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BassStep.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BassStep.schema);
 		this.contents = opts?.contents ?? operations.zero(BassStep.schema.contents);
 	}
 	/** Gets @type {BassStepAttributes['color']}. */
@@ -44465,6 +37473,7 @@ export class BassStep implements XMLElement<'bass-step', BassStepAttributes, Bas
 		return this;
 	}
 }
+registerElement('BassStep', BassStep);
 
 export type BassAlterAttributes = {
 	color: string | null;
@@ -44490,38 +37499,7 @@ export type BassAlterContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bass-alter/
  */
 export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, BassAlterContents> {
-	static readonly schema = {
-		name: 'bass-alter',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			location: { type: 'optional', value: { type: 'choices', choices: ['left', 'right'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'semitones',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'bass-alter'> = schema.BassAlter;
 
 	readonly schema = BassAlter.schema;
 
@@ -44529,7 +37507,7 @@ export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, 
 	contents: BassAlterContents;
 
 	constructor(opts?: { attributes?: Partial<BassAlterAttributes>; contents?: BassAlterContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BassAlter.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BassAlter.schema);
 		this.contents = opts?.contents ?? operations.zero(BassAlter.schema.contents);
 	}
 	/** Gets @type {BassAlterAttributes['color']}. */
@@ -44643,6 +37621,7 @@ export class BassAlter implements XMLElement<'bass-alter', BassAlterAttributes, 
 		return this;
 	}
 }
+registerElement('BassAlter', BassAlter);
 
 export type BassAttributes = { arrangement: 'horizontal' | 'vertical' | 'diagonal' | null };
 
@@ -44656,17 +37635,7 @@ export type BassContents = [BassSeparator | null, BassStep, BassAlter | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bass/
  */
 export class Bass implements XMLElement<'bass', BassAttributes, BassContents> {
-	static readonly schema = {
-		name: 'bass',
-		attributes: {
-			arrangement: { type: 'optional', value: { type: 'choices', choices: ['horizontal', 'vertical', 'diagonal'] } },
-		},
-		contents: [
-			{ type: 'optional', value: BassSeparator },
-			{ type: 'required', value: BassStep },
-			{ type: 'optional', value: BassAlter },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'bass'> = schema.Bass;
 
 	readonly schema = Bass.schema;
 
@@ -44674,7 +37643,7 @@ export class Bass implements XMLElement<'bass', BassAttributes, BassContents> {
 	contents: BassContents;
 
 	constructor(opts?: { attributes?: Partial<BassAttributes>; contents?: BassContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Bass.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Bass.schema);
 		this.contents = opts?.contents ?? operations.zero(Bass.schema.contents);
 	}
 	/** Gets @type {BassAttributes['arrangement']}. */
@@ -44714,6 +37683,7 @@ export class Bass implements XMLElement<'bass', BassAttributes, BassContents> {
 		return this;
 	}
 }
+registerElement('Bass', Bass);
 
 export type DegreeValueAttributes = {
 	color: string | null;
@@ -44739,37 +37709,7 @@ export type DegreeValueContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/degree-value/
  */
 export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttributes, DegreeValueContents> {
-	static readonly schema = {
-		name: 'degree-value',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			symbol: {
-				type: 'optional',
-				value: { type: 'choices', choices: ['major', 'minor', 'augmented', 'diminished', 'half-diminished'] },
-			},
-			text: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{ type: 'label', label: 'value', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'degree-value'> = schema.DegreeValue;
 
 	readonly schema = DegreeValue.schema;
 
@@ -44777,7 +37717,7 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
 	contents: DegreeValueContents;
 
 	constructor(opts?: { attributes?: Partial<DegreeValueAttributes>; contents?: DegreeValueContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DegreeValue.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DegreeValue.schema);
 		this.contents = opts?.contents ?? operations.zero(DegreeValue.schema.contents);
 	}
 	/** Gets @type {DegreeValueAttributes['color']}. */
@@ -44891,6 +37831,7 @@ export class DegreeValue implements XMLElement<'degree-value', DegreeValueAttrib
 		return this;
 	}
 }
+registerElement('DegreeValue', DegreeValue);
 
 export type DegreeAlterAttributes = {
 	color: string | null;
@@ -44915,37 +37856,7 @@ export type DegreeAlterContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/degree-alter/
  */
 export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttributes, DegreeAlterContents> {
-	static readonly schema = {
-		name: 'degree-alter',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'plus-minus': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'semitones',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'degree-alter'> = schema.DegreeAlter;
 
 	readonly schema = DegreeAlter.schema;
 
@@ -44953,7 +37864,7 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
 	contents: DegreeAlterContents;
 
 	constructor(opts?: { attributes?: Partial<DegreeAlterAttributes>; contents?: DegreeAlterContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DegreeAlter.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DegreeAlter.schema);
 		this.contents = opts?.contents ?? operations.zero(DegreeAlter.schema.contents);
 	}
 	/** Gets @type {DegreeAlterAttributes['color']}. */
@@ -45058,6 +37969,7 @@ export class DegreeAlter implements XMLElement<'degree-alter', DegreeAlterAttrib
 		return this;
 	}
 }
+registerElement('DegreeAlter', DegreeAlter);
 
 export type DegreeTypeAttributes = {
 	color: string | null;
@@ -45082,37 +37994,7 @@ export type DegreeTypeContents = ['add' | 'alter' | 'subtract'];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/degree-type/
  */
 export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttributes, DegreeTypeContents> {
-	static readonly schema = {
-		name: 'degree-type',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			text: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'degree-type-value',
-				value: { type: 'required', value: { type: 'choices', choices: ['add', 'alter', 'subtract'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'degree-type'> = schema.DegreeType;
 
 	readonly schema = DegreeType.schema;
 
@@ -45120,7 +38002,7 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
 	contents: DegreeTypeContents;
 
 	constructor(opts?: { attributes?: Partial<DegreeTypeAttributes>; contents?: DegreeTypeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, DegreeType.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, DegreeType.schema);
 		this.contents = opts?.contents ?? operations.zero(DegreeType.schema.contents);
 	}
 	/** Gets @type {DegreeTypeAttributes['color']}. */
@@ -45225,6 +38107,7 @@ export class DegreeType implements XMLElement<'degree-type', DegreeTypeAttribute
 		return this;
 	}
 }
+registerElement('DegreeType', DegreeType);
 
 export type DegreeAttributes = { 'print-object': 'yes' | 'no' | null };
 
@@ -45240,15 +38123,7 @@ export type DegreeContents = [DegreeValue, DegreeAlter, DegreeType];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/degree/
  */
 export class Degree implements XMLElement<'degree', DegreeAttributes, DegreeContents> {
-	static readonly schema = {
-		name: 'degree',
-		attributes: { 'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } } },
-		contents: [
-			{ type: 'required', value: DegreeValue },
-			{ type: 'required', value: DegreeAlter },
-			{ type: 'required', value: DegreeType },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'degree'> = schema.Degree;
 
 	readonly schema = Degree.schema;
 
@@ -45256,7 +38131,7 @@ export class Degree implements XMLElement<'degree', DegreeAttributes, DegreeCont
 	contents: DegreeContents;
 
 	constructor(opts?: { attributes?: Partial<DegreeAttributes>; contents?: DegreeContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Degree.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Degree.schema);
 		this.contents = opts?.contents ?? operations.zero(Degree.schema.contents);
 	}
 	/** Gets @type {DegreeAttributes['print-object']}. */
@@ -45296,6 +38171,7 @@ export class Degree implements XMLElement<'degree', DegreeAttributes, DegreeCont
 		return this;
 	}
 }
+registerElement('Degree', Degree);
 
 export type FrameStringsAttributes = Record<string, unknown>;
 
@@ -45309,17 +38185,7 @@ export type FrameStringsContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/frame-strings/
  */
 export class FrameStrings implements XMLElement<'frame-strings', FrameStringsAttributes, FrameStringsContents> {
-	static readonly schema = {
-		name: 'frame-strings',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'lines-size',
-				value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'frame-strings'> = schema.FrameStrings;
 
 	readonly schema = FrameStrings.schema;
 
@@ -45327,7 +38193,7 @@ export class FrameStrings implements XMLElement<'frame-strings', FrameStringsAtt
 	contents: FrameStringsContents;
 
 	constructor(opts?: { attributes?: Partial<FrameStringsAttributes>; contents?: FrameStringsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, FrameStrings.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, FrameStrings.schema);
 		this.contents = opts?.contents ?? operations.zero(FrameStrings.schema.contents);
 	}
 
@@ -45341,6 +38207,7 @@ export class FrameStrings implements XMLElement<'frame-strings', FrameStringsAtt
 		return this;
 	}
 }
+registerElement('FrameStrings', FrameStrings);
 
 export type FrameFretsAttributes = Record<string, unknown>;
 
@@ -45354,17 +38221,7 @@ export type FrameFretsContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/frame-frets/
  */
 export class FrameFrets implements XMLElement<'frame-frets', FrameFretsAttributes, FrameFretsContents> {
-	static readonly schema = {
-		name: 'frame-frets',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'space-size',
-				value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'frame-frets'> = schema.FrameFrets;
 
 	readonly schema = FrameFrets.schema;
 
@@ -45372,7 +38229,7 @@ export class FrameFrets implements XMLElement<'frame-frets', FrameFretsAttribute
 	contents: FrameFretsContents;
 
 	constructor(opts?: { attributes?: Partial<FrameFretsAttributes>; contents?: FrameFretsContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, FrameFrets.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, FrameFrets.schema);
 		this.contents = opts?.contents ?? operations.zero(FrameFrets.schema.contents);
 	}
 
@@ -45386,6 +38243,7 @@ export class FrameFrets implements XMLElement<'frame-frets', FrameFretsAttribute
 		return this;
 	}
 }
+registerElement('FrameFrets', FrameFrets);
 
 export type FirstFretAttributes = { location: 'left' | 'right' | null; text: string | null };
 
@@ -45399,16 +38257,7 @@ export type FirstFretContents = [number];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/first-fret/
  */
 export class FirstFret implements XMLElement<'first-fret', FirstFretAttributes, FirstFretContents> {
-	static readonly schema = {
-		name: 'first-fret',
-		attributes: {
-			location: { type: 'optional', value: { type: 'choices', choices: ['left', 'right'] } },
-			text: { type: 'optional', value: { type: 'string' } },
-		},
-		contents: [
-			{ type: 'label', label: 'fret', value: { type: 'required', value: { type: 'int', min: 1, max: Infinity } } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'first-fret'> = schema.FirstFret;
 
 	readonly schema = FirstFret.schema;
 
@@ -45416,7 +38265,7 @@ export class FirstFret implements XMLElement<'first-fret', FirstFretAttributes, 
 	contents: FirstFretContents;
 
 	constructor(opts?: { attributes?: Partial<FirstFretAttributes>; contents?: FirstFretContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, FirstFret.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, FirstFret.schema);
 		this.contents = opts?.contents ?? operations.zero(FirstFret.schema.contents);
 	}
 	/** Gets @type {FirstFretAttributes['location']}. */
@@ -45447,6 +38296,7 @@ export class FirstFret implements XMLElement<'first-fret', FirstFretAttributes, 
 		return this;
 	}
 }
+registerElement('FirstFret', FirstFret);
 
 export type BarreAttributes = { color: string | null; type: 'start' | 'stop' };
 
@@ -45460,14 +38310,7 @@ export type BarreContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/barre/
  */
 export class Barre implements XMLElement<'barre', BarreAttributes, BarreContents> {
-	static readonly schema = {
-		name: 'barre',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop'] } },
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'barre'> = schema.Barre;
 
 	readonly schema = Barre.schema;
 
@@ -45475,7 +38318,7 @@ export class Barre implements XMLElement<'barre', BarreAttributes, BarreContents
 	contents: BarreContents;
 
 	constructor(opts?: { attributes?: Partial<BarreAttributes>; contents?: BarreContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Barre.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Barre.schema);
 		this.contents = opts?.contents ?? operations.zero(Barre.schema.contents);
 	}
 	/** Gets @type {BarreAttributes['color']}. */
@@ -45497,6 +38340,7 @@ export class Barre implements XMLElement<'barre', BarreAttributes, BarreContents
 		return this;
 	}
 }
+registerElement('Barre', Barre);
 
 export type FrameNoteAttributes = Record<string, unknown>;
 
@@ -45510,16 +38354,7 @@ export type FrameNoteContents = [String, Fret, Fingering | null, Barre | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/frame-note/
  */
 export class FrameNote implements XMLElement<'frame-note', FrameNoteAttributes, FrameNoteContents> {
-	static readonly schema = {
-		name: 'frame-note',
-		attributes: {},
-		contents: [
-			{ type: 'required', value: String },
-			{ type: 'required', value: Fret },
-			{ type: 'optional', value: Fingering },
-			{ type: 'optional', value: Barre },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'frame-note'> = schema.FrameNote;
 
 	readonly schema = FrameNote.schema;
 
@@ -45527,7 +38362,7 @@ export class FrameNote implements XMLElement<'frame-note', FrameNoteAttributes, 
 	contents: FrameNoteContents;
 
 	constructor(opts?: { attributes?: Partial<FrameNoteAttributes>; contents?: FrameNoteContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, FrameNote.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, FrameNote.schema);
 		this.contents = opts?.contents ?? operations.zero(FrameNote.schema.contents);
 	}
 
@@ -45568,6 +38403,7 @@ export class FrameNote implements XMLElement<'frame-note', FrameNoteAttributes, 
 		return this;
 	}
 }
+registerElement('FrameNote', FrameNote);
 
 export type FrameAttributes = {
 	color: string | null;
@@ -45597,41 +38433,7 @@ export type FrameContents = [FrameStrings, FrameFrets, FirstFret | null, Array<F
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/frame/
  */
 export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents> {
-	static readonly schema = {
-		name: 'frame',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			height: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			unplayed: { type: 'optional', value: { type: 'string' } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom'] } },
-			width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{ type: 'required', value: FrameStrings },
-			{ type: 'required', value: FrameFrets },
-			{ type: 'optional', value: FirstFret },
-			{ type: 'label', label: 'frame-notes', value: { type: 'oneOrMore', value: FrameNote } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'frame'> = schema.Frame;
 
 	readonly schema = Frame.schema;
 
@@ -45639,7 +38441,7 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
 	contents: FrameContents;
 
 	constructor(opts?: { attributes?: Partial<FrameAttributes>; contents?: FrameContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Frame.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Frame.schema);
 		this.contents = opts?.contents ?? operations.zero(Frame.schema.contents);
 	}
 	/** Gets @type {FrameAttributes['color']}. */
@@ -45816,6 +38618,7 @@ export class Frame implements XMLElement<'frame', FrameAttributes, FrameContents
 		return this;
 	}
 }
+registerElement('Frame', Frame);
 
 export type HarmonyAttributes = {
 	arrangement: 'horizontal' | 'vertical' | 'diagonal' | null;
@@ -45857,57 +38660,7 @@ export type HarmonyContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harmony/
  */
 export class Harmony implements XMLElement<'harmony', HarmonyAttributes, HarmonyContents> {
-	static readonly schema = {
-		name: 'harmony',
-		attributes: {
-			arrangement: { type: 'optional', value: { type: 'choices', choices: ['horizontal', 'vertical', 'diagonal'] } },
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'print-frame': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			system: { type: 'optional', value: { type: 'choices', choices: ['none', 'only-top', 'also-top'] } },
-			type: { type: 'optional', value: { type: 'choices', choices: ['alternate', 'explicit', 'implied'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'values',
-				value: {
-					type: 'oneOrMore',
-					value: [
-						{ type: 'choices', choices: [Root, Numeral, Function] },
-						{ type: 'required', value: Kind },
-						{ type: 'optional', value: Inversion },
-						{ type: 'optional', value: Bass },
-						{ type: 'zeroOrMore', value: Degree },
-					],
-				},
-			},
-			{ type: 'optional', value: Frame },
-			{ type: 'optional', value: Offset },
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-			{ type: 'optional', value: Staff },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'harmony'> = schema.Harmony;
 
 	readonly schema = Harmony.schema;
 
@@ -45915,7 +38668,7 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
 	contents: HarmonyContents;
 
 	constructor(opts?: { attributes?: Partial<HarmonyAttributes>; contents?: HarmonyContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Harmony.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Harmony.schema);
 		this.contents = opts?.contents ?? operations.zero(Harmony.schema.contents);
 	}
 	/** Gets @type {HarmonyAttributes['arrangement']}. */
@@ -46119,6 +38872,7 @@ export class Harmony implements XMLElement<'harmony', HarmonyAttributes, Harmony
 		return this;
 	}
 }
+registerElement('Harmony', Harmony);
 
 export type PrefixAttributes = {
 	color: string | null;
@@ -46142,30 +38896,7 @@ export type PrefixContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/prefix/
  */
 export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixContents> {
-	static readonly schema = {
-		name: 'prefix',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'prefix'> = schema.Prefix;
 
 	readonly schema = Prefix.schema;
 
@@ -46173,7 +38904,7 @@ export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixCont
 	contents: PrefixContents;
 
 	constructor(opts?: { attributes?: Partial<PrefixAttributes>; contents?: PrefixContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Prefix.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Prefix.schema);
 		this.contents = opts?.contents ?? operations.zero(Prefix.schema.contents);
 	}
 	/** Gets @type {PrefixAttributes['color']}. */
@@ -46269,6 +39000,7 @@ export class Prefix implements XMLElement<'prefix', PrefixAttributes, PrefixCont
 		return this;
 	}
 }
+registerElement('Prefix', Prefix);
 
 export type FigureNumberAttributes = {
 	color: string | null;
@@ -46292,30 +39024,7 @@ export type FigureNumberContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/figure-number/
  */
 export class FigureNumber implements XMLElement<'figure-number', FigureNumberAttributes, FigureNumberContents> {
-	static readonly schema = {
-		name: 'figure-number',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'figure-number'> = schema.FigureNumber;
 
 	readonly schema = FigureNumber.schema;
 
@@ -46323,7 +39032,7 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
 	contents: FigureNumberContents;
 
 	constructor(opts?: { attributes?: Partial<FigureNumberAttributes>; contents?: FigureNumberContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, FigureNumber.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, FigureNumber.schema);
 		this.contents = opts?.contents ?? operations.zero(FigureNumber.schema.contents);
 	}
 	/** Gets @type {FigureNumberAttributes['color']}. */
@@ -46419,6 +39128,7 @@ export class FigureNumber implements XMLElement<'figure-number', FigureNumberAtt
 		return this;
 	}
 }
+registerElement('FigureNumber', FigureNumber);
 
 export type SuffixAttributes = {
 	color: string | null;
@@ -46442,30 +39152,7 @@ export type SuffixContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/suffix/
  */
 export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixContents> {
-	static readonly schema = {
-		name: 'suffix',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'suffix'> = schema.Suffix;
 
 	readonly schema = Suffix.schema;
 
@@ -46473,7 +39160,7 @@ export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixCont
 	contents: SuffixContents;
 
 	constructor(opts?: { attributes?: Partial<SuffixAttributes>; contents?: SuffixContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Suffix.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Suffix.schema);
 		this.contents = opts?.contents ?? operations.zero(Suffix.schema.contents);
 	}
 	/** Gets @type {SuffixAttributes['color']}. */
@@ -46569,6 +39256,7 @@ export class Suffix implements XMLElement<'suffix', SuffixAttributes, SuffixCont
 		return this;
 	}
 }
+registerElement('Suffix', Suffix);
 
 export type FigureAttributes = Record<string, unknown>;
 
@@ -46589,18 +39277,7 @@ export type FigureContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/figure/
  */
 export class Figure implements XMLElement<'figure', FigureAttributes, FigureContents> {
-	static readonly schema = {
-		name: 'figure',
-		attributes: {},
-		contents: [
-			{ type: 'optional', value: Prefix },
-			{ type: 'optional', value: FigureNumber },
-			{ type: 'optional', value: Suffix },
-			{ type: 'optional', value: Extend },
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'figure'> = schema.Figure;
 
 	readonly schema = Figure.schema;
 
@@ -46608,7 +39285,7 @@ export class Figure implements XMLElement<'figure', FigureAttributes, FigureCont
 	contents: FigureContents;
 
 	constructor(opts?: { attributes?: Partial<FigureAttributes>; contents?: FigureContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Figure.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Figure.schema);
 		this.contents = opts?.contents ?? operations.zero(Figure.schema.contents);
 	}
 
@@ -46667,6 +39344,7 @@ export class Figure implements XMLElement<'figure', FigureAttributes, FigureCont
 		return this;
 	}
 }
+registerElement('Figure', Figure);
 
 export type FiguredBassAttributes = {
 	color: string | null;
@@ -46701,44 +39379,7 @@ export type FiguredBassContents = [Array<Figure>, Duration | null, Footnote | nu
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/figured-bass/
  */
 export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttributes, FiguredBassContents> {
-	static readonly schema = {
-		name: 'figured-bass',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			parentheses: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			placement: { type: 'optional', value: { type: 'choices', choices: ['above', 'below'] } },
-			'print-dot': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-lyric': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'print-spacing': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [
-			{ type: 'label', label: 'figures', value: { type: 'oneOrMore', value: Figure } },
-			{ type: 'optional', value: Duration },
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'figured-bass'> = schema.FiguredBass;
 
 	readonly schema = FiguredBass.schema;
 
@@ -46746,7 +39387,7 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
 	contents: FiguredBassContents;
 
 	constructor(opts?: { attributes?: Partial<FiguredBassAttributes>; contents?: FiguredBassContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, FiguredBass.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, FiguredBass.schema);
 		this.contents = opts?.contents ?? operations.zero(FiguredBass.schema.contents);
 	}
 	/** Gets @type {FiguredBassAttributes['color']}. */
@@ -46950,6 +39591,7 @@ export class FiguredBass implements XMLElement<'figured-bass', FiguredBassAttrib
 		return this;
 	}
 }
+registerElement('FiguredBass', FiguredBass);
 
 export type MeasureDistanceAttributes = Record<string, unknown>;
 
@@ -46965,17 +39607,7 @@ export type MeasureDistanceContents = [number];
 export class MeasureDistance
 	implements XMLElement<'measure-distance', MeasureDistanceAttributes, MeasureDistanceContents>
 {
-	static readonly schema = {
-		name: 'measure-distance',
-		attributes: {},
-		contents: [
-			{
-				type: 'label',
-				label: 'value',
-				value: { type: 'required', value: { type: 'float', min: -Infinity, max: Infinity } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'measure-distance'> = schema.MeasureDistance;
 
 	readonly schema = MeasureDistance.schema;
 
@@ -46983,7 +39615,7 @@ export class MeasureDistance
 	contents: MeasureDistanceContents;
 
 	constructor(opts?: { attributes?: Partial<MeasureDistanceAttributes>; contents?: MeasureDistanceContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MeasureDistance.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MeasureDistance.schema);
 		this.contents = opts?.contents ?? operations.zero(MeasureDistance.schema.contents);
 	}
 
@@ -46997,6 +39629,7 @@ export class MeasureDistance
 		return this;
 	}
 }
+registerElement('MeasureDistance', MeasureDistance);
 
 export type MeasureLayoutAttributes = Record<string, unknown>;
 
@@ -47010,11 +39643,7 @@ export type MeasureLayoutContents = [MeasureDistance | null];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-layout/
  */
 export class MeasureLayout implements XMLElement<'measure-layout', MeasureLayoutAttributes, MeasureLayoutContents> {
-	static readonly schema = {
-		name: 'measure-layout',
-		attributes: {},
-		contents: [{ type: 'optional', value: MeasureDistance }],
-	} as const;
+	static readonly schema: XMLElementSchema<'measure-layout'> = schema.MeasureLayout;
 
 	readonly schema = MeasureLayout.schema;
 
@@ -47022,7 +39651,7 @@ export class MeasureLayout implements XMLElement<'measure-layout', MeasureLayout
 	contents: MeasureLayoutContents;
 
 	constructor(opts?: { attributes?: Partial<MeasureLayoutAttributes>; contents?: MeasureLayoutContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MeasureLayout.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MeasureLayout.schema);
 		this.contents = opts?.contents ?? operations.zero(MeasureLayout.schema.contents);
 	}
 
@@ -47036,6 +39665,7 @@ export class MeasureLayout implements XMLElement<'measure-layout', MeasureLayout
 		return this;
 	}
 }
+registerElement('MeasureLayout', MeasureLayout);
 
 export type MeasureNumberingAttributes = {
 	color: string | null;
@@ -47071,45 +39701,7 @@ export type MeasureNumberingContents = ['none' | 'measure' | 'system'];
 export class MeasureNumbering
 	implements XMLElement<'measure-numbering', MeasureNumberingAttributes, MeasureNumberingContents>
 {
-	static readonly schema = {
-		name: 'measure-numbering',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			halign: { type: 'optional', value: { type: 'choices', choices: ['left', 'center', 'right'] } },
-			'multiple-rest-always': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'multiple-rest-range': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			staff: { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			system: {
-				type: 'optional',
-				value: { type: 'choices', choices: ['none', 'only-top', 'only-bottom', 'also-top', 'also-bottom'] },
-			},
-			valign: { type: 'optional', value: { type: 'choices', choices: ['top', 'middle', 'bottom', 'baseline'] } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'measure-number-value',
-				value: { type: 'required', value: { type: 'choices', choices: ['none', 'measure', 'system'] } },
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'measure-numbering'> = schema.MeasureNumbering;
 
 	readonly schema = MeasureNumbering.schema;
 
@@ -47117,7 +39709,7 @@ export class MeasureNumbering
 	contents: MeasureNumberingContents;
 
 	constructor(opts?: { attributes?: Partial<MeasureNumberingAttributes>; contents?: MeasureNumberingContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MeasureNumbering.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MeasureNumbering.schema);
 		this.contents = opts?.contents ?? operations.zero(MeasureNumbering.schema.contents);
 	}
 	/** Gets @type {MeasureNumberingAttributes['color']}. */
@@ -47267,6 +39859,7 @@ export class MeasureNumbering
 		return this;
 	}
 }
+registerElement('MeasureNumbering', MeasureNumbering);
 
 export type PrintAttributes = {
 	'blank-page': number | null;
@@ -47297,26 +39890,7 @@ export type PrintContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/print/
  */
 export class Print implements XMLElement<'print', PrintAttributes, PrintContents> {
-	static readonly schema = {
-		name: 'print',
-		attributes: {
-			'blank-page': { type: 'optional', value: { type: 'int', min: 1, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'new-page': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'new-system': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'page-number': { type: 'optional', value: { type: 'string' } },
-			'staff-spacing': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{ type: 'optional', value: PageLayout },
-			{ type: 'optional', value: SystemLayout },
-			{ type: 'label', label: 'staff-layouts', value: { type: 'zeroOrMore', value: StaffLayout } },
-			{ type: 'optional', value: MeasureLayout },
-			{ type: 'optional', value: MeasureNumbering },
-			{ type: 'optional', value: PartNameDisplay },
-			{ type: 'optional', value: PartAbbreviationDisplay },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'print'> = schema.Print;
 
 	readonly schema = Print.schema;
 
@@ -47324,7 +39898,7 @@ export class Print implements XMLElement<'print', PrintAttributes, PrintContents
 	contents: PrintContents;
 
 	constructor(opts?: { attributes?: Partial<PrintAttributes>; contents?: PrintContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Print.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Print.schema);
 		this.contents = opts?.contents ?? operations.zero(Print.schema.contents);
 	}
 	/** Gets @type {PrintAttributes['blank-page']}. */
@@ -47445,6 +40019,7 @@ export class Print implements XMLElement<'print', PrintAttributes, PrintContents
 		return this;
 	}
 }
+registerElement('Print', Print);
 
 export type BarStyleAttributes = { color: string | null };
 
@@ -47470,37 +40045,7 @@ export type BarStyleContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bar-style/
  */
 export class BarStyle implements XMLElement<'bar-style', BarStyleAttributes, BarStyleContents> {
-	static readonly schema = {
-		name: 'bar-style',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'bar-style',
-				value: {
-					type: 'required',
-					value: {
-						type: 'choices',
-						choices: [
-							'none',
-							'regular',
-							'dotted',
-							'dashed',
-							'heavy',
-							'light-light',
-							'light-heavy',
-							'heavy-light',
-							'heavy-heavy',
-							'tick',
-							'short',
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'bar-style'> = schema.BarStyle;
 
 	readonly schema = BarStyle.schema;
 
@@ -47508,7 +40053,7 @@ export class BarStyle implements XMLElement<'bar-style', BarStyleAttributes, Bar
 	contents: BarStyleContents;
 
 	constructor(opts?: { attributes?: Partial<BarStyleAttributes>; contents?: BarStyleContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, BarStyle.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, BarStyle.schema);
 		this.contents = opts?.contents ?? operations.zero(BarStyle.schema.contents);
 	}
 	/** Gets @type {BarStyleAttributes['color']}. */
@@ -47554,6 +40099,7 @@ export class BarStyle implements XMLElement<'bar-style', BarStyleAttributes, Bar
 		return this;
 	}
 }
+registerElement('BarStyle', BarStyle);
 
 export type EndingAttributes = {
 	color: string | null;
@@ -47586,40 +40132,7 @@ export type EndingContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ending/
  */
 export class Ending implements XMLElement<'ending', EndingAttributes, EndingContents> {
-	static readonly schema = {
-		name: 'ending',
-		attributes: {
-			color: { type: 'optional', value: { type: 'regex', pattern: /#[\dA-F]{6}([\dA-F][\dA-F])?/, zero: '#000000' } },
-			'default-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'default-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'end-length': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'font-family': { type: 'optional', value: { type: 'regex', pattern: /[^,]+(, ?[^,]+)*/, zero: ' ' } },
-			'font-size': {
-				type: 'optional',
-				value: {
-					type: 'choices',
-					choices: [
-						{ type: 'choices', choices: ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'] },
-						{ type: 'float', min: -Infinity, max: Infinity },
-					],
-				},
-			},
-			'font-style': { type: 'optional', value: { type: 'choices', choices: ['normal', 'italic'] } },
-			'font-weight': { type: 'optional', value: { type: 'choices', choices: ['normal', 'bold'] } },
-			number: {
-				type: 'required',
-				value: { type: 'regex', pattern: /([ ]*)|([1-9][0-9]*(, ?[1-9][0-9]*)*)/, zero: '' },
-			},
-			'print-object': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'relative-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'relative-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			system: { type: 'optional', value: { type: 'choices', choices: ['none', 'only-top', 'also-top'] } },
-			'text-x': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			'text-y': { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'discontinue'] } },
-		},
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'ending'> = schema.Ending;
 
 	readonly schema = Ending.schema;
 
@@ -47627,7 +40140,7 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
 	contents: EndingContents;
 
 	constructor(opts?: { attributes?: Partial<EndingAttributes>; contents?: EndingContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Ending.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Ending.schema);
 		this.contents = opts?.contents ?? operations.zero(Ending.schema.contents);
 	}
 	/** Gets @type {EndingAttributes['color']}. */
@@ -47786,6 +40299,7 @@ export class Ending implements XMLElement<'ending', EndingAttributes, EndingCont
 		return this;
 	}
 }
+registerElement('Ending', Ending);
 
 export type RepeatAttributes = {
 	'after-jump': 'yes' | 'no' | null;
@@ -47804,19 +40318,7 @@ export type RepeatContents = [];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/repeat/
  */
 export class Repeat implements XMLElement<'repeat', RepeatAttributes, RepeatContents> {
-	static readonly schema = {
-		name: 'repeat',
-		attributes: {
-			'after-jump': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			direction: { type: 'required', value: { type: 'choices', choices: ['backward', 'forward'] } },
-			times: { type: 'optional', value: { type: 'int', min: 0, max: Infinity } },
-			winged: {
-				type: 'optional',
-				value: { type: 'choices', choices: ['none', 'straight', 'curved', 'double-straight', 'double-curved'] },
-			},
-		},
-		contents: [],
-	} as const;
+	static readonly schema: XMLElementSchema<'repeat'> = schema.Repeat;
 
 	readonly schema = Repeat.schema;
 
@@ -47824,7 +40326,7 @@ export class Repeat implements XMLElement<'repeat', RepeatAttributes, RepeatCont
 	contents: RepeatContents;
 
 	constructor(opts?: { attributes?: Partial<RepeatAttributes>; contents?: RepeatContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Repeat.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Repeat.schema);
 		this.contents = opts?.contents ?? operations.zero(Repeat.schema.contents);
 	}
 	/** Gets @type {RepeatAttributes['after-jump']}. */
@@ -47864,6 +40366,7 @@ export class Repeat implements XMLElement<'repeat', RepeatAttributes, RepeatCont
 		return this;
 	}
 }
+registerElement('Repeat', Repeat);
 
 export type BarlineAttributes = {
 	coda: string | null;
@@ -47895,27 +40398,7 @@ export type BarlineContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/barline/
  */
 export class Barline implements XMLElement<'barline', BarlineAttributes, BarlineContents> {
-	static readonly schema = {
-		name: 'barline',
-		attributes: {
-			coda: { type: 'label', label: 'coda-token', value: { type: 'optional', value: { type: 'string' } } },
-			divisions: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			location: { type: 'optional', value: { type: 'choices', choices: ['right', 'left', 'middle'] } },
-			segno: { type: 'label', label: 'segno-token', value: { type: 'optional', value: { type: 'string' } } },
-		},
-		contents: [
-			{ type: 'optional', value: BarStyle },
-			{ type: 'optional', value: Footnote },
-			{ type: 'optional', value: Level },
-			{ type: 'optional', value: WavyLine },
-			{ type: 'optional', value: Segno },
-			{ type: 'optional', value: Coda },
-			{ type: 'label', label: 'fermatas', value: { type: 'choices', choices: [[], [Fermata], [Fermata, Fermata]] } },
-			{ type: 'optional', value: Ending },
-			{ type: 'optional', value: Repeat },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'barline'> = schema.Barline;
 
 	readonly schema = Barline.schema;
 
@@ -47923,7 +40406,7 @@ export class Barline implements XMLElement<'barline', BarlineAttributes, Barline
 	contents: BarlineContents;
 
 	constructor(opts?: { attributes?: Partial<BarlineAttributes>; contents?: BarlineContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Barline.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Barline.schema);
 		this.contents = opts?.contents ?? operations.zero(Barline.schema.contents);
 	}
 	/** Gets @type {BarlineAttributes['coda']}. */
@@ -48053,6 +40536,7 @@ export class Barline implements XMLElement<'barline', BarlineAttributes, Barline
 		return this;
 	}
 }
+registerElement('Barline', Barline);
 
 export type FeatureAttributes = { type: string | null };
 
@@ -48066,11 +40550,7 @@ export type FeatureContents = [string];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/feature/
  */
 export class Feature implements XMLElement<'feature', FeatureAttributes, FeatureContents> {
-	static readonly schema = {
-		name: 'feature',
-		attributes: { type: { type: 'optional', value: { type: 'string' } } },
-		contents: [{ type: 'label', label: 'text', value: { type: 'required', value: { type: 'string' } } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'feature'> = schema.Feature;
 
 	readonly schema = Feature.schema;
 
@@ -48078,7 +40558,7 @@ export class Feature implements XMLElement<'feature', FeatureAttributes, Feature
 	contents: FeatureContents;
 
 	constructor(opts?: { attributes?: Partial<FeatureAttributes>; contents?: FeatureContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Feature.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Feature.schema);
 		this.contents = opts?.contents ?? operations.zero(Feature.schema.contents);
 	}
 	/** Gets @type {FeatureAttributes['type']}. */
@@ -48100,6 +40580,7 @@ export class Feature implements XMLElement<'feature', FeatureAttributes, Feature
 		return this;
 	}
 }
+registerElement('Feature', Feature);
 
 export type GroupingAttributes = {
 	id: string | null;
@@ -48120,16 +40601,7 @@ export type GroupingContents = [Array<Feature>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/grouping/
  */
 export class Grouping implements XMLElement<'grouping', GroupingAttributes, GroupingContents> {
-	static readonly schema = {
-		name: 'grouping',
-		attributes: {
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			'member-of': { type: 'optional', value: { type: 'string' } },
-			number: { type: 'optional', value: { type: 'string' } },
-			type: { type: 'required', value: { type: 'choices', choices: ['start', 'stop', 'single'] } },
-		},
-		contents: [{ type: 'label', label: 'features', value: { type: 'zeroOrMore', value: Feature } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'grouping'> = schema.Grouping;
 
 	readonly schema = Grouping.schema;
 
@@ -48137,7 +40609,7 @@ export class Grouping implements XMLElement<'grouping', GroupingAttributes, Grou
 	contents: GroupingContents;
 
 	constructor(opts?: { attributes?: Partial<GroupingAttributes>; contents?: GroupingContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, Grouping.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, Grouping.schema);
 		this.contents = opts?.contents ?? operations.zero(Grouping.schema.contents);
 	}
 	/** Gets @type {GroupingAttributes['id']}. */
@@ -48186,6 +40658,7 @@ export class Grouping implements XMLElement<'grouping', GroupingAttributes, Grou
 		return this;
 	}
 }
+registerElement('Grouping', Grouping);
 
 export type MeasurePartwiseAttributes = {
 	id: string | null;
@@ -48224,53 +40697,7 @@ export type MeasurePartwiseContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure/
  */
 export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAttributes, MeasurePartwiseContents> {
-	static readonly schema = {
-		name: 'measure',
-		attributes: {
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			implicit: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'non-controller': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'non-controlling': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			number: { type: 'required', value: { type: 'string' } },
-			text: {
-				type: 'optional',
-				value: {
-					type: 'not',
-					include: { type: 'choices', choices: ['yes', { type: 'string' }] },
-					exclude: { type: 'constant', value: '' },
-				},
-			},
-			width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [
-			{
-				type: 'label',
-				label: 'values',
-				value: {
-					type: 'zeroOrMore',
-					value: {
-						type: 'choices',
-						choices: [
-							Note,
-							Backup,
-							Forward,
-							Direction,
-							Attributes,
-							Harmony,
-							FiguredBass,
-							Print,
-							Sound,
-							Listening,
-							Barline,
-							Grouping,
-							Link,
-							Bookmark,
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'measure'> = schema.MeasurePartwise;
 
 	readonly schema = MeasurePartwise.schema;
 
@@ -48278,7 +40705,7 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
 	contents: MeasurePartwiseContents;
 
 	constructor(opts?: { attributes?: Partial<MeasurePartwiseAttributes>; contents?: MeasurePartwiseContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MeasurePartwise.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MeasurePartwise.schema);
 		this.contents = opts?.contents ?? operations.zero(MeasurePartwise.schema.contents);
 	}
 	/** Gets @type {MeasurePartwiseAttributes['id']}. */
@@ -48386,6 +40813,7 @@ export class MeasurePartwise implements XMLElement<'measure', MeasurePartwiseAtt
 		return this;
 	}
 }
+registerElement('MeasurePartwise', MeasurePartwise);
 
 export type PartPartwiseAttributes = { id: string };
 
@@ -48399,11 +40827,7 @@ export type PartPartwiseContents = [Array<MeasurePartwise>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part/
  */
 export class PartPartwise implements XMLElement<'part', PartPartwiseAttributes, PartPartwiseContents> {
-	static readonly schema = {
-		name: 'part',
-		attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [{ type: 'label', label: 'measures', value: { type: 'oneOrMore', value: MeasurePartwise } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'part'> = schema.PartPartwise;
 
 	readonly schema = PartPartwise.schema;
 
@@ -48411,7 +40835,7 @@ export class PartPartwise implements XMLElement<'part', PartPartwiseAttributes, 
 	contents: PartPartwiseContents;
 
 	constructor(opts?: { attributes?: Partial<PartPartwiseAttributes>; contents?: PartPartwiseContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartPartwise.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartPartwise.schema);
 		this.contents = opts?.contents ?? operations.zero(PartPartwise.schema.contents);
 	}
 	/** Gets @type {PartPartwiseAttributes['id']}. */
@@ -48433,6 +40857,7 @@ export class PartPartwise implements XMLElement<'part', PartPartwiseAttributes, 
 		return this;
 	}
 }
+registerElement('PartPartwise', PartPartwise);
 
 export type ScorePartwiseAttributes = { version: '4.0' };
 
@@ -48455,20 +40880,7 @@ export type ScorePartwiseContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise/
  */
 export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwiseAttributes, ScorePartwiseContents> {
-	static readonly schema = {
-		name: 'score-partwise',
-		attributes: { version: { type: 'constant', value: '4.0' } },
-		contents: [
-			{ type: 'optional', value: Work },
-			{ type: 'optional', value: MovementNumber },
-			{ type: 'optional', value: MovementTitle },
-			{ type: 'optional', value: Identification },
-			{ type: 'optional', value: Defaults },
-			{ type: 'label', label: 'credits', value: { type: 'zeroOrMore', value: Credit } },
-			{ type: 'required', value: PartList },
-			{ type: 'label', label: 'parts', value: { type: 'oneOrMore', value: PartPartwise } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'score-partwise'> = schema.ScorePartwise;
 
 	readonly schema = ScorePartwise.schema;
 
@@ -48476,7 +40888,7 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
 	contents: ScorePartwiseContents;
 
 	constructor(opts?: { attributes?: Partial<ScorePartwiseAttributes>; contents?: ScorePartwiseContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ScorePartwise.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ScorePartwise.schema);
 		this.contents = opts?.contents ?? operations.zero(ScorePartwise.schema.contents);
 	}
 	/** Gets @type {ScorePartwiseAttributes['version']}. */
@@ -48561,6 +40973,7 @@ export class ScorePartwise implements XMLElement<'score-partwise', ScorePartwise
 		return this;
 	}
 }
+registerElement('ScorePartwise', ScorePartwise);
 
 export type PartTimewiseAttributes = { id: string };
 
@@ -48591,38 +41004,7 @@ export type PartTimewiseContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/part/
  */
 export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, PartTimewiseContents> {
-	static readonly schema = {
-		name: 'part',
-		attributes: { id: { type: 'required', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } } },
-		contents: [
-			{
-				type: 'label',
-				label: 'values',
-				value: {
-					type: 'zeroOrMore',
-					value: {
-						type: 'choices',
-						choices: [
-							Note,
-							Backup,
-							Forward,
-							Direction,
-							Attributes,
-							Harmony,
-							FiguredBass,
-							Print,
-							Sound,
-							Listening,
-							Barline,
-							Grouping,
-							Link,
-							Bookmark,
-						],
-					},
-				},
-			},
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'part'> = schema.PartTimewise;
 
 	readonly schema = PartTimewise.schema;
 
@@ -48630,7 +41012,7 @@ export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, 
 	contents: PartTimewiseContents;
 
 	constructor(opts?: { attributes?: Partial<PartTimewiseAttributes>; contents?: PartTimewiseContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, PartTimewise.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, PartTimewise.schema);
 		this.contents = opts?.contents ?? operations.zero(PartTimewise.schema.contents);
 	}
 	/** Gets @type {PartTimewiseAttributes['id']}. */
@@ -48684,6 +41066,7 @@ export class PartTimewise implements XMLElement<'part', PartTimewiseAttributes, 
 		return this;
 	}
 }
+registerElement('PartTimewise', PartTimewise);
 
 export type MeasureTimewiseAttributes = {
 	id: string | null;
@@ -48705,26 +41088,7 @@ export type MeasureTimewiseContents = [Array<PartTimewise>];
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure/
  */
 export class MeasureTimewise implements XMLElement<'measure', MeasureTimewiseAttributes, MeasureTimewiseContents> {
-	static readonly schema = {
-		name: 'measure',
-		attributes: {
-			id: { type: 'optional', value: { type: 'regex', pattern: /[A-Za-z_][A-Za-z0-9.-_]*/, zero: '_' } },
-			implicit: { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'non-controller': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			'non-controlling': { type: 'optional', value: { type: 'choices', choices: ['yes', 'no'] } },
-			number: { type: 'required', value: { type: 'string' } },
-			text: {
-				type: 'optional',
-				value: {
-					type: 'not',
-					include: { type: 'choices', choices: ['yes', { type: 'string' }] },
-					exclude: { type: 'constant', value: '' },
-				},
-			},
-			width: { type: 'optional', value: { type: 'float', min: -Infinity, max: Infinity } },
-		},
-		contents: [{ type: 'label', label: 'parts', value: { type: 'oneOrMore', value: PartTimewise } }],
-	} as const;
+	static readonly schema: XMLElementSchema<'measure'> = schema.MeasureTimewise;
 
 	readonly schema = MeasureTimewise.schema;
 
@@ -48732,7 +41096,7 @@ export class MeasureTimewise implements XMLElement<'measure', MeasureTimewiseAtt
 	contents: MeasureTimewiseContents;
 
 	constructor(opts?: { attributes?: Partial<MeasureTimewiseAttributes>; contents?: MeasureTimewiseContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, MeasureTimewise.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, MeasureTimewise.schema);
 		this.contents = opts?.contents ?? operations.zero(MeasureTimewise.schema.contents);
 	}
 	/** Gets @type {MeasureTimewiseAttributes['id']}. */
@@ -48808,6 +41172,7 @@ export class MeasureTimewise implements XMLElement<'measure', MeasureTimewiseAtt
 		return this;
 	}
 }
+registerElement('MeasureTimewise', MeasureTimewise);
 
 export type ScoreTimewiseAttributes = { version: '4.0' };
 
@@ -48830,20 +41195,7 @@ export type ScoreTimewiseContents = [
  * @see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-timewise/
  */
 export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewiseAttributes, ScoreTimewiseContents> {
-	static readonly schema = {
-		name: 'score-timewise',
-		attributes: { version: { type: 'constant', value: '4.0' } },
-		contents: [
-			{ type: 'optional', value: Work },
-			{ type: 'optional', value: MovementNumber },
-			{ type: 'optional', value: MovementTitle },
-			{ type: 'optional', value: Identification },
-			{ type: 'optional', value: Defaults },
-			{ type: 'label', label: 'credits', value: { type: 'zeroOrMore', value: Credit } },
-			{ type: 'required', value: PartList },
-			{ type: 'label', label: 'measures', value: { type: 'oneOrMore', value: MeasureTimewise } },
-		],
-	} as const;
+	static readonly schema: XMLElementSchema<'score-timewise'> = schema.ScoreTimewise;
 
 	readonly schema = ScoreTimewise.schema;
 
@@ -48851,7 +41203,7 @@ export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewise
 	contents: ScoreTimewiseContents;
 
 	constructor(opts?: { attributes?: Partial<ScoreTimewiseAttributes>; contents?: ScoreTimewiseContents }) {
-		this.attributes = operations.merge(opts?.attributes || {}, ScoreTimewise.schema);
+		this.attributes = mergeAttributes(opts?.attributes || {}, ScoreTimewise.schema);
 		this.contents = opts?.contents ?? operations.zero(ScoreTimewise.schema.contents);
 	}
 	/** Gets @type {ScoreTimewiseAttributes['version']}. */
@@ -48936,3 +41288,4 @@ export class ScoreTimewise implements XMLElement<'score-timewise', ScoreTimewise
 		return this;
 	}
 }
+registerElement('ScoreTimewise', ScoreTimewise);

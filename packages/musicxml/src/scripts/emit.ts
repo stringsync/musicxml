@@ -166,43 +166,84 @@ export const getAttributeAccessorMethodLiterals = (schema: XMLElementSchema): st
 	return methods.join('\n');
 };
 
-const getLiteral = (value: any): string => {
-	if (value instanceof RegExp) {
-		return value.toString();
-	}
-	if (util.isString(value)) {
-		return `'${value}'`;
-	}
-	if (util.isNumber(value)) {
-		return value.toString();
-	}
-	if (util.isNull(value)) {
-		return 'null';
-	}
-	if (util.isArray(value)) {
-		return `[${value.map(getLiteral).join(', ')}]`;
-	}
-	if (util.isXMLElementSchema(value)) {
-		return getClassName(value);
-	}
-	if (util.isFunction(value)) {
-		return getLiteral(value());
-	}
-	if (util.isObject(value)) {
-		return Object.keys(value).length > 0
-			? `{ ${Object.entries(value)
-					.map(([k, v]) => `'${k}': ${getLiteral(v)}`)
-					.join(', ')} }`
-			: '{}';
-	}
-	throw new MusicXMLError('cannot compute literal', { value });
-};
+/** Emit shared descriptor trees without copying their inferred types into declarations. */
+const toSchemaFile = (schemas: XMLElementSchema[]): string => {
+	const shared = new Map<string, string>();
+	const declarations: string[] = [];
 
-const getSchemaLiteral = (schema: XMLElementSchema): string => {
-	const name = getLiteral(schema.name);
-	const attributes = getLiteral(schema.attributes);
-	const contents = getLiteral(schema.contents);
-	return `{ name: ${name}, attributes: ${attributes}, contents: ${contents} }`;
+	const literal = (value: any): string => {
+		if (value instanceof RegExp) {
+			return value.toString();
+		}
+		if (util.isString(value)) {
+			return JSON.stringify(value);
+		}
+		if (util.isNumber(value)) {
+			return value.toString();
+		}
+		if (util.isNull(value)) {
+			return 'null';
+		}
+		if (util.isFunction(value)) {
+			return literal(value());
+		}
+		if (util.isArray(value)) {
+			const refs: string[] = [];
+			const items = value.map((child, index) => {
+				const resolved = util.isFunction(child) ? child() : child;
+				if (util.isXMLElementSchema(resolved)) {
+					refs.push(`${index}: () => constructors.${getClassName(resolved)}`);
+					return 'null';
+				}
+				return literal(resolved);
+			});
+			const array = `[${items.join(', ')}]`;
+			return refs.length ? `withElements(${array}, { ${refs.join(', ')} })` : array;
+		}
+		if (util.isObject(value)) {
+			const fields = Object.entries(value).map(([key, child]) => {
+				const resolved = util.isFunction(child) ? child() : child;
+				// Getters keep the actual constructor in the descriptor while allowing the
+				// schema module to load before the element classes have been initialized.
+				return util.isXMLElementSchema(resolved)
+					? `get ${JSON.stringify(key)}() { return constructors.${getClassName(resolved)}; }`
+					: `${JSON.stringify(key)}: ${literal(resolved)}`;
+			});
+			const body = `{ ${fields.join(', ')} }`;
+			let name = shared.get(body);
+			if (!name) {
+				name = `shared${shared.size}`;
+				shared.set(body, name);
+				const type = util.isDescriptor(value) ? 'Descriptor' : 'Record<string, Descriptor>';
+				declarations.push(`const ${name}: ${type} = ${body};`);
+			}
+			return name;
+		}
+		throw new MusicXMLError('cannot compute literal', { value });
+	};
+
+	const entries = schemas.map((schema) => {
+		const attributes = literal(schema.attributes);
+		const contents = literal(schema.contents);
+		return `${getClassName(schema)}: { name: ${JSON.stringify(schema.name)}, attributes: ${attributes}, contents: ${contents} }`;
+	});
+	const types = schemas.map((schema) => `${getClassName(schema)}: XMLElementSchema<${JSON.stringify(schema.name)}>;`);
+	return [
+		`import type { Descriptor, XMLElementCtor, XMLElementSchema } from '../lib/schema';`,
+		`const constructors: Record<string, XMLElementCtor> = {};
+export const registerElement = (name: string, element: XMLElementCtor): void => {
+  constructors[name] = element;
+};`,
+		`// Array entries, like object fields, resolve constructors only after the classes load.
+const withElements = (values: any[], refs: Record<number, () => XMLElementCtor>): any => {
+  for (const [index, get] of Object.entries(refs)) {
+    Object.defineProperty(values, index, { get, enumerable: true, configurable: true });
+  }
+  return values;
+};`,
+		...declarations,
+		`export const schema: { ${types.join('\n')} } = { ${entries.join(',\n')} };`,
+	].join('\n\n');
 };
 
 /** The accessor name of each top-level content item: `getX`/`setX` for content item `x`. */
@@ -282,8 +323,6 @@ const toClassLiteral = (schema: XMLElementSchema, docs: Record<string, string>):
 		`The \`<${schema.name}>\` element.\n\n${docs[className] ?? ''}\n\n@see https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/${schema.name}/`,
 	);
 
-	const schemaLiteral = getSchemaLiteral(schema);
-
 	const labeledTypeLiterals = getLabeledTypeLiterals(schema);
 
 	const attributesTypeName = `${className}Attributes`;
@@ -303,7 +342,7 @@ export type ${contentsTypeName} = ${contentsTypeLiteral};
 
 ${classComment}
 export class ${className} implements XMLElement<'${schema.name}', ${attributesTypeName}, ${contentsTypeName}> {
-  static readonly schema = ${schemaLiteral} as const;
+  static readonly schema: XMLElementSchema<'${schema.name}'> = schema.${className};
 
   readonly schema = ${className}.schema;
 
@@ -311,12 +350,13 @@ export class ${className} implements XMLElement<'${schema.name}', ${attributesTy
   contents: ${contentsTypeName};
 
   constructor(opts?: { attributes?: Partial<${attributesTypeName}>; contents?: ${contentsTypeName} }) {
-    this.attributes = operations.merge(opts?.attributes || {}, ${className}.schema);
+    this.attributes = mergeAttributes(opts?.attributes || {}, ${className}.schema);
     this.contents = opts?.contents ?? operations.zero(${className}.schema.contents);
   }
 ${attributesAccessorMethodLiterals}
 ${contentsAccessorMethodLiterals}
-}`;
+}
+registerElement('${className}', ${className});`;
 };
 
 const toMultiLineComment = (comment: string): string =>
@@ -402,11 +442,15 @@ export const getTypeAssertMethodLiterals = (schema: XMLElementSchema): string[] 
 export const generateFiles = (
 	roots: XMLElementSchema[],
 	docs: Record<string, string>,
-): { elements: string; asserts: string } => {
+): { elements: string; asserts: string; schema: string } => {
 	const elements: string[] = [];
 	const seenElements = new Set<string>();
+	const schemas: XMLElementSchema[] = [];
 	elements.push(`import { XMLElement, XMLElementSchema } from '../lib/schema';`);
 	elements.push(`import * as operations from '../lib/operations';`);
+	elements.push(`import { schema, registerElement } from './schema';`);
+	elements.push(`// Schema types are deliberately erased; the emitted Attributes types describe the result.
+const mergeAttributes = operations.merge as unknown as (attributes: Record<string, any>, schema: XMLElementSchema) => any;`);
 
 	const asserts: string[] = [];
 	const assertLiterals = new Set<string>();
@@ -443,6 +487,7 @@ export const generateFiles = (
 			const className = getClassName(child);
 			if (!seenElements.has(className)) {
 				seenElements.add(className);
+				schemas.push(child);
 				elements.push(toClassLiteral(child, docs));
 			}
 		}
@@ -453,5 +498,9 @@ export const generateFiles = (
 	};
 
 	roots.forEach(dfs);
-	return { elements: elements.join('\n'), asserts: [...asserts, ...Array.from(assertLiterals).sort()].join('\n\n') };
+	return {
+		elements: elements.join('\n'),
+		asserts: [...asserts, ...Array.from(assertLiterals).sort()].join('\n\n'),
+		schema: toSchemaFile(schemas),
+	};
 };

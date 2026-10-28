@@ -18,6 +18,9 @@ describe('generateFiles', () => {
 		expect(files.elements.indexOf('export class ExampleChild')).toBeLessThan(
 			files.elements.indexOf('export class ExampleRoot'),
 		);
+		expect(files.elements).toContain("static readonly schema: XMLElementSchema<'example-root'> = schema.ExampleRoot;");
+		expect(files.elements).not.toContain('schema = {');
+		expect(files.schema).toContain('export const schema:');
 		expect(files.asserts).toContain('export const isExampleChild');
 		expect(files.asserts).toContain('export const isExampleRoot');
 	});
