@@ -338,9 +338,13 @@ bin/mxl test --watch
 
 A complete list of options are in the [Bun test docs](https://bun.sh/docs/cli/test).
 
+### Formatting, linting, and types
+
+`bin/mxl fix` formats and lints with [Biome](https://biomejs.dev) and typechecks with `tsc`. `bin/mxl fix --check` only reports problems. CI and the splates merge gate run `bin/mxl fix --check` and `bin/mxl test`.
+
 ### Other commands
 
-Run `bin/mxl --help` for the development commands: `build`, `generate`, `docs`, and `docs:dev`. Run `bin/mxl build` before publishing.
+Run `bin/mxl --help` for the development commands: `build`, `generate`, `docs`, `docs:dev`, and `ship`. `bin/mxl ship <patch|minor|major>` bumps the version, regenerates the docs, publishes, tags, and writes the GitHub notes. See [AGENTS.md](AGENTS.md) for how agents work in this repository.
 
 ## ❓ FAQs
 
