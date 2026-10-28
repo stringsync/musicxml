@@ -1,7 +1,10 @@
 import { beforeEach, describe, expect, it } from 'bun:test';
 import { MemoryLogger } from 'webappwiz/log';
 import { Cut } from 'webappwiz/ship';
+import { FakeGit } from 'webappwiz/ship/testing';
 import { FakeFs, FakePs } from 'webappwiz/system/testing';
+import workspaceManifest from '../../package.json';
+import libraryManifest from '../musicxml/package.json';
 import { commonJsBundle, docsStep, release, ship } from './ship';
 
 describe('ship', () => {
@@ -38,6 +41,31 @@ describe('ship', () => {
 		const declared = release({ ps, log, fs });
 		expect(declared.packages).toContain('@stringsync/musicxml');
 		expect(declared.artifacts.some((artifact) => artifact.stage === 'stamp')).toBe(true);
+	});
+
+	it('offers a minor release from the library version using the real workspace manifests', async () => {
+		await fs.mkdir('/repository/packages/musicxml', { recursive: true });
+		await fs.write('/repository/package.json', JSON.stringify(workspaceManifest));
+		await fs.write('/repository/packages/musicxml/package.json', JSON.stringify(libraryManifest));
+		const [major, minor] = libraryManifest.version.split('.').map(Number);
+		let offered = '';
+
+		await release({ ps, log, fs }).release({
+			bump: 'minor',
+			ps,
+			log,
+			fs,
+			git: new FakeGit(),
+			prompt: (message) => {
+				offered = message;
+				return 'n';
+			},
+		});
+
+		expect(workspaceManifest.version).toBe(libraryManifest.version);
+		expect(offered).toContain(`as ${major}.${minor + 1}.0?`);
+		expect(ps.getCalls()).toEqual([]);
+		expect(await fs.exists('/repository/RELEASE')).toBe(false);
 	});
 
 	describe('docs step', () => {
